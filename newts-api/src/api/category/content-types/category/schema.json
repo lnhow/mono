@@ -17,10 +17,14 @@
       "default": "Tiêu đề chuyên mục",
       "required": true
     },
-    "parent_category": {
+    "parentCategory": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::category.category"
+    },
+    "slugUrl": {
+      "type": "uid",
+      "targetField": "title"
     }
   }
 }
