@@ -1,0 +1,15 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "boufgjlprcos4mjkna7x-postgresql.services.clever-cloud.com",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "newts-dev",
+      "group": "Dev",
+      "database": "boufgjlprcos4mjkna7x",
+      "username": "umq9bsehghlbejxpdnrk",
+      "password": "D0Y7XnW11GSLgTOSPUzYBHdMISmxmP"
+    }
+  ]
+}
