@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import strapi from '@/utils/http/axios'
 
@@ -86,7 +85,7 @@ const CategoryItem = ({ category }: {category: ICategory}) => {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <h2 className={`mb-3 text-2xl font-semibold`}>
+      <h2 className={'mb-3 text-2xl font-semibold'}>
         {category.attributes.title + ' '}
         <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
           -&gt;
@@ -118,13 +117,13 @@ const PostItem = ({ post }: {post: IPost}) => {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <h2 className={`mb-3 text-2xl font-semibold`}>
+      <h2 className={'mb-3 text-2xl font-semibold'}>
         {post.attributes.title + ' '}
         <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
           -&gt;
         </span>
       </h2>
-      <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+      <p className={'m-0 max-w-[30ch] text-sm opacity-50'}>
         {post.attributes.description}
       </p>
     </a>
