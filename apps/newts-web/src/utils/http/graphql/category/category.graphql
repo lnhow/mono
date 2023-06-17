@@ -1,0 +1,20 @@
+query GetParentCategories {
+  categories(filters: { parent_category: { id: { null: true } } }) {
+    data {
+      id
+      attributes {
+        title
+        slugUrl
+        child_categories {
+          data {
+            id
+            attributes {
+              title
+              slugUrl
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -17,6 +17,10 @@
     "start": {
       "cache": false,
       "persistent": true
+    },
+    "graphql:codegen": {
+      "cache": false,
+      "persistent": true
     }
   }
 }

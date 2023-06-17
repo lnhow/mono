@@ -18,6 +18,7 @@ export const infoSlice = createSlice({
       state.now = Date.now()
     }
   },
+  // TODO(haoln): Handle warning to use builder
   extraReducers: {
     // next-redux-wrapper
     [HYDRATE]: (state, action) => {

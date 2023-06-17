@@ -2,7 +2,11 @@
   "name": "newts-api",
   "private": true,
   "version": "0.1.0",
-  "description": "A Strapi application",
+  "description": "API for Newts Project, powered by Strapi",
+  "author": {
+    "name": "Hao Le",
+    "email": "hao.lngn@gmail.com"
+  },
   "scripts": {
     "start": "strapi develop",
     "prod-start": "strapi start",
@@ -17,9 +21,6 @@
     "@strapi/strapi": "4.11.0",
     "better-sqlite3": "8.0.1",
     "pg": "^8.10.0"
-  },
-  "author": {
-    "name": "A Strapi developer"
   },
   "strapi": {
     "uuid": "b3417670-9e82-4630-9e42-e590c0d900bc"
