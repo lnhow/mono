@@ -15,7 +15,8 @@
       "outputs": []
     },
     "start": {
-      "cache": false
+      "cache": false,
+      "persistent": true
     }
   }
 }
