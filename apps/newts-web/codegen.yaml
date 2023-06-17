@@ -2,7 +2,7 @@ overwrite: true
 schema: 'http://127.0.0.1:1337/graphql'
 documents: 'src/**/*.graphql'
 generates:
-  ./src/utils/http/graphql/generated/graphql.ts:
+  ./src/utils/graphql/_generated/graphql.ts:
     plugins:
       - add:
           content: 

@@ -5,9 +5,6 @@ module.exports = {
     'es6': true,
     'browser': true
   },
-  'ignorePatterns': [
-    'src/**/generated/*.ts',
-  ],
   'extends': [
     'eslint:recommended',
     'next',
