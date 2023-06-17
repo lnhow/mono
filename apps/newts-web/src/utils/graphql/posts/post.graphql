@@ -1,0 +1,29 @@
+query GetAllPosts {
+  posts {
+    data {
+      id
+      attributes {
+        category {
+          data {
+            id
+            attributes {
+              title
+              slugUrl
+            }
+          }
+        }
+        title
+        description
+        cover {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        slugUrl
+        publishedAt
+      }
+    }
+  }
+}

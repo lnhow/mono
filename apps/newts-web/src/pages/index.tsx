@@ -1,10 +1,12 @@
 import { Inter } from 'next/font/google'
-import strapi from '@/utils/http/axios'
+import { GetAllPostsDocument, GetAllPostsQuery, GetParentCategoriesDocument, GetParentCategoriesQuery } from '@/utils/graphql/_generated/graphql'
+import { strapiGraphql } from '@/utils/graphql/graphqlClient'
 
 const inter = Inter({ subsets: ['latin'] })
 
 interface IHomePageProps {
   categories: ICategory[],
+  categories2: GetParentCategoriesQuery,
   posts: IPost[],
 }
 
@@ -14,20 +16,20 @@ export const getServerSideProps = async () => {
       resCategories,
       resPosts,
     ] = await Promise.all([
-      strapi.get('/api/categories'),
-      strapi.get('/api/posts'),
+      strapiGraphql.request<GetParentCategoriesQuery>(GetParentCategoriesDocument),
+      strapiGraphql.request<GetAllPostsQuery>(GetAllPostsDocument),
     ])
 
-    console.log(resCategories.data, resPosts.data)
+    console.log(resCategories.categories?.data, resPosts.posts?.data)
 
-    if (!resCategories.data.data || !resPosts.data.data) {
+    if (!resCategories.categories?.data || !resPosts.posts?.data) {
       throw '404'
     }
 
     return {
       props: {
-        categories: resCategories.data.data,
-        posts: resPosts.data.data
+        categories: resCategories.categories.data || [],
+        posts: resPosts.posts.data || [],
       }
     }
   } catch (error) {
