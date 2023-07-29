@@ -8,12 +8,16 @@
     "apps/*"
   ],
   "scripts": {
+    "prepare": "husky install",
     "build": "turbo run build",
     "start": "turbo run start",
-    "turbo": "turbo run lint"
+    "lint": "turbo run lint",
+    "graphql:codegen": "turbo run graphql:codegen --filter=newts-web"
   },
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^8.42.0",
+    "husky": "^8.0.3",
     "prettier": "^2.8.8",
     "turbo": "^1.10.3"
   }

@@ -15,7 +15,12 @@
       "outputs": []
     },
     "start": {
-      "cache": false
+      "cache": false,
+      "persistent": true
+    },
+    "graphql:codegen": {
+      "cache": false,
+      "persistent": true
     }
   }
 }
