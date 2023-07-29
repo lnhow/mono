@@ -1,17 +1,15 @@
-import LayoutDefault from '@/common/layouts/LayoutDefault'
+'use client'
 import './globals.css'
-import { ReactQueryProvider } from './_page/providers/ReactQueryProvider'
-import { BaseLayoutProps } from '@/common/layouts/types'
+import LayoutDefault from '@/common/layouts/LayoutDefault'
+import { Providers } from './_page/providers'
 
-export default function RootLayout({
-  children,
-}: BaseLayoutProps) {
+export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
-    <html lang="en">
-      <body>
-        <ReactQueryProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className=" text-black dark:text-white">
+        <Providers>
           <LayoutDefault>{children}</LayoutDefault>
-        </ReactQueryProvider>
+        </Providers>
       </body>
     </html>
   )

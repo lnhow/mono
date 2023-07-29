@@ -4,3 +4,7 @@ export const STALE_TIME = {
     HOME: 36e5, // (60 * 1000) = 1 min * 60 = 60 min
   },
 }
+
+export const PAGE_REVALIDATE = {
+  DEFAULT: 3600 // 60s * 60 = 1h
+}

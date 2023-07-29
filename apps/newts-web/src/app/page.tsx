@@ -5,7 +5,9 @@ import { getPageHomeData } from './_page/api'
 import { queryClient } from '@/common/utils/graphql/queryClient'
 import PageHomeWrapper from './_page/components/PageHomeWrapper.component'
 import { INITIAL_QUERY_KEY } from './_page/types'
-import { STALE_TIME } from '@/common/constants/staleTime'
+import { PAGE_REVALIDATE, STALE_TIME } from '@/common/constants/staleTime'
+
+export const revalidate = PAGE_REVALIDATE.DEFAULT
 
 export const metadata: Metadata = {
   title: 'Newts | A news website',
