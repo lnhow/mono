@@ -1,5 +1,5 @@
 
-import { isProductionEnv } from '@/utils/common'
+import { isProductionEnv } from '@/common/utils/common'
 import { configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
 import { infoSlice } from './slices'

@@ -23,7 +23,8 @@ module.exports = {
     'semi': [
       'error',
       'never'
-    ]
+    ],
+    '@typescript-eslint/ban-ts-comment': 0,
   },
   globals: {
     React: true,
