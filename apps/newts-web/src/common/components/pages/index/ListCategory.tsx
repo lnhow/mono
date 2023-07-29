@@ -1,7 +1,9 @@
-import { CategoryEntity } from '@/common/utils/graphql/_generated/types'
-
-export interface ICategory extends CategoryEntity {
-  a?: number
+export interface ICategory {
+  id: string,
+  attributes: {
+    slugUrl?: string,
+    title?: string
+  }
 }
 
 export const CategoryItem = ({ category }: { category: ICategory }) => {

@@ -11,7 +11,7 @@ export const queryClient = {
       mode: 'cors',
     }
   )),
-  REST: cache(() => new QueryClient({
+  QueryClient: cache(() => new QueryClient({
     defaultOptions: {
       queries: {
         staleTime: 5 * 1000,

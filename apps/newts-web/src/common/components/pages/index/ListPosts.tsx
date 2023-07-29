@@ -1,7 +1,10 @@
-import { PostEntity } from '@/common/utils/graphql/_generated/types'
-
-export interface IPost extends PostEntity {
-  a?: number
+export interface IPost {
+  id: string,
+  attributes: {
+    slugUrl?: string,
+    title?: string,
+    description?: string
+  }
 }
 
 export const PostItem = ({ post }: { post: IPost }) => {

@@ -1,14 +1,11 @@
 import LayoutDefault from '@/common/layouts/LayoutDefault'
 import './globals.css'
-import { ReactQueryProvider } from './_providers/ReactQueryProvider'
+import { ReactQueryProvider } from './_page/providers/ReactQueryProvider'
+import { BaseLayoutProps } from '@/common/layouts/types'
 
 export default function RootLayout({
-  // Layouts must accept a children prop.
-  // This will be populated with nested layouts or pages
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: BaseLayoutProps) {
   return (
     <html lang="en">
       <body>
