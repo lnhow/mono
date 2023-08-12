@@ -24,7 +24,9 @@ export default async function Page() {
   const dehydratedState = dehydrate(http)
   return (
     <Hydrate state={dehydratedState}>
-      <PageHomeWrapper />
+      <div className="p-4 lg:p-24">
+        <PageHomeWrapper />
+      </div>
     </Hydrate>
   )
 }

@@ -12,7 +12,7 @@
     "build": "turbo run build",
     "start": "turbo run start",
     "lint": "turbo run lint",
-    "graphql:codegen": "turbo run graphql:codegen --filter=newts-web"
+    "gen:graphql": "turbo run gen:graphql --filter=newts-web"
   },
   "license": "MIT",
   "devDependencies": {

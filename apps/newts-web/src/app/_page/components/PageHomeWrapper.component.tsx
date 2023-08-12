@@ -20,7 +20,7 @@ export default function HomePageWrapper() {
     return <></>
   }
   if (error || !data) {
-    logger('[ERR][Fetching data]', error, data)
+    logger.log('[ERR][Fetching data]', error, data)
     notFound()
   }
   const props = mapToProps(data)

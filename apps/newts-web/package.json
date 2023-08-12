@@ -12,7 +12,7 @@
     "build": "next build",
     "prod-start": "next start",
     "lint": "next lint",
-    "graphql:codegen": "graphql-codegen"
+    "gen:graphql": "graphql-codegen"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -33,6 +33,7 @@
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-markdown": "^8.0.7",
     "react-redux": "^8.1.0",
     "tailwindcss": "3.3.2"
   },
@@ -43,6 +44,7 @@
     "@graphql-codegen/typescript-graphql-request": "^5.0.0",
     "@graphql-codegen/typescript-operations": "^4.0.0",
     "@graphql-codegen/typescript-react-query": "^4.1.0",
+    "@tailwindcss/typography": "^0.5.9",
     "@types/node": "20.1.0",
     "@types/react": "18.2.9",
     "@types/react-dom": "18.2.4",

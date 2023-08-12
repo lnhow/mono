@@ -13,7 +13,7 @@ export default function LayoutDefault({ children }: BaseLayoutProps) {
   return (
     <>
       <NavBar />
-      <main className="flex min-h-screen flex-col items-center p-24">
+      <main className="flex min-h-screen flex-col items-center">
         {children}
       </main>
       <ThemeChanger />
