@@ -8,5 +8,6 @@ export const getPostCoverUrl = (post: PostEntity) => {
   if (!post.attributes?.cover?.data?.attributes?.url) {
     return ''
   }
-  return (process.env.NEXT_PUBLIC_MAIN_API || '' ) + post.attributes?.cover?.data?.attributes?.url
+  // return (process.env.NEXT_PUBLIC_MAIN_API || '' ) + post.attributes?.cover?.data?.attributes?.url
+  return post.attributes?.cover?.data?.attributes?.url || ''
 }

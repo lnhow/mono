@@ -1,4 +1,4 @@
-import '@/styles/globals.css'
+// import '@/styles/globals.css'
 // import { wrapper } from '@/common/store'
 // import { Provider } from 'react-redux'
 import { AppProps } from 'next/app'

@@ -1,4 +1,3 @@
-'use-client'
 import { PAGE_REVALIDATE } from '@/common/constants/staleTime'
 import { Metadata, ResolvingMetadata } from 'next'
 
