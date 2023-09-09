@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const strapi = axios.create({
+const appHttp = axios.create({
   baseURL: process.env.NEXT_PUBLIC_MAIN_API
 })
 
-export default strapi
+export default appHttp

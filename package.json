@@ -12,13 +12,13 @@
     "build": "turbo run build",
     "start": "turbo run start",
     "lint": "turbo run lint",
-    "graphql:codegen": "turbo run graphql:codegen --filter=newts-web"
+    "gen:graphql": "turbo run gen:graphql --filter=newts-web"
   },
   "license": "MIT",
   "devDependencies": {
     "eslint": "^8.42.0",
     "husky": "^8.0.3",
     "prettier": "^2.8.8",
-    "turbo": "^1.10.3"
+    "turbo": "1.10.13"
   }
 }

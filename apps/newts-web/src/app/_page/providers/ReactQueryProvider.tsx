@@ -2,16 +2,16 @@
 
 import React from 'react'
 import { QueryClientProvider, Hydrate, QueryClient } from '@tanstack/react-query'
-// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-// import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { AppConfigQueryClient } from '@/common/utils/graphql/queryClient'
 
 export function ReactQueryProvider({ children }: React.PropsWithChildren) {
-  const [client] = React.useState(new QueryClient())//queryClient.REST())
+  const [client] = React.useState(new QueryClient(AppConfigQueryClient))
 
   return (
     <QueryClientProvider client={client}>
       <Hydrate>{children}</Hydrate>
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }

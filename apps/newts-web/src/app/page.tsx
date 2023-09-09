@@ -1,52 +1,32 @@
-
-import { GetAllPostsDocument, GetAllPostsQuery, GetParentCategoriesDocument, GetParentCategoriesQuery } from '@/common/utils/graphql/_generated/graphql'
-import { queryClient } from '@/common/utils/graphql/graphqlClient'
-import PageHome, { IPageHomeProps } from './_components/HomePage.component'
-import { TPageInitialData } from './_types'
 import { Metadata } from 'next'
+import { Hydrate, dehydrate } from '@tanstack/react-query'
+
+import { getPageHomeData } from './_page/api'
+import { queryClient } from '@/common/utils/graphql/queryClient'
+import PageHomeWrapper from './_page/components/PageHomeWrapper.component'
+import { INITIAL_QUERY_KEY } from './_page/types'
+import { PAGE_REVALIDATE, STALE_TIME } from '@/common/constants/staleTime'
+
+export const revalidate = PAGE_REVALIDATE.DEFAULT
 
 export const metadata: Metadata = {
   title: 'Newts | A news website',
   description: 'A news website',
 }
 
-export const getPageInitialData = async (): Promise<TPageInitialData<IPageHomeProps>> => {
-  const http = queryClient.GraphQL()
-  try {
-    const [
-      resCategories,
-      resPosts,
-    ] = await Promise.all([
-      // {categories: {data: []}}, {posts: {data: []}}
-      http.request<GetParentCategoriesQuery>(GetParentCategoriesDocument),
-      http.request<GetAllPostsQuery>(GetAllPostsDocument),
-    ])
-
-    if (!resCategories.categories?.data || !resPosts.posts?.data) {
-      throw '404'
-    }
-
-    return {
-      initialData: {
-        categories: resCategories.categories.data || [],
-        // @ts-ignore
-        posts: resPosts.posts.data || [],
-      }
-    }
-  } catch (error) {
-    console.log(error)
-    return {
-      notFound: true
-    }
-  }
-}
-
 export default async function Page() {
-  const {  initialData, notFound} = await getPageInitialData()
-  if (notFound || !initialData) {
-    return <></>
-  }
+  const http = queryClient.QueryClient()
+  await http.prefetchQuery({
+    queryKey: [INITIAL_QUERY_KEY],
+    queryFn: getPageHomeData,
+    staleTime: STALE_TIME.PAGES.HOME,
+  })
+  const dehydratedState = dehydrate(http)
   return (
-    <PageHome {...initialData} />
+    <Hydrate state={dehydratedState}>
+      <div className="p-4 lg:p-24">
+        <PageHomeWrapper />
+      </div>
+    </Hydrate>
   )
 }

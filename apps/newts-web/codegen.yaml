@@ -2,14 +2,14 @@ overwrite: true
 schema: 'http://127.0.0.1:1337/graphql'
 documents: 'src/**/*.graphql'
 generates:
-  ./src/utils/graphql/_generated/types.ts:
+  ./src/common/utils/graphql/_generated/types.ts:
     plugins:
       - add:
           content: 
             - /* eslint-disable */
             - // @ts-nocheck
       - typescript
-  ./src/utils/graphql/_generated/graphql.ts:
+  ./src/common/utils/graphql/_generated/graphql.ts:
     plugins:
       - add:
           content: 

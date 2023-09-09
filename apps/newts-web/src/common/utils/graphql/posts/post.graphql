@@ -27,3 +27,37 @@ query GetAllPosts {
     }
   }
 }
+
+query GetPostBySlug($slug: String) {
+  posts(filters: { slugUrl: { eq: $slug } }) {
+    data {
+      id
+      attributes {
+        title
+        description
+        content
+        slugUrl
+        createdAt
+        updatedAt
+        publishedAt
+        category {
+          data {
+            id
+            attributes {
+              title
+              slugUrl
+            }
+          }
+        }
+        cover {
+          data {
+            id
+            attributes {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}

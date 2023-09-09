@@ -22,6 +22,13 @@ export type GetAllPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetAllPostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, description: string, slugUrl?: string | null, publishedAt?: any | null, category?: { __typename?: 'CategoryEntityResponse', data?: { __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', title: string, slugUrl?: string | null } | null } | null } | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
 
+export type GetPostBySlugQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GetPostBySlugQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, description: string, content?: string | null, slugUrl?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, category?: { __typename?: 'CategoryEntityResponse', data?: { __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', title: string, slugUrl?: string | null } | null } | null } | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
+
 
 export const GetParentCategoriesDocument = `
     query GetParentCategories {
@@ -102,5 +109,54 @@ export const useGetAllPostsQuery = <
     useQuery<GetAllPostsQuery, TError, TData>(
       variables === undefined ? ['GetAllPosts'] : ['GetAllPosts', variables],
       fetcher<GetAllPostsQuery, GetAllPostsQueryVariables>(client, GetAllPostsDocument, variables, headers),
+      options
+    );
+export const GetPostBySlugDocument = `
+    query GetPostBySlug($slug: String) {
+  posts(filters: {slugUrl: {eq: $slug}}) {
+    data {
+      id
+      attributes {
+        title
+        description
+        content
+        slugUrl
+        createdAt
+        updatedAt
+        publishedAt
+        category {
+          data {
+            id
+            attributes {
+              title
+              slugUrl
+            }
+          }
+        }
+        cover {
+          data {
+            id
+            attributes {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const useGetPostBySlugQuery = <
+      TData = GetPostBySlugQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetPostBySlugQueryVariables,
+      options?: UseQueryOptions<GetPostBySlugQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetPostBySlugQuery, TError, TData>(
+      variables === undefined ? ['GetPostBySlug'] : ['GetPostBySlug', variables],
+      fetcher<GetPostBySlugQuery, GetPostBySlugQueryVariables>(client, GetPostBySlugDocument, variables, headers),
       options
     );

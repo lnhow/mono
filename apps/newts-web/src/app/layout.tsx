@@ -1,20 +1,21 @@
-import LayoutDefault from '@/common/layouts/LayoutDefault'
 import './globals.css'
-import { ReactQueryProvider } from './_providers/ReactQueryProvider'
+import LayoutDefault from '@/common/layouts/LayoutDefault'
+import { Providers } from './_page/providers'
 
-export default function RootLayout({
-  // Layouts must accept a children prop.
-  // This will be populated with nested layouts or pages
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export const metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_HOST || ''),
+  alternates: {
+    canonical: '/',
+  },
+}
+
+export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
-    <html lang="en">
-      <body>
-        <ReactQueryProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className="text-black dark:text-white">
+        <Providers>
           <LayoutDefault>{children}</LayoutDefault>
-        </ReactQueryProvider>
+        </Providers>
       </body>
     </html>
   )
