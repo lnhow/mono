@@ -1,5 +1,11 @@
 FROM node:18-alpine AS base
 
+ARG NEXT_PUBLIC_MAIN_API
+ENV NEXT_PUBLIC_MAIN_API=$NEXT_PUBLIC_MAIN_API
+
+ARG NEXT_PUBLIC_HOST
+ENV NEXT_PUBLIC_HOST=$NEXT_PUBLIC_HOST
+
 # This Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.
 # Make sure you update both files!
 
