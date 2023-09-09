@@ -38,6 +38,7 @@ COPY turbo.json turbo.json
 
 RUN yarn turbo run build --filter=newts-web...
 
+## RUN STEP #########################################################
 FROM base AS runner
 WORKDIR /app
 
@@ -46,13 +47,8 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 USER nextjs
 
-COPY --from=installer /app/apps/newts-web/next.config.js .
-COPY --from=installer /app/apps/newts-web/package.json .
+COPY --from=installer /app .
 
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=installer --chown=nextjs:nodejs /app/apps/newts-web/.next/standalone ./
-COPY --from=installer --chown=nextjs:nodejs /app/apps/newts-web/.next/static ./apps/newts-web/.next/static
-COPY --from=installer --chown=nextjs:nodejs /app/apps/newts-web/public ./apps/newts-web/public
+EXPOSE 3000
 
-CMD node apps/newts-web/server.js
+CMD yarn workspace newts-web deploy:start

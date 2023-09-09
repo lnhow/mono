@@ -10,7 +10,7 @@
   "scripts": {
     "start": "next dev",
     "build": "next build",
-    "prod-start": "next start",
+    "deploy:start": "next start",
     "lint": "next lint",
     "gen:graphql": "graphql-codegen"
   },
