@@ -43,4 +43,4 @@ COPY --from=installer --chown=strapi:nodejs /app/apps/newts-api/build ./build
 
 EXPOSE 1337
 
-CMD yarn workspace newts-api deploy:start
+CMD yarn newts-api deploy:start
