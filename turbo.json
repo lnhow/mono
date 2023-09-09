@@ -21,6 +21,10 @@
     "gen:graphql": {
       "cache": false,
       "persistent": true
+    },
+    "deploy:start": {
+      "cache": false,
+      "persistent": true
     }
   }
 }
