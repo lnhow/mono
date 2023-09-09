@@ -33,7 +33,7 @@ const ThemeSwitch = styled(Switch)(({ theme }) => ({
     width: 32,
     height: 32,
     '&:before': {
-      content: '\'\'',
+      content: '""',
       position: 'absolute',
       width: '100%',
       height: '100%',
@@ -55,9 +55,8 @@ const ThemeSwitch = styled(Switch)(({ theme }) => ({
 
 const ThemeChanger = () => {
   const { theme, setTheme } = useTheme()
-  const isDarkMode = useMemo(() => {
-    return theme === THEME.DARK
-  }, [theme])
+  const isDarkMode = useMemo(() => theme === THEME.DARK, [theme])
+
   const toggleDarkMode = useCallback(
     (_: ChangeEvent<HTMLInputElement>, checked: boolean) => {
       if (checked) {
@@ -71,7 +70,7 @@ const ThemeChanger = () => {
 
   return (
     <div>
-      <ThemeSwitch value={isDarkMode} onChange={toggleDarkMode} />
+      <ThemeSwitch checked={isDarkMode} onChange={toggleDarkMode} />
     </div>
   )
 }
