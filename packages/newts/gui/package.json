@@ -1,11 +1,12 @@
 {
-  "name": "@newts/common",
+  "name": "@newts/common.gui",
   "version": "1.0.0",
   "author": {
     "name": "Hao Le",
     "email": "hao.lngn@gmail.com"
   },
   "dependencies": {
-    "@mui/material": "^5.14.2"
+    "next-themes": "0.2.1",
+    "@mui/material": "5.14.2"
   }
 }
