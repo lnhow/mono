@@ -9,10 +9,12 @@
   ],
   "scripts": {
     "prepare": "husky install",
-    "build": "turbo run build",
     "start": "turbo run start",
     "lint": "turbo run lint",
-    "gen:graphql": "turbo run gen:graphql --filter=newts-web"
+    "gen:graphql": "turbo run gen:graphql --filter=newts-web",
+    "build": "turbo run build",
+    "deploy:start": "turbo run deploy:start",
+    "turbo": "turbo"
   },
   "license": "MIT",
   "devDependencies": {
