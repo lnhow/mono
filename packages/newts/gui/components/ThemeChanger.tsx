@@ -1,6 +1,6 @@
 'use client'
 
-import { THEME } from '@/common/constants/theme'
+import { THEME } from '../constants/theme'
 import { Switch } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { useTheme } from 'next-themes'

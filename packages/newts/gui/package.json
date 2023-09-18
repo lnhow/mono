@@ -1,12 +1,25 @@
 {
   "name": "@newts/common.gui",
   "version": "1.0.0",
+  "private": true,
   "author": {
     "name": "Hao Le",
     "email": "hao.lngn@gmail.com"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "next-themes": "0.2.1",
-    "@mui/material": "5.14.2"
+    "@mui/material": "5.14.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.1.0",
+    "@types/react": "18.2.9",
+    "@types/react-dom": "18.2.4",
+    "@newts/eslint-config": "*",
+    "typescript": "5.0.4"
   }
 }

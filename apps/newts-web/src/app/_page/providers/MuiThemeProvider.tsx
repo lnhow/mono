@@ -1,5 +1,5 @@
 'use client'
-import { DEFAULT_THEME, MuiThemeMapping, THEME } from '@/common/constants/theme'
+import { DEFAULT_THEME, MuiThemeMapping, THEME } from '@newts/common.gui/constants/theme'
 import { ThemeProvider } from '@mui/material'
 import { useTheme } from 'next-themes'
 import { useMemo } from 'react'

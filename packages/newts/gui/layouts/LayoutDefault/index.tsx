@@ -3,7 +3,7 @@ import { NavBar } from '../components/NavBar'
 import { BaseLayoutProps } from '../types'
 
 const ThemeChanger = dynamic(
-  () => import('@/common/components/common/ThemeChanger'),
+  () => import('../../components/ThemeChanger'),
   {
     ssr: false,
   }
