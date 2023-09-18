@@ -3,7 +3,7 @@ import { NavBar } from '../components/NavBar'
 import { BaseLayoutProps } from '../types'
 
 const ThemeChanger = dynamic(
-  () => import('../../components/ThemeChanger'),
+  () => import('@newts/common.gui/components/ThemeChanger'),
   {
     ssr: false,
   }

@@ -1,5 +1,5 @@
 import './globals.css'
-import LayoutDefault from '@newts/common.gui/layouts/LayoutDefault'
+import LayoutDefault from '@/common/layouts/LayoutDefault'
 import { Providers } from './_page/providers'
 
 export const metadata = {
