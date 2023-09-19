@@ -1,13 +1,24 @@
 import Link from 'next/link'
+import ListCategory from './components/ListCategory'
+import { Suspense } from 'react'
+
+export type NavBarProps = {
+  // categories: ListCategoryProps['categories']
+}
 
 export default function NavBar() {
   return (
-    <div className="w-full h-12 py-2 px-3 bg-orange-500 dark:bg-orange-900 flex items-center">
-      <div>
-        <Link href="/">
-          <h1 className="text-xl font-bold">newts</h1>
-        </Link>
+    <>
+      <div className="w-full h-12">
+        <div className='max-w-screen-2xl mx-auto py-2 px-3 flex items-center'>
+          <Link href="/">
+            <h1 className="text-xl font-bold">newts</h1>
+          </Link>
+        </div>
       </div>
-    </div>
+      <Suspense>
+        <ListCategory />
+      </Suspense>
+    </>
   )
 }
