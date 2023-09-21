@@ -1,4 +1,6 @@
 import './globals.css'
+import '@newts/common.gui/styles.css'
+
 import LayoutDefault from '../common/layouts/LayoutDefault'
 import { Providers } from './_page/providers'
 

@@ -6,6 +6,7 @@ import { queryClient } from '@/common/utils/graphql/queryClient'
 import PageHomeWrapper from './_page/components/PageHomeWrapper.component'
 import { INITIAL_QUERY_KEY } from './_page/types'
 import { PAGE_REVALIDATE, STALE_TIME } from '@newts/common.gui/constants/staleTime'
+import ABCTest from '@newts/common.gui/components/Test'
 
 export const revalidate = PAGE_REVALIDATE.DEFAULT
 
@@ -25,6 +26,7 @@ export default async function Page() {
   return (
     <Hydrate state={dehydratedState}>
       <div className="p-4 lg:p-24">
+        <ABCTest />
         <PageHomeWrapper />
       </div>
     </Hydrate>
