@@ -8,9 +8,16 @@ export type PropsItemCategory = {
 }
 
 export default function ItemCategory({ data: category }: PropsItemCategory) {
-  const linkUrl = category.attributes.slugUrl ? `/c/${category.attributes.slugUrl}` : '#'
+  const linkUrl = category.attributes.slugUrl
+    ? `/c/${category.attributes.slugUrl}`
+    : '#'
   return (
-    <Button LinkComponent={Link} href={linkUrl} color='inherit'>
+    <Button
+      className="h-10"
+      LinkComponent={Link}
+      href={linkUrl}
+      color="inherit"
+    >
       {category.attributes.title}
     </Button>
   )

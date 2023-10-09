@@ -1,10 +1,5 @@
 import Link from 'next/link'
-import ListCategory from './components/ListCategory'
-import { Suspense } from 'react'
-
-export type NavBarProps = {
-  // categories: ListCategoryProps['categories']
-}
+import Header from './components/Header'
 
 export default function NavBar() {
   return (
@@ -16,9 +11,7 @@ export default function NavBar() {
           </Link>
         </div>
       </div>
-      <Suspense>
-        <ListCategory />
-      </Suspense>
+      <Header />
     </>
   )
 }
