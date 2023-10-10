@@ -9,7 +9,10 @@ const ModalContainer = memo(function ModalContainer({
   const [open, setOpen] = useState(false)
   return (
     <>
-      <IconButton className="rounded" onClick={() => setOpen(true)}>
+      <IconButton
+        className="rounded [&_.MuiTouchRipple-root_.MuiTouchRipple-child]:rounded"
+        onClick={() => setOpen(true)}
+      >
         <Menu />
       </IconButton>
       <Dialog open={open} onClose={() => setOpen(false)}>
