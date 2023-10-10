@@ -13,7 +13,7 @@ export default function ItemCategory({ data: category }: PropsItemCategory) {
     : '#'
   return (
     <Button
-      className="h-10"
+      className="h-10 normal-case"
       LinkComponent={Link}
       href={linkUrl}
       color="inherit"
