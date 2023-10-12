@@ -15,7 +15,15 @@ export const getParentCategory = cache(() => {
 
 export const mapToProps = cache(
   (gqlRes: Awaited<ReturnType<typeof getParentCategory>>) => {
-    console.log('[Dev Log] -> file: api.ts:18 -> gqlRes:', gqlRes)
-    return (gqlRes.categories?.data as ICategory[]) || []
+    const mappedData: ICategory[] = gqlRes.categories?.data.map((category) => {
+      return {
+        id: category.id,
+        attributes: {
+          ...(category.attributes),
+          child_categories: category.attributes?.child_categories?.data || []
+        }
+      } as ICategory
+    }) || []
+    return mappedData
   }
 )

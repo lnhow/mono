@@ -35,7 +35,7 @@ const SwiperContainer = memo(function SwiperContainer({
         `,
         `
           .swiper-button-prev, .swiper-button-next {
-            @apply bg-gradient-to-l from-zinc-800
+            @apply bg-gradient-to-l from-bgprimary-800
           }
           .swiper-button-prev svg, .swiper-button-next svg {
             width: 24px;
@@ -54,20 +54,28 @@ const SwiperContainer = memo(function SwiperContainer({
   return (
     <div id="nw-nav-cat" className='relative overflow-hidden'>
       <div className="
-        btn-prev -left-2.5 absolute z-10
-        bg-gradient-to-r from-zinc-300 dark:from-zinc-800
-        [&.swiper-button-lock]:hidden
-        [&.swiper-button-disabled]:hidden
+        btn-prev left-0 absolute z-10
+        w-12 flex justify-start
+        bg-gradient-to-r from-bgprimary-300 dark:from-bgprimary-800
+        transition-opacity
+        [&.swiper-button-lock]:invisible
+        [&.swiper-button-lock]:opacity-0
+        [&.swiper-button-disabled]:invisible
+        [&.swiper-button-disabled]:opacity-0
       ">
         <IconButton className='p-0.5 rounded [&_.MuiTouchRipple-root_.MuiTouchRipple-child]:rounded'>
           <ChevronLeft className='text-4xl' />
         </IconButton>
       </div>
       <div className="
-        btn-next -right-2.5 absolute z-10
-        bg-gradient-to-l from-zinc-300 dark:from-zinc-800
-        [&.swiper-button-lock]:hidden
-        [&.swiper-button-disabled]:hidden
+        btn-next right-0 absolute z-10
+        w-12 flex justify-end
+        bg-gradient-to-l from-bgprimary-300 dark:from-bgprimary-800
+        transition-opacity
+        [&.swiper-button-lock]:invisible
+        [&.swiper-button-lock]:opacity-0
+        [&.swiper-button-disabled]:invisible
+        [&.swiper-button-disabled]:opacity-0
       ">
         <IconButton className='p-0.5 rounded [&_.MuiTouchRipple-root_.MuiTouchRipple-child]:rounded'>
           <ChevronRight className='text-4xl' />

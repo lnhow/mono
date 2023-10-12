@@ -1,11 +1,7 @@
-import { ICategory } from '@/common/types/category'
 import { Button } from '@mui/material'
 import Link from 'next/link'
 import React from 'react'
-
-export type PropsItemCategory = {
-  data: ICategory
-}
+import { PropsItemCategory } from '../types'
 
 export default function ItemCategory({ data: category }: PropsItemCategory) {
   const linkUrl = category.attributes.slugUrl
@@ -13,7 +9,7 @@ export default function ItemCategory({ data: category }: PropsItemCategory) {
     : '#'
   return (
     <Button
-      className="h-10 normal-case"
+      className="h-10 normal-case font-light"
       LinkComponent={Link}
       href={linkUrl}
       color="inherit"

@@ -3,5 +3,6 @@ export interface ICategory {
   attributes: {
     slugUrl?: string
     title?: string
+    child_categories?: ICategory[]
   }
 }
