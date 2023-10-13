@@ -21,7 +21,8 @@ RUN turbo prune --scope=newts-web --docker
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
-RUN apk add --no-cache libc6-compat python3 make g++
+RUN apk add --update python3 make g++ && rm -rf /var/cache/apk/*
+RUN yarn global add node-gyp
 RUN apk update
 WORKDIR /app
 

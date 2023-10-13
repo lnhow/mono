@@ -2,17 +2,19 @@ import type { Config } from 'tailwindcss'
 import sharedConfig from '@newts/tailwind-config/tailwind.config'
 import color from 'tailwindcss/colors'
 
-const config: Pick<Config, 'presets' | 'theme'> = {
+const config = {
   presets: [sharedConfig],
+  content: [],
   theme: {
-    colors: {
-      ...color,
-      primary: color.emerald,
-      bgprimary: color.zinc,
-      txprimary: color.black,
-      txprimaryd: color.white,
+    extend: {
+      colors: {
+        primary: color.emerald,
+        bgprimary: color.zinc,
+        txprimary: color.black,
+        txprimaryd: color.white,
+      }
     }
   }
-}
+} satisfies Config
 
 export default config
