@@ -11,7 +11,6 @@ const ItemCategory = memo(function ItemCategory({ data: category }: PropsItemCat
     ? `/c/${category.attributes.slugUrl}`
     : '#'
   const isActive = pathname === linkUrl
-  console.log('[Dev Log] -> file: ItemCategory.tsx:14 -> ItemCategory -> isActive:', isActive)
   return (
     <Button
       className={`
