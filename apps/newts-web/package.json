@@ -50,8 +50,8 @@
     "@newts/tsconfig": "*",
     "@tailwindcss/typography": "^0.5.9",
     "@types/node": "20.1.0",
-    "@types/react": "18.2.9",
-    "@types/react-dom": "18.2.4",
-    "typescript": "5.0.4"
+    "@types/react": "18.2.28",
+    "@types/react-dom": "18.2.13",
+    "typescript": "5.2.2"
   }
 }
