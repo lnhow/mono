@@ -7,6 +7,9 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
 const ItemCategory = memo(function ItemCategory({ data }: PropsItemCategory) {
   const subCategories = data.attributes.child_categories || []
+  const linkUrl = data.attributes.slugUrl
+    ? `/c/${data.attributes.slugUrl}`
+    : '#'
   return (
     <div>
       <Button
@@ -19,7 +22,7 @@ const ItemCategory = memo(function ItemCategory({ data }: PropsItemCategory) {
         color="inherit"
         fullWidth
         LinkComponent={Link}
-        href={data.attributes.slugUrl || '#'}
+        href={linkUrl}
         endIcon={<ArrowForwardIosIcon />}
       >
         {data.attributes.title}
@@ -39,11 +42,15 @@ export default ItemCategory
 export const ItemSubCategory = memo(function ItemSubCategory({
   data,
 }: PropsItemCategory) {
+  const linkUrl = data.attributes.slugUrl
+    ? `/c/${data.attributes.slugUrl}`
+    : '#'
+
   return (
     <ListItemButton
       className="rounded-lg font-light"
       LinkComponent={Link}
-      href={data.attributes.slugUrl || '#'}
+      href={linkUrl}
     >
       {data.attributes.title}
     </ListItemButton>
