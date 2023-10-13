@@ -1,10 +1,11 @@
 {
   "name": "newts",
   "version": "1.0.0",
-  "main": "index.js",
   "private": true,
   "workspaces": [
     "packages/*",
+    "packages/newts/*",
+    "packages/configs/*",
     "apps/*"
   ],
   "scripts": {
@@ -16,11 +17,13 @@
     "deploy:start": "turbo run deploy:start",
     "turbo": "turbo"
   },
-  "license": "MIT",
+  "packageManager": "yarn@1.22.19",
   "devDependencies": {
     "eslint": "^8.42.0",
     "husky": "^8.0.3",
     "prettier": "^2.8.8",
-    "turbo": "1.10.13"
+    "turbo": "1.10.13",
+    "@newts/eslint-config": "*",
+    "tsconfig": "*"
   }
 }

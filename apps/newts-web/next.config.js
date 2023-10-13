@@ -23,6 +23,7 @@ const nextConfig = {
       },
     ],
   },
+  transpilePackages: ['@newts/common.gui']
 }
 
 module.exports = nextConfig

@@ -1,0 +1,58 @@
+'use client'
+import {
+  Dialog,
+  DialogTitle,
+  IconButton,
+  Slide,
+  dialogClasses,
+  useMediaQuery,
+} from '@mui/material'
+import { Theme } from '@mui/material/styles'
+import { Close, Menu } from '@mui/icons-material'
+import React, { PropsWithChildren, memo, useCallback, useState } from 'react'
+
+const ModalContainer = memo(function ModalContainer({
+  children,
+}: PropsWithChildren) {
+  const [open, setOpen] = useState(false)
+  const fullScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down('md')
+  )
+
+  const handleClose = useCallback(() => setOpen(false), [])
+
+  return (
+    <>
+      <IconButton
+        className="rounded [&_.MuiTouchRipple-root_.MuiTouchRipple-child]:rounded"
+        onClick={() => setOpen(true)}
+      >
+        <Menu />
+      </IconButton>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        fullScreen={fullScreen}
+        fullWidth
+        maxWidth="lg"
+        scroll="paper"
+        TransitionComponent={Slide}
+        className="
+          [&_.MuiDialog-container]:items-start
+          [&_.MuiPaper-root]:max-h-[80vh]
+          [&_.MuiPaper-root]:rounded-b-xl 
+          [&_.MuiPaper-root]:md:rounded-xl 
+        "
+      >
+        <DialogTitle className="flex justify-end px-4 py-2">
+          <IconButton onClick={handleClose}>
+            <Close />
+          </IconButton>
+        </DialogTitle>
+        {children}
+      </Dialog>
+    </>
+  )
+})
+
+export default ModalContainer
