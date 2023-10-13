@@ -49,12 +49,14 @@ RUN yarn turbo run build --filter=newts-web...
 FROM base AS runner
 WORKDIR /app
 
-# Don't run production as root
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
-USER nextjs
 
 COPY --from=installer /app .
+RUN chown -R nextjs:nodejs .
+
+# Don't run production as root
+USER nextjs
 
 EXPOSE 3000
 
