@@ -4,7 +4,7 @@ import color from 'tailwindcss/colors'
 
 const config = {
   presets: [sharedConfig],
-  content: [],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}', './app/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
       colors: {
