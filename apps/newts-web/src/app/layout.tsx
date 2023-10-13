@@ -1,5 +1,7 @@
 import './globals.css'
-import LayoutDefault from '@/common/layouts/LayoutDefault'
+import '@newts/common.gui/styles.css'
+
+import LayoutDefault from '../common/layouts/LayoutDefault'
 import { Providers } from './_page/providers'
 
 export const metadata = {
@@ -9,7 +11,7 @@ export const metadata = {
   },
 }
 
-export default function RootLayout({ children }: React.PropsWithChildren) {
+export default async function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="text-black dark:text-white">

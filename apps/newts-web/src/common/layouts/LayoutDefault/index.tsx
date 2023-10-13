@@ -1,15 +1,18 @@
 import dynamic from 'next/dynamic'
+import { BaseLayoutProps } from '@/common/layouts/types'
 import { NavBar } from '../components/NavBar'
-import { BaseLayoutProps } from '../types'
+
 
 const ThemeChanger = dynamic(
-  () => import('@/common/components/common/ThemeChanger'),
+  () => import('@newts/common.gui/components/ThemeChanger'),
   {
     ssr: false,
   }
 )
 
-export default function LayoutDefault({ children }: BaseLayoutProps) {
+export type LayoutDefaultProps = BaseLayoutProps
+
+export default function LayoutDefault({ children }: LayoutDefaultProps) {
   return (
     <>
       <NavBar />
