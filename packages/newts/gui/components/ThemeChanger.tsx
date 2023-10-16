@@ -7,11 +7,11 @@ import { useTheme } from 'next-themes'
 import { ChangeEvent, useCallback, useMemo } from 'react'
 
 const ThemeSwitch = styled(Switch)(({ theme }) => ({
-  width: 62,
-  height: 34,
+  width: 48,
+  height: 32,
   padding: 7,
   '& .MuiSwitch-switchBase': {
-    margin: 1,
+    margin: '6px 1px',
     padding: 0,
     transform: 'translateX(6px)',
     '&.Mui-checked': {
@@ -30,8 +30,8 @@ const ThemeSwitch = styled(Switch)(({ theme }) => ({
   },
   '& .MuiSwitch-thumb': {
     backgroundColor: theme.palette.mode === 'dark' ? '#003892' : '#001e3c',
-    width: 32,
-    height: 32,
+    width: 20,
+    height: 20,
     '&:before': {
       content: '""',
       position: 'absolute',
@@ -70,7 +70,10 @@ const ThemeChanger = () => {
 
   return (
     <div>
-      <ThemeSwitch checked={isDarkMode} onChange={toggleDarkMode} />
+      <ThemeSwitch
+        checked={isDarkMode}
+        onChange={toggleDarkMode}
+      />
     </div>
   )
 }

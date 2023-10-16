@@ -1,6 +1,7 @@
 'use client'
 import {
   Dialog,
+  DialogContent,
   DialogTitle,
   IconButton,
   Slide,
@@ -8,7 +9,7 @@ import {
 } from '@mui/material'
 import { Theme } from '@mui/material/styles'
 import { Close, Menu } from '@mui/icons-material'
-import React, { PropsWithChildren, memo, useCallback, useState } from 'react'
+import React, { MouseEventHandler, PropsWithChildren, memo, useCallback, useState } from 'react'
 
 const ModalContainer = memo(function ModalContainer({
   children,
@@ -19,11 +20,16 @@ const ModalContainer = memo(function ModalContainer({
   )
 
   const handleClose = useCallback(() => setOpen(false), [])
+  const handleLinkClick = useCallback<MouseEventHandler<HTMLDivElement>>((e) => {
+    if ((e.target as HTMLElement).tagName === 'A') {
+      setOpen(false)
+    }
+  }, [])
 
   return (
     <>
       <IconButton
-        className="rounded [&_.MuiTouchRipple-root_.MuiTouchRipple-child]:rounded"
+        className="rounded [&_.MuiTouchRipple-root_.MuiTouchRipple-child]:rounded text-black dark:text-white"
         onClick={() => setOpen(true)}
       >
         <Menu />
@@ -48,7 +54,9 @@ const ModalContainer = memo(function ModalContainer({
             <Close />
           </IconButton>
         </DialogTitle>
-        {children}
+        <DialogContent className='mb-4' onClick={handleLinkClick}>
+          {children}
+        </DialogContent>
       </Dialog>
     </>
   )

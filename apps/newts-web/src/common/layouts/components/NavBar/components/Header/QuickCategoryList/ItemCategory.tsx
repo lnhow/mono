@@ -1,24 +1,28 @@
 'use client'
 import { Button } from '@mui/material'
 import Link from 'next/link'
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import { PropsItemCategory } from '../types'
 import { usePathname } from 'next/navigation'
 
-const ItemCategory = memo(function ItemCategory({ data: category }: PropsItemCategory) {
+const ItemCategory = memo(function ItemCategory({
+  data: category,
+}: PropsItemCategory) {
   const pathname = usePathname()
-  const linkUrl = category.attributes.slugUrl
-    ? `/c/${category.attributes.slugUrl}`
-    : '#'
+  const linkUrl = useMemo(
+    () =>
+      category.attributes.slugUrl ? `/c/${category.attributes.slugUrl}` : '#',
+    [category.attributes.slugUrl]
+  )
   const isActive = pathname === linkUrl
   return (
     <Button
       className={`
-        !h-10 !normal-case !font-light
-        ${isActive ? 
-          'text-primary-700 dark:text-primary-300 border-b border-primary-700 dark:border-primary-300'
-          :
-          ''
+        h-10 normal-case font-light
+        ${
+          isActive
+            ? 'text-primary-700 dark:text-primary-300 border-b border-primary-700 dark:border-primary-300'
+            : ''
         }
       `}
       LinkComponent={Link}

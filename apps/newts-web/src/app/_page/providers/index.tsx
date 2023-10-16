@@ -2,14 +2,14 @@
 
 import { ThemeProvider } from 'next-themes'
 import { ReactQueryProvider } from './ReactQueryProvider'
-import { MuiThemeProvider } from './MuiThemeProvider'
+import ThemeRegistry from './ThemeRegistry'
 
 export function Providers({ children }: React.PropsWithChildren) {
   return (
     <ThemeProvider attribute='class'>
-      <MuiThemeProvider>
+      <ThemeRegistry options={{ key: 'nw', prepend: false, }}>
         <ReactQueryProvider>{children}</ReactQueryProvider>
-      </MuiThemeProvider>
+      </ThemeRegistry>
     </ThemeProvider>
   )
 }
