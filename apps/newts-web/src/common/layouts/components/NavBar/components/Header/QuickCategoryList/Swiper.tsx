@@ -49,12 +49,16 @@ const SwiperContainer = memo(function SwiperContainer({
     }
     Object.assign(swiper, params)
     swiper.initialize()
+    if (typeof document !== 'undefined') {
+      document.querySelector('#nw-nav-cat .btn-next')?.classList.remove('invisible')
+      document.querySelector('#nw-nav-cat .btn-prev')?.classList.remove('invisible')
+    }
   }, [])
 
   return (
     <div id="nw-nav-cat" className='relative overflow-hidden'>
       <div className="
-        btn-prev left-0 absolute z-10
+        btn-prev left-0 absolute z-10 invisible
         w-12 flex justify-start
         bg-gradient-to-r from-bgprimary-300 dark:from-bgprimary-800
         transition-opacity
@@ -68,7 +72,7 @@ const SwiperContainer = memo(function SwiperContainer({
         </IconButton>
       </div>
       <div className="
-        btn-next right-0 absolute z-10
+        btn-next right-0 absolute z-10 invisible
         w-12 flex justify-end
         bg-gradient-to-l from-bgprimary-300 dark:from-bgprimary-800
         transition-opacity
