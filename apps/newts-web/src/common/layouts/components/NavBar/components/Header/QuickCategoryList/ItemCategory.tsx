@@ -14,7 +14,7 @@ const ItemCategory = memo(function ItemCategory({ data: category }: PropsItemCat
   return (
     <Button
       className={`
-        h-10 normal-case font-light
+        !h-10 !normal-case !font-light
         ${isActive ? 
           'text-primary-700 dark:text-primary-300 border-b border-primary-700 dark:border-primary-300'
           :
