@@ -4,7 +4,11 @@ import color from 'tailwindcss/colors'
 
 const config = {
   presets: [sharedConfig],
-  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}', './app/**/*.{js,ts,jsx,tsx,mdx}'],
+  content: [
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    '../../packages/newts/gui/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
   theme: {
     extend: {
       colors: {
@@ -12,9 +16,9 @@ const config = {
         bgprimary: color.zinc,
         txprimary: color.black,
         txprimaryd: color.white,
-      }
-    }
-  }
+      },
+    },
+  },
 } satisfies Config
 
 export default config
