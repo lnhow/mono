@@ -1,5 +1,5 @@
 export default function LayoutPost({ children }: React.PropsWithChildren) {
-  return <main className='max-w-screen-lg w-full p-4 lg:p-8'>
+  return <div className='max-w-screen-lg mx-auto w-full'>
     {children}
-  </main>
+  </div>
 }

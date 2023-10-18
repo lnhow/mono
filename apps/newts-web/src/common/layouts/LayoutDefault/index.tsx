@@ -7,7 +7,7 @@ export default function LayoutDefault({ children }: LayoutDefaultProps) {
   return (
     <>
       <NavBar />
-      <main className="flex min-h-screen flex-col items-center">
+      <main className="min-h-screen max-w-screen-2xl mx-auto py-4 lg:py-8">
         {children}
       </main>
     </>
