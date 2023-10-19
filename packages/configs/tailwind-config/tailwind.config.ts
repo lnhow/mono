@@ -8,6 +8,9 @@ const config: Config = {
     minHeight: {
       '1/2': '50%',
     },
+    aspectRatio: {
+      '4/3': '4 / 3',
+    },
     extend: {},
   },
   plugins: [require('@tailwindcss/typography')],

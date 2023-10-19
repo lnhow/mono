@@ -1,5 +1,5 @@
 import { getCategoryFromPost, getPostCoverUrl } from '@/common/utils/data/post'
-import { PostEntity } from '@/common/utils/graphql/_generated/types'
+import { PostEntity } from '@/data/graphql/_generated/types'
 import HomeIcon from '@mui/icons-material/Home'
 import { Breadcrumbs, Link, Paper, Tooltip, Typography } from '@mui/material'
 import Image from 'next/image'

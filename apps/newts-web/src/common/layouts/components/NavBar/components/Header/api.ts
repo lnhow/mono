@@ -2,8 +2,8 @@ import { ICategory } from '@/common/types/category'
 import {
   GetParentCategoriesDocument,
   GetParentCategoriesQuery,
-} from '@/common/utils/graphql/_generated/graphql'
-import { queryClient } from '@/common/utils/graphql/queryClient'
+} from '@/data/graphql/_generated/graphql'
+import { queryClient } from '@/data/graphql/queryClient'
 import { cache } from 'react'
 
 export const getParentCategory = cache(() => {

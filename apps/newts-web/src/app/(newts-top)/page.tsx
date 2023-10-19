@@ -6,10 +6,11 @@ import { Metadata } from 'next'
 // import PageHomeWrapper from './_page/components/PageHomeWrapper.component'
 // import { INITIAL_QUERY_KEY } from './_page/types'
 import { PAGE_REVALIDATE } from '@newts/common.gui/constants/staleTime'
-import FeaturedPosts from '@newts/common.gui/components/pages/index/FeaturedPosts'
+import NwFeaturedPosts from '@newts/common.gui/components/pages/index/FeaturedPosts'
 import PostsByCategory from '@newts/common.gui/components/pages/index/PostsByCategory'
 import PostsByCategorySkeleton from '@newts/common.gui/components/pages/index/PostsByCategory/skeleton'
 import { Suspense } from 'react'
+import FeaturedPosts from './_page/FeaturedPosts'
 
 export const revalidate = PAGE_REVALIDATE.DEFAULT
 

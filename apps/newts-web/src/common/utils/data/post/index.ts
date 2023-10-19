@@ -1,4 +1,4 @@
-import { PostEntity } from '../../graphql/_generated/types'
+import { PostEntity } from '../../../../data/graphql/_generated/types'
 
 export const getCategoryFromPost = (post: PostEntity) => {
   return post.attributes?.category?.data
