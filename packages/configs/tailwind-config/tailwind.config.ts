@@ -5,13 +5,14 @@ const config: Config = {
   important: true,
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
-    minHeight: {
-      '1/2': '50%',
+    extend: {
+      minHeight: {
+        '1/2': '50%',
+      },
+      aspectRatio: {
+        '4/3': '4 / 3',
+      },
     },
-    aspectRatio: {
-      '4/3': '4 / 3',
-    },
-    extend: {},
   },
   plugins: [require('@tailwindcss/typography')],
 }
