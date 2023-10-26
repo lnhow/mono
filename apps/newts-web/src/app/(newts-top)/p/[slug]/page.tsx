@@ -5,7 +5,7 @@ import { getPostBySlug } from './_page/api'
 import { notFound } from 'next/navigation'
 import { cache } from 'react'
 import PageView from './_page/components'
-import { PostEntity } from '@/common/utils/graphql/_generated/types'
+import { PostEntity } from '@/data/graphql/_generated/types'
 import { getPostCoverUrl } from '@/common/utils/data/post'
 
 export const revalidate = PAGE_REVALIDATE.DEFAULT

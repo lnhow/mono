@@ -1,9 +1,9 @@
-import { queryClient } from '@/common/utils/graphql/queryClient'
+import { queryClient } from '@/data/graphql/queryClient'
 import {
   GetPostBySlugDocument,
   GetPostBySlugQuery,
   GetPostBySlugQueryVariables,
-} from '@/common/utils/graphql/_generated/graphql'
+} from '@/data/graphql/_generated/graphql'
 import { cache } from 'react'
 
 export const getPostBySlug = cache((slug: string) => {

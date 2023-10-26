@@ -1,0 +1,37 @@
+query FeaturedPosts($start: Int, $limit: Int) {
+    posts(sort: "publishedAt:DESC", pagination: { start: $start, limit: $limit }) {
+        data {
+            id
+            attributes {
+                category {
+                    data {
+                        id
+                        attributes {
+                            title
+                            slugUrl
+                        }
+                    }
+                }
+                title
+                description
+                cover {
+                    data {
+                        attributes {
+                            url
+                        }
+                    }
+                }
+                slugUrl
+                publishedAt
+            }
+        }
+        meta {
+            pagination {
+                total
+                page
+                pageSize
+                pageCount
+            }
+        }
+    }
+}

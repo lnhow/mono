@@ -17,6 +17,14 @@ export type GetParentCategoriesQueryVariables = Exact<{ [key: string]: never; }>
 
 export type GetParentCategoriesQuery = { __typename?: 'Query', categories?: { __typename?: 'CategoryEntityResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', title: string, slugUrl?: string | null, child_categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', title: string, slugUrl?: string | null } | null }> } | null } | null }> } | null };
 
+export type FeaturedPostsQueryVariables = Exact<{
+  start?: InputMaybe<Scalars['Int']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type FeaturedPostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, description: string, slugUrl?: string | null, publishedAt?: any | null, category?: { __typename?: 'CategoryEntityResponse', data?: { __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', title: string, slugUrl?: string | null } | null } | null } | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }>, meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', total: number, page: number, pageSize: number, pageCount: number } } } | null };
+
 export type GetAllPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -64,6 +72,59 @@ export const useGetParentCategoriesQuery = <
     useQuery<GetParentCategoriesQuery, TError, TData>(
       variables === undefined ? ['GetParentCategories'] : ['GetParentCategories', variables],
       fetcher<GetParentCategoriesQuery, GetParentCategoriesQueryVariables>(client, GetParentCategoriesDocument, variables, headers),
+      options
+    );
+export const FeaturedPostsDocument = `
+    query FeaturedPosts($start: Int, $limit: Int) {
+  posts(sort: "publishedAt:DESC", pagination: {start: $start, limit: $limit}) {
+    data {
+      id
+      attributes {
+        category {
+          data {
+            id
+            attributes {
+              title
+              slugUrl
+            }
+          }
+        }
+        title
+        description
+        cover {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        slugUrl
+        publishedAt
+      }
+    }
+    meta {
+      pagination {
+        total
+        page
+        pageSize
+        pageCount
+      }
+    }
+  }
+}
+    `;
+export const useFeaturedPostsQuery = <
+      TData = FeaturedPostsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: FeaturedPostsQueryVariables,
+      options?: UseQueryOptions<FeaturedPostsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<FeaturedPostsQuery, TError, TData>(
+      variables === undefined ? ['FeaturedPosts'] : ['FeaturedPosts', variables],
+      fetcher<FeaturedPostsQuery, FeaturedPostsQueryVariables>(client, FeaturedPostsDocument, variables, headers),
       options
     );
 export const GetAllPostsDocument = `
