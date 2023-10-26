@@ -16,7 +16,7 @@ export default async function RootLayout({ children }: React.PropsWithChildren) 
     <html lang="en" suppressHydrationWarning>
       <body className="text-black dark:text-white">
         <Providers>
-          <LayoutDefault>{children}</LayoutDefault>
+          {children}
         </Providers>
       </body>
     </html>
