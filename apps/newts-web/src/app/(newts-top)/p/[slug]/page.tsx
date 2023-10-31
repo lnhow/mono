@@ -1,4 +1,4 @@
-import { PAGE_REVALIDATE } from '@newts/common.gui/constants/staleTime'
+import { PAGE_REVALIDATE } from '@newts/ui/constants/staleTime'
 import { Metadata, ResolvingMetadata } from 'next'
 
 import { getPostBySlug } from './_page/api'

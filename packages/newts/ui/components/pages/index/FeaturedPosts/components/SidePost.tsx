@@ -1,5 +1,5 @@
-import { NwPostProps } from '@newts/common.gui/types/components/posts.type'
-import NwPostImage from '@newts/common.gui/components/common/NwPostImage'
+import { NwPostProps } from '@newts/ui/types/components/posts.type'
+import NwPostImage from '@newts/ui/components/common/NwPostImage'
 import Link from 'next/link'
 
 export default function SidePost({ data }: NwPostProps) {

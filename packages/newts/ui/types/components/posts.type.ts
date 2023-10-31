@@ -1,4 +1,4 @@
-import NwPost from '@newts/common.gui/types/post'
+import NwPost from '@newts/ui/types/post'
 
 export type NwPostProps = { data: NwPost }
 

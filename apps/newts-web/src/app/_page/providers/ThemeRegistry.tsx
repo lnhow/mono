@@ -11,7 +11,7 @@ import {
   DEFAULT_THEME,
   MuiThemeMapping,
   THEME,
-} from '@newts/common.gui/constants/theme'
+} from '@newts/ui/constants/theme'
 import { useTheme } from 'next-themes'
 
 const useMuiTheme = () => {
