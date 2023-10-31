@@ -1,12 +1,8 @@
-import NwPost from '../../../../types/post'
 import TopPost from './components/TopPost'
 import SidePost from './components/SidePost'
+import { NwPostGroupProps } from '../../../../types/components/posts.type'
 
-export interface NwFeaturedPostsProps {
-  data: NwPost[]
-}
-
-export default function NwFeaturedPosts({ data }: NwFeaturedPostsProps) {
+export default function NwFeaturedPosts({ data }: NwPostGroupProps) {
   if (!data || data.length < 1) {
     return <></>
   }

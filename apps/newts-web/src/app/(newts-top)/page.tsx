@@ -1,10 +1,8 @@
 import { Metadata } from 'next'
 import { PAGE_REVALIDATE } from '@newts/ui/constants/staleTime'
-import PostsByCategory from '@newts/ui/components/pages/index/PostsByCategory'
-import PostsByCategorySkeleton from '@newts/ui/components/pages/index/PostsByCategory/skeleton'
-import { Suspense } from 'react'
 import FeaturedPosts from './_page/FeaturedPosts'
 import { pageHomeCategories } from './const'
+import PostsByCategory from './_page/PostsByCategory'
 
 export const revalidate = PAGE_REVALIDATE.DEFAULT
 
@@ -19,9 +17,7 @@ export default async function Page() {
       <FeaturedPosts />
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {pageHomeCategories.map((category) => ( 
-          <Suspense key={category} fallback={<PostsByCategorySkeleton />}>
-            <PostsByCategory />
-          </Suspense>
+          <PostsByCategory key={category} category={category} />
         ))}
       </div>
     </div>
