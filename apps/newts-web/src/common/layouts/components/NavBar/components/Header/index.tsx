@@ -1,4 +1,4 @@
-import { STALE_TIME } from '@newts/common.gui/constants/staleTime'
+import { STALE_TIME } from '@newts/ui/constants/staleTime'
 import QuickCategoryList from './QuickCategoryList'
 import FullCategoryModalButton from './FullCategoryModal'
 

@@ -1,5 +1,5 @@
 import { PostEntity } from '@/data/graphql/_generated/types'
-import NwPost from '@newts/common.gui/types/post'
+import NwPost from '@newts/ui/types/post'
 
 export const mapPostEntityToNwPost = (post: PostEntity): NwPost => {
   const attributes = post.attributes

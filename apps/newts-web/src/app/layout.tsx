@@ -1,5 +1,5 @@
 import './globals.css'
-import '@newts/common.gui/styles.css'
+import '@newts/ui/styles.css'
 import { Providers } from './_page/providers'
 
 export const metadata = {

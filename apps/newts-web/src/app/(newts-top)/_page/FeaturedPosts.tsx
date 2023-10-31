@@ -2,7 +2,7 @@ import { mapPostEntityToNwPost } from '@/data/mapping/post'
 import { getFeaturedPosts } from './api'
 import { PostEntity } from '@/data/graphql/_generated/types'
 
-import NwFeaturedPosts from '@newts/common.gui/components/pages/index/FeaturedPosts'
+import NwFeaturedPosts from '@newts/ui/components/pages/index/FeaturedPosts'
 
 export default async function FeaturedPosts() {
   const posts = await getFeaturedPosts()

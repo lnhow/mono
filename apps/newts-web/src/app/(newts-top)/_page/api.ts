@@ -15,8 +15,8 @@ export const getFeaturedPosts = cache((skip = 0, limit = 3) => {
   })
 })
 
-// import NwPost from '@newts/common.gui/types/post'
-// import NwCategory from '@newts/common.gui/types/category'
+// import NwPost from '@newts/ui/types/post'
+// import NwCategory from '@newts/ui/types/category'
 
 // export const mapPostsToNwPost: NwPost = (posts: FeaturedPostsQuery) => {
 //   return posts.posts?.data.map((post) => {

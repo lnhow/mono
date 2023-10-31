@@ -7,7 +7,7 @@ const config = {
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-    '../../packages/newts/gui/**/*.{js,ts,jsx,tsx,mdx}',
+    '../../packages/newts/ui/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {

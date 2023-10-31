@@ -6,6 +6,7 @@ dist/**
 node_modules
 
 .env
+.envrc
 
 # Build
 out/

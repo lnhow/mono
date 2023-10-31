@@ -3,7 +3,7 @@ import Header from './components/Header'
 import dynamic from 'next/dynamic'
 
 const ThemeChanger = dynamic(
-  () => import('@newts/common.gui/components/ThemeChanger'),
+  () => import('@newts/ui/components/ThemeChanger'),
   { ssr: false }
 )
 
