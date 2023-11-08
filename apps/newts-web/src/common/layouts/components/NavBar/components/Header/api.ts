@@ -4,6 +4,7 @@ import {
   GetParentCategoriesQuery,
 } from '@/data/graphql/_generated/graphql'
 import { queryClient } from '@/data/graphql/queryClient'
+import { mapCategoryToNwCategory } from '@/data/mapping/category'
 import { cache } from 'react'
 
 export const getParentCategory = cache(() => {
@@ -15,15 +16,7 @@ export const getParentCategory = cache(() => {
 
 export const mapToProps = cache(
   (gqlRes: Awaited<ReturnType<typeof getParentCategory>>) => {
-    const mappedData: ICategory[] = gqlRes.categories?.data.map((category) => {
-      return {
-        id: category.id,
-        attributes: {
-          ...(category.attributes),
-          child_categories: category.attributes?.child_categories?.data || []
-        }
-      } as ICategory
-    }) || []
+    const mappedData = gqlRes.categories?.data.map(mapCategoryToNwCategory) || [] as unknown as ICategory[]
     return mappedData
   }
 )

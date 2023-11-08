@@ -1,37 +1,41 @@
 query FeaturedPosts($start: Int, $limit: Int) {
-    posts(sort: "publishedAt:DESC", pagination: { start: $start, limit: $limit }) {
-        data {
+  posts(
+    sort: "publishedAt:DESC"
+    pagination: { start: $start, limit: $limit }
+    publicationState: LIVE
+  ) {
+    data {
+      id
+      attributes {
+        category {
+          data {
             id
             attributes {
-                category {
-                    data {
-                        id
-                        attributes {
-                            title
-                            slugUrl
-                        }
-                    }
-                }
-                title
-                description
-                cover {
-                    data {
-                        attributes {
-                            url
-                        }
-                    }
-                }
-                slugUrl
-                publishedAt
+              title
+              slugUrl
             }
+          }
         }
-        meta {
-            pagination {
-                total
-                page
-                pageSize
-                pageCount
+        title
+        description
+        cover {
+          data {
+            attributes {
+              url
             }
+          }
         }
+        slugUrl
+        publishedAt
+      }
     }
+    meta {
+      pagination {
+        total
+        page
+        pageSize
+        pageCount
+      }
+    }
+  }
 }
