@@ -1,5 +1,5 @@
-import { ICategory } from '@/common/types/category'
+import NwCategory from '@newts/ui/types/category'
 
 export type PropsItemCategory = {
-  data: ICategory
+  data: NwCategory
 }

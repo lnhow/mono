@@ -1,10 +1,10 @@
-import { ICategory } from '@/common/types/category'
 import {
   GetParentCategoriesDocument,
   GetParentCategoriesQuery,
 } from '@/data/graphql/_generated/graphql'
 import { queryClient } from '@/data/graphql/queryClient'
 import { mapCategoryToNwCategory } from '@/data/mapping/category'
+import NwCategory from '@newts/ui/types/category'
 import { cache } from 'react'
 
 export const getParentCategory = cache(() => {
@@ -16,7 +16,7 @@ export const getParentCategory = cache(() => {
 
 export const mapToProps = cache(
   (gqlRes: Awaited<ReturnType<typeof getParentCategory>>) => {
-    const mappedData = gqlRes.categories?.data.map(mapCategoryToNwCategory) || [] as unknown as ICategory[]
+    const mappedData = gqlRes.categories?.data.map(mapCategoryToNwCategory) || [] as NwCategory[]
     return mappedData
   }
 )
