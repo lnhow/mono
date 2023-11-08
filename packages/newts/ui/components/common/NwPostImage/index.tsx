@@ -3,17 +3,23 @@ import { ComponentPropsWithoutRef } from 'react'
 
 export type NwPostImageProps = ComponentPropsWithoutRef<typeof Image> & {
   roundedSize?: string
+  wrapperClassName?: string
 }
 
 export default function NwPostImage({
   src,
   alt,
   roundedSize = 'rounded-md',
+  wrapperClassName,
   className,
   ...props
 }: NwPostImageProps) {
   return (
-    <div className="relative pb-[75%]">
+    <div
+      className={
+        (wrapperClassName ? `${wrapperClassName} ` : '') + 'relative pb-[75%]'
+      }
+    >
       <Image
         loading="lazy"
         src={src || ''}
