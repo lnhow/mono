@@ -12,6 +12,15 @@ function fetcher<TData, TVariables extends { [key: string]: any }>(client: Graph
     requestHeaders
   });
 }
+export type GetPostsByCategorySlugQueryVariables = Exact<{
+  categorySlug?: InputMaybe<Scalars['String']['input']>;
+  start?: InputMaybe<Scalars['Int']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetPostsByCategorySlugQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, description: string, content?: string | null, slugUrl?: string | null, publishedAt?: any | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, category?: { __typename?: 'CategoryEntityResponse', data?: { __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', title: string, slugUrl?: string | null } | null } | null } | null } | null }> } | null };
+
 export type GetParentCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -38,6 +47,56 @@ export type GetPostBySlugQueryVariables = Exact<{
 export type GetPostBySlugQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, description: string, content?: string | null, slugUrl?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, category?: { __typename?: 'CategoryEntityResponse', data?: { __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', title: string, slugUrl?: string | null } | null } | null } | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
 
 
+export const GetPostsByCategorySlugDocument = `
+    query GetPostsByCategorySlug($categorySlug: String, $start: Int, $limit: Int) {
+  posts(
+    filters: {or: [{category: {slugUrl: {eq: $categorySlug}}}, {category: {parent_category: {slugUrl: {eq: $categorySlug}}}}]}
+    pagination: {start: $start, limit: $limit}
+    publicationState: LIVE
+  ) {
+    data {
+      id
+      attributes {
+        title
+        description
+        content
+        slugUrl
+        publishedAt
+        cover {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        category {
+          data {
+            attributes {
+              title
+              slugUrl
+            }
+            id
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const useGetPostsByCategorySlugQuery = <
+      TData = GetPostsByCategorySlugQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetPostsByCategorySlugQueryVariables,
+      options?: UseQueryOptions<GetPostsByCategorySlugQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetPostsByCategorySlugQuery, TError, TData>(
+      variables === undefined ? ['GetPostsByCategorySlug'] : ['GetPostsByCategorySlug', variables],
+      fetcher<GetPostsByCategorySlugQuery, GetPostsByCategorySlugQueryVariables>(client, GetPostsByCategorySlugDocument, variables, headers),
+      options
+    );
 export const GetParentCategoriesDocument = `
     query GetParentCategories {
   categories(filters: {parent_category: {id: {null: true}}}) {
@@ -76,7 +135,11 @@ export const useGetParentCategoriesQuery = <
     );
 export const FeaturedPostsDocument = `
     query FeaturedPosts($start: Int, $limit: Int) {
-  posts(sort: "publishedAt:DESC", pagination: {start: $start, limit: $limit}) {
+  posts(
+    sort: "publishedAt:DESC"
+    pagination: {start: $start, limit: $limit}
+    publicationState: LIVE
+  ) {
     data {
       id
       attributes {
