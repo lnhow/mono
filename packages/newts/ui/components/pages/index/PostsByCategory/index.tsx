@@ -1,25 +1,19 @@
-import { NwPostGroupProps } from '../../../../types/components/posts.type'
-import SideCategoryPost from './components/SideCategoryPost'
-import TopCategoryPost from './components/TopCategoryPost'
-// import NwPostsByCategorySkeleton from './skeleton'
+import { NwCategoryProps } from '@newts/ui/types/components/category.type'
+import { NwPostGroupProps } from '@newts/ui/types/components/posts.type'
+import CategoryTitle from './components/CategoryTitle'
+import PostGroup from './components/PostsGroup'
 
-
-export default async function NwPostsByCategory({ data }: NwPostGroupProps) {
-  if (!data || data.length < 1) {
+export default async function NwPostsByCategory({
+  data,
+  categoryData,
+}: NwPostGroupProps & { categoryData: NwCategoryProps['data'] }) {
+  if (!data || data.length < 1 || !categoryData.id) {
     return <></>
   }
-  const sidePosts = data.slice(1, 3)
 
   return (
-    <section className="grid grid-cols-1 gap-4">
-      <TopCategoryPost data={data[0]} />
-      <div className="flex flex-col md:max-lg:flex-row gap-4">
-        {sidePosts.map((post, index) => (
-          <div key={index} className='max-lg:flex-1'>
-            <SideCategoryPost data={post} />
-          </div>
-        ))}
-      </div>
-    </section>
+    <CategoryTitle data={categoryData}>
+      <PostGroup data={data} />
+    </CategoryTitle>
   )
 }
