@@ -1,3 +1,19 @@
+query CategoriesBySlugUrl($categorySlug: String) {
+  categories(
+    filters: { slugUrl: { eq: $categorySlug } }
+    publicationState: LIVE
+    pagination: { limit: 1 }
+  ) {
+    data {
+      id
+      attributes {
+        title
+        slugUrl
+      }
+    }
+  }
+}
+
 query GetPostsByCategorySlug($categorySlug: String, $start: Int, $limit: Int) {
   posts(
     filters: {

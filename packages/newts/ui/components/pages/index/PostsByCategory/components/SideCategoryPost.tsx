@@ -23,11 +23,11 @@ export default function SideCategoryPost({ data }: NwPostProps) {
       )}
       <div className="ml-2 min-w-0 flex-[2] py-2 pr-2">
         <Link href={hrefUrl} title={title}>
-          <h2 className="text-xl font-extralight line-clamp-1 lg:line-clamp-2">
+          <h2 className="text-md font-extralight line-clamp-1 lg:line-clamp-2">
             {data.attributes.title}
           </h2>
         </Link>
-        <p className="mt-2 text-sm font-light line-clamp-3 lg:line-clamp-2">
+        <p className="mt-2 text-xs font-light line-clamp-3 lg:line-clamp-2">
           {data.attributes.description}
         </p>
       </div>

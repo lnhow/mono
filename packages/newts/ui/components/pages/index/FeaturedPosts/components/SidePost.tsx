@@ -10,8 +10,8 @@ export default function SidePost({ data }: NwPostProps) {
       {data.attributes.cover?.attributes.url && (
         <div
           className="
-          shrink-0 w-full min-w-[150px] overflow-hidden
-          flex-1 lg:flex-[2]
+          shrink-0 w-40 lg:w-full lg:min-w-[120px] overflow-hidden
+          lg:flex-[2]
         "
         >
           <Link href={hrefUrl} title={title}>
@@ -22,7 +22,7 @@ export default function SidePost({ data }: NwPostProps) {
           </Link>
         </div>
       )}
-      <div className="ml-2 min-w-0 flex-[2] py-2 pr-2">
+      <div className="ml-2 min-w-0 flex-2 lg:flex-[3] py-2 pr-2">
         <Link href={hrefUrl} title={title}>
           <h2 className="text-xl font-extralight line-clamp-1 lg:line-clamp-2">
             {data.attributes.title}

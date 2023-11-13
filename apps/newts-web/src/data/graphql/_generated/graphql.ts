@@ -12,6 +12,13 @@ function fetcher<TData, TVariables extends { [key: string]: any }>(client: Graph
     requestHeaders
   });
 }
+export type CategoriesBySlugUrlQueryVariables = Exact<{
+  categorySlug?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type CategoriesBySlugUrlQuery = { __typename?: 'Query', categories?: { __typename?: 'CategoryEntityResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', title: string, slugUrl?: string | null } | null }> } | null };
+
 export type GetPostsByCategorySlugQueryVariables = Exact<{
   categorySlug?: InputMaybe<Scalars['String']['input']>;
   start?: InputMaybe<Scalars['Int']['input']>;
@@ -47,6 +54,37 @@ export type GetPostBySlugQueryVariables = Exact<{
 export type GetPostBySlugQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, description: string, content?: string | null, slugUrl?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, category?: { __typename?: 'CategoryEntityResponse', data?: { __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', title: string, slugUrl?: string | null } | null } | null } | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
 
 
+export const CategoriesBySlugUrlDocument = `
+    query CategoriesBySlugUrl($categorySlug: String) {
+  categories(
+    filters: {slugUrl: {eq: $categorySlug}}
+    publicationState: LIVE
+    pagination: {limit: 1}
+  ) {
+    data {
+      id
+      attributes {
+        title
+        slugUrl
+      }
+    }
+  }
+}
+    `;
+export const useCategoriesBySlugUrlQuery = <
+      TData = CategoriesBySlugUrlQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: CategoriesBySlugUrlQueryVariables,
+      options?: UseQueryOptions<CategoriesBySlugUrlQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<CategoriesBySlugUrlQuery, TError, TData>(
+      variables === undefined ? ['CategoriesBySlugUrl'] : ['CategoriesBySlugUrl', variables],
+      fetcher<CategoriesBySlugUrlQuery, CategoriesBySlugUrlQueryVariables>(client, CategoriesBySlugUrlDocument, variables, headers),
+      options
+    );
 export const GetPostsByCategorySlugDocument = `
     query GetPostsByCategorySlug($categorySlug: String, $start: Int, $limit: Int) {
   posts(

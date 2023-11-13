@@ -22,20 +22,20 @@ export default function TopCategoryPost({ data }: NwPostProps) {
             />
           </Link>
         </div>
-        <div className="min-w-0 z-10 absolute w-2/3 md:w-1/2 right-2 top-1/4 flex flex-col items-end">
+        <div className="min-w-0 z-10 absolute w-2/3 right-2 top-1/4 flex flex-col items-end">
           <div
             className="p-2 rounded-lg
             bg-bgprimary-100/95 dark:bg-bgprimary-900/95
           "
           >
             <Link href={hrefUrl} title={title}>
-              <h1 className="text-md md:text-xl font-extralight line-clamp-2">
+              <h1 className="text-lg md:text-md font-extralight line-clamp-2">
                 {data.attributes.title}
               </h1>
             </Link>
           </div>
           <div className="w-[75%] mt-1 p-1 rounded-md bg-bgprimary-900/90 dark:bg-bgprimary-100/90">
-            <p className="text-xs font-light text-ellipsis line-clamp-3 text-white dark:text-black">
+            <p className="text-sm lg:text-xs font-light text-ellipsis line-clamp-3 lg:line-clamp-2 text-white dark:text-black">
               {data.attributes.description}
             </p>
           </div>
