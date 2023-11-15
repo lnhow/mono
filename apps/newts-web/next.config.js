@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+import { PHASE_PRODUCTION_BUILD } from 'next/constants'
+
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -23,12 +25,24 @@ const nextConfig = {
       },
     ],
   },
-  rewrites: async () => [
-    {
-      source: '/api/newts/:path*',
-      destination: `${process.env.MAIN_API}/:path*`,
-    },
-  ],
+  rewrites: async () => {
+    if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
+      return [
+        [
+          {
+            source: '/api/newts/:path*',
+            destination: `${process.env.MAIN_API}/:path*`,
+          },
+        ]
+      ]
+    }
+    return  [
+      {
+        source: '/api/newts/:path*',
+        destination: `${process.env.PRIVATE_MAIN_API}/:path*`,
+      },
+    ]
+  },
   transpilePackages: ['@newts/ui']
 }
 
