@@ -9,6 +9,8 @@ ENV PRIVATE_MAIN_API=$PRIVATE_MAIN_API
 ARG NEXT_PUBLIC_HOST
 ENV NEXT_PUBLIC_HOST=$NEXT_PUBLIC_HOST
 
+ENV PHASE=build
+
 # This Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.
 # Make sure you update both files!
 

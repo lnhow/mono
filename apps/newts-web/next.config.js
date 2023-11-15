@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { PHASE_PRODUCTION_BUILD } = require('next/constants')
 
 const nextConfig = {
   reactStrictMode: true,
@@ -27,24 +26,23 @@ const nextConfig = {
     ],
   },
   rewrites: async () => {
-    if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
+    console.log('[REWRITE] Rewrite path in PHASE:', process.env.PHASE)
+    if (process.env.PHASE === 'build') {
       return [
-        [
-          {
-            source: '/api/newts/:path*',
-            destination: `${process.env.MAIN_API}/:path*`,
-          },
-        ]
+        {
+          source: '/api/newts/:path*',
+          destination: `${process.env.MAIN_API}/:path*`,
+        },
       ]
     }
-    return  [
+    return [
       {
         source: '/api/newts/:path*',
         destination: `${process.env.PRIVATE_MAIN_API}/:path*`,
       },
     ]
   },
-  transpilePackages: ['@newts/ui']
+  transpilePackages: ['@newts/ui'],
 }
 
 module.exports = nextConfig
