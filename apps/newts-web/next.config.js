@@ -11,7 +11,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: `${process.env.NEXT_PUBLIC_MAIN_API}`,
+        hostname: `${process.env.MAIN_API}`,
         port: '',
         pathname: '/uploads/**',
       },
@@ -23,6 +23,12 @@ const nextConfig = {
       },
     ],
   },
+  rewrites: async () => [
+    {
+      source: '/api/newts/:path*',
+      destination: `${process.env.MAIN_API}/:path*`,
+    },
+  ],
   transpilePackages: ['@newts/ui']
 }
 

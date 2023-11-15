@@ -2,7 +2,7 @@ import { GraphQLClient } from 'graphql-request'
 import { cache } from 'react'
 import { QueryClient, QueryClientConfig } from '@tanstack/react-query'
 
-const GRAPHQL_ENDPOINT = process.env.NEXT_PUBLIC_MAIN_API as string
+const GRAPHQL_ENDPOINT = process.env.NEXT_PUBLIC_HOST + '/api/newts'
 
 export const AppConfigQueryClient: QueryClientConfig = {
   defaultOptions: {
