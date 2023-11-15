@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
+console.log('[CONFIG] Running in PHASE:', process.env.PHASE)
+
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -26,15 +28,6 @@ const nextConfig = {
     ],
   },
   rewrites: async () => {
-    console.log('[REWRITE] Rewrite path in PHASE:', process.env.PHASE)
-    if (process.env.PHASE === 'build') {
-      return [
-        {
-          source: '/api/newts/:path*',
-          destination: `${process.env.MAIN_API}/:path*`,
-        },
-      ]
-    }
     return [
       {
         source: '/api/newts/:path*',
