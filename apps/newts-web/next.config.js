@@ -31,7 +31,7 @@ const nextConfig = {
     return [
       {
         source: '/api/newts/:path*',
-        destination: `${process.env.PRIVATE_MAIN_API}/:path*`,
+        destination: `${process.env.MAIN_API}/:path*`,
       },
     ]
   },
