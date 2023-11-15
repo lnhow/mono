@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
-import { PHASE_PRODUCTION_BUILD } from 'next/constants'
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { PHASE_PRODUCTION_BUILD } = require('next/constants')
 
 const nextConfig = {
   reactStrictMode: true,
