@@ -6,7 +6,7 @@ import {
 } from '@/data/graphql/_generated/graphql'
 import { cache } from 'react'
 
-export const getPostBySlug = cache((slug: string) => {
+export const fetchSearchPost = cache((slug: string) => {
   const gqlClient = queryClient.GraphQL()
   return gqlClient.request<GetPostBySlugQuery, GetPostBySlugQueryVariables>({
     document: GetPostBySlugDocument,

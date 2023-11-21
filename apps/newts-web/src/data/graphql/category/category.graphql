@@ -18,3 +18,29 @@ query GetParentCategories {
     }
   }
 }
+
+query CatWithChildBySlugUrl($categorySlug: String) {
+    categories(
+        filters: { slugUrl: { eq: $categorySlug } }
+        publicationState: LIVE
+        pagination: { limit: 1 }
+    ) {
+        data {
+            id
+            attributes {
+                title
+                slugUrl
+                child_categories {
+                    data {
+                        id
+                        attributes {
+                            title
+                            slugUrl
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

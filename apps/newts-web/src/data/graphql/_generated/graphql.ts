@@ -33,6 +33,13 @@ export type GetParentCategoriesQueryVariables = Exact<{ [key: string]: never; }>
 
 export type GetParentCategoriesQuery = { __typename?: 'Query', categories?: { __typename?: 'CategoryEntityResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', title: string, slugUrl?: string | null, child_categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', title: string, slugUrl?: string | null } | null }> } | null } | null }> } | null };
 
+export type CatWithChildBySlugUrlQueryVariables = Exact<{
+  categorySlug?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type CatWithChildBySlugUrlQuery = { __typename?: 'Query', categories?: { __typename?: 'CategoryEntityResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', title: string, slugUrl?: string | null, child_categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', title: string, slugUrl?: string | null } | null }> } | null } | null }> } | null };
+
 export type FeaturedPostsQueryVariables = Exact<{
   start?: InputMaybe<Scalars['Int']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -52,6 +59,15 @@ export type GetPostBySlugQueryVariables = Exact<{
 
 
 export type GetPostBySlugQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, description: string, content?: string | null, slugUrl?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, category?: { __typename?: 'CategoryEntityResponse', data?: { __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', title: string, slugUrl?: string | null } | null } | null } | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
+
+export type PostByFilterQueryVariables = Exact<{
+  filter?: InputMaybe<PostFiltersInput>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type PostByFilterQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, description: string, content?: string | null, slugUrl?: string | null, publishedAt?: any | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, category?: { __typename?: 'CategoryEntityResponse', data?: { __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', title: string, slugUrl?: string | null } | null } | null } | null } | null }>, meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', total: number, page: number, pageSize: number, pageCount: number } } } | null };
 
 
 export const CategoriesBySlugUrlDocument = `
@@ -169,6 +185,46 @@ export const useGetParentCategoriesQuery = <
     useQuery<GetParentCategoriesQuery, TError, TData>(
       variables === undefined ? ['GetParentCategories'] : ['GetParentCategories', variables],
       fetcher<GetParentCategoriesQuery, GetParentCategoriesQueryVariables>(client, GetParentCategoriesDocument, variables, headers),
+      options
+    );
+export const CatWithChildBySlugUrlDocument = `
+    query CatWithChildBySlugUrl($categorySlug: String) {
+  categories(
+    filters: {slugUrl: {eq: $categorySlug}}
+    publicationState: LIVE
+    pagination: {limit: 1}
+  ) {
+    data {
+      id
+      attributes {
+        title
+        slugUrl
+        child_categories {
+          data {
+            id
+            attributes {
+              title
+              slugUrl
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const useCatWithChildBySlugUrlQuery = <
+      TData = CatWithChildBySlugUrlQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: CatWithChildBySlugUrlQueryVariables,
+      options?: UseQueryOptions<CatWithChildBySlugUrlQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<CatWithChildBySlugUrlQuery, TError, TData>(
+      variables === undefined ? ['CatWithChildBySlugUrl'] : ['CatWithChildBySlugUrl', variables],
+      fetcher<CatWithChildBySlugUrlQuery, CatWithChildBySlugUrlQueryVariables>(client, CatWithChildBySlugUrlDocument, variables, headers),
       options
     );
 export const FeaturedPostsDocument = `
@@ -320,5 +376,63 @@ export const useGetPostBySlugQuery = <
     useQuery<GetPostBySlugQuery, TError, TData>(
       variables === undefined ? ['GetPostBySlug'] : ['GetPostBySlug', variables],
       fetcher<GetPostBySlugQuery, GetPostBySlugQueryVariables>(client, GetPostBySlugDocument, variables, headers),
+      options
+    );
+export const PostByFilterDocument = `
+    query PostByFilter($filter: PostFiltersInput, $page: Int, $pageSize: Int) {
+  posts(
+    filters: $filter
+    pagination: {page: $page, pageSize: $pageSize}
+    publicationState: LIVE
+  ) {
+    data {
+      id
+      attributes {
+        title
+        description
+        content
+        slugUrl
+        publishedAt
+        cover {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        category {
+          data {
+            attributes {
+              title
+              slugUrl
+            }
+            id
+          }
+        }
+      }
+    }
+    meta {
+      pagination {
+        total
+        page
+        pageSize
+        pageCount
+      }
+    }
+  }
+}
+    `;
+export const usePostByFilterQuery = <
+      TData = PostByFilterQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: PostByFilterQueryVariables,
+      options?: UseQueryOptions<PostByFilterQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<PostByFilterQuery, TError, TData>(
+      variables === undefined ? ['PostByFilter'] : ['PostByFilter', variables],
+      fetcher<PostByFilterQuery, PostByFilterQueryVariables>(client, PostByFilterDocument, variables, headers),
       options
     );

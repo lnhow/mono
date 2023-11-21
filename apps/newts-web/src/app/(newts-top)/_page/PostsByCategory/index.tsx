@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 
-import { mapPostEntityToNwPost } from '@/data/mapping/post'
+import { mapPostToNwPost } from '@/data/mapping/post'
 import { getFeatureCategoryDataBySlug } from '../api'
 import { PostEntity } from '@/data/graphql/_generated/types'
 import NwPostsByCategory from '@newts/ui/components/pages/index/PostsByCategory'
@@ -24,7 +24,7 @@ export async function PostsByCategoryAsync({ category }: PostsByCategoryProps) {
 
   const mappedPost =
     postsData.data.posts?.data.map((post) =>
-      mapPostEntityToNwPost(post as unknown as PostEntity)
+      mapPostToNwPost(post as unknown as PostEntity)
     ) || []
   const mappedCategory = mapCategoryToNwCategory(
     categoryData.data.categories?.data[0] || {}
