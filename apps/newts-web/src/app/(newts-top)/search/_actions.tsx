@@ -10,24 +10,26 @@ import { PostFiltersInput } from '@/data/graphql/_generated/types'
 export const ParamNameSearchPost = ['searchTerms', 'categorySlug'] as const
 export type TParamNameSearchPost = (typeof ParamNameSearchPost)[number]
 
-export type TParamSearchPost = Record<TParamNameSearchPost, string | undefined>
+export type TParamSearchPost = Record<TParamNameSearchPost, string | string[] | undefined>
 
 const searchParamsMapper: Record<
   TParamNameSearchPost,
-  (params: string) => object
+  (params: string | string[]) => object
 > = {
-  searchTerms: (params: string) => {
+  searchTerms: (params: string | string[]) => {
+    const processedParams = Array.isArray(params) ? params[0] : params
     return {
-      title: { containsi: params },
+      title: { containsi: processedParams },
     }
   },
-  categorySlug: (params: string) => {
+  categorySlug: (params: string | string[]) => {
+    const processedParams = Array.isArray(params) ? params[0] : params
     return {
       or: [
-        { category: { slugUrl: { eq: params } } },
+        { category: { slugUrl: { eq: processedParams } } },
         {
           category: {
-            parent_category: { slugUrl: { eq: params } },
+            parent_category: { slugUrl: { eq: processedParams } },
           },
         },
       ],
@@ -46,29 +48,9 @@ export const fetchSearchPost = cache(
       }, []),
     }
 
-    // if (searchParams.searchTerms) {
-    //   searchFilter.and?.push({
-    //     title: { contains: searchParams.searchTerms },
-    //   })
-    // }
-
-    // if (searchParams.categorySlug) {
-    //   searchFilter.and?.push({
-    //     or: [
-    //       { category: { slugUrl: { eq: searchParams.categorySlug } } },
-    //       {
-    //         category: {
-    //           parent_category: { slugUrl: { eq: searchParams.categorySlug } },
-    //         },
-    //       },
-    //     ],
-    //   })
-    // }
-
-    console.log(
-      '[Dev Log] -> file: actions.tsx:19 -> searchFilter:',
-      searchFilter
-    )
+    if (searchFilter.and?.length === 0) {
+      delete searchFilter.and
+    }
 
     const gqlClient = queryClient.GraphQL()
     return gqlClient.request<PostByFilterQuery, PostByFilterQueryVariables>({

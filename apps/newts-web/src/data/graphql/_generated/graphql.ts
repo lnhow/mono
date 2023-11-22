@@ -384,6 +384,7 @@ export const PostByFilterDocument = `
     filters: $filter
     pagination: {page: $page, pageSize: $pageSize}
     publicationState: LIVE
+    sort: ["publishedAt:desc"]
   ) {
     data {
       id

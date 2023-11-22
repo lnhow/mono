@@ -1,6 +1,7 @@
 import { STALE_TIME } from '@newts/ui/constants/staleTime'
 import QuickCategoryList from './QuickCategoryList'
 import FullCategoryModalButton from './FullCategoryModal'
+import SearchButton from './SearchButton'
 
 export const revalidate = STALE_TIME.DEFAULT
 
@@ -16,6 +17,7 @@ export default async function Header() {
       ">
         <FullCategoryModalButton />
         <QuickCategoryList />
+        <SearchButton />
       </div>
     </div>
   )
