@@ -103,12 +103,12 @@ export const NwPaginationButton = memo(function NwPaginationButton({
   searchParams,
   page,
 }: NwPaginationButtonProps) {
+  const pathname = usePathname()
   const newUrl = useMemo(() => {
-    const pathname = window.location.pathname
     const newSearchParams = new URLSearchParams(searchParams)
     newSearchParams.set('page', '' + page)
     return pathname + '?' + newSearchParams.toString()
-  }, [page, searchParams])
+  }, [page, searchParams, pathname])
 
   return (
     <li>
