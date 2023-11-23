@@ -18,8 +18,7 @@ export default async function Page({ searchParams }: NextPageProps) {
       searchTerms: searchParams['q'] || undefined,
       categorySlug: searchParams['c'] || undefined,
     },
-    page,
-    1
+    page
   )
 
   const mappedPosts =

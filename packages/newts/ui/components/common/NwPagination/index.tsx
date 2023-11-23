@@ -1,5 +1,5 @@
 'use client'
-import { memo, use, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { NwPaginationProps } from './type'
 import {
   ChevronLeft as ChevronLeftIcon,
@@ -12,10 +12,26 @@ export type { NwPaginationProps } from './type'
 
 const PAGINATION_BUTTONS = 5
 const resolvePaginationButtonPage = (page: number, pageCount: number) => {
-  return {
-    from: PAGINATION_BUTTONS * (page - 1) + 1,
-    to: Math.min(PAGINATION_BUTTONS * page, pageCount),
+  const halfPaginationButtons = Math.floor(PAGINATION_BUTTONS / 2)
+  const result = {
+    from: 1,
+    to: pageCount,
   }
+
+  if (pageCount <= PAGINATION_BUTTONS) {
+    return result
+  }
+
+  if (page <= halfPaginationButtons) {
+    result.to = PAGINATION_BUTTONS
+  } else if (page >= pageCount - halfPaginationButtons) {
+    result.from = pageCount - PAGINATION_BUTTONS + 1
+  } else {
+    result.from = page - halfPaginationButtons
+    result.to = page + halfPaginationButtons
+  }
+
+  return result
 }
 
 const NwPagination = memo(function NwPagination({
@@ -26,10 +42,10 @@ const NwPagination = memo(function NwPagination({
   const searchParams = useSearchParams()
   const truncatedPage = useMemo(() => {
     const { from, to } = resolvePaginationButtonPage(page, pageCount)
-    return Array.from({ length: to - from + 1 }, (value, index) => from + index)
+    return Array.from({ length: to - from + 1 }, (_, index) => from + index)
   }, [page, pageCount])
   const isEmpty = total < 1
-  const isFirstPage = page === 1
+  const isFirstPage = page < 2
   const isLastPage = page >= pageCount
 
   if (isEmpty) {
@@ -60,17 +76,6 @@ const NwPagination = memo(function NwPagination({
             </NwPaginationButton>
           )
         })}
-        {/*
-        <li>
-          <a
-            href="#"
-            aria-current="page"
-            className="z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-          >
-            3
-          </a>
-        </li>
-        */}
         <NwPaginationButton
           searchParams={searchParams}
           page={page + 1}
@@ -110,15 +115,29 @@ export const NwPaginationButton = memo(function NwPaginationButton({
     return pathname + '?' + newSearchParams.toString()
   }, [page, searchParams, pathname])
 
+  const colorClass = useMemo(() => {
+    if (active) {
+      return 'text-blue-600 border border-blue-300 bg-primary hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white pointer-events-none'
+    }
+    if (disabled) {
+      return 'bg-gray-200 cursor-default pointer-events-none'
+    }
+    return 'bg-white hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700'
+  }, [active, disabled])
+
   return (
     <li>
       <Link
-        href={newUrl}
+        href={disabled ? '#' : newUrl}
         aria-disabled={disabled}
+        data-disabled={disabled}
         data-active={active}
         className={
           (className ? `${className} ` : '') +
-          'flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+          `${colorClass} ` +
+          'flex items-center justify-center px-3 h-8 ms-0 ' +
+          'leading-tight border border-gray-300 dark:border-gray-700 ' +
+          'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white'
         }
       >
         {children}

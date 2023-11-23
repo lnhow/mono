@@ -20,7 +20,8 @@
   "peerDependencies": {
     "react": "18.2.0",
     "next": "13.5.4",
-    "@mui/icons-material": "*"
+    "@mui/icons-material": "*",
+    "daisyui": "*"
   },
   "devDependencies": {
     "@types/node": "20.1.0",
