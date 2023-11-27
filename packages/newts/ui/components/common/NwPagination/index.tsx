@@ -117,7 +117,7 @@ export const NwPaginationButton = memo(function NwPaginationButton({
 
   const colorClass = useMemo(() => {
     if (active) {
-      return 'text-blue-600 border border-blue-300 bg-primary hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white pointer-events-none'
+      return 'text-primary border border-blue-300 bg-primary hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:text-white pointer-events-none'
     }
     if (disabled) {
       return 'bg-gray-200 cursor-default pointer-events-none'

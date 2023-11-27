@@ -13,7 +13,7 @@ const config = {
   theme: {
     extend: {
       colors: {
-        primary: color.emerald,
+        // primary: color.emerald,
         bgprimary: color.zinc,
         txprimary: color.black,
         txprimaryd: color.white,

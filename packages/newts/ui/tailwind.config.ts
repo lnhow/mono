@@ -9,7 +9,6 @@ const config: Config = {
   theme: {
     extends: {
       colors: {
-        primary: color.emerald,
         bgprimary: color.zinc,
         txprimary: color.black,
         txprimaryd: color.white,
