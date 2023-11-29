@@ -1,12 +1,6 @@
 {
   "extends": "@newts/tsconfig/lib.json",
   "compilerOptions": {
-    "paths": {
-      "baseUrl": ["."],
-      "@/*": [
-        "./*"
-      ]
-    },
   },
   "include": [
     ".",
