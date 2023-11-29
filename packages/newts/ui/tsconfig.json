@@ -1,5 +1,13 @@
 {
   "extends": "@newts/tsconfig/lib.json",
+  "compilerOptions": {
+    "paths": {
+      "baseUrl": ["."],
+      "@/*": [
+        "./*"
+      ]
+    },
+  },
   "include": [
     ".",
     "next-env.d.ts",

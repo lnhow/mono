@@ -5,6 +5,15 @@ import { PostEntity } from '@/data/graphql/_generated/types'
 import SideCategoryPost from '@newts/ui/components/pages/index/PostsByCategory/components/SideCategoryPost'
 import NwPagination from '@newts/ui/components/common/NwPagination'
 import { TNwPagination } from '@newts/ui/components/common/NwPagination/type'
+import { Metadata } from 'next'
+
+export const generateMetadata = ({ searchParams }: NextPageProps): Metadata => {
+  const title = (searchParams['q'] ? `Search results for "${searchParams['q']}"` : 'Search') + ' | Newts'
+  return {
+    title,
+    description: `Search results for ${title}`,
+  }
+}
 
 export default async function Page({ searchParams }: NextPageProps) {
   const page =

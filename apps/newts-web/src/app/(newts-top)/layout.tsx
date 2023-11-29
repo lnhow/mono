@@ -1,9 +1,14 @@
-import LayoutDefault from '@/common/layouts/LayoutDefault'
+import LayoutDefault from '@newts/ui/layouts/LayoutDefault'
 import { PropsWithChildren } from 'react'
+import { getParentCategory, mapToProps } from '@/common/layouts/api'
 
-export default function IndexLayout({ children }: PropsWithChildren) {
+
+export default async function IndexLayout({ children }: PropsWithChildren) {
+  const categoriesRes = await getParentCategory()
+  const categories = mapToProps(categoriesRes)
+
   return (
-    <LayoutDefault>
+    <LayoutDefault categories={categories}>
       {children}
     </LayoutDefault>
   )
