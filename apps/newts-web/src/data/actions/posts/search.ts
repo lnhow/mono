@@ -11,7 +11,7 @@ export const ParamNameSearchPost = ['query', 'category'] as const
 
 export type TParamName = (typeof ParamNameSearchPost)[number]
 export type TParamValue = string | undefined
-export type TParamSearchPost = Record<TParamName, TParamValue>
+export type TParamSearchPost = Partial<Record<TParamName, TParamValue>>
 
 export const fetchSearchPost = cache(
   (searchParams: TParamSearchPost, page = 1, pageSize = 20) => {
