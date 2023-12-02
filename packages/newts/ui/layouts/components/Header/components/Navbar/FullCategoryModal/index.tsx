@@ -2,7 +2,7 @@
 import ModalContainer from './ModalContainer'
 import Grid from '@mui/material/Unstable_Grid2'
 import ItemCategory from './ItemCategory'
-import { NwCategoryGroupProps } from '@/types/components/category.type'
+import { NwCategoryGroupProps } from '@newts/ui/types/components/category.type'
 
 export default async function FullCategoryModalButton({ data: categories }: NwCategoryGroupProps) {
   // const categoriesRes = await getParentCategory()

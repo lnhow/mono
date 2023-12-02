@@ -12,6 +12,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "scripts": {
+    "lint": "eslint --ext .ts,.tsx ."
+  },
   "dependencies": {
     "@mui/material": "5.14.2",
     "react": "18.2.0",
