@@ -61,3 +61,47 @@ query GetPostBySlug($slug: String) {
     }
   }
 }
+
+query PostByFilter($filter: PostFiltersInput, $page: Int, $pageSize: Int) {
+  posts(
+    filters: $filter
+    pagination: { page: $page, pageSize: $pageSize }
+    publicationState: LIVE
+    sort: ["publishedAt:desc"]
+  ) {
+    data {
+      id
+      attributes {
+        title
+        description
+        content
+        slugUrl
+        publishedAt
+        cover {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        category {
+          data {
+            attributes {
+              title
+              slugUrl
+            }
+            id
+          }
+        }
+      }
+    }
+    meta {
+      pagination {
+        total
+        page
+        pageSize
+        pageCount
+      }
+    }
+  }
+}

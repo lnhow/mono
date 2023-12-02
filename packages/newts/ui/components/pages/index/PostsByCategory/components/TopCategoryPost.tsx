@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { NwPostProps } from '@newts/ui/types/components/posts.type'
-import NwPostImage from '@newts/ui/components/common/NwPostImage'
+import NwPostImage from '../../../../common/NwPost/NwPostImage'
 
 export default function TopCategoryPost({ data }: NwPostProps) {
   const hrefUrl = data.attributes.slugUrl

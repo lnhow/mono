@@ -1,5 +1,15 @@
 {
   "extends": "@newts/tsconfig/lib.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "next"
+      },
+      {
+        "name": "@typescript-eslint"
+      }
+    ]
+  },
   "include": [
     ".",
     "next-env.d.ts",

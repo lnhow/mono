@@ -1,12 +1,12 @@
 import Link from 'next/link'
 import { NwPostProps } from '@newts/ui/types/components/posts.type'
-import NwPostImage from '@newts/ui/components/common/NwPostImage'
+import NwPostImage from '../../../../common/NwPost/NwPostImage'
 
 export default function SideCategoryPost({ data }: NwPostProps) {
   const hrefUrl = data.attributes.slugUrl ? `/p/${data.attributes.slugUrl}` : '#'
   const title = data.attributes.title || ''
   return (
-    <div className="flex">
+    <article className="flex">
       {data.attributes.cover?.attributes.url && (
         <div
           className="
@@ -31,6 +31,6 @@ export default function SideCategoryPost({ data }: NwPostProps) {
           {data.attributes.description}
         </p>
       </div>
-    </div>
+    </article>
   )
 }
