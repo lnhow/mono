@@ -59,7 +59,6 @@ const NwPagination = memo(function NwPagination({
           searchParams={searchParams}
           page={page - 1}
           disabled={isFirstPage}
-          // className="rounded-s-lg border-e-0"
         >
           <span className="sr-only">Previous</span>
           <ChevronLeftIcon className="w-4 h-4" aria-hidden="true" />
@@ -80,7 +79,6 @@ const NwPagination = memo(function NwPagination({
           searchParams={searchParams}
           page={page + 1}
           disabled={isLastPage}
-          // className="rounded-e-lg"
         >
           <span className="sr-only">Next</span>
           <ChevronRightIcon className="w-4 h-4" aria-hidden="true" />
@@ -97,12 +95,10 @@ export type NwPaginationButtonProps = React.PropsWithChildren<{
   disabled?: boolean
   searchParams: URLSearchParams
   page: number
-  className?: string
 }>
 
 export const NwPaginationButton = memo(function NwPaginationButton({
   children,
-  className,
   active,
   disabled,
   searchParams,
@@ -114,16 +110,6 @@ export const NwPaginationButton = memo(function NwPaginationButton({
     newSearchParams.set('page', '' + page)
     return pathname + '?' + newSearchParams.toString()
   }, [page, searchParams, pathname])
-
-  // const colorClass = useMemo(() => {
-  //   if (active) {
-  //     return 'text-primary border border-blue-300 bg-primary hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:text-white pointer-events-none'
-  //   }
-  //   if (disabled) {
-  //     return 'bg-gray-200 cursor-default pointer-events-none'
-  //   }
-  //   return 'bg-white hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700'
-  // }, [active, disabled])
 
   return (
     <li>
