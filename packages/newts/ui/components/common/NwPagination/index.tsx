@@ -7,6 +7,7 @@ import {
 } from '@mui/icons-material'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
+import classNames from '../../../utils/classNames'
 
 export type { NwPaginationProps } from './type'
 
@@ -37,7 +38,6 @@ const resolvePaginationButtonPage = (page: number, pageCount: number) => {
 const NwPagination = memo(function NwPagination({
   pagination,
 }: NwPaginationProps) {
-  console.log('[Dev Log] -> file: index.tsx:9 -> total:', pagination)
   const { total, page, pageCount } = pagination
   const searchParams = useSearchParams()
   const truncatedPage = useMemo(() => {
@@ -54,12 +54,12 @@ const NwPagination = memo(function NwPagination({
 
   return (
     <nav aria-label="Pagination navigation">
-      <ul className="flex items-center -space-x-px h-8 text-sm">
+      <ul className="flex items-center -space-x-px h-8 text-sm join">
         <NwPaginationButton
           searchParams={searchParams}
           page={page - 1}
           disabled={isFirstPage}
-          className="rounded-s-lg border-e-0"
+          // className="rounded-s-lg border-e-0"
         >
           <span className="sr-only">Previous</span>
           <ChevronLeftIcon className="w-4 h-4" aria-hidden="true" />
@@ -80,7 +80,7 @@ const NwPagination = memo(function NwPagination({
           searchParams={searchParams}
           page={page + 1}
           disabled={isLastPage}
-          className="rounded-e-lg"
+          // className="rounded-e-lg"
         >
           <span className="sr-only">Next</span>
           <ChevronRightIcon className="w-4 h-4" aria-hidden="true" />
@@ -115,15 +115,15 @@ export const NwPaginationButton = memo(function NwPaginationButton({
     return pathname + '?' + newSearchParams.toString()
   }, [page, searchParams, pathname])
 
-  const colorClass = useMemo(() => {
-    if (active) {
-      return 'text-primary border border-blue-300 bg-primary hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:text-white pointer-events-none'
-    }
-    if (disabled) {
-      return 'bg-gray-200 cursor-default pointer-events-none'
-    }
-    return 'bg-white hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700'
-  }, [active, disabled])
+  // const colorClass = useMemo(() => {
+  //   if (active) {
+  //     return 'text-primary border border-blue-300 bg-primary hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:text-white pointer-events-none'
+  //   }
+  //   if (disabled) {
+  //     return 'bg-gray-200 cursor-default pointer-events-none'
+  //   }
+  //   return 'bg-white hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700'
+  // }, [active, disabled])
 
   return (
     <li>
@@ -131,14 +131,11 @@ export const NwPaginationButton = memo(function NwPaginationButton({
         href={disabled ? '#' : newUrl}
         aria-disabled={disabled}
         data-disabled={disabled}
-        data-active={active}
-        className={
-          (className ? `${className} ` : '') +
-          `${colorClass} ` +
-          'flex items-center justify-center px-3 h-8 ms-0 ' +
-          'leading-tight border border-gray-300 dark:border-gray-700 ' +
-          'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white'
-        }
+        className={classNames(
+          'join-item btn btn-sm',
+          disabled && 'btn-disabled',
+          active && 'btn-active',
+        )}
       >
         {children}
       </Link>

@@ -12,7 +12,6 @@ export default async function handleSearch(formSearch: FormData) {
   if (category) {
     searchParams.set('c', category.toString())
   }
-  console.log('[Dev Log] -> file: search.ts:9 -> handleSearch -> searchParams:', searchParams)
 
   redirect(`/search?${searchParams.toString()}`)
 }

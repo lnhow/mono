@@ -1,9 +1,9 @@
 import { Metadata } from 'next'
 import NextPageProps from '@newts/ui/types/common/pageProps'
-import SideCategoryPost from '@newts/ui/components/pages/index/PostsByCategory/components/SideCategoryPost'
 import { TNwPagination } from '@newts/ui/components/common/NwPagination/type'
 import NwPagination from '@newts/ui/components/common/NwPagination'
 import NwSearchBox from '@newts/ui/components/pages/search/NwSearchBox'
+import NwSearchList from '@newts/ui/components/pages/search/NwSearchList'
 import { sanitizeSearchParam } from '@newts/ui/utils/queryParams'
 
 import { mapPostToNwPost } from '@/data/mapping/post'
@@ -42,19 +42,13 @@ export default async function Page({ searchParams }: NextPageProps) {
 
   return (
     <div className="max-w-screen-lg mx-auto w-full">
-      <NwSearchBox data={paramsData} onSearch={handleSearch} />
-      <div className="min-h-[50vh] mt-4">
-        {mappedPosts.map((post) => {
-          return (
-            <div key={post.id} className="mt-6">
-              <SideCategoryPost data={post} />
-            </div>
-          )
-        })}
-      </div>
-      <div className="flex justify-center">
-        <NwPagination pagination={pagination} />
-      </div>
+      <section className="mb-4">
+        <NwSearchBox data={paramsData} onSearch={handleSearch} />
+      </section>
+      <hr className="mt-8 mb-2 divider divider-neutral" />
+      <section>
+        <NwSearchList data={mappedPosts} pagination={pagination} />
+      </section>
     </div>
   )
 }

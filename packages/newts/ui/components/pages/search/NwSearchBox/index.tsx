@@ -1,4 +1,4 @@
-import { Search } from '@mui/icons-material'
+import SubmitButton from './SubmitButton'
 
 export type NwSearchData = {
   query?: string
@@ -14,16 +14,15 @@ export default function NwSearchBox({ data, onSearch }: NwSearchBoxProps) {
   return (
     <form action={onSearch} className="flex flex-row">
       <input
-        name='query'
-        role='searchbox'
+        name="query"
+        role="searchbox"
         type="text"
+        autoFocus
         defaultValue={data.query || ''}
-        className="input input-bordered input-primary text-sm font-light flex-1"
+        className="input input-bordered text-sm font-light flex-1"
         placeholder="Article, category, or tag"
       />
-      <button type="submit" className="btn btn-square btn-primary ml-2">
-        <Search />
-      </button>
+      <SubmitButton />
     </form>
   )
 }
