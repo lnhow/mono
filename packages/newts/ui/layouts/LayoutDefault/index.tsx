@@ -1,7 +1,7 @@
 import { BaseLayoutProps } from '../types'
 import { NavBar } from '../components/Header'
 import Footer from '../components/Footer'
-import NwCategory from '@/types/category'
+import NwCategory from '@newts/ui/types/category'
 
 export type LayoutDefaultProps = BaseLayoutProps & {
   categories: NwCategory[]
