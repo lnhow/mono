@@ -9,7 +9,6 @@ import {
   FeaturedPostsQueryVariables,
   GetPostsByCategorySlugDocument,
   GetPostsByCategorySlugQuery,
-  // GetPostsByCategorySlugQueryVariables,
 } from '@/data/graphql/_generated/graphql'
 
 export const getFeaturedPosts = cache((skip = 0, limit = 3) => {
@@ -19,19 +18,6 @@ export const getFeaturedPosts = cache((skip = 0, limit = 3) => {
     variables: { skip, limit },
   })
 })
-
-// export const getPostsByCategory = cache(
-//   (category: string, skip = 0, limit = 3) => {
-//     const gqlClient = queryClient.GraphQL()
-//     return gqlClient.request<
-//       GetPostsByCategorySlugQuery,
-//       GetPostsByCategorySlugQueryVariables
-//     >({
-//       document: GetPostsByCategorySlugDocument,
-//       variables: { categorySlug: category, skip, limit },
-//     })
-//   }
-// )
 
 export const getFeatureCategoryDataBySlug = cache((category: string) => {
   const gqlClient = queryClient.GraphQL()

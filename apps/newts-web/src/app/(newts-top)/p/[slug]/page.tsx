@@ -1,7 +1,7 @@
 import { PAGE_REVALIDATE } from '@newts/ui/constants/staleTime'
 import { Metadata, ResolvingMetadata } from 'next'
 
-import { getPostBySlug } from './_page/api'
+import { fetchSearchPost } from './_page/api'
 import { notFound } from 'next/navigation'
 import { cache } from 'react'
 import PageView from './_page/components'
@@ -16,7 +16,7 @@ export const generateMetadata = async (
   { params }: PageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> => {
-  const getPostRes = await getPostBySlug(params.slug)
+  const getPostRes = await fetchSearchPost(params.slug)
   const { post } = mapToProps(getPostRes)
   const coverImage = getPostCoverUrl(post as PostEntity)
 
@@ -33,7 +33,7 @@ export const generateMetadata = async (
 }
 
 export default async function Page({ params }: PageProps) {
-  const getPostRes = await getPostBySlug(params.slug)
+  const getPostRes = await fetchSearchPost(params.slug)
   const { post } = mapToProps(getPostRes)
 
   if (!post) {
@@ -44,7 +44,7 @@ export default async function Page({ params }: PageProps) {
 }
 
 const mapToProps = cache(
-  (gqlRes: Awaited<ReturnType<typeof getPostBySlug>>) => {
+  (gqlRes: Awaited<ReturnType<typeof fetchSearchPost>>) => {
     const result = { post: undefined }
     if (!gqlRes.posts?.data) {
       return result

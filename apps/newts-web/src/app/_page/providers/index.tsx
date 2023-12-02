@@ -6,7 +6,7 @@ import ThemeRegistry from './ThemeRegistry'
 
 export function Providers({ children }: React.PropsWithChildren) {
   return (
-    <ThemeProvider attribute='class'>
+    <ThemeProvider attribute='data-theme'>
       <ThemeRegistry options={{ key: 'nw', prepend: false, }}>
         {/* <ReactQueryProvider> */}
         {children}
