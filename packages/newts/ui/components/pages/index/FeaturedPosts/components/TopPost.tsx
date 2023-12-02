@@ -1,4 +1,4 @@
-import NwPostImage from '@newts/ui/components/common/NwPostImage'
+import NwPostImage from '../../../../common/NwPost/NwPostImage'
 import { NwPostProps } from '@newts/ui/types/components/posts.type'
 import Link from 'next/link'
 

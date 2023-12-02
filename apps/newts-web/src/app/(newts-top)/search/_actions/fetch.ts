@@ -7,22 +7,22 @@ import {
 import { cache } from 'react'
 import { PostFiltersInput } from '@/data/graphql/_generated/types'
 
-export const ParamNameSearchPost = ['searchTerms', 'categorySlug'] as const
+export const ParamNameSearchPost = ['query', 'category'] as const
 export type TParamNameSearchPost = (typeof ParamNameSearchPost)[number]
 
 export type TParamSearchPost = Record<TParamNameSearchPost, string | string[] | undefined>
 
-const searchParamsMapper: Record<
+export const searchParamsMapper: Record<
   TParamNameSearchPost,
   (params: string | string[]) => object
 > = {
-  searchTerms: (params: string | string[]) => {
+  query: (params: string | string[]) => {
     const processedParams = Array.isArray(params) ? params[0] : params
     return {
       title: { containsi: processedParams },
     }
   },
-  categorySlug: (params: string | string[]) => {
+  category: (params: string | string[]) => {
     const processedParams = Array.isArray(params) ? params[0] : params
     return {
       or: [
@@ -59,3 +59,5 @@ export const fetchSearchPost = cache(
     })
   }
 )
+
+
