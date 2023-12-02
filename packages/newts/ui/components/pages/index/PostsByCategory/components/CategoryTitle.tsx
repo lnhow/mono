@@ -1,4 +1,4 @@
-import { NwCategoryGroupProps } from '@newts/ui/types/components/category.type'
+import { NwCategoryProps } from '@newts/ui/types/components/category.type'
 import Link from 'next/link'
 import { PropsWithChildren } from 'react'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
@@ -6,7 +6,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 export default function CategoryTitle({
   data,
   children,
-}: PropsWithChildren<NwCategoryGroupProps>) {
+}: PropsWithChildren<NwCategoryProps>) {
   const linkUrl = data.attributes.slugUrl
     ? `/c/${data.attributes.slugUrl}`
     : '#'
