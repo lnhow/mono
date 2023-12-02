@@ -1,3 +1,3 @@
 export enum ESearchParam {
-  Page = 'p',
+  Page = 'page',
 }

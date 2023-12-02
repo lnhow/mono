@@ -9,7 +9,7 @@ import { mapPostsToNwPosts } from '@/data/mapping/post'
 import { PostEntity } from '@/data/graphql/_generated/types'
 import { fetchSearchPost } from '@/data/actions/posts/search'
 
-import { ESearchParam } from './_actions/types'
+import { ESearchParam } from '@newts/ui/types/common/searchParams'
 
 export const generateMetadata = (): Metadata => {
   const title = 'Category | Newts'

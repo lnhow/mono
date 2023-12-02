@@ -1,5 +1,7 @@
+import { ESearchParam as ESearchDefault } from '@newts/ui/types/common/searchParams'
+
 export enum ESearchParam {
   Query = 'q',
   Category = 'c',
-  Page = 'p',
+  Page = ESearchDefault.Page,
 }
