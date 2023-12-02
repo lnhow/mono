@@ -1,15 +1,15 @@
 import { Metadata } from 'next'
 import NextPageProps from '@newts/ui/types/common/pageProps'
-import { TNwPagination } from '@newts/ui/components/common/NwPagination/type'
-import NwPagination from '@newts/ui/components/common/NwPagination'
 import NwSearchBox from '@newts/ui/components/pages/search/NwSearchBox'
 import NwSearchList from '@newts/ui/components/pages/search/NwSearchList'
+import { defaultPagination } from '@newts/ui/components/common/NwPagination/type'
+
 import { sanitizeSearchParam } from '@newts/ui/utils/queryParams'
 
-import { mapPostToNwPost } from '@/data/mapping/post'
+import { mapPostsToNwPosts } from '@/data/mapping/post'
 import { PostEntity } from '@/data/graphql/_generated/types'
+import { fetchSearchPost } from '@/data/actions/posts/search'
 
-import { fetchSearchPost } from './_actions/fetch'
 import { ESearchParam } from './_actions/types'
 import handleSearch from './_actions/search'
 
@@ -34,10 +34,7 @@ export default async function Page({ searchParams }: NextPageProps) {
   }
 
   const postsData = await fetchSearchPost(paramsData, page)
-  const mappedPosts =
-    postsData.posts?.data.map((post) =>
-      mapPostToNwPost(post as unknown as PostEntity)
-    ) || []
+  const mappedPosts = mapPostsToNwPosts(postsData.posts?.data as unknown as PostEntity[] || [])
   const pagination = postsData.posts?.meta?.pagination || defaultPagination
 
   return (
@@ -52,10 +49,3 @@ export default async function Page({ searchParams }: NextPageProps) {
     </div>
   )
 }
-
-const defaultPagination = {
-  page: 1,
-  pageCount: 0,
-  total: 0,
-  pageSize: 0,
-} as TNwPagination

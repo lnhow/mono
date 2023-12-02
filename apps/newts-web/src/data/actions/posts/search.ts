@@ -8,34 +8,10 @@ import { cache } from 'react'
 import { PostFiltersInput } from '@/data/graphql/_generated/types'
 
 export const ParamNameSearchPost = ['query', 'category'] as const
-export type TParamNameSearchPost = (typeof ParamNameSearchPost)[number]
 
-export type TParamSearchPost = Record<TParamNameSearchPost, string | string[] | undefined>
-
-export const searchParamsMapper: Record<
-  TParamNameSearchPost,
-  (params: string | string[]) => object
-> = {
-  query: (params: string | string[]) => {
-    const processedParams = Array.isArray(params) ? params[0] : params
-    return {
-      title: { containsi: processedParams },
-    }
-  },
-  category: (params: string | string[]) => {
-    const processedParams = Array.isArray(params) ? params[0] : params
-    return {
-      or: [
-        { category: { slugUrl: { eq: processedParams } } },
-        {
-          category: {
-            parent_category: { slugUrl: { eq: processedParams } },
-          },
-        },
-      ],
-    }
-  },
-}
+export type TParamName = (typeof ParamNameSearchPost)[number]
+export type TParamValue = string | undefined
+export type TParamSearchPost = Record<TParamName, TParamValue>
 
 export const fetchSearchPost = cache(
   (searchParams: TParamSearchPost, page = 1, pageSize = 20) => {
@@ -59,5 +35,30 @@ export const fetchSearchPost = cache(
     })
   }
 )
+
+export const searchParamsMapper: Record<
+  TParamName,
+  (params: TParamValue) => object
+> = {
+  query: (params: TParamValue) => {
+    const processedParams = Array.isArray(params) ? params[0] : params
+    return {
+      title: { containsi: processedParams },
+    }
+  },
+  category: (params: TParamValue) => {
+    const processedParams = Array.isArray(params) ? params[0] : params
+    return {
+      or: [
+        { category: { slugUrl: { eq: processedParams } } },
+        {
+          category: {
+            parent_category: { slugUrl: { eq: processedParams } },
+          },
+        },
+      ],
+    }
+  },
+}
 
 

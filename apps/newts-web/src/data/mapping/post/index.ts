@@ -24,3 +24,7 @@ export const mapPostToNwPost = (post: PostEntity): NwPost => {
     },
   }
 }
+
+export const mapPostsToNwPosts = (posts: PostEntity[]): NwPost[] => {
+  return posts.map(mapPostToNwPost)
+}
