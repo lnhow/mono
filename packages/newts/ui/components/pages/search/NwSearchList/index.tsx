@@ -8,7 +8,7 @@ export default function NwSearchList({
   pagination,
 }: NwPostsWithPaginationProps) {
   if (data.length < 1) {
-    return <NwEmptyList />
+    return <NwEmptyList className="mt-12" />
   }
   return (
     <>

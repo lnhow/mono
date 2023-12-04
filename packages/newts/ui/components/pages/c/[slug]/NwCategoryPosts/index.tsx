@@ -8,15 +8,10 @@ export default function NwCategoryPosts({
   pagination,
 }: NwPostsWithPaginationProps) {
   if (data.length < 1) {
-    return <NwEmptyList title='There are no posts yet' />
+    return <NwEmptyList title="There are no posts yet" className='mt-12' />
   }
   return (
     <>
-      <div>
-        {/* <h1 className="text-2xl font-bold">{`${pagination.total} ${
-          pagination.total > 1 ? 'results' : 'result'
-        }`}</h1> */}
-      </div>
       <NwPostsWithPagination data={data} pagination={pagination} />
     </>
   )
