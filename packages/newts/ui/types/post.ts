@@ -11,5 +11,6 @@ export default interface NwPost {
     category?: Maybe<NwCategory>
     cover?: Maybe<NwImage>
     publishedAt?: Maybe<string>
+    content?: Maybe<string>
   }
 }

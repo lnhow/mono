@@ -1,9 +1,9 @@
 'use client'
-import { Button } from '@mui/material'
 import Link from 'next/link'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { PropsItemCategory } from '../types'
 import { usePathname } from 'next/navigation'
+import classNames from '@newts/ui/utils/classNames'
 
 const ItemCategory = memo(function ItemCategory({
   data: category,
@@ -16,21 +16,16 @@ const ItemCategory = memo(function ItemCategory({
   )
   const isActive = pathname === linkUrl
   return (
-    <Button
-      className={`
-        h-10 normal-case font-light
-        ${
-          isActive
-            ? 'text-primary border-b border-primary-700 dark:border-primary-300'
-            : ''
-        }
-      `}
-      LinkComponent={Link}
+    <Link
+      className={classNames(
+        'btn btn-ghost h-10 min-h-[40px] normal-case font-light rounded-md',
+        isActive && 'text-primary border-b-primary'
+      )}
       href={linkUrl}
       color="inherit"
     >
       {category.attributes.title}
-    </Button>
+    </Link>
   )
 })
 
