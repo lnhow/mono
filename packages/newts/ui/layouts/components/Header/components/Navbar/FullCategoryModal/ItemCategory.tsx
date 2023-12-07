@@ -2,7 +2,6 @@ import { memo } from 'react'
 import Link from 'next/link'
 
 import { PropsItemCategory } from '../types'
-import { Button, Divider, List, ListItemButton } from '@mui/material'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
 const ItemCategory = memo(function ItemCategory({ data }: PropsItemCategory) {
@@ -12,27 +11,23 @@ const ItemCategory = memo(function ItemCategory({ data }: PropsItemCategory) {
     : '#'
   return (
     <div>
-      <Button
-        className="
-          text-txprimary-800 dark:text-txprimaryd-400
+      <Link
+        className="w-full btn btn-ghost rounded-lg
           text-xl font-extralight normal-case
-          justify-between
-          rounded-lg
+          flex justify-between pr-2
         "
         color="inherit"
-        fullWidth
-        LinkComponent={Link}
         href={linkUrl}
-        endIcon={<ArrowForwardIosIcon />}
       >
         {data.attributes.title}
-      </Button>
-      <List>
+        <ArrowForwardIosIcon />
+      </Link>
+      <ul>
         {subCategories.map((category) => {
           return <ItemSubCategory key={category.id} data={category} />
         })}
-      </List>
-      <Divider />
+      </ul>
+      <div className='my-2 mb-0 divider divider-base-100'></div>
     </div>
   )
 })
@@ -47,12 +42,13 @@ export const ItemSubCategory = memo(function ItemSubCategory({
     : '#'
 
   return (
-    <ListItemButton
-      className="rounded-lg font-light"
-      LinkComponent={Link}
-      href={linkUrl}
-    >
-      {data.attributes.title}
-    </ListItemButton>
+    <li>
+      <Link
+        className="w-full btn btn-ghost rounded-lg font-light text-left justify-start"
+        href={linkUrl}
+      >
+        {data.attributes.title}
+      </Link>
+    </li>
   )
 })

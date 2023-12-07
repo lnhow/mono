@@ -1,6 +1,5 @@
 'use client'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
-import { Typography } from '@mui/material'
 
 export default function PublishDate({ date }: { date?: string }) {
   if (!date) {
@@ -9,9 +8,9 @@ export default function PublishDate({ date }: { date?: string }) {
 
   const jsDate = new Date(date)
   return (
-    <Typography variant='caption' className='flex items-center'>
-      <AccessTimeIcon className='mr-1' />
+    <span className='flex items-center text-xs'>
+      <AccessTimeIcon className='mr-1' fontSize='small' />
       {jsDate.toLocaleDateString() + ' ' + jsDate.toLocaleTimeString()}
-    </Typography>
+    </span>
   )
 }

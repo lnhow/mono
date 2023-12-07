@@ -1,4 +1,5 @@
 import { PostEntity } from '@/data/graphql/_generated/types'
+import NwCategory from '@newts/ui/types/category'
 import NwPost from '@newts/ui/types/post'
 
 export const mapPostToNwPost = (post: PostEntity): NwPost => {
@@ -13,9 +14,9 @@ export const mapPostToNwPost = (post: PostEntity): NwPost => {
         id: category?.id || '',
         attributes: {
           title: category?.attributes?.title,
-          slugUrl: typeof category?.attributes?.slugUrl || undefined,
+          slugUrl: category?.attributes?.slugUrl || undefined,
         },
-      },
+      } as NwCategory,
       cover: {
         attributes: {
           url: cover?.attributes?.url || undefined,
