@@ -2,7 +2,6 @@
 
 import ChevronRight from '@mui/icons-material/ChevronRight'
 import ChevronLeft from '@mui/icons-material/ChevronLeft'
-import { IconButton } from '@mui/material'
 import { PropsWithChildren, memo, useEffect, useRef } from 'react'
 import { SwiperContainer, register } from 'swiper/element/bundle'
 
@@ -67,9 +66,9 @@ const SwiperContainer = memo(function SwiperContainer({
         [&.swiper-button-disabled]:invisible
         [&.swiper-button-disabled]:opacity-0
       ">
-        <IconButton className='p-0.5 rounded [&_.MuiTouchRipple-root_.MuiTouchRipple-child]:rounded'>
+        <button className='btn btn-square btn-ghost'>
           <ChevronLeft className='text-4xl' />
-        </IconButton>
+        </button>
       </div>
       <div className="
         btn-next right-0 absolute z-10 invisible
@@ -81,9 +80,9 @@ const SwiperContainer = memo(function SwiperContainer({
         [&.swiper-button-disabled]:invisible
         [&.swiper-button-disabled]:opacity-0
       ">
-        <IconButton className='p-0.5 rounded [&_.MuiTouchRipple-root_.MuiTouchRipple-child]:rounded'>
+        <button className='btn btn-square btn-ghost'>
           <ChevronRight className='text-4xl' />
-        </IconButton>
+        </button>
       </div>
       <swiper-container
         class="m-0"

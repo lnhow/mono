@@ -1,63 +1,45 @@
 'use client'
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  Slide,
-  useMediaQuery,
-} from '@mui/material'
-import { Theme } from '@mui/material/styles'
 import { Close, Menu } from '@mui/icons-material'
-import React, { MouseEventHandler, PropsWithChildren, memo, useCallback, useState } from 'react'
+import { MouseEventHandler, PropsWithChildren, memo, useCallback, useRef } from 'react'
 
 const ModalContainer = memo(function ModalContainer({
   children,
 }: PropsWithChildren) {
-  const [open, setOpen] = useState(false)
-  const fullScreen = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down('md')
-  )
+  const refModal = useRef<HTMLDialogElement>(null)
 
-  const handleClose = useCallback(() => setOpen(false), [])
+  const handleClose = useCallback(() => {
+    refModal.current?.close()
+  }, [])
+  const handleOpen = useCallback(() => {
+    refModal.current?.showModal()
+  }, [])
+
+  // const handleClose = useCallback(() => setOpen(false), [])
   const handleLinkClick = useCallback<MouseEventHandler<HTMLDivElement>>((e) => {
     if ((e.target as HTMLElement).tagName === 'A') {
-      setOpen(false)
+      // setOpen(false)
+      handleClose()
     }
-  }, [])
+  }, [handleClose])
 
   return (
     <>
-      <IconButton
-        className="rounded [&_.MuiTouchRipple-root_.MuiTouchRipple-child]:rounded text-black dark:text-white"
-        onClick={() => setOpen(true)}
-      >
+      <button className='btn btn-square btn-ghost' onClick={handleOpen}>
         <Menu />
-      </IconButton>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        fullScreen={fullScreen}
-        fullWidth
-        maxWidth="lg"
-        scroll="paper"
-        TransitionComponent={Slide}
-        className="
-          [&_.MuiDialog-container]:items-start
-          [&_.MuiPaper-root]:max-h-[80vh]
-          [&_.MuiPaper-root]:rounded-b-xl 
-          [&_.MuiPaper-root]:md:rounded-xl 
-        "
-      >
-        <DialogTitle className="flex justify-end px-4 py-2">
-          <IconButton onClick={handleClose}>
-            <Close />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent className='mb-4' onClick={handleLinkClick}>
-          {children}
-        </DialogContent>
-      </Dialog>
+      </button>
+      <dialog ref={refModal} className='modal modal-top'>
+        <div className='modal-box pt-0'>
+          <div className='flex py-2'>
+            <button className='btn btn-circle btn-ghost' onClick={handleClose}>
+              <Close />
+            </button>
+          </div>
+          <div onClick={handleLinkClick}>
+            {children}
+          </div>
+        </div>
+        <div className='modal-backdrop' onClick={handleClose}></div>
+      </dialog>
     </>
   )
 })

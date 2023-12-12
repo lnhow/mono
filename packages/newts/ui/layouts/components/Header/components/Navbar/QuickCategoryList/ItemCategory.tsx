@@ -18,7 +18,7 @@ const ItemCategory = memo(function ItemCategory({
   return (
     <Link
       className={classNames(
-        'btn btn-ghost h-10 min-h-[40px] normal-case font-light rounded-md',
+        'btn btn-ghost normal-case font-light rounded-md',
         isActive && 'text-primary border-b-primary'
       )}
       href={linkUrl}
