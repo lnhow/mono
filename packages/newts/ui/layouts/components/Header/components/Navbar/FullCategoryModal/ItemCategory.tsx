@@ -12,7 +12,7 @@ const ItemCategory = memo(function ItemCategory({ data }: PropsItemCategory) {
   return (
     <div>
       <Link
-        className="w-full btn btn-ghost rounded-lg
+        className="w-full btn h-auto btn-ghost rounded-lg
           text-xl font-extralight normal-case
           flex justify-between pr-2
         "
@@ -44,7 +44,7 @@ export const ItemSubCategory = memo(function ItemSubCategory({
   return (
     <li>
       <Link
-        className="w-full btn btn-ghost rounded-lg font-light text-left justify-start"
+        className="w-full btn h-auto btn-ghost rounded-lg font-light text-left justify-start"
         href={linkUrl}
       >
         {data.attributes.title}

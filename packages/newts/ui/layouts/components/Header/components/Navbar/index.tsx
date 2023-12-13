@@ -9,13 +9,12 @@ export default async function Navbar({ data }: NwCategoryGroupProps) {
     <div
       className="
       w-full dark:bg-bgprimary-800 bg-bgprimary-300
-      sticky top-0 z-20
-    "
+      sticky top-0 z-20"
     >
-      <nav
-        className="
-        max-w-screen-2xl h-10 mx-auto px-1 sm:px-3 flex
-      "
+      <nav className="max-w-screen-2xl h-10 mx-auto sm:px-3 flex
+        [&_.btn:not(dialog_.btn)]:h-10
+        [&_.btn:not(dialog_.btn)]:min-h-[40px]
+        [&_.btn-square:not(dialog_.btn)]:w-10"
       >
         <FullCategoryModalButton data={data} />
         <NwVerticalDivider />

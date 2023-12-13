@@ -27,7 +27,6 @@ export const generateMetadata = ({ searchParams }: NextPageProps): Metadata => {
 export default async function Page({ searchParams }: NextPageProps) {
   const page =
   parseInt(sanitizeSearchParam(searchParams[ESearchParam.Page])) || 1
-  console.log('[Dev Log] -> file: page.tsx:29 -> Page -> page:', page)
   const paramsData = {
     query: sanitizeSearchParam(searchParams[ESearchParam.Query]) || undefined,
     category:
@@ -36,7 +35,6 @@ export default async function Page({ searchParams }: NextPageProps) {
 
   const postsData = await fetchSearchPost(paramsData, page)
   const mappedPosts = mapPostsToNwPosts(postsData.posts?.data as unknown as PostEntity[] || [])
-  console.log('[Dev Log] -> file: page.tsx:39 -> Page -> mappedPosts:', mappedPosts.length)
   const pagination = postsData.posts?.meta?.pagination || defaultPagination
 
   return (
