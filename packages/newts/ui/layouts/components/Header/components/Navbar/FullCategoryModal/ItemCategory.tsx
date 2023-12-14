@@ -2,7 +2,7 @@ import { memo } from 'react'
 import Link from 'next/link'
 
 import { PropsItemCategory } from '../types'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import { MdOutlineArrowForwardIos } from 'react-icons/md'
 
 const ItemCategory = memo(function ItemCategory({ data }: PropsItemCategory) {
   const subCategories = data.attributes.child_categories || []
@@ -20,7 +20,7 @@ const ItemCategory = memo(function ItemCategory({ data }: PropsItemCategory) {
         href={linkUrl}
       >
         {data.attributes.title}
-        <ArrowForwardIosIcon />
+        <MdOutlineArrowForwardIos className='icon-md' />
       </Link>
       <ul>
         {subCategories.map((category) => {

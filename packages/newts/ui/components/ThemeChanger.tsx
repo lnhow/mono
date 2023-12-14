@@ -3,8 +3,7 @@
 import { THEME } from '../constants/theme'
 import { useTheme } from 'next-themes'
 import { ChangeEvent, ChangeEventHandler, useCallback, useMemo } from 'react'
-import DarkModeIcon from '@mui/icons-material/DarkModeOutlined'
-import LightModeIcon from '@mui/icons-material/LightModeOutlined'
+import { MdOutlineDarkMode, MdOutlineLightMode } from 'react-icons/md'
 
 const ThemeChanger = () => {
   const { theme, setTheme } = useTheme()
@@ -37,8 +36,8 @@ const ThemeChanger = () => {
           aria-checked={isDarkMode}
           onChange={toggleDarkMode}
         />
-        <LightModeIcon className="swap-off fill-current" />
-        <DarkModeIcon className="swap-on fill-current" />
+        <MdOutlineLightMode className="swap-off fill-current icon-md" />
+        <MdOutlineDarkMode className="swap-on fill-current icon-md" />
       </label>
     </div>
   )

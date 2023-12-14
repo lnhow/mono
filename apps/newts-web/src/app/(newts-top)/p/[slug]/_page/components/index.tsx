@@ -1,5 +1,5 @@
 import { PostEntity } from '@/data/graphql/_generated/types'
-import HomeIcon from '@mui/icons-material/Home'
+import { MdOutlineHome } from 'react-icons/md'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
@@ -37,6 +37,7 @@ export default function PageView({ post }: { post: PostEntity }) {
               alt={postTitle || 'Cover image'}
               width={1024}
               height={300}
+              priority
               className="w-full rounded-2xl"
             />
           )}
@@ -59,7 +60,7 @@ const PostBreadcrumb = ({ category }: { category: Maybe<NwCategory> }) => {
             color="inherit"
             className="flex items-center"
           >
-            <HomeIcon className="mr-1" />
+            <MdOutlineHome className='icon-md' />
           </Link>
         </li>
         <li>
