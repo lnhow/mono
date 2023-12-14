@@ -1,4 +1,4 @@
-import { Search } from '@mui/icons-material'
+import { MdOutlineSearch } from 'react-icons/md'
 import Link from 'next/link'
 
 const SearchButton = function SearchButton() {
@@ -7,7 +7,7 @@ const SearchButton = function SearchButton() {
       className="btn btn-square btn-ghost"
       href='/search'
     >
-      <Search />
+      <MdOutlineSearch className='icon-md' />
     </Link>
   )
 }

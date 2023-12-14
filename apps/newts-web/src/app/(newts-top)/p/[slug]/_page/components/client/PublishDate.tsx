@@ -1,5 +1,5 @@
 'use client'
-import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import { MdOutlineAccessTime } from 'react-icons/md'
 
 export default function PublishDate({ date }: { date?: string }) {
   if (!date) {
@@ -9,7 +9,7 @@ export default function PublishDate({ date }: { date?: string }) {
   const jsDate = new Date(date)
   return (
     <span className='flex items-center text-xs'>
-      <AccessTimeIcon className='mr-1' fontSize='small' />
+      <MdOutlineAccessTime className='mr-1 icon-md' />
       {jsDate.toLocaleDateString() + ' ' + jsDate.toLocaleTimeString()}
     </span>
   )

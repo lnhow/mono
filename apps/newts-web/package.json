@@ -15,10 +15,6 @@
     "gen:graphql": "graphql-codegen"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.14.1",
-    "@mui/material": "5.14.2",
     "@newts/ui": "*",
     "@tanstack/react-query": "^4.29.14",
     "@tanstack/react-query-devtools": "^4.32.0",
@@ -32,6 +28,7 @@
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "4.12.0",
     "react-markdown": "^8.0.7",
     "sharp": "^0.32.6",
     "swiper": "^10.3.1",

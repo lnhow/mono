@@ -1,7 +1,7 @@
 import { NwCategoryProps } from '@newts/ui/types/components/category.type'
 import Link from 'next/link'
 import { PropsWithChildren } from 'react'
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import { MdOutlineChevronRight } from 'react-icons/md'
 
 export default function CategoryTitle({
   data,
@@ -22,7 +22,7 @@ export default function CategoryTitle({
           className="flex items-center text-xs font-light"
           title={data.attributes.title || ''}
         >
-          Xem thêm <ChevronRightIcon className="w-4 h-4" />
+          See more <MdOutlineChevronRight />
         </Link>
       </div>
       {children}

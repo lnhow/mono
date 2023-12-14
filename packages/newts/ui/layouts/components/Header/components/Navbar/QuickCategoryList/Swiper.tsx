@@ -1,7 +1,6 @@
 'use client'
 
-import ChevronRight from '@mui/icons-material/ChevronRight'
-import ChevronLeft from '@mui/icons-material/ChevronLeft'
+import { MdOutlineChevronLeft, MdOutlineChevronRight } from 'react-icons/md'
 import { PropsWithChildren, memo, useEffect, useRef } from 'react'
 import { SwiperContainer, register } from 'swiper/element/bundle'
 
@@ -67,7 +66,7 @@ const SwiperContainer = memo(function SwiperContainer({
         [&.swiper-button-disabled]:opacity-0
       ">
         <button className='btn btn-square btn-ghost'>
-          <ChevronLeft className='text-4xl' />
+          <MdOutlineChevronLeft className='text-4xl' />
         </button>
       </div>
       <div className="
@@ -81,7 +80,7 @@ const SwiperContainer = memo(function SwiperContainer({
         [&.swiper-button-disabled]:opacity-0
       ">
         <button className='btn btn-square btn-ghost'>
-          <ChevronRight className='text-4xl' />
+          <MdOutlineChevronRight className='text-4xl' />
         </button>
       </div>
       <swiper-container

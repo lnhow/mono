@@ -1,5 +1,5 @@
 'use client'
-import { Close, Menu } from '@mui/icons-material'
+import { MdOutlineClose, MdOutlineMenu } from 'react-icons/md'
 import { MouseEventHandler, PropsWithChildren, memo, useCallback, useRef } from 'react'
 
 const ModalContainer = memo(function ModalContainer({
@@ -25,13 +25,13 @@ const ModalContainer = memo(function ModalContainer({
   return (
     <>
       <button className='btn btn-square btn-ghost' onClick={handleOpen}>
-        <Menu />
+        <MdOutlineMenu className='icon-md' />
       </button>
       <dialog ref={refModal} className='modal modal-top'>
         <div className='modal-box pt-0'>
           <div className='flex py-2'>
             <button className='btn btn-circle btn-ghost' onClick={handleClose}>
-              <Close />
+              <MdOutlineClose className='icon-md' />
             </button>
           </div>
           <div onClick={handleLinkClick}>

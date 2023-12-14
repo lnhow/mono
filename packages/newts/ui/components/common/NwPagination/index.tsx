@@ -1,10 +1,7 @@
 'use client'
 import { memo, useMemo } from 'react'
 import { NwPaginationProps } from './type'
-import {
-  ChevronLeft as ChevronLeftIcon,
-  ChevronRight as ChevronRightIcon,
-} from '@mui/icons-material'
+import { MdOutlineChevronLeft, MdOutlineChevronRight } from 'react-icons/md'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import classNames from '../../../utils/classNames'
@@ -61,7 +58,7 @@ const NwPagination = memo(function NwPagination({
           disabled={isFirstPage}
         >
           <span className="sr-only">Previous</span>
-          <ChevronLeftIcon className="w-4 h-4" aria-hidden="true" />
+          <MdOutlineChevronLeft className="w-4 h-4" aria-hidden="true" />
         </NwPaginationButton>
         {truncatedPage.map((pageNumber) => {
           return (
@@ -81,7 +78,7 @@ const NwPagination = memo(function NwPagination({
           disabled={isLastPage}
         >
           <span className="sr-only">Next</span>
-          <ChevronRightIcon className="w-4 h-4" aria-hidden="true" />
+          <MdOutlineChevronRight className="w-4 h-4" aria-hidden="true" />
         </NwPaginationButton>
       </ul>
     </nav>

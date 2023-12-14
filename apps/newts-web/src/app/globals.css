@@ -16,3 +16,9 @@ body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background));
 }
+
+@layer components {
+  .icon-md {
+    @apply w-6 h-6;
+  }
+}
