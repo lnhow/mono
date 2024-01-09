@@ -1,5 +1,6 @@
 {
   "name": "newts-api",
+  "readme": "apps/newts-api/README.md",
   "private": true,
   "version": "0.1.0",
   "description": "API for Newts Project, powered by Strapi",
@@ -10,24 +11,30 @@
   "scripts": {
     "start": "strapi develop",
     "deploy:start": "strapi start",
-    "build": "strapi build",
+    "build": "strapi build --debug",
     "strapi": "strapi"
   },
   "devDependencies": {},
   "dependencies": {
-    "@strapi/plugin-graphql": "4.13.3",
-    "@strapi/plugin-i18n": "4.13.3",
-    "@strapi/plugin-users-permissions": "4.13.3",
-    "@strapi/provider-upload-cloudinary": "4.13.3",
-    "@strapi/strapi": "4.13.3",
+    "@strapi/plugin-graphql": "4.16.2",
+    "@strapi/plugin-i18n": "4.16.2",
+    "@strapi/plugin-users-permissions": "4.16.2",
+    "@strapi/provider-upload-cloudinary": "4.16.2",
+    "@strapi/strapi": "4.16.2",
+    "@strapi/typings": "4.13.3",
     "better-sqlite3": "8.0.1",
-    "pg": "^8.10.0"
+    "pg": "^8.10.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.2.1"
   },
   "strapi": {
     "uuid": "b3417670-9e82-4630-9e42-e590c0d900bc"
   },
   "engines": {
-    "node": ">=18.17.1"
+    "node": ">=14.19.1 <=18.x.x",
+    "npm": ">=6.0.0"
   },
   "license": "MIT"
 }

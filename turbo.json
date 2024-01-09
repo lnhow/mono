@@ -25,6 +25,10 @@
     "deploy:start": {
       "cache": false,
       "persistent": true
+    },
+    "strapi": {
+      "cache": false,
+      "persistent": true
     }
   }
 }
