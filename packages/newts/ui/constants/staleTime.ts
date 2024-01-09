@@ -1,3 +1,3 @@
 export const PAGE_REVALIDATE = {
-  DEFAULT: 3600 // 60s * 60 = 1h
+  DEFAULT: 600 // 60s * 10 = 10min
 } as const
