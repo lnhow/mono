@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   --background: 235, 235, 235;
   --foreground: 0, 0, 0;
 }
@@ -15,7 +15,7 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background));
-}
+} */
 
 @layer components {
   .icon-md {
