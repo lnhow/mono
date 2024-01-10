@@ -8,7 +8,7 @@ export default async function Navbar({ data }: NwCategoryGroupProps) {
   return (
     <div
       className="
-      w-full dark:bg-bgprimary-800 bg-bgprimary-300
+      w-full bg-base-200
       sticky top-0 z-20"
     >
       <nav className="max-w-screen-2xl h-10 mx-auto sm:px-3 flex

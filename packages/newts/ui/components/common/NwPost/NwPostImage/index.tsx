@@ -29,7 +29,7 @@ export default function NwPostImage({
         sizes="100vw"
         className={
           (className ? `${className} ` : '') +
-          `w-full h-full object-cover absolute inset-0 ${roundedSize} border-2 border-bgprimary-200 dark:border-bgprimary-800`
+          `w-full h-full object-contain absolute inset-0 ${roundedSize} bg-base-300`
         }
         {...props}
       />
