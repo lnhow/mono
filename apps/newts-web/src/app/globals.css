@@ -2,21 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
-  --background: 235, 235, 235;
-  --foreground: 0, 0, 0;
-}
-
-:root[data-theme=dark] {
-  --background: 20, 20, 20;
-  --foreground: 255, 255, 255;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background));
-} */
-
 @layer components {
   .icon-md {
     @apply w-6 h-6;
