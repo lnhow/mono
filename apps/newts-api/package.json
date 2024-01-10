@@ -14,7 +14,11 @@
     "build": "strapi build --debug",
     "strapi": "strapi"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/node": "20.1.0",
+    "@types/react": "18.2.47",
+    "@types/react-dom": "^18.2.18"
+  },
   "dependencies": {
     "@strapi/plugin-graphql": "4.16.2",
     "@strapi/plugin-i18n": "4.16.2",
@@ -24,8 +28,8 @@
     "@strapi/typings": "4.13.3",
     "better-sqlite3": "8.0.1",
     "pg": "^8.10.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.1"
   },
