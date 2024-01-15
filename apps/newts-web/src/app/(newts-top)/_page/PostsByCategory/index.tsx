@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 
 import { mapPostToNwPost } from '@/data/mapping/post'
-import { getFeatureCategoryDataBySlug } from '../api'
+import { getFeatureCategoryDataBySlug } from '../actions'
 import { PostEntity } from '@/data/graphql/_generated/types'
 import NwPostsByCategory from '@newts/ui/components/pages/index/PostsByCategory'
 import NwPostsByCategorySkeleton from '@newts/ui/components/pages/index/PostsByCategory/skeleton'

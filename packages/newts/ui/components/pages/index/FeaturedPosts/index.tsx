@@ -6,7 +6,7 @@ export default function NwFeaturedPosts({ data }: NwPostGroupProps) {
   if (!data || data.length < 1) {
     return <></>
   }
-  const sidePosts = data.slice(1, 3)
+  const sidePosts = data.slice(1)
 
   return (
     <section className="grid grid-cols-1 lg:grid-cols-3 gap-4">
