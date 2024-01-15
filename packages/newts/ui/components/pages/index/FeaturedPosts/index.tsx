@@ -1,6 +1,6 @@
 import TopPost from './components/TopPost'
-import SidePost from './components/SidePost'
-import { NwPostGroupProps } from '../../../../types/components/posts.type'
+import { NwPostGroupProps } from '@newts/ui/types/components/posts.type'
+import NwPostBase from '@newts/ui/components/common/NwPost/NwPostBase'
 
 export default function NwFeaturedPosts({ data }: NwPostGroupProps) {
   if (!data || data.length < 1) {
@@ -14,7 +14,7 @@ export default function NwFeaturedPosts({ data }: NwPostGroupProps) {
       <div className="flex flex-col md:max-lg:flex-row gap-4">
         {sidePosts.map((post, index) => (
           <div key={index} className='max-lg:flex-1'>
-            <SidePost data={post} />
+            <NwPostBase data={post} />
           </div>
         ))}
       </div>

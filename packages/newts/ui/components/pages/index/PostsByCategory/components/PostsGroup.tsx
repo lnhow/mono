@@ -1,5 +1,5 @@
 import { NwPostGroupProps } from '@newts/ui/types/components/posts.type'
-import SideCategoryPost from './SideCategoryPost'
+import NwPostBase from '@newts/ui/components/common/NwPost/NwPostBase'
 import TopCategoryPost from './TopCategoryPost'
 
 export default function PostGroup({ data }: NwPostGroupProps) {
@@ -11,7 +11,7 @@ export default function PostGroup({ data }: NwPostGroupProps) {
       <div className="flex flex-col md:max-lg:flex-row gap-4">
         {sidePosts.map((post, index) => (
           <div key={index} className="max-lg:flex-1">
-            <SideCategoryPost data={post} />
+            <NwPostBase data={post} />
           </div>
         ))}
       </div>
