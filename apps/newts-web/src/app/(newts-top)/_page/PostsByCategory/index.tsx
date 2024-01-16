@@ -1,11 +1,12 @@
 import { Suspense } from 'react'
 
 import { mapPostToNwPost } from '@/data/mapping/post'
-import { getFeatureCategoryDataBySlug } from '../actions'
 import { PostEntity } from '@/data/graphql/_generated/types'
 import NwPostsByCategory from '@newts/ui/components/pages/index/PostsByCategory'
 import NwPostsByCategorySkeleton from '@newts/ui/components/pages/index/PostsByCategory/skeleton'
 import { mapCategoryToNwCategory } from '@/data/mapping/category'
+import { fetchCategoryAndPosts } from '../../c/[slug]/actions'
+import { FEATURED_CATEGORY_SIZE } from '../actions'
 
 export interface PostsByCategoryProps {
   category: string
@@ -20,7 +21,7 @@ export default function PostsByCategory({ category }: PostsByCategoryProps) {
 }
 
 export async function PostsByCategoryAsync({ category }: PostsByCategoryProps) {
-  const [postsData, categoryData] = await getFeatureCategoryDataBySlug(category)
+  const [postsData, categoryData] = await fetchCategoryAndPosts(category, 1, FEATURED_CATEGORY_SIZE)
 
   const mappedPost =
     postsData.data.posts?.data.map((post) =>

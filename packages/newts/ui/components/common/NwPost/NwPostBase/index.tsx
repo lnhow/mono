@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { NwPostProps } from '@newts/ui/types/components/posts.type'
-import NwPostImage from '../NwPostImage'
+import NwPostImage from '../components/NwPostImage'
 import classNames from '@newts/ui/utils/classNames'
 
 export type NwPostBaseProps = {
@@ -42,6 +42,7 @@ export type NwPostCoverProps = {
   hrefUrl: string
   title: string
   styles?: string
+  propsImage?: React.ComponentPropsWithoutRef<typeof NwPostImage>
 }
 
 export function NwPostCover({
@@ -49,13 +50,14 @@ export function NwPostCover({
   hrefUrl,
   title,
   styles,
+  propsImage,
 }: NwPostCoverProps) {
   return (
     <>
       {coverUrl && (
         <div className={classNames('shrink-0 w-40 overflow-hidden', styles)}>
           <Link href={hrefUrl} title={title}>
-            <NwPostImage src={coverUrl} alt={title || ''} />
+            <NwPostImage src={coverUrl} alt={title || ''} {...propsImage} />
           </Link>
         </div>
       )}
@@ -88,14 +90,14 @@ export function NwPostContent({
       )}
     >
       <Link href={hrefUrl} title={title}>
-        <h2
+        <h4
           className={classNames(
             'text-md font-extralight line-clamp-1 lg:line-clamp-2',
             styles?.title
           )}
         >
           {title}
-        </h2>
+        </h4>
       </Link>
       <p
         className={classNames(
