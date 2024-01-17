@@ -1,1 +1,1 @@
-export const pageHomeCategories = ['general', 'intriguings', 'dev', 'ideas', 'design']
+export const pageHomeCategories = ['tech', 'process', 'ideas', 'design', 'general']

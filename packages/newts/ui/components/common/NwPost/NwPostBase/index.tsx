@@ -55,7 +55,7 @@ export function NwPostCover({
   return (
     <>
       {coverUrl && (
-        <div className={classNames('shrink-0 w-40 overflow-hidden', styles)}>
+        <div className={classNames('shrink-0 w-28 lg:w-40 overflow-hidden', styles)}>
           <Link href={hrefUrl} title={title}>
             <NwPostImage src={coverUrl} alt={title || ''} {...propsImage} />
           </Link>
@@ -101,7 +101,7 @@ export function NwPostContent({
       </Link>
       <p
         className={classNames(
-          'mt-2 text-xs font-light line-clamp-3 lg:line-clamp-2',
+          'mt-2 text-xs font-light line-clamp-3 lg:line-clamp-2 max-md:hidden',
           styles?.description
         )}
       >
