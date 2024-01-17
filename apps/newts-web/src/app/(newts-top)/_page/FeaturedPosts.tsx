@@ -1,5 +1,5 @@
 import { mapPostToNwPost } from '@/data/mapping/post'
-import { getFeaturedPosts } from './api'
+import { getFeaturedPosts } from './actions'
 import { PostEntity } from '@/data/graphql/_generated/types'
 
 import NwFeaturedPosts from '@newts/ui/components/pages/index/FeaturedPosts'

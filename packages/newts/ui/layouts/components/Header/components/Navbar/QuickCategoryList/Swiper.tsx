@@ -25,19 +25,14 @@ const SwiperContainer = memo(function SwiperContainer({
         `
           .swiper {
             --swiper-navigation-sides-offset: 0px;
-            --swiper-navigation-color: black;
-          }
-          .swiper ~ .dark {
-            --swiper-navigation-color: white;
           }
         `,
         `
           .swiper-button-prev, .swiper-button-next {
-            @apply bg-gradient-to-l from-bgprimary-800
+            @apply bg-gradient-to-l from-base-200
           }
           .swiper-button-prev svg, .swiper-button-next svg {
-            width: 24px;
-            height: 24px;
+            @apply w-6, h-6
           }
           .swiper-button-disabled {
             visibility: hidden;
@@ -58,7 +53,7 @@ const SwiperContainer = memo(function SwiperContainer({
       <div className="
         btn-prev left-0 absolute z-10 invisible
         w-12 flex justify-start
-        bg-gradient-to-r from-bgprimary-300 dark:from-bgprimary-800
+        bg-gradient-to-r from-base-200
         transition-opacity
         [&.swiper-button-lock]:invisible
         [&.swiper-button-lock]:opacity-0
@@ -72,7 +67,7 @@ const SwiperContainer = memo(function SwiperContainer({
       <div className="
         btn-next right-0 absolute z-10 invisible
         w-12 flex justify-end
-        bg-gradient-to-l from-bgprimary-300 dark:from-bgprimary-800
+        bg-gradient-to-l from-base-200
         transition-opacity
         [&.swiper-button-lock]:invisible
         [&.swiper-button-lock]:opacity-0
