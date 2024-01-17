@@ -12,12 +12,12 @@ export default function NwFeaturedPosts({ data }: NwPostGroupProps) {
     <section className="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <NwPostHero data={data[0]}
         styles={{
-          cover: 'sm:w-3/5 md:w-2/3',
+          cover: '!sm:w-3/5 !md:w-2/3',
           content: {
-            titleContainer: 'p-3 md:p-4',
-            title: 'text-xl md:text-3xl',
-            descriptionContainer: 'p-2',
-            description: 'lg:line-clamp-3 lg:text-sm',
+            titleContainer: '!p-3 md:!p-4',
+            title: '!text-xl md:!text-2xl',
+            descriptionContainer: '!p-2',
+            description: '!lg:line-clamp-3 lg:!text-sm',
           }
         }}
       />
