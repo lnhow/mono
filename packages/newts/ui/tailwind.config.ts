@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss'
 import sharedConfig from '@newts/tailwind-config/tailwind.config'
 import daisyuiConfig from '@newts/tailwind-config/daisyui.config'
-import color from 'tailwindcss/colors'
+// import color from 'tailwindcss/colors'
 
 const config: Config = {
   presets: [sharedConfig],
@@ -9,9 +9,9 @@ const config: Config = {
   theme: {
     extends: {
       colors: {
-        bgprimary: color.zinc,
-        txprimary: color.black,
-        txprimaryd: color.white,
+        // bgprimary: color.zinc,
+        // txprimary: color.black,
+        // txprimaryd: color.white,
       },
     },
   },
