@@ -1,6 +1,6 @@
 'use server'
 
-import { RedirectType, redirect } from 'next/navigation'
+import { redirect } from 'next/navigation'
 import { ESearchParam } from './types'
 
 export default async function handleSearch(formSearch: FormData) {
@@ -14,5 +14,5 @@ export default async function handleSearch(formSearch: FormData) {
     searchParams.set(ESearchParam.Category, category.toString())
   }
 
-  redirect(`/search?${searchParams.toString()}`, RedirectType.replace)
+  redirect(`/search?${searchParams.toString()}`)
 }
