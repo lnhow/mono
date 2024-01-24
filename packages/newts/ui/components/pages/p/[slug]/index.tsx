@@ -1,18 +1,19 @@
-import { PostEntity } from '@/data/graphql/_generated/types'
 import { MdOutlineHome } from 'react-icons/md'
 import Image from 'next/image'
 import Link from 'next/link'
-import Markdown from 'react-markdown'
-import PublishDate from './client/PublishDate'
-import NwCategory from '@newts/ui/types/category'
-import { mapPostToNwPost } from '@/data/mapping/post'
-import Maybe from '@newts/ui/types/common/maybe'
 import remarkGfm from 'remark-gfm'
+import Markdown from 'react-markdown'
+
+import NwCategory from '@newts/ui/types/category'
+import Maybe from '@newts/ui/types/common/maybe'
+import NwPost from '@newts/ui/types/post'
+
+import PublishDate from './client/PublishDate'
 
 const EMPTY_DISPLAY = '(This post is empty. Comeback later)'
 
-export default function PageView({ post }: { post: PostEntity }) {
-  const nwPost = mapPostToNwPost(post)
+export default function PageView({ post }: { post: NwPost }) {
+  const nwPost = post
   const postCoverUrl = nwPost.attributes?.cover?.attributes?.url
   const postTitle = post.attributes?.title
 
@@ -25,7 +26,7 @@ export default function PageView({ post }: { post: PostEntity }) {
           <h3 className="text-3xl md:text-4xl">{postTitle}</h3>
           {/* Post metadata */}
           <div className="pt-2">
-            <PublishDate date={post.attributes?.publishedAt} />
+            <PublishDate date={post.attributes?.publishedAt || ''} />
           </div>
         </section>
         {/* Post content */}
@@ -34,10 +35,10 @@ export default function PageView({ post }: { post: PostEntity }) {
             <Image
               src={postCoverUrl}
               alt={postTitle || 'Cover image'}
-              width={1024}
-              height={300}
+              width={1200}
+              height={900}
               priority
-              className="w-full rounded-2xl"
+              className="w-full h-80 rounded-2xl object-contain bg-base-300"
             />
           )}
           <Markdown
