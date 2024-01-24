@@ -7,7 +7,7 @@ import {
 import { cache } from 'react'
 import { PostFiltersInput } from '@/data/graphql/_generated/types'
 
-export const ParamNameSearchPost = ['query', 'category'] as const
+export const ParamNameSearchPost = ['query', 'category', 'slug'] as const
 
 export type TParamName = (typeof ParamNameSearchPost)[number]
 export type TParamValue = string | undefined
@@ -60,6 +60,11 @@ export const searchParamsMapper: Record<
           },
         },
       ],
+    }
+  },
+  slug: (params: TParamValue) => {
+    return {
+      slugUrl: { eq: params },
     }
   },
 }
