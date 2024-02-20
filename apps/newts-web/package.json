@@ -25,6 +25,7 @@
     "graphql": "^16.6.0",
     "graphql-request": "^6.1.0",
     "next": "14.0.4",
+    "next-intl": "^3.9.0",
     "next-themes": "0.2.1",
     "postcss": "8.4.23",
     "react": "18.2.0",
