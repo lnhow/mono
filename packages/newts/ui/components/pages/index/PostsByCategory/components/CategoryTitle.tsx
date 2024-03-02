@@ -1,12 +1,15 @@
+import { getTranslation } from '@i18n/server'
 import { NwCategoryProps } from '@newts/ui/types/components/category.type'
 import Link from 'next/link'
 import { PropsWithChildren } from 'react'
 import { MdOutlineChevronRight } from 'react-icons/md'
+import { nsCommon } from '@newts/ui/components/common/types'
 
-export default function CategoryTitle({
+export default async function CategoryTitle({
   data,
   children,
 }: PropsWithChildren<NwCategoryProps>) {
+  const { t } = await getTranslation(nsCommon)
   const linkUrl = data.attributes.slugUrl
     ? `/c/${data.attributes.slugUrl}`
     : '#'
@@ -22,7 +25,7 @@ export default function CategoryTitle({
           className="flex items-center text-xs font-light"
           title={data.attributes.title || ''}
         >
-          See more <MdOutlineChevronRight />
+          {t('see-more')} <MdOutlineChevronRight />
         </Link>
       </div>
       {children}
