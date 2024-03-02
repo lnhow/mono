@@ -2,6 +2,8 @@
 
 import { redirect } from 'next/navigation'
 import { ESearchParam } from './types'
+import { getRequestLocale } from '@i18n/server'
+import { prefixPathname } from '@newts/i18n/src/utils'
 
 export default async function handleSearch(formSearch: FormData) {
   const query = formSearch.get('query')
@@ -14,5 +16,7 @@ export default async function handleSearch(formSearch: FormData) {
     searchParams.set(ESearchParam.Category, category.toString())
   }
 
-  redirect(`/search?${searchParams.toString()}`)
+  return redirect(
+    await prefixPathname(getRequestLocale(), `/search?${searchParams.toString()}`),
+  )
 }
