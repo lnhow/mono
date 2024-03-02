@@ -1,0 +1,7 @@
+{
+  "search": {
+    "placeholder": "Article title or description"
+  },
+  "result_one": "{{count}} result",
+  "result_other": "{{count}} results"
+}

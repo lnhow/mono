@@ -3,9 +3,6 @@
   "compilerOptions": {
     "plugins": [
       {
-        "name": "next"
-      },
-      {
         "name": "@typescript-eslint"
       }
     ],
@@ -16,11 +13,7 @@
     }
   },
   "include": [
-    ".",
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
+    "src/**/*.ts",
   ],
   "exclude": ["dist", "build", "node_modules"]
 }
