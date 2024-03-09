@@ -25,7 +25,9 @@ export default function createMiddleware({
   acceptLanguage.languages(languages)
   function resolveLanguage(req: NextRequest) {
     let lng
-    if (req.cookies.has(langCookieName)) {
+    lng = languages.find((lang) => req.nextUrl.pathname.startsWith(`/${lang}`))
+
+    if (!lng && req.cookies.has(langCookieName)) {
       lng = acceptLanguage.get((req.cookies.get(langCookieName))?.value)
     }
     if (!lng) {
@@ -38,6 +40,7 @@ export default function createMiddleware({
   }
 
   return function middleware(req: NextRequest) {
+    console.log(`${req.method} ${req.url}`)
     if (
       req.nextUrl.pathname.startsWith('/_next')
     ) {
@@ -57,6 +60,7 @@ export default function createMiddleware({
     }
 
     const response = NextResponse.next()
+    response.cookies.set(langCookieName, lng)
 
     if (req.headers.has(HEADER_REFERER)) {
       const refererUrl = new URL(req.headers.get(HEADER_REFERER) as string)

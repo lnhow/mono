@@ -1,9 +1,10 @@
 'use server'
 
 import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
 import { ESearchParam } from './types'
-import { getRequestLocale } from '@i18n/server'
 import { prefixPathname } from '@newts/i18n/src/utils'
+import { LANG_COOKIE_NAME } from '@i18n/config'
 
 export default async function handleSearch(formSearch: FormData) {
   const query = formSearch.get('query')
@@ -15,8 +16,9 @@ export default async function handleSearch(formSearch: FormData) {
   if (category) {
     searchParams.set(ESearchParam.Category, category.toString())
   }
+  const locale = cookies().get(LANG_COOKIE_NAME)?.value
 
   return redirect(
-    await prefixPathname(getRequestLocale(), `/search?${searchParams.toString()}`),
+    await prefixPathname(locale, `/search?${searchParams.toString()}`),
   )
 }

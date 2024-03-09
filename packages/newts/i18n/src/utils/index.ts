@@ -4,7 +4,7 @@
  * @param pathname 
  * @returns 
  */
-export async function prefixPathname(locale: string, pathname: string) {
+export async function prefixPathname(locale?: string, pathname = '') {
   let localizedHref = '/' + locale
 
   // Avoid trailing slashes
