@@ -3,5 +3,6 @@
     "placeholder": "Article title or description"
   },
   "result_one": "{{count}} result",
-  "result_other": "{{count}} results"
+  "result_other": "{{count}} results",
+  "no-results": "No results found"
 }

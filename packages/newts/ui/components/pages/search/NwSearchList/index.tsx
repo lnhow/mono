@@ -9,10 +9,11 @@ export default async function NwSearchList({
   data,
   pagination,
 }: NwPostsWithPaginationProps) {
-  if (data.length < 1) {
-    return <NwEmptyList className="mt-12" />
-  }
   const { t } = await getTranslation(nsPageSearch)
+  if (data.length < 1) {
+    console.log('data.length < 1', t('no-results'))
+    return <NwEmptyList title={t('no-results')} className="mt-12" />
+  }
   return (
     <>
       <div>
