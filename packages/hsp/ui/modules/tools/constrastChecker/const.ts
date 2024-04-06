@@ -1,0 +1,1 @@
+export const nsToolsConstrast = 'pages@constrast-checker'

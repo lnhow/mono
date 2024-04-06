@@ -1,3 +1,5 @@
 {
-  "constrast-checker": "Color constrast checker"
+  "constrast-checker": "Color constrast checker",
+  "big-text-placeholder": "This is how a big text would look.",
+  "small-text-placeholder": "This is how a small text would look."
 }

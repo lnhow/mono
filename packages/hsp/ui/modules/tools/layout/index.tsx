@@ -24,7 +24,7 @@ export default function ToolsLayout({ children }: BaseLayoutProps) {
     <div role="main" className="lg:-mt-8 lg:-mx-4 -mb-16">
       <nav role="menubar" className="drawer lg:drawer-open">
         <input id="drawer-tools" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
+        <div className="drawer-content min-h-[80vh]">
           <div className="bg-base-200 fixed bottom-4 left-4 rounded-lg lg:hidden">
             <label htmlFor='drawer-tools' className="btn btn-square btn-neutral drawer-button" aria-label="toggle sidebar">
               <MdMenu className='icon-md' />
