@@ -36,7 +36,7 @@ const nextConfig = {
       },
     ]
   },
-  transpilePackages: ['@newts/ui', '@newts/i18n'],
+  transpilePackages: ['@newts/ui', '@hsp/ui', '@newts/i18n'],
   webpack: (config) => {
     config.resolve.alias['@i18n'] = path.resolve(
       __dirname,
