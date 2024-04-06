@@ -1,0 +1,107 @@
+query GetAllPosts {
+  posts {
+    data {
+      id
+      attributes {
+        category {
+          data {
+            id
+            attributes {
+              title
+              slugUrl
+            }
+          }
+        }
+        title
+        description
+        cover {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        slugUrl
+        publishedAt
+      }
+    }
+  }
+}
+
+query GetPostBySlug($slug: String) {
+  posts(filters: { slugUrl: { eq: $slug } }) {
+    data {
+      id
+      attributes {
+        title
+        description
+        content
+        slugUrl
+        createdAt
+        updatedAt
+        publishedAt
+        category {
+          data {
+            id
+            attributes {
+              title
+              slugUrl
+            }
+          }
+        }
+        cover {
+          data {
+            id
+            attributes {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query PostByFilter($filter: PostFiltersInput, $page: Int, $pageSize: Int) {
+  posts(
+    filters: $filter
+    pagination: { page: $page, pageSize: $pageSize }
+    publicationState: LIVE
+    sort: ["publishedAt:desc"]
+  ) {
+    data {
+      id
+      attributes {
+        title
+        description
+        content
+        slugUrl
+        publishedAt
+        cover {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        category {
+          data {
+            attributes {
+              title
+              slugUrl
+            }
+            id
+          }
+        }
+      }
+    }
+    meta {
+      pagination {
+        total
+        page
+        pageSize
+        pageCount
+      }
+    }
+  }
+}

@@ -9,7 +9,8 @@
     "packages/*",
     "packages/newts/*",
     "packages/configs/*",
-    "apps/*"
+    "apps/*",
+    "apps/hsp/*"
   ],
   "scripts": {
     "prepare": "husky install",

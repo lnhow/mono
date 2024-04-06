@@ -1,0 +1,8 @@
+{
+  "search": {
+    "placeholder": "Tên/mô tả bài viết"
+  },
+  "result_one": "{{count}} kết quả",
+  "result_other": "{{count}} kết quả",
+  "no-results": "Không có kết quả"
+}
