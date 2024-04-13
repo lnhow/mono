@@ -48,7 +48,7 @@ COPY turbo.json turbo.json
 # ARG TURBO_TOKEN
 # ENV TURBO_TOKEN=$TURBO_TOKEN
 
-RUN yarn turbo run build --filter=@hsp/web...
+RUN yarn turbo run build --filter=@hsp/app-web...
 
 ## RUN STEP #########################################################
 FROM base AS runner
