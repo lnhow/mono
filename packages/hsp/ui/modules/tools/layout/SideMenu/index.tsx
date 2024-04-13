@@ -68,7 +68,7 @@ const ToolsGroup = memo(function ToolsGroup({ item }: { item: MenuItemGroup }) {
       >
         <span className="leading-8">{t(item.key)}</span>
       </h6>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap hover:!cursor-auto">
         {item.items.map((item) => {
           return <ToolsGroupLink key={item.key} item={item} />
         })}
