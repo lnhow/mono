@@ -65,4 +65,4 @@ USER nextjs
 
 EXPOSE 3000
 
-CMD yarn workspace @hsp/web deploy:start
+CMD yarn workspace @hsp/app-web deploy:start
