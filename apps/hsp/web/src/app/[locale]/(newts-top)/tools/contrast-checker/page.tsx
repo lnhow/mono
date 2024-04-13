@@ -8,7 +8,7 @@ const BasePageContrastChecker = nextDynamic(() => import('@hsp/ui/modules/tools/
 
 export const dynamic = 'force-static'
 
-export async function generateMetadata(): Metadata {
+export async function generateMetadata(): Promise<Metadata> {
   const { t } = await getTranslation(nsToolsContrast)
   return {
     title: t('contrast-checker')
