@@ -1,12 +1,12 @@
 import { useTranslation } from '@i18n/client'
 import { memo } from 'react'
 import { Controller } from 'react-hook-form'
-import { nsToolsConstrast } from '../const'
+import { nsToolsContrast } from '../const'
 import { HsColorPicker } from '../../../../components/common/input/HsColorPicker'
-import ButtonGenLinkConstrast from './ButtonGenUrl'
+import ButtonGenLinkContrast from './ButtonGenUrl'
 
 export const ColorInput = memo(function ColorInput() {
-  const { t } = useTranslation(nsToolsConstrast)
+  const { t } = useTranslation(nsToolsContrast)
 
   return (
     <div className="flex flex-col justify-center items-center mt-20">
@@ -35,7 +35,7 @@ export const ColorInput = memo(function ColorInput() {
             />
           </div>
         </div>
-        <ButtonGenLinkConstrast />
+        <ButtonGenLinkContrast />
       </div>
     </div>
   )

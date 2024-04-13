@@ -1,6 +1,6 @@
-export const nsToolsConstrast = 'page@constrast-checker'
+export const nsToolsContrast = 'page@contrast-checker'
 
-export type FormConstrastChecker = {
+export type FormContrastChecker = {
   foreground: string,
   background: string,
   bigText: string,

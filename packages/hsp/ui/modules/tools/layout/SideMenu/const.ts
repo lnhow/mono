@@ -27,8 +27,8 @@ export const menuItems: MenuItem[] = [
     key: 'group-color',
     items: [
       {
-        href: '/tools/constrast-checker',
-        key: 'constrast-checker',
+        href: '/tools/contrast-checker',
+        key: 'contrast-checker',
         icon: MdContrast,
       },
       {

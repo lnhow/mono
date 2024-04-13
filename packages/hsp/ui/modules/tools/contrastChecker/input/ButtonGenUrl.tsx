@@ -1,12 +1,12 @@
 import { memo, useEffect, useState } from 'react'
 import { Button, TooltipTrigger, Tooltip } from 'react-aria-components'
 import { useFormContext } from 'react-hook-form'
-import { FormConstrastChecker, ValidationRules, nsToolsConstrast } from '../const'
+import { FormContrastChecker, ValidationRules, nsToolsContrast } from '../const'
 import { useTranslation } from '@i18n/client'
 
-const ButtonGenLinkConstrast = memo(function ButtonGenLinkConstrast() {
-  const { t } = useTranslation(nsToolsConstrast)
-  const { getValues } = useFormContext<FormConstrastChecker>()
+const ButtonGenLinkContrast = memo(function ButtonGenLinkContrast() {
+  const { t } = useTranslation(nsToolsContrast)
+  const { getValues } = useFormContext<FormContrastChecker>()
   const [isCopied, setIsCopied] = useState(false)
   const copyURL = () => {
     const values = {
@@ -17,7 +17,7 @@ const ButtonGenLinkConstrast = memo(function ButtonGenLinkConstrast() {
     }
     navigator.clipboard.writeText(
       window.location.host +
-        '/tools/constrast-checker?' +
+        '/tools/contrast-checker?' +
         Object.keys(values).map((key) => {
           // @ts-ignore
           return key + '=' + encodeURIComponent(values[key])
@@ -49,4 +49,4 @@ const ButtonGenLinkConstrast = memo(function ButtonGenLinkConstrast() {
   )
 })
 
-export default ButtonGenLinkConstrast
+export default ButtonGenLinkContrast

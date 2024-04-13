@@ -67,17 +67,17 @@ export const TextPreview = memo(function TextPreview({ variant }: TextPreview) {
           )
         }}
       />
-      <ConstrastScore variant={variant} />
+      <ContrastScore variant={variant} />
     </div>
   )
 })
 
-export const StyleConstrastScore = {
+export const StyleContrastScore = {
   bigText: 'text-3xl',
   smallText: 'text-md',
 } as const
 
-export const ConstrastScore = memo(function ConstrastScore({
+export const ContrastScore = memo(function ContrastScore({
   variant,
 }: TextPreview) {
   const foreground = useWatch({ name: 'foreground' })
@@ -109,7 +109,7 @@ export const ConstrastScore = memo(function ConstrastScore({
   return (
     <div
       className={classNames(
-        StyleConstrastScore[variant],
+        StyleContrastScore[variant],
         'font-bold self-end bg-base-200/70 backdrop:blur-sm px-3 py-1 rounded flex items-center gap-4'
       )}
     >
