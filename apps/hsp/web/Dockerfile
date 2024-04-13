@@ -48,7 +48,7 @@ COPY turbo.json turbo.json
 # ARG TURBO_TOKEN
 # ENV TURBO_TOKEN=$TURBO_TOKEN
 
-RUN yarn turbo run build --filter=newts-web...
+RUN yarn turbo run build --filter=@hsp/web...
 
 ## RUN STEP #########################################################
 FROM base AS runner
@@ -65,4 +65,4 @@ USER nextjs
 
 EXPOSE 3000
 
-CMD yarn workspace newts-web deploy:start
+CMD yarn workspace @hsp/web deploy:start
