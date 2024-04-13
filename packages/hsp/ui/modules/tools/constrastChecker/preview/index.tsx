@@ -52,8 +52,8 @@ export const TextPreview = memo(function TextPreview({ variant }: TextPreview) {
         rules={ValidationRules[variant]}
         render={({ field }) => {
           return (
-            <div
-              contentEditable
+            <p
+              // contentEditable
               spellCheck="false"
               style={{ color: foreground }}
               className={classNames(StyleTextPreview[field.name], 'mb-2')}
@@ -63,7 +63,7 @@ export const TextPreview = memo(function TextPreview({ variant }: TextPreview) {
               }}
             >
               {field.value}
-            </div>
+            </p>
           )
         }}
       />

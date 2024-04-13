@@ -1,3 +1,11 @@
 {
-  "constrast-checker": "Color constrast checker"
+  "group-color": "Color",
+  "constrast-checker": "Constrast checker",
+  "color-picker": "Color picker",
+  "group-formatter": "Formatter",
+  "html-formatter": "HTML Formatter",
+  "css-formatter": "CSS Formatter",
+  "json-formatter": "JSON Formatter",
+  "group-misc": "Misc",
+  "can-i-use": "Can I use"
 }
