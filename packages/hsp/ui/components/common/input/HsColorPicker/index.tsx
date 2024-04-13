@@ -1,5 +1,5 @@
 import classNames from '@hsp/ui/utils/classNames'
-import { ComponentPropsWithRef, memo, useEffect, useState } from 'react'
+import { ComponentPropsWithRef, forwardRef, memo, useEffect, useState } from 'react'
 import { Button, Dialog, DialogTrigger, Popover } from 'react-aria-components'
 import { SketchPicker } from 'react-color'
 
@@ -12,12 +12,12 @@ export type HsColorPickerProps = ComponentPropsWithRef<'input'> & {
   }
 }
 
-export const HsColorPicker = memo(function HsColorPicker({
+export const HsColorPicker = memo(forwardRef<HTMLInputElement>((function HsColorPicker({
   inputLabel,
   container,
   value,
   ...props
-}: HsColorPickerProps) {
+}: HsColorPickerProps, ref) {
   const [color, setColor] = useState(value)
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export const HsColorPicker = memo(function HsColorPicker({
           inputLabel?.className
         )}
       >
-        <input type='text' {...props} value={color} className="grow bg-transparent" />
+        <input type='text' {...props} value={color} ref={ref} className="grow bg-transparent" />
         <DialogTrigger>
           <Button className="btn btn-square btn-sm">
             <div
@@ -54,4 +54,4 @@ export const HsColorPicker = memo(function HsColorPicker({
       </label>
     </div>
   )
-})
+})))
