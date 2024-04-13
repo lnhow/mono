@@ -1,0 +1,26 @@
+{
+  "extends": "@newts/tsconfig/lib.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "next"
+      },
+      {
+        "name": "@typescript-eslint"
+      }
+    ],
+    "paths": {
+      "@i18n/*": [
+        "../../../apps/newts-web/i18n/*"
+      ],
+    }
+  },
+  "include": [
+    ".",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": ["dist", "build", "node_modules"]
+}

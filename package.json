@@ -6,11 +6,12 @@
   },
   "private": true,
   "workspaces": [
+    "apps/*",
     "packages/*",
     "packages/newts/*",
     "packages/configs/*",
-    "apps/*",
-    "apps/hsp/*"
+    "apps/hsp/*",
+    "packages/hsp/*"
   ],
   "scripts": {
     "prepare": "husky install",
