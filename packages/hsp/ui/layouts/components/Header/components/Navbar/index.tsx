@@ -10,7 +10,7 @@ export default async function Navbar() {
     <div
       className="
       w-full bg-base-200
-      sticky top-0 z-20"
+      sticky top-0 z-50"
     >
       <nav
         className="max-w-screen-2xl h-10 mx-auto sm:px-3 flex

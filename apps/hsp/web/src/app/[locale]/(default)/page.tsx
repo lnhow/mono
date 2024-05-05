@@ -23,20 +23,20 @@ export default async function Page() {
   const { t } = await getTranslation(nsPageHome)
 
   return (
-    <div className="w-full max-w-screen-2xl mx-auto flex flex-col lg:flex-row justify-center gap-8">
+    <div className="w-full max-w-screen-2xl mx-auto flex flex-col lg:flex-row justify-center gap-4 lg:gap-8">
       <div className="flex-1">
         <div className="mb-4">
           <h1 className="text-2xl text-extralight">{t('shorts-title')}</h1>
           <p className="text-sm text-light">{t('shorts-desc')}</p>
         </div>
-        <div className="flex flex-wrap gap-8 min-w-">
+        <div className="flex flex-wrap gap-8">
           {SHORTS.map((short, index) => {
             return (
               <NwShortBase
                 key={index}
                 data={short}
                 styles={{
-                  wrapper: 'flex-1 min-w-[200px] lg:min-w-[30%]',
+                  wrapper: 'flex-1 min-w-[200px] sm:min-w-[300px]',
                 }}
               />
             )
