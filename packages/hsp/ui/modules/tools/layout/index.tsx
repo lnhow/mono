@@ -28,11 +28,11 @@ export default function ToolsLayout({ children }: BaseLayoutProps) {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu p-4 w-80 max-w-[90vw] min-h-full bg-base-200 text-base-content gap-1 shadow-md">
+          <nav className="p-4 w-80 max-w-[90vw] min-h-full bg-base-200 text-base-content gap-1 shadow-md">
             <Suspense>
               <SideMenu />
             </Suspense>
-          </ul>
+          </nav>
         </div>
       </nav>
     </div>

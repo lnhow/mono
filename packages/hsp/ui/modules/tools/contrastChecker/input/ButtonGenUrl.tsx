@@ -1,7 +1,11 @@
 import { memo, useEffect, useState } from 'react'
 import { Button, TooltipTrigger, Tooltip } from 'react-aria-components'
 import { useFormContext } from 'react-hook-form'
-import { FormContrastChecker, ValidationRules, nsToolsContrast } from '../const'
+import { 
+  FormContrastChecker,
+  // ValidationRules,
+  nsToolsContrast
+} from '../const'
 import { useTranslation } from '@i18n/client'
 
 const ButtonGenLinkContrast = memo(function ButtonGenLinkContrast() {
@@ -12,16 +16,19 @@ const ButtonGenLinkContrast = memo(function ButtonGenLinkContrast() {
     const values = {
       fg: getValues('foreground'),
       bg: getValues('background'),
-      bt: getValues('bigText').slice(0, ValidationRules.bigText.max),
-      st: getValues('smallText').slice(0, ValidationRules.bigText.max),
+      // TODO: Add correct input into texts
+      // bt: getValues('bigText').slice(0, ValidationRules.bigText.max),
+      // st: getValues('smallText').slice(0, ValidationRules.bigText.max),
     }
     navigator.clipboard.writeText(
       window.location.host +
         '/tools/contrast-checker?' +
-        Object.keys(values).map((key) => {
-          // @ts-ignore
-          return key + '=' + encodeURIComponent(values[key])
-        }).join('&')
+        Object.keys(values)
+          .map((key) => {
+            // @ts-ignore
+            return key + '=' + encodeURIComponent(values[key])
+          })
+          .join('&')
     )
     setIsCopied(true)
   }
@@ -44,7 +51,12 @@ const ButtonGenLinkContrast = memo(function ButtonGenLinkContrast() {
       <Button className="btn btn-link w-full" onPress={copyURL}>
         {isCopied ? t('copied') : t('permalink')}
       </Button>
-      <Tooltip placement='bottom' className='bg-base-200 shadow-md py-1 px-3 rounded'>{t('permalink')}</Tooltip>
+      <Tooltip
+        placement="bottom"
+        className="bg-base-200 shadow-md py-1 px-3 rounded"
+      >
+        {t('permalink')}
+      </Tooltip>
     </TooltipTrigger>
   )
 })

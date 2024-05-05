@@ -17,11 +17,11 @@ import { MdOpenInNew } from 'react-icons/md'
 
 export default function SideMenu() {
   return (
-    <>
+    <ul className="list-none p-2 [&_li.row]:my-2">
       {menuItems.map((item) => {
         return <ToolsItem key={item.key} item={item} />
       })}
-    </>
+    </ul>
   )
 }
 
@@ -44,7 +44,7 @@ const ToolsLink = memo(function ToolsLink({
     return pathname.endsWith(href.toString())
   }, [pathname, href])
   return (
-    <li>
+    <li className='row'>
       <Link
         className={classNames(
           'btn btn-neutral flex justify-center items-center',
@@ -62,19 +62,19 @@ const ToolsLink = memo(function ToolsLink({
 const ToolsGroup = memo(function ToolsGroup({ item }: { item: MenuItemGroup }) {
   const { t } = useTranslation(nsLayoutTools)
   return (
-    <li>
+    <li className='row'>
       <h6
         className={
-          'px-4 py-1 bg-base-100 flex justify-center items-center menu-title rounded'
+          'px-4 py-1 mb-2 bg-base-100 flex justify-center items-center menu-title rounded'
         }
       >
         <span className="leading-8">{t(item.key)}</span>
       </h6>
-      <div className="all-unset flex flex-wrap hover:!cursor-auto hover:!bg-transparent active:!bg-transparent focus:!bg-transparent">
+      <ul className="flex flex-wrap gap-2">
         {item.items.map((item) => {
           return <ToolsGroupLink key={item.key} item={item} />
         })}
-      </div>
+      </ul>
     </li>
   )
 })
@@ -90,19 +90,21 @@ const ToolsGroupLink = memo(function ToolsGroupLink({
     return pathname.endsWith(item.href.toString())
   }, [pathname, item.href])
   return (
-    <Link
-      className={classNames(
-        'btn btn-neutral flex flex-col justify-center items-center px-2 py-3 flex-1 min-w-[120px] h-full relative',
-        isSelected && 'btn-active'
-      )}
-      title={t(item.key)}
-      href={item.href}
-      target={item.external ? '_blank' : undefined}
-      rel={item.external ? 'noopener nofollow noreferer' : undefined}
-    >
-      {item.icon && <item.icon className="icon-md" />}
-      <span className="block">{t(item.key)}</span>
-      {item.external && <MdOpenInNew className="absolute top-1 right-1" />}
-    </Link>
+    <li className='flex-1 min-w-[120px]'>
+      <Link
+        className={classNames(
+          'btn btn-neutral flex flex-col justify-center items-center px-2 py-3 h-full relative',
+          isSelected && 'btn-active'
+        )}
+        title={t(item.key)}
+        href={item.href}
+        target={item.external ? '_blank' : undefined}
+        rel={item.external ? 'noopener nofollow noreferer' : undefined}
+      >
+        {item.icon && <item.icon className="icon-md" />}
+        <span className="block">{t(item.key)}</span>
+        {item.external && <MdOpenInNew className="absolute top-1 right-1" />}
+      </Link>
+    </li>
   )
 })

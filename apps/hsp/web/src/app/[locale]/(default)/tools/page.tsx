@@ -26,7 +26,7 @@ export default async function Page() {
         <span className="text-xs text-light">{t('tools-desc')}</span>
       </div>
       <Suspense fallback={<div className="skeleton h-80 w-full lg:w-lg" />}>
-        <div className="menu max-w-lg">
+        <div className="max-w-lg">
           <ToolsMenu />
         </div>
       </Suspense>

@@ -31,6 +31,7 @@ export default function NwShortBase({ data, styles }: NwShortBaseProps) {
         className={classNames(
           'group flex card image-full h-full hover:shadow-lg transition-shadow duration-300 ease-in-out',
           'before:bg-gradient-to-br before:from-base-300 before:to-base-100',
+          'before:!opacity-0 hover:before:!opacity-60 before:transition-opacity before:duration-200 before:ease-in-out',
           styles?.container
         )}
       >
@@ -56,22 +57,24 @@ export default function NwShortBase({ data, styles }: NwShortBaseProps) {
             className={classNames(
               'text-lg font-bold lg:line-clamp-2 py-1 px-2 rounded-lg shadow-sm',
               'bg-gradient-to-br from-base-100 bg-base-300 bg-opacity-80',
-              'border-r-2 group-hover:border-r-4 border-primary transition-[border] duration-200 ease-in-out',
+              'border-r-2 group-hover:border-r-4 border-neutral transition-[border] duration-200 ease-in-out',
               styles?.content?.title
             )}
           >
             {title}
           </h4>
           <div className="mt-1 max-w-[90%]">
-            <p
-              className={classNames(
-                'text-sm p-2 shadow-sm rounded-sm',
-                'bg-gradient-to-br from-base-300 bg-base-100 bg-opacity-60',
-                styles?.content?.description
-              )}
-            >
-              {description}
-            </p>
+            <div className="bg-gradient-to-br from-base-300 bg-base-100 bg-opacity-60 p-2 shadow-sm rounded-sm">
+              <p
+                className={classNames('text-sm', styles?.content?.description)}
+              >
+                {description}
+              </p>
+              <div className="text-right text-sm font-bold">
+                {data.source.author}
+                {data.source.site ? ` (${data.source.site})` : <></>}
+              </div>
+            </div>
           </div>
         </div>
       </article>
