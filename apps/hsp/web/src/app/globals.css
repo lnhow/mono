@@ -6,4 +6,7 @@
   .icon-md {
     @apply w-6 h-6;
   }
+  .all-unset {
+    all: unset;
+  }
 }

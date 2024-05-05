@@ -12,7 +12,7 @@ export default async function Footer() {
             dangerouslySetInnerHTML={{
               __html: t('copyright', {
                 year: new Date().getFullYear(),
-                project: 'Newts',
+                project: 'hammerspc',
                 author:
                   '<a href="https://github.com/lnhow" class="font-extralight">haoln</a>',
                 interpolation: { escapeValue: false },

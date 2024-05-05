@@ -16,6 +16,7 @@
   "scripts": {
     "prepare": "husky install",
     "start": "turbo run start",
+    "start:hsp": "turbo run start --filter=@hsp/app-web...",
     "lint": "turbo run lint",
     "gen:graphql": "turbo run gen:graphql --filter=newts-web",
     "build": "turbo run build",
