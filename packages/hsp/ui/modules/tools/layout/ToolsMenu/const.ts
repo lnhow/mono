@@ -32,10 +32,9 @@ export const menuItems: MenuItem[] = [
         icon: MdContrast,
       },
       {
-        href: 'https://imagecolorpicker.com/',
+        href: '/tools/color-picker',
         key: 'color-picker',
         icon: MdPalette,
-        external: true,
       }
     ],
   },

@@ -4,16 +4,13 @@ import {
   Form,
   Input,
   TextField,
-  Tooltip,
-  TooltipTrigger,
 } from 'react-aria-components'
 import { nsToolURL } from '../const'
 import { useTranslation } from '@i18n/client'
-import { MdCheck, MdCopyAll } from 'react-icons/md'
 import { Controller, useForm } from 'react-hook-form'
 import { useCopyToClipboard } from 'usehooks-ts'
-import { useCallback, useEffect, useRef } from 'react'
 import { toSlug } from './utils'
+import ButtonCopy from '../../../../components/common/input/CopyButton'
 
 export type TConverterSlugForm = {
   textToSlug: string
@@ -22,47 +19,20 @@ export type TConverterSlugForm = {
 
 export default function ConverterSlug() {
   const { t } = useTranslation(nsToolURL)
-  const timeoutRef = useRef<number | null>(null)
-  const { control, handleSubmit, setValue, getValues } = useForm({
+
+  const { control, handleSubmit, setValue } = useForm({
     defaultValues: {
       textToSlug: '',
       slug: '',
     },
   })
-  const [copiedText, copy] = useCopyToClipboard()
-
-  const delayResetCopy = useCallback(() => {
-    if (timeoutRef.current) {
-      clearInterval(timeoutRef.current)
-    }
-    timeoutRef.current = window.setTimeout(() => {
-      copy('')
-    }, 3000)
-  }, [copy])
-
-  // Clear timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) {
-        clearInterval(timeoutRef.current)
-      }
-    }
-  }, [])
+  const [, copy] = useCopyToClipboard()
 
   const onSubmit = (data: TConverterSlugForm) => {
     const slug = toSlug(data.textToSlug)
     setValue('slug', slug)
     copy(slug)
-    delayResetCopy()
   }
-
-  const onCopy = useCallback(() => {
-    copy(getValues('slug'))
-    timeoutRef.current = window.setTimeout(() => {
-      copy('')
-    }, 200)
-    delayResetCopy()
-  }, [copy, getValues, delayResetCopy])
 
   return (
     <Form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
@@ -82,7 +52,6 @@ export default function ConverterSlug() {
                 className="grow bg-transparent"
                 placeholder={t('input-slug')}
               />
-              {/* <FieldError /> */}
             </TextField>
           )
         }}
@@ -101,27 +70,13 @@ export default function ConverterSlug() {
               type="text"
               isReadOnly
               isDisabled
-              className="input input-bordered w-full flex items-center gap-2 bg-base-200"
+              className="input input-bordered w-full flex items-center gap-2 bg-base-200 pr-2"
             >
               <Input
                 className="grow bg-transparent"
                 placeholder={t('placeholder-slug')}
               />
-              <TooltipTrigger delay={200}>
-                <Button
-                  className="btn btn-square btn-sm"
-                  isDisabled={!field.value}
-                  onPress={onCopy}
-                >
-                  {copiedText ? <MdCheck className="icon-md" /> : <MdCopyAll className="icon-md" />}
-                </Button>
-                <Tooltip
-                  className="bg-base-200 shadow-md py-1 px-3 rounded"
-                  placement="bottom"
-                >
-                  {copiedText ? t('copied') : t('copy')}
-                </Tooltip>
-              </TooltipTrigger>
+              <ButtonCopy textToCopy={field.value} disabled={!field.value} />
             </TextField>
           )
         }}
