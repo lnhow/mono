@@ -1,0 +1,14 @@
+{
+  "title": "Bộ chọn màu sắc",
+  "description": "Một bộ chọn màu đơn giản",
+  "rgb": "RGB",
+  "red": "Red",
+  "green": "Green",
+  "blue": "Blue",
+  "hsl": "HSL",
+  "hue": "Hue",
+  "saturation": "Saturation",
+  "lightness": "Lightness",
+  "hex": "HEX",
+  "alpha": "Alpha"
+}
