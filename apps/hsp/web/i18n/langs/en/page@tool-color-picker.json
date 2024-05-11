@@ -1,0 +1,14 @@
+{
+  "title": "Color picker",
+  "description": "A simple color picker",
+  "rgb": "RGB",
+  "red": "Red",
+  "green": "Green",
+  "blue": "Blue",
+  "hsl": "HSL",
+  "hue": "Hue",
+  "saturation": "Saturation",
+  "lightness": "Lightness",
+  "hex": "HEX",
+  "alpha": "Alpha"
+}

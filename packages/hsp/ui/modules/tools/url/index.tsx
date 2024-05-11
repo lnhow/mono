@@ -1,9 +1,10 @@
-import { getTranslation } from '@i18n/server'
+'use client'
 import { nsToolURL } from './const'
 import ConverterSlug from './converterSlug'
+import { useTranslation } from '@i18n/client'
 
-export default async function PageToolURL() {
-  const { t } = await getTranslation(nsToolURL)
+export default function PageToolURL() {
+  const { t } = useTranslation(nsToolURL)
 
   return (
     <>
