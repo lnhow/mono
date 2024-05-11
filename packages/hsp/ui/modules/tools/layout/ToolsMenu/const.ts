@@ -1,4 +1,4 @@
-import { MdCode, MdContrast, MdCss, MdHtml, MdPalette, MdQuestionMark } from 'react-icons/md'
+import { MdCode, MdContrast, MdCss, MdHtml, MdLink, MdPalette, MdQuestionMark } from 'react-icons/md'
 import { IconType } from 'react-icons'
 
 export type MenuItem = MenuItemLink | MenuItemGroup
@@ -65,6 +65,11 @@ export const menuItems: MenuItem[] = [
   {
     key: 'group-misc',
     items: [
+      {
+        href: '/tools/url',
+        key: 'url-tools',
+        icon: MdLink,
+      },
       {
         href: 'https://caniuse.com',
         key: 'can-i-use',
