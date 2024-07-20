@@ -18,61 +18,58 @@ export default function createMiddleware({
   defaultLanguage = DEFAULT_LANGUAGE,
   langCookieName = DEFAULT_COOKIE_NAMES.LANG,
 }: {
-  languages: string[],
-  defaultLanguage: string,
-  langCookieName?: string,
+  languages: string[]
+  defaultLanguage: string
+  langCookieName?: string
 }) {
   acceptLanguage.languages(languages)
   function resolveLanguage(req: NextRequest) {
-    const lng = languages.find((lang) => req.nextUrl.pathname.startsWith(`/${lang}`))
-    if (lng) {
+    const lngInPath = languages.find((lang) =>
+      req.nextUrl.pathname.startsWith(`/${lang}`)
+    )
+    const lngInCookie = req.cookies.get(langCookieName)?.value
+    if (lngInPath || lngInCookie) {
       return {
-        lng,
-        redirect: lng !== acceptLanguage.get(req.cookies.get(langCookieName)?.value),
+        lng: lngInPath || lngInCookie || defaultLanguage,
+        redirect: lngInPath !== acceptLanguage.get(lngInCookie),
+        setCookie: !lngInCookie,
       }
     }
-    else if (req.cookies.has(langCookieName)) {
-      return {
-        lng: acceptLanguage.get((req.cookies.get(langCookieName))?.value) || defaultLanguage,
-        redirect: false,
-      }
-    }
-    else if (req.headers.has(DEFAULT_COOKIE_NAMES.ACCEPT_LANGUAGE)) {
-      return {
-        lng: acceptLanguage.get(req.headers.get(DEFAULT_COOKIE_NAMES.ACCEPT_LANGUAGE)) || defaultLanguage,
-        redirect: true,
-      }
-    }
+
     return {
-      lng: defaultLanguage,
+      lng: req.headers.has(DEFAULT_COOKIE_NAMES.ACCEPT_LANGUAGE)
+        ? acceptLanguage.get(
+            req.headers.get(DEFAULT_COOKIE_NAMES.ACCEPT_LANGUAGE)
+          ) || defaultLanguage
+        : defaultLanguage,
       redirect: true,
     }
   }
 
   return function middleware(req: NextRequest) {
     console.log(`${req.method} ${req.url}`)
-    if (
-      req.nextUrl.pathname.startsWith('/_next')
-    ) {
+    if (req.nextUrl.pathname.startsWith('/_next')) {
       return
     }
-  
-    const { lng, redirect } = resolveLanguage(req)
+
+    const { lng, redirect, setCookie } = resolveLanguage(req)
 
     // Redirect if lng in path is not supported
-    if (
-      redirect
-    ) {
-      console.log('Redirecting to', `/${lng}${req.nextUrl.pathname}`)
-      const response = NextResponse.redirect(
-        new URL(`/${lng}${req.nextUrl.pathname}?${req.nextUrl.searchParams.toString()}`, req.url)
+    if (redirect) {
+      const redirectUrl = new URL(
+        req.nextUrl.pathname.startsWith(`/${lng}`)
+          ? req.nextUrl
+          : `/${lng}` + req.nextUrl.toString(),
+        req.url
       )
-      response.cookies.set(langCookieName, lng)
+      console.log('Redirecting to', `${redirectUrl}`)
+      const response = NextResponse.redirect(redirectUrl)
+      setCookie && response.cookies.set(langCookieName, lng)
       return response
     }
 
     const response = NextResponse.next()
-    response.cookies.set(langCookieName, lng)
+    setCookie && response.cookies.set(langCookieName, lng)
 
     if (req.headers.has(HEADER_REFERER)) {
       const refererUrl = new URL(req.headers.get(HEADER_REFERER) as string)
@@ -86,37 +83,3 @@ export default function createMiddleware({
     return response
   }
 }
-
-// acceptLanguage.languages([...LANGUAGES])
-//
-// export function middleware(req: NextRequest) {
-//   let lng
-//   if (req.cookies.has(LANG_COOKIE_NAME)) {
-//     lng = acceptLanguage.get((req.cookies.get(LANG_COOKIE_NAME))?.value)
-//   }
-//   if (!lng) lng = acceptLanguage.get(req.headers.get('Accept-Language'))
-//   if (!lng) lng = DEFAULT_LANGUAGE
-
-//   // Redirect if lng in path is not supported
-//   if (
-//     !LANGUAGES.some((lang) => req.nextUrl.pathname.startsWith(`/${lang}`)) &&
-//     !req.nextUrl.pathname.startsWith('/_next')
-//   ) {
-//     return NextResponse.redirect(
-//       new URL(`/${lng}${req.nextUrl.pathname}`, req.url)
-//     )
-//   }
-
-//   const response = NextResponse.next()
-
-//   if (req.headers.has('referer')) {
-//     const refererUrl = new URL(req.headers.get('referer') as string)
-//     const lngInReferer = LANGUAGES.find((l) =>
-//       refererUrl.pathname.startsWith(`/${l}`)
-//     )
-//     if (lngInReferer) response.cookies.set(LANG_COOKIE_NAME, lngInReferer)
-//     return response
-//   }
-
-//   return response
-// }
