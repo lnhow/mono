@@ -27,7 +27,9 @@ export default function createMiddleware({
     let lng
     lng = languages.find((lang) => req.nextUrl.pathname.startsWith(`/${lang}`))
 
-    if (!lng && req.cookies.has(langCookieName)) {
+    if (lng) return lng
+
+    if (req.cookies.has(langCookieName)) {
       lng = acceptLanguage.get((req.cookies.get(langCookieName))?.value)
     }
     if (!lng) {
@@ -51,12 +53,14 @@ export default function createMiddleware({
 
     // Redirect if lng in path is not supported
     if (
-      !languages.some((lang) => req.nextUrl.pathname.startsWith(`/${lang}`))
+      languages.every((lang) => !req.nextUrl.pathname.startsWith(`/${lang}`))
     ) {
       console.log('Redirecting to', `/${lng}${req.nextUrl.pathname}`)
-      return NextResponse.redirect(
+      const response = NextResponse.redirect(
         new URL(`/${lng}${req.nextUrl.pathname}?${req.nextUrl.searchParams.toString()}`, req.url)
       )
+      response.cookies.set(langCookieName, lng)
+      return response
     }
 
     const response = NextResponse.next()
