@@ -59,7 +59,7 @@ export default function createMiddleware({
       const redirectUrl = new URL(
         req.nextUrl.pathname.startsWith(`/${lng}`)
           ? req.nextUrl
-          : `/${lng}` + req.nextUrl.toString(),
+          : `/${lng}` + req.nextUrl.pathname + '?' + req.nextUrl.searchParams.toString(),
         req.url
       )
       console.log('Redirecting to', `${redirectUrl}`)
