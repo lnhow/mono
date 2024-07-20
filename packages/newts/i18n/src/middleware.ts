@@ -32,8 +32,8 @@ export default function createMiddleware({
       const resolvedLng = lngInPath || lngInCookie || defaultLanguage
       return {
         lng: resolvedLng,
-        redirect: resolvedLng !== lngInCookie,
-        setCookie: !lngInCookie || lngInCookie !== resolvedLng,
+        redirect: !lngInPath || resolvedLng !== lngInCookie,
+        setCookie: !lngInCookie || resolvedLng !== lngInCookie,
       }
     }
 
