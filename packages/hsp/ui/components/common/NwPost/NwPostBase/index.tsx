@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { NwPostProps } from '@newts/ui/types/components/posts.type'
+import { NwPostProps } from '@hsp/ui/types/components/posts.type'
 import NwPostImage from '../components/NwPostImage'
-import classNames from '@newts/ui/utils/classNames'
+import classNames from '@hsp/ui/utils/classNames'
 
 export type NwPostBaseProps = {
   styles?: {

@@ -4,9 +4,9 @@ import Link from 'next/link'
 import remarkGfm from 'remark-gfm'
 import Markdown from 'react-markdown'
 
-import NwCategory from '@newts/ui/types/category'
-import Maybe from '@newts/ui/types/common/maybe'
-import NwPost from '@newts/ui/types/post'
+import NwCategory from '@hsp/ui/types/category'
+import Maybe from '@hsp/ui/types/common/maybe'
+import NwPost from '@hsp/ui/types/post'
 
 import PublishDate from './client/PublishDate'
 

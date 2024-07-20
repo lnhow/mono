@@ -1,7 +1,7 @@
 import NwPostsWithPagination, {
   NwPostsWithPaginationProps,
-} from '@newts/ui/components/common/NwPost/NwPostList/WithPagination'
-import NwEmptyList from '@newts/ui/components/common/NwPost/NwPostList/Empty'
+} from '@hsp/ui/components/common/NwPost/NwPostList/WithPagination'
+import NwEmptyList from '@hsp/ui/components/common/NwPost/NwPostList/Empty'
 import { getTranslation } from '@i18n/server'
 
 export default async function NwCategoryPosts({

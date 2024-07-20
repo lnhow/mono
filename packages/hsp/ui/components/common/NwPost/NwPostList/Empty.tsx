@@ -1,6 +1,6 @@
 import { MdOutlineInventory2 } from 'react-icons/md'
-import PropsWithClassName from '@newts/ui/types/components/common.type'
-import classNames from '@newts/ui/utils/classNames'
+import PropsWithClassName from '@hsp/ui/types/components/common.type'
+import classNames from '@hsp/ui/utils/classNames'
 
 export default function NwEmptyList({
   title = 'No results found',

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 
 const ThemeChanger = dynamic(
-  () => import('@newts/ui/components/ThemeChanger'),
+  () => import('@hsp/ui/components/ThemeChanger'),
   { ssr: false }
 )
 

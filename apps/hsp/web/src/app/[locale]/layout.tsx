@@ -1,5 +1,5 @@
 import '../globals.css'
-import '@newts/ui/styles.css'
+import '@hsp/ui/styles.css'
 import { Providers } from './_page/providers'
 import { LANGUAGES } from '@i18n/config.ts'
 import { setRequestLocale } from '@i18n/server'

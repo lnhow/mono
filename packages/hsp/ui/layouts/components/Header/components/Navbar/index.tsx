@@ -1,4 +1,4 @@
-import { NwVerticalDivider } from '@newts/ui/components/common/NwDivider/Vertical'
+import { NwVerticalDivider } from '@hsp/ui/components/common/NwDivider/Vertical'
 import Link from '@hsp/ui/shared/components/navigation/Link'
 import { MdOutlineHome, MdOutlineApps } from 'react-icons/md'
 import { getRequestLocale, getTranslation } from '@i18n/server'

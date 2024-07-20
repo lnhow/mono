@@ -1,4 +1,4 @@
-import NwPost from '@newts/ui/types/post'
+import NwPost from '@hsp/ui/types/post'
 
 export type NwPostProps = { data: NwPost }
 

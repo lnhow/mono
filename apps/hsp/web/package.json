@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@newts/i18n": "*",
-    "@newts/ui": "*",
+    "@hsp/ui": "*",
     "@hsp/ui": "*",
     "@tanstack/react-query": "^4.29.14",
     "@tanstack/react-query-devtools": "^4.32.0",

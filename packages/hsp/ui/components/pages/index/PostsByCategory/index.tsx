@@ -1,5 +1,5 @@
-import { NwCategoryProps } from '@newts/ui/types/components/category.type'
-import { NwPostGroupProps } from '@newts/ui/types/components/posts.type'
+import { NwCategoryProps } from '@hsp/ui/types/components/category.type'
+import { NwPostGroupProps } from '@hsp/ui/types/components/posts.type'
 import CategoryTitle from './components/CategoryTitle'
 import PostGroup from './components/PostsGroup'
 

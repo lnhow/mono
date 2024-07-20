@@ -1,6 +1,6 @@
-import { NwPostGroupProps } from '@newts/ui/types/components/posts.type'
-import PropsWithClassName from '@newts/ui/types/components/common.type'
-import classNames from '@newts/ui/utils/classNames'
+import { NwPostGroupProps } from '@hsp/ui/types/components/posts.type'
+import PropsWithClassName from '@hsp/ui/types/components/common.type'
+import classNames from '@hsp/ui/utils/classNames'
 
 import NwPostBase from '../NwPostBase'
 import { TNwPagination } from '../../NwPagination/type'

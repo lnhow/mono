@@ -1,5 +1,5 @@
-import { NwPostGroupProps } from '@newts/ui/types/components/posts.type'
-import NwPostBase from '@newts/ui/components/common/NwPost/NwPostBase'
+import { NwPostGroupProps } from '@hsp/ui/types/components/posts.type'
+import NwPostBase from '@hsp/ui/components/common/NwPost/NwPostBase'
 import NwPostHero from '../../../common/NwPost/NwPostHero'
 
 export default function NwFeaturedPosts({ data }: NwPostGroupProps) {

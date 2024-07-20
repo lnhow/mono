@@ -2,9 +2,9 @@ import Link from 'next/link'
 import {
   NwCategoryGroupProps,
   NwCategoryProps,
-} from '@newts/ui/types/components/category.type'
-import PropsWithClassName from '@newts/ui/types/components/common.type'
-import classNames from '@newts/ui/utils/classNames'
+} from '@hsp/ui/types/components/category.type'
+import PropsWithClassName from '@hsp/ui/types/components/common.type'
+import classNames from '@hsp/ui/utils/classNames'
 
 export default function NwCategoryHeader({ data }: NwCategoryProps) {
   return (
