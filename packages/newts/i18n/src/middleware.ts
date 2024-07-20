@@ -24,21 +24,29 @@ export default function createMiddleware({
 }) {
   acceptLanguage.languages(languages)
   function resolveLanguage(req: NextRequest) {
-    let lng
-    lng = languages.find((lang) => req.nextUrl.pathname.startsWith(`/${lang}`))
-
-    if (lng) return lng
-
-    if (req.cookies.has(langCookieName)) {
-      lng = acceptLanguage.get((req.cookies.get(langCookieName))?.value)
+    const lng = languages.find((lang) => req.nextUrl.pathname.startsWith(`/${lang}`))
+    if (lng) {
+      return {
+        lng,
+        redirect: lng !== acceptLanguage.get(req.cookies.get(langCookieName)?.value),
+      }
     }
-    if (!lng) {
-      lng = acceptLanguage.get(req.headers.get(DEFAULT_COOKIE_NAMES.ACCEPT_LANGUAGE))
+    else if (req.cookies.has(langCookieName)) {
+      return {
+        lng: acceptLanguage.get((req.cookies.get(langCookieName))?.value) || defaultLanguage,
+        redirect: false,
+      }
     }
-    if (!lng) {
-      lng = defaultLanguage
+    else if (req.headers.has(DEFAULT_COOKIE_NAMES.ACCEPT_LANGUAGE)) {
+      return {
+        lng: acceptLanguage.get(req.headers.get(DEFAULT_COOKIE_NAMES.ACCEPT_LANGUAGE)) || defaultLanguage,
+        redirect: true,
+      }
     }
-    return lng
+    return {
+      lng: defaultLanguage,
+      redirect: true,
+    }
   }
 
   return function middleware(req: NextRequest) {
@@ -49,11 +57,11 @@ export default function createMiddleware({
       return
     }
   
-    const lng = resolveLanguage(req)
+    const { lng, redirect } = resolveLanguage(req)
 
     // Redirect if lng in path is not supported
     if (
-      languages.every((lang) => !req.nextUrl.pathname.startsWith(`/${lang}`))
+      redirect
     ) {
       console.log('Redirecting to', `/${lng}${req.nextUrl.pathname}`)
       const response = NextResponse.redirect(
