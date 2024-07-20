@@ -27,12 +27,13 @@ export default function createMiddleware({
     const lngInPath = languages.find((lang) =>
       req.nextUrl.pathname.startsWith(`/${lang}`)
     )
-    const lngInCookie = req.cookies.get(langCookieName)?.value
-    if (lngInPath || lngInCookie) {
+    if (lngInPath || req.cookies.has(langCookieName)) {
+      const lngInCookie = acceptLanguage.get(req.cookies.get(langCookieName)?.value)
+      const resolvedLng = lngInPath || lngInCookie || defaultLanguage
       return {
-        lng: lngInPath || lngInCookie || defaultLanguage,
-        redirect: lngInPath !== acceptLanguage.get(lngInCookie),
-        setCookie: !lngInCookie,
+        lng: resolvedLng,
+        redirect: resolvedLng !== lngInCookie,
+        setCookie: !lngInCookie || lngInCookie !== resolvedLng,
       }
     }
 
