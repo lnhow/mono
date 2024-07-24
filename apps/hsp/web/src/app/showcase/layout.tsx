@@ -1,8 +1,6 @@
 import '../globals.css'
 import '@hsp/ui/styles.css'
-import { Providers } from './_page/providers'
-import { LANGUAGES } from '@i18n/config.ts'
-import { setRequestLocale } from '@i18n/server'
+import { Providers } from '../[locale]/_page/providers'
 
 type RootLocaleLayoutProps = React.PropsWithChildren<{ params: {locale: string} }>
 
@@ -11,7 +9,6 @@ export default async function RootLayout({
   children,
   params: { locale },
 }: RootLocaleLayoutProps) {
-  setRequestLocale(locale)
   return (
     <html lang={locale} suppressHydrationWarning>
       <body>
@@ -31,9 +28,4 @@ export const generateMetadata = ({ params: { locale }} : RootLocaleLayoutProps) 
       canonical: '/' + locale,
     },
   }
-}
-
-// Language-specific static parameters
-export function generateStaticParams() {
-  return LANGUAGES.map((locale) => ({locale}))
 }

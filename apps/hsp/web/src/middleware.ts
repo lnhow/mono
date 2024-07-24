@@ -12,7 +12,7 @@ export default middleware
 export const config = {
   matcher: [
     {
-      source: '/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js|health|res).*)',
+      source: '/((?!api|showcase|_next/static|_next/image|assets|favicon.ico|sw.js|health|res).*)',
       // missing: [
       //   { type: 'header', key: 'Next-Action' }
       // ]

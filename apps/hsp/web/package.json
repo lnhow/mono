@@ -17,7 +17,6 @@
   "dependencies": {
     "@newts/i18n": "*",
     "@hsp/ui": "*",
-    "@hsp/ui": "*",
     "@tanstack/react-query": "^4.29.14",
     "@tanstack/react-query-devtools": "^4.32.0",
     "autoprefixer": "10.4.14",
