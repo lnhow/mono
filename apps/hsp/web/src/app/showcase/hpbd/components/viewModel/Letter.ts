@@ -1,5 +1,8 @@
+import { stat } from 'fs'
 import GlobalState from './Global'
 import options from './options'
+import Shard from './Shard'
+import LetterColor from './Color'
 
 export enum Phase {
   FIREWORK,
@@ -14,63 +17,185 @@ type LetterOptions = {
   y: number
   offsetX: number
   offsetY: number
+  color: LetterColor
 }
 
-// type LetterState = {
-//   phase: Phase
-//   tick: number
-//   spawned: boolean
-//   spawningTime: number
-//   reachTime: number
-//   lineWidth: number
-//   prevPoints: number[][]
-//   circleFinalSize: number
-//   circleCompleteTime: number
-//   circleCreating: boolean
-//   circleFading: boolean
-//   circleFadeTime: number
-//   tick2: number
-//   // shards: Shard[]
-// }
+type LetterState = {
+  phase: Phase
+  tick: number
+  prevPoints: number[][]
+  // shards: Shard[]
+  // circle: {
+  //   size: number
+  //   time: number
+  //   fadeTime: number
+  //   isCreating: boolean
+  //   isFading: boolean
+  // }
+}
 
 export default class Letter {
-  private ctx: CanvasRenderingContext2D
-  private options: LetterOptions
-  // private state: LetterState
+  public ctx: CanvasRenderingContext2D
+  public options: LetterOptions
+   state!: LetterState
+  public strategies: Record<Phase, PhaseStrategy> = {
+    [Phase.FIREWORK]: new PhaseStrategyFirework(this),
+    [Phase.MEDITATE]: new PhaseStrategyMeditate(this),
+    [Phase.BALLOON]: new PhaseStrategyBalloon(this),
+    [Phase.DONE]: new PhaseStrategyDone(this),
+  }
 
   constructor(char: string, x: number, y: number) {
     this.ctx = GlobalState.ctx
+    // Hue increases from left to right
+    const hue = x / GlobalState.textWidth * 360
     this.options = {
       char,
       x,
       y,
       offsetX: -this.ctx.measureText(char).width / 2,
       offsetY: +options.text.fontSize / 2,
+      color: new LetterColor(hue),
     }
+
+    this.start()
   }
   start() {
-    // this.letterState = {
-    //   phase: Phase.FIREWORK,
-    //   tick: 0,
-    //   spawned: false,
-    //   spawningTime: options.fireworkSpawnTime * Math.random() | 0,
-    //   reachTime: options.fireworkBaseReachTime + options.fireworkAddedReachTime * Math.random() | 0,
-    //   lineWidth: options.fireworkBaseLineWidth + options.fireworkAddedLineWidth * Math.random(),
-    //   prevPoints: [[0, hh, 0]],
-    //   circleFinalSize: options.fireworkCircleBaseSize + options.fireworkCircleAddedSize * Math.random(),
-    //   circleCompleteTime: options.fireworkCircleBaseTime + options.fireworkCircleAddedTime * Math.random() | 0,
-    //   circleCreating: true,
-    //   circleFading: false,
-    //   circleFadeTime: options.fireworkCircleFadeBaseTime + options.fireworkCircleFadeAddedTime * Math.random() | 0,
-    //   tick2: 0,
-    // }
+    this.state = {
+      phase: Phase.FIREWORK,
+      tick: 0,
+      prevPoints: [[0, GlobalState.halfHeight, 0]],
+      // circle: {
+      //   size: options.firework.circle.size.base + options.firework.circle.size.added * Math.random(),
+      //   time: options.firework.circle.time.base + options.firework.circle.time.added * Math.random() | 0,
+      //   fadeTime: options.firework.circle.fadeTime.base + options.firework.circle.fadeTime.added * Math.random() | 0,
+      //   isCreating: true,
+      //   isFading: false,
+      // },
+      // shards: [],
+    }
+    this.strategies[Phase.FIREWORK].start()
   }
   update() {
+    this.ctx.fillStyle = this.options.color.toHSLA() //options.text.color
     this.ctx.fillText(
       this.options.char,
       this.options.x + this.options.offsetX,
-      this.options.y + this.options.offsetY
+      this.options.y + this.options.offsetY,
     )
+    this.strategies[this.state.phase].update()
+  }
+}
+
+class PhaseStrategy {
+  protected letter: Letter
+  constructor(letter: Letter) {
+    this.letter = letter
+  }
+  // // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // setOptions(_: Record<string, unknown>) {
+  //   /* To be implemented */
+  // }
+  start() {
+    /* To be implemented */
+  }
+  update() {
+    if (!this.letter.state) return
+    /* To be implemented */
+  }
+}
+
+class PhaseStrategyFirework extends PhaseStrategy {
+  isSpawned = false
+  spawnDelay = 0
+  reachTime = options.firework.reachTime.base
+  lineWidth = options.firework.lineWidth.base
+  velocityY = 0
+
+  start() {
+    this.velocityY = this.letter.options.y - GlobalState.halfHeight
+    this.spawnDelay = options.firework.spawnTime * Math.random() | 0 
+    this.reachTime = options.firework.reachTime.base + options.firework.reachTime.added * Math.random() | 0
+    this.lineWidth = options.firework.lineWidth.base + options.firework.lineWidth.added * Math.random(),
+    this.isSpawned = false
+  }
+  update() {
+    const state = this.letter.state
+    state.tick++
+    if (!this.isSpawned) {
+      this.waitToSpawn()
+      return
+    }
+    this.drawFirework()
+    if (state.tick >= this.reachTime) {
+      this.nextPhase()
+    }
+  }
+  /**
+   * Draw a line from the bottom of the screen to the letter
+   * The line arcs upwards
+   */
+  drawFirework() {
+    const state = this.letter.state
+    const dx = state.tick / this.reachTime // dx = Change in x
+    const dy = Math.sin(dx * Math.PI / 2) // dy = Change in y
+    const x = dx * this.letter.options.x // x = New x
+    const y = dy * this.letter.options.y + GlobalState.halfHeight * (1 - dy) // y = v(y) * y0 + offsetY
+
+    // Remove the oldest point
+    if (state.prevPoints.length > options.firework.prevPoints) {
+      state.prevPoints.shift()
+    }
+    // Add the new point
+    state.prevPoints.push([x, y, dx * this.lineWidth])
+    const lineWidthFactor = 1 / (state.prevPoints.length - 1)
+
+    // Draw the firework line
+    for (let i = 1; i < state.prevPoints.length; i++) {
+      const point = state.prevPoints[i]
+      const prevPoint = state.prevPoints[i - 1]
+
+      // Set the color and width of the line
+      this.letter.ctx.strokeStyle = this.letter.options.color.toAlpha(i / state.prevPoints.length)
+      this.letter.ctx.lineWidth = point[2] * lineWidthFactor * i
+      // Draw
+      this.letter.ctx.beginPath() // Begin a new path
+      this.letter.ctx.moveTo(point[0], point[1]) // Move to the current point
+      this.letter.ctx.lineTo(prevPoint[0], prevPoint[1]) // Draw a line to the previous point
+      this.letter.ctx.stroke() // Stroke the line
+    }
+  }
+  waitToSpawn() {
+    const state = this.letter.state
+
+    if (state?.tick >= this.spawnDelay) {
+      state.tick = 0
+      this.isSpawned = true
+    }
+  }
+  nextPhase() {
+    console.log('[Dev Log] -> PhaseStrategyFirework -> nextPhase -> nextPhase:')
+    this.letter.state.phase = Phase.DONE
+    // this.letter.state.phase = Phase.MEDITATE
+    // this.letter.strategies[Phase.MEDITATE].reset()
+  }
+}
+
+class PhaseStrategyMeditate extends PhaseStrategy {
+  update() {
+    if (!this.letter.state) return
+  }
+}
+
+class PhaseStrategyBalloon extends PhaseStrategy {
+  update() {
+    if (!this.letter.state) return
+  }
+}
+
+class PhaseStrategyDone extends PhaseStrategy {
+  update() {
+    if (!this.letter.state) return
   }
 }
 

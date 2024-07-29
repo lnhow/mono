@@ -1,14 +1,16 @@
 const options = {
+  gravity: 0.1,
   text: {
-    value: ['HAPPY', 'BIRTHDAY!'],
+    value: ['happy', 'birthday'],
     fontSize: 30,
     fontFamily: 'Arial',
     letterSpacing: 2,
     lineHeight: 50,
+    color: '#222',
   },
   canvas: {
-    blank: 'black',
-    background: '#111',
+    blank: 'white',
+    background: '#eee',
   },
   balloon: {
 
@@ -55,4 +57,6 @@ const options = {
     },
   },
 }
+
+export const Tau = Math.PI * 2
 export default options

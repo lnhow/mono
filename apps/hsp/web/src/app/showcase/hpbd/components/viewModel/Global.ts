@@ -1,4 +1,4 @@
-import Letter from './Letter'
+import Letter, { Phase } from './Letter'
 import options from './options'
 
 export default class GlobalState {
@@ -11,8 +11,9 @@ export default class GlobalState {
   public static halfHeight = 0
 
   static letters: Letter[] = []
+  public static textWidth = 0
 
-  public static init(canvas: HTMLCanvasElement) {
+  public static start(canvas: HTMLCanvasElement) {
     GlobalState.canvas = canvas
     GlobalState.ctx = canvas.getContext('2d') as CanvasRenderingContext2D
 
@@ -28,6 +29,9 @@ export default class GlobalState {
     const letterWidth = options.text.letterSpacing + options.text.fontSize
     const lineHeight = options.text.lineHeight
     const lines = options.text.value.length
+
+    GlobalState.textWidth = letterWidth * Math.max(...options.text.value.map(word => word.length))
+
     for (let i = 0; i < lines; i++) {
       const word = options.text.value[i]
       for (let j = 0; j < word.length; j++) {
@@ -39,7 +43,6 @@ export default class GlobalState {
         GlobalState.letters.push(letter)
       }
     }
-    console.log('[Dev Log] -> GlobalState -> initLetters -> letters:', GlobalState.letters)
   }
 
   public static update() {
@@ -52,16 +55,28 @@ export default class GlobalState {
     // Move to center
     ctx.translate(GlobalState.halfWidth, GlobalState.halfHeight)
 
-    GlobalState.drawGuide() // Debug
+    // GlobalState.drawGuide() // Debug
     
+    let isDone = true
     // Draw letters
     for (const letter of GlobalState.letters) {
       ctx.fillStyle = '#fff'
       letter.update()
+      if (letter.state.phase !== Phase.DONE) {
+        isDone = false
+      }
     }
 
     // Move to [0, 0]
     ctx.translate(-GlobalState.halfWidth, -GlobalState.halfHeight)
+
+    if (isDone) {
+      // reset letter state & loop back animation
+      for (const letter of GlobalState.letters) {
+        // re-start
+        letter.start()
+      }
+    }
   }
 
   public static destroy() {

@@ -10,7 +10,7 @@ export default function Canvas() {
   useEffect(() => {
     if (!canvasRef.current) return
     const canvas = canvasRef.current
-    GlobalState.init(canvas)
+    GlobalState.start(canvas)
 
     GlobalState.update()
 
