@@ -1,23 +1,24 @@
+import Color from './Color'
 import GlobalState from './Global'
 import options from './options'
 
 export default class Shard {
   x: number
   y: number
-  vx: number
-  vy: number
+  dx: number
+  dy: number
   prevPoints: number[][]
-  color: string
+  color: Color
   alive: boolean
   size: number
 
-  constructor(x: number, y: number, vx: number, vy: number, color: string) {
+  constructor(x: number, y: number, vx: number, vy: number, color: Color) {
     const velocity =
       options.firework.shard.velocity.base +
       options.firework.shard.velocity.added * Math.random()
 
-    this.vx = vx * velocity
-    this.vy = vy * velocity
+    this.dx = vx * velocity
+    this.dy = vy * velocity
 
     this.x = x
     this.y = y
@@ -34,8 +35,8 @@ export default class Shard {
 
   update() {
     const ctx = GlobalState.ctx
-    this.x += this.vx
-    this.y += this.vy += options.gravity
+    this.x += this.dx
+    this.y += this.dy += options.gravity // vy is affected by gravity
 
     if (this.prevPoints.length > options.firework.shard.prevPoints) {
       this.prevPoints.shift()
@@ -43,17 +44,17 @@ export default class Shard {
 
     this.prevPoints.push([this.x, this.y])
 
-    const lineWidthProportion = this.size / this.prevPoints.length
+    const lineWidthFactor = this.size / this.prevPoints.length
 
     for (let k = 0; k < this.prevPoints.length - 1; k++) {
       const point = this.prevPoints[k],
-        point2 = this.prevPoints[k + 1]
+        nextPoint = this.prevPoints[k + 1]
 
-      ctx.strokeStyle = this.color.replace('alp', '' + k / this.prevPoints.length)
-      ctx.lineWidth = k * lineWidthProportion
+      ctx.strokeStyle = this.color.toAlpha(k / this.prevPoints.length)
+      ctx.lineWidth = k * lineWidthFactor
       ctx.beginPath()
       ctx.moveTo(point[0], point[1])
-      ctx.lineTo(point2[0], point2[1])
+      ctx.lineTo(nextPoint[0], nextPoint[1])
       ctx.stroke()
     }
 

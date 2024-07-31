@@ -7,6 +7,7 @@ const options = {
     letterSpacing: 2,
     lineHeight: 50,
     color: '#222',
+    waitTime: 720,
   },
   canvas: {
     blank: 'white',
@@ -23,7 +24,7 @@ const options = {
       added: 8,
     },
     reachTime: {
-      base: 30,
+      base: 60,
       added: 30,
     },
     circle: {
