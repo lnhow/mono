@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import GlobalState from './viewModel/Global'
+import Scene from './viewModel/Scene'
 // Ref: https://codepen.io/robin-ivi/pen/ZEWYNEQ
 
 
@@ -10,12 +10,12 @@ export default function Canvas() {
   useEffect(() => {
     if (!canvasRef.current) return
     const canvas = canvasRef.current
-    GlobalState.start(canvas)
+    Scene.start(canvas)
 
-    GlobalState.update()
+    Scene.update()
 
     return () => {
-      GlobalState.destroy()
+      Scene.destroy()
     }
   }, [])
   return <canvas ref={canvasRef} />

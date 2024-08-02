@@ -1,7 +1,7 @@
 import Letter, { Phase } from './Letter'
 import options from './options'
 
-export default class GlobalState {
+export default class Scene {
   public static canvas: HTMLCanvasElement
   public static ctx: CanvasRenderingContext2D
 
@@ -12,25 +12,26 @@ export default class GlobalState {
 
   static letters: Letter[] = []
   public static textWidth = 0
+  private static animationId: number
 
   public static start(canvas: HTMLCanvasElement) {
-    GlobalState.canvas = canvas
-    GlobalState.ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+    Scene.canvas = canvas
+    Scene.ctx = canvas.getContext('2d') as CanvasRenderingContext2D
 
-    GlobalState.updateOnWindowResize()
-    window.addEventListener('resize', GlobalState.updateOnWindowResize)
+    Scene.updateOnWindowResize()
+    window.addEventListener('resize', Scene.updateOnWindowResize)
     
-    GlobalState.clear()
-    GlobalState.initLetters()
+    Scene.clear()
+    Scene.initLetters()
   }
 
   public static initLetters() {
-    GlobalState.letters = []
+    Scene.letters = []
     const letterWidth = options.text.letterSpacing + options.text.fontSize
     const lineHeight = options.text.lineHeight
     const lines = options.text.value.length
 
-    GlobalState.textWidth = letterWidth * Math.max(...options.text.value.map(word => word.length))
+    Scene.textWidth = letterWidth * Math.max(...options.text.value.map(word => word.length))
 
     for (let i = 0; i < lines; i++) {
       const word = options.text.value[i]
@@ -40,39 +41,39 @@ export default class GlobalState {
         const posY = i * lineHeight - (lines - 1) * lineHeight / 2
 
         const letter = new Letter(char, posX, posY)
-        GlobalState.letters.push(letter)
+        Scene.letters.push(letter)
       }
     }
   }
 
   public static update() {
-    const ctx = GlobalState.ctx
+    const ctx = Scene.ctx
     if (!ctx) return
-    window.requestAnimationFrame(GlobalState.update)
+    Scene.animationId = window.requestAnimationFrame(Scene.update)
     // Draw background
     ctx.fillStyle = options.canvas.background
-    ctx.fillRect(0, 0, GlobalState.width, GlobalState.height)
+    ctx.fillRect(0, 0, Scene.width, Scene.height)
     // Move to center
-    ctx.translate(GlobalState.halfWidth, GlobalState.halfHeight)
+    ctx.translate(Scene.halfWidth, Scene.halfHeight)
 
     // GlobalState.drawGuide() // Debug
     
     let isDone = true
     // Draw letters
-    for (const letter of GlobalState.letters) {
+    for (const letter of Scene.letters) {
       ctx.fillStyle = '#fff'
       letter.update()
-      if (letter.state.phase !== Phase.DONE) {
+      if (letter.phase !== Phase.DONE) {
         isDone = false
       }
     }
 
     // Move to [0, 0]
-    ctx.translate(-GlobalState.halfWidth, -GlobalState.halfHeight)
+    ctx.translate(-Scene.halfWidth, -Scene.halfHeight)
 
     if (isDone) {
       // reset letter state & loop back animation
-      for (const letter of GlobalState.letters) {
+      for (const letter of Scene.letters) {
         // re-start
         letter.start()
       }
@@ -80,27 +81,28 @@ export default class GlobalState {
   }
 
   public static destroy() {
-    GlobalState.clear()
-    window.removeEventListener('resize', GlobalState.updateOnWindowResize)
+    Scene.clear()
+    window.cancelAnimationFrame(Scene.animationId)
+    window.removeEventListener('resize', Scene.updateOnWindowResize)
   }
 
   public static updateOnWindowResize() {
-    const canvas = GlobalState.canvas
-    GlobalState.width = canvas.width = window.innerWidth
-    GlobalState.height = canvas.height = window.innerHeight
-    GlobalState.halfWidth = GlobalState.width / 2
-    GlobalState.halfHeight = GlobalState.height / 2
+    const canvas = Scene.canvas
+    Scene.width = canvas.width = window.innerWidth
+    Scene.height = canvas.height = window.innerHeight
+    Scene.halfWidth = Scene.width / 2
+    Scene.halfHeight = Scene.height / 2
 
-    GlobalState.ctx.font = `${options.text.fontSize}px ${options.text.fontFamily}`
+    Scene.ctx.font = `${options.text.fontSize}px ${options.text.fontFamily}`
   }
 
   public static clear() {
-    GlobalState.ctx.clearRect(0, 0, GlobalState.width, GlobalState.height)
-    GlobalState.ctx.resetTransform()
+    Scene.ctx.clearRect(0, 0, Scene.width, Scene.height)
+    Scene.ctx.resetTransform()
   }
 
   public static drawGuide() {
-    const ctx = GlobalState.ctx
+    const ctx = Scene.ctx
     ctx.fillStyle = 'red'
     ctx.arc(0, 0, 10, 0, Math.PI * 2)
     ctx.fill()

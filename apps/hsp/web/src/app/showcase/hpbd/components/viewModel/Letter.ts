@@ -1,11 +1,11 @@
-import GlobalState from './Global'
+import Scene from './Scene'
 import options from './options'
 import Shard from './Shard'
 import LetterColor from './Color'
 
 export enum Phase {
   FIREWORK,
-  MEDITATE,
+  BLAST,
   BALLOON,
   DONE,
 }
@@ -19,25 +19,27 @@ type LetterOptions = {
   color: LetterColor
 }
 
-type LetterState = {
-  phase: Phase
-}
-
 export default class Letter {
   public ctx: CanvasRenderingContext2D
   public options: LetterOptions
-   state!: LetterState
-  public strategies: Record<Phase, PhaseStrategy> = {
-    [Phase.FIREWORK]: new PhaseStrategyFirework(this),
-    [Phase.MEDITATE]: new PhaseStrategyMeditate(this),
-    [Phase.BALLOON]: new PhaseStrategyBalloon(this),
-    [Phase.DONE]: new PhaseStrategyDone(this),
+  public phases: Record<Phase, PhaseState> = {
+    [Phase.FIREWORK]: new PhaseFirework(this),
+    [Phase.BLAST]: new PhaseBlast(this),
+    [Phase.BALLOON]: new PhaseBalloon(this),
+    [Phase.DONE]: new PhaseDone(this),
   }
+  public nextPhase: Record<Phase, Phase> = {
+    [Phase.FIREWORK]: Phase.BLAST,
+    [Phase.BLAST]: Phase.BALLOON,
+    [Phase.BALLOON]: Phase.DONE,
+    [Phase.DONE]: Phase.DONE,
+  }
+  phase: Phase
 
   constructor(char: string, x: number, y: number) {
-    this.ctx = GlobalState.ctx
+    this.ctx = Scene.ctx
     // Hue increases from left to right
-    const hue = x / GlobalState.textWidth * 360
+    const hue = (x / Scene.textWidth) * 360
     this.options = {
       char,
       x,
@@ -47,22 +49,12 @@ export default class Letter {
       color: new LetterColor(hue),
     }
 
+    this.phase = Phase.FIREWORK
     this.start()
   }
   start() {
-    this.state = {
-      phase: Phase.FIREWORK,
-      // tick: 0,
-      // circle: {
-      //   size: options.firework.circle.size.base + options.firework.circle.size.added * Math.random(),
-      //   time: options.firework.circle.time.base + options.firework.circle.time.added * Math.random() | 0,
-      //   fadeTime: options.firework.circle.fadeTime.base + options.firework.circle.fadeTime.added * Math.random() | 0,
-      //   isCreating: true,
-      //   isFading: false,
-      // },
-      // shards: [],
-    }
-    this.strategies[Phase.FIREWORK].start()
+    this.phase = Phase.FIREWORK
+    this.phases[this.phase].start()
   }
   update() {
     // this.ctx.fillStyle = this.options.color.toHSLA() //options.text.color
@@ -71,36 +63,35 @@ export default class Letter {
     //   this.options.x + this.options.offsetX,
     //   this.options.y + this.options.offsetY,
     // )
-    this.strategies[this.state.phase].update()
+    this.phases[this.phase].update()
+    if (this.phases[this.phase].isNextPhase()) {
+      this.goToNextPhase()
+    }
+  }
+  goToNextPhase() {
+    this.phase = this.nextPhase[this.phase]
+    this.phases[this.phase].start()
   }
 }
 
-class PhaseStrategy {
+class PhaseState {
   protected tick = 0
   protected letter: Letter
   constructor(letter: Letter) {
     this.letter = letter
   }
-  // // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // setOptions(_: Record<string, unknown>) {
-  //   /* To be implemented */
-  // }
   start() {
     /* To be implemented */
   }
   update() {
-    if (!this.letter.state) return
     /* To be implemented */
   }
-
-  nextPhase() {
-    const nextPhase = Phase.DONE
-    this.letter.state.phase = nextPhase
-    this.letter.strategies[nextPhase].start()
+  isNextPhase() {
+    return true
   }
 }
 
-class PhaseStrategyFirework extends PhaseStrategy {
+class PhaseFirework extends PhaseState {
   isSpawned = false
   spawnDelay = 0
   reachTime = options.firework.reachTime.base
@@ -110,12 +101,17 @@ class PhaseStrategyFirework extends PhaseStrategy {
 
   start() {
     this.tick = 0
-    this.velocityY = this.letter.options.y - GlobalState.halfHeight
-    this.spawnDelay = options.firework.spawnTime * Math.random() | 0 
-    this.reachTime = options.firework.reachTime.base + options.firework.reachTime.added * Math.random() | 0
-    this.lineWidth = options.firework.lineWidth.base + options.firework.lineWidth.added * Math.random(),
-    this.isSpawned = false
-    this.prevPoints = [[0, GlobalState.halfHeight, 0]]
+    this.velocityY = this.letter.options.y - Scene.halfHeight
+    this.spawnDelay = (options.firework.spawnTime * Math.random()) | 0
+    this.reachTime =
+      (options.firework.reachTime.base +
+        options.firework.reachTime.added * Math.random()) |
+      0
+    ;(this.lineWidth =
+      options.firework.lineWidth.base +
+      options.firework.lineWidth.added * Math.random()),
+      (this.isSpawned = false)
+    this.prevPoints = [[0, Scene.halfHeight, 0]]
   }
   update() {
     this.tick++
@@ -124,9 +120,9 @@ class PhaseStrategyFirework extends PhaseStrategy {
       return
     }
     this.drawFirework()
-    if (this.tick >= this.reachTime) {
-      this.nextPhase()
-    }
+  }
+  isNextPhase(): boolean {
+    return this.tick >= this.reachTime
   }
   /**
    * Draw a line from the bottom of the screen to the letter
@@ -134,12 +130,12 @@ class PhaseStrategyFirework extends PhaseStrategy {
    */
   drawFirework() {
     const dx = this.tick / this.reachTime // dx = Change in x
-    const dy = Math.sin(dx * Math.PI / 2) // dy = Change in y
+    const dy = Math.sin((dx * Math.PI) / 2) // dy = Change in y
     const x = dx * this.letter.options.x // x = New x
-    const y = dy * this.letter.options.y + GlobalState.halfHeight * (1 - dy) // y = v(y) * y0 + offsetY
+    const y = dy * this.letter.options.y + Scene.halfHeight * (1 - dy) // y = v(y) * y0 + offsetY
 
     // Remove the oldest point
-    if (this.prevPoints.length > options.firework.prevPoints) {
+    if (this.prevPoints.length > options.firework.points) {
       this.prevPoints.shift()
     }
     // Add the new point
@@ -152,7 +148,9 @@ class PhaseStrategyFirework extends PhaseStrategy {
       const prevPoint = this.prevPoints[i - 1]
 
       // Set the color and width of the line
-      this.letter.ctx.strokeStyle = this.letter.options.color.toAlpha(i / this.prevPoints.length)
+      this.letter.ctx.strokeStyle = this.letter.options.color.toAlpha(
+        i / this.prevPoints.length
+      )
       this.letter.ctx.lineWidth = point[2] * lineWidthFactor * i
       // Draw
       this.letter.ctx.beginPath() // Begin a new path
@@ -167,35 +165,46 @@ class PhaseStrategyFirework extends PhaseStrategy {
       this.isSpawned = true
     }
   }
-  nextPhase() {
-    const nextPhase = Phase.MEDITATE
-    this.letter.state.phase = nextPhase
-    this.letter.strategies[nextPhase].start()
-  }
 }
 
-class PhaseStrategyMeditate extends PhaseStrategy {
+enum PhaseBlastState {
+  CREATING,
+  FADING,
+  LETTER,
+}
+
+class PhaseBlast extends PhaseState {
   static Tau = Math.PI * 2 // Tau = 2π
   circleTick = 0
   circleSize = options.firework.circle.size.base
   circleTime = options.firework.circle.time.base
   circleFadeTime = options.firework.circle.fadeTime.base
-  isCircleCreating = true
-  isCircleFading = false
+  state: PhaseBlastState = PhaseBlastState.CREATING
   fireworkShards: Shard[] = []
+
   start() {
     this.tick = 0
     this.circleTick = 0
+    this.isCircleCreating = true
+    this.isCircleFading = false
 
     // Set the blast circle size, time, and fade time
-    this.circleSize = options.firework.circle.size.base + options.firework.circle.size.added * Math.random()
-    this.circleTime = options.firework.circle.time.base + options.firework.circle.time.added * Math.random() || 0
-    this.circleFadeTime = options.firework.circle.fadeTime.base + options.firework.circle.fadeTime.added * Math.random() || 0
+    this.circleSize =
+      options.firework.circle.size.base +
+      options.firework.circle.size.added * Math.random()
+    this.circleTime =
+      options.firework.circle.time.base +
+        options.firework.circle.time.added * Math.random() || 0
+    this.circleFadeTime =
+      options.firework.circle.fadeTime.base +
+        options.firework.circle.fadeTime.added * Math.random() || 0
     this.fireworkShards = []
 
     // Create the firework shards
-    const shardCount = options.firework.shard.count.base + options.firework.shard.count.added * Math.random() || 0
-    const angle = PhaseStrategyMeditate.Tau / shardCount
+    const shardCount =
+      options.firework.shard.count.base +
+        options.firework.shard.count.added * Math.random() || 0
+    const angle = PhaseBlast.Tau / shardCount
     const cos = Math.cos(angle)
     const sin = Math.sin(angle)
     let shardX = 1
@@ -205,59 +214,95 @@ class PhaseStrategyMeditate extends PhaseStrategy {
       const orginalShardX = shardX
       shardX = shardX * cos - shardY * sin
       shardY = shardY * cos + orginalShardX * sin
-      this.fireworkShards.push(new Shard(this.letter.options.x, this.letter.options.y, shardX, shardY, this.letter.options.color))
+      this.fireworkShards.push(
+        new Shard(
+          this.letter.options.x,
+          this.letter.options.y,
+          shardX,
+          shardY,
+          this.letter.options.color
+        )
+      )
     }
   }
   update() {
     this.tick++
     this.drawBlastCircle()
     this.updateFireworkShards()
-    if (this.tick > options.text.waitTime) {
-      this.nextPhase()
-    }
+  }
+  isNextPhase(): boolean {
+    return this.tick > options.text.waitTime
   }
 
   drawBlastCircle() {
-    // Draw the blast circle
-    if (this.isCircleCreating) {
-      this.circleTick++
-      const progressX = this.circleTick / this.circleTime
-      const progressY = -Math.cos(progressX * Math.PI) / 2 + 0.5
-      this.letter.ctx.beginPath()
-      this.letter.ctx.fillStyle = this.letter.options.color.toHSLA(50 + 50 * progressX, progressX)
-      this.letter.ctx.arc(this.letter.options.x, this.letter.options.y, progressY * this.circleSize, 0, PhaseStrategyMeditate.Tau)
-      this.letter.ctx.fill()
+    switch (this.state) {
+      // Draw firework blast circle
+      case PhaseBlastState.CREATING: {
+        this.circleTick++
+        const progressX = this.circleTick / this.circleTime
+        const progressY = -Math.cos(progressX * Math.PI) / 2 + 0.5
+        this.letter.ctx.beginPath()
+        this.letter.ctx.fillStyle = this.letter.options.color.toHSLA(
+          50 + 50 * progressX,
+          progressX
+        )
+        this.letter.ctx.arc(
+          this.letter.options.x,
+          this.letter.options.y,
+          progressY * this.circleSize,
+          0,
+          PhaseBlast.Tau
+        )
+        this.letter.ctx.fill()
 
-      if (this.circleTick > this.circleTime) {
-        this.circleTick = 0
-        this.isCircleCreating = false
-        this.isCircleFading = true
+        if (this.circleTick > this.circleTime) {
+          this.circleTick = 0
+          this.state = PhaseBlastState.FADING
+        }
+        return
       }
-      return
-    }
-    // After blast circle fade, draw the letter
-    if (this.isCircleFading) {
-      this.letter.ctx.fillStyle = this.letter.options.color.toHSLA(70)
-      this.letter.ctx.fillText(this.letter.options.char, this.letter.options.x + this.letter.options.offsetX, this.letter.options.y + this.letter.options.offsetY)
+      // Transition fading blast circle to the letter
+      case PhaseBlastState.FADING: {
+        this.drawLetter()
 
-      this.circleTick++
-      
-      const progressX = this.circleTick / this.circleFadeTime
-      const progressY = -Math.cos(progressX * Math.PI) / 2 + 0.5
+        this.circleTick++
 
-      this.letter.ctx.beginPath()
-      this.letter.ctx.fillStyle = this.letter.options.color.toHSLA(100, 1 - progressY)
-      this.letter.ctx.arc(this.letter.options.x, this.letter.options.y, this.circleSize, 0, PhaseStrategyMeditate.Tau)
-      this.letter.ctx.fill()
+        const progressX = this.circleTick / this.circleFadeTime
+        const progressY = -Math.cos(progressX * Math.PI) / 2 + 0.5
 
-      if (this.circleTick >= this.circleFadeTime) {
-        this.isCircleFading = false
+        this.letter.ctx.beginPath()
+        this.letter.ctx.fillStyle = this.letter.options.color.toHSLA(
+          100,
+          1 - progressY
+        )
+        this.letter.ctx.arc(
+          this.letter.options.x,
+          this.letter.options.y,
+          this.circleSize,
+          0,
+          PhaseBlast.Tau
+        )
+        this.letter.ctx.fill()
+
+        if (this.circleTick >= this.circleFadeTime) {
+          this.state = PhaseBlastState.LETTER
+        }
+        return
       }
-      return
+      // The blast circle has faded, draw only the letter now
+      default: {
+        this.drawLetter()
+      }
     }
+  }
 
+  drawLetter() {
     this.letter.ctx.fillStyle = this.letter.options.color.toHSLA(70)
-    this.letter.ctx.fillText(this.letter.options.char, this.letter.options.x + this.letter.options.offsetX, this.letter.options.y + this.letter.options.offsetY)
+    this.letter.ctx.fillText(
+      this.letter.options.char,
+      this.letter.options.x + this.letter.options.offsetX,
+      this.letter.options.y + this.letter.options.offsetY
+    )
   }
 
   updateFireworkShards() {
@@ -269,24 +314,50 @@ class PhaseStrategyMeditate extends PhaseStrategy {
       }
     }
   }
+}
 
-  nextPhase() {
-    const nextPhase = Phase.BALLOON
-    this.letter.state.phase = nextPhase
-    this.letter.strategies[nextPhase].start()
+enum PhaseBalloonState {
+  SPAWNING,
+  INFLATING,
+  DONE,
+}
+
+class PhaseBalloon extends PhaseState {
+  state = PhaseBalloonState.SPAWNING
+  spawnTime = 0
+  inflateTime = 0
+  size = 0
+  vx = 0
+  vy = 0
+
+  start() {
+    this.tick = 0
+    this.state = PhaseBalloonState.SPAWNING
+    this.spawnTime = options.balloon.spawnTime * Math.random() || 0
+    this.inflateTime =
+      options.balloon.inflateTime.base +
+        options.balloon.inflateTime.added * Math.random() || 0
+    this.size =
+      options.balloon.size.base + options.balloon.size.added * Math.random() ||
+      0
+
+    const rad =
+      options.balloon.radian.base + options.balloon.radian.added * Math.random()
+    const vel =
+      options.balloon.velocity.base +
+      options.balloon.velocity.added * Math.random()
+
+    this.vx = Math.cos(rad) * vel
+    this.vy = Math.sin(rad) * vel
+  }
+  update() {
+    //
   }
 }
 
-class PhaseStrategyBalloon extends PhaseStrategy {
-  update() {
-    this.nextPhase()
-    if (!this.letter.state) return
-  }
-}
-
-class PhaseStrategyDone extends PhaseStrategy {
-  update() {
-    if (!this.letter.state) return
+class PhaseDone extends PhaseState {
+  isNextPhase(): boolean {
+    return false
   }
 }
 

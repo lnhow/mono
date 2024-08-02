@@ -7,24 +7,21 @@ const options = {
     letterSpacing: 2,
     lineHeight: 50,
     color: '#222',
-    waitTime: 720,
+    waitTime: 360,
   },
   canvas: {
     blank: 'white',
     background: '#eee',
   },
-  balloon: {
-
-  },
   firework: {
-    prevPoints: 10,
+    points: 10,
     spawnTime: 200,
     lineWidth: {
       base: 5,
       added: 8,
     },
     reachTime: {
-      base: 60,
+      base: 45,
       added: 30,
     },
     circle: {
@@ -42,7 +39,7 @@ const options = {
       },
     },
     shard: {
-      prevPoints: 3,
+      points: 3,
       count: {
         base: 5,
         added: 5,
@@ -56,6 +53,25 @@ const options = {
         added: 3,
       },
     },
+  },
+  balloon: {
+    spawnTime: 20,
+    inflateTime: {
+      base: 10,
+      added: 10,
+    },
+    size: {
+      base: 20,
+      added: 20,
+    },
+    velocity: {
+      base: 0.4,
+      added: 0.4,
+    },
+    radian: {
+      base: -(Math.PI / 2 - 0.5),
+      added: -1,
+    }
   },
 }
 
