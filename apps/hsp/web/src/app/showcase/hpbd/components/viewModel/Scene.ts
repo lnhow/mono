@@ -1,3 +1,4 @@
+// import LetterColor from './Color'
 import Letter, { Phase } from './Letter'
 import options from './options'
 
@@ -13,6 +14,12 @@ export default class Scene {
   static letters: Letter[] = []
   public static textWidth = 0
   private static animationId: number
+  // private static bgTick = 0
+  // private static bgColor = new LetterColor(
+  //   options.canvas.background.hue,
+  //   options.canvas.background.saturation
+  // )
+  // private static isTickBgColor = false
 
   public static start(canvas: HTMLCanvasElement) {
     Scene.canvas = canvas
@@ -20,9 +27,10 @@ export default class Scene {
 
     Scene.updateOnWindowResize()
     window.addEventListener('resize', Scene.updateOnWindowResize)
-    
+
     Scene.clear()
     Scene.initLetters()
+    Scene.fillBackground()
   }
 
   public static initLetters() {
@@ -31,14 +39,15 @@ export default class Scene {
     const lineHeight = options.text.lineHeight
     const lines = options.text.value.length
 
-    Scene.textWidth = letterWidth * Math.max(...options.text.value.map(word => word.length))
+    Scene.textWidth =
+      letterWidth * Math.max(...options.text.value.map((word) => word.length))
 
     for (let i = 0; i < lines; i++) {
       const word = options.text.value[i]
       for (let j = 0; j < word.length; j++) {
         const char = word[j]
-        const posX = j * letterWidth - (word.length - 1) * letterWidth / 2
-        const posY = i * lineHeight - (lines - 1) * lineHeight / 2
+        const posX = j * letterWidth - ((word.length - 1) * letterWidth) / 2
+        const posY = i * lineHeight - ((lines - 1) * lineHeight) / 2
 
         const letter = new Letter(char, posX, posY)
         Scene.letters.push(letter)
@@ -50,28 +59,35 @@ export default class Scene {
     const ctx = Scene.ctx
     if (!ctx) return
     Scene.animationId = window.requestAnimationFrame(Scene.update)
-    // Draw background
-    ctx.fillStyle = options.canvas.background
-    ctx.fillRect(0, 0, Scene.width, Scene.height)
+    Scene.fillBackground()
+    
     // Move to center
     ctx.translate(Scene.halfWidth, Scene.halfHeight)
 
     // GlobalState.drawGuide() // Debug
-    
+
     let isDone = true
     // Draw letters
     for (const letter of Scene.letters) {
       ctx.fillStyle = '#fff'
       letter.update()
+      // if (!Scene.isTickBgColor && letter.current().phase === Phase.BLAST) {
+      //   Scene.isTickBgColor = true
+      // }
       if (letter.phase !== Phase.DONE) {
         isDone = false
       }
     }
+    // if (Scene.isTickBgColor) {
+    //   Scene.bgTick++
+    // }
 
     // Move to [0, 0]
     ctx.translate(-Scene.halfWidth, -Scene.halfHeight)
 
     if (isDone) {
+      // Scene.bgTick = 0
+      // Scene.isTickBgColor = false
       // reset letter state & loop back animation
       for (const letter of Scene.letters) {
         // re-start
@@ -97,6 +113,8 @@ export default class Scene {
   }
 
   public static clear() {
+    // Scene.bgTick = 0
+    // Scene.isTickBgColor = false
     Scene.ctx.clearRect(0, 0, Scene.width, Scene.height)
     Scene.ctx.resetTransform()
   }
@@ -106,5 +124,21 @@ export default class Scene {
     ctx.fillStyle = 'red'
     ctx.arc(0, 0, 10, 0, Math.PI * 2)
     ctx.fill()
+  }
+
+  public static fillBackground() {
+    const ctx = Scene.ctx
+    ctx.fillStyle = options.canvas.background
+    // ctx.fillStyle = Scene.bgColor.toHSLA(
+    //   options.canvas.background.light +
+    //     Math.min(Scene.bgTick / options.canvas.background.time, 1) *
+    //       (options.canvas.background.lightMax - options.canvas.background.light)
+    // )
+    // console.log('[Dev Log] -> Scene -> update -> fillStyle:', ctx.fillStyle, Scene.bgColor.toHSLA(
+    //   options.canvas.background.light +
+    //     Math.min(Scene.bgTick / options.canvas.background.time, 1) *
+    //       (options.canvas.background.lightMax - options.canvas.background.light)
+    // ))
+    ctx.fillRect(0, 0, Scene.width, Scene.height)
   }
 }

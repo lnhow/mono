@@ -72,6 +72,20 @@ export default class Letter {
     this.phase = this.nextPhase[this.phase]
     this.phases[this.phase].start()
   }
+
+  drawLetter(
+    x: number = this.options.x + this.options.offsetX,
+    y: number = this.options.y + this.options.offsetY
+  ) {
+    this.ctx.fillStyle = this.options.color.toHSLA(70)
+    this.ctx.fillText(this.options.char, x, y)
+  }
+  current() {
+    return {
+      phase: this.phase,
+      tick: this.phases[this.phase].currentTick(),
+    }
+  }
 }
 
 class PhaseState {
@@ -88,6 +102,9 @@ class PhaseState {
   }
   isNextPhase() {
     return true
+  }
+  currentTick() {
+    return this.tick
   }
 }
 
@@ -185,8 +202,6 @@ class PhaseBlast extends PhaseState {
   start() {
     this.tick = 0
     this.circleTick = 0
-    this.isCircleCreating = true
-    this.isCircleFading = false
 
     // Set the blast circle size, time, and fade time
     this.circleSize =
@@ -263,7 +278,7 @@ class PhaseBlast extends PhaseState {
       }
       // Transition fading blast circle to the letter
       case PhaseBlastState.FADING: {
-        this.drawLetter()
+        this.letter.drawLetter()
 
         this.circleTick++
 
@@ -291,18 +306,9 @@ class PhaseBlast extends PhaseState {
       }
       // The blast circle has faded, draw only the letter now
       default: {
-        this.drawLetter()
+        this.letter.drawLetter()
       }
     }
-  }
-
-  drawLetter() {
-    this.letter.ctx.fillStyle = this.letter.options.color.toHSLA(70)
-    this.letter.ctx.fillText(
-      this.letter.options.char,
-      this.letter.options.x + this.letter.options.offsetX,
-      this.letter.options.y + this.letter.options.offsetY
-    )
   }
 
   updateFireworkShards() {
@@ -326,9 +332,11 @@ class PhaseBalloon extends PhaseState {
   state = PhaseBalloonState.SPAWNING
   spawnTime = 0
   inflateTime = 0
-  size = 0
+  baloonSize = 0
   vx = 0
   vy = 0
+  baloonX = 0
+  baloonY = 0
 
   start() {
     this.tick = 0
@@ -337,7 +345,7 @@ class PhaseBalloon extends PhaseState {
     this.inflateTime =
       options.balloon.inflateTime.base +
         options.balloon.inflateTime.added * Math.random() || 0
-    this.size =
+    this.baloonSize =
       options.balloon.size.base + options.balloon.size.added * Math.random() ||
       0
 
@@ -349,9 +357,86 @@ class PhaseBalloon extends PhaseState {
 
     this.vx = Math.cos(rad) * vel
     this.vy = Math.sin(rad) * vel
+    this.baloonX = this.letter.options.x
+    this.baloonY = this.letter.options.y
   }
   update() {
-    //
+    const ctx = this.letter.ctx
+    ctx.strokeStyle = this.letter.options.color.toHSLA(80)
+    this.tick++
+    switch (this.state) {
+      case PhaseBalloonState.SPAWNING: {
+        this.letter.drawLetter()
+        if (this.tick >= this.spawnTime) {
+          this.tick = 0
+          this.state = PhaseBalloonState.INFLATING
+        }
+        break
+      }
+      case PhaseBalloonState.INFLATING: {
+        const percentage = this.tick / this.inflateTime
+        const tickBaloonSize = this.baloonSize * percentage
+        const x = (this.baloonX = this.letter.options.x)
+        const y = (this.baloonY = this.letter.options.y - tickBaloonSize)
+
+        ctx.fillStyle = this.letter.options.color.toAlpha(percentage)
+        this.drawBalloon(x, y, tickBaloonSize)
+        this.drawBalloonString(x, y, this.baloonY) // Draw a string from the letter to the balloon
+
+        this.letter.drawLetter()
+
+        if (this.tick >= this.inflateTime) {
+          this.tick = 0
+          this.state = PhaseBalloonState.DONE
+        }
+        break
+      }
+      default: {
+        this.baloonX += this.vx
+        this.baloonY += this.vy -= options.gravity // minus gravity to make the balloon float up
+        ctx.fillStyle = this.letter.options.color.toHSLA()
+        this.drawBalloon(this.baloonX, this.baloonY, this.baloonSize)
+        this.drawBalloonString(this.baloonX, this.baloonY, this.baloonY + this.baloonSize)
+
+        this.letter.drawLetter(
+          this.baloonX + this.letter.options.offsetX,
+          this.baloonY + this.letter.options.offsetY + this.baloonSize
+        )
+      }
+    }
+  }
+  isNextPhase(): boolean {
+    return (
+      this.baloonY + this.baloonSize < -Scene.halfHeight ||
+      this.baloonX < -Scene.halfWidth ||
+      this.baloonY > Scene.halfWidth
+    )
+  }
+
+  drawBalloon(x: number, y: number, size: number) {
+    const ctx = this.letter.ctx
+    ctx.beginPath()
+    ctx.moveTo(x, y)
+    ctx.bezierCurveTo(
+      x - size / 2,
+      y - size / 2,
+      x - size / 4,
+      y - size,
+      x,
+      y - size
+    )
+    ctx.bezierCurveTo(x + size / 4, y - size, x + size / 2, y - size / 2, x, y)
+    ctx.fill()
+  }
+  drawBalloonString(x: number, fromY: number, toY: number) {
+    const ctx = this.letter.ctx
+    const originalLineWidth = ctx.lineWidth
+    ctx.lineWidth = options.balloon.string.size
+    ctx.beginPath()
+    ctx.moveTo(x, fromY)
+    ctx.lineTo(x, toY)
+    ctx.stroke()
+    ctx.lineWidth = originalLineWidth
   }
 }
 
@@ -360,246 +445,3 @@ class PhaseDone extends PhaseState {
     return false
   }
 }
-
-// function Letter( char, x, y ){
-// 	this.char = char;
-// 	this.x = x;
-// 	this.y = y;
-
-// 	this.dx = -ctx.measureText( char ).width / 2;
-// 	this.dy = +opts.charSize / 2;
-
-// 	this.fireworkDy = this.y - hh;
-
-// 	var hue = x / calc.totalWidth * 360;
-
-// 	this.color = 'hsl(hue,80%,50%)'.replace( 'hue', hue );
-// 	this.lightAlphaColor = 'hsla(hue,80%,light%,alp)'.replace( 'hue', hue );
-// 	this.lightColor = 'hsl(hue,80%,light%)'.replace( 'hue', hue );
-// 	this.alphaColor = 'hsla(hue,80%,50%,alp)'.replace( 'hue', hue );
-
-// 	this.reset();
-// }
-// Letter.prototype.reset = function(){
-
-// 	this.phase = 'firework';
-// 	this.tick = 0;
-// 	this.spawned = false;
-// 	this.spawningTime = opts.fireworkSpawnTime * Math.random() |0;
-// 	this.reachTime = opts.fireworkBaseReachTime + opts.fireworkAddedReachTime * Math.random() |0;
-// 	this.lineWidth = opts.fireworkBaseLineWidth + opts.fireworkAddedLineWidth * Math.random();
-// 	this.prevPoints = [ [ 0, hh, 0 ] ];
-// }
-// Letter.prototype.step = function(){
-
-// 	if( this.phase === 'firework' ){
-
-// 		if( !this.spawned ){
-
-// 			++this.tick;
-// 			if( this.tick >= this.spawningTime ){
-
-// 				this.tick = 0;
-// 				this.spawned = true;
-// 			}
-
-// 		} else {
-
-// 			++this.tick;
-
-// 			var linearProportion = this.tick / this.reachTime,
-// 					armonicProportion = Math.sin( linearProportion * TauQuarter ),
-
-// 					x = linearProportion * this.x,
-// 					y = hh + armonicProportion * this.fireworkDy;
-
-// 			if( this.prevPoints.length > opts.fireworkPrevPoints )
-// 				this.prevPoints.shift();
-
-// 			this.prevPoints.push( [ x, y, linearProportion * this.lineWidth ] );
-
-// 			var lineWidthProportion = 1 / ( this.prevPoints.length - 1 );
-
-// 			for( var i = 1; i < this.prevPoints.length; ++i ){
-
-// 				var point = this.prevPoints[ i ],
-// 						point2 = this.prevPoints[ i - 1 ];
-
-// 				ctx.strokeStyle = this.alphaColor.replace( 'alp', i / this.prevPoints.length );
-// 				ctx.lineWidth = point[ 2 ] * lineWidthProportion * i;
-// 				ctx.beginPath();
-// 				ctx.moveTo( point[ 0 ], point[ 1 ] );
-// 				ctx.lineTo( point2[ 0 ], point2[ 1 ] );
-// 				ctx.stroke();
-
-// 			}
-
-// 			if( this.tick >= this.reachTime ){
-
-// 				this.phase = 'contemplate';
-
-// 				this.circleFinalSize = opts.fireworkCircleBaseSize + opts.fireworkCircleAddedSize * Math.random();
-// 				this.circleCompleteTime = opts.fireworkCircleBaseTime + opts.fireworkCircleAddedTime * Math.random() |0;
-// 				this.circleCreating = true;
-// 				this.circleFading = false;
-
-// 				this.circleFadeTime = opts.fireworkCircleFadeBaseTime + opts.fireworkCircleFadeAddedTime * Math.random() |0;
-// 				this.tick = 0;
-// 				this.tick2 = 0;
-
-// 				this.shards = [];
-
-// 				var shardCount = opts.fireworkBaseShards + opts.fireworkAddedShards * Math.random() |0,
-// 						angle = Tau / shardCount,
-// 						cos = Math.cos( angle ),
-// 						sin = Math.sin( angle ),
-
-// 						x = 1,
-// 						y = 0;
-
-// 				for( var i = 0; i < shardCount; ++i ){
-// 					var x1 = x;
-// 					x = x * cos - y * sin;
-// 					y = y * cos + x1 * sin;
-
-// 					this.shards.push( new Shard( this.x, this.y, x, y, this.alphaColor ) );
-// 				}
-// 			}
-
-// 		}
-// 	} else if( this.phase === 'contemplate' ){
-
-// 		++this.tick;
-
-// 		if( this.circleCreating ){
-
-// 			++this.tick2;
-// 			var proportion = this.tick2 / this.circleCompleteTime,
-// 					armonic = -Math.cos( proportion * Math.PI ) / 2 + .5;
-
-// 			ctx.beginPath();
-// 			ctx.fillStyle = this.lightAlphaColor.replace( 'light', 50 + 50 * proportion ).replace( 'alp', proportion );
-// 			ctx.beginPath();
-// 			ctx.arc( this.x, this.y, armonic * this.circleFinalSize, 0, Tau );
-// 			ctx.fill();
-
-// 			if( this.tick2 > this.circleCompleteTime ){
-// 				this.tick2 = 0;
-// 				this.circleCreating = false;
-// 				this.circleFading = true;
-// 			}
-// 		} else if( this.circleFading ){
-
-// 			ctx.fillStyle = this.lightColor.replace( 'light', 70 );
-// 			ctx.fillText( this.char, this.x + this.dx, this.y + this.dy );
-
-// 			++this.tick2;
-// 			var proportion = this.tick2 / this.circleFadeTime,
-// 					armonic = -Math.cos( proportion * Math.PI ) / 2 + .5;
-
-// 			ctx.beginPath();
-// 			ctx.fillStyle = this.lightAlphaColor.replace( 'light', 100 ).replace( 'alp', 1 - armonic );
-// 			ctx.arc( this.x, this.y, this.circleFinalSize, 0, Tau );
-// 			ctx.fill();
-
-// 			if( this.tick2 >= this.circleFadeTime )
-// 				this.circleFading = false;
-
-// 		} else {
-
-// 			ctx.fillStyle = this.lightColor.replace( 'light', 70 );
-// 			ctx.fillText( this.char, this.x + this.dx, this.y + this.dy );
-// 		}
-
-// 		for( var i = 0; i < this.shards.length; ++i ){
-
-// 			this.shards[ i ].step();
-
-// 			if( !this.shards[ i ].alive ){
-// 				this.shards.splice( i, 1 );
-// 				--i;
-// 			}
-// 		}
-
-// 		if( this.tick > opts.letterContemplatingWaitTime ){
-
-// 			this.phase = 'balloon';
-
-// 			this.tick = 0;
-// 			this.spawning = true;
-// 			this.spawnTime = opts.balloonSpawnTime * Math.random() |0;
-// 			this.inflating = false;
-// 			this.inflateTime = opts.balloonBaseInflateTime + opts.balloonAddedInflateTime * Math.random() |0;
-// 			this.size = opts.balloonBaseSize + opts.balloonAddedSize * Math.random() |0;
-
-// 			var rad = opts.balloonBaseRadian + opts.balloonAddedRadian * Math.random(),
-// 					vel = opts.balloonBaseVel + opts.balloonAddedVel * Math.random();
-
-// 			this.vx = Math.cos( rad ) * vel;
-// 			this.vy = Math.sin( rad ) * vel;
-// 		}
-// 	} else if( this.phase === 'balloon' ){
-
-// 		ctx.strokeStyle = this.lightColor.replace( 'light', 80 );
-
-// 		if( this.spawning ){
-
-// 			++this.tick;
-// 			ctx.fillStyle = this.lightColor.replace( 'light', 70 );
-// 			ctx.fillText( this.char, this.x + this.dx, this.y + this.dy );
-
-// 			if( this.tick >= this.spawnTime ){
-// 				this.tick = 0;
-// 				this.spawning = false;
-// 				this.inflating = true;
-// 			}
-// 		} else if( this.inflating ){
-
-// 			++this.tick;
-
-// 			var proportion = this.tick / this.inflateTime,
-// 			    x = this.cx = this.x,
-// 					y = this.cy = this.y - this.size * proportion;
-
-// 			ctx.fillStyle = this.alphaColor.replace( 'alp', proportion );
-// 			ctx.beginPath();
-// 			generateBalloonPath( x, y, this.size * proportion );
-// 			ctx.fill();
-
-// 			ctx.beginPath();
-// 			ctx.moveTo( x, y );
-// 			ctx.lineTo( x, this.y );
-// 			ctx.stroke();
-
-// 			ctx.fillStyle = this.lightColor.replace( 'light', 70 );
-// 			ctx.fillText( this.char, this.x + this.dx, this.y + this.dy );
-
-// 			if( this.tick >= this.inflateTime ){
-// 				this.tick = 0;
-// 				this.inflating = false;
-// 			}
-
-// 		} else {
-
-// 			this.cx += this.vx;
-// 			this.cy += this.vy += opts.upFlow;
-
-// 			ctx.fillStyle = this.color;
-// 			ctx.beginPath();
-// 			generateBalloonPath( this.cx, this.cy, this.size );
-// 			ctx.fill();
-
-// 			ctx.beginPath();
-// 			ctx.moveTo( this.cx, this.cy );
-// 			ctx.lineTo( this.cx, this.cy + this.size );
-// 			ctx.stroke();
-
-// 			ctx.fillStyle = this.lightColor.replace( 'light', 70 );
-// 			ctx.fillText( this.char, this.cx + this.dx, this.cy + this.dy + this.size );
-
-// 			if( this.cy + this.size < -hh || this.cx < -hw || this.cy > hw  )
-// 				this.phase = 'done';
-
-// 		}
-// 	}
-// }
