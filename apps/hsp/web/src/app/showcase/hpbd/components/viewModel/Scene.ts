@@ -1,4 +1,4 @@
-// import LetterColor from './Color'
+import LetterColor from './Color'
 import Letter, { Phase } from './Letter'
 import options from './options'
 
@@ -19,7 +19,6 @@ export default class Scene {
   //   options.canvas.background.hue,
   //   options.canvas.background.saturation
   // )
-  // private static isTickBgColor = false
 
   public static start(canvas: HTMLCanvasElement) {
     Scene.canvas = canvas
@@ -30,7 +29,7 @@ export default class Scene {
 
     Scene.clear()
     Scene.initLetters()
-    Scene.fillBackground()
+    BackgroundDrawer.update()
   }
 
   public static initLetters() {
@@ -59,8 +58,9 @@ export default class Scene {
     const ctx = Scene.ctx
     if (!ctx) return
     Scene.animationId = window.requestAnimationFrame(Scene.update)
-    Scene.fillBackground()
-    
+    const isBgLoadingDone = BackgroundDrawer.update()
+    if (!isBgLoadingDone) return
+
     // Move to center
     ctx.translate(Scene.halfWidth, Scene.halfHeight)
 
@@ -78,16 +78,11 @@ export default class Scene {
         isDone = false
       }
     }
-    // if (Scene.isTickBgColor) {
-    //   Scene.bgTick++
-    // }
 
     // Move to [0, 0]
     ctx.translate(-Scene.halfWidth, -Scene.halfHeight)
 
     if (isDone) {
-      // Scene.bgTick = 0
-      // Scene.isTickBgColor = false
       // reset letter state & loop back animation
       for (const letter of Scene.letters) {
         // re-start
@@ -97,6 +92,7 @@ export default class Scene {
   }
 
   public static destroy() {
+    BackgroundDrawer.start()
     Scene.clear()
     window.cancelAnimationFrame(Scene.animationId)
     window.removeEventListener('resize', Scene.updateOnWindowResize)
@@ -126,19 +122,79 @@ export default class Scene {
     ctx.fill()
   }
 
-  public static fillBackground() {
+  // public static fillBackground() {
+  //   const ctx = Scene.ctx
+  //   ctx.fillStyle = options.canvas.background
+  //   // ctx.fillStyle = Scene.bgColor.toHSLA(
+  //   //   options.canvas.background.light +
+  //   //     Math.min(Scene.bgTick / options.canvas.background.time, 1) *
+  //   //       (options.canvas.background.lightMax - options.canvas.background.light)
+  //   // )
+  //   // console.log('[Dev Log] -> Scene -> update -> fillStyle:', ctx.fillStyle, Scene.bgColor.toHSLA(
+  //   //   options.canvas.background.light +
+  //   //     Math.min(Scene.bgTick / options.canvas.background.time, 1) *
+  //   //       (options.canvas.background.lightMax - options.canvas.background.light)
+  //   // ))
+  //   ctx.fillRect(0, 0, Scene.width, Scene.height)
+  // }
+}
+
+class BackgroundDrawer {
+  static tick = 0
+  static isDoneLoading = false
+  static backgroundColor = new LetterColor(
+    options.canvas.backgroundLoading.h,
+    options.canvas.backgroundLoading.s
+  )
+  public static start() {
+    BackgroundDrawer.tick = 0
+    BackgroundDrawer.isDoneLoading = false
+  }
+
+  public static update() {
+    if (options.canvas.backgroundLoading.enable) {
+      if (!BackgroundDrawer.isDoneLoading) {
+        BackgroundDrawer.isDoneLoading =
+          BackgroundDrawer.drawBackgroundLoading()
+        return BackgroundDrawer.isDoneLoading
+      }
+      BackgroundDrawer.drawBackground(
+        BackgroundDrawer.backgroundColor.toHSLA(
+          options.canvas.backgroundLoading.lMax
+        )
+      )
+      return true
+    }
+    BackgroundDrawer.drawBackground(options.canvas.background)
+    return true
+  }
+
+  public static drawBackgroundLoading() {
     const ctx = Scene.ctx
-    ctx.fillStyle = options.canvas.background
-    // ctx.fillStyle = Scene.bgColor.toHSLA(
-    //   options.canvas.background.light +
-    //     Math.min(Scene.bgTick / options.canvas.background.time, 1) *
-    //       (options.canvas.background.lightMax - options.canvas.background.light)
-    // )
-    // console.log('[Dev Log] -> Scene -> update -> fillStyle:', ctx.fillStyle, Scene.bgColor.toHSLA(
-    //   options.canvas.background.light +
-    //     Math.min(Scene.bgTick / options.canvas.background.time, 1) *
-    //       (options.canvas.background.lightMax - options.canvas.background.light)
-    // ))
+    const progress = Math.min(
+      BackgroundDrawer.tick / options.canvas.backgroundLoading.time,
+      1
+    )
+    ctx.fillStyle = BackgroundDrawer.backgroundColor.toHSLA(
+      options.canvas.backgroundLoading.l +
+        Math.min(
+          BackgroundDrawer.tick / options.canvas.backgroundLoading.time,
+          1
+        ) *
+          (options.canvas.backgroundLoading.lMax -
+            options.canvas.backgroundLoading.l)
+    )
+    ctx.fillRect(0, 0, Scene.width, Scene.height)
+    if (progress === 1) {
+      return true
+    }
+    BackgroundDrawer.tick++
+    return false
+  }
+
+  public static drawBackground(color: string) {
+    const ctx = Scene.ctx
+    ctx.fillStyle = color
     ctx.fillRect(0, 0, Scene.width, Scene.height)
   }
 }

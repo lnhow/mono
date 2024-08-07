@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import Scene from './viewModel/Scene'
+import GiftBox from './GiftBox'
 // Ref: https://codepen.io/robin-ivi/pen/ZEWYNEQ
 
 export default function Canvas() {
@@ -16,7 +17,7 @@ export default function Canvas() {
       Scene.destroy()
     }
   }, [])
-  const onClick = () => { 
+  const onClick = () => {
     setIsStarted(true)
 
     Scene.update()
@@ -24,13 +25,7 @@ export default function Canvas() {
   return (
     <div className="relative w-full h-full">
       <canvas ref={canvasRef} />
-      <button
-        className="btn btn-primary fixed bottom-8 left-[calc(50%-40px)] w-20 data-[start=true]:hidden"
-        data-start={isStarted}
-        onClick={onClick}
-      >
-        Click
-      </button>
+      <GiftBox onClick={onClick} started={isStarted} />
     </div>
   )
 }

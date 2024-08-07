@@ -10,15 +10,15 @@ const options = {
     waitTime: 360,
   },
   canvas: {
-    // blank: '#111111',
     background: '#151515',
-    // background: {
-    //   hue: 0,
-    //   saturation: 0,
-    //   light: 13,
-    //   lightMax: 93,
-    //   time: 100,
-    // },
+    backgroundLoading: {
+      enable: true,
+      h: 0,
+      s: 0,
+      l: 13,
+      lMax: 93,
+      time: 100,
+    },
   },
   firework: {
     points: 10,
