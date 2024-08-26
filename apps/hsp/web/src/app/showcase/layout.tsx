@@ -19,13 +19,13 @@ export default async function RootLayout({
 }
 
 // Language-specific metadata
-export const generateMetadata = ({ params: { locale }} : RootLocaleLayoutProps) => {
+export const generateMetadata = () => {
   return {
     metadataBase: new URL(
       process.env.NEXT_PUBLIC_HOST || 'https://hspln.vercel.app/'
     ),
     alternates: {
-      canonical: '/' + locale,
-    },
+      canonical: './',
+    }
   }
 }
