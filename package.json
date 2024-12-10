@@ -25,12 +25,12 @@
   },
   "packageManager": "yarn@1.22.19",
   "devDependencies": {
+    "@newts/eslint-config": "*",
+    "@newts/tsconfig": "*",
     "eslint": "^8.42.0",
     "husky": "^8.0.3",
     "prettier": "^2.8.8",
-    "turbo": "1.10.13",
-    "@newts/eslint-config": "*",
-    "@newts/tsconfig": "*",
-    "tsconfig": "*"
+    "tsconfig": "*",
+    "turbo": "^2.3.3"
   }
 }
