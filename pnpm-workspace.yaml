@@ -1,5 +1,5 @@
 packages:
-  # include packages in subfolders (e.g. apps/ and packages/)
+  # Turbo only accepts * globs not ** globs
   - "apps/hsp/*"
   - "packages/configs/*"
   - "packages/newts/*"
