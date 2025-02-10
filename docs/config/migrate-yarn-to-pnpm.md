@@ -1,4 +1,5 @@
 # Migrating yarn to pnpm
+
 0. Install `pnpm`
    1. Install `node 22`
 1. Delete all `node_modules`: `npx npkill`
@@ -10,4 +11,3 @@
 4. Run `pnpm import` to create `pnpm-lock.yaml`
 5. Delete `yarn.lock`
 6. Re-install depenedencies `pnpm i`
-7. 
