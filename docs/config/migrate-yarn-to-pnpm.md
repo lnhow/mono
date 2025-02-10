@@ -6,7 +6,8 @@
 2. Create `pnpm-workspace.yaml`
 3. Change `package.json`: 
    1. Add script: `"preinstall": "npx only-allow pnpm"`
-   2. Change field `package-manager` to which ever pnpm version used:
+   2. Remove `workspaces` field
+   3. Change field `package-manager` to which ever pnpm version used:
       - `"packageManager": "pnpm@10.2.1"`
 4. Run `pnpm import` to create `pnpm-lock.yaml`
 5. Delete `yarn.lock`
