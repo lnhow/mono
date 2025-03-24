@@ -1,16 +1,12 @@
 import { Suspense } from 'react'
 import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import { getTranslation } from '@i18n/server'
 
 import { nsPageHome } from '@hsp/ui/modules/home/const'
 import { SHORTS } from '@hsp/ui/modules/shorts//shorts'
 import NwShortBase from '@hsp/ui/modules/shorts/components/NwShortBase'
 
-const ToolsMenu = dynamic(
-  () => import('@hsp/ui/modules/tools/layout/ToolsMenu'),
-  { ssr: false }
-)
+import ToolsMenu from '@hsp/ui/modules/tools/layout/ToolsMenu'
 
 export async function generateMetadata(): Promise<Metadata> {
   const { t } = await getTranslation(nsPageHome)

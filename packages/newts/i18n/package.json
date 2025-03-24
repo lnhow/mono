@@ -22,8 +22,8 @@
   },
   "devDependencies": {
     "@types/node": "20.1.0",
-    "@types/react": "18.2.47",
-    "@types/react-dom": "18.2.18",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
     "@newts/tsconfig": "workspace:*",
     "@newts/eslint-config": "workspace:*",
     "eslint-config-next": "^14.0.3",

@@ -9,8 +9,9 @@ type RootLocaleLayoutProps = React.PropsWithChildren<{ params: {locale: string} 
 // Language-specific layout
 export default async function RootLayout({
   children,
-  params: { locale },
+  params,
 }: RootLocaleLayoutProps) {
+  const { locale } = await params
   setRequestLocale(locale)
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -22,7 +23,8 @@ export default async function RootLayout({
 }
 
 // Language-specific metadata
-export const generateMetadata = ({ params: { locale }} : RootLocaleLayoutProps) => {
+export const generateMetadata = async ({ params} : RootLocaleLayoutProps) => {
+  const { locale } = await params
   return {
     metadataBase: new URL(
       process.env.NEXT_PUBLIC_HOST || 'https://hspln.vercel.app/'

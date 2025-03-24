@@ -1,11 +1,7 @@
 import { memo } from 'react'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
 
-const ThemeChanger = dynamic(
-  () => import('@hsp/ui/components/ThemeChanger'),
-  { ssr: false }
-)
+import ThemeChanger from '@hsp/ui/components/ThemeChanger'
 
 const HeaderLeading = memo(function HeaderLeading() {
   return (

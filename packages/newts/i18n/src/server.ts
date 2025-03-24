@@ -31,7 +31,7 @@ export default class I18nServer {
       keyPrefix?: string
     } = {}
   ) {
-    const resolvedLang = lang || getRequestLocale() || this._defaultLanguage
+    const resolvedLang = lang || await getRequestLocale() || this._defaultLanguage
     // console.log('[Debug Log] -> I18nServer -> resolvedLang:', resolvedLang)
     const i18nextInstance = await this.initI18next(resolvedLang, ns)
     return {

@@ -12,11 +12,11 @@ export function setRequestLocale(locale: string) {
   getCache().locale = locale
 }
 
-export function getRequestLocale(): string | undefined {
+export async function getRequestLocale(): Promise<string | undefined> {
   let locale = getCache().locale
   if (locale) return locale
 
-  locale = cookies().get('NEXT_LOCALE')?.value
+  locale = (await cookies()).get('NEXT_LOCALE')?.value
   if (locale) {
     setRequestLocale(locale)
   }

@@ -6,6 +6,7 @@ import { nsCommon } from '@hsp/ui/components/common/types'
 
 export default async function Navbar() {
   const { t } = await getTranslation(nsCommon)
+  const locale = await getRequestLocale()
   return (
     <div
       className="
@@ -22,7 +23,7 @@ export default async function Navbar() {
           className="btn btn-square btn-ghost"
           href="/"
           title={t('home', { ns: nsCommon })}
-          locale={getRequestLocale()}
+          locale={locale}
         >
           <MdOutlineHome className="icon-md" />
         </Link>
@@ -31,7 +32,7 @@ export default async function Navbar() {
           className="btn btn-square btn-ghost"
           href="/tools"
           title={t('tools', { ns: nsCommon })}
-          locale={getRequestLocale()}
+          locale={locale}
         >
           <MdOutlineApps className="icon-md" />
         </Link>
