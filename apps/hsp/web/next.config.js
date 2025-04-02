@@ -6,7 +6,7 @@ console.log('[CONFIG] Running in PHASE:', process.env.PHASE)
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['@hsp/ui', '@newts/i18n'],
+  transpilePackages: ['@hsp/ui', '@repo/i18n'],
   webpack: (config) => {
     config.resolve.alias['@i18n'] = path.resolve(
       __dirname,

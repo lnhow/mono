@@ -1,4 +1,4 @@
-import createMiddleware from '@newts/i18n/src/middleware'
+import createMiddleware from '@repo/i18n/src/middleware'
 import { LANGUAGES, DEFAULT_LANGUAGE, LANG_COOKIE_NAME } from '@i18n/config'
 
 const middleware = createMiddleware({

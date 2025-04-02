@@ -1,5 +1,5 @@
 {
-  "extends": "@newts/tsconfig/nextjs.json",
+  "extends": "@repo/tsconfig/nextjs.json",
   "compilerOptions": {
     "paths": {
       "baseUrl": ["."],

@@ -1,5 +1,5 @@
 {
-  "extends": "@newts/tsconfig/lib.json",
+  "extends": "@repo/tsconfig/lib.json",
   "compilerOptions": {
     "plugins": [
       {

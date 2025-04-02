@@ -1,5 +1,5 @@
 {
-  "name": "@newts/i18n",
+  "name": "@repo/i18n",
   "version": "1.0.0",
   "private": true,
   "author": {
@@ -15,18 +15,18 @@
   "dependencies": {
     "accept-language": "3.0.18",
     "react-cookie": "7.1.0",
-    "react-i18next": "14.0.5",
-    "i18next": "23.10.0",
-    "i18next-browser-languagedetector": "7.2.0",
-    "i18next-resources-to-backend": "1.2.0"
+    "react-i18next": "15.4.1",
+    "i18next": "24.2.3",
+    "i18next-browser-languagedetector": "8.0.4",
+    "i18next-resources-to-backend": "1.2.1"
   },
   "devDependencies": {
     "@types/node": "20.1.0",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
-    "@newts/tsconfig": "workspace:*",
-    "@newts/eslint-config": "workspace:*",
-    "eslint-config-next": "^14.0.3",
-    "typescript": "5.2.2"
+    "@repo/tsconfig": "workspace:*",
+    "@repo/eslint-config": "workspace:*",
+    "eslint-config-next": "15.2.4",
+    "typescript": "5.8.2"
   }
 }

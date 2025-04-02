@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss'
-import sharedConfig from '@newts/tailwind-config/tailwind.config'
-// import daisyuiConfig from '@newts/tailwind-config/daisyui.config'
+import sharedConfig from '@repo/tailwind-config/tailwind.config'
+// import daisyuiConfig from '@repo/tailwind-config/daisyui.config'
 
 const config: Config = {
   presets: [sharedConfig],

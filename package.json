@@ -1,5 +1,5 @@
 {
-  "name": "newts",
+  "name": "mono",
   "version": "1.0.0",
   "engines": {
     "node": ">=22.12.0"
@@ -18,8 +18,8 @@
   },
   "packageManager": "pnpm@10.2.1",
   "devDependencies": {
-    "@newts/eslint-config": "workspace:*",
-    "@newts/tsconfig": "workspace:*",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/tsconfig": "workspace:*",
     "eslint": "^8.42.0",
     "husky": "^8.0.3",
     "prettier": "^2.8.8",
