@@ -7,6 +7,7 @@ import { SHORTS } from '@hsp/ui/modules/shorts//shorts'
 import NwShortBase from '@hsp/ui/modules/shorts/components/NwShortBase'
 
 import ToolsMenu from '@hsp/ui/modules/tools/layout/ToolsMenu'
+import NoSsr from '@hsp/ui/components/utils/NoSsr'
 
 export async function generateMetadata(): Promise<Metadata> {
   const { t } = await getTranslation(nsPageHome)
@@ -46,7 +47,9 @@ export default async function Page() {
         </div>
         <Suspense fallback={<div className="skeleton w-full h-80" />}>
           <div>
-            <ToolsMenu />
+            <NoSsr>
+              <ToolsMenu />
+            </NoSsr>
           </div>
         </Suspense>
       </div>

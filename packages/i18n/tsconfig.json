@@ -6,11 +6,6 @@
         "name": "@typescript-eslint"
       }
     ],
-    "paths": {
-      "@i18n/*": [
-        "../../../apps/newts-web/i18n/*"
-      ],
-    }
   },
   "include": [
     "src/**/*.ts",

@@ -2,8 +2,8 @@
 import { Suspense } from 'react'
 import { MdMenu } from 'react-icons/md'
 import { BaseLayoutProps } from '@hsp/ui/layouts/types'
-import dynamic from 'next/dynamic'
-const SideMenu = dynamic(() => import('./ToolsMenu'), { ssr: false })
+import SideMenu from './ToolsMenu'
+import NoSsr from '@hsp/ui/components/utils/NoSsr'
 
 export default function ToolsLayout({ children }: BaseLayoutProps) {
   return (
@@ -30,7 +30,9 @@ export default function ToolsLayout({ children }: BaseLayoutProps) {
           ></label>
           <nav className="p-4 w-80 max-w-[90vw] min-h-full bg-base-200 text-base-content gap-1 shadow-md">
             <Suspense>
-              <SideMenu />
+              <NoSsr>
+                <SideMenu />
+              </NoSsr>
             </Suspense>
           </nav>
         </div>
