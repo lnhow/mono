@@ -1,0 +1,151 @@
+@import 'tailwindcss';
+@plugin 'daisyui';
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility icon-md {
+  @apply w-6 h-6;
+}
+
+@utility all-unset {
+  all: unset;
+}
+
+:root {
+  --hsp-primary-100: var(--color-emerald-50);
+  --hsp-primary-200: var(--color-emerald-200);
+  --hsp-primary-300: var(--color-emerald-400);
+  --hsp-primary-400: var(--color-emerald-600);
+  --hsp-primary-500: var(--color-emerald-800);
+
+  --hsp-secondary-100: var(--color-indigo-50);
+  --hsp-secondary-200: var(--color-indigo-200);
+  --hsp-secondary-300: var(--color-indigo-400);
+  --hsp-secondary-400: var(--color-indigo-600);
+  --hsp-secondary-500: var(--color-indigo-800);
+
+  --hsp-accent-100: var(--color-cyan-50);
+  --hsp-accent-200: var(--color-cyan-200);
+  --hsp-accent-300: var(--color-cyan-400);
+  --hsp-accent-400: var(--color-cyan-600);
+  --hsp-accent-500: var(--color-cyan-800);
+
+  --hsp-text-100: var(--color-zinc-200);
+  --hsp-text-200: var(--color-zinc-400);
+  --hsp-text-300: var(--color-zinc-600);
+  --hsp-text-400: var(--color-zinc-800);
+  --hsp-text-500: var(--color-zinc-950);
+
+  --hsp-base-100: var(--color-zinc-50);
+  --hsp-base-200: var(--color-zinc-100);
+  --hsp-base-300: var(--color-zinc-200);
+  --hsp-base-400: var(--color-zinc-300);
+  --hsp-base-500: var(--color-zinc-400);
+
+  --hsp-warning-100: var(--color-amber-100);
+  --hsp-warning-200: var(--color-amber-300);
+  --hsp-warning-300: var(--color-amber-500);
+
+  --hsp-error-100: var(--color-red-100);
+  --hsp-error-200: var(--color-red-300);
+  --hsp-error-300: var(--color-red-500);
+}
+
+[data-theme=dark] {
+  --hsp-primary-100: var(--color-emerald-800);
+  --hsp-primary-200: var(--color-emerald-600);
+  --hsp-primary-300: var(--color-emerald-400);
+  --hsp-primary-400: var(--color-emerald-200);
+  --hsp-primary-500: var(--color-emerald-50);
+
+  --hsp-secondary-100: var(--color-indigo-800);
+  --hsp-secondary-200: var(--color-indigo-600);
+  --hsp-secondary-300: var(--color-indigo-400);
+  --hsp-secondary-400: var(--color-indigo-200);
+  --hsp-secondary-500: var(--color-indigo-50);
+
+  --hsp-accent-100: var(--color-cyan-800);
+  --hsp-accent-200: var(--color-cyan-600);
+  --hsp-accent-300: var(--color-cyan-400);
+  --hsp-accent-400: var(--color-cyan-200);
+  --hsp-accent-500: var(--color-cyan-50);
+
+  --hsp-text-100: var(--color-zinc-800);
+  --hsp-text-200: var(--color-zinc-600);
+  --hsp-text-300: var(--color-zinc-400);
+  --hsp-text-400: var(--color-zinc-200);
+  --hsp-text-500: var(--color-zinc-50);
+
+  --hsp-base-100: var(--color-zinc-950);
+  --hsp-base-200: var(--color-zinc-900);
+  --hsp-base-300: var(--color-zinc-800);
+  --hsp-base-400: var(--color-zinc-700);
+  --hsp-base-500: var(--color-zinc-600);
+
+  --hsp-warning-100: var(--color-amber-950);
+  --hsp-warning-200: var(--color-amber-700);
+  --hsp-warning-300: var(--color-amber-500);
+
+  --hsp-error-100: var(--color-red-950);
+  --hsp-error-200: var(--color-red-700);
+  --hsp-error-300: var(--color-red-500);
+}
+
+@theme inline {
+  --color-primary-100: var(--hsp-primary-100);
+  --color-primary-200: var(--hsp-primary-200);
+  --color-primary-300: var(--hsp-primary-300);
+  --color-primary-400: var(--hsp-primary-400);
+  --color-primary-500: var(--hsp-primary-500);
+
+  --color-secondary-100: var(--hsp-secondary-100);
+  --color-secondary-200: var(--hsp-secondary-200);
+  --color-secondary-300: var(--hsp-secondary-300);
+  --color-secondary-400: var(--hsp-secondary-400);
+  --color-secondary-500: var(--hsp-secondary-500);
+
+  --color-accent-100: var(--hsp-accent-100);
+  --color-accent-200: var(--hsp-accent-200);
+  --color-accent-300: var(--hsp-accent-300);
+  --color-accent-400: var(--hsp-accent-400);
+  --color-accent-500: var(--hsp-accent-500);
+
+  --color-text-100: var(--hsp-text-100);
+  --color-text-200: var(--hsp-text-200);
+  --color-text-300: var(--hsp-text-300);
+  --color-text-400: var(--hsp-text-400);
+  --color-text-500: var(--hsp-text-500);
+
+  --color-base-100: var(--hsp-base-100);
+  --color-base-200: var(--hsp-base-200);
+  --color-base-300: var(--hsp-base-300);
+  --color-base-400: var(--hsp-base-400);
+  --color-base-500: var(--hsp-base-500);
+
+  --color-warning-100: var(--hsp-warning-100);
+  --color-warning-200: var(--hsp-warning-200);
+  --color-warning-300: var(--hsp-warning-300);
+
+  --color-error-100: var(--hsp-error-100);
+  --color-error-200: var(--hsp-error-200);
+  --color-error-300: var(--hsp-error-300);
+}

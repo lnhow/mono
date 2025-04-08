@@ -1,5 +1,4 @@
-import '../globals.css'
-import '@hsp/ui/styles.css'
+import '@hsp/ui/styles/globals.css'
 import { Providers } from '../[locale]/_page/providers'
 
 type RootLocaleLayoutProps = React.PropsWithChildren<{ params: {locale: string} }>
