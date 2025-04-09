@@ -93,7 +93,7 @@ const ToolsGroupLink = memo(function ToolsGroupLink({
     <li className='flex-1 min-w-[120px]'>
       <Link
         className={classNames(
-          'btn btn-neutral flex flex-col justify-center items-center px-2 py-3 h-full relative',
+          'btn flex flex-col justify-center items-center px-2 py-3 h-full relative',
           isSelected && 'btn-active'
         )}
         title={t(item.key)}

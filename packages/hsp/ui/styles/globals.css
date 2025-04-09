@@ -18,7 +18,7 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    border-color: var(--color-fore-300, currentColor);
   }
 }
 
@@ -49,11 +49,11 @@
   --hsp-accent-400: var(--color-cyan-600);
   --hsp-accent-500: var(--color-cyan-800);
 
-  --hsp-text-100: var(--color-zinc-200);
-  --hsp-text-200: var(--color-zinc-400);
-  --hsp-text-300: var(--color-zinc-600);
-  --hsp-text-400: var(--color-zinc-800);
-  --hsp-text-500: var(--color-zinc-950);
+  --hsp-fore-100: var(--color-zinc-400);
+  --hsp-fore-200: var(--color-zinc-600);
+  --hsp-fore-300: var(--color-zinc-700);
+  --hsp-fore-400: var(--color-zinc-800);
+  --hsp-fore-500: var(--color-zinc-950);
 
   --hsp-base-100: var(--color-zinc-50);
   --hsp-base-200: var(--color-zinc-100);
@@ -89,11 +89,11 @@
   --hsp-accent-400: var(--color-cyan-200);
   --hsp-accent-500: var(--color-cyan-50);
 
-  --hsp-text-100: var(--color-zinc-800);
-  --hsp-text-200: var(--color-zinc-600);
-  --hsp-text-300: var(--color-zinc-400);
-  --hsp-text-400: var(--color-zinc-200);
-  --hsp-text-500: var(--color-zinc-50);
+  --hsp-fore-100: var(--color-zinc-600);
+  --hsp-fore-200: var(--color-zinc-500);
+  --hsp-fore-300: var(--color-zinc-400);
+  --hsp-fore-400: var(--color-zinc-300);
+  --hsp-fore-500: var(--color-zinc-100);
 
   --hsp-base-100: var(--color-zinc-950);
   --hsp-base-200: var(--color-zinc-900);
@@ -129,11 +129,11 @@
   --color-accent-400: var(--hsp-accent-400);
   --color-accent-500: var(--hsp-accent-500);
 
-  --color-text-100: var(--hsp-text-100);
-  --color-text-200: var(--hsp-text-200);
-  --color-text-300: var(--hsp-text-300);
-  --color-text-400: var(--hsp-text-400);
-  --color-text-500: var(--hsp-text-500);
+  --color-fore-100: var(--hsp-fore-100);
+  --color-fore-200: var(--hsp-fore-200);
+  --color-fore-300: var(--hsp-fore-300);
+  --color-fore-400: var(--hsp-fore-400);
+  --color-fore-500: var(--hsp-fore-500);
 
   --color-base-100: var(--hsp-base-100);
   --color-base-200: var(--hsp-base-200);
