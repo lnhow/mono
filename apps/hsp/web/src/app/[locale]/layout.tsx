@@ -5,7 +5,7 @@ import { LANGUAGES } from '@i18n/config.ts'
 import { setRequestLocale } from '@i18n/server'
 
 type RootLocaleLayoutProps = React.PropsWithChildren<{
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }>
 
 // Language-specific layout

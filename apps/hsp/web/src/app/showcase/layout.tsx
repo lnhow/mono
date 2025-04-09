@@ -1,13 +1,14 @@
 import '@hsp/ui/styles/globals.css'
 import { Providers } from '../[locale]/_page/providers'
 
-type RootLocaleLayoutProps = React.PropsWithChildren<{ params: {locale: string} }>
+type RootLocaleLayoutProps = React.PropsWithChildren<{ params: Promise<{locale: string}> }>
 
 // Language-specific layout
 export default async function RootLayout({
   children,
-  params: { locale },
+  params,
 }: RootLocaleLayoutProps) {
+  const { locale } = await params
   return (
     <html lang={locale} suppressHydrationWarning>
       <body>
