@@ -1,19 +1,26 @@
+// import '@hsp/ui/styles/globals.css'
 import '../globals.css'
-import '@hsp/ui/styles.css'
 import { Providers } from './_page/providers'
 import { LANGUAGES } from '@i18n/config.ts'
 import { setRequestLocale } from '@i18n/server'
 
-type RootLocaleLayoutProps = React.PropsWithChildren<{ params: {locale: string} }>
+type RootLocaleLayoutProps = React.PropsWithChildren<{
+  params: Promise<{ locale: string }>
+}>
 
 // Language-specific layout
 export default async function RootLayout({
   children,
-  params: { locale },
+  params,
 }: RootLocaleLayoutProps) {
+  const { locale } = await params
   setRequestLocale(locale)
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html
+      lang={locale}
+      suppressHydrationWarning
+      className="bg-base-100 text-fore-400 font-light"
+    >
       <body>
         <Providers>{children}</Providers>
       </body>
@@ -22,7 +29,8 @@ export default async function RootLayout({
 }
 
 // Language-specific metadata
-export const generateMetadata = ({ params: { locale }} : RootLocaleLayoutProps) => {
+export const generateMetadata = async ({ params }: RootLocaleLayoutProps) => {
+  const { locale } = await params
   return {
     metadataBase: new URL(
       process.env.NEXT_PUBLIC_HOST || 'https://hspln.vercel.app/'
@@ -35,5 +43,5 @@ export const generateMetadata = ({ params: { locale }} : RootLocaleLayoutProps) 
 
 // Language-specific static parameters
 export function generateStaticParams() {
-  return LANGUAGES.map((locale) => ({locale}))
+  return LANGUAGES.map((locale) => ({ locale }))
 }

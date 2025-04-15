@@ -1,11 +1,7 @@
-import nextDynamic from 'next/dynamic'
 import { Metadata } from 'next'
 import { getTranslation } from '@i18n/server'
 import { nsToolURL } from '@hsp/ui/modules/tools/url/const'
-const BasePageToolURL = nextDynamic(
-  () => import('@hsp/ui/modules/tools/url/index'),
-  { ssr: false }
-)
+import BasePageToolURL from '@hsp/ui/modules/tools/url/index'
 
 export const dynamic = 'force-static'
 

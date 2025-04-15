@@ -1,4 +1,4 @@
-import { TGetOptions } from '@newts/i18n/src/types'
+import { TGetOptions } from '@repo/i18n/src/types'
 
 export const LANGUAGES = ['en', 'vi'] as const
 export const LANG_COOKIE_NAME = 'NEXT_LOCALE' as const

@@ -1,14 +1,11 @@
 import { Suspense } from 'react'
 import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import { getTranslation } from '@i18n/server'
 
 import { nsPageToolsIndex } from '@hsp/ui/modules/tools/const'
 
-const ToolsMenu = dynamic(
-  () => import('@hsp/ui/modules/tools/layout/ToolsMenu'),
-  { ssr: false }
-)
+import ToolsMenu from '@hsp/ui/modules/tools/layout/ToolsMenu'
+import NoSsr from '@hsp/ui/components/utils/NoSsr'
 
 export async function generateMetadata(): Promise<Metadata> {
   const { t } = await getTranslation(nsPageToolsIndex)
@@ -27,7 +24,9 @@ export default async function Page() {
       </div>
       <Suspense fallback={<div className="skeleton h-80 w-full lg:w-lg" />}>
         <div className="max-w-lg">
-          <ToolsMenu />
+          <NoSsr>
+            <ToolsMenu />
+          </NoSsr>
         </div>
       </Suspense>
     </div>

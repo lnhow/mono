@@ -1,1 +1,0 @@
-export const BODY_MAX_WIDTH = 1280 // px

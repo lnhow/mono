@@ -1,5 +1,5 @@
 {
-  "extends": "@newts/tsconfig/lib.json",
+  "extends": "@repo/tsconfig/lib.json",
   "compilerOptions": {
     "plugins": [
       {
@@ -11,8 +11,11 @@
     ],
     "paths": {
       "@i18n/*": [
-        "../../../apps/newts-web/i18n/*"
+        "../../../apps/hsp/web/i18n/*"
       ],
+      "@hsp/ui/*": [
+        "./*"
+      ]
     }
   },
   "include": [
