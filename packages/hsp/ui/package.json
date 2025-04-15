@@ -10,7 +10,14 @@
     "access": "public"
   },
   "exports": {
-    "./styles/*": "./styles/*"
+    "./components/*": "./components/*",
+    "./constants/*": "./constants/*",
+    "./layouts/*": "./layouts/*",
+    "./modules/*": "./modules/*",
+    "./shared/*": "./shared/*",
+    "./styles/*": "./styles/*",
+    "./types/*": "./types/*",
+    "./utils/*": "./utils/*"
   },
   "scripts": {
     "lint": "eslint --ext .ts,.tsx ."
