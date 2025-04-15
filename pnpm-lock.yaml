@@ -90,9 +90,6 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../../packages/configs/eslint-config
-      '@repo/tailwind-config':
-        specifier: workspace:*
-        version: link:../../../packages/configs/tailwind-config
       '@repo/tsconfig':
         specifier: workspace:*
         version: link:../../../packages/configs/tsconfig
@@ -129,15 +126,6 @@ importers:
       eslint-config-prettier:
         specifier: 8.8.0
         version: 8.8.0(eslint@8.42.0)
-
-  packages/configs/tailwind-config:
-    dependencies:
-      '@tailwindcss/typography':
-        specifier: ^0.5.16
-        version: 0.5.16(tailwindcss@4.0.15)
-      tailwindcss:
-        specifier: 4.0.15
-        version: 4.0.15
 
   packages/configs/tsconfig: {}
 
@@ -195,9 +183,6 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../configs/eslint-config
-      '@repo/tailwind-config':
-        specifier: workspace:*
-        version: link:../../configs/tailwind-config
       '@repo/tsconfig':
         specifier: workspace:*
         version: link:../../configs/tsconfig

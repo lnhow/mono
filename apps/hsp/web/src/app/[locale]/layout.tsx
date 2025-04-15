@@ -19,7 +19,7 @@ export default async function RootLayout({
     <html
       lang={locale}
       suppressHydrationWarning
-      className="bg-base-400 text-fore-400 font-light"
+      className="bg-base-100 text-fore-400 font-light"
     >
       <body>
         <Providers>{children}</Providers>
