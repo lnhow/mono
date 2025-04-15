@@ -17,7 +17,7 @@ const nextConfig = {
       'i18n',
     )
     return config
-  }
+  },
 }
 
 module.exports = nextConfig
