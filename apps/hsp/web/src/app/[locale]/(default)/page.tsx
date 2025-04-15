@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { getTranslation } from '@i18n/server'
 
 import { nsPageHome } from '@hsp/ui/modules/home/const'
-import { SHORTS } from '@hsp/ui/modules/shorts//shorts'
+import { SHORTS } from '@hsp/ui/modules/shorts/shorts'
 import NwShortBase from '@hsp/ui/modules/shorts/components/NwShortBase'
 
 import ToolsMenu from '@hsp/ui/modules/tools/layout/ToolsMenu'
