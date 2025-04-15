@@ -1,6 +1,5 @@
 import { Suspense } from 'react'
 import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import { getTranslation } from '@i18n/server'
 
 import { nsPageToolsIndex } from '@hsp/ui/modules/tools/const'
