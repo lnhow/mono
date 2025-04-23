@@ -1,4 +1,5 @@
 // import '@hsp/ui/styles/globals.css'
+import { useEffect } from 'react'
 import '../globals.css'
 import { Providers } from './_page/providers'
 import { LANGUAGES } from '@i18n/config.ts'

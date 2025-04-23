@@ -26,7 +26,8 @@
     "@types/react-dom": "^19.0.4",
     "@repo/tsconfig": "workspace:*",
     "@repo/eslint-config": "workspace:*",
-    "typescript": "5.8.2"
+    
+"typescript": "5.8.3"
   },
   "peerDependencies": {
     "react": "^19.0.0",
