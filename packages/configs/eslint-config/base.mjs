@@ -2,20 +2,30 @@
 
 import eslint from '@eslint/js'
 import tseslint from 'typescript-eslint'
-import eslintConfigPrettier from 'eslint-config-prettier/flat'
+import turboConfig from 'eslint-config-turbo/flat'
+// import eslintConfigPrettier from 'eslint-config-prettier/flat'
+import stylistic from '@stylistic/eslint-plugin'
 
-export default [
-  tseslint.config(eslint.configs.recommended, tseslint.configs.recommended, {
-    rules: {
-      '@typescript-eslint/ban-ts-comment': 0,
-    },
-  }),
+export default tseslint.config(
+  turboConfig,
+  eslint.configs.recommended,
+  tseslint.configs.strictTypeChecked,
+  tseslint.configs.stylisticTypeChecked,
   {
-    files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+    plugins: {
+      '@stylistic': stylistic,
+    },
     rules: {
-      quotes: ['error', 'single'],
-      semi: ['error', 'never'],
+      '@stylistic/quotes': ['error', 'single'],
+      '@stylistic/semi': ['error', 'never'],
+      '@typescript-eslint/ban-ts-comment': 0,
+      'turbo/no-undeclared-env-vars': [
+        'error',
+        {
+          allowList: ['^ENV_[A-Z]+$'],
+        },
+      ],
     },
   },
-  eslintConfigPrettier,
-]
+  // eslintConfigPrettier,
+)

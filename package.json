@@ -19,11 +19,9 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/tsconfig": "workspace:*",
-    "eslint": "9.24.0",
-    "eslint-config-turbo": "2.5.0",
     "husky": "^8.0.3",
     "prettier": "3.5.3",
-    "turbo": "^2.4.0"
+    "turbo": "^2.5.0"
   },
   "volta": {
     "node": "22.13.1",

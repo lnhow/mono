@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 
 console.log('[CONFIG] Running in PHASE:', process.env.PHASE)
