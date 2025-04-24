@@ -43,8 +43,14 @@ export default class Scene {
 
     for (let i = 0; i < lines; i++) {
       const word = options.text.value[i]
+      if (!word) {
+        continue
+      }
       for (let j = 0; j < word.length; j++) {
         const char = word[j]
+        if (!char) {
+          continue
+        }
         const posX = j * letterWidth - ((word.length - 1) * letterWidth) / 2
         const posY = i * lineHeight - ((lines - 1) * lineHeight) / 2
 

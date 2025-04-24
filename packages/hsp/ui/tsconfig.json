@@ -1,13 +1,10 @@
 {
-  "extends": "@repo/tsconfig/lib.json",
+  "extends": "@repo/tsconfig/lib-react.json",
   "compilerOptions": {
     "plugins": [
       {
         "name": "next"
       },
-      {
-        "name": "@typescript-eslint"
-      }
     ],
     "paths": {
       "@i18n/*": [
@@ -16,7 +13,8 @@
       "@hsp/ui/*": [
         "./*"
       ]
-    }
+    },
+    "outDir": "dist"
   },
   "include": [
     ".",

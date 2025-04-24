@@ -4,7 +4,7 @@
   "private": true,
   "author": {
     "name": "Hao Le",
-    "email": "hao.lngn@gmail.com"
+    "email": "haoln.contactme@gmail.com"
   },
   "publishConfig": {
     "access": "public"
@@ -26,8 +26,8 @@
     "@types/react-dom": "^19.0.4",
     "@repo/tsconfig": "workspace:*",
     "@repo/eslint-config": "workspace:*",
-    "eslint-config-next": "15.2.4",
-    "typescript": "5.8.2"
+    "eslint": "^9.25.0",
+    "typescript": "5.8.3"
   },
   "peerDependencies": {
     "react": "^19.0.0",

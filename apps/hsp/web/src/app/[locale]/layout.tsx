@@ -1,7 +1,6 @@
-// import '@hsp/ui/styles/globals.css'
 import '../globals.css'
 import { Providers } from './_page/providers'
-import { LANGUAGES } from '@i18n/config.ts'
+import { LANGUAGES } from '@i18n/config'
 import { setRequestLocale } from '@i18n/server'
 
 type RootLocaleLayoutProps = React.PropsWithChildren<{

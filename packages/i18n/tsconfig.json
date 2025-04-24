@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/tsconfig/lib.json",
+  "extends": "@repo/tsconfig/lib-react.json",
   "compilerOptions": {
     "plugins": [
       {
