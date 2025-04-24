@@ -7,6 +7,13 @@ const i18nServer = new I18nServer({
   defaultLanguage: DEFAULT_LANGUAGE,
 })
 
-export const getTranslation = cache(i18nServer.getTranslation.bind(i18nServer))
+export const getTranslation: ReturnType<typeof cache<typeof i18nServer.getTranslation>> = cache(
+  (...args: Parameters<typeof i18nServer.getTranslation>) => {
+    return i18nServer.getTranslation(...args)
+  }
+)
 
-export { getRequestLocale, setRequestLocale } from '@repo/i18n/src/RequestLocale'
+export {
+  getRequestLocale,
+  setRequestLocale,
+} from '@repo/i18n/src/RequestLocale'

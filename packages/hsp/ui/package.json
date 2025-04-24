@@ -6,6 +6,7 @@
     "name": "Hao Le",
     "email": "haoln.contactme@gmail.com"
   },
+  "type": "module",
   "publishConfig": {
     "access": "public"
   },
