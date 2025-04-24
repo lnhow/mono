@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { resolve } from 'path'
 
 /** @type {import('next').NextConfig} */
@@ -7,11 +6,11 @@ const nextConfig = {
   transpilePackages: ['@hsp/ui', '@repo/i18n'],
   webpack: (config) => {
     config.resolve.alias['@hsp/ui'] = resolve(
-      __dirname,
+      import.meta.dirname,
       '../../../packages/hsp/ui',
     )
     config.resolve.alias['@i18n'] = resolve(
-      __dirname,
+      import.meta.dirname,
       'i18n',
     )
     return config
