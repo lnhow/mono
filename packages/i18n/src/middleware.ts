@@ -65,12 +65,16 @@ export default function createMiddleware({
       )
       console.log('Redirecting to', `${redirectUrl}`)
       const response = NextResponse.redirect(redirectUrl)
-      setCookie && response.cookies.set(langCookieName, lng)
+      if (setCookie) {
+        response.cookies.set(langCookieName, lng)
+      }
       return response
     }
 
     const response = NextResponse.next()
-    setCookie && response.cookies.set(langCookieName, lng)
+    if (setCookie) {
+      response.cookies.set(langCookieName, lng)
+    }
 
     if (req.headers.has(HEADER_REFERER)) {
       const refererUrl = new URL(req.headers.get(HEADER_REFERER) as string)

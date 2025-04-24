@@ -271,6 +271,9 @@ importers:
       '@types/react-dom':
         specifier: ^19.0.4
         version: 19.0.4(@types/react@19.0.12)
+      eslint:
+        specifier: ^9.25.0
+        version: 9.25.1(jiti@2.4.2)
       typescript:
         specifier: 5.8.3
         version: 5.8.3
