@@ -14,7 +14,7 @@
     "lint": {
       "outputs": []
     },
-    "start": {
+    "dev": {
       "cache": false,
       "persistent": true
     },
