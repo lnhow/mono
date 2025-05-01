@@ -2,6 +2,8 @@ import * as React from 'react'
 import { Slot } from 'radix-ui'
 import { cva, type VariantProps } from 'class-variance-authority'
 
+import Link from '@hsp/ui/src/components/app/link'
+
 import cn from '@hsp/ui/src/utils/cn'
 
 const buttonVariants = cva(
@@ -48,7 +50,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         className={cn(
           buttonVariants({ variant, size, className }),
-          'cursor-pointer',
+          'cursor-pointer disabled:cursor-not-allowed',
         )}
         ref={ref}
         {...props}
@@ -58,4 +60,24 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 )
 Button.displayName = 'Button'
 
-export { Button, buttonVariants }
+export interface ButtonLinkProps
+  extends React.ComponentProps<typeof Link>,
+    VariantProps<typeof buttonVariants> {}
+
+const ButtonLink = React.forwardRef<
+  React.ComponentRef<typeof Link>,
+  ButtonLinkProps
+>(function ButtonLink({ className, variant, size, ...props }, ref) {
+  return (
+    <Link
+      className={cn(
+        buttonVariants({ variant, size, className }),
+        'cursor-pointer disabled:cursor-not-allowed',
+      )}
+      ref={ref}
+      {...props}
+    />
+  )
+})
+
+export { Button, ButtonLink, buttonVariants }

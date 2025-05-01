@@ -251,19 +251,6 @@
   body {
     @apply bg-background text-foreground font-light;
   }
-  /*
-    The default border color has changed to `currentColor` in Tailwind CSS v4,
-    so we've added these compatibility styles to make sure everything still
-    looks the same as it did with Tailwind CSS v3.
-
-    If we ever want to remove these styles, we need to add an explicit border
-    color utility to any element that depends on these defaults.
-  */
-  /* *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-fore-300, currentColor);
-  } */
 }
+
+@import '../modules/guesart/styles.css';
