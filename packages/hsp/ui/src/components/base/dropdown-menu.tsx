@@ -3,10 +3,10 @@
 import * as React from 'react'
 import { DropdownMenu as DropdownMenuPrimitive } from 'radix-ui'
 import {
-  MdCheck as Check,
-  MdChevronRight as ChevronRight,
-  MdCircle as Circle,
-} from 'react-icons/md'
+  LuCheck as Check,
+  LuChevronRight as ChevronRight,
+  LuCircle as Circle,
+} from 'react-icons/lu'
 
 import cn from '@hsp/ui/src/utils/cn'
 

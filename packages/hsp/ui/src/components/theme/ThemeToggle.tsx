@@ -1,6 +1,6 @@
 'use client'
 
-import { MdDarkMode as Moon, MdLightMode as Sun } from 'react-icons/md'
+import { LuMoon as Moon, LuSun as Sun } from 'react-icons/lu'
 import { useTheme } from 'next-themes'
 
 import { Button } from '@hsp/ui/src/components/base/button'
