@@ -8,8 +8,8 @@
   "scripts": {
     "prepare": "husky install",
     "preinstall": "npx only-allow pnpm",
-    "start": "turbo run start",
-    "start:hsp": "turbo run start --filter=@hsp/app-web...",
+    "dev": "turbo run dev",
+    "dev:hsp": "turbo run dev --filter=@hsp/app-web...",
     "lint": "turbo run lint",
     "build": "turbo run build",
     "deploy:start": "turbo run deploy:start",

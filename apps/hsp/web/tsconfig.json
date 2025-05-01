@@ -11,7 +11,7 @@
       ],
       "@hsp/ui/*": [
         "../../../packages/hsp/ui/*",
-      ],
+      ]
     },
     "plugins": [
       {

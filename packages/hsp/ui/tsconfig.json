@@ -12,6 +12,9 @@
       ],
       "@hsp/ui/*": [
         "./*"
+      ],
+      "@/hsp/*": [
+        "../../../packages/hsp/src/*"
       ]
     },
     "outDir": "dist"
