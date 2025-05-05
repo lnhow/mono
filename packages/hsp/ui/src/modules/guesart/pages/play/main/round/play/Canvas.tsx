@@ -45,7 +45,7 @@ export default function Canvas() {
   const ctxRef = useRef<CanvasRenderingContext2D>(null)
   const [isDrawing, setIsDrawing] = useState(false)
   // For later use
-  const [brushSize,] = useState<number>(DEFAULT_BRUSH_SIZES[0])
+  const [brushSize] = useState<number>(DEFAULT_BRUSH_SIZES[0])
   const [color, setColor] = useState('#000000')
   const [recentColors, setRecentColors] = useState(['#000000'])
   const [history, setHistory] = useState<string[]>([])
@@ -64,8 +64,13 @@ export default function Canvas() {
     ctxRef.current = ctx
 
     const resizeCanvas = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio
+      const layoutHeight = document.documentElement.style.getPropertyValue(
+        '--layout-full-height',
+      )
+      console.log('\x1B[35m[Dev log]\x1B[0m -> resizeCanvas -> layoutHeight:', layoutHeight)
+      
+      canvas.width = Math.min(canvas.offsetWidth * window.devicePixelRatio, window.innerWidth)
+      canvas.height = canvas.width * 3 / 4
       ctxRef.current?.scale(window.devicePixelRatio, window.devicePixelRatio)
       // canvas.width = canvas.offsetWidth
       // canvas.height = canvas.offsetHeight
@@ -179,7 +184,7 @@ export default function Canvas() {
   )
 
   return (
-    <div className="flex flex-col items-center w-full h-[calc(100vh-var(--layout-header-height)---spacing(4))] relative">
+    <div className="flex flex-col items-center w-full h-(--layout-full-height) relative">
       <Card className="p-2 flex flex-col gap-4 shadow-md z-10 max-h-full overflow-auto absolute top-0 left-0">
         <div className="flex flex-col gap-2">
           <Button onClick={undo} variant="outline">
@@ -218,16 +223,18 @@ export default function Canvas() {
             onBlur={saveRecentColors}
             className="w-full h-9 rounded-lg shrink-0 p-0 border-none overflow-hidden cursor-pointer"
           />
-          <div className="grid grid-cols-3 gap-2">
-            {recentColors.map((c, i) => (
-              <button
-                key={i}
-                style={{ backgroundColor: c }}
-                onClick={() => setColor(c)}
-                className="w-6 h-6 rounded-full border border-fore-400"
-              ></button>
-            ))}
-          </div>
+          {recentColors.length > 1 && (
+            <div className="grid grid-cols-3 gap-2">
+              {recentColors.map((c, i) => (
+                <button
+                  key={i}
+                  style={{ backgroundColor: c }}
+                  onClick={() => setColor(c)}
+                  className="w-6 h-6 rounded-full border border-fore-400"
+                ></button>
+              ))}
+            </div>
+          )}
         </div>
       </Card>
       <div className="flex-grow w-full rounded-lg">
