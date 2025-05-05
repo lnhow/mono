@@ -5,7 +5,7 @@ export default function PagePlay() {
   return (
     <div className="flex flex-col md:flex-row gap-2">
       <Canvas />
-      <Sidebar className="w-[360px]" />
+      <Sidebar className="w-full md:w-[360px] md:max-w-4/12" />
     </div>
   )
 }

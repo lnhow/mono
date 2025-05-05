@@ -11,13 +11,13 @@ import {
 import { Button } from '@hsp/ui/src/components/base/button'
 import { Card } from '@hsp/ui/src/components/base/card'
 import { /* LuCircle, */ LuUndo, LuX } from 'react-icons/lu'
+import { debounce } from 'lodash'
 
 const DEFAULT_BRUSH_SIZES = [4, 8, 16] as const
 const MAX_RECENT_COLORS = 6
+const ID_CANVAS_CONTAINER = 'canvas-container'
 
-type CanvasEvent = SyntheticEvent
-
-const getCoords = (canvas: HTMLCanvasElement | null, e: SyntheticEvent) => {
+const getPointerCoords = (canvas: HTMLCanvasElement | null, e: SyntheticEvent) => {
   if (!canvas) {
     return { x: 0, y: 0 }
   }
@@ -37,6 +37,36 @@ const getCoords = (canvas: HTMLCanvasElement | null, e: SyntheticEvent) => {
   return {
     x: clientX - rect.left,
     y: clientY - rect.top,
+  }
+}
+
+const loadImageToCanvas = (
+  ctx: CanvasRenderingContext2D,
+  imgUrl: string,
+) => {
+  const img = new Image()
+  img.src = imgUrl || ''
+  img.onload = () => {
+    const canvas = ctx.canvas
+
+    const hRatio = canvas.clientWidth / img.width
+    const vRatio = canvas.clientHeight / img.height
+    const ratio = Math.min(hRatio, vRatio)
+    const centerOffsetX = (canvas.clientWidth - img.width * ratio) / 2
+    const centerOffsetY = (canvas.clientHeight - img.height * ratio) / 2
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.drawImage(
+      img,
+      0,
+      0,
+      img.width,
+      img.height,
+      centerOffsetX,
+      centerOffsetY,
+      img.width * ratio,
+      img.height * ratio,
+    )
   }
 }
 
@@ -63,18 +93,25 @@ export default function Canvas() {
     ctx.lineJoin = 'round'
     ctxRef.current = ctx
 
-    const resizeCanvas = () => {
-      const layoutHeight = document.documentElement.style.getPropertyValue(
-        '--layout-full-height',
+    const resizeCanvas = debounce(() => {
+      const canvasCtn = document.getElementById(ID_CANVAS_CONTAINER)
+      if (!canvasCtn) {
+        return
+      }
+      console.log(
+        '\x1B[35m[Dev log]\x1B[0m -> resizeCanvas -> rootElLayoutHeight:',
+        canvasCtn.clientWidth,
+        canvasCtn.clientHeight,
+        Math.min(canvasCtn.clientWidth, canvasCtn.clientHeight),
       )
-      console.log('\x1B[35m[Dev log]\x1B[0m -> resizeCanvas -> layoutHeight:', layoutHeight)
-      
-      canvas.width = Math.min(canvas.offsetWidth * window.devicePixelRatio, window.innerWidth)
-      canvas.height = canvas.width * 3 / 4
+      const minSide = Math.min(canvasCtn.clientWidth, canvasCtn.clientHeight)
+
+      canvas.width = minSide * window.devicePixelRatio
+      canvas.height = minSide * window.devicePixelRatio
       ctxRef.current?.scale(window.devicePixelRatio, window.devicePixelRatio)
       // canvas.width = canvas.offsetWidth
       // canvas.height = canvas.offsetHeight
-    }
+    }, 50) // avoid excessive resizing
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas)
     window.addEventListener('orientationchange', resizeCanvas)
@@ -91,8 +128,8 @@ export default function Canvas() {
     }
   }, [color, brushSize])
 
-  const startDrawing = useCallback((e: CanvasEvent) => {
-    const { x, y } = getCoords(canvasRef.current, e)
+  const startDrawing = useCallback((e: SyntheticEvent) => {
+    const { x, y } = getPointerCoords(canvasRef.current, e)
 
     ctxRef.current?.beginPath()
     ctxRef.current?.moveTo(x, y)
@@ -100,11 +137,11 @@ export default function Canvas() {
   }, [])
 
   const draw = useCallback(
-    (e: CanvasEvent) => {
+    (e: SyntheticEvent) => {
       if (!isDrawing) {
         return
       }
-      const { x, y } = getCoords(canvasRef.current, e)
+      const { x, y } = getPointerCoords(canvasRef.current, e)
       ctxRef.current?.lineTo(x, y)
       ctxRef.current?.stroke()
     },
@@ -146,17 +183,8 @@ export default function Canvas() {
       clearCanvas()
       return
     }
-    const img = new Image()
-    img.src = last || ''
-    img.onload = () => {
-      if (!ctxRef.current || !canvasRef.current) return
-      ctxRef.current.clearRect(
-        0,
-        0,
-        canvasRef.current.width,
-        canvasRef.current.height,
-      )
-      ctxRef.current.drawImage(img, 0, 0)
+    if (ctxRef.current) {
+      loadImageToCanvas(ctxRef.current, last)
     }
     setHistory(prev)
   }, [history, clearCanvas])
@@ -184,8 +212,8 @@ export default function Canvas() {
   )
 
   return (
-    <div className="flex flex-col items-center w-full h-(--layout-full-height) relative">
-      <Card className="p-2 flex flex-col gap-4 shadow-md z-10 max-h-full overflow-auto absolute top-0 left-0">
+    <div className="flex flex-col items-center w-full md:h-(--layout-full-height) relative">
+      <Card className="p-2 flex flex-col gap-4 shadow-md z-10 max-h-full overflow-auto absolute top-0 left-0 bg-base-300">
         <div className="flex flex-col gap-2">
           <Button onClick={undo} variant="outline">
             <LuUndo />
@@ -237,10 +265,13 @@ export default function Canvas() {
           )}
         </div>
       </Card>
-      <div className="flex-grow w-full rounded-lg">
+      <div
+        className="flex-grow w-full rounded-lg flex justify-center items-center bg-base-200"
+        id={ID_CANVAS_CONTAINER}
+      >
         <canvas
           ref={canvasRef}
-          className="bg-white rounded-lg shadow-md w-full h-full cursor-crosshair"
+          className="bg-white rounded-lg shadow-md mx-auto max-w-full max-h-(--layout-full-height) cursor-crosshair"
           onMouseDown={startDrawing}
           onMouseMove={draw}
           onMouseUp={stopDrawing}

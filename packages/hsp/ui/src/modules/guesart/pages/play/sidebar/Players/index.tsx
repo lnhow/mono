@@ -12,7 +12,7 @@ const initialUsers: Player[] = [
 export default function PlayersList({ className }: { className?: string }) {
   return (
     <Card className={cn('border-b flex flex-col overflow-hidden', className)}>
-      <h2 className="text-xs font-semibold text-fore-200 mb-1 px-4 pt-4">Users</h2>
+      <h2 className="text-xs font-semibold text-fore-200 mb-1 px-4 pt-2">Users</h2>
       <ul className="space-y-1 overflow-auto flex-1 px-4 pb-4">
         {initialUsers.map((user, index) => (
           <li
