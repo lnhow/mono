@@ -16,7 +16,7 @@ export default function GuesartLayout({
           <ThemeToggle />
         </nav>
       </div>
-      <main className="mx-4 mb-4 bg-base-200 min-h-[calc(100vh-var(--layout-header-height)---spacing(4))]">
+      <main className="mx-4 mb-4 min-h-[calc(100vh-var(--layout-header-height)---spacing(4))]">
         {children}
       </main>
     </div>

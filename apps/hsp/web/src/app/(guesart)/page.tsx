@@ -1,10 +1,9 @@
-import { ThemeToggle } from "@hsp/ui/src/components/theme/ThemeToggle";
+import Canvas from '@hsp/ui/src/modules/guesart/pages/play/round/play/Canvas'
 
 export default function IndexPage() {
   return (
     <div>
-      <h1>Welcome to guesart!</h1>
-      <ThemeToggle />
+      <Canvas />
     </div>
-  );
+  )
 }
