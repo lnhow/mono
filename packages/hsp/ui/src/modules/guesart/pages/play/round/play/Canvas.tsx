@@ -10,7 +10,7 @@ import {
 } from 'react'
 import { Button } from '@hsp/ui/src/components/base/button'
 import { Card } from '@hsp/ui/src/components/base/card'
-import { LuCircle, LuUndo, LuX } from 'react-icons/lu'
+import { /* LuCircle, */ LuUndo, LuX } from 'react-icons/lu'
 
 const DEFAULT_BRUSH_SIZES = [4, 8, 16] as const
 const MAX_RECENT_COLORS = 6
@@ -44,7 +44,8 @@ export default function Canvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const ctxRef = useRef<CanvasRenderingContext2D>(null)
   const [isDrawing, setIsDrawing] = useState(false)
-  const [brushSize, setBrushSize] = useState<number>(DEFAULT_BRUSH_SIZES[0])
+  // For later use
+  const [brushSize,] = useState<number>(DEFAULT_BRUSH_SIZES[0])
   const [color, setColor] = useState('#000000')
   const [recentColors, setRecentColors] = useState(['#000000'])
   const [history, setHistory] = useState<string[]>([])
@@ -190,7 +191,7 @@ export default function Canvas() {
             Clear
           </Button>
         </div>
-        <div className="flex flex-col gap-2 items-center">
+        {/* <div className="flex flex-col gap-2 items-center">
           {DEFAULT_BRUSH_SIZES.map((size) => (
             <Button
               key={size}
@@ -208,14 +209,14 @@ export default function Canvas() {
               {size}
             </Button>
           ))}
-        </div>
-        <div className="flex flex-col gap-2">
+        </div> */}
+        <div className="flex flex-col gap-1">
           <input
             type="color"
             value={color}
             onChange={handleColorChange}
             onBlur={saveRecentColors}
-            className="w-full h-9 rounded-md shrink-0 p-0 border-none cursor-pointer"
+            className="w-full h-9 rounded-lg shrink-0 p-0 border-none overflow-hidden cursor-pointer"
           />
           <div className="grid grid-cols-3 gap-2">
             {recentColors.map((c, i) => (
