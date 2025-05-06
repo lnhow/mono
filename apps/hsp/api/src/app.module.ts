@@ -1,9 +1,10 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Module } from '@nestjs/common'
+import { AppController } from './app.controller'
+import { AppService } from './app.service'
+import { GuesartGateway } from './modules/guesart/guesart.gateway'
 
 @Module({
-  imports: [],
+  imports: [GuesartGateway],
   controllers: [AppController],
   providers: [AppService],
 })
