@@ -9,7 +9,7 @@
     "prepare": "husky install",
     "preinstall": "npx only-allow pnpm",
     "dev": "turbo run dev",
-    "dev:hsp": "turbo run dev --filter=@hsp/app-web...",
+    "dev:hsp": "turbo run dev --filter=@hsp/app-*...",
     "lint": "turbo run lint",
     "build": "turbo run build",
     "deploy:start": "turbo run deploy:start",
