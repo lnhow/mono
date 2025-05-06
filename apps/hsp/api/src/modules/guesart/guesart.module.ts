@@ -6,4 +6,4 @@ import { GuesartGateway } from './guesart.gateway'
   controllers: [],
   providers: [GuesartGateway],
 })
-export class WSModule {}
+export class GuesartWSModule {}
