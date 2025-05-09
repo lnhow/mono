@@ -18,17 +18,41 @@
       "cache": false,
       "persistent": true
     },
-    "gen:graphql": {
-      "cache": false,
-      "persistent": true
-    },
     "deploy:start": {
       "cache": false,
       "persistent": true
     },
-    "strapi": {
-      "cache": false,
-      "persistent": true
+    "db:generate": {
+      "dependsOn": [
+        "^db:generate"
+      ],
+      "outputs": [
+        "generated/prisma"
+      ]
+    },
+    "db:migrate": {
+      "dependsOn": [
+        "^db:migrate"
+      ],
+      "outputs": [
+        "generated/prisma"
+      ]
+    },
+    "db:deploy": {
+      "dependsOn": [
+        "^db:deploy"
+      ],
+      "outputs": [
+        "generated/prisma"
+      ]
+    },
+    "db:studio": {
+      "dependsOn": [
+        "^db:studio"
+      ],
+      "outputs": [
+        "generated/prisma"
+      ]
     }
   },
   "ui": "tui"

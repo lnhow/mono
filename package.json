@@ -13,7 +13,11 @@
     "lint": "turbo run lint",
     "build": "turbo run build",
     "deploy:start": "turbo run deploy:start",
-    "turbo": "turbo"
+    "turbo": "turbo",
+    "db:generate": "turbo run db:generate",
+    "db:migrate": "turbo run db:migrate",
+    "db:deploy": "turbo run db:deploy",
+    "db:studio": "turbo run db:studio"
   },
   "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39",
   "devDependencies": {

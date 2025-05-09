@@ -29,7 +29,7 @@ export class GuesartGateway
 {
   @WebSocketServer() server: Server
 
-  private logger: Logger = new Logger('WSGateway')
+  private logger: Logger = new Logger('GuesartGateway')
 
   async getClientCount(): Promise<number> {
     const clients = await this.server.fetchSockets()
