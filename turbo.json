@@ -15,8 +15,14 @@
       ]
     },
     "@hsp/app-api#build": {
+      "dependsOn": [
+        "^build"
+      ],
       "env": [
         "API_*"
+      ],
+      "outputs": [
+        "dist/**"
       ]
     },
     "lint": {
