@@ -19,7 +19,7 @@ export enum CLIENT_EVENTS {
 }
 
 @WebSocketGateway({
-  namespace: '/guesart',
+  namespace: '/api/guesart/v1',
   cors: {
     origin: '*',
   },
