@@ -38,7 +38,9 @@ export class MongoIoAdapter extends IoAdapter {
       { expireAfterSeconds: 3600, background: true },
     )
 
-    this.adapter = createAdapter(mongoCollection)
+    this.adapter = createAdapter(mongoCollection, {
+      addCreatedAtField: true,
+    })
   }
 
   createIOServer(port: number, options?: ServerOptions) {
