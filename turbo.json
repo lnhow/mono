@@ -5,9 +5,6 @@
       "dependsOn": [
         "^build"
       ],
-      "env": [
-        "API_*"
-      ],
       "outputs": [
         "build/**",
         "dist/**",
@@ -34,7 +31,10 @@
     },
     "deploy:start": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": [
+        "API_*"
+      ]
     },
     "db:generate": {
       "dependsOn": [
@@ -42,6 +42,9 @@
       ],
       "outputs": [
         "generated/prisma"
+      ],
+      "env": [
+        "API_*"
       ]
     },
     "db:migrate": {
@@ -50,6 +53,9 @@
       ],
       "outputs": [
         "generated/prisma"
+      ],
+      "env": [
+        "API_*"
       ]
     },
     "db:deploy": {
@@ -58,6 +64,9 @@
       ],
       "outputs": [
         "generated/prisma"
+      ],
+      "env": [
+        "API_*"
       ]
     },
     "db:studio": {
@@ -66,6 +75,9 @@
       ],
       "outputs": [
         "generated/prisma"
+      ],
+      "env": [
+        "API_*"
       ]
     }
   },
