@@ -126,6 +126,10 @@ const config = {
         "fromEnvVar": null,
         "value": "darwin-arm64",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "debian-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -152,8 +156,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mongodb\"\n  url      = env(\"API_DATABASE_URL\")\n}\n\nmodel test {\n  id   String @id @default(auto()) @map(\"_id\") @db.ObjectId\n  name String\n}\n",
-  "inlineSchemaHash": "05c4f2613bbf2a8332f1dcf7064bbf5bf05dc970afa8c005e767649014632e55",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../generated/prisma\"\n  binaryTargets = [\"native\", \"debian-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"mongodb\"\n  url      = env(\"API_DATABASE_URL\")\n}\n\nmodel test {\n  id   String @id @default(auto()) @map(\"_id\") @db.ObjectId\n  name String\n}\n",
+  "inlineSchemaHash": "f42c608323a6c9c71e6da7258494edbe75cc5b0ad21f653f51dd4158d88f81ac",
   "copyEngine": true
 }
 config.dirname = '/'
