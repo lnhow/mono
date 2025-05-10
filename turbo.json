@@ -5,10 +5,18 @@
       "dependsOn": [
         "^build"
       ],
+      "env": [
+        "API_*"
+      ],
       "outputs": [
         "build/**",
         "dist/**",
         ".next/**"
+      ]
+    },
+    "@hsp/app-api#build": {
+      "env": [
+        "API_*"
       ]
     },
     "lint": {
@@ -55,5 +63,8 @@
       ]
     }
   },
+  "globalEnv": [
+    "PORT"
+  ],
   "ui": "tui"
 }

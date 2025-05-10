@@ -147,13 +147,13 @@ const config = {
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": "DATABASE_URL",
+        "fromEnvVar": "API_DATABASE_URL",
         "value": null
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mongodb\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel test {\n  id   String @id @default(auto()) @map(\"_id\") @db.ObjectId\n  name String\n}\n",
-  "inlineSchemaHash": "427cdf11ace909e13f75cd27b5303a15232384ab775496565788efe4e9b94bd7",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mongodb\"\n  url      = env(\"API_DATABASE_URL\")\n}\n\nmodel test {\n  id   String @id @default(auto()) @map(\"_id\") @db.ObjectId\n  name String\n}\n",
+  "inlineSchemaHash": "05c4f2613bbf2a8332f1dcf7064bbf5bf05dc970afa8c005e767649014632e55",
   "copyEngine": true
 }
 config.dirname = '/'
@@ -165,7 +165,7 @@ config.compilerWasm = undefined
 
 config.injectableEdgeEnv = () => ({
   parsed: {
-    DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL || undefined
+    API_DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['API_DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.API_DATABASE_URL || undefined
   }
 })
 

@@ -17,7 +17,7 @@ export class PrismaService
     super({
       datasources: {
         db: {
-          url: configService.get<string>('DATABASE_URL'),
+          url: configService.get<string>('API_DATABASE_URL'),
         },
       },
     })
