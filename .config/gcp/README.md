@@ -57,10 +57,8 @@ pnpm build --filter=@hsp/app-api
 pnpm deploy:start --filter=@hsp/app-api
 ```
 
-7. Set up a deploy script
+1. When deploy changes
 
 ```bash
-chmod +x ~/app/apps/hsp/api/.ci/deploy.sh
-chmod +x ~/app/apps/hsp/api/.ci/start.sh
-chmod +x ~/app/apps/hsp/api/.ci/build.sh
+chmod +x ~/app/apps/hsp/api/.ci/deploy.sh && ~/app/apps/hsp/api/.ci/deploy.sh
 ```
