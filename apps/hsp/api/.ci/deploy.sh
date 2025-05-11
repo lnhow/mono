@@ -3,6 +3,6 @@ pm2 delete hsp-api
 git restore .
 git pull
 
-./build-hsp-api.sh
+./build.sh
 
-./start-hsp-api.sh
+./start.sh
