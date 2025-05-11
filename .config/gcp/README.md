@@ -56,3 +56,11 @@ pnpm db:generate
 pnpm build --filter=@hsp/app-api
 pnpm deploy:start --filter=@hsp/app-api
 ```
+
+7. Set up a deploy script
+
+```bash
+chmod +x ~/app/apps/hsp/api/deploy.sh
+chmod +x ~/app/apps/hsp/api/start.sh
+chmod +x ~/app/apps/hsp/api/build.sh
+```
