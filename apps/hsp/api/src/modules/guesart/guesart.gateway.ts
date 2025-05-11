@@ -7,15 +7,21 @@ import {
   OnGatewayDisconnect,
   WsResponse,
   MessageBody,
+  ConnectedSocket,
 } from '@nestjs/websockets'
 import { Logger } from '@nestjs/common'
 import { Socket, Server } from 'socket.io'
+import { MessageReqDto, MessageResDto } from './guesart.dto'
 
 // Messages that client accepts (i.e. Server sends)
-export enum CLIENT_EVENTS {
+export enum RES_EVENTS {
   CONNECT_CONFIRM = 'connect-confirm',
   ECHO = 'echo',
   N_CLIENTS = 'n-clients',
+  CHAT = 'chat',
+  JOIN_ROOM = 'joinRoom',
+  LEAVE_ROOM = 'leaveRoom',
+  RECEIVE_CANVAS = 'receive-canvas',
 }
 
 @WebSocketGateway({
@@ -42,7 +48,7 @@ export class GuesartGateway
   ): WsResponse<{ data: string }> {
     console.log(`[echo] ${data}`)
     return {
-      event: CLIENT_EVENTS.ECHO,
+      event: RES_EVENTS.ECHO,
       data: {
         data: `echo: ${data}`,
       },
@@ -59,9 +65,38 @@ export class GuesartGateway
       data: await this.getClientCount(),
     }
     return {
-      event: CLIENT_EVENTS.N_CLIENTS,
+      event: RES_EVENTS.N_CLIENTS,
       data: res,
     }
+  }
+
+  @SubscribeMessage('chat')
+  public handleChat(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() data: MessageReqDto,
+  ): WsResponse<MessageResDto> {
+    const res = {
+      id: '1',
+      content: data.content,
+      sender: {
+        id: client.id,
+        name: 'John Doe' + Math.random(),
+      },
+    }
+
+    client.broadcast.emit(RES_EVENTS.CHAT, res) // broadcast to all clients except the sender
+    return {
+      event: 'chat',
+      data: res,
+    }
+  }
+
+  @SubscribeMessage('send-canvas')
+  public handleSendCanvas(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() data: string,
+  ): void {
+    client.broadcast.emit(RES_EVENTS.RECEIVE_CANVAS, data)
   }
 
   // @SubscribeMessage('joinRoom')
@@ -89,9 +124,10 @@ export class GuesartGateway
   public async handleConnection(client: Socket) {
     const clientsCount = await this.getClientCount()
     const message = `Client connected - ${clientsCount}`
-    this.server.to(client.id).emit(CLIENT_EVENTS.CONNECT_CONFIRM, {
+    this.server.to(client.id).emit(RES_EVENTS.CONNECT_CONFIRM, {
       data: message,
     })
+
     this.logger.log(
       `Client connected: ${client.id} - [Clients: ${clientsCount}]`,
     )

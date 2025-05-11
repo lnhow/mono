@@ -1,26 +1,35 @@
 'use client'
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, useEffect } from 'react'
 import { Input } from '@hsp/ui/src/components/base/input'
 import { Button } from '@hsp/ui/src/components/base/button'
-import { Message } from '../type'
 import cn from '@hsp/ui/src/utils/cn'
 import { LuSend } from 'react-icons/lu'
 
-const initialMessages: Message[] = [
-  { sender: 'Alice', text: 'Hi there!' },
-  { sender: 'Bob', text: 'Hello!' },
-  { sender: 'Charlie', text: "How's it going?" },
-]
+import { useAtom } from 'jotai'
+import { messagesAtom, MessageType, socketAtom } from '../../../../state/store'
 
 export default function Chat({ className }: { className?: string }) {
-  const [messages, setMessages] = useState<Message[]>(initialMessages)
+  const [socket] = useAtom(socketAtom)
+  const [messages, setMessages] = useAtom(messagesAtom)
   const [input, setInput] = useState<string>('')
 
-  const sendMessage = (): void => {
-    if (input.trim()) {
-      setMessages([...messages, { sender: 'You', text: input }])
-      setInput('')
+  useEffect(() => {
+    if (socket.socket) {
+      socket.socket.on('chat', (message: MessageType) => {
+        setMessages((prev) => [...prev, message])
+      })
     }
+  }, [socket.socket, setMessages])
+
+  const sendMessage = (): void => {
+    const trimedInput = input.trim()
+    if (!trimedInput || !socket.socket || !socket.connected) {
+      return
+    }
+    setInput('')
+    socket.socket.emit('chat', {
+      content: trimedInput,
+    })
   }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -28,12 +37,14 @@ export default function Chat({ className }: { className?: string }) {
   }
   return (
     <div className={cn('flex flex-col flex-1 overflow-y-auto py-2', className)}>
-      <h2 className="text-xs text-fore-200 font-semibold mb-2 px-4">Messages</h2>
+      <h2 className="text-xs text-fore-200 font-semibold mb-2 px-4">
+        Messages
+      </h2>
       <div className="space-y-2 mb-4 flex-1 overflow-y-auto px-4">
         {messages.map((msg, index) => (
           <div key={index} className="text-sm text-fore-500">
-            <span className="text-fore-400">{msg.sender}:</span>{' '}
-            {msg.text}
+            <span className="text-fore-400">{msg.sender.id === socket.socket?.id ? 'You' : msg.sender.name}:</span>{' '}
+            {msg.content}
           </div>
         ))}
       </div>

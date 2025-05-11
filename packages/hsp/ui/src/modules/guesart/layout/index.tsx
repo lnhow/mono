@@ -1,5 +1,7 @@
+import NoSsr from '@hsp/ui/src/components/app/NoSsr'
 import { ButtonLink } from '@hsp/ui/src/components/base/button'
 import { ThemeToggle } from '@hsp/ui/src/components/theme/ThemeToggle'
+import SocketProvider from '../state/SocketProvider'
 
 export default function GuesartLayout({
   children,
@@ -19,6 +21,9 @@ export default function GuesartLayout({
       <main className="mx-4 mb-4 min-h-[calc(100vh-var(--layout-header-height)---spacing(4))]">
         {children}
       </main>
+      <NoSsr>
+        <SocketProvider />
+      </NoSsr>
     </div>
   )
 }

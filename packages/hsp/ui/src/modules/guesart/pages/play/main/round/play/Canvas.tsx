@@ -12,6 +12,8 @@ import { Button } from '@hsp/ui/src/components/base/button'
 import { Card } from '@hsp/ui/src/components/base/card'
 import { /* LuCircle, */ LuUndo, LuX } from 'react-icons/lu'
 import { debounce } from 'lodash'
+import { useAtomValue } from 'jotai'
+import { socketAtom } from '@hsp/ui/src/modules/guesart/state/store'
 
 const DEFAULT_BRUSH_SIZES = [4, 8, 16] as const
 const MAX_RECENT_COLORS = 6
@@ -79,6 +81,7 @@ export default function Canvas() {
   const [color, setColor] = useState('#000000')
   const [recentColors, setRecentColors] = useState(['#000000'])
   const [history, setHistory] = useState<string[]>([])
+  const socket = useAtomValue(socketAtom)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -128,6 +131,25 @@ export default function Canvas() {
     }
   }, [color, brushSize])
 
+  useEffect(() => {
+    if (!socket.socket) {
+      return
+    }
+
+    const handleReceiveCanvas = (canvas: string) => {
+      if (!ctxRef.current) {
+        return
+      }
+      loadImageToCanvas(ctxRef.current, canvas)
+    }
+
+    socket.socket.on('receive-canvas', handleReceiveCanvas)
+    
+    return () => {
+      socket.socket?.off('receive-canvas', handleReceiveCanvas)
+    }
+  }, [socket.socket])
+
   const startDrawing = useCallback((e: SyntheticEvent) => {
     const { x, y } = getPointerCoords(canvasRef.current, e)
 
@@ -162,7 +184,8 @@ export default function Canvas() {
     ctxRef.current?.closePath()
     setIsDrawing(false)
     saveHistory()
-  }, [isDrawing, saveHistory])
+    socket.socket?.emit('send-canvas', canvasRef.current?.toDataURL() || '')
+  }, [isDrawing, saveHistory, socket.socket])
 
   const clearCanvas = useCallback(() => {
     if (!ctxRef.current || !canvasRef.current) return
