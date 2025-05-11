@@ -57,7 +57,7 @@ pnpm build --filter=@hsp/app-api
 pnpm deploy:start --filter=@hsp/app-api
 ```
 
-1. When deploy changes
+### Deploying changes
 
 ```bash
 chmod +x ~/app/apps/hsp/api/.ci/deploy.sh && ~/app/apps/hsp/api/.ci/deploy.sh
