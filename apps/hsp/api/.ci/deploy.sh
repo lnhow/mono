@@ -5,6 +5,5 @@ git pull
 
 echo "$PWD"
 
-sh ./build.sh
-
-sh ./start.sh
+sh "$PWD/apps/hsp/api/.ci/build.sh"
+sh "$PWD/apps/hsp/api/.ci/start.sh"
