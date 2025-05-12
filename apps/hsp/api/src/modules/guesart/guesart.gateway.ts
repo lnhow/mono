@@ -9,20 +9,10 @@ import {
   MessageBody,
   ConnectedSocket,
 } from '@nestjs/websockets'
-import { Logger } from '@nestjs/common'
+import { Inject, Logger } from '@nestjs/common'
 import { Socket, Server } from 'socket.io'
-import { MessageReqDto, MessageResDto } from './guesart.dto'
-
-// Messages that client accepts (i.e. Server sends)
-export enum RES_EVENTS {
-  CONNECT_CONFIRM = 'connect-confirm',
-  ECHO = 'echo',
-  N_CLIENTS = 'n-clients',
-  CHAT = 'chat',
-  JOIN_ROOM = 'joinRoom',
-  LEAVE_ROOM = 'leaveRoom',
-  RECEIVE_CANVAS = 'receive-canvas',
-}
+import { MessageReqDto, MessageResDto, RES_EVENTS } from './guesart.type'
+import { GuesartService } from './guesart.service'
 
 @WebSocketGateway({
   namespace: '/api/guesart/v1',
@@ -36,6 +26,11 @@ export class GuesartGateway
   @WebSocketServer() server: Server
 
   private logger: Logger = new Logger('GuesartGateway')
+
+  constructor(
+    @Inject(GuesartService)
+    private service: GuesartService,
+  ) {}
 
   async getClientCount(): Promise<number> {
     const clients = await this.server.fetchSockets()
@@ -75,28 +70,15 @@ export class GuesartGateway
     @ConnectedSocket() client: Socket,
     @MessageBody() data: MessageReqDto,
   ): WsResponse<MessageResDto> {
-    const res = {
-      id: '1',
-      content: data.content,
-      sender: {
-        id: client.id,
-        name: 'John Doe' + Math.random(),
-      },
-    }
-
-    client.broadcast.emit(RES_EVENTS.CHAT, res) // broadcast to all clients except the sender
-    return {
-      event: 'chat',
-      data: res,
-    }
+    return this.service.handleChat(client, data)
   }
 
   @SubscribeMessage('send-canvas')
   public handleSendCanvas(
     @ConnectedSocket() client: Socket,
-    @MessageBody() data: string,
+    @MessageBody() data: string, // Canvas data URL
   ): void {
-    client.broadcast.emit(RES_EVENTS.RECEIVE_CANVAS, data)
+    this.service.broadcastCanvas(client, data)
   }
 
   // @SubscribeMessage('joinRoom')
@@ -115,21 +97,11 @@ export class GuesartGateway
     return this.logger.log('Init Gateway successfully')
   }
 
-  public async handleDisconnect(client: Socket) {
-    return this.logger.log(
-      `Client disconnected: ${client.id} - [Clients: ${await this.getClientCount()}]`,
-    )
+  public handleDisconnect(client: Socket) {
+    this.service.onClientDisconnect(this.server, client)
   }
 
   public async handleConnection(client: Socket) {
-    const clientsCount = await this.getClientCount()
-    const message = `Client connected - ${clientsCount}`
-    this.server.to(client.id).emit(RES_EVENTS.CONNECT_CONFIRM, {
-      data: message,
-    })
-
-    this.logger.log(
-      `Client connected: ${client.id} - [Clients: ${clientsCount}]`,
-    )
+    await this.service.onClientConnect(this.server, client)
   }
 }

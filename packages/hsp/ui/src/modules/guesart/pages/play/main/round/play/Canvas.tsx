@@ -7,6 +7,7 @@ import {
   useCallback,
   SyntheticEvent,
   FocusEventHandler,
+  memo,
 } from 'react'
 import { Button } from '@hsp/ui/src/components/base/button'
 import { Card } from '@hsp/ui/src/components/base/card'
@@ -72,7 +73,7 @@ const loadImageToCanvas = (
   }
 }
 
-export default function Canvas() {
+const Canvas = memo(function Canvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const ctxRef = useRef<CanvasRenderingContext2D>(null)
   const [isDrawing, setIsDrawing] = useState(false)
@@ -315,4 +316,6 @@ export default function Canvas() {
       </div>
     </div>
   )
-}
+})
+
+export default Canvas
