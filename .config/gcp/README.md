@@ -35,22 +35,42 @@ git --version
 git config --global user.name "Your Name"
 git config --global user.email "youremail@example.com"
 
-# Generate a new SSH key:
-ssh-keygen -t ed25519 -C "github@email.com"
-cd /path/to/.ssh
-nano id_ed25519.pub
-# Copy the contents of the file to your GitHub account's SSH keys.
-
-# Make a new directory for your projects:
-mkdir ~/app
+# nginx
+sudo apt install nginx -y
 ```
 
-5. Clone the repo `git clone git@github.com:yourusername/yourrepo.git ~/app`
-6. Install dependencies
+4. Configure SSL for nginx (optional)
+
+```bash
+# Install certbot
+sudo apt install certbot python3-certbot-nginx -y
+# Continue on https://certbot.eff.org/instructions?ws=nginx&os=pip
+```
+
+5. Create a new SSH key and add it to your GitHub account's SSH keys.
+```bash
+# Generate a new SSH key:
+ssh-keygen -t ed25519 -C "github@email.com"
+# Open the public key file:
+# /path/to/.ssh should be displayed after running the above command.
+# Default path: /home/<yourusername>/.ssh/id_ed25519.pub
+nano /path/to/.ssh/id_ed25519.pub
+# Copy the contents of the file to your GitHub account's SSH keys.
+```
+
+6. Clone the source code
+
+```bash
+# Make a new directory for your projects:
+mkdir ~/app
+git clone git@github.com:yourusername/yourrepo.git ~/app
+```
+
+7. Install dependencies
 
 ```bash
 cd ~/app
-pnpm install
+pnpm i --frozen-lockfile
 
 pnpm db:generate
 pnpm build --filter=@hsp/app-api
@@ -61,4 +81,61 @@ pnpm deploy:start --filter=@hsp/app-api
 
 ```bash
 chmod +x ~/app/apps/hsp/api/.ci/deploy.sh && ~/app/apps/hsp/api/.ci/deploy.sh
+```
+
+### Configurations
+
+#### Nginx Reverse Proxy
+```bash
+# cd /etc/nginx/sites-available
+# sudo nano <server_name>.config
+
+server {
+  server_name api.hspln.com;
+
+  # HTTP configuration
+  listen 80;
+  listen [::]:80;
+
+  # HTTP to HTTPS
+  if ($scheme != "https") {
+    return 301 https://$host$request_uri;
+  } # managed by Certbot
+
+  # HTTPS configuration
+  listen [::]:443 ssl ipv6only=on; # managed by Certbot
+  listen 443 ssl; # managed by Certbot
+  ssl_certificate /etc/letsencrypt/live/api.hspln.com/fullchain.pem; # managed by Certbot
+  ssl_certificate_key /etc/letsencrypt/live/api.hspln.com/privkey.pem; # managed by Certbot
+  include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+  ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+  location / {
+    proxy_pass http://127.0.0.1:8000;
+
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+
+    proxy_redirect                      off;
+    proxy_set_header  Host              $http_host;
+    proxy_set_header  X-Real-IP         $remote_addr;
+    proxy_set_header  X-Forwarded-For   $proxy_add_x_forwarded_for;
+    proxy_set_header  X-Forwarded-Proto $scheme;
+    proxy_read_timeout                  900;
+  }
+}
+
+# sudo ln -s /etc/nginx/sites-available/<server_name>.config /etc/nginx/sites-enabled/
+# sudo nginx -t
+# If "conflicting" is displayed, run "sudo unlink /etc/nginx/sites-enabled/default"
+# sudo systemctl restart nginx
+```
+#### PM2
+```bash
+pm2 startup
+pm2 start --name hsp-api pnpm -- deploy:start --filter=@hsp/app-api # Start the process named "hsp-api"
+pm2 delete hsp-api # Close the process "hsp-api" if it's running
 ```
