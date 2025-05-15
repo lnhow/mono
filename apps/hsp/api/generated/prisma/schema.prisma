@@ -32,46 +32,51 @@ model Test {
  * - status == waiting_host and createdAt > (x3) time
  */
 model Room {
-  id        String      @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  users     RoomUser[]
-  rounds    RoomRound[]
-  status    RoomStatus  @default(waiting_host)
+  id                String      @id @default(auto()) @map("_id") @db.ObjectId
+  name              String
+  users             RoomUser[]
+  rounds            RoomRound[]
+  status            RoomStatus  @default(waiting)
   // Settings
-  maxRounds Int         @default(10)
-  maxUsers  Int         @default(4)
+  maxUsers          Int         @default(4)
+  numOfRounds       Int         @default(10)
+  timePerRoundInSec Int         @default(30)
   // Metadata
-  createdAt DateTime    @default(now())
-  endedAt   DateTime? // Based on last user to leave the room
+  createdAt         DateTime    @default(now())
+  endedAt           DateTime? // Based on last user to leave the room
 
   @@map("grt_rooms")
 }
 
 type RoomRound {
-  answer    String
-  duration  Int
-  startTime DateTime
-  endTime   DateTime
+  roundNumber  Int
+  answer       String
+  drawerUserId String   @db.ObjectId
+  correctUsers String[] @db.ObjectId
+  duration     Int
+  startTime    DateTime
+  endTime      DateTime
 }
 
 enum RoomStatus {
-  waiting_host // Waiting for the host to join the game
   waiting // Waiting for players to join the game
   playing // Game is in progress
   finished // Game is finished
 }
 
-model RoomUser {
-  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+type RoomUser {
+  id     String  @db.ObjectId
   name   String
   score  Int
   isHost Boolean
-  roomId String  @db.ObjectId
-  room   Room    @relation(fields: [roomId], references: [id])
+}
 
+model UserSession {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
   // Users have to send this JWT every actions for authentication themselves
   // This field used only to logs, DO NOT look up this for authentication
-  identifierToken String
+  identifierToken String   @map("identifier")
+  createdAt       DateTime @default(now())
 
-  @@map("grt_room_users")
+  @@map("grt_user_session")
 }
