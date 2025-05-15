@@ -40,6 +40,9 @@ export class MongoIoAdapter extends IoAdapter {
 
     this.adapter = createAdapter(mongoCollection, {
       addCreatedAtField: true,
+      requestsTimeout: 20000,
+      heartbeatInterval: 20000,
+      heartbeatTimeout: 40000,
     })
   }
 

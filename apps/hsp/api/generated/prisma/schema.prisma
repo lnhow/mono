@@ -15,7 +15,63 @@ datasource db {
   url      = env("API_DATABASE_URL")
 }
 
-model test {
+model Test {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   name String
+
+  @@map("tests")
+}
+
+/**
+ * Rooms
+ * This model is used to store the rooms that are currently in the game.
+ * It is used to store the users that are in the room, the rounds that are in the room, and the status of the room.
+ * Rooms can be cleaned up if:
+ * - status == finished and createdAt > (x1) time
+ * - endedAt > (x2) time
+ * - status == waiting_host and createdAt > (x3) time
+ */
+model Room {
+  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  users     RoomUser[]
+  rounds    RoomRound[]
+  status    RoomStatus  @default(waiting_host)
+  // Settings
+  maxRounds Int         @default(10)
+  maxUsers  Int         @default(4)
+  // Metadata
+  createdAt DateTime    @default(now())
+  endedAt   DateTime? // Based on last user to leave the room
+
+  @@map("grt_rooms")
+}
+
+type RoomRound {
+  answer    String
+  duration  Int
+  startTime DateTime
+  endTime   DateTime
+}
+
+enum RoomStatus {
+  waiting_host // Waiting for the host to join the game
+  waiting // Waiting for players to join the game
+  playing // Game is in progress
+  finished // Game is finished
+}
+
+model RoomUser {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  score  Int
+  isHost Boolean
+  roomId String  @db.ObjectId
+  room   Room    @relation(fields: [roomId], references: [id])
+
+  // Users have to send this JWT every actions for authentication themselves
+  // This field used only to logs, DO NOT look up this for authentication
+  identifierToken String
+
+  @@map("grt_room_users")
 }

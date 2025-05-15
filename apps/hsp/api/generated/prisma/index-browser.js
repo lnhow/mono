@@ -118,6 +118,25 @@ exports.Prisma.TestScalarFieldEnum = {
   name: 'name'
 };
 
+exports.Prisma.RoomScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  status: 'status',
+  maxRounds: 'maxRounds',
+  maxUsers: 'maxUsers',
+  createdAt: 'createdAt',
+  endedAt: 'endedAt'
+};
+
+exports.Prisma.RoomUserScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  score: 'score',
+  isHost: 'isHost',
+  roomId: 'roomId',
+  identifierToken: 'identifierToken'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -127,10 +146,17 @@ exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
-
+exports.RoomStatus = exports.$Enums.RoomStatus = {
+  waiting_host: 'waiting_host',
+  waiting: 'waiting',
+  playing: 'playing',
+  finished: 'finished'
+};
 
 exports.Prisma.ModelName = {
-  test: 'test'
+  Test: 'Test',
+  Room: 'Room',
+  RoomUser: 'RoomUser'
 };
 
 /**
