@@ -13,12 +13,14 @@ import { Inject, Logger } from '@nestjs/common'
 import { Socket, Server } from 'socket.io'
 import { MessageReqDto, MessageResDto, RES_EVENTS } from './guesart.type'
 import { GuesartService } from './guesart.service'
+import { GuesartSessionService } from './session/session.service'
 
 @WebSocketGateway({
   namespace: '/api/guesart/v1',
   cors: {
     origin: '*',
   },
+  transports: ['websocket'],
 })
 export class GuesartGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
@@ -26,11 +28,6 @@ export class GuesartGateway
   @WebSocketServer() server: Server
 
   private logger: Logger = new Logger('GuesartGateway')
-
-  constructor(
-    @Inject(GuesartService)
-    private service: GuesartService,
-  ) {}
 
   async getClientCount(): Promise<number> {
     const clients = await this.server.fetchSockets()
@@ -93,15 +90,34 @@ export class GuesartGateway
   //   client.emit('leftRoom', room);
   // }
 
-  public afterInit(): void {
-    return this.logger.log('Init Gateway successfully')
-  }
-
   public handleDisconnect(client: Socket) {
     this.service.onClientDisconnect(this.server, client)
   }
 
   public async handleConnection(client: Socket) {
+    const session = await this.sessionService.getSession(client)
+    if (!session) {
+      return
+    }
     await this.service.onClientConnect(this.server, client)
+  }
+
+  constructor(
+    @Inject(GuesartService)
+    private service: GuesartService,
+    @Inject(GuesartSessionService)
+    private sessionService: GuesartSessionService,
+  ) {}
+
+  // After this.server is initialized
+  public afterInit(): void {
+    this.server.use((socket, next) => {
+      this.logger.log(
+        '\x1B[35m[Dev log]\x1B[0m -> this.server.use -> socket:',
+        socket.handshake,
+      )
+      next()
+    })
+    return this.logger.log('Init Gateway successfully')
   }
 }

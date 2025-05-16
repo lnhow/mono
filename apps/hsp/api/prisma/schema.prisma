@@ -79,5 +79,5 @@ model UserSession {
   sessionToken String   @map("session")
   createdAt    DateTime @default(now())
 
-  @@map("grt_user_session")
+  @@map("grt_user_sessions")
 }

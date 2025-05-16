@@ -6,6 +6,8 @@ import { MongoClient } from 'mongodb'
 import { createAdapter } from '@socket.io/mongo-adapter'
 import { ConfigService } from '@nestjs/config'
 
+const COLLECTION_USER_SESSIONS = 'grt_user_sessions'
+
 export class MongoIoAdapter extends IoAdapter {
   private mongoClient: MongoClient
   private adapter: ReturnType<typeof createAdapter>
@@ -20,30 +22,39 @@ export class MongoIoAdapter extends IoAdapter {
     this.mongoClient = new MongoClient(uri)
     await this.mongoClient.connect()
 
-    try {
-      await this.mongoClient.db(dbName).createCollection(collectionName, {
+    // Create the capped collection if it doesn't exist, ignore if it already exists
+    await Promise.allSettled([
+      this.mongoClient.db(dbName).createCollection(collectionName, {
         capped: true,
         size: 1e6,
-      })
-    } catch {
-      // Ignore if the collection already exists
-    }
+      }),
+      this.mongoClient.db(dbName).createCollection(COLLECTION_USER_SESSIONS),
+    ])
 
-    const mongoCollection = this.mongoClient
+    const adpaterCollection = this.mongoClient
       .db(dbName)
       .collection(collectionName)
 
-    await mongoCollection.createIndex(
+    await adpaterCollection.createIndex(
       { createdAt: 1 },
       { expireAfterSeconds: 3600, background: true },
     )
 
-    this.adapter = createAdapter(mongoCollection, {
+    this.adapter = createAdapter(adpaterCollection, {
       addCreatedAtField: true,
       requestsTimeout: 20000,
       heartbeatInterval: 20000,
       heartbeatTimeout: 40000,
     })
+
+    // Create TTL index for user sessions
+    await this.mongoClient
+      .db(dbName)
+      .collection(COLLECTION_USER_SESSIONS)
+      .createIndex(
+        { createdAt: 1 },
+        { expireAfterSeconds: 24 * 60 * 60, background: true },
+      )
   }
 
   createIOServer(port: number, options?: ServerOptions) {
