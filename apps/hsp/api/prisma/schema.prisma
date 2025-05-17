@@ -7,7 +7,6 @@
 generator client {
   provider      = "prisma-client-js"
   output        = "../generated/prisma"
-  binaryTargets = ["native", "debian-openssl-3.0.x", "linux-musl-arm64-openssl-3.0.x"]
 }
 
 datasource db {
@@ -33,11 +32,12 @@ model Test {
  */
 model Room {
   id                String      @id @default(auto()) @map("_id") @db.ObjectId
-  name              String
   users             RoomUser[]
   rounds            RoomRound[]
   status            RoomStatus  @default(waiting)
   // Settings
+  name              String
+  theme             String
   maxUsers          Int         @default(4)
   numOfRounds       Int         @default(10)
   timePerRoundInSec Int         @default(30)

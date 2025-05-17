@@ -8,6 +8,7 @@
   "scripts": {
     "prepare": "husky install",
     "preinstall": "npx only-allow pnpm",
+    "postinstall": "pnpm db:generate",
     "dev": "turbo run dev",
     "dev:hsp": "turbo run dev --filter=@hsp/app-*...",
     "lint": "turbo run lint",
