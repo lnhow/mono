@@ -1,89 +1,100 @@
 import { Injectable, Logger } from '@nestjs/common'
-import { Server, Socket } from 'socket.io'
 import {
-  MessageReqDto,
   MessageResDto,
-  EMessageType,
-  RES_EVENTS,
   ESystemMessageContent,
+  GrtServer,
+  GrtSocket,
+  GrtClientToServerEventsPayload,
+  EClientToServerEvents,
+  GrtWsResponse,
+  GrtServerToClientEventsPayload,
+  EServerToClientEvents,
 } from './guesart.type'
 import { randomUUID } from 'crypto'
-import { WsResponse } from '@nestjs/websockets'
+import { OnGatewayInit } from '@nestjs/websockets'
+import { GrtSessionService } from './session/session.service'
 
 @Injectable()
-export class GuesartService {
-  private readonly logger: Logger = new Logger('GuesartService')
+export class GrtService implements OnGatewayInit<GrtServer> {
+  private readonly logger: Logger = new Logger(GrtService.name)
+  private server: GrtServer
 
   // joinRoom
   // leaveRoom
   // createRoom
-  handleChat(client: Socket, data: MessageReqDto): WsResponse<MessageResDto> {
-    const res: MessageResDto = {
-      id: randomUUID(),
-      type: EMessageType.USER,
-      content: data.content,
-      user: {
-        id: client.id,
-        name: 'John Doe' + Math.random(),
-      },
-    }
+  handleChat(
+    client: GrtSocket,
+    data: GrtClientToServerEventsPayload<EClientToServerEvents.CHAT>,
+  ): GrtWsResponse<EServerToClientEvents.MSG_CHAT> {
+    const session = GrtSessionService.extractSession(client)
+    const res: GrtServerToClientEventsPayload<EServerToClientEvents.MSG_CHAT> =
+      {
+        id: randomUUID(),
+        content: data.content,
+        user: {
+          id: session.userId,
+          name: session.userName,
+        },
+      }
 
-    client.broadcast.emit(RES_EVENTS.CHAT, res) // broadcast to all clients except the sender
+    client.broadcast.emit(EServerToClientEvents.MSG_CHAT, res) // broadcast to all clients except the sender
     return {
-      event: RES_EVENTS.CHAT,
+      event: EServerToClientEvents.MSG_CHAT,
       data: res,
     }
   }
 
-  broadcastCanvas(client: Socket, canvasDataUrl: string) {
-    client.broadcast.emit(RES_EVENTS.RECEIVE_CANVAS, canvasDataUrl)
+  broadcastCanvas(client: GrtSocket, canvasDataUrl: string) {
+    client.broadcast.emit(EServerToClientEvents.CANVAS, canvasDataUrl)
   }
 
-  async onClientConnect(server: Server, client: Socket) {
+  async onClientConnect(client: GrtSocket) {
+    const session = GrtSessionService.extractSession(client)
+    client.emit(EServerToClientEvents.SESSION, session)
     const res: MessageResDto = {
       id: randomUUID(),
-      type: EMessageType.SYSTEM,
       content: ESystemMessageContent.JOIN_ROOM,
       user: {
-        id: client.id,
-        name: 'John Doe' + Math.random(),
+        id: session.userId,
+        name: session.userName,
       },
     }
 
-    client.emit(RES_EVENTS.CHAT, res)
-
-    const clientsCount = await this._getClientCount(server)
-    const message = `Client connected - ${clientsCount}`
-    server.to(client.id).emit(RES_EVENTS.CONNECT_CONFIRM, {
-      data: message,
-    })
-
+    client.emit(EServerToClientEvents.MSG_SYSTEM, res)
+    const clientsCount = await this.getClientCount()
     this.logger.log(
-      `Client connected: ${client.id} - [Clients: ${clientsCount}]`,
+      `Client connected: ${client.id} [UID: ${session.userId}, Count: ${clientsCount}]`,
     )
   }
 
-  onClientDisconnect(server: Server, client: Socket) {
-    this.logger.log(`Client disconnected: ${client.id}`)
+  onClientDisconnect(client: GrtSocket) {
+    const session = GrtSessionService.extractSession(client)
+    this.logger.log(
+      `Client disconnected: ${client.id} [UID: ${session.userId}]`,
+    )
     const res: MessageResDto = {
       id: randomUUID(),
-      type: EMessageType.SYSTEM,
       content: ESystemMessageContent.LEAVE_ROOM,
       user: {
-        id: client.id,
-        name: 'John Doe' + Math.random(),
+        id: session.userId,
+        name: session.userName,
       },
     }
 
-    server.emit(RES_EVENTS.CHAT, res)
+    this.server.emit(EServerToClientEvents.MSG_SYSTEM, res)
   }
   // sendCanvas
   // startGame
   // endGame
   // startRound
 
-  async _getClientCount(server: Server): Promise<number> {
-    const clients = await server.fetchSockets()
+  async getClientCount(): Promise<number> {
+    const clients = await this.server.fetchSockets()
     return clients.length
+  }
+
+  afterInit(server: GrtServer) {
+    this.server = server
+    this.logger.log('GuesartService initialized')
   }
 }

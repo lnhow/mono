@@ -2,19 +2,27 @@ import {
   SubscribeMessage,
   WebSocketGateway,
   OnGatewayInit,
-  WebSocketServer,
   OnGatewayConnection,
   OnGatewayDisconnect,
-  WsResponse,
   MessageBody,
   ConnectedSocket,
 } from '@nestjs/websockets'
-import { Inject, Logger } from '@nestjs/common'
-import { Socket, Server } from 'socket.io'
-import { MessageReqDto, MessageResDto, RES_EVENTS } from './guesart.type'
-import { GuesartService } from './guesart.service'
-import { GuesartSessionService } from './session/session.service'
+import { Inject, UseGuards } from '@nestjs/common'
+import {
+  EGrtErrorCode,
+  GrtServer,
+  GrtSocket,
+  GrtError,
+  EClientToServerEvents,
+  GrtClientToServerEventsPayload,
+  GrtWsResponse,
+  EServerToClientEvents,
+} from './guesart.type'
+import { GrtService } from './guesart.service'
+import { GrtSessionService } from './session/session.service'
+import { GrtAuthGuard } from './guesart.guard'
 
+@UseGuards(GrtAuthGuard) // Run on every events, except handleConnection and handleDisconnect
 @WebSocketGateway({
   namespace: '/api/guesart/v1',
   cors: {
@@ -22,102 +30,73 @@ import { GuesartSessionService } from './session/session.service'
   },
   transports: ['websocket'],
 })
-export class GuesartGateway
-  implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
+export class GrtGateway
+  implements OnGatewayInit<GrtServer>, OnGatewayConnection, OnGatewayDisconnect
 {
-  @WebSocketServer() server: Server
-
-  private logger: Logger = new Logger('GuesartGateway')
-
-  async getClientCount(): Promise<number> {
-    const clients = await this.server.fetchSockets()
-    return clients.length
-  }
-
-  @SubscribeMessage('echo')
+  @SubscribeMessage(EClientToServerEvents.ECHO)
   public handleEcho(
-    @MessageBody('data') data: string,
-  ): WsResponse<{ data: string }> {
-    console.log(`[echo] ${data}`)
+    @MessageBody('data')
+    data: GrtClientToServerEventsPayload<EClientToServerEvents.ECHO>,
+  ): GrtWsResponse<EServerToClientEvents.ECHO> {
     return {
-      event: RES_EVENTS.ECHO,
+      event: EServerToClientEvents.ECHO,
       data: {
         data: `echo: ${data}`,
       },
     }
   }
 
-  @SubscribeMessage('n-clients')
-  public async handleGetClientCount(): Promise<
-    WsResponse<{
-      data: number
-    }>
-  > {
-    const res = {
-      data: await this.getClientCount(),
-    }
-    return {
-      event: RES_EVENTS.N_CLIENTS,
-      data: res,
-    }
-  }
-
-  @SubscribeMessage('chat')
+  @SubscribeMessage(EClientToServerEvents.CHAT)
   public handleChat(
-    @ConnectedSocket() client: Socket,
-    @MessageBody() data: MessageReqDto,
-  ): WsResponse<MessageResDto> {
+    @ConnectedSocket() client: GrtSocket,
+    @MessageBody()
+    data: GrtClientToServerEventsPayload<EClientToServerEvents.CHAT>,
+  ): GrtWsResponse<EServerToClientEvents.MSG_CHAT> {
     return this.service.handleChat(client, data)
   }
 
-  @SubscribeMessage('send-canvas')
-  public handleSendCanvas(
-    @ConnectedSocket() client: Socket,
-    @MessageBody() data: string, // Canvas data URL
+  @SubscribeMessage(EClientToServerEvents.CANVAS)
+  public handleCanvas(
+    @ConnectedSocket() client: GrtSocket,
+    @MessageBody()
+    data: GrtClientToServerEventsPayload<EClientToServerEvents.CANVAS>, // Canvas data URL
   ): void {
     this.service.broadcastCanvas(client, data)
   }
 
-  // @SubscribeMessage('joinRoom')
-  // public joinRoom(client: Socket, room: string): void {
-  //   client.join(room);
-  //   client.emit('joinedRoom', room);
-  // }
-
-  // @SubscribeMessage('leaveRoom')
-  // public leaveRoom(client: Socket, room: string): void {
-  //   client.leave(room);
-  //   client.emit('leftRoom', room);
-  // }
-
-  public handleDisconnect(client: Socket) {
-    this.service.onClientDisconnect(this.server, client)
+  public handleDisconnect(client: GrtSocket) {
+    this.service.onClientDisconnect(client)
   }
 
-  public async handleConnection(client: Socket) {
-    const session = await this.sessionService.getSession(client)
-    if (!session) {
-      return
-    }
-    await this.service.onClientConnect(this.server, client)
+  // Called after connection is established
+  public async handleConnection(client: GrtSocket) {
+    await this.service.onClientConnect(client)
   }
 
   constructor(
-    @Inject(GuesartService)
-    private service: GuesartService,
-    @Inject(GuesartSessionService)
-    private sessionService: GuesartSessionService,
+    @Inject(GrtService)
+    private service: GrtService,
+    @Inject(GrtSessionService)
+    private sessionService: GrtSessionService,
   ) {}
 
-  // After this.server is initialized
-  public afterInit(): void {
-    this.server.use((socket, next) => {
-      this.logger.log(
-        '\x1B[35m[Dev log]\x1B[0m -> this.server.use -> socket:',
-        socket.handshake,
-      )
+  // After websocket server is initialized
+  public afterInit(server: GrtServer): void {
+    // Socket.io middleware
+    // Called once, before any connection is established
+    // Workaround for socket.io typing
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    server.use(async (socket, next) => {
+      const session =
+        await this.sessionService.getOrCreateSessionIfNotExist(socket)
+      if (!session) {
+        const err = new GrtError(EGrtErrorCode.INVALID_SESSION)
+        next(err)
+      }
+
+      socket.data.session = session
       next()
     })
-    return this.logger.log('Init Gateway successfully')
+    this.service.afterInit(server)
   }
 }

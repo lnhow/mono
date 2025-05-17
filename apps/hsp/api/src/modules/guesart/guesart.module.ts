@@ -1,17 +1,12 @@
 import { Module } from '@nestjs/common'
-import { GuesartGateway } from './guesart.gateway'
-import { GuesartService } from './guesart.service'
-import { GuesartSessionService } from './session/session.service'
+import { GrtGateway } from './guesart.gateway'
+import { GrtService } from './guesart.service'
+import { GrtSessionService } from './session/session.service'
 import { JwtService } from '@nestjs/jwt'
 
 @Module({
   imports: [],
   controllers: [],
-  providers: [
-    GuesartGateway,
-    GuesartService,
-    GuesartSessionService,
-    JwtService,
-  ],
+  providers: [GrtGateway, GrtService, GrtSessionService, JwtService],
 })
-export class GuesartWSModule {}
+export class GrtWSModule {}

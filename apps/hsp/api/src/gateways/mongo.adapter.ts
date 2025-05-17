@@ -6,7 +6,7 @@ import { MongoClient } from 'mongodb'
 import { createAdapter } from '@socket.io/mongo-adapter'
 import { ConfigService } from '@nestjs/config'
 
-const COLLECTION_USER_SESSIONS = 'grt_user_sessions'
+// const COLLECTION_USER_SESSIONS = 'grt_user_sessions'
 
 export class MongoIoAdapter extends IoAdapter {
   private mongoClient: MongoClient
@@ -28,7 +28,6 @@ export class MongoIoAdapter extends IoAdapter {
         capped: true,
         size: 1e6,
       }),
-      this.mongoClient.db(dbName).createCollection(COLLECTION_USER_SESSIONS),
     ])
 
     const adpaterCollection = this.mongoClient
@@ -46,15 +45,6 @@ export class MongoIoAdapter extends IoAdapter {
       heartbeatInterval: 20000,
       heartbeatTimeout: 40000,
     })
-
-    // Create TTL index for user sessions
-    await this.mongoClient
-      .db(dbName)
-      .collection(COLLECTION_USER_SESSIONS)
-      .createIndex(
-        { createdAt: 1 },
-        { expireAfterSeconds: 24 * 60 * 60, background: true },
-      )
   }
 
   createIOServer(port: number, options?: ServerOptions) {
