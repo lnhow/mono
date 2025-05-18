@@ -51,3 +51,7 @@ export class RoomCreateRequestDto {
 export type RoomCreateResponseDto = {
   id: string
 }
+
+export type RoomBaseDto = {
+  roomId: string
+}

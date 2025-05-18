@@ -29,7 +29,7 @@ import { GrtSessionService } from './session/session.service'
 import { GrtAuthGuard } from './guesart.guard'
 import { GrtWsExceptionsFilter } from './guesart.exception'
 import { GrtRoomService } from './room/room.service'
-import { RoomCreateRequestDto } from './room/room.type'
+import { RoomBaseDto, RoomCreateRequestDto } from './room/room.type'
 
 @UseFilters(new GrtWsExceptionsFilter())
 @UseGuards(GrtAuthGuard) // Run on every events, except handleConnection and handleDisconnect
@@ -62,7 +62,6 @@ export class GrtGateway
     data: RoomCreateRequestDto,
   ): Promise<GrtWsResponse<EServerToClientEvents.ROOM_CREATE>> {
     const roomData = await this.roomService.createRoom(client, data)
-    console.log('\x1B[35m[Dev log]\x1B[0m -> data:', data, roomData)
 
     return {
       event: EServerToClientEvents.ROOM_CREATE,
@@ -71,6 +70,29 @@ export class GrtGateway
       },
     }
   }
+
+  @SubscribeMessage(EClientToServerEvents.ROOM_JOIN)
+  public async handleRoomJoin(
+    @ConnectedSocket() client: GrtSocket,
+    @MessageBody('data')
+    data: RoomBaseDto,
+  ) {
+    const roomData = await this.roomService.joinRoom(client, data)
+    console.log('\x1B[35m[Dev log]\x1B[0m -> roomData:', roomData)
+    // return {
+    //   event: EServerToClientEvents.ROOM_JOIN,
+    //   data: {
+    //     data: roomData,
+    //   },
+    // }
+  }
+
+  @SubscribeMessage(EClientToServerEvents.ROOM_LEAVE)
+  public async handleRoomLeave(@ConnectedSocket() client: GrtSocket) {
+    const roomData = await this.roomService.leaveRoom(client)
+    console.log('\x1B[35m[Dev log]\x1B[0m -> roomData:', roomData)
+  }
+
   @SubscribeMessage(EClientToServerEvents.ECHO)
   public handleEcho(
     @MessageBody('data')
@@ -102,6 +124,7 @@ export class GrtGateway
     this.service.broadcastCanvas(client, data)
   }
 
+  // Called when client disconnects
   public handleDisconnect(client: GrtSocket) {
     this.service.onClientDisconnect(client)
   }

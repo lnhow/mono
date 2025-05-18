@@ -3,7 +3,7 @@ import { EventsMap } from 'socket.io/dist/typed-events'
 import { SessionDto } from '../session/session.type'
 import { WsException, WsResponse } from '@nestjs/websockets'
 import { ChatResponseDto } from './dto'
-import { RoomCreateRequestDto, RoomCreateResponseDto } from '../room/room.type'
+import { RoomBaseDto, RoomCreateRequestDto, RoomCreateResponseDto } from '../room/room.type'
 
 // Server to Client Events ======================================
 export enum EServerToClientEvents {
@@ -59,10 +59,10 @@ export interface GrtClientToServerEvents {
   [EClientToServerEvents.CHAT]: (data: { content: string }) => void
   [EClientToServerEvents.CANVAS]: (data: string) => void
   [EClientToServerEvents.ROOM_CREATE]: (data: RoomCreateRequestDto) => void
-  [EClientToServerEvents.ROOM_JOIN]: (data: { roomId: string }) => void
-  [EClientToServerEvents.ROOM_LEAVE]: (data: { roomId: string }) => void
-  [EClientToServerEvents.GAME_START]: (data: { roomId: string }) => void
-  [EClientToServerEvents.ROUND_START]: (data: { roomId: string }) => void
+  [EClientToServerEvents.ROOM_JOIN]: (data: RoomBaseDto) => void
+  [EClientToServerEvents.ROOM_LEAVE]: (data: never) => void
+  [EClientToServerEvents.GAME_START]: (data: never) => void
+  [EClientToServerEvents.ROUND_START]: (data: never) => void
 }
 export type GrtClientToServerEventsPayload<T extends EClientToServerEvents> =
   Parameters<GrtClientToServerEvents[T]>[0]
