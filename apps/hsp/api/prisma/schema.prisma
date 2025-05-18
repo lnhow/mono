@@ -39,9 +39,10 @@ model Room {
   name              String
   theme             String
   maxUsers          Int         @default(4)
-  numOfRounds       Int         @default(10)
+  numOfRounds       Int         @default(4)
   timePerRoundInSec Int         @default(30)
   // Metadata
+  host              RoomHost
   createdAt         DateTime    @default(now())
   endedAt           DateTime? // Based on last user to leave the room
 
@@ -66,10 +67,14 @@ enum RoomStatus {
 }
 
 type RoomUser {
-  id     String  @db.ObjectId
+  id     String
   name   String
   score  Int
-  isHost Boolean
+}
+
+type RoomHost {
+  id String
+  name String
 }
 
 // Users have to send this JWT every actions for authentication themselves

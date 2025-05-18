@@ -7,4 +7,4 @@ packages:
 catalogs:
 # Pin the versions of the packages in the workspace
   prisma:
-    prisma: 6.7.0
+    prisma: 6.8.2

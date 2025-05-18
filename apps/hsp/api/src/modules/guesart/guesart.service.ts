@@ -1,7 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common'
 import {
-  MessageResDto,
-  ESystemMessageContent,
   GrtServer,
   GrtSocket,
   GrtClientToServerEventsPayload,
@@ -9,10 +7,11 @@ import {
   GrtWsResponse,
   GrtServerToClientEventsPayload,
   EServerToClientEvents,
-} from './guesart.type'
+} from './types/ws'
 import { randomUUID } from 'crypto'
 import { OnGatewayInit } from '@nestjs/websockets'
 import { GrtSessionService } from './session/session.service'
+import { ChatResponseDto, ESystemMessageContent } from './types/dto'
 
 @Injectable()
 export class GrtService implements OnGatewayInit<GrtServer> {
@@ -22,6 +21,10 @@ export class GrtService implements OnGatewayInit<GrtServer> {
   // joinRoom
   // leaveRoom
   // createRoom
+  // startGame
+  // endGame
+  // startRound
+
   handleChat(
     client: GrtSocket,
     data: GrtClientToServerEventsPayload<EClientToServerEvents.CHAT>,
@@ -51,7 +54,7 @@ export class GrtService implements OnGatewayInit<GrtServer> {
   async onClientConnect(client: GrtSocket) {
     const session = GrtSessionService.extractSession(client)
     client.emit(EServerToClientEvents.SESSION, session)
-    const res: MessageResDto = {
+    const res: ChatResponseDto = {
       id: randomUUID(),
       content: ESystemMessageContent.JOIN_ROOM,
       user: {
@@ -72,7 +75,7 @@ export class GrtService implements OnGatewayInit<GrtServer> {
     this.logger.log(
       `Client disconnected: ${client.id} [UID: ${session.userId}]`,
     )
-    const res: MessageResDto = {
+    const res: ChatResponseDto = {
       id: randomUUID(),
       content: ESystemMessageContent.LEAVE_ROOM,
       user: {
@@ -83,10 +86,6 @@ export class GrtService implements OnGatewayInit<GrtServer> {
 
     this.server.emit(EServerToClientEvents.MSG_SYSTEM, res)
   }
-  // sendCanvas
-  // startGame
-  // endGame
-  // startRound
 
   async getClientCount(): Promise<number> {
     const clients = await this.server.fetchSockets()

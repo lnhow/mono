@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt'
 import { randomUUID } from 'crypto'
 import { ConfigService } from '@nestjs/config'
 import { SessionDto, SessionPayload } from './session.type'
-import { GrtSocket } from '../guesart.type'
+import { GrtSocket } from '../types/ws'
 
 @Injectable()
 export class GrtSessionService {

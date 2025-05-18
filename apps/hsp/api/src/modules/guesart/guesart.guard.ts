@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common'
-import { GrtSocket } from './guesart.type'
+import { GrtSocket } from './types/ws'
 
 @Injectable()
 export class GrtAuthGuard implements CanActivate {
