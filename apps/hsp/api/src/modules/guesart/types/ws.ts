@@ -2,8 +2,14 @@ import { Server, Socket } from 'socket.io'
 import { EventsMap } from 'socket.io/dist/typed-events'
 import { SessionDto } from '../session/session.type'
 import { WsException, WsResponse } from '@nestjs/websockets'
-import { ChatResponseDto } from './dto'
-import { RoomBaseDto, RoomCreateRequestDto, RoomCreateResponseDto } from '../room/room.type'
+import {
+  ChatResponseDto,
+  PlayerDto,
+  RoomBaseDto,
+  RoomCreateRequestDto,
+  RoomCreateResponseDto,
+  RoomInfoResponseDto,
+} from '../room/room.type'
 
 // Server to Client Events ======================================
 export enum EServerToClientEvents {
@@ -13,8 +19,9 @@ export enum EServerToClientEvents {
   MSG_SYSTEM = 'msg_system',
   CANVAS = 'canvas',
   ROOM_CREATE = 'room_create',
+  ROOM_JOIN = 'room_join',
   // ROOM_INFO = 'room_info',
-  // ROOM_USERS = 'room_users',
+  ROOM_USERS = 'room_users',
   // ROUND_NEXT = 'round_next',
   // ROUND_DRAWER = 'round_drawer',
   // ROUND_START = 'round_start',
@@ -24,10 +31,13 @@ export enum EServerToClientEvents {
 }
 export interface GrtServerToClientEvents {
   [EServerToClientEvents.ECHO]: (data: { data: string }) => void
-  [EServerToClientEvents.ROOM_CREATE]: (data: {
-    data?: RoomCreateResponseDto
-    error?: GrtWsException
-  }) => void
+  [EServerToClientEvents.ROOM_CREATE]: (
+    data: WithError<RoomCreateResponseDto>,
+  ) => void
+  [EServerToClientEvents.ROOM_JOIN]: (
+    data: WithError<RoomInfoResponseDto>,
+  ) => void
+  [EServerToClientEvents.ROOM_USERS]: (data: PlayerDto[]) => void
   [EServerToClientEvents.MSG_CHAT]: (data: ChatResponseDto) => void
   [EServerToClientEvents.MSG_SYSTEM]: (data: ChatResponseDto) => void
   [EServerToClientEvents.SESSION]: (data: SessionDto) => void
@@ -40,6 +50,10 @@ export type GrtServerToClientEventsPayload<T extends EServerToClientEvents> =
 export interface GrtWsResponse<T extends EServerToClientEvents>
   extends WsResponse<GrtServerToClientEventsPayload<T>> {
   event: T
+}
+export type WithError<T> = {
+  data?: T
+  error?: GrtWsException
 }
 // Server to Client Events ======================================
 

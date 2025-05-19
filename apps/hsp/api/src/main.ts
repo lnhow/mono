@@ -5,14 +5,16 @@ import { ConfigService } from '@nestjs/config'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+  app.enableShutdownHooks()
   app.setGlobalPrefix('api')
+
   const configService = app.get(ConfigService)
-  const PORT = configService.get<number>('PORT') || 8000
 
   const mongoIoAdapter = new MongoIoAdapter(app)
   await mongoIoAdapter.initConnection(configService)
   app.useWebSocketAdapter(mongoIoAdapter)
 
+  const PORT = configService.get<number>('PORT') || 8000
   await app.listen(PORT).then(() => {
     console.log(`Listening on port ${PORT}`)
   })

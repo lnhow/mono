@@ -6,6 +6,7 @@ import {
   Min,
   MinLength,
 } from 'class-validator'
+import { Room } from 'generated/prisma'
 
 export enum ERoomTheme {
   ANIMALS = 'animals',
@@ -52,6 +53,40 @@ export type RoomCreateResponseDto = {
   id: string
 }
 
+export type RoomInfoResponseDto = Room
+
 export type RoomBaseDto = {
   roomId: string
+}
+
+export class RoomChatRequestDto {
+  @IsString()
+  @MinLength(1)
+  @MaxLength(250)
+  content: string
+}
+
+export enum ESystemMessageContent {
+  JOIN_ROOM = 'joined',
+  LEAVE_ROOM = 'left',
+  GUESS_CORRECT = 'correct',
+  GUESS_ALREADY_CORRECT = 'already_correct',
+  GUESS_WRONG = 'wrong',
+  ROUND_START = 'start',
+  ROUND_END = 'end',
+}
+
+export type ChatResponseDto = {
+  id: string
+  content: string
+  user?: {
+    id: string
+    name: string
+  }
+}
+
+export type PlayerDto = {
+  userId: string
+  userName: string
+  score: number
 }

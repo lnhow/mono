@@ -125,8 +125,15 @@ export class GrtGateway
   }
 
   // Called when client disconnects
-  public handleDisconnect(client: GrtSocket) {
-    this.service.onClientDisconnect(client)
+  public async handleDisconnect(client: GrtSocket) {
+    console.log(
+      '\x1B[35m[Dev log]\x1B[0m -> handleDisconnect -> client:',
+      client,
+    )
+    await Promise.allSettled([
+      this.service.onClientDisconnect(client),
+      this.roomService.leaveRoom(client),
+    ])
   }
 
   // Called after connection is established
@@ -159,5 +166,6 @@ export class GrtGateway
       next()
     })
     this.service.afterInit(server)
+    this.roomService.afterInit(server)
   }
 }

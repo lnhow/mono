@@ -11,7 +11,6 @@ import {
 import { randomUUID } from 'crypto'
 import { OnGatewayInit } from '@nestjs/websockets'
 import { GrtSessionService } from './session/session.service'
-import { ChatResponseDto, ESystemMessageContent } from './types/dto'
 
 @Injectable()
 export class GrtService implements OnGatewayInit<GrtServer> {
@@ -54,16 +53,7 @@ export class GrtService implements OnGatewayInit<GrtServer> {
   async onClientConnect(client: GrtSocket) {
     const session = GrtSessionService.extractSession(client)
     client.emit(EServerToClientEvents.SESSION, session)
-    const res: ChatResponseDto = {
-      id: randomUUID(),
-      content: ESystemMessageContent.JOIN_ROOM,
-      user: {
-        id: session.userId,
-        name: session.userName,
-      },
-    }
 
-    client.emit(EServerToClientEvents.MSG_SYSTEM, res)
     const clientsCount = await this.getClientCount()
     this.logger.log(
       `Client connected: ${client.id} [UID: ${session.userId}, Count: ${clientsCount}]`,
@@ -75,16 +65,6 @@ export class GrtService implements OnGatewayInit<GrtServer> {
     this.logger.log(
       `Client disconnected: ${client.id} [UID: ${session.userId}]`,
     )
-    const res: ChatResponseDto = {
-      id: randomUUID(),
-      content: ESystemMessageContent.LEAVE_ROOM,
-      user: {
-        id: session.userId,
-        name: session.userName,
-      },
-    }
-
-    this.server.emit(EServerToClientEvents.MSG_SYSTEM, res)
   }
 
   async getClientCount(): Promise<number> {

@@ -49,7 +49,9 @@ model Room {
   @@map("grt_rooms")
 }
 
-type RoomRound {
+model RoomRound {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  roomId       String   @db.ObjectId
   roundNumber  Int
   isActive     Boolean
   answer       String
@@ -58,6 +60,9 @@ type RoomRound {
   duration     Int
   startTime    DateTime
   endTime      DateTime
+  Room         Room     @relation(fields: [roomId], references: [id])
+
+  @@map("grt_room_rounds")
 }
 
 enum RoomStatus {
@@ -66,11 +71,18 @@ enum RoomStatus {
   finished // Game is finished
 }
 
-type RoomUser {
-  id       String
-  name     String
+model RoomUser {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  roomId   String  @db.ObjectId
+  userId   String
+  userName String
   score    Int     @default(0)
   isActive Boolean @default(false)
+  isValid  Boolean @default(false)
+  Room     Room    @relation(fields: [roomId], references: [id])
+
+  @@map("grt_room_users")
+  @@unique([roomId, userId])
 }
 
 type RoomHost {
