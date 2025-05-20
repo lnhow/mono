@@ -11,7 +11,7 @@ import {
 const Lobby = memo(function Lobby() {
   return (
     <div className="flex flex-col gap-4">
-      <Tabs defaultValue="create" className="w-full">
+      <Tabs defaultValue="join" className="w-full">
         <TabsList className="flex min-h-10 border-base-100 border p-0">
           <TabsTrigger value="join" className="flex-1 min-h-10">
             Join Room
