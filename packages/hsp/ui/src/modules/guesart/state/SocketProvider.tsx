@@ -16,6 +16,7 @@ const SocketProvider = memo(function SocketProvider({
   useEffect(() => {
     const socket = io(getSocketUrl(), {
       transports: ['websocket'],
+      autoConnect: false,
     })
     setAtom((prev) => ({
       ...prev,

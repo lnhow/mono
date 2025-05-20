@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { randomUUID } from 'crypto'
 import { ConfigService } from '@nestjs/config'
-import { SessionDto, SessionPayload } from './session.type'
+import { SessionDto, SessionPayload, USER_NAME } from './session.type'
 import { GrtSocket } from '../types/ws'
 
 @Injectable()
@@ -16,7 +16,11 @@ export class GrtSessionService {
       return session
     }
 
-    if (!userName) {
+    if (
+      !userName ||
+      userName.length < USER_NAME.MIN_LENGTH ||
+      userName.length > USER_NAME.MAX_LENGTH
+    ) {
       return null
     }
     return await this.createSession(userName, session && session.userId)

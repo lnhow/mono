@@ -1,5 +1,5 @@
-import PagePlay from '@hsp/ui/src/modules/guesart/pages/play'
+import PageLobby from '@hsp/ui/src/modules/guesart/pages/lobby'
 
-export default function IndexPage() {
-  return <PagePlay />
+export default function PageIndex() {
+  return <PageLobby />
 }

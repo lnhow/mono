@@ -14,6 +14,12 @@ export const socketAtom = atom<SocketStateType>({
   connected: false,
 })
 
+export const sessionAtom = atom({
+  userId: '',
+  userName: '',
+  roomId: '',
+})
+
 export const gameAtom = atom<TGameState>({
   roomId: '',
   players: [],
