@@ -1,5 +1,4 @@
 'use client'
-import { Card } from '@hsp/ui/src/components/base/card'
 import { Input } from '@hsp/ui/src/components/base/input'
 import { Button } from '@hsp/ui/src/components/base/button'
 import { useForm, SubmitHandler } from 'react-hook-form'
@@ -17,7 +16,7 @@ export default function RoomJoinForm() {
   }
 
   return (
-    <Card className="p-6 w-96 shadow-md">
+    <div className="py-2">
       <h2 className="text-2xl font-semibold mb-4">Join a Room</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <Input
@@ -29,6 +28,6 @@ export default function RoomJoinForm() {
           Join Room
         </Button>
       </form>
-    </Card>
+    </div>
   )
 }

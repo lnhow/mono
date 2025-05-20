@@ -9,8 +9,13 @@ import { GrtSocket } from '../types/ws'
 export class GrtSessionService {
   async getOrCreateSessionIfNotExist(client: GrtSocket) {
     const session = this.getSessionFromReq(client)
+    console.log(
+      '\x1B[35m[Dev log]\x1B[0m -> GrtSessionService -> getOrCreateSessionIfNotExist -> session:',
+      session,
+    )
     const userName = GrtSessionService._getUserNameFromAuth(client)
-    const isReuseOldSession = session && session.userName === userName
+    const isReuseOldSession =
+      session && (!userName || session.userName === userName)
 
     if (isReuseOldSession) {
       return session
@@ -81,8 +86,8 @@ export class GrtSessionService {
   }
 
   private static _getSessionFromAuth(client: GrtSocket) {
-    if (client.handshake.auth.token) {
-      return client.handshake.auth.token as string
+    if (client.handshake.auth.session) {
+      return client.handshake.auth.session as string
     }
 
     return GrtSessionService.extractTokenFromHeader(

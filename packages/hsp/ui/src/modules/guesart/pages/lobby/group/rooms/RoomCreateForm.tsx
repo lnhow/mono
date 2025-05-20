@@ -1,6 +1,5 @@
 'use client'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { Card } from '@hsp/ui/src/components/base/card'
+import { useForm } from 'react-hook-form'
 import { Input } from '@hsp/ui/src/components/base/input'
 import { Button } from '@hsp/ui/src/components/base/button'
 import {
@@ -22,20 +21,29 @@ interface RoomFormValues {
 const themes = ['Animals', 'Movies', 'Technology', 'Nature', 'Space', 'Fantasy']
 const maxUsersOptions = Array.from({ length: 7 }, (_, i) => i + 2)
 const roundsOptions = Array.from({ length: 8 }, (_, i) => i + 3)
-const roundTimeOptions = ['30s', '45s', '1m']
+const roundTimeOptions = ['30s', '45s', '1m'].map((time, index) => ({ value: '' + index + 1, label: time }))
+const defaultValues: RoomFormValues = {
+  name: '',
+  theme: '',
+  maxUsers: 2,
+  rounds: 3,
+  roundTime: '1',
+}
 
 export default function RoomCreateForm() {
-  const { register, handleSubmit, reset } = useForm<RoomFormValues>()
+  const { register, handleSubmit, reset } = useForm<RoomFormValues>({
+    defaultValues,
+  })
 
-  const onSubmit: SubmitHandler<RoomFormValues> = (data) => {
+  const onSubmit = handleSubmit((data) => {
     console.log('Room Created:', data)
     reset()
-  }
+  })
 
   return (
-    <Card className="p-6 w-96 shadow-md">
+    <div className="py-2">
       <h2 className="text-2xl font-semibold mb-4">Create a Room</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={onSubmit} className="space-y-4">
         <Input
           placeholder="Room Name"
           {...register('name', { required: true })}
@@ -87,8 +95,8 @@ export default function RoomCreateForm() {
           </SelectTrigger>
           <SelectContent>
             {roundTimeOptions.map((time) => (
-              <SelectItem key={time} value={time}>
-                {time}
+              <SelectItem key={time.value} value={time.value}>
+                {time.label}
               </SelectItem>
             ))}
           </SelectContent>
@@ -97,6 +105,6 @@ export default function RoomCreateForm() {
           Create Room
         </Button>
       </form>
-    </Card>
+    </div>
   )
 }

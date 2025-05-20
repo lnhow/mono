@@ -126,10 +126,6 @@ export class GrtGateway
 
   // Called when client disconnects
   public async handleDisconnect(client: GrtSocket) {
-    console.log(
-      '\x1B[35m[Dev log]\x1B[0m -> handleDisconnect -> client:',
-      client,
-    )
     await Promise.allSettled([
       this.service.onClientDisconnect(client),
       this.roomService.leaveRoom(client),
@@ -157,6 +153,7 @@ export class GrtGateway
     server.use(async (socket, next) => {
       const session =
         await this.sessionService.getOrCreateSessionIfNotExist(socket)
+
       if (!session) {
         const err = new GrtWsException(EGrtErrorCode.INVALID_SESSION)
         return next(err)

@@ -1,13 +1,3 @@
-import {
-  IsEnum,
-  IsString,
-  Max,
-  MaxLength,
-  Min,
-  MinLength,
-} from 'class-validator'
-import { Room } from 'generated/prisma'
-
 export enum ERoomTheme {
   ANIMALS = 'animals',
   EVERYDAY_OBJECTS = 'everyday_objects',
@@ -28,24 +18,11 @@ export const ROOM_TIME_OPTIONS = {
   [ERoomTimeOption.ONE_MINUTE]: 60,
 } as const
 
-export class RoomCreateRequestDto {
-  @IsString()
-  @MinLength(3)
-  @MaxLength(50)
+export type RoomCreateRequestDto = {
   name: string
-
-  @IsEnum(ERoomTheme)
   theme: ERoomTheme
-
-  @Min(2)
-  @Max(8)
   maxUsers: number
-
-  @Min(3)
-  @Max(10)
   numOfRounds: number
-
-  @IsEnum(ERoomTimeOption)
   timeOption: ERoomTimeOption
 }
 
@@ -53,26 +30,25 @@ export type RoomCreateResponseDto = {
   id: string
 }
 
-export type RoomInfoResponseDto = Pick<
-  Room,
-  | 'id'
-  | 'name'
-  | 'theme'
-  | 'maxUsers'
-  | 'numOfRounds'
-  | 'timePerRoundInSec'
-  | 'host'
-  | 'status'
->
+export type RoomInfoResponseDto = {
+  id: string
+  name: string
+  theme: ERoomTheme
+  maxUsers: number
+  numOfRounds: number
+  timePerRoundInSec: number
+  host: {
+    userId: string
+    userName: string
+  }
+  status: string
+}
 
 export type RoomBaseDto = {
   roomId: string
 }
 
-export class RoomChatRequestDto {
-  @IsString()
-  @MinLength(1)
-  @MaxLength(250)
+export type RoomChatRequestDto = {
   content: string
 }
 
