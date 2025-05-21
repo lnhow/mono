@@ -27,50 +27,55 @@ const RoomCreateForm = memo(function RoomCreateForm() {
   const { control, handleSubmit, reset } = useForm<RoomFormValues>({
     defaultValues,
   })
-  
-  const onSubmit = handleSubmit(useDebounceCallback(async (data) => {
-    if (!socket) {
-      console.error('Socket is not connected')
-      return
-    }
 
-    const submitData = {
-      name: data.name,
-      theme: data.theme,
-      maxUsers: parseInt(data.maxUsers, 10),
-      numOfRounds: parseInt(data.rounds, 10),
-      timeOption: parseInt(data.roundTime, 10),
-    } as RoomCreateRequestDto
+  const onSubmit = handleSubmit(
+    useDebounceCallback(async (data) => {
+      if (!socket) {
+        console.error('Socket is not connected')
+        return
+      }
 
-    const promise = new Promise<RoomCreateResponseDto>((resolve, reject) => {
-      socket.once(EServerToClientEvents.ROOM_CREATE, (res) => {
-        console.log('\x1B[35m[Dev log]\x1B[0m -> socket.once -> res:', res)
-        const resData = res.data
-        if (res.error || !resData) {
-          reject(res.error)
-        }
-        resolve(resData as RoomCreateResponseDto)
+      const submitData = {
+        name: data.name,
+        theme: data.theme,
+        maxUsers: parseInt(data.maxUsers, 10),
+        numOfRounds: parseInt(data.rounds, 10),
+        timeOption: parseInt(data.roundTime, 10),
+      } as RoomCreateRequestDto
+
+      const promise = new Promise<RoomCreateResponseDto>((resolve, reject) => {
+        socket.once(EServerToClientEvents.ROOM_CREATE, (res) => {
+          const resData = res.data
+          if (res.error || !resData) {
+            reject(res.error)
+          }
+          resolve(resData as RoomCreateResponseDto)
+        })
       })
-    })
 
-    try {
-      setIsLoading(true)
+      const toastId = toast.loading('Creating room...')
+      try {
+        setIsLoading(true)
+        socket.emit(EClientToServerEvents.ROOM_CREATE, submitData)
+        const data = await promise
+        await handleJoinRoom(data.id)
+        toast.success('Room created successfully', {
+          id: toastId,
+        })
+      } catch (error) {
+        console.error('Error creating room:', error)
+        toast.error('Error creating room', { id: toastId })
+        return
+      } finally {
+        setIsLoading(false)
+      }
+
       socket.emit(EClientToServerEvents.ROOM_CREATE, submitData)
-      const data = await promise
-      handleJoinRoom(data.id)
-    } catch (error) {
-      console.error('Error creating room:', error)
-      toast.error('Error creating room')
-      return
-    } finally {
-      setIsLoading(false)
-    }
 
-    socket.emit(EClientToServerEvents.ROOM_CREATE, submitData)
-
-    console.log('Room Created:', data)
-    reset()
-  }, 100))
+      console.log('Room Created:', data)
+      reset()
+    }, 100),
+  )
 
   return (
     <div className="py-2">
