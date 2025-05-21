@@ -1,12 +1,12 @@
 'use client'
 import { Button } from '@hsp/ui/src/components/base/button'
-import { Input } from '@hsp/ui/src/components/base/input'
-import { Label } from '@hsp/ui/src/components/base/label'
 import { useEffect } from 'react'
 
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { socketAtom } from '../../../state/store'
 import { useAtomValue } from 'jotai'
+import { FormInput } from './components/input'
+import { useDebounceCallback } from 'usehooks-ts'
 
 export default function ConnectForm() {
   const { socket } = useAtomValue(socketAtom)
@@ -27,7 +27,7 @@ export default function ConnectForm() {
     }
   }, [setValue])
 
-  const onConnect = handleSubmit((data) => {
+  const onConnect = handleSubmit(useDebounceCallback((data) => {
     localStorage.setItem(STORAGE_KEY.USERNAME, data.username)
     if (!socket) {
       return
@@ -36,16 +36,18 @@ export default function ConnectForm() {
       username: data.username,
     }
     socket.connect()
-  })
+  }, 100))
 
   return (
     <form onSubmit={onConnect} className="space-y-4">
-      <Label htmlFor="username" className="block mb-2">
-        Username
-      </Label>
-      <Controller
-        name="username"
+      <FormInput
         control={control}
+        label='Username'
+        name="username"
+        InputProps={{
+          maxLength: USER_NAME.MAX_LENGTH,
+          placeholder: 'Enter your name',
+        }}
         rules={{
           required: true,
           minLength: {
@@ -56,21 +58,6 @@ export default function ConnectForm() {
             value: USER_NAME.MAX_LENGTH,
             message: `Username must be at most ${USER_NAME.MAX_LENGTH} characters`,
           },
-        }}
-        render={({ field, formState }) => {
-          return (
-            <div>
-              <Input
-                placeholder="Enter your name"
-                {...field}
-                className="w-full"
-                maxLength={USER_NAME.MAX_LENGTH}
-              />
-              <span className="text-error-300">
-                {formState.errors?.username?.message || <>&nbsp;</>}
-              </span>
-            </div>
-          )
         }}
       />
       <Button type="submit" className="w-full" disabled={!socket}>

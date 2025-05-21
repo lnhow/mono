@@ -1,11 +1,12 @@
 'use client'
 import { atom } from 'jotai'
 import { focusAtom } from 'jotai-optics'
-import { Socket } from 'socket.io-client'
 import { TGameState } from './state.type'
+import { GrtSocket } from './type/socket'
+import { ERoomStatus, ERoomTheme } from './type/room'
 
 export type SocketStateType = {
-  socket: Socket | null
+  socket: GrtSocket | null
   connected: boolean
 }
 
@@ -17,15 +18,25 @@ export const socketAtom = atom<SocketStateType>({
 export const sessionAtom = atom({
   userId: '',
   userName: '',
-  roomId: '',
 })
 
 export const gameAtom = atom<TGameState>({
-  roomId: '',
+  metadata: {
+    id: '',
+    name: '',
+    theme: ERoomTheme.ANIMALS,
+    maxUsers: 0,
+    numOfRounds: 0,
+    timePerRoundInSec: 0,
+    host: {
+      userId: '',
+      userName: '',
+    },
+    status: ERoomStatus.WAITING,
+  },
   players: [],
   round: 0,
-  maxRound: 0,
-  currentPlayer: '',
+  currentDrawer: '',
   currentQuestion: '',
   messages: [],
 })

@@ -16,6 +16,7 @@ import {
   RoomChatRequestDto,
   RoomCreateResponseDto,
   ESystemMessageContent,
+  RoomCreateRequestDto,
 } from './room.type'
 import { RoomStatus } from 'generated/prisma'
 import { OnGatewayInit } from '@nestjs/websockets'
@@ -30,7 +31,7 @@ export class GrtRoomService
 {
   async createRoom(
     client: GrtSocket,
-    data: GrtClientToServerEventsPayload<EClientToServerEvents.ROOM_CREATE>,
+    data: RoomCreateRequestDto,
   ): Promise<RoomCreateResponseDto> {
     const session = GrtSessionService.extractSession(client)
 
@@ -329,7 +330,7 @@ export class GrtRoomService
   }
 
   // Handle canvas messages && validate drawer permissions
-  async handleRoomDraw(
+  handleRoomDraw(
     client: GrtSocket,
     data: GrtClientToServerEventsPayload<EClientToServerEvents.CANVAS>,
   ) {

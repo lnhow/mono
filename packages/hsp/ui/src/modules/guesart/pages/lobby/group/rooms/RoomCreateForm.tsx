@@ -1,110 +1,213 @@
 'use client'
+import { memo, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Input } from '@hsp/ui/src/components/base/input'
+
 import { Button } from '@hsp/ui/src/components/base/button'
+import { FormInput } from '../components/input'
+import { FormSelect } from '../components/select'
 import {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectValue,
-} from '@hsp/ui/src/components/base/select'
+  ERoomTheme,
+  RoomCreateRequestDto,
+  RoomCreateResponseDto,
+} from '../../../../state/type/room'
+import { useAtomValue } from 'jotai'
+import { socketAtom } from '../../../../state/store'
+import {
+  EClientToServerEvents,
+  EServerToClientEvents,
+} from '../../../../state/type/socket'
+import { toast } from 'sonner'
+import { useJoinRoom } from './utils'
+import { useDebounceCallback } from 'usehooks-ts'
 
-interface RoomFormValues {
-  name: string
-  theme: string
-  maxUsers: number
-  rounds: number
-  roundTime: string
-}
-
-const themes = ['Animals', 'Movies', 'Technology', 'Nature', 'Space', 'Fantasy']
-const maxUsersOptions = Array.from({ length: 7 }, (_, i) => i + 2)
-const roundsOptions = Array.from({ length: 8 }, (_, i) => i + 3)
-const roundTimeOptions = ['30s', '45s', '1m'].map((time, index) => ({ value: '' + index + 1, label: time }))
-const defaultValues: RoomFormValues = {
-  name: '',
-  theme: '',
-  maxUsers: 2,
-  rounds: 3,
-  roundTime: '1',
-}
-
-export default function RoomCreateForm() {
-  const { register, handleSubmit, reset } = useForm<RoomFormValues>({
+const RoomCreateForm = memo(function RoomCreateForm() {
+  const { socket } = useAtomValue(socketAtom)
+  const handleJoinRoom = useJoinRoom()
+  const [isLoading, setIsLoading] = useState(false)
+  const { control, handleSubmit, reset } = useForm<RoomFormValues>({
     defaultValues,
   })
+  
+  const onSubmit = handleSubmit(useDebounceCallback(async (data) => {
+    if (!socket) {
+      console.error('Socket is not connected')
+      return
+    }
 
-  const onSubmit = handleSubmit((data) => {
+    const submitData = {
+      name: data.name,
+      theme: data.theme,
+      maxUsers: parseInt(data.maxUsers, 10),
+      numOfRounds: parseInt(data.rounds, 10),
+      timeOption: parseInt(data.roundTime, 10),
+    } as RoomCreateRequestDto
+
+    const promise = new Promise<RoomCreateResponseDto>((resolve, reject) => {
+      socket.once(EServerToClientEvents.ROOM_CREATE, (res) => {
+        console.log('\x1B[35m[Dev log]\x1B[0m -> socket.once -> res:', res)
+        const resData = res.data
+        if (res.error || !resData) {
+          reject(res.error)
+        }
+        resolve(resData as RoomCreateResponseDto)
+      })
+    })
+
+    try {
+      setIsLoading(true)
+      socket.emit(EClientToServerEvents.ROOM_CREATE, submitData)
+      const data = await promise
+      handleJoinRoom(data.id)
+    } catch (error) {
+      console.error('Error creating room:', error)
+      toast.error('Error creating room')
+      return
+    } finally {
+      setIsLoading(false)
+    }
+
+    socket.emit(EClientToServerEvents.ROOM_CREATE, submitData)
+
     console.log('Room Created:', data)
     reset()
-  })
+  }, 100))
 
   return (
     <div className="py-2">
       <h2 className="text-2xl font-semibold mb-4">Create a Room</h2>
       <form onSubmit={onSubmit} className="space-y-4">
-        <Input
-          placeholder="Room Name"
-          {...register('name', { required: true })}
-          className="w-full"
+        <FormInput
+          control={control}
+          label="Room Name"
+          name="name"
+          rules={{
+            required: {
+              value: true,
+              message: 'Room name is required',
+            },
+            minLength: {
+              value: ROOM_CONSTRAINTS.NAME.MIN_LENGTH,
+              message: `Room name must be at least ${ROOM_CONSTRAINTS.NAME.MIN_LENGTH} characters long`,
+            },
+            maxLength: {
+              value: ROOM_CONSTRAINTS.NAME.MAX_LENGTH,
+              message: `Room name cannot exceed ${ROOM_CONSTRAINTS.NAME.MAX_LENGTH} characters`,
+            },
+          }}
+          InputProps={{
+            placeholder: 'Enter a room name',
+            maxLength: ROOM_CONSTRAINTS.NAME.MAX_LENGTH,
+          }}
         />
-        <Select {...register('theme', { required: true })}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select Theme" />
-          </SelectTrigger>
-          <SelectContent>
-            {themes.map((theme) => (
-              <SelectItem key={theme} value={theme}>
-                {theme}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select
-          {...register('maxUsers', { required: true, valueAsNumber: true })}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Max Users" />
-          </SelectTrigger>
-          <SelectContent>
-            {maxUsersOptions.map((num) => (
-              <SelectItem key={num} value={num.toString()}>
-                {num}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select
-          {...register('rounds', { required: true, valueAsNumber: true })}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Rounds" />
-          </SelectTrigger>
-          <SelectContent>
-            {roundsOptions.map((num) => (
-              <SelectItem key={num} value={num.toString()}>
-                {num}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select {...register('roundTime', { required: true })}>
-          <SelectTrigger>
-            <SelectValue placeholder="Time per Round" />
-          </SelectTrigger>
-          <SelectContent>
-            {roundTimeOptions.map((time) => (
-              <SelectItem key={time.value} value={time.value}>
-                {time.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Button type="submit" className="w-full">
+        <FormSelect
+          control={control}
+          label="Theme"
+          name="theme"
+          rules={{
+            required: {
+              value: true,
+              message: 'Theme is required',
+            },
+          }}
+          options={ROOM_CONSTRAINTS.THEMES_OPTIONS}
+          placeholder="Select a theme"
+          InputProps={{}}
+        />
+        <FormSelect
+          control={control}
+          label="Max Users"
+          name="maxUsers"
+          rules={{
+            required: {
+              value: true,
+              message: 'Max Users is required',
+            },
+          }}
+          options={ROOM_CONSTRAINTS.MAX_USERS_OPTIONS}
+          placeholder="Select max users"
+        />
+        <FormSelect
+          control={control}
+          label="Rounds"
+          name="rounds"
+          rules={{
+            required: {
+              value: true,
+              message: 'Rounds is required',
+            },
+          }}
+          options={ROOM_CONSTRAINTS.ROUNDS_OPTIONS}
+          placeholder="Select rounds"
+        />
+        <FormSelect
+          control={control}
+          label="Time per Round"
+          name="roundTime"
+          rules={{
+            required: {
+              value: true,
+              message: 'Time per Round is required',
+            },
+          }}
+          options={ROOM_CONSTRAINTS.ROUND_TIME_OPTIONS}
+          placeholder="Select time per round"
+        />
+        <Button type="submit" className="w-full" disabled={isLoading}>
           Create Room
         </Button>
       </form>
     </div>
   )
+})
+export default RoomCreateForm
+
+interface RoomFormValues {
+  name: string
+  theme: string
+  maxUsers: string
+  rounds: string
+  roundTime: string
+}
+
+export const ROOM_CONSTRAINTS = {
+  NAME: {
+    MIN_LENGTH: 3,
+    MAX_LENGTH: 50,
+  },
+  MAX_USERS_OPTIONS: Array.from({ length: 7 }, (_, i) => '' + (i + 2)),
+  ROUNDS_OPTIONS: Array.from({ length: 8 }, (_, i) => '' + (i + 3)),
+  ROUND_TIME_OPTIONS: ['30s', '45s', '60s'].map((time, index) => ({
+    value: '' + (index + 1),
+    label: time,
+  })),
+  THEMES_OPTIONS: [
+    {
+      value: ERoomTheme.ANIMALS,
+      label: 'Animals',
+    },
+    {
+      value: ERoomTheme.FOOD,
+      label: 'Food',
+    },
+    {
+      value: ERoomTheme.EVERYDAY_OBJECTS,
+      label: 'Everyday Objects',
+    },
+    {
+      value: ERoomTheme.FRUITS,
+      label: 'Fruits',
+    },
+    {
+      value: ERoomTheme.VEHICLES,
+      label: 'Vehicles',
+    },
+  ],
+}
+
+const defaultValues: RoomFormValues = {
+  name: '',
+  theme: ROOM_CONSTRAINTS.THEMES_OPTIONS[0]!.value,
+  maxUsers: '4',
+  rounds: '3',
+  roundTime: '1',
 }

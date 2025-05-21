@@ -1,3 +1,5 @@
+import { RoomInfoResponseDto } from "./type/room"
+
 // Messages that client sends (i.e. Server accepts)
 export enum REQ_EVENTS {
   CHAT = 'chat',
@@ -51,11 +53,10 @@ export type TUserMessage = TBaseMessage & {
 }
 
 export type TGameState = {
-  roomId: string
+  metadata: RoomInfoResponseDto
   players: PlayerType[]
   round: number
-  maxRound: number
-  currentPlayer: string
+  currentDrawer: string
   currentQuestion: string
   messages: TBaseMessage[]
 }

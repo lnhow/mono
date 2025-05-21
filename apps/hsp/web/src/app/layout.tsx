@@ -1,5 +1,6 @@
 import './globals.css'
 import { ThemeProvider } from '@hsp/ui/src/components/theme/ThemeProvider'
+import { Toaster } from '@hsp/ui/src/components/base/Sonner'
 
 type RootLocaleLayoutProps = React.PropsWithChildren<{
   params: Promise<{ locale: string }>
@@ -17,6 +18,7 @@ export default async function RootLayout({ children }: RootLocaleLayoutProps) {
           disableTransitionOnChange
         >
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

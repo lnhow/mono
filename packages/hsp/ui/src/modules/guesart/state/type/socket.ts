@@ -78,3 +78,10 @@ export enum EGrtErrorCode {
   UNAUTHORIZED = 'EGRT002', // Unauthorized. Invalid session
   INVALID_DATA = 'EGRT003', // Bad request. Invalid data
 }
+
+export const GrtErrorMessages = {
+  [EGrtErrorCode.UNKNOWN]: 'Unknown error',
+  [EGrtErrorCode.INVALID_SESSION]: 'Invalid session',
+  [EGrtErrorCode.UNAUTHORIZED]: 'Unauthorized',
+  [EGrtErrorCode.INVALID_DATA]: 'Invalid data',
+}

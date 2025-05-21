@@ -1,7 +1,9 @@
+import { memo } from 'react'
+
 import { Card } from '@hsp/ui/src/components/base/card'
 import { FormGroup } from './group'
 
-export default function PageLobby() {
+function PageLobby() {
   return (
     <div className="max-w-2xl mx-auto min-h-(--layout-full-height) flex flex-col justify-center">
       <Card className="p-6 shadow-md max-w-sm w-full mx-auto">
@@ -11,3 +13,4 @@ export default function PageLobby() {
     </div>
   )
 }
+export default memo(PageLobby)

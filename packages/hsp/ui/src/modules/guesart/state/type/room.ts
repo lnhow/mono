@@ -6,6 +6,12 @@ export enum ERoomTheme {
   VEHICLES = 'vehicles',
 }
 
+export enum ERoomStatus {
+  WAITING = 'waiting',
+  STARTED = 'started',
+  FINISHED = 'finished',
+}
+
 export enum ERoomTimeOption {
   THIRTY_SECONDS = 1,
   FOURTY_FIVE_SECONDS = 2,

@@ -58,7 +58,7 @@ export class GrtGateway
   @SubscribeMessage(EClientToServerEvents.ROOM_CREATE)
   public async handleRoomCreate(
     @ConnectedSocket() client: GrtSocket,
-    @MessageBody('data')
+    @MessageBody()
     data: RoomCreateRequestDto,
   ): Promise<GrtWsResponse<EServerToClientEvents.ROOM_CREATE>> {
     const roomData = await this.roomService.createRoom(client, data)
@@ -74,17 +74,24 @@ export class GrtGateway
   @SubscribeMessage(EClientToServerEvents.ROOM_JOIN)
   public async handleRoomJoin(
     @ConnectedSocket() client: GrtSocket,
-    @MessageBody('data')
+    @MessageBody()
     data: RoomBaseDto,
   ) {
+    console.log('\x1B[35m[Dev log]\x1B[0m -> data:', data)
+    if (!data.roomId) {
+      throw new GrtWsException(
+        EGrtErrorCode.INVALID_DATA,
+        EServerToClientEvents.ROOM_JOIN,
+      )
+    }
     const roomData = await this.roomService.joinRoom(client, data)
     console.log('\x1B[35m[Dev log]\x1B[0m -> roomData:', roomData)
-    // return {
-    //   event: EServerToClientEvents.ROOM_JOIN,
-    //   data: {
-    //     data: roomData,
-    //   },
-    // }
+    return {
+      event: EServerToClientEvents.ROOM_JOIN,
+      data: {
+        data: roomData,
+      },
+    }
   }
 
   @SubscribeMessage(EClientToServerEvents.ROOM_LEAVE)
@@ -95,7 +102,7 @@ export class GrtGateway
 
   @SubscribeMessage(EClientToServerEvents.ECHO)
   public handleEcho(
-    @MessageBody('data')
+    @MessageBody()
     data: GrtClientToServerEventsPayload<EClientToServerEvents.ECHO>,
   ): GrtWsResponse<EServerToClientEvents.ECHO> {
     return {
