@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form'
 import { useAtomValue } from 'jotai'
 import { useAtomCallback } from 'jotai/utils'
 import { socketAtom } from '../../../../state/store'
-import { REQ_EVENTS } from '../../../../state/state.type'
+import { EClientToServerEvents } from '../../../../state/type/socket'
 
 const ChatInput = memo(function ChatInput({ className }: WithClassName) {
   const { register, handleSubmit, reset } = useForm({
@@ -21,7 +21,7 @@ const ChatInput = memo(function ChatInput({ className }: WithClassName) {
   const submitToServer = useAtomCallback(
     useCallback((get, _, data: string) => {
       const { socket } = get(socketAtom)
-      socket?.emit(REQ_EVENTS.CHAT, {
+      socket?.emit(EClientToServerEvents.CHAT, {
         content: data,
       })
     }, []),

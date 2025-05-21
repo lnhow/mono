@@ -1,7 +1,7 @@
 'use client'
 import { memo, PropsWithChildren, useEffect } from 'react'
 import { io } from 'socket.io-client'
-import { socketAtom } from './store'
+import { sessionAtom, socketAtom } from './store'
 import { useSetAtom } from 'jotai'
 import { EServerToClientEvents, GrtSocket } from './type/socket'
 
@@ -13,6 +13,7 @@ const SocketProvider = memo(function SocketProvider({
   children,
 }: PropsWithChildren) {
   const setAtom = useSetAtom(socketAtom)
+  const setSessionAtom = useSetAtom(sessionAtom)
 
   useEffect(() => {
     const socket: GrtSocket = io(getSocketUrl(), {
@@ -26,7 +27,7 @@ const SocketProvider = memo(function SocketProvider({
 
     const setConnected = () => {
       setAtom((prev) => ({
-       ...prev,
+        ...prev,
         connected: socket.connected,
       }))
     }
@@ -42,9 +43,9 @@ const SocketProvider = memo(function SocketProvider({
         console.error('Error saving session to sessionStorage:', error)
       }
 
-      setAtom((prev) => ({
-      ...prev,
-        session,
+      setSessionAtom((prev) => ({
+        ...prev,
+        ...session,
       }))
     })
 
@@ -68,14 +69,13 @@ const SocketProvider = memo(function SocketProvider({
         // Connect to the server
         socket.connect()
       }
-
     } catch (error) {
       console.error('Error retrieving session from sessionStorage:', error)
     }
     return () => {
       socket.disconnect()
     }
-  }, [setAtom])
+  }, [setAtom, setSessionAtom])
   return <>{children}</>
 })
 

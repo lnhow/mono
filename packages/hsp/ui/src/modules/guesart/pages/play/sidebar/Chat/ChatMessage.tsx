@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { useAtomValue } from 'jotai'
 
-import { socketAtom } from '../../../../state/store'
+import { sessionAtom } from '../../../../state/store'
 import {
   MessageType,
   SystemMessageContent,
@@ -28,9 +28,10 @@ const ChatMessage = memo(function ChatMessage({ msg }: ChatMessageProps) {
 export default ChatMessage
 
 const UserMessage = ({ msg }: ChatMessageProps) => {
-  const { socket } = useAtomValue(socketAtom)
+  const { userId } = useAtomValue(sessionAtom)
   const userMsg = msg as TUserMessage
-  const isCurrentUser = userMsg.user.id === socket?.id
+  console.log('\x1B[35m[Dev log]\x1B[0m -> UserMessage -> userMsg:', userMsg.user.id, userId)
+  const isCurrentUser = userMsg.user.id === userId
 
   return (
     <div className="text-sm text-fore-500">
@@ -43,11 +44,11 @@ const UserMessage = ({ msg }: ChatMessageProps) => {
 }
 
 const SystemMessage = ({ msg }: ChatMessageProps) => {
-  const { socket } = useAtomValue(socketAtom)
+  const { userId } = useAtomValue(sessionAtom)
   const content = getSystemMessageContent({
     msg,
     metadata: {
-      currentUserId: socket?.id,
+      currentUserId: userId,
     },
   })
 

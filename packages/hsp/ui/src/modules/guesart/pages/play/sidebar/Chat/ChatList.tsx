@@ -3,7 +3,9 @@ import { useAtom, useAtomValue } from 'jotai'
 import { memo, startTransition, useEffect, useRef } from 'react'
 import { messagesAtom, socketAtom } from '../../../../state/store'
 import ChatMessage from './ChatMessage'
-import { TBaseMessage } from '../../../../state/state.type'
+import { MessageType } from '../../../../state/state.type'
+import { EServerToClientEvents } from '../../../../state/type/socket'
+import { ChatResponseDto } from '../../../../state/type/room'
 
 const ChatList = memo(function ChatList({ className }: { className?: string }) {
   const { socket } = useAtomValue(socketAtom)
@@ -15,16 +17,30 @@ const ChatList = memo(function ChatList({ className }: { className?: string }) {
       return
     }
 
-    const onNewMessage = (message: TBaseMessage) => {
+    const onNewUserMessage = (message: ChatResponseDto) => {
       startTransition(() => {
-        setMessages((prev) => [...prev, message])
+        setMessages((prev) => [...prev, {
+          ...message,
+          type: MessageType.USER,
+        }])
       })
     }
 
-    socket.on('chat', onNewMessage)
+    const onNewSystemMessage = (message: ChatResponseDto) => {
+      startTransition(() => {
+        setMessages((prev) => [...prev, {
+          ...message,
+          type: MessageType.SYSTEM,
+        }])
+      })
+    }
+
+    socket.on(EServerToClientEvents.MSG_CHAT, onNewUserMessage)
+    socket.on(EServerToClientEvents.MSG_SYSTEM, onNewSystemMessage)
 
     return () => {
-      socket.off('chat', onNewMessage)
+      socket.off(EServerToClientEvents.MSG_CHAT, onNewUserMessage)
+      socket.off(EServerToClientEvents.MSG_SYSTEM, onNewSystemMessage)
     }
   }, [socket, setMessages])
 

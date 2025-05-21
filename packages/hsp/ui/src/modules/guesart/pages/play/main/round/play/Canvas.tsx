@@ -15,6 +15,7 @@ import { /* LuCircle, */ LuUndo, LuX } from 'react-icons/lu'
 import { debounce } from 'lodash'
 import { useAtomValue } from 'jotai'
 import { socketAtom } from '@hsp/ui/src/modules/guesart/state/store'
+import { EClientToServerEvents, EServerToClientEvents } from '@hsp/ui/src/modules/guesart/state/type/socket'
 
 const DEFAULT_BRUSH_SIZES = [4, 8, 16] as const
 const MAX_RECENT_COLORS = 6
@@ -144,10 +145,10 @@ const Canvas = memo(function Canvas() {
       loadImageToCanvas(ctxRef.current, canvas)
     }
 
-    socket.socket.on('receive-canvas', handleReceiveCanvas)
+    socket.socket.on(EServerToClientEvents.CANVAS, handleReceiveCanvas)
     
     return () => {
-      socket.socket?.off('receive-canvas', handleReceiveCanvas)
+      socket.socket?.off(EServerToClientEvents.CANVAS, handleReceiveCanvas)
     }
   }, [socket.socket])
 
@@ -185,7 +186,7 @@ const Canvas = memo(function Canvas() {
     ctxRef.current?.closePath()
     setIsDrawing(false)
     saveHistory()
-    socket.socket?.emit('send-canvas', canvasRef.current?.toDataURL() || '')
+    socket.socket?.emit(EClientToServerEvents.CANVAS, canvasRef.current?.toDataURL() || '')
   }, [isDrawing, saveHistory, socket.socket])
 
   const clearCanvas = useCallback(() => {
