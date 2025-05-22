@@ -1,8 +1,8 @@
 import { memo } from 'react'
 import Link from 'next/link'
 
-import ThemeChanger from '@hsp/ui/components/ThemeChanger'
-import NoSsr from '../../../../../components/utils/NoSsr'
+// import ThemeChanger from '@hsp/ui/components/ThemeChanger'
+// import NoSsr from '../../../../../components/utils/NoSsr'
 
 const HeaderLeading = memo(function HeaderLeading() {
   return (
@@ -11,9 +11,9 @@ const HeaderLeading = memo(function HeaderLeading() {
         <Link href="/">
           <h1 className="text-xl font-extralight">hammerspc</h1>
         </Link>
-        <NoSsr>
+        {/* <NoSsr>
           <ThemeChanger />
-        </NoSsr>
+        </NoSsr> */}
       </div>
     </div>
   )
