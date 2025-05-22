@@ -60,11 +60,11 @@ export interface GrtClientToServerEvents {
   [EClientToServerEvents.CHAT]: (data: { content: string }) => void
   [EClientToServerEvents.CANVAS]: (data: string) => void
   [EClientToServerEvents.ROOM_CREATE]: (data: RoomCreateRequestDto) => void
-  [EServerToClientEvents.ROOM_VALIDATE]: (data: RoomBaseDto) => void
+  [EClientToServerEvents.ROOM_VALIDATE]: (data: RoomBaseDto) => void
   [EClientToServerEvents.ROOM_JOIN]: (data: RoomBaseDto) => void
-  [EClientToServerEvents.ROOM_LEAVE]: (data: never) => void
-  [EClientToServerEvents.GAME_START]: (data: never) => void
-  [EClientToServerEvents.ROUND_START]: (data: never) => void
+  [EClientToServerEvents.ROOM_LEAVE]: () => void
+  [EClientToServerEvents.GAME_START]: () => void
+  [EClientToServerEvents.ROUND_START]: () => void
 }
 
 export type GrtSocket = Socket<GrtServerToClientEvents, GrtClientToServerEvents>

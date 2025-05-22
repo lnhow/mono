@@ -165,6 +165,7 @@ export class GrtRoomService
 
       return tx
     } catch (e) {
+      this.logger.error(e)
       if (e instanceof GrtWsException && e.message == 'Unknown error') {
         this.logger.error(e)
       }

@@ -1,11 +1,11 @@
 'use client'
 import { useAtom, useAtomValue } from 'jotai'
 import { memo, startTransition, useEffect, useRef } from 'react'
-import { messagesAtom, socketAtom } from '../../../../state/store'
+import { socketAtom } from '../../../../state/store'
 import ChatMessage from './ChatMessage'
-import { MessageType } from '../../../../state/state.type'
 import { EServerToClientEvents } from '../../../../state/type/socket'
 import { ChatResponseDto } from '../../../../state/type/room'
+import { messagesAtom, MessageType } from '../../_state/store'
 
 const ChatList = memo(function ChatList({ className }: { className?: string }) {
   const { socket } = useAtomValue(socketAtom)

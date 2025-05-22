@@ -1,14 +1,119 @@
 'use client'
+import { useAtomValue } from 'jotai'
 import Canvas from './main/round/play/Canvas'
 import Sidebar from './sidebar'
+import { sessionAtom, socketAtom } from '../../state/store'
+import { roomAtom } from './_state/store'
+import { memo, useCallback, useEffect } from 'react'
+import { RESET, useAtomCallback } from 'jotai/utils'
+import { SESSION_STORAGE_KEY } from '../../state/type/session'
+import { usePathname, useRouter } from 'next/navigation'
+import {
+  EClientToServerEvents,
+  EServerToClientEvents,
+} from '../../state/type/socket'
+import { LOBBY_URL } from '../../utils'
+import { debounce } from 'lodash'
+import RoomSkeleton from './skeleton'
 
-export default function PagePlay() {
+function PagePlay() {
+  const { isLoading } = useAtomValue(roomAtom)
 
-  
+  useInitRoom()
+
+  if (isLoading) {
+    return <RoomSkeleton />
+  }
+
   return (
     <div className="flex flex-col md:flex-row gap-2">
       <Canvas />
       <Sidebar className="w-full md:w-[360px] md:max-w-4/12" />
     </div>
   )
+}
+export default memo(PagePlay)
+
+const debounceInit = debounce((fn: () => void) => {
+  fn()
+}, 50)
+
+const useInitRoom = () => {
+  const router = useRouter()
+  const pathname = usePathname()
+  const { userId } = useAtomValue(sessionAtom)
+
+  const loadGameState = useAtomCallback(
+    useCallback(
+      (get, set) => {
+        const { socket } = get(socketAtom)
+        if (!socket) {
+          return
+        }
+
+        debounceInit(() => {
+          new Promise((resolve, reject) => {
+            socket.once(EServerToClientEvents.ROOM_JOIN, (res) => {
+              console.log(
+                '\x1B[35m[Dev log]\x1B[0m -> socket.once -> res:',
+                res,
+              )
+              const resData = res.data
+              if (res.error || !resData) {
+                reject(res.error)
+                return
+              }
+              set(roomAtom, (prev) => {
+                return {
+                  ...prev,
+                  isLoading: false,
+                  metadata: resData,
+                }
+              })
+              resolve(res)
+            })
+
+            const roomId = pathname.split('/').pop()
+            if (!roomId) {
+              return reject('Room id not found')
+            }
+            socket.emit(EClientToServerEvents.ROOM_JOIN, {
+              roomId,
+            })
+          }).catch((err) => {
+            console.error(err)
+            router.push(LOBBY_URL)
+          })
+        })
+
+        return () => {
+          socket.off(EServerToClientEvents.ROOM_JOIN)
+          const { metadata } = get(roomAtom)
+          if (metadata.id) {
+            socket.emit(EClientToServerEvents.ROOM_LEAVE)
+          }
+          set(roomAtom, RESET)
+        }
+      },
+      [pathname, router],
+    ),
+  )
+
+  return useEffect(() => {
+    if (!userId) {
+      try {
+        const session = sessionStorage.getItem(SESSION_STORAGE_KEY)
+        if (!session) {
+          router.push(LOBBY_URL)
+          return
+        }
+      } catch {
+        /*ignore*/
+      }
+    }
+    // Wait for socket to connect & log in
+    const cleanup = loadGameState()
+
+    return cleanup
+  }, [router, userId, loadGameState])
 }

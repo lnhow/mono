@@ -1,12 +1,7 @@
-import { RoomInfoResponseDto } from "./type/room"
-
-// Messages that client sends (i.e. Server accepts)
-export enum REQ_EVENTS {
-  CHAT = 'chat',
-  JOIN_ROOM = 'joinRoom',
-  LEAVE_ROOM = 'leaveRoom',
-  SEND_CANVAS = 'send-canvas',
-}
+'use client'
+import { focusAtom } from 'jotai-optics'
+import { ERoomStatus, ERoomTheme, RoomInfoResponseDto } from '../../../state/type/room'
+import { atomWithReset } from 'jotai/utils'
 
 export type PlayerType = {
   id: string
@@ -53,6 +48,7 @@ export type TUserMessage = TBaseMessage & {
 }
 
 export type TGameState = {
+  isLoading: boolean
   metadata: RoomInfoResponseDto
   players: PlayerType[]
   round: number
@@ -60,3 +56,27 @@ export type TGameState = {
   currentQuestion: string
   messages: TBaseMessage[]
 }
+
+export const roomAtom = atomWithReset<TGameState>({
+  isLoading: true,
+  metadata: {
+    id: '',
+    name: '',
+    theme: ERoomTheme.ANIMALS,
+    maxUsers: 0,
+    numOfRounds: 0,
+    timePerRoundInSec: 0,
+    host: {
+      userId: '',
+      userName: '',
+    },
+    status: ERoomStatus.WAITING,
+  },
+  players: [],
+  round: 0,
+  currentDrawer: '',
+  currentQuestion: '',
+  messages: [],
+})
+
+export const messagesAtom = focusAtom(roomAtom, (game) => game.prop('messages'))

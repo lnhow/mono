@@ -3,6 +3,7 @@ import { useCallback } from 'react'
 import { socketAtom } from '../../../../state/store'
 import { useRouter } from 'next/navigation'
 import { EClientToServerEvents, EServerToClientEvents } from '../../../../state/type/socket'
+import { getRoomUrl } from '../../../../utils'
 
 export const useValidateRoom = () => {
   const { socket } = useAtomValue(socketAtom)
@@ -22,17 +23,13 @@ export const useValidateRoom = () => {
           reject(res.error)
           return
         }
-        router.push(roomUrl(roomId))
+        router.push(getRoomUrl(roomId))
         resolve(res)
       })
 
-      socket.emit(EClientToServerEvents.ROOM_JOIN, {
-        roomId: roomId,
+      socket.emit(EClientToServerEvents.ROOM_VALIDATE, {
+        roomId,
       })
     })
   }, [router, socket])
-}
-
-export const roomUrl = (roomId: string) => {
-  return `/${roomId}`
 }

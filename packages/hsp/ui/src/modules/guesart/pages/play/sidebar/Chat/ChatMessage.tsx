@@ -8,7 +8,7 @@ import {
   TBaseMessage,
   TSystemMessage,
   TUserMessage,
-} from '../../../../state/state.type'
+} from '../../_state/store'
 import cn from '@hsp/ui/src/utils/cn'
 
 export type ChatMessageProps = {
@@ -30,7 +30,11 @@ export default ChatMessage
 const UserMessage = ({ msg }: ChatMessageProps) => {
   const { userId } = useAtomValue(sessionAtom)
   const userMsg = msg as TUserMessage
-  console.log('\x1B[35m[Dev log]\x1B[0m -> UserMessage -> userMsg:', userMsg.user.id, userId)
+  console.log(
+    '\x1B[35m[Dev log]\x1B[0m -> UserMessage -> userMsg:',
+    userMsg.user.id,
+    userId,
+  )
   const isCurrentUser = userMsg.user.id === userId
 
   return (

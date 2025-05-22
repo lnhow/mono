@@ -61,7 +61,6 @@ const SocketProvider = memo(function SocketProvider({
 
     try {
       const session = sessionStorage.getItem('session')
-      console.log('\x1B[35m[Dev log]\x1B[0m -> useEffect -> session:', session)
       if (session) {
         socket.auth = {
           session: session,

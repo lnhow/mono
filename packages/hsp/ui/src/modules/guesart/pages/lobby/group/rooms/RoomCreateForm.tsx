@@ -1,6 +1,10 @@
 'use client'
 import { memo, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import { useDebounceCallback } from 'usehooks-ts'
+import { useRouter } from 'next/navigation'
+import { useAtomValue } from 'jotai'
 
 import { Button } from '@hsp/ui/src/components/base/button'
 import { FormInput } from '../components/input'
@@ -10,16 +14,13 @@ import {
   RoomCreateRequestDto,
   RoomCreateResponseDto,
 } from '../../../../state/type/room'
-import { useAtomValue } from 'jotai'
 import { socketAtom } from '../../../../state/store'
 import {
   EClientToServerEvents,
   EServerToClientEvents,
 } from '../../../../state/type/socket'
-import { toast } from 'sonner'
-import { useDebounceCallback } from 'usehooks-ts'
-import { useRouter } from 'next/navigation'
-import { roomUrl } from './utils'
+
+import { getRoomUrl } from '../../../../utils'
 
 const RoomCreateForm = memo(function RoomCreateForm() {
   const { socket } = useAtomValue(socketAtom)
@@ -63,7 +64,7 @@ const RoomCreateForm = memo(function RoomCreateForm() {
           id: toastId,
         })
 
-        router.push(roomUrl(data.id))
+        router.push(getRoomUrl(data.id))
       } catch (error) {
         console.error('Error creating room:', error)
         toast.error('Error creating room', { id: toastId })

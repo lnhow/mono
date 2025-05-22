@@ -42,6 +42,7 @@ const ChatInput = memo(function ChatInput({ className }: WithClassName) {
         {...register('input')}
         placeholder="Type a message..."
         className="flex-1"
+        autoComplete="off"
       />
       <Button type="submit" size="icon" disabled={!connected}>
         <LuSend />
