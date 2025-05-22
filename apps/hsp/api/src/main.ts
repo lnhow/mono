@@ -5,7 +5,6 @@ import { ConfigService } from '@nestjs/config'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
-  app.enableShutdownHooks()
   app.setGlobalPrefix('api')
 
   const configService = app.get(ConfigService)
@@ -15,6 +14,12 @@ async function bootstrap() {
   app.useWebSocketAdapter(mongoIoAdapter)
 
   const PORT = configService.get<number>('PORT') || 8000
+  const ENV = configService.get<string>('ENV')
+
+  if (ENV !== 'local') {
+    app.enableShutdownHooks()
+  }
+
   await app.listen(PORT).then(() => {
     console.log(`Listening on port ${PORT}`)
   })

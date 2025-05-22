@@ -16,6 +16,7 @@ export enum EServerToClientEvents {
   MSG_CHAT = 'msg_chat',
   MSG_SYSTEM = 'msg_system',
   CANVAS = 'canvas',
+  ROOM_VALIDATE = 'room_validate',
   ROOM_CREATE = 'room_create',
   ROOM_JOIN = 'room_join',
   // ROOM_INFO = 'room_info',
@@ -32,6 +33,7 @@ export interface GrtServerToClientEvents {
   [EServerToClientEvents.ROOM_CREATE]: (
     data: WithError<RoomCreateResponseDto>,
   ) => void
+  [EServerToClientEvents.ROOM_VALIDATE]: (data: WithError<RoomBaseDto>) => void
   [EServerToClientEvents.ROOM_JOIN]: (
     data: WithError<RoomInfoResponseDto>,
   ) => void
@@ -47,6 +49,7 @@ export enum EClientToServerEvents {
   CHAT = 'chat',
   CANVAS = 'canvas',
   ROOM_CREATE = 'room_create',
+  ROOM_VALIDATE = 'room_validate',
   ROOM_JOIN = 'room_join',
   ROOM_LEAVE = 'room_leave',
   GAME_START = 'game_start',
@@ -57,6 +60,7 @@ export interface GrtClientToServerEvents {
   [EClientToServerEvents.CHAT]: (data: { content: string }) => void
   [EClientToServerEvents.CANVAS]: (data: string) => void
   [EClientToServerEvents.ROOM_CREATE]: (data: RoomCreateRequestDto) => void
+  [EServerToClientEvents.ROOM_VALIDATE]: (data: RoomBaseDto) => void
   [EClientToServerEvents.ROOM_JOIN]: (data: RoomBaseDto) => void
   [EClientToServerEvents.ROOM_LEAVE]: (data: never) => void
   [EClientToServerEvents.GAME_START]: (data: never) => void

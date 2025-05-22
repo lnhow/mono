@@ -1,12 +1,11 @@
-import { useAtomValue, useSetAtom } from 'jotai'
+import { useAtomValue } from 'jotai'
 import { useCallback } from 'react'
-import { gameAtom, socketAtom } from '../../../../state/store'
+import { socketAtom } from '../../../../state/store'
 import { useRouter } from 'next/navigation'
 import { EClientToServerEvents, EServerToClientEvents } from '../../../../state/type/socket'
 
-export const useJoinRoom = () => {
+export const useValidateRoom = () => {
   const { socket } = useAtomValue(socketAtom)
-  const setGameAtom = useSetAtom(gameAtom)
   const router = useRouter()
 
   return useCallback((roomId: string) => {
@@ -17,19 +16,13 @@ export const useJoinRoom = () => {
     }
 
     return new Promise((resolve, reject) => {
-      socket.once(EServerToClientEvents.ROOM_JOIN, (res) => {
+      socket.once(EServerToClientEvents.ROOM_VALIDATE, (res) => {
         const resData = res.data
         if (res.error || !resData) {
           reject(res.error)
           return
         }
-        setGameAtom((prev) => {
-          return {
-            ...prev,
-            metadata: resData,
-          }
-        })
-        router.push(`/${resData.id}`)
+        router.push(roomUrl(roomId))
         resolve(res)
       })
 
@@ -37,5 +30,9 @@ export const useJoinRoom = () => {
         roomId: roomId,
       })
     })
-  }, [router, setGameAtom, socket])
+  }, [router, socket])
+}
+
+export const roomUrl = (roomId: string) => {
+  return `/${roomId}`
 }

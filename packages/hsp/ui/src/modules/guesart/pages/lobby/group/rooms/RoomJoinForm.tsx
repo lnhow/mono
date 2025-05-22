@@ -8,7 +8,7 @@ import { FormInput } from '../components/input'
 import { socketAtom } from '../../../../state/store'
 import { EGrtErrorCode } from '../../../../state/type/socket'
 import { useState } from 'react'
-import { useJoinRoom } from './utils'
+import { useValidateRoom } from './utils'
 import { useDebounceCallback } from 'usehooks-ts'
 
 interface JoinRoomFormValues {
@@ -23,7 +23,7 @@ export default function RoomJoinForm() {
       roomId: '',
     },
   })
-  const handleJoinRoom = useJoinRoom()
+  const handleJoinRoom = useValidateRoom()
 
   const onSubmit = handleSubmit(useDebounceCallback((data) => {
     if (!socket) {
@@ -40,7 +40,7 @@ export default function RoomJoinForm() {
       success: 'Joined Room!',
       error: (error) => {
         if (error?.error === EGrtErrorCode.INVALID_DATA) {
-          return 'Room not found'
+          return error.data.message === 'Unknown error' ? 'Room not found' : error.data.message
         }
         return 'Unexcepted error. Please try again later.'
       },

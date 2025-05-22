@@ -1,13 +1,13 @@
 'use client'
 import { useAtomValue } from 'jotai'
 import ConnectForm from './ConnectForm'
-import { socketAtom } from '../../../state/store'
+import { sessionAtom } from '../../../state/store'
 import Lobby from './rooms'
 
 export function FormGroup() {
-  const { connected } = useAtomValue(socketAtom)
+  const { userId } = useAtomValue(sessionAtom)
 
-  if (connected) {
+  if (userId) {
     return <Lobby />
   }
 

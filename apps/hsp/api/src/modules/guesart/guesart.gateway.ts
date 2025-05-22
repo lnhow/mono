@@ -71,13 +71,29 @@ export class GrtGateway
     }
   }
 
+  @SubscribeMessage(EClientToServerEvents.ROOM_VALIDATE)
+  public async handleRoomValidate(
+    @ConnectedSocket() client: GrtSocket,
+    @MessageBody()
+    data: RoomBaseDto,
+  ): Promise<GrtWsResponse<EServerToClientEvents.ROOM_VALIDATE>> {
+    const roomData = await this.roomService.validateRoom(client, data)
+    return {
+      event: EServerToClientEvents.ROOM_VALIDATE,
+      data: {
+        data: {
+          roomId: roomData.id,
+        },
+      },
+    }
+  }
+
   @SubscribeMessage(EClientToServerEvents.ROOM_JOIN)
   public async handleRoomJoin(
     @ConnectedSocket() client: GrtSocket,
     @MessageBody()
     data: RoomBaseDto,
   ) {
-    console.log('\x1B[35m[Dev log]\x1B[0m -> data:', data)
     if (!data.roomId) {
       throw new GrtWsException(
         EGrtErrorCode.INVALID_DATA,
@@ -85,7 +101,7 @@ export class GrtGateway
       )
     }
     const roomData = await this.roomService.joinRoom(client, data)
-    console.log('\x1B[35m[Dev log]\x1B[0m -> roomData:', roomData)
+
     return {
       event: EServerToClientEvents.ROOM_JOIN,
       data: {

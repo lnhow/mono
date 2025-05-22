@@ -22,6 +22,7 @@ import { RoomStatus } from 'generated/prisma'
 import { OnGatewayInit } from '@nestjs/websockets'
 import { buildChatMessage, buildSystemMessage, socketRoomId } from './utils'
 import { MAX_CORRECT_USERS } from './room.const'
+import { ObjectId } from 'mongodb'
 
 const PREFIX_VALIDATION = 'Validation:' as const
 
@@ -56,43 +57,70 @@ export class GrtRoomService
     }
   }
 
+  async validateRoom(client: GrtSocket, data: RoomBaseDto) {
+    const session = GrtSessionService.extractSession(client)
+    const roomId = data.roomId
+
+    try {
+      if (!roomId || !ObjectId.isValid(roomId)) {
+        throw new Error(`${PREFIX_VALIDATION}Invalid roomId`)
+      }
+      const room = await this.prisma.room.findUnique({
+        where: {
+          id: roomId,
+        },
+        include: {
+          users: {
+            where: {
+              isValid: true,
+            },
+          },
+        },
+      })
+      if (!room) {
+        throw new GrtWsException(
+          EGrtErrorCode.INVALID_DATA,
+          EServerToClientEvents.ROOM_JOIN,
+        )
+      }
+
+      const isUserInRoom = room.users.some(
+        (user) => user.userId === session.userId,
+      )
+
+      if (room.status !== RoomStatus.waiting && !isUserInRoom) {
+        throw new Error(`${PREFIX_VALIDATION}Room is not waiting`)
+      }
+
+      if (room.users.length === 0 && room.host.id !== session.userId) {
+        throw new Error(`${PREFIX_VALIDATION}Host hasn't joined room`)
+      }
+
+      if (room.users.length >= room.maxUsers) {
+        throw new Error(`${PREFIX_VALIDATION}Room is full`)
+      }
+
+      return room
+    } catch (e) {
+      // this.logger.error(e)
+      throw new GrtWsException(
+        EGrtErrorCode.INVALID_DATA,
+        EServerToClientEvents.ROOM_JOIN,
+        {
+          message:
+            e instanceof Error && e.message.startsWith(PREFIX_VALIDATION)
+              ? e.message.substring(PREFIX_VALIDATION.length)
+              : 'Unknown error',
+        },
+      )
+    }
+  }
+
   async joinRoom(client: GrtSocket, data: RoomBaseDto) {
     const session = GrtSessionService.extractSession(client)
     try {
       const tx = await this.prisma.$transaction(async (tx) => {
-        const room = await tx.room.findUnique({
-          where: {
-            id: data.roomId,
-          },
-          include: {
-            users: {
-              where: {
-                isValid: true,
-              },
-            },
-          },
-        })
-
-        if (!room) {
-          throw new Error(`${PREFIX_VALIDATION}Room not found`)
-        }
-
-        const isUserInRoom = room.users.some(
-          (user) => user.userId === session.userId,
-        )
-
-        if (room.status !== RoomStatus.waiting && !isUserInRoom) {
-          throw new Error(`${PREFIX_VALIDATION}Room is not waiting`)
-        }
-
-        if (room.users.length === 0 && room.host.id !== session.userId) {
-          throw new Error(`${PREFIX_VALIDATION}Host hasn't joined room`)
-        }
-
-        if (room.users.length >= room.maxUsers) {
-          throw new Error(`${PREFIX_VALIDATION}Room is full`)
-        }
-
+        await this.validateRoom(client, data)
         // room.status = RoomStatus.waiting && user joined room for the first time
         // || user rejoined room
 
@@ -137,7 +165,9 @@ export class GrtRoomService
 
       return tx
     } catch (e) {
-      this.logger.error(e)
+      if (e instanceof GrtWsException && e.message == 'Unknown error') {
+        this.logger.error(e)
+      }
       throw new GrtWsException(
         EGrtErrorCode.INVALID_DATA,
         EServerToClientEvents.ROOM_JOIN,

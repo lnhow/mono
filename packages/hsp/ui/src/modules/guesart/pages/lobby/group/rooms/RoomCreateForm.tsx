@@ -17,12 +17,13 @@ import {
   EServerToClientEvents,
 } from '../../../../state/type/socket'
 import { toast } from 'sonner'
-import { useJoinRoom } from './utils'
 import { useDebounceCallback } from 'usehooks-ts'
+import { useRouter } from 'next/navigation'
+import { roomUrl } from './utils'
 
 const RoomCreateForm = memo(function RoomCreateForm() {
   const { socket } = useAtomValue(socketAtom)
-  const handleJoinRoom = useJoinRoom()
+  const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const { control, handleSubmit, reset } = useForm<RoomFormValues>({
     defaultValues,
@@ -58,10 +59,11 @@ const RoomCreateForm = memo(function RoomCreateForm() {
         setIsLoading(true)
         socket.emit(EClientToServerEvents.ROOM_CREATE, submitData)
         const data = await promise
-        await handleJoinRoom(data.id)
         toast.success('Room created successfully', {
           id: toastId,
         })
+
+        router.push(roomUrl(data.id))
       } catch (error) {
         console.error('Error creating room:', error)
         toast.error('Error creating room', { id: toastId })
