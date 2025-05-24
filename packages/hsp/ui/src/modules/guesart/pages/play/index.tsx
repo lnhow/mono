@@ -1,20 +1,22 @@
 'use client'
+import { memo, useCallback, useEffect } from 'react'
 import { useAtomValue } from 'jotai'
-import Canvas from './main/round/play/Canvas'
-import Sidebar from './sidebar'
+import { RESET, useAtomCallback } from 'jotai/utils'
+import { usePathname, useRouter } from 'next/navigation'
+import { debounce } from 'lodash'
+
 import { sessionAtom, socketAtom } from '../../state/store'
 import { roomAtom } from './_state/store'
-import { memo, useCallback, useEffect } from 'react'
-import { RESET, useAtomCallback } from 'jotai/utils'
 import { SESSION_STORAGE_KEY } from '../../state/type/session'
-import { usePathname, useRouter } from 'next/navigation'
 import {
   EClientToServerEvents,
   EServerToClientEvents,
 } from '../../state/type/socket'
 import { LOBBY_URL } from '../../utils'
-import { debounce } from 'lodash'
+
+import Sidebar from './sidebar'
 import RoomSkeleton from './skeleton'
+import RoomMain from './main'
 
 function PagePlay() {
   const { isLoading } = useAtomValue(roomAtom)
@@ -27,7 +29,7 @@ function PagePlay() {
 
   return (
     <div className="flex flex-col md:flex-row gap-2">
-      <Canvas />
+      <RoomMain />
       <Sidebar className="w-full md:w-[360px] md:max-w-4/12" />
     </div>
   )

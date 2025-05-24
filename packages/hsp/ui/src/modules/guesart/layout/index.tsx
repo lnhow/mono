@@ -2,8 +2,9 @@ import NoSsr from '@hsp/ui/src/components/app/NoSsr'
 import { ButtonLink } from '@hsp/ui/src/components/base/button'
 import { ThemeToggle } from '@hsp/ui/src/components/theme/ThemeToggle'
 import SocketProvider from '../state/SocketProvider'
+import { memo } from 'react'
 
-export default function GuesartLayout({
+const GuesartLayout = memo(function GuesartLayout({
   children,
 }: {
   children: React.ReactNode
@@ -18,7 +19,7 @@ export default function GuesartLayout({
           <ThemeToggle />
         </nav>
       </div>
-      <main className="mx-4 mb-4 min-h-[calc(100vh-var(--layout-header-height)---spacing(4))]">
+      <main className="mx-(--layout-spacing) mb-(--layout-spacing) min-h-(--layout-full-height)">
         {children}
       </main>
       <NoSsr>
@@ -26,4 +27,6 @@ export default function GuesartLayout({
       </NoSsr>
     </div>
   )
-}
+})
+
+export default GuesartLayout

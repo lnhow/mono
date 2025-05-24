@@ -1,6 +1,0 @@
-@layer guesart {
-  :root {
-    --layout-header-height: --spacing(13);
-    --layout-full-height: calc(100vh - var(--layout-header-height) - --spacing(4));
-  }
-}

@@ -10,7 +10,7 @@ export default function Sidebar({ className }: { className?: string }) {
         className,
       )}
     >
-      <Chat className="h-56 md:h-[calc(100%-var(--spacing)*56)] md:order-1" />
+      <Chat className="h-56 md:h-[calc(100%---spacing(56))] md:order-1" />
       <PlayersList className="h-56 md:max-h-5/12" />
     </div>
   )
