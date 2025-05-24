@@ -1,13 +1,7 @@
 'use client'
 import { focusAtom } from 'jotai-optics'
-import { ERoomStatus, ERoomTheme, RoomInfoResponseDto } from '../../../state/type/room'
+import { ERoomStatus, ERoomTheme, PlayerDto, RoomInfoResponseDto } from '../../../state/type/room'
 import { atomWithReset } from 'jotai/utils'
-
-export type PlayerType = {
-  id: string
-  name: string
-  score: number
-}
 
 export enum MessageType {
   SYSTEM = -1,
@@ -50,10 +44,12 @@ export type TUserMessage = TBaseMessage & {
 export type TGameState = {
   isLoading: boolean
   metadata: RoomInfoResponseDto
-  players: PlayerType[]
-  round: number
-  currentDrawer: string
-  currentQuestion: string
+  players: PlayerDto[]
+  round: {
+    number: number
+    currentDrawer: string
+    currentQuestion: string
+  }
   messages: TBaseMessage[]
 }
 
@@ -73,10 +69,15 @@ export const roomAtom = atomWithReset<TGameState>({
     status: ERoomStatus.WAITING,
   },
   players: [],
-  round: 0,
-  currentDrawer: '',
-  currentQuestion: '',
+  round: {
+    number: 0,
+    currentDrawer: '',
+    currentQuestion: '',
+  },
   messages: [],
 })
 
-export const messagesAtom = focusAtom(roomAtom, (game) => game.prop('messages'))
+export const roomIsLoadingAtom = focusAtom(roomAtom, (game) => game.prop('isLoading'))
+export const roomPlayersAtom = focusAtom(roomAtom, (game) => game.prop('players'))
+export const roomMetadataAtom = focusAtom(roomAtom, (game) => game.prop('metadata'))
+export const roomMessagesAtom = focusAtom(roomAtom, (game) => game.prop('messages'))

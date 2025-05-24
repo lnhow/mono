@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { debounce } from 'lodash'
 
 import { sessionAtom, socketAtom } from '../../state/store'
-import { roomAtom } from './_state/store'
+import { roomAtom, roomIsLoadingAtom, roomMetadataAtom } from './_state/store'
 import { SESSION_STORAGE_KEY } from '../../state/type/session'
 import {
   EClientToServerEvents,
@@ -17,11 +17,13 @@ import { LOBBY_URL } from '../../utils'
 import Sidebar from './sidebar'
 import RoomSkeleton from './skeleton'
 import RoomMain from './main'
+import { useListenRoomPlayers } from './_state/hooks'
 
 function PagePlay() {
-  const { isLoading } = useAtomValue(roomAtom)
+  const isLoading = useAtomValue(roomIsLoadingAtom)
 
   useInitRoom()
+  useListenRoomPlayers()
 
   if (isLoading) {
     return <RoomSkeleton />
@@ -36,7 +38,7 @@ function PagePlay() {
 }
 export default memo(PagePlay)
 
-const debounceInit = debounce((fn: () => void) => {
+const debouncedInit = debounce((fn: () => void) => {
   fn()
 }, 50)
 
@@ -53,25 +55,17 @@ const useInitRoom = () => {
           return
         }
 
-        debounceInit(() => {
+        debouncedInit(() => {
           new Promise((resolve, reject) => {
             socket.once(EServerToClientEvents.ROOM_JOIN, (res) => {
-              console.log(
-                '\x1B[35m[Dev log]\x1B[0m -> socket.once -> res:',
-                res,
-              )
               const resData = res.data
               if (res.error || !resData) {
                 reject(res.error)
                 return
               }
-              set(roomAtom, (prev) => {
-                return {
-                  ...prev,
-                  isLoading: false,
-                  metadata: resData,
-                }
-              })
+
+              set(roomIsLoadingAtom, false)
+              set(roomMetadataAtom, resData)
               resolve(res)
             })
 

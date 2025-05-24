@@ -5,11 +5,11 @@ import { socketAtom } from '../../../../state/store'
 import ChatMessage from './ChatMessage'
 import { EServerToClientEvents } from '../../../../state/type/socket'
 import { ChatResponseDto } from '../../../../state/type/room'
-import { messagesAtom, MessageType } from '../../_state/store'
+import { roomMessagesAtom, MessageType } from '../../_state/store'
 
 const ChatList = memo(function ChatList({ className }: { className?: string }) {
   const { socket } = useAtomValue(socketAtom)
-  const [messages, setMessages] = useAtom(messagesAtom)
+  const [messages, setMessages] = useAtom(roomMessagesAtom)
   const refContainer = useRef<HTMLDivElement>(null)
 
   useEffect(() => {

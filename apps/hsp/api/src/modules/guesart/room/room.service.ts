@@ -163,6 +163,8 @@ export class GrtRoomService
           buildSystemMessage(ESystemMessageContent.JOIN_ROOM, session),
         )
 
+      await this.emitUpdatedUserInfo(data.roomId)
+
       return tx
     } catch (e) {
       this.logger.error(e)
@@ -241,6 +243,7 @@ export class GrtRoomService
         EServerToClientEvents.MSG_SYSTEM,
         buildSystemMessage(ESystemMessageContent.LEAVE_ROOM, session),
       )
+    await this.emitUpdatedUserInfo(roomId)
 
     return tx
   }
@@ -345,6 +348,8 @@ export class GrtRoomService
       const roomUsers = await this.prisma.roomUser.findMany({
         where: {
           roomId,
+          isActive: true,
+          isValid: true,
         },
         select: {
           userId: true,

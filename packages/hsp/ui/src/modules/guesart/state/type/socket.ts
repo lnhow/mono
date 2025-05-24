@@ -43,6 +43,8 @@ export interface GrtServerToClientEvents {
   [EServerToClientEvents.SESSION]: (data: SessionDto) => void
   [EServerToClientEvents.CANVAS]: (data: string) => void
 }
+export type GrtServerToClientEventsPayload<T extends EServerToClientEvents> =
+  Parameters<GrtServerToClientEvents[T]>[0]
 
 export enum EClientToServerEvents {
   ECHO = 'echo',
