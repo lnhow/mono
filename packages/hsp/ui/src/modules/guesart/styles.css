@@ -5,6 +5,6 @@
     --layout-full-height: calc(100vh - var(--layout-header-height) - var(--layout-spacing));
 
     --game-topbar-height: --spacing(20);
-    --game-canvas-height: calc(var(--layout-full-height) - var(--room-game-top-bar-height));
+    --game-canvas-height: calc(var(--layout-full-height) - var(--game-topbar-height) - --spacing(2));
   }
 }
