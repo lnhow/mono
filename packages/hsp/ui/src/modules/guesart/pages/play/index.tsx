@@ -41,7 +41,7 @@ const debounceInit = debounce((fn: () => void) => {
 const useInitRoom = () => {
   const router = useRouter()
   const pathname = usePathname()
-  const { userId } = useAtomValue(sessionAtom)
+  const session = useAtomValue(sessionAtom)
 
   const loadGameState = useAtomCallback(
     useCallback(
@@ -100,7 +100,7 @@ const useInitRoom = () => {
   )
 
   return useEffect(() => {
-    if (!userId) {
+    if (!session.userId) {
       try {
         const session = sessionStorage.getItem(SESSION_STORAGE_KEY)
         if (!session) {
@@ -115,5 +115,5 @@ const useInitRoom = () => {
     const cleanup = loadGameState()
 
     return cleanup
-  }, [router, userId, loadGameState])
+  }, [router, session, loadGameState])
 }

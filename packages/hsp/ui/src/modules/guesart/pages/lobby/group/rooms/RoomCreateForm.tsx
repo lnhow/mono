@@ -73,8 +73,6 @@ const RoomCreateForm = memo(function RoomCreateForm() {
         setIsLoading(false)
       }
 
-      socket.emit(EClientToServerEvents.ROOM_CREATE, submitData)
-
       console.log('Room Created:', data)
       reset()
     }, 100),
