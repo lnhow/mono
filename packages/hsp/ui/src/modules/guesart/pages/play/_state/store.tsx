@@ -47,8 +47,10 @@ export type TGameState = {
   players: PlayerDto[]
   round: {
     number: number
-    currentDrawer: string
-    currentQuestion: string
+    drawerId: string
+    word: string
+    wordImg: string
+    endedAt: number
   }
   messages: TBaseMessage[]
 }
@@ -71,8 +73,10 @@ export const roomAtom = atomWithReset<TGameState>({
   players: [],
   round: {
     number: 0,
-    currentDrawer: '',
-    currentQuestion: '',
+    drawerId: '',
+    word: '____',
+    wordImg: '',
+    endedAt: 0,
   },
   messages: [],
 })
@@ -81,3 +85,5 @@ export const roomIsLoadingAtom = focusAtom(roomAtom, (game) => game.prop('isLoad
 export const roomPlayersAtom = focusAtom(roomAtom, (game) => game.prop('players'))
 export const roomMetadataAtom = focusAtom(roomAtom, (game) => game.prop('metadata'))
 export const roomMessagesAtom = focusAtom(roomAtom, (game) => game.prop('messages'))
+export const roomRoundAtom = focusAtom(roomAtom, (game) => game.prop('round'))
+export const roomStatusAtom = focusAtom(roomMetadataAtom, (metadata) => metadata.prop('status'))

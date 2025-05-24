@@ -1,11 +1,20 @@
 import { useAtomValue, useSetAtom } from 'jotai'
-import { socketAtom } from '../../../state/store'
+import { sessionAtom, socketAtom } from '../../../state/store'
 import {
   EServerToClientEvents,
   GrtServerToClientEventsPayload,
 } from '../../../state/type/socket'
-import { useEffect } from 'react'
-import { roomPlayersAtom } from './store'
+import { useEffect, useMemo } from 'react'
+import { roomPlayersAtom, roomRoundAtom } from './store'
+
+export const useIsDrawer = () => {
+  const { userId } = useAtomValue(sessionAtom)
+  const { drawerId: drawer } = useAtomValue(roomRoundAtom)
+
+  return useMemo(() => {
+    return drawer === userId
+  }, [drawer, userId])
+}
 
 export const useListenRoomPlayers = () => {
   const { socket } = useAtomValue(socketAtom)
