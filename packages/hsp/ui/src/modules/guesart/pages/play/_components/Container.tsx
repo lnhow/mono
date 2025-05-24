@@ -1,8 +1,20 @@
+import cn from '@hsp/ui/src/utils/cn'
 import { memo } from 'react'
 
-function Container({ children }: { children: React.ReactNode }) {
+function Container({
+  children,
+  className,
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
   return (
-    <div className="flex flex-col items-center w-full md:h-(--room-game-top-bar-height) relative gap-2">
+    <div
+      className={cn(
+        'flex flex-col items-center w-full md:h-(--room-game-top-bar-height) relative gap-2',
+        className,
+      )}
+    >
       {children}
     </div>
   )

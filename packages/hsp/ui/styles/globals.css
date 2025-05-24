@@ -70,19 +70,19 @@
 }
 
 [data-theme=dark] {
-  --hsp-primary-100: var(--color-emerald-800);
+  --hsp-primary-100: var(--color-emerald-950);
   --hsp-primary-200: var(--color-emerald-600);
   --hsp-primary-300: var(--color-emerald-400);
   --hsp-primary-400: var(--color-emerald-200);
   --hsp-primary-500: var(--color-emerald-50);
 
-  --hsp-secondary-100: var(--color-indigo-800);
+  --hsp-secondary-100: var(--color-indigo-950);
   --hsp-secondary-200: var(--color-indigo-600);
   --hsp-secondary-300: var(--color-indigo-400);
   --hsp-secondary-400: var(--color-indigo-200);
   --hsp-secondary-500: var(--color-indigo-50);
 
-  --hsp-accent-100: var(--color-cyan-800);
+  --hsp-accent-100: var(--color-cyan-950);
   --hsp-accent-200: var(--color-cyan-600);
   --hsp-accent-300: var(--color-cyan-400);
   --hsp-accent-400: var(--color-cyan-200);

@@ -44,8 +44,8 @@ export type RoomInfoResponseDto = {
   numOfRounds: number
   timePerRoundInSec: number
   host: {
-    userId: string
-    userName: string
+    id: string
+    name: string
   }
   status: string
 }

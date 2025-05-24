@@ -1,10 +1,14 @@
 import { memo } from "react";
-import Canvas from "./round/play/Canvas";
+// import Canvas from "./round/play/Canvas";
+import Lobby from "./lobby";
 
 function RoomMain() {
   return (
-    <Canvas />
+    <Lobby />
   )
+  // return (
+  //   <Canvas />
+  // )
 }
 
 export default memo(RoomMain)

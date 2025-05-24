@@ -65,8 +65,8 @@ export const roomAtom = atomWithReset<TGameState>({
     numOfRounds: 0,
     timePerRoundInSec: 0,
     host: {
-      userId: '',
-      userName: '',
+      id: '',
+      name: '',
     },
     status: ERoomStatus.WAITING,
   },
