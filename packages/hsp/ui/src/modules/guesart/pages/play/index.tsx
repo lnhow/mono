@@ -17,13 +17,11 @@ import { LOBBY_URL } from '../../utils'
 import Sidebar from './sidebar'
 import RoomSkeleton from './skeleton'
 import RoomMain from './main'
-import { useListenRoomPlayers } from './_state/hooks'
 
 function PagePlay() {
   const isLoading = useAtomValue(roomIsLoadingAtom)
 
   useInitRoom()
-  useListenRoomPlayers()
 
   if (isLoading) {
     return <RoomSkeleton />
