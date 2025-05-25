@@ -3,6 +3,7 @@ import { ButtonLink } from '@hsp/ui/src/components/base/button'
 import { ThemeToggle } from '@hsp/ui/src/components/theme/ThemeToggle'
 import SocketProvider from '../state/SocketProvider'
 import { memo } from 'react'
+import { JotaiProvider } from './JotaiProvider'
 
 const GuesartLayout = memo(function GuesartLayout({
   children,
@@ -19,12 +20,14 @@ const GuesartLayout = memo(function GuesartLayout({
           <ThemeToggle />
         </nav>
       </div>
-      <main className="mx-(--layout-spacing) mb-(--layout-spacing) min-h-(--layout-full-height)">
-        {children}
-      </main>
-      <NoSsr>
-        <SocketProvider />
-      </NoSsr>
+      <JotaiProvider>
+        <main className="mx-(--layout-spacing) mb-(--layout-spacing) min-h-(--layout-full-height)">
+          {children}
+        </main>
+        <NoSsr>
+          <SocketProvider />
+        </NoSsr>
+      </JotaiProvider>
     </div>
   )
 })
