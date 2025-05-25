@@ -10,7 +10,6 @@ export const initGameStateListener: TInitListener = (socket, state) => {
   function onNextRound(
     data: GrtServerToClientEventsPayload<EServerToClientEvents.ROUND_NEXT>,
   ) {
-    console.log('\x1B[35m[Dev log]\x1B[0m -> data:', data)
     state.set(roomStatusAtom, ERoomStatus.playing)
     state.set(roomRoundAtom, (prev) => ({
       ...prev,

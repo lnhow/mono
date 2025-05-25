@@ -65,6 +65,7 @@ export enum EClientToServerEvents {
   ROOM_LEAVE = 'room_leave',
   GAME_START = 'game_start',
   ROUND_START = 'round_start',
+  ROUND_END = 'round_end'
 }
 export interface GrtClientToServerEvents {
   [EClientToServerEvents.ECHO]: (data: string) => void
@@ -76,6 +77,7 @@ export interface GrtClientToServerEvents {
   [EClientToServerEvents.ROOM_LEAVE]: () => void
   [EClientToServerEvents.GAME_START]: () => void
   [EClientToServerEvents.ROUND_START]: () => void
+  [EClientToServerEvents.ROUND_END]: () => void
 }
 
 export type GrtSocket = Socket<GrtServerToClientEvents, GrtClientToServerEvents>

@@ -26,13 +26,15 @@ import ToolsPanel from './ToolsPanel'
 import InfoPanel from './InfoPanel'
 import Container from '../../../_components/Container'
 import { breakpoints } from '@hsp/ui/src/styles/const'
+import { useIsDrawer } from '../../../_state/hooks'
 
 const RoundPlay = memo(function RoundPlay() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const ctxRef = useRef<CanvasRenderingContext2D>(null)
-  const [isDrawing, setIsDrawing] = useState(false)
+  const isDrawingRef = useRef(false)
   const [, setHistory] = useState<string[]>([])
   const socket = useAtomValue(socketAtom)
+  const isDrawer = useIsDrawer()
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -55,12 +57,12 @@ const RoundPlay = memo(function RoundPlay() {
         if (!canvasCtn) {
           return
         }
-  
+
         const minSide = window.matchMedia(`(width >= ${breakpoints.md})`)
           .matches
           ? Math.min(canvasCtn.clientWidth, canvasCtn.clientHeight)
           : canvasCtn.clientWidth
-  
+
         canvas.width = minSide * window.devicePixelRatio
         canvas.height = minSide * window.devicePixelRatio
         if (ctxRef.current) {
@@ -102,19 +104,19 @@ const RoundPlay = memo(function RoundPlay() {
 
     ctxRef.current?.beginPath()
     ctxRef.current?.moveTo(x, y)
-    setIsDrawing(true)
+    isDrawingRef.current = true
   }, [])
 
   const draw = useCallback(
     (e: SyntheticEvent) => {
-      if (!isDrawing) {
+      if (!isDrawingRef.current) {
         return
       }
       const { x, y } = getPointerCoords(canvasRef.current, e)
       ctxRef.current?.lineTo(x, y)
       ctxRef.current?.stroke()
     },
-    [isDrawing],
+    [],
   )
 
   const saveHistory = useCallback(() => {
@@ -127,15 +129,15 @@ const RoundPlay = memo(function RoundPlay() {
   }, [])
 
   const stopDrawing = useCallback(() => {
-    if (!isDrawing) return
+    if (!isDrawingRef.current) return
     ctxRef.current?.closePath()
-    setIsDrawing(false)
+    isDrawingRef.current = false
     saveHistory()
     socket.socket?.emit(
       EClientToServerEvents.CANVAS,
       canvasRef.current?.toDataURL() || '',
     )
-  }, [isDrawing, saveHistory, socket.socket])
+  }, [saveHistory, socket.socket])
 
   const getCanvasContext = useCallback(() => {
     return canvasRef.current?.getContext('2d')
@@ -169,7 +171,12 @@ const RoundPlay = memo(function RoundPlay() {
           }}
         />
       </div>
-      <ToolsPanel getCanvasContext={getCanvasContext} setHistory={setHistory} />
+      {isDrawer && (
+        <ToolsPanel
+          getCanvasContext={getCanvasContext}
+          setHistory={setHistory}
+        />
+      )}
     </Container>
   )
 })

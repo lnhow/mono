@@ -3,15 +3,22 @@ import Container from '../../../_components/Container'
 import { Button } from '@hsp/ui/src/components/base/button'
 import { useCountdown } from 'usehooks-ts'
 import WordBox from '../../../_components/WordBox'
+import { useAtomValue } from 'jotai'
+import { roomRoundAtom } from '../../../_state/store'
+import { socketAtom } from '@hsp/ui/src/modules/guesart/state/store'
+import { EClientToServerEvents } from '@hsp/ui/src/modules/guesart/state/type/socket'
 
 export const RoundStartDrawer = memo(function RoundStartDrawer() {
-  const word = 'apple'
-  const wordImageUrl = 'https://picsum.photos/300'
+  const round = useAtomValue(roomRoundAtom)
+  const { socket } = useAtomValue(socketAtom)
+
   return (
     <RoundStartDrawerInternal
-      word={word}
-      wordImg={wordImageUrl}
-      onStart={() => {}}
+      word={round.word}
+      wordImg={round.wordImg}
+      onStart={() => {
+        socket?.emit(EClientToServerEvents.ROUND_START)
+      }}
     />
   )
 })

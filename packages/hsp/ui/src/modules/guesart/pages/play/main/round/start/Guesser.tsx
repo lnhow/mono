@@ -1,9 +1,17 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import Container from '../../../_components/Container';
+import { useAtomValue } from 'jotai';
+import { roomPlayersAtom, roomRoundAtom } from '../../../_state/store';
 
 
 export const RoundStartGuesser = memo(function RoundGuesser() {
-  const drawerName = 'John Doe'
+  const { drawerId } = useAtomValue(roomRoundAtom)
+  const players = useAtomValue(roomPlayersAtom)
+  const drawerName = useMemo(() => {
+    const drawer = players.find((val) => val.userId === drawerId)
+    return drawer?.userName || 'N/A'
+  }, [drawerId, players])
+
   return (
     <RoundStartGuesserInternal drawerName={drawerName} />
   )
