@@ -54,7 +54,7 @@ const useInitRoom = () => {
           return
         }
 
-        const cleanup = initSocket(socket)
+        const cleanup = initSocket(socket, { get, set })
 
         debouncedInit(() => {
           new Promise((resolve, reject) => {
