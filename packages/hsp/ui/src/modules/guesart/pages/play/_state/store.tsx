@@ -50,7 +50,7 @@ export type TGameState = {
     drawerId: string
     word: string
     wordImg: string
-    endedAt: number
+    endAt: number
   }
   messages: TBaseMessage[]
 }
@@ -76,7 +76,7 @@ export const roomAtom = atomWithReset<TGameState>({
     drawerId: '',
     word: '____',
     wordImg: '',
-    endedAt: 0,
+    endAt: 0,
   },
   messages: [],
 })

@@ -60,7 +60,7 @@ model RoomRound {
   duration     Int
   startTime    DateTime
   endTime      DateTime
-  Room         Room     @relation(fields: [roomId], references: [id])
+  room         Room     @relation(fields: [roomId], references: [id])
 
   @@map("grt_room_rounds")
 }

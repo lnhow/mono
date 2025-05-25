@@ -17,12 +17,21 @@ import {
   RoomCreateResponseDto,
   ESystemMessageContent,
   RoomCreateRequestDto,
+  ERoomTheme,
 } from './room.type'
 import { RoomStatus } from 'generated/prisma'
 import { OnGatewayInit } from '@nestjs/websockets'
-import { buildChatMessage, buildSystemMessage, socketRoomId } from './utils'
+import {
+  buildChatMessage,
+  buildSystemMessage,
+  DEFAULT_DATE,
+  socketRoomId,
+  userRoomId,
+} from './utils'
 import { MAX_CORRECT_USERS } from './room.const'
 import { ObjectId } from 'mongodb'
+import WordService, { RandomService } from './word.service'
+import { sleep } from 'src/_utils/sleep'
 
 const PREFIX_VALIDATION = 'Validation:' as const
 
@@ -30,7 +39,7 @@ const PREFIX_VALIDATION = 'Validation:' as const
 export class GrtRoomService
   implements OnGatewayInit<GrtServer>, OnModuleDestroy
 {
-  async createRoom(
+  async create(
     client: GrtSocket,
     data: RoomCreateRequestDto,
   ): Promise<RoomCreateResponseDto> {
@@ -57,7 +66,7 @@ export class GrtRoomService
     }
   }
 
-  async validateRoom(client: GrtSocket, data: RoomBaseDto) {
+  async validate(client: GrtSocket, data: RoomBaseDto) {
     const session = GrtSessionService.extractSession(client)
     const roomId = data.roomId
 
@@ -116,11 +125,11 @@ export class GrtRoomService
     }
   }
 
-  async joinRoom(client: GrtSocket, data: RoomBaseDto) {
+  async join(client: GrtSocket, data: RoomBaseDto) {
     const session = GrtSessionService.extractSession(client)
     try {
       const tx = await this.prisma.$transaction(async (tx) => {
-        await this.validateRoom(client, data)
+        await this.validate(client, data)
         // room.status = RoomStatus.waiting && user joined room for the first time
         // || user rejoined room
 
@@ -184,7 +193,7 @@ export class GrtRoomService
     }
   }
 
-  async leaveRoom(client: GrtSocket) {
+  async leave(client: GrtSocket) {
     const session = GrtSessionService.extractSession(client)
     const roomId = client.data.currentRoomId
 
@@ -249,7 +258,7 @@ export class GrtRoomService
   }
 
   // Handle chat and guess messages
-  async handleRoomChat(client: GrtSocket, data: RoomChatRequestDto) {
+  async chat(client: GrtSocket, data: RoomChatRequestDto) {
     const session = GrtSessionService.extractSession(client)
     const roomId = client.data.currentRoomId
     if (!roomId) {
@@ -335,7 +344,7 @@ export class GrtRoomService
           buildSystemMessage(ESystemMessageContent.GUESS_CORRECT, session),
         )
       if (txResult[0].correctUsers.length >= MAX_CORRECT_USERS) {
-        this._handleRoundEnd(roomId)
+        void this._endGame(roomId)
       }
       await this.emitUpdatedUserInfo(roomId)
     } catch (e) {
@@ -366,57 +375,279 @@ export class GrtRoomService
   }
 
   // Handle canvas messages && validate drawer permissions
-  handleRoomDraw(
+  async draw(
     client: GrtSocket,
     data: GrtClientToServerEventsPayload<EClientToServerEvents.CANVAS>,
   ) {
-    // const session = GrtSessionService.extractSession(client)
+    const session = GrtSessionService.extractSession(client)
     const roomId = client.data.currentRoomId
     if (!roomId) {
       return
     }
-    // const roomRound = await this.prisma.roomRound.findFirst({
-    //   where: {
-    //     roomId,
-    //     isActive: true,
-    //   },
-    //   select: {
-    //     id: true,
-    //     roundNumber: true,
-    //     drawerUserId: true,
-    //   },
-    // })
-    // if (!roomRound || roomRound.drawerUserId !== session.userId) {
-    //   return
-    // }
+    const roomRound = await this.prisma.roomRound.findFirst({
+      where: {
+        id: roomId,
+        isActive: true,
+      },
+      select: {
+        id: true,
+        roundNumber: true,
+        drawerUserId: true,
+      },
+    })
+    if (!roomRound || roomRound.drawerUserId !== session.userId) {
+      return
+    }
 
     client.to(socketRoomId(roomId)).emit(EServerToClientEvents.CANVAS, data)
   }
 
   // Change room status to playing
-  // async handleGameStart(client: GrtSocket) {
-  // }
+  async startGame(client: GrtSocket) {
+    const session = GrtSessionService.extractSession(client)
+    const roomId = client.data.currentRoomId
+    if (!roomId) {
+      return
+    }
+    try {
+      const room = await this.prisma.room.findUnique({
+        where: {
+          id: roomId,
+          status: RoomStatus.waiting,
+        },
+        select: {
+          id: true,
+          status: true,
+          host: true,
+        },
+      })
+
+      if (!room || room.host.id !== session.userId) {
+        return
+      }
+
+      await this.prisma.room.update({
+        where: {
+          id: roomId,
+        },
+        data: {
+          status: RoomStatus.playing,
+        },
+      })
+
+      await this._nextRound(roomId)
+    } catch (e) {
+      this.logger.error(e)
+      return
+    }
+  }
 
   // Pick a word & drawer for a round
-  // private async _handleRoundStart() {
-  // }
+  private async _nextRound(roomId: string) {
+    try {
+      const room = await this.prisma.room.findUnique({
+        where: {
+          id: roomId,
+        },
+        include: {
+          users: {
+            where: {
+              isActive: true,
+              isValid: true,
+            },
+          },
+          rounds: true,
+        },
+      })
+
+      if (!room) {
+        return
+      }
+      const users = room.users
+      const rounds = room.rounds
+      const userIds = users.map((user) => user.userId)
+      const prevRounds = rounds.reduce(
+        (acc, round) => {
+          acc.drawers.push(round.drawerUserId)
+          acc.answers.push(round.answer)
+          return acc
+        },
+        { drawers: [], answers: [] } as {
+          drawers: string[]
+          answers: string[]
+        },
+      )
+
+      const word = WordService.getRandomWord(
+        room.theme as ERoomTheme,
+        prevRounds.answers,
+      )
+      const data = {
+        roomId,
+        roundNumber: rounds.length + 1,
+        drawerUserId: RandomService.getRandomArray(userIds, (userId) => {
+          return !prevRounds.drawers.includes(userId)
+        }),
+        answer: word.word,
+        isActive: true,
+        correctUsers: [] as string[],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        duration: room.timePerRoundInSec,
+      }
+
+      const roomRound = await this.prisma.roomRound.create({
+        data: {
+          roomId,
+          roundNumber: rounds.length + 1,
+          drawerUserId: data.drawerUserId,
+          answer: data.answer,
+          isActive: true,
+          correctUsers: [],
+          startTime: DEFAULT_DATE,
+          endTime: DEFAULT_DATE,
+          duration: room.timePerRoundInSec,
+        },
+      })
+
+      const userRoom = userRoomId(roomId, data.drawerUserId)
+      // Emit to drawer
+      this.server.to(userRoom).emit(EServerToClientEvents.ROUND_NEXT, {
+        round: roomRound.roundNumber,
+        drawer: roomRound.drawerUserId,
+        word: word.word,
+        wordImg: word.wordImg,
+      })
+
+      this.server
+        .in(socketRoomId(roomId))
+        .except(userRoom)
+        .emit(EServerToClientEvents.ROUND_NEXT, {
+          round: roomRound.roundNumber,
+          drawer: roomRound.drawerUserId,
+          word: WordService.obstructWord(word.word),
+        })
+    } catch (e) {
+      this.logger.error(e)
+    }
+  }
 
   // Confirm round start by drawer
-  // async handleRoundStartConfirm(client: GrtSocket) {
-  // }
+  async startRound(client: GrtSocket) {
+    const session = GrtSessionService.extractSession(client)
+    const roomId = client.data.currentRoomId
+    if (!roomId) {
+      return
+    }
+    try {
+      const roomRound = await this.prisma.roomRound.findFirst({
+        where: {
+          roomId,
+          isActive: true,
+          drawerUserId: session.userId,
+        },
+        select: {
+          id: true,
+          duration: true,
+        },
+      })
+
+      if (!roomRound) {
+        return
+      }
+      const startTime = new Date()
+      const endTime = new Date(startTime.getTime() + roomRound.duration * 1000)
+
+      await this.prisma.roomRound.update({
+        where: {
+          id: roomRound.id,
+        },
+        data: {
+          startTime,
+          endTime,
+        },
+      })
+
+      this.server
+        .in(socketRoomId(roomId))
+        .emit(EServerToClientEvents.ROUND_START, {
+          endAt: endTime.getTime(),
+        })
+    } catch (e) {
+      this.logger.error(e)
+    }
+  }
 
   // private _handleRoundGuess() {}
 
   // Show word to all players
-  private _handleRoundEnd(roomId: string) {
-    console.log(
-      '\x1B[35m[Dev log]\x1B[0m -> _handleRoundEnd -> roomId:',
-      roomId,
-    )
+  async endRound(client: GrtSocket) {
+    const session = GrtSessionService.extractSession(client)
+    const roomId = client.data.currentRoomId
+    if (!roomId) {
+      return
+    }
+
+    try {
+      const round = await this.prisma.roomRound.findFirst({
+        where: {
+          drawerUserId: session.userId,
+          isActive: true,
+        },
+        include: {
+          room: {
+            include: {
+              _count: {
+                select: { rounds: true },
+              },
+            },
+          },
+        },
+      })
+      console.log('\x1B[35m[Dev log]\x1B[0m -> endRound -> round:', round)
+      if (!round) {
+        return
+      }
+
+      await this.prisma.roomRound.update({
+        where: {
+          id: round.id,
+        },
+        data: {
+          isActive: false,
+        },
+      })
+
+      this.server.in(socketRoomId(roomId)).emit(EServerToClientEvents.ROUND_END)
+      await sleep(10000)
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      if (round.roundNumber >= round.room._count.rounds) {
+        void this._endGame(roomId)
+        return
+      }
+      void this._nextRound(roomId)
+    } catch (error) {
+      this.logger.log(error)
+    }
   }
 
   // Show leaderboard & end game
-  // private _handleGameEnd() {}
+  private async _endGame(roomId: string) {
+    try {
+      await this.prisma.room.update({
+        where: {
+          id: roomId,
+          status: RoomStatus.waiting,
+        },
+        data: {
+          status: RoomStatus.finished,
+        },
+      })
+      this.server.emit(EServerToClientEvents.GAME_END)
+    } catch (error) {
+      this.logger.error(error)
+    }
+  }
 
   constructor(private prisma: PrismaService) {}
 

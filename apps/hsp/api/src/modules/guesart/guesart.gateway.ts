@@ -61,7 +61,7 @@ export class GrtGateway
     @MessageBody()
     data: RoomCreateRequestDto,
   ): Promise<GrtWsResponse<EServerToClientEvents.ROOM_CREATE>> {
-    const roomData = await this.roomService.createRoom(client, data)
+    const roomData = await this.roomService.create(client, data)
 
     return {
       event: EServerToClientEvents.ROOM_CREATE,
@@ -77,7 +77,7 @@ export class GrtGateway
     @MessageBody()
     data: RoomBaseDto,
   ): Promise<GrtWsResponse<EServerToClientEvents.ROOM_VALIDATE>> {
-    const roomData = await this.roomService.validateRoom(client, data)
+    const roomData = await this.roomService.validate(client, data)
     return {
       event: EServerToClientEvents.ROOM_VALIDATE,
       data: {
@@ -100,7 +100,7 @@ export class GrtGateway
         EServerToClientEvents.ROOM_JOIN,
       )
     }
-    const roomData = await this.roomService.joinRoom(client, data)
+    const roomData = await this.roomService.join(client, data)
 
     return {
       event: EServerToClientEvents.ROOM_JOIN,
@@ -112,46 +112,48 @@ export class GrtGateway
 
   @SubscribeMessage(EClientToServerEvents.ROOM_LEAVE)
   public async handleRoomLeave(@ConnectedSocket() client: GrtSocket) {
-    const roomData = await this.roomService.leaveRoom(client)
+    const roomData = await this.roomService.leave(client)
     console.log('\x1B[35m[Dev log]\x1B[0m -> room leave -> roomData:', roomData)
   }
 
-  @SubscribeMessage(EClientToServerEvents.ECHO)
-  public handleEcho(
-    @MessageBody()
-    data: GrtClientToServerEventsPayload<EClientToServerEvents.ECHO>,
-  ): GrtWsResponse<EServerToClientEvents.ECHO> {
-    return {
-      event: EServerToClientEvents.ECHO,
-      data: {
-        data: `echo: ${data}`,
-      },
-    }
+  @SubscribeMessage(EClientToServerEvents.GAME_START)
+  public async handleRoomStartGame(@ConnectedSocket() client: GrtSocket) {
+    await this.roomService.startGame(client)
+  }
+
+  @SubscribeMessage(EClientToServerEvents.ROUND_START)
+  public async handleRoomStartRound(@ConnectedSocket() client: GrtSocket) {
+    await this.roomService.startRound(client)
+  }
+
+  @SubscribeMessage(EClientToServerEvents.ROUND_END)
+  public async handleRoomEndRound(@ConnectedSocket() client: GrtSocket) {
+    await this.roomService.endRound(client)
   }
 
   @SubscribeMessage(EClientToServerEvents.CHAT)
-  public handleChat(
+  public async handleChat(
     @ConnectedSocket() client: GrtSocket,
     @MessageBody()
     data: GrtClientToServerEventsPayload<EClientToServerEvents.CHAT>,
-  ): GrtWsResponse<EServerToClientEvents.MSG_CHAT> {
-    return this.service.handleChat(client, data)
+  ) {
+    await this.roomService.chat(client, data)
   }
 
   @SubscribeMessage(EClientToServerEvents.CANVAS)
-  public handleCanvas(
+  public async handleCanvas(
     @ConnectedSocket() client: GrtSocket,
     @MessageBody()
     data: GrtClientToServerEventsPayload<EClientToServerEvents.CANVAS>, // Canvas data URL
-  ): void {
-    this.service.broadcastCanvas(client, data)
+  ) {
+    await this.roomService.draw(client, data)
   }
 
   // Called when client disconnects
   public async handleDisconnect(client: GrtSocket) {
     await Promise.allSettled([
       this.service.onClientDisconnect(client),
-      this.roomService.leaveRoom(client),
+      this.roomService.leave(client),
     ])
   }
 

@@ -23,12 +23,10 @@ export enum EServerToClientEvents {
   ROOM_JOIN = 'room_join',
   // ROOM_INFO = 'room_info',
   ROOM_USERS = 'room_users',
-  // ROUND_NEXT = 'round_next',
-  // ROUND_DRAWER = 'round_drawer',
-  // ROUND_START = 'round_start',
-  // ROUND_END = 'round_end',
-  // GAME_END = 'game_end',
-  // GAME_RESULT = 'game_result',
+  ROUND_NEXT = 'round_next',
+  ROUND_START = 'round_start',
+  ROUND_END = 'round_end',
+  GAME_END = 'game_end',
 }
 export interface GrtServerToClientEvents {
   [EServerToClientEvents.ECHO]: (data: { data: string }) => void
@@ -39,7 +37,16 @@ export interface GrtServerToClientEvents {
   [EServerToClientEvents.ROOM_JOIN]: (
     data: WithError<RoomInfoResponseDto>,
   ) => void
+  [EServerToClientEvents.ROUND_NEXT]: (data: {
+    round: number
+    drawer: string
+    word: string
+    wordImg?: string
+  }) => void
+  [EServerToClientEvents.ROUND_START]: (data: { endAt: number }) => void
+  [EServerToClientEvents.ROUND_END]: () => void
   [EServerToClientEvents.ROOM_USERS]: (data: PlayerDto[]) => void
+  [EServerToClientEvents.GAME_END]: () => void
   [EServerToClientEvents.MSG_CHAT]: (data: ChatResponseDto) => void
   [EServerToClientEvents.MSG_SYSTEM]: (data: ChatResponseDto) => void
   [EServerToClientEvents.SESSION]: (data: SessionDto) => void
@@ -70,6 +77,7 @@ export enum EClientToServerEvents {
   ROOM_LEAVE = 'room_leave',
   GAME_START = 'game_start',
   ROUND_START = 'round_start',
+  ROUND_END = 'round_end',
 }
 export interface GrtClientToServerEvents {
   [EClientToServerEvents.ECHO]: (data: string) => void
@@ -78,9 +86,10 @@ export interface GrtClientToServerEvents {
   [EClientToServerEvents.ROOM_VALIDATE]: (data: RoomBaseDto) => void
   [EClientToServerEvents.ROOM_CREATE]: (data: RoomCreateRequestDto) => void
   [EClientToServerEvents.ROOM_JOIN]: (data: RoomBaseDto) => void
-  [EClientToServerEvents.ROOM_LEAVE]: (data: never) => void
-  [EClientToServerEvents.GAME_START]: (data: never) => void
-  [EClientToServerEvents.ROUND_START]: (data: never) => void
+  [EClientToServerEvents.ROOM_LEAVE]: () => void
+  [EClientToServerEvents.GAME_START]: () => void
+  [EClientToServerEvents.ROUND_START]: () => void
+  [EClientToServerEvents.ROUND_END]: () => void
 }
 export type GrtClientToServerEventsPayload<T extends EClientToServerEvents> =
   Parameters<GrtClientToServerEvents[T]>[0]

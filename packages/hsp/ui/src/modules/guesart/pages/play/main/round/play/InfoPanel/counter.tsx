@@ -3,7 +3,7 @@ import { memo, useEffect, useMemo, useState } from 'react'
 import { roomRoundAtom } from '../../../../_state/store'
 
 export const Counter = memo(function Counter() {
-  const { endedAt } = useAtomValue(roomRoundAtom)
+  const { endAt: endedAt } = useAtomValue(roomRoundAtom)
   const timeLimit = useMemo(() => {
     if (!endedAt) {
       return 0

@@ -2,9 +2,14 @@ import { randomUUID } from 'crypto'
 import { ChatResponseDto, ESystemMessageContent } from './room.type'
 import { SessionDto } from '../session/session.type'
 
+export const DEFAULT_DATE = new Date(0)
 export const ROOM_PREFIX = 'room'
 export const socketRoomId = (roomId: string) => {
   return `${ROOM_PREFIX}:${roomId}`
+}
+// Private room to send message to user
+export const userRoomId = (roomId: string, userId: string) => {
+  return `${ROOM_PREFIX}:${roomId}:user:${userId}`
 }
 
 export function buildSystemMessage(
