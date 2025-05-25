@@ -45,3 +45,21 @@ export function buildChatMessage(
 export const genMsgId = () => {
   return randomUUID()
 }
+
+export const calcPoints = ({
+  now,
+  endAt,
+  total,
+}: {
+  now: number
+  endAt: number
+  total: number
+}) => {
+  const remainingTimePercentage = ((endAt - now) / total) * 100
+  return {
+    // 5 per correct guess +1 point if word is guessed within first half of round
+    drawer: 5 + Math.floor(remainingTimePercentage / 50),
+    // 10 +1 point for every 25% of time remaining
+    guesser: 10 + Math.floor(remainingTimePercentage / 25),
+  }
+}

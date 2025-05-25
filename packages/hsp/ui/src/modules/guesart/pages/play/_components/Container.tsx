@@ -11,7 +11,7 @@ function Container({
   return (
     <div
       className={cn(
-        'flex flex-col items-center w-full md:h-(--room-game-top-bar-height) relative gap-2',
+        'flex flex-col items-center w-full h-full min-h-[33vh] md:h-(--layout-full-height) relative gap-2',
         className,
       )}
     >

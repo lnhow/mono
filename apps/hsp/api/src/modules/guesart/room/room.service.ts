@@ -24,11 +24,11 @@ import { OnGatewayInit } from '@nestjs/websockets'
 import {
   buildChatMessage,
   buildSystemMessage,
+  calcPoints,
   DEFAULT_DATE,
   socketRoomId,
   socketUserRoomId,
 } from './utils'
-import { MAX_CORRECT_USERS } from './room.const'
 import { ObjectId } from 'mongodb'
 import WordService, { RandomService } from './word.service'
 import { sleep } from 'src/_utils/sleep'
@@ -270,6 +270,7 @@ export class GrtRoomService
   async chat(client: GrtSocket, data: RoomChatRequestDto) {
     const session = GrtSessionService.extractSession(client)
     const roomId = client.data.currentRoomId
+    const now = Date.now()
     if (!roomId) {
       return
     }
@@ -284,6 +285,9 @@ export class GrtRoomService
         roundNumber: true,
         answer: true,
         correctUsers: true,
+        drawerUserId: true,
+        duration: true,
+        endTime: true,
       },
     })
 
@@ -305,8 +309,7 @@ export class GrtRoomService
     const isCorrectUser = roomRound.correctUsers.some(
       (user) => user === session.userId,
     )
-
-    if (isCorrectUser && isCorrectGuess) {
+    if (isCorrectUser) {
       client.emit(
         EServerToClientEvents.MSG_SYSTEM,
         buildSystemMessage(
@@ -317,34 +320,72 @@ export class GrtRoomService
       return
     }
 
+    const isDrawer = roomRound.drawerUserId === session.userId
+    if (isDrawer) {
+      client.emit(
+        EServerToClientEvents.MSG_SYSTEM,
+        buildSystemMessage(ESystemMessageContent.DRAWER_GUESS_BLOCKED, session),
+      )
+      return
+    }
+
+    const points = calcPoints({
+      now,
+      endAt: roomRound.endTime.getTime(),
+      total: roomRound.duration * 1000,
+    })
     try {
-      const txResult = await this.prisma.$transaction(async (tx) => {
-        const newCorrectUsers = [...roomRound.correctUsers, session.userId]
-        return await Promise.all([
-          tx.roomRound.update({
-            where: {
-              id: roomRound.id,
-            },
-            data: {
-              correctUsers: newCorrectUsers,
-            },
-          }),
-          tx.roomUser.update({
-            where: {
-              roomId_userId: {
-                roomId,
-                userId: session.userId,
+      const [txResult, roomUsers] = await Promise.all([
+        this.prisma.$transaction(async (tx) => {
+          const newCorrectUsers = [...roomRound.correctUsers, session.userId]
+
+          return await Promise.all([
+            tx.roomRound.update({
+              where: {
+                id: roomRound.id,
               },
-            },
-            data: {
-              score: {
-                increment:
-                  MAX_CORRECT_USERS - roomRound.correctUsers.length + 1,
+              data: {
+                correctUsers: newCorrectUsers,
               },
-            },
-          }),
-        ])
-      })
+            }),
+            // Update guesser point
+            tx.roomUser.update({
+              where: {
+                roomId_userId: {
+                  roomId,
+                  userId: session.userId,
+                },
+              },
+              data: {
+                score: {
+                  increment: points.guesser,
+                },
+              },
+            }),
+            // Update drawer points
+            tx.roomUser.update({
+              where: {
+                roomId_userId: {
+                  roomId,
+                  userId: roomRound.drawerUserId,
+                },
+              },
+              data: {
+                score: {
+                  increment: points.drawer,
+                },
+              },
+            }),
+          ])
+        }),
+        this.prisma.roomUser.count({
+          where: {
+            roomId: roomId,
+            isActive: true,
+            isValid: true,
+          },
+        }),
+      ])
 
       this.server
         .to(socketRoomId(roomId))
@@ -352,7 +393,7 @@ export class GrtRoomService
           EServerToClientEvents.MSG_SYSTEM,
           buildSystemMessage(ESystemMessageContent.GUESS_CORRECT, session),
         )
-      if (txResult[0].correctUsers.length >= MAX_CORRECT_USERS) {
+      if (txResult[0].correctUsers.length >= roomUsers - 1) {
         void this._endGame(roomId)
       }
       await this.emitUpdatedUserInfo(roomId)
@@ -435,7 +476,6 @@ export class GrtRoomService
           },
         },
       })
-      console.log('\x1B[35m[Dev log]\x1B[0m -> startGame -> room:', room)
 
       if (!room || room.host.id !== session.userId) {
         return
@@ -482,7 +522,6 @@ export class GrtRoomService
           rounds: true,
         },
       })
-      console.log('\x1B[35m[Dev log]\x1B[0m -> _nextRound -> room:', room)
 
       if (!room) {
         return
@@ -628,7 +667,7 @@ export class GrtRoomService
           },
         },
       })
-      console.log('\x1B[35m[Dev log]\x1B[0m -> endRound -> round:', round)
+
       if (!round) {
         return
       }

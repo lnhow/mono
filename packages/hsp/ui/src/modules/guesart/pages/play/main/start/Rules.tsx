@@ -39,7 +39,7 @@ export default function Rules() {
                 </li>
               </ul>
             </div>
-            <div>
+            {/* <div>
               <h3 className="font-bold text-error-300">
                 ❌ Incorrect / Unsolved Word
               </h3>
@@ -47,7 +47,7 @@ export default function Rules() {
                 <li>Drawer: -5 points</li>
                 <li>Guesser: 0 points</li>
               </ul>
-            </div>
+            </div> */}
           </div>
         </CollapsibleContent>
       </Collapsible>
