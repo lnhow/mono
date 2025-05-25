@@ -44,7 +44,7 @@ export interface GrtServerToClientEvents {
     wordImg?: string
   }) => void
   [EServerToClientEvents.ROUND_START]: (data: { endAt: number }) => void
-  [EServerToClientEvents.ROUND_END]: () => void
+  [EServerToClientEvents.ROUND_END]: (data: { word: string }) => void
   [EServerToClientEvents.ROOM_USERS]: (data: PlayerDto[]) => void
   [EServerToClientEvents.GAME_END]: () => void
   [EServerToClientEvents.MSG_CHAT]: (data: ChatResponseDto) => void

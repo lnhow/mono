@@ -9,7 +9,7 @@ export enum ERoomTheme {
 export enum ERoomStatus {
   waiting = 'waiting',
   playing = 'playing',
-  FINISHED = 'finished',
+  finished = 'finished',
 }
 
 export enum ERoomTimeOption {

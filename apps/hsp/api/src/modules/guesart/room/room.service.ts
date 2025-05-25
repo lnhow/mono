@@ -482,6 +482,7 @@ export class GrtRoomService
           rounds: true,
         },
       })
+      console.log('\x1B[35m[Dev log]\x1B[0m -> _nextRound -> room:', room)
 
       if (!room) {
         return
@@ -632,16 +633,23 @@ export class GrtRoomService
         return
       }
 
-      await this.prisma.roomRound.update({
+      const resUpdate = await this.prisma.roomRound.update({
         where: {
           id: round.id,
         },
         data: {
           isActive: false,
         },
+        select: {
+          answer: true,
+        },
       })
 
-      this.server.in(socketRoomId(roomId)).emit(EServerToClientEvents.ROUND_END)
+      this.server
+        .in(socketRoomId(roomId))
+        .emit(EServerToClientEvents.ROUND_END, {
+          word: resUpdate.answer,
+        })
       await sleep(10000)
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       if (round.roundNumber >= round.room._count.rounds) {

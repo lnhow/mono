@@ -51,6 +51,7 @@ export type TGameState = {
     word: string
     wordImg: string
     endAt: number
+    status: ERoomStatus
   }
   messages: TBaseMessage[]
 }
@@ -77,6 +78,7 @@ export const roomAtom = atomWithReset<TGameState>({
     word: '____',
     wordImg: '',
     endAt: 0,
+    status: ERoomStatus.waiting,
   },
   messages: [],
 })
@@ -85,5 +87,7 @@ export const roomIsLoadingAtom = focusAtom(roomAtom, (game) => game.prop('isLoad
 export const roomPlayersAtom = focusAtom(roomAtom, (game) => game.prop('players'))
 export const roomMetadataAtom = focusAtom(roomAtom, (game) => game.prop('metadata'))
 export const roomMessagesAtom = focusAtom(roomAtom, (game) => game.prop('messages'))
-export const roomRoundAtom = focusAtom(roomAtom, (game) => game.prop('round'))
 export const roomStatusAtom = focusAtom(roomMetadataAtom, (metadata) => metadata.prop('status'))
+
+export const roomRoundAtom = focusAtom(roomAtom, (game) => game.prop('round'))
+export const roundStatusAtom = focusAtom(roomRoundAtom, (round) => round.prop('status'))
