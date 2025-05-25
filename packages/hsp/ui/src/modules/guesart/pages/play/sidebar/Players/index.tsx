@@ -30,19 +30,18 @@ export default function PlayersList({ className }: { className?: string }) {
 function Player({ player }: { player: PlayerDto }) {
   const { userId } = useAtomValue(sessionAtom)
   const { host } = useAtomValue(roomMetadataAtom)
-  const isHost = host.id === userId
+  const isHost = host.id === player.userId
   const isMe = userId === player.userId
 
   return (
     <li className="text-sm text-fore-400 flex justify-between">
-      <div className="flex gap-1 items-center">
+      <div className={cn("flex gap-1 items-center", isMe ? 'font-bold text-primary-400' : '')}>
         <span>{player.userName}</span>
         {isHost && (
           <Tooltip label="Host">
             <LuMicVocal className="text-fore-200" />
           </Tooltip>
         )}
-        {isMe && '(You)'}
       </div>
       <span className="text-fore-500 font-semibold">{player.score}</span>
     </li>
