@@ -1,13 +1,10 @@
-import { toast } from 'sonner'
 import {
-  EGrtErrorCode,
   EServerToClientEvents,
-  GrtErrorMessages,
-  GrtServerToClientEventsPayload,
   GrtSocket,
 } from '../../../../state/type/socket'
+import { onError } from './error'
 
-export const initSocket = (socket?: GrtSocket) => {
+export const initSocket = (socket?: GrtSocket, ) => {
   if (!socket) {
     return () => {
       /* noop */
@@ -18,14 +15,4 @@ export const initSocket = (socket?: GrtSocket) => {
   return () => {
     socket.off(EServerToClientEvents.ERROR, onError)
   }
-}
-
-function onError(
-  message: GrtServerToClientEventsPayload<EServerToClientEvents.ERROR>,
-) {
-  toast.error(
-    GrtErrorMessages[message as EGrtErrorCode]
-      ? GrtErrorMessages[message as EGrtErrorCode]
-      : GrtErrorMessages['EGRT000'],
-  )
 }
