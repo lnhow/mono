@@ -1,5 +1,6 @@
 import { SyntheticEvent } from 'react'
 
+export const ID_CANVAS_CONTAINER = 'canvas-container'
 export const DEFAULT_BRUSH_SIZES = [4, 8, 16] as const
 export const DRAWING_COLORS = [
   '#000000', // Black - For outlines and strong details

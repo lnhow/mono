@@ -1,13 +1,13 @@
 import { memo } from 'react'
-import Canvas from './play/Canvas'
+import RoundPlay from './play'
 import RoundStart from './start'
 import RoundEnd from './end'
 
-const RoomRound = memo(function RoomRound() {
+const GameRound = memo(function GameRound() {
 
-  return <RoundEnd />
   return <RoundStart />
-  return <Canvas />
+  return <RoundPlay />
+  return <RoundEnd />
 })
 
-export default RoomRound
+export default GameRound

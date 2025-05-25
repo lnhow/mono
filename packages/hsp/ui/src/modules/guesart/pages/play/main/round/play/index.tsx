@@ -6,6 +6,7 @@ import {
   useCallback,
   SyntheticEvent,
   memo,
+  startTransition,
 } from 'react'
 import { debounce } from 'lodash'
 import { useAtomValue } from 'jotai'
@@ -18,6 +19,7 @@ import {
   DEFAULT_BRUSH_SIZES,
   DEFAULT_COLOR,
   getPointerCoords,
+  ID_CANVAS_CONTAINER,
   loadImageToCanvas,
 } from './const'
 import ToolsPanel from './ToolsPanel'
@@ -25,9 +27,7 @@ import InfoPanel from './InfoPanel'
 import Container from '../../../_components/Container'
 import { breakpoints } from '@hsp/ui/src/styles/const'
 
-const ID_CANVAS_CONTAINER = 'canvas-container'
-
-const Canvas = memo(function Canvas() {
+const RoundPlay = memo(function RoundPlay() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const ctxRef = useRef<CanvasRenderingContext2D>(null)
   const [isDrawing, setIsDrawing] = useState(false)
@@ -50,21 +50,23 @@ const Canvas = memo(function Canvas() {
     ctxRef.current = ctx
 
     const resizeCanvas = debounce(() => {
-      const canvasCtn = document.getElementById(ID_CANVAS_CONTAINER)
-      if (!canvasCtn) {
-        return
-      }
-
-      const minSide = window.matchMedia(`(width >= ${breakpoints.md})`)
-        .matches
-        ? Math.min(canvasCtn.clientWidth, canvasCtn.clientHeight)
-        : canvasCtn.clientWidth
-
-      canvas.width = minSide * window.devicePixelRatio
-      canvas.height = minSide * window.devicePixelRatio
-      if (ctxRef.current) {
-        ctxRef.current.scale(window.devicePixelRatio, window.devicePixelRatio)
-      }
+      startTransition(() => {
+        const canvasCtn = canvasRef.current?.parentElement //document.getElementById(ID_CANVAS_CONTAINER)
+        if (!canvasCtn) {
+          return
+        }
+  
+        const minSide = window.matchMedia(`(width >= ${breakpoints.md})`)
+          .matches
+          ? Math.min(canvasCtn.clientWidth, canvasCtn.clientHeight)
+          : canvasCtn.clientWidth
+  
+        canvas.width = minSide * window.devicePixelRatio
+        canvas.height = minSide * window.devicePixelRatio
+        if (ctxRef.current) {
+          ctxRef.current.scale(window.devicePixelRatio, window.devicePixelRatio)
+        }
+      })
     }, 50) // avoid excessive resizing
 
     resizeCanvas()
@@ -172,4 +174,4 @@ const Canvas = memo(function Canvas() {
   )
 })
 
-export default Canvas
+export default RoundPlay

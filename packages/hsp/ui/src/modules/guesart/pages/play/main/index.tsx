@@ -1,20 +1,13 @@
-import { memo } from "react";
+import { memo } from 'react'
 // import RoomRound from "./round";
-import GameEnd from "./end";
-// import Lobby from "./lobby";
+import GameEnd from './end'
+import GameStart from './start'
+import GameRound from './round'
 
 function RoomMain() {
-  // return (
-  //   <Lobby />
-  // )
-
-  return (
-    <GameEnd />
-  )
-
-  // return (
-  //   <RoomRound />
-  // )
+  return <GameStart />
+  return <GameRound />
+  return <GameEnd />
 }
 
 export default memo(RoomMain)
