@@ -1,14 +1,14 @@
 import { memo } from 'react'
 import { useAtomValue } from 'jotai'
-import { Button, ButtonLink } from '@hsp/ui/src/components/base/button'
+import { Button } from '@hsp/ui/src/components/base/button'
 import ButtonCopy from '@hsp/ui/components/common/input/CopyButton'
 
 import { roomMetadataAtom } from '../../_state/store'
 import { sessionAtom } from '../../../../state/store'
 import Container from '../../_components/Container'
-import { LOBBY_URL } from '../../../../utils'
 
 import Rules from './Rules'
+import ButtonLeaveRoom from '../../_components/ButtonLeaveRoom'
 
 const Lobby = memo(function Lobby() {
   const { host, id: roomId } = useAtomValue(roomMetadataAtom)
@@ -48,9 +48,7 @@ function InternalLobby({ roomId, isHost, onStartGame }: InternalLobbyProps) {
       </div>
 
       <div className="flex flex-wrap justify-center items-center mt-4 gap-4">
-        <ButtonLink href={LOBBY_URL} variant="destructive">
-          Leave Room
-        </ButtonLink>
+        <ButtonLeaveRoom />
         {/* Start Game Button (Host Only) */}
         {isHost && (
           <Button onClick={onStartGame} variant="primary">

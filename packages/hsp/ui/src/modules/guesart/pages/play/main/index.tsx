@@ -1,5 +1,6 @@
 import { memo } from "react";
-import RoomRound from "./round";
+// import RoomRound from "./round";
+import GameEnd from "./end";
 // import Lobby from "./lobby";
 
 function RoomMain() {
@@ -8,8 +9,12 @@ function RoomMain() {
   // )
 
   return (
-    <RoomRound />
+    <GameEnd />
   )
+
+  // return (
+  //   <RoomRound />
+  // )
 }
 
 export default memo(RoomMain)
