@@ -8,7 +8,7 @@ export const socketRoomId = (roomId: string) => {
   return `${ROOM_PREFIX}:${roomId}`
 }
 // Private room to send message to user
-export const userRoomId = (roomId: string, userId: string) => {
+export const socketUserRoomId = (roomId: string, userId: string) => {
   return `${ROOM_PREFIX}:${roomId}:user:${userId}`
 }
 

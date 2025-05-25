@@ -26,7 +26,7 @@ import {
   buildSystemMessage,
   DEFAULT_DATE,
   socketRoomId,
-  userRoomId,
+  socketUserRoomId,
 } from './utils'
 import { MAX_CORRECT_USERS } from './room.const'
 import { ObjectId } from 'mongodb'
@@ -101,7 +101,10 @@ export class GrtRoomService
         throw new Error(`${PREFIX_VALIDATION}Room is not waiting`)
       }
 
-      if (room.users.length === 0 && room.host.id !== session.userId) {
+      if (
+        room.maxUsers - room.users.length <= 1 &&
+        room.host.id !== session.userId
+      ) {
         throw new Error(`${PREFIX_VALIDATION}Host hasn't joined room`)
       }
 
@@ -163,7 +166,10 @@ export class GrtRoomService
       })
 
       const socketRoom = socketRoomId(data.roomId)
-      await client.join(socketRoom)
+      await Promise.all([
+        client.join(socketRoom),
+        client.join(socketUserRoomId(data.roomId, session.userId)),
+      ])
       client.data.currentRoomId = data.roomId
       this.server
         .to(socketRoom)
@@ -202,7 +208,10 @@ export class GrtRoomService
     }
 
     const socketRoom = socketRoomId(roomId)
-    await client.leave(socketRoom)
+    await Promise.all([
+      client.leave(socketRoom),
+      client.leave(socketUserRoomId(roomId, session.userId)),
+    ])
     client.data.currentRoomId = null
 
     const tx = await this.prisma.$transaction(async (tx) => {
@@ -419,10 +428,24 @@ export class GrtRoomService
           id: true,
           status: true,
           host: true,
+          _count: {
+            select: {
+              users: true,
+            },
+          },
         },
       })
+      console.log('\x1B[35m[Dev log]\x1B[0m -> startGame -> room:', room)
 
       if (!room || room.host.id !== session.userId) {
+        return
+      }
+
+      if (room._count.users < 2) {
+        client.emit(
+          EServerToClientEvents.ERROR,
+          EGrtErrorCode.ROOM_NOT_ENOUGH_USER,
+        )
         return
       }
 
@@ -510,7 +533,7 @@ export class GrtRoomService
         },
       })
 
-      const userRoom = userRoomId(roomId, data.drawerUserId)
+      const userRoom = socketUserRoomId(roomId, data.drawerUserId)
       // Emit to drawer
       this.server.to(userRoom).emit(EServerToClientEvents.ROUND_NEXT, {
         round: roomRound.roundNumber,

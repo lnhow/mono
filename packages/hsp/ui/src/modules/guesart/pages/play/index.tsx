@@ -17,6 +17,7 @@ import { LOBBY_URL } from '../../utils'
 import Sidebar from './sidebar'
 import RoomSkeleton from './skeleton'
 import RoomMain from './main'
+import { initSocket } from './_state/listeners'
 
 function PagePlay() {
   const isLoading = useAtomValue(roomIsLoadingAtom)
@@ -53,6 +54,8 @@ const useInitRoom = () => {
           return
         }
 
+        const cleanup = initSocket(socket)
+
         debouncedInit(() => {
           new Promise((resolve, reject) => {
             socket.once(EServerToClientEvents.ROOM_JOIN, (res) => {
@@ -81,6 +84,7 @@ const useInitRoom = () => {
         })
 
         return () => {
+          cleanup()
           socket.off(EServerToClientEvents.ROOM_JOIN)
           const { metadata } = get(roomAtom)
           if (metadata.id) {

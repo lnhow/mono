@@ -7,8 +7,8 @@ export enum ERoomTheme {
 }
 
 export enum ERoomStatus {
-  WAITING = 'waiting',
-  STARTED = 'started',
+  waiting = 'waiting',
+  playing = 'playing',
   FINISHED = 'finished',
 }
 

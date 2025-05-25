@@ -68,7 +68,7 @@ export const roomAtom = atomWithReset<TGameState>({
       id: '',
       name: '',
     },
-    status: ERoomStatus.WAITING,
+    status: ERoomStatus.waiting,
   },
   players: [],
   round: {

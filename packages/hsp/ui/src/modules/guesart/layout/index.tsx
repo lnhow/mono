@@ -3,7 +3,7 @@ import { ButtonLink } from '@hsp/ui/src/components/base/button'
 import { ThemeToggle } from '@hsp/ui/src/components/theme/ThemeToggle'
 import SocketProvider from '../state/SocketProvider'
 import { memo } from 'react'
-import { JotaiProvider } from './JotaiProvider'
+import { JotaiProvider } from '../state/JotaiProvider'
 
 const GuesartLayout = memo(function GuesartLayout({
   children,

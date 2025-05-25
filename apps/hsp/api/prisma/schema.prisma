@@ -55,8 +55,8 @@ model RoomRound {
   roundNumber  Int
   isActive     Boolean
   answer       String
-  drawerUserId String   @db.ObjectId
-  correctUsers String[] @db.ObjectId
+  drawerUserId String   
+  correctUsers String[]
   duration     Int
   startTime    DateTime
   endTime      DateTime

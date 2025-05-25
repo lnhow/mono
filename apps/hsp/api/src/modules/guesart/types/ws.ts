@@ -14,6 +14,7 @@ import {
 // Server to Client Events ======================================
 export enum EServerToClientEvents {
   ECHO = 'echo',
+  ERROR = 'error',
   SESSION = 'session',
   MSG_CHAT = 'msg_chat',
   MSG_SYSTEM = 'msg_system',
@@ -30,6 +31,7 @@ export enum EServerToClientEvents {
 }
 export interface GrtServerToClientEvents {
   [EServerToClientEvents.ECHO]: (data: { data: string }) => void
+  [EServerToClientEvents.ERROR]: (data: string) => void
   [EServerToClientEvents.ROOM_CREATE]: (
     data: WithError<RoomCreateResponseDto>,
   ) => void
@@ -106,6 +108,7 @@ export enum EGrtErrorCode {
   INVALID_SESSION = 'EGRT001', // Bad request. Invalid session
   UNAUTHORIZED = 'EGRT002', // Unauthorized. Invalid session
   INVALID_DATA = 'EGRT003', // Bad request. Invalid data
+  ROOM_NOT_ENOUGH_USER = 'EGRT_ROOM001',
 }
 
 export type GrtServer = Server<

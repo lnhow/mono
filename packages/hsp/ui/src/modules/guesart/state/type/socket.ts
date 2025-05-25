@@ -12,24 +12,24 @@ import { SessionDto } from './session'
 // Server to Client Events ======================================
 export enum EServerToClientEvents {
   ECHO = 'echo',
+  ERROR = 'error',
   SESSION = 'session',
   MSG_CHAT = 'msg_chat',
   MSG_SYSTEM = 'msg_system',
   CANVAS = 'canvas',
-  ROOM_VALIDATE = 'room_validate',
   ROOM_CREATE = 'room_create',
+  ROOM_VALIDATE = 'room_validate',
   ROOM_JOIN = 'room_join',
   // ROOM_INFO = 'room_info',
   ROOM_USERS = 'room_users',
-  // ROUND_NEXT = 'round_next',
-  // ROUND_DRAWER = 'round_drawer',
-  // ROUND_START = 'round_start',
-  // ROUND_END = 'round_end',
-  // GAME_END = 'game_end',
-  // GAME_RESULT = 'game_result',
+  ROUND_NEXT = 'round_next',
+  ROUND_START = 'round_start',
+  ROUND_END = 'round_end',
+  GAME_END = 'game_end',
 }
 export interface GrtServerToClientEvents {
   [EServerToClientEvents.ECHO]: (data: { data: string }) => void
+  [EServerToClientEvents.ERROR]: (data: string) => void
   [EServerToClientEvents.ROOM_CREATE]: (
     data: WithError<RoomCreateResponseDto>,
   ) => void
@@ -37,7 +37,16 @@ export interface GrtServerToClientEvents {
   [EServerToClientEvents.ROOM_JOIN]: (
     data: WithError<RoomInfoResponseDto>,
   ) => void
+  [EServerToClientEvents.ROUND_NEXT]: (data: {
+    round: number
+    drawer: string
+    word: string
+    wordImg?: string
+  }) => void
+  [EServerToClientEvents.ROUND_START]: (data: { endAt: number }) => void
+  [EServerToClientEvents.ROUND_END]: () => void
   [EServerToClientEvents.ROOM_USERS]: (data: PlayerDto[]) => void
+  [EServerToClientEvents.GAME_END]: () => void
   [EServerToClientEvents.MSG_CHAT]: (data: ChatResponseDto) => void
   [EServerToClientEvents.MSG_SYSTEM]: (data: ChatResponseDto) => void
   [EServerToClientEvents.SESSION]: (data: SessionDto) => void
@@ -83,11 +92,13 @@ export enum EGrtErrorCode {
   INVALID_SESSION = 'EGRT001', // Bad request. Invalid session
   UNAUTHORIZED = 'EGRT002', // Unauthorized. Invalid session
   INVALID_DATA = 'EGRT003', // Bad request. Invalid data
+  ROOM_NOT_ENOUGH_USER = 'EGRT_ROOM001',
 }
 
 export const GrtErrorMessages = {
-  [EGrtErrorCode.UNKNOWN]: 'Unknown error',
+  [EGrtErrorCode.UNKNOWN]: 'Unexpected error',
   [EGrtErrorCode.INVALID_SESSION]: 'Invalid session',
   [EGrtErrorCode.UNAUTHORIZED]: 'Unauthorized',
   [EGrtErrorCode.INVALID_DATA]: 'Invalid data',
+  [EGrtErrorCode.ROOM_NOT_ENOUGH_USER]: '2 players is required to play'
 }

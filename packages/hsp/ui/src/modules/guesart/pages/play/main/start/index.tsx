@@ -4,30 +4,33 @@ import { Button } from '@hsp/ui/src/components/base/button'
 import ButtonCopy from '@hsp/ui/components/common/input/CopyButton'
 
 import { roomMetadataAtom, TGameState } from '../../_state/store'
-import { sessionAtom } from '../../../../state/store'
+import { sessionAtom, socketAtom } from '../../../../state/store'
 import Container from '../../_components/Container'
 
 import Rules from './Rules'
 import ButtonLeaveRoom from '../../_components/ButtonLeaveRoom'
 import { ROOM_CONSTRAINTS } from '../../../lobby/group/rooms/RoomCreateForm'
 import { ERoomTheme } from '../../../../state/type/room'
+import { EClientToServerEvents } from '../../../../state/type/socket'
+import { debounce } from 'lodash'
+import { DEFAULT_DEBOUNCE_TIME } from '@hsp/ui/src/utils/debounce'
 
 const GameStart = memo(function GameStart() {
   const metaData = useAtomValue(roomMetadataAtom)
+  const { socket } = useAtomValue(socketAtom)
   const { userId } = useAtomValue(sessionAtom)
-  console.log(
-    '\x1B[35m[Dev log]\x1B[0m -> Lobby -> host:',
-    metaData.host.id,
-    userId,
-    metaData.host.id === userId,
-  )
   const isHost = metaData.host.id === userId
 
   return (
     <GameStartInternal
       metaData={metaData}
       isHost={isHost}
-      onStartGame={() => {}}
+      onStartGame={debounce(() => {
+        if (!isHost || !socket) {
+          return
+        }
+        socket.emitWithAck(EClientToServerEvents.GAME_START)
+      }, DEFAULT_DEBOUNCE_TIME)}
     />
   )
 })

@@ -3,10 +3,21 @@ import { memo } from 'react'
 import GameEnd from './end'
 import GameStart from './start'
 import GameRound from './round'
+import { useAtomValue } from 'jotai'
+import { roomStatusAtom } from '../_state/store'
+import { ERoomStatus } from '../../../state/type/room'
 
 function RoomMain() {
-  return <GameStart />
-  return <GameRound />
+  const status = useAtomValue(roomStatusAtom)
+
+  if (status === ERoomStatus.waiting) {
+    return <GameStart />
+  }
+
+  if (status === ERoomStatus.playing) {
+    return <GameRound />
+  }
+
   return <GameEnd />
 }
 
