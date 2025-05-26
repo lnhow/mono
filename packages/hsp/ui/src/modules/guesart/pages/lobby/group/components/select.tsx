@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
 import { Controller, FieldValues } from 'react-hook-form'
 
-import genericMemo from '@hsp/ui/src/hooks/genericMemo'
+import genericMemo from '@hsp/ui/src/utils/react/genericMemo'
 import {
   Select,
   SelectTrigger,
