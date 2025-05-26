@@ -1,8 +1,9 @@
-import NoSsr from '@hsp/ui/src/components/app/NoSsr'
+import { memo } from 'react'
 import { ButtonLink } from '@hsp/ui/src/components/base/button'
 import { ThemeToggle } from '@hsp/ui/src/components/theme/ThemeToggle'
+import NoSsr from '@hsp/ui/src/components/app/NoSsr'
+
 import SocketProvider from '../state/SocketProvider'
-import { memo } from 'react'
 import { JotaiProvider } from '../state/JotaiProvider'
 
 const GuesartLayout = memo(function GuesartLayout({
