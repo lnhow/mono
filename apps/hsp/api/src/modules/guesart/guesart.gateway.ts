@@ -112,8 +112,7 @@ export class GrtGateway
 
   @SubscribeMessage(EClientToServerEvents.ROOM_LEAVE)
   public async handleRoomLeave(@ConnectedSocket() client: GrtSocket) {
-    const roomData = await this.roomService.leave(client)
-    console.log('\x1B[35m[Dev log]\x1B[0m -> room leave -> roomData:', roomData)
+    await this.roomService.leave(client)
   }
 
   @SubscribeMessage(EClientToServerEvents.GAME_START)

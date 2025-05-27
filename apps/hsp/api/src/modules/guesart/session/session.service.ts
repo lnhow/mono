@@ -9,10 +9,6 @@ import { GrtSocket } from '../types/ws'
 export class GrtSessionService {
   async getOrCreateSessionIfNotExist(client: GrtSocket) {
     const session = this.getSessionFromReq(client)
-    console.log(
-      '\x1B[35m[Dev log]\x1B[0m -> GrtSessionService -> getOrCreateSessionIfNotExist -> session:',
-      session,
-    )
     const userName = GrtSessionService._getUserNameFromAuth(client)
     const isReuseOldSession =
       session && (!userName || session.userName === userName)

@@ -381,12 +381,6 @@ export class GrtRoomService
         }),
       ])
 
-      console.log(
-        '\x1B[35m[Dev log]\x1B[0m -> chat -> txResult[0].correctUsers.length:',
-        txResult[0].correctUsers.length,
-        roomUsers - 1,
-        txResult[0].correctUsers.length >= roomUsers - 1,
-      )
       await Promise.all([
         this.emitUpdatedUserInfo(roomId),
         txResult[0].correctUsers.length >= roomUsers - 1
@@ -532,7 +526,6 @@ export class GrtRoomService
 
   // Pick a word & drawer for a round
   private async _nextRound(roomId: string) {
-    console.log('\x1B[35m[Dev log]\x1B[0m -> _nextRound -> roomId:', roomId)
     try {
       const room = await this.prisma.room.findUnique({
         where: {
@@ -704,8 +697,6 @@ export class GrtRoomService
         },
       })
 
-      console.log('\x1B[35m[Dev log]\x1B[0m -> endRound -> round:', round)
-
       if (!round) {
         return
       }
@@ -721,10 +712,6 @@ export class GrtRoomService
           answer: true,
         },
       })
-      console.log(
-        '\x1B[35m[Dev log]\x1B[0m -> endRound -> resUpdate:',
-        resUpdate,
-      )
 
       this.server
         .in(socketRoomId(roomId))
@@ -733,12 +720,6 @@ export class GrtRoomService
         })
       await sleep(10000)
 
-      console.log(
-        '\x1B[35m[Dev log]\x1B[0m -> endRound -> round.roundNumber >= round.room._count.rounds:',
-        round.room._count.rounds,
-        round.room.numOfRounds,
-        round.room._count.rounds >= round.room.numOfRounds,
-      )
       if (round.room._count.rounds >= round.room.numOfRounds) {
         await this._endGame(roomId)
         return
@@ -751,7 +732,6 @@ export class GrtRoomService
 
   // Show leaderboard & end game
   private async _endGame(roomId: string) {
-    console.log('\x1B[35m[Dev log]\x1B[0m -> _endGame -> roomId:', roomId)
     try {
       await this.prisma.room.update({
         where: {

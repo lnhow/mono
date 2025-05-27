@@ -30,11 +30,6 @@ export default ChatMessage
 const UserMessage = ({ msg }: ChatMessageProps) => {
   const { userId } = useAtomValue(sessionAtom)
   const userMsg = msg as TUserMessage
-  console.log(
-    '\x1B[35m[Dev log]\x1B[0m -> UserMessage -> userMsg:',
-    userMsg.user.id,
-    userId,
-  )
   const isCurrentUser = userMsg.user.id === userId
 
   return (
