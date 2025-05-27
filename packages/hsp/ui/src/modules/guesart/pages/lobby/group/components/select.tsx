@@ -43,9 +43,8 @@ export const FormSelect = genericMemo(function FormSelect<
           return (
             <div>
               <Select
-                // className="w-full"
                 {...InputProps}
-                {...field}
+                onValueChange={field.onChange} defaultValue={field.value}
               >
                 <SelectTrigger>
                   <SelectValue placeholder={placeholder} />
@@ -75,17 +74,5 @@ export const FormSelect = genericMemo(function FormSelect<
         }}
       />
     </div>
-    // <Select {...register('theme', { required: true })}>
-    //   <SelectTrigger>
-    //     <SelectValue placeholder="Select Theme" />
-    //   </SelectTrigger>
-    //   <SelectContent>
-    //     {themes.map((theme) => (
-    //       <SelectItem key={theme} value={theme}>
-    //         {theme}
-    //       </SelectItem>
-    //     ))}
-    //   </SelectContent>
-    // </Select>
   )
 })

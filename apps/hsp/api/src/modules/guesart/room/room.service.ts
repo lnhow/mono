@@ -93,8 +93,17 @@ export class GrtRoomService
         )
       }
 
-      const isUserInRoom = room.users.some(
-        (user) => user.userId === session.userId,
+      const { isUserInRoom, isHostInRoom } = room.users.reduce(
+        (acc, user) => {
+          if (user.userId === session.userId) {
+            acc.isUserInRoom = true
+          }
+          if (user.userId === room.host.id) {
+            acc.isHostInRoom = true
+          }
+          return acc
+        },
+        { isUserInRoom: false, isHostInRoom: false },
       )
 
       if (room.status !== RoomStatus.waiting && !isUserInRoom) {
@@ -103,6 +112,7 @@ export class GrtRoomService
 
       if (
         room.maxUsers - room.users.length <= 1 &&
+        !isHostInRoom &&
         room.host.id !== session.userId
       ) {
         throw new Error(`${PREFIX_VALIDATION}Host hasn't joined room`)
@@ -117,7 +127,7 @@ export class GrtRoomService
       // this.logger.error(e)
       throw new GrtWsException(
         EGrtErrorCode.INVALID_DATA,
-        EServerToClientEvents.ROOM_JOIN,
+        EServerToClientEvents.ROOM_VALIDATE,
         {
           message:
             e instanceof Error && e.message.startsWith(PREFIX_VALIDATION)
@@ -349,32 +359,16 @@ export class GrtRoomService
               },
             }),
             // Update guesser point
-            tx.roomUser.update({
-              where: {
-                roomId_userId: {
-                  roomId,
-                  userId: session.userId,
-                },
-              },
-              data: {
-                score: {
-                  increment: points.guesser,
-                },
-              },
+            this._updateUserScore(tx, {
+              roomId,
+              userId: session.userId,
+              increment: points.guesser,
             }),
             // Update drawer points
-            tx.roomUser.update({
-              where: {
-                roomId_userId: {
-                  roomId,
-                  userId: roomRound.drawerUserId,
-                },
-              },
-              data: {
-                score: {
-                  increment: points.drawer,
-                },
-              },
+            this._updateUserScore(tx, {
+              roomId,
+              userId: roomRound.drawerUserId,
+              increment: points.drawer,
             }),
           ])
         }),
@@ -387,19 +381,50 @@ export class GrtRoomService
         }),
       ])
 
-      this.server
-        .to(socketRoomId(roomId))
-        .emit(
-          EServerToClientEvents.MSG_SYSTEM,
-          buildSystemMessage(ESystemMessageContent.GUESS_CORRECT, session),
-        )
+      console.log(
+        '\x1B[35m[Dev log]\x1B[0m -> chat -> txResult[0].correctUsers.length:',
+        txResult[0].correctUsers.length,
+        roomUsers - 1,
+        txResult[0].correctUsers.length >= roomUsers - 1,
+      )
       if (txResult[0].correctUsers.length >= roomUsers - 1) {
-        void this._endGame(roomId)
+        void this.endRound(client)
       }
-      await this.emitUpdatedUserInfo(roomId)
+      await Promise.all([
+        this.emitUpdatedUserInfo(roomId),
+        this.server
+          .to(socketRoomId(roomId))
+          .emit(
+            EServerToClientEvents.MSG_SYSTEM,
+            buildSystemMessage(ESystemMessageContent.GUESS_CORRECT, session),
+          ),
+      ])
     } catch (e) {
       this.logger.error(e)
     }
+  }
+
+  private _updateUserScore(
+    prisma: Parameters<Parameters<PrismaService['$transaction']>[0]>[0],
+    {
+      roomId,
+      userId,
+      increment,
+    }: { roomId: string; userId: string; increment: number },
+  ) {
+    return prisma.roomUser.update({
+      where: {
+        roomId_userId: {
+          roomId,
+          userId,
+        },
+      },
+      data: {
+        score: {
+          increment,
+        },
+      },
+    })
   }
 
   async emitUpdatedUserInfo(roomId: string) {
@@ -507,6 +532,7 @@ export class GrtRoomService
 
   // Pick a word & drawer for a round
   private async _nextRound(roomId: string) {
+    console.log('\x1B[35m[Dev log]\x1B[0m -> _nextRound -> roomId:', roomId)
     try {
       const room = await this.prisma.room.findUnique({
         where: {
@@ -690,7 +716,7 @@ export class GrtRoomService
           word: resUpdate.answer,
         })
       await sleep(10000)
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
       if (round.roundNumber >= round.room._count.rounds) {
         void this._endGame(roomId)
         return
@@ -703,6 +729,7 @@ export class GrtRoomService
 
   // Show leaderboard & end game
   private async _endGame(roomId: string) {
+    console.log('\x1B[35m[Dev log]\x1B[0m -> _endGame -> roomId:', roomId)
     try {
       await this.prisma.room.update({
         where: {
