@@ -63,3 +63,7 @@ export const calcPoints = ({
     guesser: 10 + Math.floor(remainingTimePercentage / 25),
   }
 }
+
+export const capitalizeFirstLetter = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}

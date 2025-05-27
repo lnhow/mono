@@ -4,12 +4,12 @@ import { useAtomValue } from 'jotai'
 import { sessionAtom } from '../../../../state/store'
 import {
   MessageType,
-  SystemMessageContent,
   TBaseMessage,
   TSystemMessage,
   TUserMessage,
 } from '../../_state/store'
 import cn from '@hsp/ui/src/utils/cn'
+import { ESystemMessageContent } from '../../../../state/type/room'
 
 export type ChatMessageProps = {
   msg: TBaseMessage
@@ -68,36 +68,42 @@ const getSystemMessageContent = ({
 }) => {
   const systemMsg = msg as TSystemMessage
   const isCurrentUser = systemMsg.user?.id === metadata.currentUserId
+  const textUserName = isCurrentUser ? 'You' : systemMsg.user?.name || 'A player'
 
   switch (msg.content) {
-    case SystemMessageContent.JOIN_ROOM:
+    case ESystemMessageContent.JOIN_ROOM:
       return {
-        msg: `${isCurrentUser ? 'You' : systemMsg.user?.name || 'A player'} joined the game`,
+        msg: `${textUserName} joined the game`,
         style: 'text-accent-400',
       }
-    case SystemMessageContent.LEAVE_ROOM:
+    case ESystemMessageContent.LEAVE_ROOM:
       return {
-        msg: `${systemMsg.user?.name || 'A player'} left the game`,
+        msg: `${textUserName} left the game`,
         style: 'text-warning-300',
       }
-    case SystemMessageContent.ROUND_START:
+    case ESystemMessageContent.ROUND_START:
       return {
         msg: 'Game started!',
         style: 'text-accent-400',
       }
-    case SystemMessageContent.ROUND_END:
+    case ESystemMessageContent.ROUND_END:
       return {
         msg: 'Round ended!',
         style: 'text-accent-400',
       }
-    case SystemMessageContent.GUESS_CORRECT:
+    case ESystemMessageContent.GUESS_CORRECT:
       return {
-        msg: `${systemMsg.user?.name || 'A player'} guessed correctly`,
+        msg: `${textUserName} guessed correct!`,
         style: 'text-primary-500',
       }
-    case SystemMessageContent.GUESS_WRONG:
+    case ESystemMessageContent.GUESS_ALREADY_CORRECT:
       return {
-        msg: 'Incorrect guess!',
+        msg: `${textUserName} already guessed correctly. Don't spoil the answer!`,
+        style: 'text-warning-300',
+      }
+    case ESystemMessageContent.DRAWER_GUESS_BLOCKED:
+      return {
+        msg: `Please don't spoil the answer!`,
         style: 'text-warning-300',
       }
     default:

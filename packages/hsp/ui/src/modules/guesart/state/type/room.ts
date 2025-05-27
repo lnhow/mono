@@ -63,7 +63,7 @@ export enum ESystemMessageContent {
   LEAVE_ROOM = 'left',
   GUESS_CORRECT = 'correct',
   GUESS_ALREADY_CORRECT = 'already_correct',
-  GUESS_WRONG = 'wrong',
+  DRAWER_GUESS_BLOCKED = 'drawer_guess_blocked',
   ROUND_START = 'start',
   ROUND_END = 'end',
 }

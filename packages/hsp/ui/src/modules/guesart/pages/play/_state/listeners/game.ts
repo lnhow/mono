@@ -37,6 +37,7 @@ export const initGameStateListener: TInitListener = (socket, state) => {
     state.set(roomRoundAtom, (prev) => ({
       ...prev,
       word: data.word,
+      wordImg: data.wordImg,
       status: ERoomStatus.finished,
     }))
   }
@@ -45,14 +46,25 @@ export const initGameStateListener: TInitListener = (socket, state) => {
     state.set(roomStatusAtom, ERoomStatus.finished)
   }
 
+  function onWordHint(
+    data: GrtServerToClientEventsPayload<EServerToClientEvents.WORD_HINT>,
+  ) {
+    state.set(roomRoundAtom, (prev) => ({
+     ...prev,
+      word: data.word,
+    }))
+  }
+
   socket.on(EServerToClientEvents.ROUND_NEXT, onNextRound)
   socket.on(EServerToClientEvents.ROUND_START, onStartRound)
   socket.on(EServerToClientEvents.ROUND_END, onEndRound)
   socket.on(EServerToClientEvents.GAME_END, onEndGame)
+  socket.on(EServerToClientEvents.WORD_HINT, onWordHint)
   return () => {
     socket.off(EServerToClientEvents.ROUND_NEXT, onNextRound)
     socket.off(EServerToClientEvents.ROUND_START, onStartRound)
     socket.off(EServerToClientEvents.ROUND_END, onEndRound)
     socket.off(EServerToClientEvents.GAME_END, onEndGame)
+    socket.off(EServerToClientEvents.WORD_HINT, onWordHint)
   }
 }

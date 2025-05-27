@@ -12,7 +12,8 @@ export enum SystemMessageContent {
   JOIN_ROOM = 'joined',
   LEAVE_ROOM = 'left',
   GUESS_CORRECT = 'correct',
-  GUESS_WRONG = 'wrong',
+  GUESS_ALREADY_CORRECT = 'already_correct',
+  DRAWER_GUESS_BLOCKED = 'drawer_guess_blocked',
   ROUND_START = 'start',
   ROUND_END = 'end',
 }

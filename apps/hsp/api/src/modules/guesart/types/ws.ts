@@ -28,6 +28,7 @@ export enum EServerToClientEvents {
   ROUND_START = 'round_start',
   ROUND_END = 'round_end',
   GAME_END = 'game_end',
+  WORD_HINT = 'word_hint',
 }
 export interface GrtServerToClientEvents {
   [EServerToClientEvents.ECHO]: (data: { data: string }) => void
@@ -46,9 +47,13 @@ export interface GrtServerToClientEvents {
     wordImg?: string
   }) => void
   [EServerToClientEvents.ROUND_START]: (data: { endAt: number }) => void
-  [EServerToClientEvents.ROUND_END]: (data: { word: string }) => void
+  [EServerToClientEvents.ROUND_END]: (data: {
+    word: string
+    wordImg: string
+  }) => void
   [EServerToClientEvents.ROOM_USERS]: (data: PlayerDto[]) => void
   [EServerToClientEvents.GAME_END]: () => void
+  [EServerToClientEvents.WORD_HINT]: (data: { word: string }) => void
   [EServerToClientEvents.MSG_CHAT]: (data: ChatResponseDto) => void
   [EServerToClientEvents.MSG_SYSTEM]: (data: ChatResponseDto) => void
   [EServerToClientEvents.SESSION]: (data: SessionDto) => void

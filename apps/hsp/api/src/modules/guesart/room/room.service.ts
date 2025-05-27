@@ -25,6 +25,7 @@ import {
   buildChatMessage,
   buildSystemMessage,
   calcPoints,
+  capitalizeFirstLetter,
   DEFAULT_DATE,
   socketRoomId,
   socketUserRoomId,
@@ -302,8 +303,8 @@ export class GrtRoomService
     })
 
     // Validate guess
-    const answer = roomRound && roomRound.answer.toLocaleUpperCase()
-    const guess = data.content.toLocaleUpperCase()
+    const answer = roomRound && roomRound.answer.toLocaleLowerCase()
+    const guess = data.content.toLocaleLowerCase()
     const isCorrectGuess = guess.includes(answer)
 
     if (!roomRound || !isCorrectGuess) {
@@ -313,6 +314,9 @@ export class GrtRoomService
           EServerToClientEvents.MSG_CHAT,
           buildChatMessage(data.content, session),
         )
+      client.emit(EServerToClientEvents.WORD_HINT, {
+        word: capitalizeFirstLetter(WordService.unobstructWord(answer, guess)),
+      })
       return
     }
 
@@ -392,6 +396,9 @@ export class GrtRoomService
             EServerToClientEvents.MSG_SYSTEM,
             buildSystemMessage(ESystemMessageContent.GUESS_CORRECT, session),
           ),
+        client.emit(EServerToClientEvents.WORD_HINT, {
+          word: capitalizeFirstLetter(answer),
+        }),
       ])
     } catch (e) {
       this.logger.error(e)
@@ -433,6 +440,9 @@ export class GrtRoomService
           userId: true,
           userName: true,
           score: true,
+        },
+        orderBy: {
+          score: 'desc',
         },
       })
       this.server
@@ -564,26 +574,19 @@ export class GrtRoomService
         room.theme as ERoomTheme,
         prevRounds.answers,
       )
-      const data = {
-        roomId,
-        roundNumber: rounds.length + 1,
-        drawerUserId: RandomService.getRandomArray(userIds, (userId) => {
+      const nextRoundDrawer = RandomService.getRandomArray(
+        userIds,
+        (userId) => {
           return !prevRounds.drawers.includes(userId)
-        }),
-        answer: word.word,
-        isActive: true,
-        correctUsers: [] as string[],
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        duration: room.timePerRoundInSec,
-      }
+        },
+      )
 
       const roomRound = await this.prisma.roomRound.create({
         data: {
           roomId,
           roundNumber: rounds.length + 1,
-          drawerUserId: data.drawerUserId,
-          answer: data.answer,
+          drawerUserId: nextRoundDrawer,
+          answer: word.word,
           isActive: true,
           correctUsers: [],
           startTime: DEFAULT_DATE,
@@ -592,12 +595,12 @@ export class GrtRoomService
         },
       })
 
-      const userRoom = socketUserRoomId(roomId, data.drawerUserId)
+      const userRoom = socketUserRoomId(roomId, nextRoundDrawer)
       // Emit to drawer
       this.server.to(userRoom).emit(EServerToClientEvents.ROUND_NEXT, {
         round: roomRound.roundNumber,
         drawer: roomRound.drawerUserId,
-        word: word.word,
+        word: capitalizeFirstLetter(word.word),
         wordImg: word.wordImg,
       })
 
@@ -660,8 +663,6 @@ export class GrtRoomService
     }
   }
 
-  // private _handleRoundGuess() {}
-
   // Show word to all players
   async endRound(client: GrtSocket, internalRoundNumber?: number) {
     const session = GrtSessionService.extractSession(client)
@@ -687,6 +688,7 @@ export class GrtRoomService
           room: {
             select: {
               numOfRounds: true,
+              theme: true,
               _count: {
                 select: {
                   rounds: true,
@@ -716,7 +718,11 @@ export class GrtRoomService
       this.server
         .in(socketRoomId(roomId))
         .emit(EServerToClientEvents.ROUND_END, {
-          word: resUpdate.answer,
+          word: capitalizeFirstLetter(resUpdate.answer),
+          wordImg: WordService.findWordImage(
+            round.room.theme as ERoomTheme,
+            resUpdate.answer,
+          ),
         })
       await sleep(10000)
 

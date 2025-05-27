@@ -51,6 +51,12 @@ export default class WordService {
 
     return wordArr.join('')
   }
+
+  public static findWordImage(theme: ERoomTheme, word: string): string {
+    const themeWords = this.words[theme]
+    const wordInfo = themeWords.find((wordInfo) => wordInfo.word === word)
+    return wordInfo?.imageUrl || ''
+  }
 }
 
 export class RandomService {

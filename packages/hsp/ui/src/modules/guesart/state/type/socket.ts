@@ -26,6 +26,7 @@ export enum EServerToClientEvents {
   ROUND_START = 'round_start',
   ROUND_END = 'round_end',
   GAME_END = 'game_end',
+  WORD_HINT = 'word_hint',
 }
 export interface GrtServerToClientEvents {
   [EServerToClientEvents.ECHO]: (data: { data: string }) => void
@@ -44,9 +45,13 @@ export interface GrtServerToClientEvents {
     wordImg?: string
   }) => void
   [EServerToClientEvents.ROUND_START]: (data: { endAt: number }) => void
-  [EServerToClientEvents.ROUND_END]: (data: { word: string }) => void
+  [EServerToClientEvents.ROUND_END]: (data: {
+    word: string
+    wordImg: string
+  }) => void
   [EServerToClientEvents.ROOM_USERS]: (data: PlayerDto[]) => void
   [EServerToClientEvents.GAME_END]: () => void
+  [EServerToClientEvents.WORD_HINT]: (data: { word: string }) => void
   [EServerToClientEvents.MSG_CHAT]: (data: ChatResponseDto) => void
   [EServerToClientEvents.MSG_SYSTEM]: (data: ChatResponseDto) => void
   [EServerToClientEvents.SESSION]: (data: SessionDto) => void
@@ -65,7 +70,7 @@ export enum EClientToServerEvents {
   ROOM_LEAVE = 'room_leave',
   GAME_START = 'game_start',
   ROUND_START = 'round_start',
-  ROUND_END = 'round_end'
+  ROUND_END = 'round_end',
 }
 export interface GrtClientToServerEvents {
   [EClientToServerEvents.ECHO]: (data: string) => void
@@ -102,5 +107,5 @@ export const GrtErrorMessages = {
   [EGrtErrorCode.INVALID_SESSION]: 'Invalid session',
   [EGrtErrorCode.UNAUTHORIZED]: 'Unauthorized',
   [EGrtErrorCode.INVALID_DATA]: 'Invalid data',
-  [EGrtErrorCode.ROOM_NOT_ENOUGH_USER]: '2 players is required to play'
+  [EGrtErrorCode.ROOM_NOT_ENOUGH_USER]: '2 players is required to play',
 }
