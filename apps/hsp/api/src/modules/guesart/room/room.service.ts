@@ -387,11 +387,11 @@ export class GrtRoomService
         roomUsers - 1,
         txResult[0].correctUsers.length >= roomUsers - 1,
       )
-      if (txResult[0].correctUsers.length >= roomUsers - 1) {
-        void this.endRound(client)
-      }
       await Promise.all([
         this.emitUpdatedUserInfo(roomId),
+        txResult[0].correctUsers.length >= roomUsers - 1
+          ? this.endRound(client, roomRound.roundNumber)
+          : Promise.resolve(),
         this.server
           .to(socketRoomId(roomId))
           .emit(
@@ -670,7 +670,7 @@ export class GrtRoomService
   // private _handleRoundGuess() {}
 
   // Show word to all players
-  async endRound(client: GrtSocket) {
+  async endRound(client: GrtSocket, internalRoundNumber?: number) {
     const session = GrtSessionService.extractSession(client)
     const roomId = client.data.currentRoomId
     if (!roomId) {
@@ -679,20 +679,32 @@ export class GrtRoomService
 
     try {
       const round = await this.prisma.roomRound.findFirst({
-        where: {
-          drawerUserId: session.userId,
-          isActive: true,
-        },
+        where: internalRoundNumber
+          ? {
+              roundNumber: internalRoundNumber,
+              roomId,
+              isActive: true,
+            }
+          : {
+              drawerUserId: session.userId,
+              roomId,
+              isActive: true,
+            },
         include: {
           room: {
-            include: {
+            select: {
+              numOfRounds: true,
               _count: {
-                select: { rounds: true },
+                select: {
+                  rounds: true,
+                },
               },
             },
           },
         },
       })
+
+      console.log('\x1B[35m[Dev log]\x1B[0m -> endRound -> round:', round)
 
       if (!round) {
         return
@@ -709,6 +721,10 @@ export class GrtRoomService
           answer: true,
         },
       })
+      console.log(
+        '\x1B[35m[Dev log]\x1B[0m -> endRound -> resUpdate:',
+        resUpdate,
+      )
 
       this.server
         .in(socketRoomId(roomId))
@@ -717,11 +733,17 @@ export class GrtRoomService
         })
       await sleep(10000)
 
-      if (round.roundNumber >= round.room._count.rounds) {
-        void this._endGame(roomId)
+      console.log(
+        '\x1B[35m[Dev log]\x1B[0m -> endRound -> round.roundNumber >= round.room._count.rounds:',
+        round.room._count.rounds,
+        round.room.numOfRounds,
+        round.room._count.rounds >= round.room.numOfRounds,
+      )
+      if (round.room._count.rounds >= round.room.numOfRounds) {
+        await this._endGame(roomId)
         return
       }
-      void this._nextRound(roomId)
+      await this._nextRound(roomId)
     } catch (error) {
       this.logger.log(error)
     }
@@ -734,7 +756,7 @@ export class GrtRoomService
       await this.prisma.room.update({
         where: {
           id: roomId,
-          status: RoomStatus.waiting,
+          status: RoomStatus.playing,
         },
         data: {
           status: RoomStatus.finished,
