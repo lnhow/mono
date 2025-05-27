@@ -1,22 +1,36 @@
 import { memo, useEffect, useMemo } from 'react'
-import { roomRoundAtom, TGameState } from '../../../_state/store'
+import {
+  roomMetadataAtom,
+  roomRoundAtom,
+  TGameState,
+} from '../../../_state/store'
 import Container from '../../../_components/Container'
 import { useCountdown } from 'usehooks-ts'
 import WordBox from '../../../_components/WordBox'
 import { useAtomValue } from 'jotai'
-// import { socketAtom } from '@hsp/ui/src/modules/guesart/state/store'
-// import { EClientToServerEvents } from '@hsp/ui/src/modules/guesart/state/type/socket'
 
 const RoundEnd = memo(function RoundEnd() {
   const round = useAtomValue(roomRoundAtom)
-  return <RoundEndInternal word={round.word} wordImg={round.wordImg} />
+  const metadata = useAtomValue(roomMetadataAtom)
+  const isFinalRound = metadata.numOfRounds === round.number
+
+  return (
+    <RoundEndInternal
+      word={round.word}
+      wordImg={round.wordImg}
+      isFinalRound={isFinalRound}
+    />
+  )
 })
 export default RoundEnd
 
 const RoundEndInternal = ({
   word,
   wordImg,
-}: Pick<TGameState['round'], 'word' | 'wordImg'>) => {
+  isFinalRound,
+}: Pick<TGameState['round'], 'word' | 'wordImg'> & {
+  isFinalRound: boolean
+}) => {
   return (
     <Container className="bg-base-200 rounded-lg justify-center">
       <div className="bg-base-300 rounded-lg shadow-lg p-4 md:p-8 max-w-lg w-full text-center">
@@ -26,12 +40,19 @@ const RoundEndInternal = ({
           title="The word is"
           className="mb-8"
         />
+        <NextRound isFinalRound={isFinalRound} />
       </div>
     </Container>
   )
 }
 
-export const NextRound = memo(function NextRound() {
+type TNextRoundProps = {
+  isFinalRound: boolean
+}
+
+export const NextRound = memo(function NextRound({
+  isFinalRound,
+}: TNextRoundProps) {
   const [countdown, controller] = useCountdown(
     useMemo(
       () => ({
@@ -45,9 +66,9 @@ export const NextRound = memo(function NextRound() {
 
   useEffect(() => {
     if (countdown === 0) {
-      console.log('\x1B[35m[Dev log]\x1B[0m -> useEffect -> countdown:', countdown)
+      controller.stopCountdown()
     }
-  }, [countdown])
+  }, [countdown, controller])
 
   useEffect(() => {
     controller.startCountdown()
@@ -58,7 +79,11 @@ export const NextRound = memo(function NextRound() {
 
   return (
     <div className="max-w-full">
-      Starting next round in <span>{countdown}s</span>
+      {isFinalRound ? (
+        <>Finalizing results ({countdown}s)</>
+      ) : (
+        <>Starting next round in {countdown}s</>
+      )}
     </div>
   )
 })
