@@ -51,6 +51,7 @@ export interface GrtServerToClientEvents {
   [EServerToClientEvents.ROUND_END]: (data: {
     word: string
     wordImg: string
+    isLastRound: boolean
   }) => void
   [EServerToClientEvents.ROOM_USERS]: (data: PlayerDto[]) => void
   [EServerToClientEvents.GAME_END]: () => void

@@ -525,12 +525,14 @@ export class GrtRoomService
   ) {
     const session = GrtSessionService.extractSession(client)
     const roomId = client.data.currentRoomId
+    console.log('\x1B[35m[Dev log]\x1B[0m -> roomId:', roomId)
     if (!roomId) {
       return
     }
     const roomRound = await this.prisma.roomRound.findFirst({
       where: {
-        id: roomId,
+        roomId: roomId,
+        drawerUserId: session.userId,
         isActive: true,
       },
       select: {
@@ -539,7 +541,8 @@ export class GrtRoomService
         drawerUserId: true,
       },
     })
-    if (!roomRound || roomRound.drawerUserId !== session.userId) {
+    console.log('\x1B[35m[Dev log]\x1B[0m -> roomRound:', roomRound)
+    if (!roomRound) {
       return
     }
 
@@ -788,6 +791,7 @@ export class GrtRoomService
             round.room.theme as ERoomTheme,
             resUpdate.answer,
           ),
+          isLastRound: round.room._count.rounds >= round.room.numOfRounds,
         })
       await sleep(10000)
 

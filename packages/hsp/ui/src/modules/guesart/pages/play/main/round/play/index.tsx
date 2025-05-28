@@ -88,6 +88,7 @@ const RoundPlay = memo(function RoundPlay() {
     }
 
     const handleReceiveCanvas = (canvas: string) => {
+      console.log('\x1B[35m[Dev log]\x1B[0m -> handleReceiveCanvas -> canvas:', canvas)
       if (!ctxRef.current) {
         return
       }
@@ -142,6 +143,7 @@ const RoundPlay = memo(function RoundPlay() {
       EClientToServerEvents.CANVAS,
       canvasRef.current?.toDataURL() || '',
     )
+    console.log('\x1B[35m[Dev log]\x1B[0m -> stopDrawing -> canvasRef.current?.toDataURL():', canvasRef.current?.toDataURL())
   }, [saveHistory, socket.socket])
 
   const getCanvasContext = useCallback(() => {

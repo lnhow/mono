@@ -53,6 +53,7 @@ export type TGameState = {
     wordImg: string
     endAt: number
     status: ERoomStatus
+    isLastRound: boolean
   }
   messages: TBaseMessage[]
 }
@@ -80,6 +81,7 @@ export const roomAtom = atomWithReset<TGameState>({
     wordImg: '',
     endAt: 0,
     status: ERoomStatus.waiting,
+    isLastRound: false,
   },
   messages: [],
 })

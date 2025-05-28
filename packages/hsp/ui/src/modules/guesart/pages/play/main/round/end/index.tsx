@@ -1,6 +1,5 @@
 import { memo, useEffect, useMemo } from 'react'
 import {
-  roomMetadataAtom,
   roomRoundAtom,
   TGameState,
 } from '../../../_state/store'
@@ -11,8 +10,7 @@ import { useAtomValue } from 'jotai'
 
 const RoundEnd = memo(function RoundEnd() {
   const round = useAtomValue(roomRoundAtom)
-  const metadata = useAtomValue(roomMetadataAtom)
-  const isFinalRound = metadata.numOfRounds === round.number
+  const isFinalRound = round.isLastRound
 
   return (
     <RoundEndInternal
@@ -40,18 +38,18 @@ const RoundEndInternal = ({
           title="The word is"
           className="mb-8"
         />
-        <NextRound isFinalRound={isFinalRound} />
+        <NextRound isLastRound={isFinalRound} />
       </div>
     </Container>
   )
 }
 
 type TNextRoundProps = {
-  isFinalRound: boolean
+  isLastRound: boolean
 }
 
 export const NextRound = memo(function NextRound({
-  isFinalRound,
+  isLastRound,
 }: TNextRoundProps) {
   const [countdown, controller] = useCountdown(
     useMemo(
@@ -79,7 +77,7 @@ export const NextRound = memo(function NextRound({
 
   return (
     <div className="max-w-full">
-      {isFinalRound ? (
+      {isLastRound ? (
         <>Finalizing results ({countdown}s)</>
       ) : (
         <>Starting next round in {countdown}s</>
