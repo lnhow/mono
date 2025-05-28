@@ -10,7 +10,7 @@ export type TWord = {
   imageUrl?: string
 }
 
-export default class WordService {
+export default class WordRepository {
   public static words: {
     [key in ERoomTheme]: TWord[]
   } = {
@@ -29,7 +29,7 @@ export default class WordService {
     wordImg?: string
   } {
     const themeWords = this.words[theme]
-    const word = RandomService.getRandomArray(themeWords, (word) => {
+    const word = RandomRepository.getRandomArray(themeWords, (word) => {
       if (!filter.length) return true
       return !filter.includes(word.word)
     })
@@ -59,7 +59,7 @@ export default class WordService {
   }
 }
 
-export class RandomService {
+export class RandomRepository {
   public static getRandomArray<T>(
     arr: T[],
     filter: Parameters<Array<T>['filter']>[0],

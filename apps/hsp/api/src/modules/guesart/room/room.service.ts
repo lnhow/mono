@@ -31,7 +31,7 @@ import {
   socketUserRoomId,
 } from './utils'
 import { ObjectId } from 'mongodb'
-import WordService, { RandomService } from './word.service'
+import WordRepository, { RandomRepository } from './word.repository'
 import { sleep } from 'src/_utils/sleep'
 
 const PREFIX_VALIDATION = 'Validation:' as const
@@ -189,7 +189,13 @@ export class GrtRoomService
           buildSystemMessage(ESystemMessageContent.JOIN_ROOM, session),
         )
 
-      await this.emitUpdatedUserInfo(data.roomId)
+      await Promise.all([
+        client.emit(EServerToClientEvents.ROOM_JOIN, {
+          data: tx,
+        }),
+        this.emitUpdatedUserInfo(data.roomId),
+        this._emitCurrentRoundInfo(client),
+      ])
 
       return tx
     } catch (e) {
@@ -232,7 +238,12 @@ export class GrtRoomService
         },
         select: {
           status: true,
-          users: true,
+          users: {
+            where: {
+              isValid: true,
+              isActive: true,
+            },
+          },
         },
       })
       if (!room) {
@@ -244,6 +255,10 @@ export class GrtRoomService
           id: roomId,
         },
         data: {
+          // There are 2 cases:
+          // 1. User is the last user in the room => Invalidate room
+          // 2. User is not the last user in the room
+          status: room.users.length === 1 ? RoomStatus.finished : room.status,
           users: {
             update: {
               where: {
@@ -275,6 +290,54 @@ export class GrtRoomService
     await this.emitUpdatedUserInfo(roomId)
 
     return tx
+  }
+
+  private async _emitCurrentRoundInfo(client: GrtSocket) {
+    const { userId } = GrtSessionService.extractSession(client)
+    const roomId = client.data.currentRoomId
+    if (!roomId) {
+      return
+    }
+    const roomRound = await this.prisma.roomRound.findFirst({
+      where: {
+        roomId,
+        isActive: true,
+      },
+      select: {
+        id: true,
+        roundNumber: true,
+        drawerUserId: true,
+        answer: true,
+        endTime: true,
+        room: {
+          select: {
+            theme: true,
+          },
+        },
+      },
+    })
+    if (!roomRound) {
+      return
+    }
+    const isDrawer = roomRound.drawerUserId === userId
+    if (isDrawer) {
+      return client.emit(EServerToClientEvents.ROUND_NEXT, {
+        round: roomRound.roundNumber,
+        drawer: roomRound.drawerUserId,
+        word: capitalizeFirstLetter(roomRound.answer),
+        wordImg: WordRepository.findWordImage(
+          roomRound.room.theme as ERoomTheme,
+          roomRound.answer,
+        ),
+        endAt: roomRound.endTime.getTime(),
+      })
+    }
+
+    return client.emit(EServerToClientEvents.ROUND_NEXT, {
+      round: roomRound.roundNumber,
+      drawer: roomRound.drawerUserId,
+      word: WordRepository.obstructWord(roomRound.answer),
+    })
   }
 
   // Handle chat and guess messages
@@ -315,7 +378,9 @@ export class GrtRoomService
           buildChatMessage(data.content, session),
         )
       client.emit(EServerToClientEvents.WORD_HINT, {
-        word: capitalizeFirstLetter(WordService.unobstructWord(answer, guess)),
+        word: capitalizeFirstLetter(
+          WordRepository.unobstructWord(answer, guess),
+        ),
       })
       return
     }
@@ -570,11 +635,11 @@ export class GrtRoomService
         },
       )
 
-      const word = WordService.getRandomWord(
+      const word = WordRepository.getRandomWord(
         room.theme as ERoomTheme,
         prevRounds.answers,
       )
-      const nextRoundDrawer = RandomService.getRandomArray(
+      const nextRoundDrawer = RandomRepository.getRandomArray(
         userIds,
         (userId) => {
           return !prevRounds.drawers.includes(userId)
@@ -610,7 +675,7 @@ export class GrtRoomService
         .emit(EServerToClientEvents.ROUND_NEXT, {
           round: roomRound.roundNumber,
           drawer: roomRound.drawerUserId,
-          word: WordService.obstructWord(word.word),
+          word: WordRepository.obstructWord(word.word),
         })
     } catch (e) {
       this.logger.error(e)
@@ -719,7 +784,7 @@ export class GrtRoomService
         .in(socketRoomId(roomId))
         .emit(EServerToClientEvents.ROUND_END, {
           word: capitalizeFirstLetter(resUpdate.answer),
-          wordImg: WordService.findWordImage(
+          wordImg: WordRepository.findWordImage(
             round.room.theme as ERoomTheme,
             resUpdate.answer,
           ),
@@ -742,7 +807,6 @@ export class GrtRoomService
       await this.prisma.room.update({
         where: {
           id: roomId,
-          status: RoomStatus.playing,
         },
         data: {
           status: RoomStatus.finished,

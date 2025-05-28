@@ -27,6 +27,7 @@ import InfoPanel from './InfoPanel'
 import Container from '../../../_components/Container'
 import { breakpoints } from '@hsp/ui/src/styles/const'
 import { useIsDrawer } from '../../../_state/hooks'
+import cn from '@hsp/ui/src/utils/cn'
 
 const RoundPlay = memo(function RoundPlay() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
@@ -99,25 +100,29 @@ const RoundPlay = memo(function RoundPlay() {
     }
   }, [socket.socket])
 
-  const startDrawing = useCallback((e: SyntheticEvent) => {
-    const { x, y } = getPointerCoords(canvasRef.current, e)
-
-    ctxRef.current?.beginPath()
-    ctxRef.current?.moveTo(x, y)
-    isDrawingRef.current = true
-  }, [])
-
-  const draw = useCallback(
+  const startDrawing = useCallback(
     (e: SyntheticEvent) => {
-      if (!isDrawingRef.current) {
+      e.preventDefault()
+      if (!isDrawer) {
         return
       }
+
       const { x, y } = getPointerCoords(canvasRef.current, e)
-      ctxRef.current?.lineTo(x, y)
-      ctxRef.current?.stroke()
+      ctxRef.current?.beginPath()
+      ctxRef.current?.moveTo(x, y)
+      isDrawingRef.current = true
     },
-    [],
+    [isDrawer],
   )
+
+  const draw = useCallback((e: SyntheticEvent) => {
+    if (!isDrawingRef.current) {
+      return
+    }
+    const { x, y } = getPointerCoords(canvasRef.current, e)
+    ctxRef.current?.lineTo(x, y)
+    ctxRef.current?.stroke()
+  }, [])
 
   const saveHistory = useCallback(() => {
     const canvas = canvasRef.current
@@ -152,7 +157,10 @@ const RoundPlay = memo(function RoundPlay() {
       >
         <canvas
           ref={canvasRef}
-          className="bg-white rounded-lg shadow-md mx-auto max-w-full max-h-(--game-canvas-height) cursor-crosshair"
+          className={cn(
+            'bg-white rounded-lg shadow-md mx-auto max-w-full max-h-(--game-canvas-height)',
+            isDrawer ? 'cursor-crosshair' : 'cursor-default',
+          )}
           onMouseDown={startDrawing}
           onMouseMove={draw}
           onMouseUp={stopDrawing}

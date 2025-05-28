@@ -43,6 +43,8 @@ export interface GrtServerToClientEvents {
     drawer: string
     word: string
     wordImg?: string
+    isOldRound?: boolean
+    endAt?: number
   }) => void
   [EServerToClientEvents.ROUND_START]: (data: { endAt: number }) => void
   [EServerToClientEvents.ROUND_END]: (data: {

@@ -17,7 +17,8 @@ export const initGameStateListener: TInitListener = (socket, state) => {
       drawerId: data.drawer,
       word: data.word,
       wordImg: data.wordImg || '',
-      status: ERoomStatus.waiting,
+      status: data.endAt ? ERoomStatus.playing : ERoomStatus.waiting,
+      endAt: data.endAt || 0,
     }))
   }
 

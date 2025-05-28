@@ -100,14 +100,7 @@ export class GrtGateway
         EServerToClientEvents.ROOM_JOIN,
       )
     }
-    const roomData = await this.roomService.join(client, data)
-
-    return {
-      event: EServerToClientEvents.ROOM_JOIN,
-      data: {
-        data: roomData,
-      },
-    }
+    await this.roomService.join(client, data)
   }
 
   @SubscribeMessage(EClientToServerEvents.ROOM_LEAVE)
