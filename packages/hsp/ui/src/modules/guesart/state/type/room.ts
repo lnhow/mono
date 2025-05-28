@@ -16,12 +16,14 @@ export enum ERoomTimeOption {
   THIRTY_SECONDS = 1,
   FOURTY_FIVE_SECONDS = 2,
   ONE_MINUTE = 3,
+  NINETY_SECONDS = 4,
 }
 
 export const ROOM_TIME_OPTIONS = {
   [ERoomTimeOption.THIRTY_SECONDS]: 30,
   [ERoomTimeOption.FOURTY_FIVE_SECONDS]: 45,
   [ERoomTimeOption.ONE_MINUTE]: 60,
+  [ERoomTimeOption.NINETY_SECONDS]: 90,
 } as const
 
 export type RoomCreateRequestDto = {

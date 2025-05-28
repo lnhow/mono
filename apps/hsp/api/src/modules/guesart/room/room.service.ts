@@ -255,10 +255,13 @@ export class GrtRoomService
           id: roomId,
         },
         data: {
-          // There are 2 cases:
+          // There are 2 cases while playing:
           // 1. User is the last user in the room => Invalidate room
           // 2. User is not the last user in the room
-          status: room.users.length === 1 ? RoomStatus.finished : room.status,
+          status:
+            room.users.length === 1 && room.status === RoomStatus.playing
+              ? RoomStatus.finished
+              : room.status,
           users: {
             update: {
               where: {

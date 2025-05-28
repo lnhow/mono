@@ -11,6 +11,8 @@ import { FormInput } from '../components/input'
 import { FormSelect } from '../components/select'
 import {
   ERoomTheme,
+  ERoomTimeOption,
+  ROOM_TIME_OPTIONS,
   RoomCreateRequestDto,
   RoomCreateResponseDto,
 } from '../../../../state/type/room'
@@ -182,9 +184,9 @@ export const ROOM_CONSTRAINTS = {
   },
   MAX_USERS_OPTIONS: Array.from({ length: 7 }, (_, i) => '' + (i + 2)),
   ROUNDS_OPTIONS: Array.from({ length: 8 }, (_, i) => '' + (i + 3)),
-  ROUND_TIME_OPTIONS: ['30s', '45s', '60s'].map((time, index) => ({
+  ROUND_TIME_OPTIONS: Object.values(ROOM_TIME_OPTIONS).map((time, index) => ({
     value: '' + (index + 1),
-    label: time,
+    label: `${time}s`,
   })),
   THEMES_OPTIONS: [
     {
@@ -215,5 +217,5 @@ const defaultValues: RoomFormValues = {
   theme: ROOM_CONSTRAINTS.THEMES_OPTIONS[0]!.value,
   maxUsers: '4',
   rounds: '3',
-  roundTime: '1',
+  roundTime: `${ERoomTimeOption.ONE_MINUTE}`,
 }
