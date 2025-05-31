@@ -1,5 +1,5 @@
 {
-  "extends": "@newts/tsconfig/nextjs.json",
+  "extends": "@repo/tsconfig/nextjs.json",
   "compilerOptions": {
     "paths": {
       "baseUrl": ["."],
@@ -8,6 +8,9 @@
       ],
       "@i18n/*": [
         "./i18n/*",
+      ],
+      "@hsp/ui/*": [
+        "../../../packages/hsp/ui/*",
       ]
     },
     "plugins": [
@@ -17,6 +20,7 @@
     ]
   },
   "include": [
+    ".",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",

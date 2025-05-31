@@ -4,7 +4,7 @@ import './style.css'
 import box from './box.png'
 import boxLid from './box-lid.png'
 import Image from 'next/image'
-import cn from '@hsp/ui/utils/cn'
+import cn from '@hsp/ui/src/utils/cn'
 
 export default function GiftBox({
   started,

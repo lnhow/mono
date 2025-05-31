@@ -1,0 +1,14 @@
+{
+  "extends": "@repo/tsconfig/lib-react.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "@typescript-eslint"
+      }
+    ],
+  },
+  "include": [
+    "src/**/*.ts",
+  ],
+  "exclude": ["dist", "build", "node_modules"]
+}

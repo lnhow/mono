@@ -1,0 +1,101 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("API_DATABASE_URL")
+}
+
+model Test {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+
+  @@map("tests")
+}
+
+/**
+ * Rooms
+ * This model is used to store the rooms that are currently in the game.
+ * It is used to store the users that are in the room, the rounds that are in the room, and the status of the room.
+ * Rooms can be cleaned up if:
+ * - status == finished and createdAt > (x1) time
+ * - endedAt > (x2) time
+ * - status == waiting_host and createdAt > (x3) time
+ */
+model Room {
+  id                String      @id @default(auto()) @map("_id") @db.ObjectId
+  users             RoomUser[]
+  rounds            RoomRound[]
+  status            RoomStatus  @default(waiting)
+  // Settings
+  name              String
+  theme             String
+  maxUsers          Int         @default(4)
+  numOfRounds       Int         @default(4)
+  timePerRoundInSec Int         @default(30)
+  // Metadata
+  host              RoomHost
+  createdAt         DateTime    @default(now())
+  endedAt           DateTime? // Based on last user to leave the room
+
+  @@map("grt_rooms")
+}
+
+model RoomRound {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  roomId       String   @db.ObjectId
+  roundNumber  Int
+  isActive     Boolean
+  answer       String
+  drawerUserId String   
+  correctUsers String[]
+  duration     Int
+  startTime    DateTime
+  endTime      DateTime
+  room         Room     @relation(fields: [roomId], references: [id])
+
+  @@map("grt_room_rounds")
+}
+
+enum RoomStatus {
+  waiting // Waiting for players to join the game
+  playing // Game is in progress
+  finished // Game is finished
+}
+
+model RoomUser {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  roomId   String  @db.ObjectId
+  userId   String
+  userName String
+  score    Int     @default(0)
+  isActive Boolean @default(false)
+  isValid  Boolean @default(false)
+  Room     Room    @relation(fields: [roomId], references: [id])
+
+  @@map("grt_room_users")
+  @@unique([roomId, userId])
+}
+
+type RoomHost {
+  id   String
+  name String
+}
+
+// Users have to send this JWT every actions for authentication themselves
+// This model is used only for loggin, DO NOT look up this for authentication
+model UserSession {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @map("session")
+  createdAt    DateTime @default(now())
+
+  @@map("grt_user_sessions")
+}

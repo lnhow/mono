@@ -11,25 +11,78 @@
         ".next/**"
       ]
     },
+    "@hsp/app-api#build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "env": [
+        "API_*"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
     "lint": {
       "outputs": []
     },
-    "start": {
-      "cache": false,
-      "persistent": true
-    },
-    "gen:graphql": {
+    "dev": {
       "cache": false,
       "persistent": true
     },
     "deploy:start": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": [
+        "API_*"
+      ]
     },
-    "strapi": {
-      "cache": false,
-      "persistent": true
+    "db:generate": {
+      "dependsOn": [
+        "^db:generate"
+      ],
+      "outputs": [
+        "generated/prisma"
+      ],
+      "env": [
+        "API_*"
+      ]
+    },
+    "db:migrate": {
+      "dependsOn": [
+        "^db:migrate"
+      ],
+      "outputs": [
+        "generated/prisma"
+      ],
+      "env": [
+        "API_*"
+      ]
+    },
+    "db:deploy": {
+      "dependsOn": [
+        "^db:deploy"
+      ],
+      "outputs": [
+        "generated/prisma"
+      ],
+      "env": [
+        "API_*"
+      ]
+    },
+    "db:studio": {
+      "dependsOn": [
+        "^db:studio"
+      ],
+      "outputs": [
+        "generated/prisma"
+      ],
+      "env": [
+        "API_*"
+      ]
     }
   },
+  "globalEnv": [
+    "PORT"
+  ],
   "ui": "tui"
 }

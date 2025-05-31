@@ -1,0 +1,82 @@
+[
+  {
+    "word": "chair",
+    "imageUrl": "https://images.unsplash.com/photo-1503602642458-232111445657"
+  },
+  {
+    "word": "table",
+    "imageUrl": "https://images.unsplash.com/photo-1565791380713-1756b9a05343"
+  },
+  {
+    "word": "phone",
+    "imageUrl": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
+  },
+  {
+    "word": "television",
+    "imageUrl": "https://images.unsplash.com/photo-1567690187548-f07b1d7bf5a9"
+  },
+  {
+    "word": "lamp",
+    "imageUrl": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c"
+  },
+  {
+    "word": "watch",
+    "imageUrl": "https://images.unsplash.com/photo-1508057198894-247b23fe5ade"
+  },
+  {
+    "word": "mirror",
+    "imageUrl": "https://images.unsplash.com/photo-1620416265040-cc777cad1883"
+  },
+  {
+    "word": "book",
+    "imageUrl": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c"
+  },
+  {
+    "word": "pen",
+    "imageUrl": "https://images.unsplash.com/photo-1585336261022-680e295ce3fe"
+  },
+  {
+    "word": "pencil",
+    "imageUrl": "https://images.unsplash.com/photo-1590243107381-a5e2bd5ef4ba"
+  },
+  {
+    "word": "scissors",
+    "imageUrl": "https://images.unsplash.com/photo-1503792501406-2c40da09e1e2"
+  },
+  {
+    "word": "cup",
+    "imageUrl": "https://images.unsplash.com/photo-1570784332176-fdd73da66f03"
+  },
+  {
+    "word": "dish",
+    "imageUrl": "https://images.unsplash.com/photo-1587334207810-4915c4e40c67"
+  },
+  {
+    "word": "backpack",
+    "imageUrl": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62"
+  },
+  {
+    "word": "umbrella",
+    "imageUrl": "https://images.unsplash.com/photo-1517398629-9d24ea1f4f94"
+  },
+  {
+    "word": "keys",
+    "imageUrl": "https://images.unsplash.com/photo-1584985429926-08867327d3a6"
+  },
+  {
+    "word": "wallet",
+    "imageUrl": "https://images.unsplash.com/photo-1627123424574-724758594e93"
+  },
+  {
+    "word": "glasses",
+    "imageUrl": "https://images.unsplash.com/photo-1574258495973-f010dfbb5371"
+  },
+  {
+    "word": "toothbrush",
+    "imageUrl": "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04"
+  },
+  {
+    "word": "remote",
+    "imageUrl": "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37"
+  }
+]

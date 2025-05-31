@@ -7,7 +7,7 @@ export default class Shard {
   y: number
   dx: number
   dy: number
-  prevPoints: number[][]
+  prevPoints: { x: number, y: number }[] = []
   color: Color
   alive: boolean
   size: number
@@ -23,7 +23,7 @@ export default class Shard {
     this.x = x
     this.y = y
 
-    this.prevPoints = [[x, y]]
+    this.prevPoints = [{ x, y }]
     this.color = color
 
     this.alive = true
@@ -42,7 +42,7 @@ export default class Shard {
       this.prevPoints.shift()
     }
 
-    this.prevPoints.push([this.x, this.y])
+    this.prevPoints.push({ x: this.x, y: this.y })
 
     const lineWidthFactor = this.size / this.prevPoints.length
 
@@ -50,14 +50,20 @@ export default class Shard {
       const point = this.prevPoints[k]
       const prevPoint = this.prevPoints[k - 1]
 
+      if (!point || !prevPoint) {
+        continue
+      }
+
       ctx.strokeStyle = this.color.toAlpha(k / this.prevPoints.length)
       ctx.lineWidth = k * lineWidthFactor
       ctx.beginPath()
-      ctx.moveTo(point[0], point[1])
-      ctx.lineTo(prevPoint[0], prevPoint[1])
+      ctx.moveTo(point.x, point.y)
+      ctx.lineTo(prevPoint.x, prevPoint.y)
       ctx.stroke()
     }
 
-    if (this.prevPoints[0][1] > Scene.halfHeight) this.alive = false
+    if (this.prevPoints[0] && this.prevPoints[0].x > Scene.halfHeight) {
+      this.alive = false
+    }
   }
 }

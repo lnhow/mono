@@ -65,7 +65,7 @@ const ToolsGroup = memo(function ToolsGroup({ item }: { item: MenuItemGroup }) {
     <li className='row'>
       <h6
         className={
-          'px-4 py-1 mb-2 bg-base-100 flex justify-center items-center menu-title rounded'
+          'px-4 py-1 mb-2 menu-title'
         }
       >
         <span className="leading-8">{t(item.key)}</span>
@@ -90,10 +90,10 @@ const ToolsGroupLink = memo(function ToolsGroupLink({
     return pathname.endsWith(item.href.toString())
   }, [pathname, item.href])
   return (
-    <li className='flex-1 min-w-[120px]'>
+    <li className='w-[132px]'>
       <Link
         className={classNames(
-          'btn btn-neutral flex flex-col justify-center items-center px-2 py-3 h-full relative',
+          'btn bg-base-300 flex flex-col justify-center items-center px-2 py-3 h-full relative',
           isSelected && 'btn-active'
         )}
         title={t(item.key)}
