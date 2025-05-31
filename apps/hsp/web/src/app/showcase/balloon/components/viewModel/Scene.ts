@@ -127,22 +127,6 @@ export default class Scene {
     ctx.arc(0, 0, 10, 0, Math.PI * 2)
     ctx.fill()
   }
-
-  // public static fillBackground() {
-  //   const ctx = Scene.ctx
-  //   ctx.fillStyle = options.canvas.background
-  //   // ctx.fillStyle = Scene.bgColor.toHSLA(
-  //   //   options.canvas.background.light +
-  //   //     Math.min(Scene.bgTick / options.canvas.background.time, 1) *
-  //   //       (options.canvas.background.lightMax - options.canvas.background.light)
-  //   // )
-  //   // console.log('[Dev Log] -> Scene -> update -> fillStyle:', ctx.fillStyle, Scene.bgColor.toHSLA(
-  //   //   options.canvas.background.light +
-  //   //     Math.min(Scene.bgTick / options.canvas.background.time, 1) *
-  //   //       (options.canvas.background.lightMax - options.canvas.background.light)
-  //   // ))
-  //   ctx.fillRect(0, 0, Scene.width, Scene.height)
-  // }
 }
 
 class BackgroundDrawer {
