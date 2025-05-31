@@ -5,14 +5,17 @@ This is a monorepo of stuff that I made to experiment more with development.
 ## Structure
 
 ```
+|-- .config
+|   |-- gcp             - GCP configuration
+|       |-- README.md   - Deployment documentation
 |-- apps
-|   |-- hsp         - HSP(hammerspace), a collection of web-related experiment
-|       |-- api     - API application
-|       |-- web     - Web application
+|   |-- hsp             - HSP(hammerspace), a collection of web-related experiment
+|       |-- api         - API application
+|       |-- web         - Web application
 |-- packages
-|   |-- configs     - Shared configuration
+|   |-- configs         - Shared configuration
 |   |-- hsp
-|       |-- ui      - Shared UI components for HSP
+|       |-- ui          - Shared UI components for HSP
 ```
 
 ## Techs
@@ -31,6 +34,15 @@ This is a monorepo of stuff that I made to experiment more with development.
   - PNPM
   - Prettier
   - Eslint v9
+- Deployment
+  - Frontend web: Vercel
+  - Backend: 
+    - GCP Compute Engine VM on free tier.
+      - The reason is to learn more about GCP and keep it running 24/7 while keeping the costs low
+    - Nginx
+    - PM2
+    - SSL: Let's Encrypt
+  - MongoDB: MongoDB Atlas
 
 ## Todos
 
