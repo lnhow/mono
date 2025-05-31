@@ -1,4 +1,4 @@
-import I18nServer from '@newts/i18n/src/server'
+import I18nServer from '@repo/i18n/src/server'
 import { DEFAULT_LANGUAGE, getOptions } from './config'
 import { cache } from 'react'
 
@@ -7,6 +7,13 @@ const i18nServer = new I18nServer({
   defaultLanguage: DEFAULT_LANGUAGE,
 })
 
-export const getTranslation = cache(i18nServer.getTranslation.bind(i18nServer))
+export const getTranslation: ReturnType<typeof cache<typeof i18nServer.getTranslation>> = cache(
+  (...args: Parameters<typeof i18nServer.getTranslation>) => {
+    return i18nServer.getTranslation(...args)
+  }
+)
 
-export { getRequestLocale, setRequestLocale } from '@newts/i18n/src/RequestLocale'
+export {
+  getRequestLocale,
+  setRequestLocale,
+} from '@repo/i18n/src/RequestLocale'

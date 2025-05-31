@@ -1,0 +1,37 @@
+@layer guesart {
+  :root {
+    --layout-spacing: --spacing(4);
+    --layout-header-height: --spacing(13);
+    --layout-full-height: calc(
+      100vh - var(--layout-header-height) - var(--layout-spacing)
+    );
+
+    --game-topbar-height: --spacing(16);
+    --game-canvas-height: calc(
+      var(--layout-full-height) - var(--game-topbar-height) - --spacing(2)
+    );
+  }
+
+  .animation-dots::before {
+    content: '';
+    animation: dots 1.5s infinite;
+  }
+
+  @keyframes dots {
+    0% {
+      content: '';
+    }
+    25% {
+      content: '.';
+    }
+    50% {
+      content: '..';
+    }
+    75% {
+      content: '...';
+    }
+    100% {
+      content: '';
+    }
+  }
+}

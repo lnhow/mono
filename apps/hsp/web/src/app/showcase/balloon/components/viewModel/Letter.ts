@@ -114,7 +114,7 @@ class PhaseFirework extends PhaseState {
   reachTime = options.firework.reachTime.base
   lineWidth = options.firework.lineWidth.base
   velocityY = 0
-  prevPoints: number[][] = []
+  prevPoints: { x: number, y: number, width: number }[] = []
 
   start() {
     this.tick = 0
@@ -124,11 +124,11 @@ class PhaseFirework extends PhaseState {
       (options.firework.reachTime.base +
         options.firework.reachTime.added * Math.random()) |
       0
-    ;(this.lineWidth =
+    this.lineWidth =
       options.firework.lineWidth.base +
-      options.firework.lineWidth.added * Math.random()),
-      (this.isSpawned = false)
-    this.prevPoints = [[0, Scene.halfHeight, 0]]
+      options.firework.lineWidth.added * Math.random()
+    this.isSpawned = false
+    this.prevPoints = [{ x: 0, y: Scene.halfHeight, width: 0 }]
   }
   update() {
     this.tick++
@@ -156,7 +156,7 @@ class PhaseFirework extends PhaseState {
       this.prevPoints.shift()
     }
     // Add the new point
-    this.prevPoints.push([x, y, dx * this.lineWidth])
+    this.prevPoints.push({ x, y, width: dx * this.lineWidth })
     const lineWidthFactor = 1 / (this.prevPoints.length - 1)
 
     // Draw the firework line
@@ -164,15 +164,19 @@ class PhaseFirework extends PhaseState {
       const point = this.prevPoints[i]
       const prevPoint = this.prevPoints[i - 1]
 
+      if (!point || !prevPoint) {
+        continue // Skip if point or prevPoint is undefined
+      }
+
       // Set the color and width of the line
       this.letter.ctx.strokeStyle = this.letter.options.color.toAlpha(
         i / this.prevPoints.length
       )
-      this.letter.ctx.lineWidth = point[2] * lineWidthFactor * i
+      this.letter.ctx.lineWidth = point.width * lineWidthFactor * i
       // Draw
       this.letter.ctx.beginPath() // Begin a new path
-      this.letter.ctx.moveTo(point[0], point[1]) // Move to the current point
-      this.letter.ctx.lineTo(prevPoint[0], prevPoint[1]) // Draw a line to the previous point
+      this.letter.ctx.moveTo(point.x, point.y) // Move to the current point
+      this.letter.ctx.lineTo(prevPoint.x, prevPoint.y) // Draw a line to the previous point
       this.letter.ctx.stroke() // Stroke the line
     }
   }
@@ -313,8 +317,9 @@ class PhaseBlast extends PhaseState {
 
   updateFireworkShards() {
     for (let i = 0; i < this.fireworkShards.length; i++) {
-      this.fireworkShards[i].update()
-      if (!this.fireworkShards[i].alive) {
+      this.fireworkShards[i]?.update()
+
+      if (!this.fireworkShards[i]?.alive) {
         this.fireworkShards.splice(i, 1)
         i--
       }

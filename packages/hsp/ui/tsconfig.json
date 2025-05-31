@@ -1,19 +1,23 @@
 {
-  "extends": "@newts/tsconfig/lib.json",
+  "extends": "@repo/tsconfig/lib-react.json",
   "compilerOptions": {
     "plugins": [
       {
         "name": "next"
       },
-      {
-        "name": "@typescript-eslint"
-      }
     ],
     "paths": {
       "@i18n/*": [
-        "../../../apps/newts-web/i18n/*"
+        "../../../apps/hsp/web/i18n/*"
       ],
-    }
+      "@hsp/ui/*": [
+        "./*"
+      ],
+      "@/hsp/*": [
+        "../../../packages/hsp/src/*"
+      ]
+    },
+    "outDir": "dist"
   },
   "include": [
     ".",

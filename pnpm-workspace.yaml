@@ -1,0 +1,10 @@
+packages:
+  # Turbo only accepts * globs not ** globs
+  - "apps/hsp/*"
+  - "packages/configs/*"
+  - "packages/*"
+  - "packages/hsp/*"
+catalogs:
+# Pin the versions of the packages in the workspace
+  prisma:
+    prisma: 6.8.2

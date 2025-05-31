@@ -1,36 +1,35 @@
 {
-  "name": "newts",
+  "name": "mono",
   "version": "1.0.0",
   "engines": {
-    "node": ">=18.17.1"
+    "node": ">=22.12.0"
   },
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*",
-    "packages/newts/*",
-    "packages/configs/*",
-    "apps/hsp/*",
-    "packages/hsp/*"
-  ],
   "scripts": {
     "prepare": "husky install",
-    "start": "turbo run start",
-    "start:hsp": "turbo run start --filter=@hsp/app-web...",
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "pnpm db:generate",
+    "dev": "turbo run dev",
+    "dev:hsp": "turbo run dev --filter=@hsp/app-*...",
     "lint": "turbo run lint",
-    "gen:graphql": "turbo run gen:graphql --filter=newts-web",
     "build": "turbo run build",
     "deploy:start": "turbo run deploy:start",
-    "turbo": "turbo"
+    "turbo": "turbo",
+    "db:generate": "turbo run db:generate",
+    "db:migrate": "turbo run db:migrate",
+    "db:deploy": "turbo run db:deploy",
+    "db:studio": "turbo run db:studio"
   },
-  "packageManager": "yarn@1.22.19",
+  "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39",
   "devDependencies": {
-    "eslint": "^8.42.0",
     "husky": "^8.0.3",
-    "prettier": "^2.8.8",
-    "turbo": "1.10.13",
-    "@newts/eslint-config": "*",
-    "@newts/tsconfig": "*",
-    "tsconfig": "*"
+    "prettier": "^3.5.3",
+    "turbo": "^2.5.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@nestjs/core",
+      "@swc/core"
+    ]
   }
 }

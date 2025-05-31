@@ -1,0 +1,58 @@
+[
+  {
+    "word": "apple",
+    "imageUrl": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6"
+  },
+  {
+    "word": "banana",
+    "imageUrl": "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e"
+  },
+  {
+    "word": "orange",
+    "imageUrl": "https://images.unsplash.com/photo-1557800636-894a64c1696f"
+  },
+  {
+    "word": "strawberry",
+    "imageUrl": "https://images.unsplash.com/photo-1518635017498-87f514b751ba"
+  },
+  {
+    "word": "grape",
+    "imageUrl": "https://images.unsplash.com/photo-1537640538966-79f369143f8f"
+  },
+  {
+    "word": "watermelon",
+    "imageUrl": "https://images.unsplash.com/photo-1587049352846-4a222e784d38"
+  },
+  {
+    "word": "pineapple",
+    "imageUrl": "https://images.unsplash.com/photo-1550258987-190a2d41a8ba"
+  },
+  {
+    "word": "mango",
+    "imageUrl": "https://images.unsplash.com/photo-1553279768-865429fa0078"
+  },
+  {
+    "word": "peach",
+    "imageUrl": "https://images.unsplash.com/photo-1595124245030-41448b199d6d"
+  },
+  {
+    "word": "pear",
+    "imageUrl": "https://images.unsplash.com/photo-1601876813368-7962dc48cfab"
+  },
+  {
+    "word": "cherry",
+    "imageUrl": "https://images.unsplash.com/photo-1528821128474-27f963b062bf"
+  },
+  {
+    "word": "lemon",
+    "imageUrl": "https://images.unsplash.com/photo-1582087463261-ddea03f80e5d"
+  },
+  {
+    "word": "coconut",
+    "imageUrl": "https://images.unsplash.com/photo-1581375321224-79da6fd32f6e"
+  },
+  {
+    "word": "avocado",
+    "imageUrl": "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578"
+  }
+]

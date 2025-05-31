@@ -1,0 +1,37 @@
+{
+  "name": "@repo/i18n",
+  "version": "1.0.0",
+  "private": true,
+  "author": {
+    "name": "Hao Le",
+    "email": "haoln.contactme@gmail.com"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "lint": "eslint --ext .ts,.tsx ."
+  },
+  "dependencies": {
+    "accept-language": "3.0.18",
+    "react-cookie": "7.1.0",
+    "react-i18next": "15.4.1",
+    "i18next": "24.2.3",
+    "i18next-browser-languagedetector": "8.0.4",
+    "i18next-resources-to-backend": "1.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.1.0",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "@repo/tsconfig": "workspace:*",
+    "@repo/eslint-config": "workspace:*",
+    "eslint": "^9.25.0",
+    "typescript": "5.8.3"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "next": "15.2.3"
+  }
+}

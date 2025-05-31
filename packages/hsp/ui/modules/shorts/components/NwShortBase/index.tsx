@@ -49,13 +49,13 @@ export default function NwShortBase({ data, styles }: NwShortBaseProps) {
         )}
         <div
           className={classNames(
-            'card-body justify-end items-end px-4 py-6',
+            'card-body justify-end items-end px-4 py-6 text-text-300',
             styles?.container
           )}
         >
           <h4
             className={classNames(
-              'text-lg font-bold lg:line-clamp-2 py-1 px-2 rounded-lg shadow-sm',
+              'text-lg font-bold lg:line-clamp-2 py-1 px-2 rounded-lg shadow-sm text-text-300',
               'bg-gradient-to-br from-base-100 bg-base-300 bg-opacity-80',
               'border-r-2 group-hover:border-r-4 border-neutral transition-[border] duration-200 ease-in-out',
               styles?.content?.title
@@ -64,7 +64,7 @@ export default function NwShortBase({ data, styles }: NwShortBaseProps) {
             {title}
           </h4>
           <div className="mt-1 max-w-[90%]">
-            <div className="bg-gradient-to-br from-base-300 bg-base-100 bg-opacity-60 p-2 shadow-sm rounded-sm">
+            <div className="bg-gradient-to-br from-base-300 bg-base-100 bg-opacity-60 p-2 shadow-sm rounded-sm text-text-300">
               <p
                 className={classNames('text-sm', styles?.content?.description)}
               >
