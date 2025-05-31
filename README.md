@@ -1,30 +1,57 @@
-# Monorepo
+# About
 
-## Roadmap
+This is a monorepo of stuff that I made to experiment more with development.
 
-- Change HSP to version 2
-  - Libraries update
-    - Use shadcn, remove daisyui
-    - Update react-ii8next configuration
-  - Demo
-    - [ ] Theme switcher
-      - [ ] Migrate to shadcn, new tailwind & react-ii8next
-    - [ ] Draw and guess game
-      - [ ] Drawing canvas
-      - [ ] Chat box & user list
-      - [ ] Server for socket.io stuff
-      - [ ] Connect socket.io server to share drawing canvas
-      - [ ] User connect, join & create room screen
-      - [ ] Manage stages and rounds
-    - [ ] Contrast checker
-      - [ ] Migrate to shadcn, new tailwind & react-ii8next
-      - [ ] Improve design
-    - [ ] Color picker
-      - [ ] Migrate to shadcn, new tailwind & react-ii8next
-      - [ ] Improve design
-    - [ ] Redesign homepage
-    - [ ] PWA
-    - [ ] Video player
-      - [ ] Planning
-    - [ ] Extension to open a webpage side-by-side with the current tab 
-      - [ ] Planning
+## Structure
+
+```
+|-- apps
+|   |-- hsp         - HSP(hammerspace), a collection of web-related experiment
+|       |-- api     - API application
+|       |-- web     - Web application
+|-- packages
+|   |-- configs     - Shared configuration
+|   |-- hsp
+|       |-- ui      - Shared UI components for HSP
+```
+
+## Techs
+
+- Frontend web
+  - React 19
+  - Next.js 15
+  - Shadcn (Radix UI + TailwindCSS)
+- Backend
+  - Nest.js
+  - Prisma
+  - MongoDB
+  - Socket.io
+- Config
+  - Turborepo - Monorepo management
+  - PNPM
+  - Prettier
+  - Eslint v9
+
+## Todos
+
+- Demo
+  - [ ] Contrast checker
+    - [ ] Migrate to shadcn, new tailwind & react-ii8next
+    - [ ] Improve design
+  - [ ] Color picker
+    - [ ] Migrate to shadcn, new tailwind & react-ii8next
+    - [ ] Improve design
+  - [ ] Redesign homepage
+  - [ ] Add a PWA manifest
+  - [ ] Video player
+    - [ ] Planning
+  - [ ] Extension to open a webpage side-by-side with the current tab 
+    - [ ] Planning
+  - [ ] JS Playground
+    - [ ] Planning
+  - [ ] View transitions experiment
+    - [ ] Planning
+  - [ ] ThreeJS
+    - [ ] Planning
+- Configuration
+  - [ ] Update react-ii8next configuration
