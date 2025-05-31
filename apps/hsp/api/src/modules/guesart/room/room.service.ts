@@ -528,10 +528,11 @@ export class GrtRoomService
   ) {
     const session = GrtSessionService.extractSession(client)
     const roomId = client.data.currentRoomId
-    console.log('\x1B[35m[Dev log]\x1B[0m -> roomId:', roomId)
+
     if (!roomId) {
       return
     }
+
     const roomRound = await this.prisma.roomRound.findFirst({
       where: {
         roomId: roomId,
@@ -544,7 +545,7 @@ export class GrtRoomService
         drawerUserId: true,
       },
     })
-    console.log('\x1B[35m[Dev log]\x1B[0m -> roomRound:', roomRound)
+
     if (!roomRound) {
       return
     }
