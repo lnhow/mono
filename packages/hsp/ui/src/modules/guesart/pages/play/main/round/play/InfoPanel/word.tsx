@@ -2,6 +2,7 @@ import { memo } from 'react'
 import { roomRoundAtom } from '../../../../_state/store'
 import { useAtomValue } from 'jotai'
 import { useIsDrawer } from '../../../../_state/hooks'
+import { resizeUnsplashImage } from '@hsp/ui/src/modules/guesart/utils'
 
 export const Word = memo(function Word() {
   const { word, wordImg } = useAtomValue(roomRoundAtom)
@@ -21,11 +22,13 @@ function InternalWord({
   isDrawer: boolean
   wordImg?: string
 }) {
+  const imgUrl = wordImg ? resizeUnsplashImage(wordImg, IMAGE_WIDTH) : ''
+
   return (
     <div className="flex items-center">
       {wordImg && (
         <div className="relative rounded-lg overflow-hidden border border-fore-200">
-          <img src={wordImg} alt={word} className="object-cover w-16 h-16" />
+          <img src={imgUrl} alt={word} className="object-cover w-16 h-16" />
         </div>
       )}
       <div className="m-4">
@@ -35,3 +38,5 @@ function InternalWord({
     </div>
   )
 }
+
+const IMAGE_WIDTH = 64 // px
