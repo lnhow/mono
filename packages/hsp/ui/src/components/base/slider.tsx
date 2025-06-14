@@ -38,8 +38,8 @@ function Slider({
       {/* A span to enlarge the touch target */}
       <span
         data-orientation={props.orientation}
-        data-disabled={props.disabled}
-        className="absolute left-0 top-0 h-9 pointer-fine:h-4 w-full -translate-y-1/2 data-[orientation=vertical]:w-9 data-[orientation=vertical]:pointer-fine:w-4 data-[orientation=vertical]:h-full data-[orientation=vertical]:-translate-x-1/2 cursor-pointer data-[disabled]:cursor-default"
+        data-disabled={props.disabled || undefined}
+        className="absolute left-0 top-0 h-4 w-full -translate-y-1/2 data-[orientation=vertical]:w-9 data-[orientation=vertical]:pointer-fine:w-4 data-[orientation=vertical]:h-full data-[orientation=vertical]:-translate-x-1/2 cursor-pointer data-disabled:cursor-default"
         aria-hidden
       />
       <SliderPrimitive.Track
