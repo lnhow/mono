@@ -1,11 +1,16 @@
 'use client'
-import { Slider } from '@hsp/ui/src/components/base/slider'
 import cn from '@hsp/ui/src/utils/cn'
 import { ComponentPropsWithoutRef, useRef } from 'react'
 import { ButtonPlayback } from './controls/playback'
 import { ButtonFullscreen } from './controls/fullscreen'
 import { PlayerButton } from './_base/button'
-import { LuCaptions, LuSettings, LuSubscript, LuVolume2 } from 'react-icons/lu'
+import {
+  LuCaptions,
+  LuPictureInPicture2,
+  LuSettings,
+  LuVolume2,
+} from 'react-icons/lu'
+import { DurationIndicator, DurationSlider } from './controls/timeline'
 
 export type HspPlayerProps = {
   sources?: string[]
@@ -59,15 +64,14 @@ export default function HspPlayer({
       </video>
       {/* Controls */}
       <div className="absolute bottom-0 left-0 right-0 bg-black/50 backdrop-blur-sm z-10">
-        <Slider />
+        <DurationSlider getVideoEl={getVideoEl} />
         <div className="flex justify-between gap-2">
           <div className="flex items-center">
             <ButtonPlayback getVideoEl={getVideoEl} />
-            <div className='mx-2 text-xs'>
-              <span className="current">0:00</span>
-              <span className="separator">{' / '}</span>
-              <span className="duration">0:00</span>
-            </div>
+            <DurationIndicator
+              className="mx-2 text-xs"
+              getVideoEl={getVideoEl}
+            />
           </div>
           <div className="flex items-center">
             <PlayerButton>
@@ -75,6 +79,9 @@ export default function HspPlayer({
             </PlayerButton>
             <PlayerButton>
               <LuVolume2 />
+            </PlayerButton>
+            <PlayerButton>
+              <LuPictureInPicture2 />
             </PlayerButton>
             <PlayerButton>
               <LuSettings />
@@ -86,7 +93,3 @@ export default function HspPlayer({
     </div>
   )
 }
-
-
-
-
