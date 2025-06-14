@@ -13,7 +13,6 @@ function Slider({
   max = 100,
   ...props
 }: React.ComponentProps<typeof SliderPrimitive.Root>) {
-  console.log('\x1B[35m[Dev log]\x1B[0m -> props:', props)
   const _values = React.useMemo(
     () =>
       Array.isArray(value)

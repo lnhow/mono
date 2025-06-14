@@ -45,6 +45,7 @@ export default function ButtonVolume({ getVideoEl }: PlayerBaseSubCompProps) {
       videoEl.muted = false
       refPreviousVolume.current = newVolume
     } else {
+      refPreviousVolume.current = videoEl.volume || 10 // If volume is 0, set previous volume to 10
       videoEl.muted = true
     }
   }
@@ -53,7 +54,8 @@ export default function ButtonVolume({ getVideoEl }: PlayerBaseSubCompProps) {
     const videoEl = getVideoEl()
     if (!videoEl) return
 
-    onVolumeChange([videoEl.muted ? refPreviousVolume.current : 0])
+    const newVolume = videoEl.muted ? refPreviousVolume.current : 0
+    onVolumeChange([newVolume])
   }
 
   return (
