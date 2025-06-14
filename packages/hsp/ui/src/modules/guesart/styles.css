@@ -1,11 +1,5 @@
 @layer guesart {
   :root {
-    --layout-spacing: --spacing(4);
-    --layout-header-height: --spacing(13);
-    --layout-full-height: calc(
-      100vh - var(--layout-header-height) - var(--layout-spacing)
-    );
-
     --game-topbar-height: --spacing(16);
     --game-canvas-height: calc(
       var(--layout-full-height) - var(--game-topbar-height) - --spacing(2)
