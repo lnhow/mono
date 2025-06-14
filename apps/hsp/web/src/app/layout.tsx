@@ -1,6 +1,15 @@
 import './globals.css'
 import { ThemeProvider } from '@hsp/ui/src/components/theme/ThemeProvider'
 import { Toaster } from '@hsp/ui/src/components/base/sonner'
+import { Lexend } from 'next/font/google'
+
+const lexendFont = Lexend({
+  subsets: ['latin', 'vietnamese'],
+  variable: '--font-lexend',
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal'],
+})
 
 type RootLocaleLayoutProps = React.PropsWithChildren<{
   params: Promise<{ locale: string }>
@@ -10,7 +19,7 @@ type RootLocaleLayoutProps = React.PropsWithChildren<{
 export default async function RootLayout({ children }: RootLocaleLayoutProps) {
   return (
     <html suppressHydrationWarning lang="en">
-      <body>
+      <body className={lexendFont.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
