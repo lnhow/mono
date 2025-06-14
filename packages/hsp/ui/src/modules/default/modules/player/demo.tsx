@@ -7,6 +7,7 @@ export default function DemoPlayer() {
   return (
     <HspPlayer
       sources={[...sampleVideo.sources]}
+      tracks={[...sampleVideo.track]}
       className="w-full rounded-md"
     />
   )

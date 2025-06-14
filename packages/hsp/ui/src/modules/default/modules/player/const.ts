@@ -7,7 +7,15 @@ export const SAMPLE = {
       sources: [
         'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
       ],
-      subtitle: 'By Blender Foundation',
+      track: [
+        {
+          label: 'English',
+          kind: 'subtitles',
+          srcLang: 'en',
+          src: '/static/default/player/big-buck-bunny.vtt',
+        },
+        
+      ],
       thumb: 'images/BigBuckBunny.jpg',
       title: 'Big Buck Bunny',
     },

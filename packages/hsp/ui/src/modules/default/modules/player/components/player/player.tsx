@@ -1,17 +1,23 @@
 'use client'
 import cn from '@hsp/ui/src/utils/cn'
-import { ComponentPropsWithoutRef, useRef } from 'react'
+import { ComponentProps, ComponentPropsWithoutRef, useRef } from 'react'
 import { ButtonPlayback } from './controls/playback'
 import { ButtonFullscreen } from './controls/fullscreen'
-import { PlayerButton } from './_base/button'
-import { LuCaptions } from 'react-icons/lu'
 import { DurationIndicator, DurationSlider } from './controls/timeline'
 import ButtonPictureInPicture from './controls/pictureinpicture'
 import ButtonVolume from './controls/volume'
 import ButtonPlayrate from './controls/playrate'
+import ButtonSubtitle from './controls/subtitle'
+
+export type TracksProps = Pick<
+  ComponentProps<'track'>,
+  'kind' | 'label' | 'src' | 'srcLang'
+>
 
 export type HspPlayerProps = {
   sources?: string[]
+  tracks?: TracksProps[]
+  poster?: string
   autoPlay?: boolean
   className?: string
   slot?: {
@@ -21,6 +27,8 @@ export type HspPlayerProps = {
 
 export default function HspPlayer({
   sources,
+  tracks,
+  poster,
   className,
   slot,
 }: HspPlayerProps) {
@@ -53,10 +61,11 @@ export default function HspPlayer({
       className={cn('relative overflow-hidden', className)}
       ref={refContainer}
     >
-      <video ref={refVideo} className="w-full h-full">
+      <video ref={refVideo} className="w-full h-full" poster={poster}>
         {sources?.map((src, index) => (
           <source key={index} src={src} type="video/mp4" />
         ))}
+        {tracks?.map((track, index) => <track key={index} {...track} />)}
         Your browser does not support the video tag.
       </video>
       {/* Controls */}
@@ -72,9 +81,7 @@ export default function HspPlayer({
             />
           </div>
           <div className="flex items-center">
-            <PlayerButton>
-              <LuCaptions />
-            </PlayerButton>
+            <ButtonSubtitle getVideoEl={getVideoEl} />
             <ButtonVolume getVideoEl={getVideoEl} />
             <ButtonPictureInPicture
               getContainerEl={getContainerEl}
