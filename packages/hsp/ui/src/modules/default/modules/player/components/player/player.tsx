@@ -11,6 +11,7 @@ import {
 } from 'react-icons/lu'
 import { DurationIndicator, DurationSlider } from './controls/timeline'
 import ButtonPictureInPicture from './controls/pictureinpicture'
+import ButtonVolume from './controls/volume'
 
 export type HspPlayerProps = {
   sources?: string[]
@@ -77,13 +78,11 @@ export default function HspPlayer({
             <PlayerButton>
               <LuCaptions />
             </PlayerButton>
-            <PlayerButton>
-              <LuVolume2 />
-            </PlayerButton>
-            <ButtonPictureInPicture getContainerEl={getContainerEl} getVideoEl={getVideoEl} />
+            <ButtonVolume getVideoEl={getVideoEl} />
             <PlayerButton>
               <LuSettings />
             </PlayerButton>
+            <ButtonPictureInPicture getContainerEl={getContainerEl} getVideoEl={getVideoEl} />
             <ButtonFullscreen getContainerEl={getContainerEl} />
           </div>
         </div>

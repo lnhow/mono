@@ -32,7 +32,7 @@ export function DurationSlider({ getVideoEl }: PlayerBaseSubCompProps) {
   const handleValueChange = (value: number[]) => {
     isChanging.current = true
     const newValue = value[0]
-    if (!newValue || newValue < 0 || newValue > duration) {
+    if (typeof newValue === 'undefined' || newValue < 0 || newValue > duration) {
       return
     }
     setLocalCurrent(newValue)
@@ -41,7 +41,7 @@ export function DurationSlider({ getVideoEl }: PlayerBaseSubCompProps) {
   const handleValueCommit = (value: number[]) => {
     const videoEl = getVideoEl()
     const newValue = value[0]
-    if (!videoEl || !newValue || newValue < 0 || newValue > duration) {
+    if (!videoEl || typeof newValue === 'undefined' || newValue < 0 || newValue > duration) {
       isChanging.current = false
       return
     }
@@ -61,6 +61,7 @@ export function DurationSlider({ getVideoEl }: PlayerBaseSubCompProps) {
   // To show a tooltip with the image of the current time, you have to chop the video to get the image of the current time
   return (
     <Slider
+      disabled={duration <= 0}
       max={duration}
       min={0}
       value={[localCurrent]}
