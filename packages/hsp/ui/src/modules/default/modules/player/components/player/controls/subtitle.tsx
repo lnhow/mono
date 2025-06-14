@@ -3,6 +3,7 @@ import { PlayerButton } from '../_base/button'
 import { useHTMLElState } from '../_utils/useHTMLVideoState'
 import { useState } from 'react'
 import { PlayerBaseSubCompProps } from '../types'
+import { useKeydown } from '../_utils/useKeydown'
 
 export default function ButtonSubtitle({ getVideoEl }: PlayerBaseSubCompProps) {
   const isHasSubtitle = useHTMLElState(
@@ -16,19 +17,21 @@ export default function ButtonSubtitle({ getVideoEl }: PlayerBaseSubCompProps) {
   )
   const [isEnabled, setIsEnabled] = useState(false)
 
-  if (!isHasSubtitle) {
-    return null
-  }
-
   const toggleSubtitle = () => {
     const videoEl = getVideoEl()
-    if (!videoEl) return
+    if (!videoEl || !isHasSubtitle) return
 
     const track = videoEl.textTracks[0]
     if (!track) return
     // Toggle subtitle visibility
     track.mode = track.mode === 'showing' ? 'hidden' : 'showing'
     setIsEnabled(track.mode === 'showing')
+  }
+
+  useKeydown('c', toggleSubtitle)
+
+  if (!isHasSubtitle) {
+    return null
   }
 
   return (

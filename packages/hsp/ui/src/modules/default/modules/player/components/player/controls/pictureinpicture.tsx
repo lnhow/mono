@@ -1,12 +1,13 @@
 import { LuPictureInPicture2 } from 'react-icons/lu'
 import { PlayerButton } from '../_base/button'
 import { PlayerBaseSubCompProps, PlayerViewControlsProps } from '../types'
-import { useSyncExternalStore } from 'react'
+import { useCallback, useSyncExternalStore } from 'react'
 import {
   detectPictureInPictureSupport,
   TRequestDPIPOptions,
   WindowWithDocumentPictureInPicture,
 } from '@hsp/ui/src/utils/browser/pictureinpicture'
+import { useKeydown } from '../_utils/useKeydown'
 
 const PictureInPictureType = {
   video: {
@@ -77,7 +78,7 @@ const ButtonPictureInPictureVideo = ({
     () => false, // Default value when not in Picture-in-Picture
   )
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     const PIP = PictureInPictureType.video
     const videoEl = getVideoEl()
     if (!videoEl) return
@@ -92,7 +93,11 @@ const ButtonPictureInPictureVideo = ({
     PIP.request(videoEl).catch((error) => {
       console.error('Error requesting Picture-in-Picture:', error)
     })
-  }
+  }, [getVideoEl])
+
+  // Handle keydown for Picture-in-Picture control
+  useKeydown('i', handleClick)
+
   return (
     <ButtonPictureInPictureBase isOpen={isOpen} handleClick={handleClick} />
   )

@@ -9,6 +9,12 @@ import {
   PopoverTrigger,
 } from '@hsp/ui/src/components/base/popover'
 import { Slider } from '@hsp/ui/src/components/base/slider'
+import { useKeydown } from '../_utils/useKeydown'
+
+const getVolumeSnapshot = (videoEl: HTMLVideoElement | null) => {
+  if (!videoEl) return 0
+  return videoEl.muted ? 0 : videoEl.volume
+}
 
 export default function ButtonVolume({ getVideoEl }: PlayerBaseSubCompProps) {
   const refPreviousVolume = useRef(100)
@@ -16,11 +22,7 @@ export default function ButtonVolume({ getVideoEl }: PlayerBaseSubCompProps) {
     getVideoEl,
     ['volumechange', 'play'],
     () => {
-      const videoEl = getVideoEl()
-      if (!videoEl) {
-        return 0
-      }
-      return videoEl.muted ? 0 : videoEl.volume
+      return getVolumeSnapshot(getVideoEl())
     },
     () => 0,
   )
@@ -57,6 +59,18 @@ export default function ButtonVolume({ getVideoEl }: PlayerBaseSubCompProps) {
     const newVolume = videoEl.muted ? refPreviousVolume.current : 0
     onVolumeChange([newVolume])
   }
+
+  useKeydown('m', toggleMute)
+  useKeydown('ArrowUp', () => {
+    const videoEl = getVideoEl()
+    if (!videoEl) return
+    onVolumeChange([Math.min(videoEl.volume * 100 + 10, 100)])
+  })
+  useKeydown('ArrowDown', () => {
+    const videoEl = getVideoEl()
+    if (!videoEl) return
+    onVolumeChange([Math.max(videoEl.volume * 100 - 10, 0)])
+  })
 
   return (
     <Popover>

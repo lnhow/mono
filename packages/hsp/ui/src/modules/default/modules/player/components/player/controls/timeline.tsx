@@ -3,6 +3,7 @@ import cn from '@hsp/ui/src/utils/cn'
 import { useHTMLElState } from '../_utils/useHTMLVideoState'
 import { Slider } from '@hsp/ui/src/components/base/slider'
 import { useEffect, useRef, useState } from 'react'
+import { useKeydown } from '../_utils/useKeydown'
 
 export function DurationIndicator({
   className,
@@ -32,7 +33,11 @@ export function DurationSlider({ getVideoEl }: PlayerBaseSubCompProps) {
   const handleValueChange = (value: number[]) => {
     isChanging.current = true
     const newValue = value[0]
-    if (typeof newValue === 'undefined' || newValue < 0 || newValue > duration) {
+    if (
+      typeof newValue === 'undefined' ||
+      newValue < 0 ||
+      newValue > duration
+    ) {
       return
     }
     setLocalCurrent(newValue)
@@ -41,7 +46,12 @@ export function DurationSlider({ getVideoEl }: PlayerBaseSubCompProps) {
   const handleValueCommit = (value: number[]) => {
     const videoEl = getVideoEl()
     const newValue = value[0]
-    if (!videoEl || typeof newValue === 'undefined' || newValue < 0 || newValue > duration) {
+    if (
+      !videoEl ||
+      typeof newValue === 'undefined' ||
+      newValue < 0 ||
+      newValue > duration
+    ) {
       isChanging.current = false
       return
     }
@@ -56,6 +66,17 @@ export function DurationSlider({ getVideoEl }: PlayerBaseSubCompProps) {
       setLocalCurrent(current)
     }
   }, [current])
+
+  useKeydown('ArrowLeft', () => {
+    const videoEl = getVideoEl()
+    if (!videoEl) return
+    handleValueCommit([Math.max(0, videoEl.currentTime - 5)])
+  })
+  useKeydown('ArrowRight', () => {
+    const videoEl = getVideoEl()
+    if (!videoEl) return
+    handleValueCommit([Math.min(duration, videoEl.currentTime + 5)])
+  })
 
   // Note:
   // To show a tooltip with the image of the current time, you have to chop the video to get the image of the current time

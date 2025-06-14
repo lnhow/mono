@@ -1,7 +1,13 @@
 'use client'
 import cn from '@hsp/ui/src/utils/cn'
-import { ComponentProps, ComponentPropsWithoutRef, useRef } from 'react'
-import { ButtonPlayback } from './controls/playback'
+import {
+  ComponentProps,
+  ComponentPropsWithoutRef,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react'
+import { ButtonPlayback, togglePlayback } from './controls/playback'
 import { ButtonFullscreen } from './controls/fullscreen'
 import { DurationIndicator, DurationSlider } from './controls/timeline'
 import ButtonPictureInPicture from './controls/pictureinpicture'
@@ -18,7 +24,6 @@ export type HspPlayerProps = {
   sources?: string[]
   tracks?: TracksProps[]
   poster?: string
-  autoPlay?: boolean
   className?: string
   slot?: {
     container?: Omit<ComponentPropsWithoutRef<'div'>, 'children' | 'className'>
@@ -36,29 +41,32 @@ export default function HspPlayer({
   const refContainer = useRef<HTMLDivElement>(null)
   const refVideo = useRef<HTMLVideoElement>(null)
 
-  const getVideoEl = () => {
+  const getVideoEl = useCallback(() => {
     return refVideo.current
-  }
-  const getContainerEl = () => {
+  }, [])
+  const getContainerEl = useCallback(() => {
     return refContainer.current
-  }
+  }, [])
 
-  // useImperativeHandle(
-  //   props.ref,
-  //   () => ({
-  //     current: refVideo.current,
-  //     play: () => refVideo.current?.play(),
-  //     pause: () => refVideo.current?.pause(),
-  //     load: () => refVideo.current?.load(),
-  //     requestFullscreen: () => refVideo.current?.requestFullscreen(),
-  //   }),
-  //   [],
-  // )
+  useEffect(() => {
+    const refVideoEl = refVideo.current
+    if (!refVideoEl) return
+
+    const onVideoClick = () => {
+      togglePlayback(refVideoEl)
+    }
+
+    refVideoEl.addEventListener('click', onVideoClick)
+
+    return () => {
+      refVideoEl.removeEventListener('click', onVideoClick)
+    }
+  }, [])
 
   return (
     <div
       {...propsContainer}
-      className={cn('relative overflow-hidden', className)}
+      className={cn('relative overflow-hidden bg-black', className)}
       ref={refContainer}
     >
       <video ref={refVideo} className="w-full h-full" poster={poster}>

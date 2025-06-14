@@ -8,7 +8,8 @@ export default function DemoPlayer() {
     <HspPlayer
       sources={[...sampleVideo.sources]}
       tracks={[...sampleVideo.track]}
-      className="w-full rounded-md"
+      poster={SAMPLE.thumbPrefix + sampleVideo.thumb}
+      className="w-full rounded-md aspect-video"
     />
   )
 }
