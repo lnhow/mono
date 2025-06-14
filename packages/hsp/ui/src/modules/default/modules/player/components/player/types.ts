@@ -36,3 +36,7 @@ export type PlayerBaseSubCompProps = {
   getVideoEl: () => HTMLVideoElement | null
   className?: string
 }
+
+export type PlayerViewControlsProps = {
+  getContainerEl: () => HTMLDivElement | null
+}

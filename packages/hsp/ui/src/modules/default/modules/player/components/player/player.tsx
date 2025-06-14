@@ -6,11 +6,11 @@ import { ButtonFullscreen } from './controls/fullscreen'
 import { PlayerButton } from './_base/button'
 import {
   LuCaptions,
-  LuPictureInPicture2,
   LuSettings,
   LuVolume2,
 } from 'react-icons/lu'
 import { DurationIndicator, DurationSlider } from './controls/timeline'
+import ButtonPictureInPicture from './controls/pictureinpicture'
 
 export type HspPlayerProps = {
   sources?: string[]
@@ -80,9 +80,7 @@ export default function HspPlayer({
             <PlayerButton>
               <LuVolume2 />
             </PlayerButton>
-            <PlayerButton>
-              <LuPictureInPicture2 />
-            </PlayerButton>
+            <ButtonPictureInPicture getContainerEl={getContainerEl} getVideoEl={getVideoEl} />
             <PlayerButton>
               <LuSettings />
             </PlayerButton>
