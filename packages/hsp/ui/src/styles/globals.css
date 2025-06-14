@@ -262,6 +262,9 @@
     /* Shadcn accordion */
     --animate-accordion-down: accordion-down 0.2s ease-out;
     --animate-accordion-up: accordion-up 0.2s ease-out;
+    /* Shadcn collapsible */
+    --animate-collapsible-side-in: collapsible-side-in var(--tw-duration, var(--default-transition-duration)) var(--tw-ease, var(--default-transition-timing-function));
+    --animate-collapsible-side-out: collapsible-side-out var(--tw-duration, var(--default-transition-duration)) var(--tw-ease, var(--default-transition-timing-function));
   }
   @keyframes accordion-down {
     0% {
@@ -277,6 +280,25 @@
     }
     100% {
       height: 0;
+    }
+  }
+
+  /* Collapsible */
+  @keyframes collapsible-side-in {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: var(--radix-collapsible-content-width);
+    }
+  }
+
+  @keyframes collapsible-side-out {
+    0% {
+      width: var(--radix-collapsible-content-width);
+    }
+    100% {
+      width: 0;
     }
   }
 }

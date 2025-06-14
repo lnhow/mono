@@ -9,7 +9,7 @@ export default function DemoPlayer() {
       sources={[...sampleVideo.sources]}
       tracks={[...sampleVideo.track]}
       poster={SAMPLE.thumbPrefix + sampleVideo.thumb}
-      className="w-full rounded-md aspect-video"
+      className="w-full max-w-3xl rounded-md aspect-video"
     />
   )
 }
