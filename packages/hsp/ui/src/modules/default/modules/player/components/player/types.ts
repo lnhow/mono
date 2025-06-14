@@ -36,11 +36,3 @@ export type PlayerBaseSubCompProps = {
   getVideoEl: () => HTMLVideoElement | null
   className?: string
 }
-
-export type HTMLVideoEvent = keyof HTMLVideoElementEventMap //React.SyntheticEvent<HTMLVideoElement, Event>
-
-export interface DocumentWithCustomFullscreen extends Document {
-  webkitFullscreenElement?: Element | null
-  mozFullScreenElement?: Element | null
-  msFullscreenElement?: Element | null
-}

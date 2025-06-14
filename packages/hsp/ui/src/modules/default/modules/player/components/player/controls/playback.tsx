@@ -1,23 +1,11 @@
-import { useSyncExternalStore } from 'react'
 import { PLAYER_STATE, PlayerBaseSubCompProps } from '../types'
 import { PlayerButton } from '../_base/button'
+import { useHTMLElState } from '../_utils/useHTMLVideoState'
 
 export const ButtonPlayback = ({ getVideoEl }: PlayerBaseSubCompProps) => {
-  const videoState = useSyncExternalStore(
-    (onChange) => {
-      const videoEl = getVideoEl()
-      if (!videoEl) return () => {}
-      const events = ['play', 'pause', 'ended']
-      events.forEach((event) => {
-        videoEl.addEventListener(event, onChange)
-      })
-
-      return () => {
-        events.forEach((event) => {
-          videoEl.removeEventListener(event, onChange)
-        })
-      }
-    },
+  const playbackState = useHTMLElState(
+    getVideoEl,
+    ['play', 'pause', 'ended', 'timeupdate'],
     () => {
       const videoEl = getVideoEl()
       if (!videoEl) return PLAYER_STATE.PAUSED
@@ -27,9 +15,7 @@ export const ButtonPlayback = ({ getVideoEl }: PlayerBaseSubCompProps) => {
           ? PLAYER_STATE.PAUSED
           : PLAYER_STATE.PLAYING
     },
-    () => {
-      return PLAYER_STATE.PAUSED
-    },
+    () => PLAYER_STATE.PAUSED,
   )
 
   return (
@@ -37,10 +23,10 @@ export const ButtonPlayback = ({ getVideoEl }: PlayerBaseSubCompProps) => {
       onClick={() => {
         const videoEl = getVideoEl()
         if (!videoEl) return
-        videoState.nextState.action(videoEl)
+        playbackState.nextState.action(videoEl)
       }}
     >
-      <videoState.nextState.icon />
+      <playbackState.nextState.icon />
     </PlayerButton>
   )
 }

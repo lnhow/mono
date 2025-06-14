@@ -1,47 +1,8 @@
 import { PlayerBaseSubCompProps } from '../types'
 import cn from '@hsp/ui/src/utils/cn'
-import { useHTMLVideoState } from '../_utils/useHTMLVideoState'
+import { useHTMLElState } from '../_utils/useHTMLVideoState'
 import { Slider } from '@hsp/ui/src/components/base/slider'
 import { useState } from 'react'
-
-const useVideoDuration = (getVideoEl: PlayerBaseSubCompProps['getVideoEl']) => {
-  return useHTMLVideoState(
-    getVideoEl,
-    ['loadedmetadata', 'durationchange'],
-    () => {
-      const videoEl = getVideoEl()
-      return videoEl ? videoEl.duration : 0
-    },
-    () => 0,
-  )
-}
-
-const useVideoCurrentTime = (
-  getVideoEl: PlayerBaseSubCompProps['getVideoEl'],
-) => {
-  return useHTMLVideoState(
-    getVideoEl,
-    ['timeupdate'],
-    () => {
-      const videoEl = getVideoEl()
-      return videoEl ? videoEl.currentTime : 0
-    },
-    () => 0,
-  )
-}
-
-function formatTime(seconds: number): string {
-  const hours = Math.floor(seconds / 3600)
-  const minutes = Math.floor((seconds % 3600) / 60)
-  const secs = Math.floor(seconds % 60)
-  return [
-    hours > 0 ? hours.toString().padStart(2, '0') : '',
-    minutes.toString().padStart(2, '0'),
-    secs.toString().padStart(2, '0'),
-  ]
-    .filter(Boolean)
-    .join(':')
-}
 
 export function DurationIndicator({
   className,
@@ -94,4 +55,43 @@ export function DurationSlider({ getVideoEl }: PlayerBaseSubCompProps) {
       onValueCommit={handleValueCommit}
     />
   )
+}
+
+const useVideoDuration = (getVideoEl: PlayerBaseSubCompProps['getVideoEl']) => {
+  return useHTMLElState(
+    getVideoEl,
+    ['loadedmetadata', 'durationchange'],
+    () => {
+      const videoEl = getVideoEl()
+      return videoEl ? videoEl.duration : 0
+    },
+    () => 0,
+  )
+}
+
+const useVideoCurrentTime = (
+  getVideoEl: PlayerBaseSubCompProps['getVideoEl'],
+) => {
+  return useHTMLElState(
+    getVideoEl,
+    ['timeupdate'],
+    () => {
+      const videoEl = getVideoEl()
+      return videoEl ? videoEl.currentTime : 0
+    },
+    () => 0,
+  )
+}
+
+function formatTime(seconds: number): string {
+  const hours = Math.floor(seconds / 3600)
+  const minutes = Math.floor((seconds % 3600) / 60)
+  const secs = Math.floor(seconds % 60)
+  return [
+    hours > 0 ? hours.toString().padStart(2, '0') : '',
+    minutes.toString().padStart(2, '0'),
+    secs.toString().padStart(2, '0'),
+  ]
+    .filter(Boolean)
+    .join(':')
 }

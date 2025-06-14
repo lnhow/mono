@@ -1,10 +1,12 @@
 import { useSyncExternalStore } from 'react'
 
-type EventKeysForEl<El extends HTMLElement> = 
+type SupportedElement = HTMLElement | Document;
+type EventKeysForEl<El extends SupportedElement> = 
   El extends HTMLVideoElement ? keyof HTMLVideoElementEventMap :
+  El extends Document ? keyof DocumentEventMapCrossBrowser :
   keyof HTMLElementEventMap;
 
-export const useHTMLVideoState = function <T, El extends HTMLElement>(
+export const useHTMLElState = function <T, El extends SupportedElement>(
   getEl: (() => El | null),
   events: EventKeysForEl<El>[],
   getSnapshot: () => T,
@@ -28,4 +30,16 @@ export const useHTMLVideoState = function <T, El extends HTMLElement>(
     getSnapshot,
     getServerSnapshot,
   )
+}
+
+export interface DocumentEventMapCrossBrowser extends DocumentEventMap {
+  webkitfullscreenchange: Event;
+  mozfullscreenchange: Event;
+  MSFullscreenChange: Event;
+}
+
+export interface DocumentWithCrossBrowser extends Document {
+  webkitFullscreenElement?: Element | null
+  mozFullScreenElement?: Element | null
+  msFullscreenElement?: Element | null
 }

@@ -1,7 +1,6 @@
-import { useSyncExternalStore } from 'react'
-import { DocumentWithCustomFullscreen } from '../types'
 import { LuFullscreen, LuMinimize } from 'react-icons/lu'
 import { PlayerButton } from '../_base/button'
+import { DocumentWithCrossBrowser, useHTMLElState } from '../_utils/useHTMLVideoState'
 
 type PlayerButtonFullscreenProps = {
   getContainerEl: () => HTMLDivElement | null
@@ -10,30 +9,20 @@ type PlayerButtonFullscreenProps = {
 export const ButtonFullscreen = ({
   getContainerEl,
 }: PlayerButtonFullscreenProps) => {
-  const isFullscreen = useSyncExternalStore(
-    (onChange) => {
-      const events = [
-        'fullscreenchange',
-        'webkitfullscreenchange',
-        'mozfullscreenchange',
-        'MSFullscreenChange',
-      ]
-      events.forEach((event) => {
-        document.addEventListener(event, onChange)
-      })
-
-      return () => {
-        events.forEach((event) => {
-          document.removeEventListener(event, onChange)
-        })
-      }
-    },
+  const isFullscreen = useHTMLElState(
+    () => document,
+    [
+      'fullscreenchange',
+      'webkitfullscreenchange',
+      'mozfullscreenchange',
+      'MSFullscreenChange',
+    ],
     () => {
       return Boolean(
         document.fullscreenElement ||
-          (document as DocumentWithCustomFullscreen).webkitFullscreenElement ||
-          (document as DocumentWithCustomFullscreen).mozFullScreenElement ||
-          (document as DocumentWithCustomFullscreen).msFullscreenElement,
+          (document as DocumentWithCrossBrowser).webkitFullscreenElement ||
+          (document as DocumentWithCrossBrowser).mozFullScreenElement ||
+          (document as DocumentWithCrossBrowser).msFullscreenElement,
       )
     },
     () => false, // Default value when not in fullscreen
