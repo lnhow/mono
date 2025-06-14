@@ -6,7 +6,7 @@ import NoSsr from '@hsp/ui/src/components/app/NoSsr'
 import SocketProvider from '../state/SocketProvider'
 import { JotaiProvider } from '../state/JotaiProvider'
 
-const GuesartLayout = memo(function GuesartLayout({
+const LayoutGuesart = memo(function LayoutGuesart({
   children,
 }: {
   children: React.ReactNode
@@ -33,4 +33,4 @@ const GuesartLayout = memo(function GuesartLayout({
   )
 })
 
-export default GuesartLayout
+export default LayoutGuesart

@@ -253,6 +253,13 @@
   }
 
   :root {
+    --layout-spacing: --spacing(4);
+    --layout-header-height: --spacing(13);
+    --layout-full-height: calc(
+      100vh - var(--layout-header-height) - var(--layout-spacing)
+    );
+
+    /* Shadcn accordion */
     --animate-accordion-down: accordion-down 0.2s ease-out;
     --animate-accordion-up: accordion-up 0.2s ease-out;
   }
