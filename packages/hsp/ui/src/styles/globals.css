@@ -76,8 +76,8 @@
 
   --hsp-fore-100: var(--color-zinc-600);
   --hsp-fore-200: var(--color-zinc-500);
-  --hsp-fore-300: var(--color-zinc-400);
-  --hsp-fore-400: var(--color-zinc-300);
+  --hsp-fore-300: var(--color-zinc-300);
+  --hsp-fore-400: var(--color-zinc-200);
   --hsp-fore-500: var(--color-zinc-100);
 
   --hsp-base-100: var(--color-neutral-900);

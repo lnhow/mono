@@ -4,14 +4,11 @@ import { ComponentPropsWithoutRef, useRef } from 'react'
 import { ButtonPlayback } from './controls/playback'
 import { ButtonFullscreen } from './controls/fullscreen'
 import { PlayerButton } from './_base/button'
-import {
-  LuCaptions,
-  LuSettings,
-  LuVolume2,
-} from 'react-icons/lu'
+import { LuCaptions } from 'react-icons/lu'
 import { DurationIndicator, DurationSlider } from './controls/timeline'
 import ButtonPictureInPicture from './controls/pictureinpicture'
 import ButtonVolume from './controls/volume'
+import ButtonPlayrate from './controls/playrate'
 
 export type HspPlayerProps = {
   sources?: string[]
@@ -19,7 +16,6 @@ export type HspPlayerProps = {
   className?: string
   slot?: {
     container?: Omit<ComponentPropsWithoutRef<'div'>, 'children' | 'className'>
-    // video?: Omit<ComponentPropsWithoutRef<'video'>, 'src' | 'controls'>
   }
 }
 
@@ -64,11 +60,12 @@ export default function HspPlayer({
         Your browser does not support the video tag.
       </video>
       {/* Controls */}
-      <div className="absolute bottom-0 left-0 right-0 bg-black/50 backdrop-blur-sm z-10">
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-base-100 via-30% via-base-100/60 to-base-100/20 backdrop-blur-sm z-10">
         <DurationSlider getVideoEl={getVideoEl} />
         <div className="flex justify-between gap-2">
           <div className="flex items-center">
             <ButtonPlayback getVideoEl={getVideoEl} />
+            <ButtonPlayrate getVideoEl={getVideoEl} />
             <DurationIndicator
               className="mx-2 text-xs"
               getVideoEl={getVideoEl}
@@ -79,10 +76,10 @@ export default function HspPlayer({
               <LuCaptions />
             </PlayerButton>
             <ButtonVolume getVideoEl={getVideoEl} />
-            <PlayerButton>
-              <LuSettings />
-            </PlayerButton>
-            <ButtonPictureInPicture getContainerEl={getContainerEl} getVideoEl={getVideoEl} />
+            <ButtonPictureInPicture
+              getContainerEl={getContainerEl}
+              getVideoEl={getVideoEl}
+            />
             <ButtonFullscreen getContainerEl={getContainerEl} />
           </div>
         </div>

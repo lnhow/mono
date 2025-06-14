@@ -30,7 +30,7 @@ function Slider({
       min={min}
       max={max}
       className={cn(
-        'relative flex w-full touch-none items-center select-none data-[disabled]:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col',
+        'group relative flex w-full touch-none items-center select-none data-[disabled]:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col',
         className,
       )}
       {...props}
@@ -39,13 +39,13 @@ function Slider({
       <span
         data-orientation={props.orientation}
         data-disabled={props.disabled || undefined}
-        className="absolute left-0 top-0 h-4 w-full -translate-y-1/2 data-[orientation=vertical]:w-9 data-[orientation=vertical]:pointer-fine:w-4 data-[orientation=vertical]:h-full data-[orientation=vertical]:-translate-x-1/2 cursor-pointer data-disabled:cursor-default"
+        className="absolute left-0 top-0 pointer-fine:hidden w-full -translate-y-1/2 data-[orientation=vertical]:w-9 data-[orientation=vertical]:h-full data-[orientation=vertical]:-translate-x-1/2 cursor-pointer data-disabled:cursor-default"
         aria-hidden
       />
       <SliderPrimitive.Track
         data-slot="slider-track"
         className={cn(
-          'bg-muted relative grow overflow-hidden rounded-full data-[orientation=horizontal]:h-1 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1',
+          'bg-muted relative grow overflow-hidden rounded-full data-[orientation=horizontal]:h-1 data-[orientation=horizontal]:group-hover:h-2 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1 data-[orientation=vertical]:group-hover:w-2 transition-[width,height] cursor-pointer data-disabled:cursor-not-allowed',
         )}
       >
         <SliderPrimitive.Range
