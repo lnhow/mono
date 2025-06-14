@@ -167,7 +167,7 @@ importers:
         version: 4.0.15
       '@tailwindcss/typography':
         specifier: ^0.5.16
-        version: 0.5.16(tailwindcss@4.0.15)
+        version: 0.5.16(tailwindcss@4.1.10)
       autoprefixer:
         specifier: 10.4.14
         version: 10.4.14(postcss@8.5.3)
@@ -223,8 +223,8 @@ importers:
         specifier: ^10.3.1
         version: 10.3.1
       tailwindcss:
-        specifier: 4.0.15
-        version: 4.0.15
+        specifier: 4.1.10
+        version: 4.1.10
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -293,7 +293,7 @@ importers:
         version: 0.26.28(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@tailwindcss/typography':
         specifier: ^0.5.16
-        version: 0.5.16(tailwindcss@4.0.15)
+        version: 0.5.16(tailwindcss@4.1.10)
       class-variance-authority:
         specifier: 0.7.1
         version: 0.7.1
@@ -334,8 +334,8 @@ importers:
         specifier: ^1.12.0
         version: 1.14.0
       tailwindcss:
-        specifier: 4.0.15
-        version: 4.0.15
+        specifier: 4.1.10
+        version: 4.1.10
       tw-animate-css:
         specifier: 1.2.8
         version: 1.2.8
@@ -6359,6 +6359,9 @@ packages:
   tailwindcss@4.0.15:
     resolution: {integrity: sha512-6ZMg+hHdMJpjpeCCFasX7K+U615U9D+7k5/cDK/iRwl6GptF24+I/AbKgOnXhVKePzrEyIXutLv36n4cRsq3Sg==}
 
+  tailwindcss@4.1.10:
+    resolution: {integrity: sha512-P3nr6WkvKV/ONsTzj6Gb57sWPMX29EPNPopo7+FcpkQaNsrNpZ1pv8QmrYI2RqEKD7mlGqLnGovlcYnBK0IqUA==}
+
   tapable@2.2.1:
     resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
     engines: {node: '>=6'}
@@ -9875,13 +9878,13 @@ snapshots:
       postcss: 8.5.3
       tailwindcss: 4.0.15
 
-  '@tailwindcss/typography@0.5.16(tailwindcss@4.0.15)':
+  '@tailwindcss/typography@0.5.16(tailwindcss@4.1.10)':
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 4.0.15
+      tailwindcss: 4.1.10
 
   '@tokenizer/token@0.3.0': {}
 
@@ -14351,6 +14354,8 @@ snapshots:
   tailwind-merge@1.14.0: {}
 
   tailwindcss@4.0.15: {}
+
+  tailwindcss@4.1.10: {}
 
   tapable@2.2.1: {}
 
