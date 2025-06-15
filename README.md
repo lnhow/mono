@@ -47,23 +47,21 @@ This is a monorepo of stuff that I made to experiment more with development.
 ## Todos
 
 - Demo
+  - [ ] Redesign homepage
+  - [ ] Add a PWA manifest
+  - [ ] Extension to open a webpage side-by-side with the current tab 
+    - [ ] Planning
+  - [ ] View transitions experiment
+    - [ ] Planning
+  - [ ] ThreeJS
+    - [ ] Planning
+  - [ ] JS Playground
+    - [ ] Planning
   - [ ] Contrast checker
     - [ ] Migrate to shadcn, new tailwind & react-ii8next
     - [ ] Improve design
   - [ ] Color picker
     - [ ] Migrate to shadcn, new tailwind & react-ii8next
     - [ ] Improve design
-  - [ ] Redesign homepage
-  - [ ] Add a PWA manifest
-  - [ ] Video player
-    - [ ] Planning
-  - [ ] Extension to open a webpage side-by-side with the current tab 
-    - [ ] Planning
-  - [ ] JS Playground
-    - [ ] Planning
-  - [ ] View transitions experiment
-    - [ ] Planning
-  - [ ] ThreeJS
-    - [ ] Planning
 - Configuration
   - [ ] Update react-ii8next configuration
