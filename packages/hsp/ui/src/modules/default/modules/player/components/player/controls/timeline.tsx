@@ -98,7 +98,7 @@ const useVideoDuration = (getVideoEl: PlayerBaseSubCompProps['getVideoEl']) => {
     ['loadedmetadata', 'durationchange'],
     () => {
       const videoEl = getVideoEl()
-      return videoEl ? videoEl.duration : 0
+      return videoEl ? videoEl.duration || 0 : 0
     },
     () => 0,
   )
@@ -112,7 +112,7 @@ const useVideoCurrentTime = (
     ['timeupdate'],
     () => {
       const videoEl = getVideoEl()
-      return videoEl ? videoEl.currentTime : 0
+      return videoEl ? videoEl.currentTime || 0 : 0
     },
     () => 0,
   )
