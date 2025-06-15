@@ -8,6 +8,8 @@ import {
   WindowWithDocumentPictureInPicture,
 } from '@hsp/ui/src/utils/browser/pictureinpicture'
 import { useKeydown } from '../_utils/useKeydown'
+import { HOTKEYS, TOOLTIPS } from '../types'
+import Tooltip from '@hsp/ui/src/components/base/tooltip'
 
 const PictureInPictureType = {
   video: {
@@ -49,7 +51,7 @@ export default function ButtonPictureInPicture({
       return 'false' as const // Default value when Picture-in-Picture is not supported
     },
   )
-  
+
   if (isSupportPIP === 'false') {
     return null
   }
@@ -96,7 +98,7 @@ const ButtonPictureInPictureVideo = ({
   }, [getVideoEl])
 
   // Handle keydown for Picture-in-Picture control
-  useKeydown('i', handleClick)
+  useKeydown(HOTKEYS.pictureInPicture, handleClick)
 
   return (
     <ButtonPictureInPictureBase isOpen={isOpen} handleClick={handleClick} />
@@ -104,21 +106,26 @@ const ButtonPictureInPictureVideo = ({
 }
 
 const ButtonPictureInPictureBase = ({
-  isOpen,
   handleClick,
 }: {
   isOpen: boolean
   handleClick: () => void
 }) => {
   return (
-    <PlayerButton onClick={handleClick}>
-      <LuPictureInPicture2 />
-      {isOpen && <span className="sr-only">Exit Picture-in-Picture</span>}
-      {!isOpen && <span className="sr-only">Enter Picture-in-Picture</span>}
-    </PlayerButton>
+    <Tooltip
+      label={TOOLTIPS.pictureInPicture}
+    >
+      <PlayerButton onClick={handleClick}>
+        <LuPictureInPicture2 />
+      </PlayerButton>
+    </Tooltip>
   )
 }
 
+// Failed to implement the document Picture-in-Picture version
+// Reason: complexity
+// It requires adding style and script tags to the new window, which is difficult to do in the current setup.
+// It should be easier if the player is a standalone application that have its own style and script files.
 // const ButtonPictureInPictureDocument = ({
 //   getContainerEl,
 // }: ButtonPictureInPictureProps) => {

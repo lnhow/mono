@@ -1,9 +1,13 @@
 import { LuFullscreen, LuMinimize } from 'react-icons/lu'
 import { PlayerButton } from '../_base/button'
-import { DocumentWithCrossBrowser, useHTMLElState } from '../_utils/useHTMLVideoState'
-import { PlayerViewControlsProps } from '../types'
+import {
+  DocumentWithCrossBrowser,
+  useHTMLElState,
+} from '../_utils/useHTMLVideoState'
+import { PlayerViewControlsProps, HOTKEYS, TOOLTIPS } from '../types'
 import { useCallback } from 'react'
 import { useKeydown } from '../_utils/useKeydown'
+import Tooltip from '@hsp/ui/src/components/base/tooltip'
 
 const getFullscreenSnapshot = () => {
   return Boolean(
@@ -39,20 +43,18 @@ export const ButtonFullscreen = ({
     }
     const containerEl = getContainerEl()
     if (!containerEl) return
-    containerEl
-      .requestFullscreen()
-      .catch((error) => {
-        console.error('Error requesting fullscreen:', error)
-      })
+    containerEl.requestFullscreen().catch((error) => {
+      console.error('Error requesting fullscreen:', error)
+    })
   }, [getContainerEl])
 
-  useKeydown('f', toggleFullscreen)
+  useKeydown(HOTKEYS.fullscreen, toggleFullscreen)
 
   return (
-    <PlayerButton
-      onClick={toggleFullscreen}
-    >
-      {isFullscreen ? <LuMinimize /> : <LuFullscreen />}
-    </PlayerButton>
+    <Tooltip label={TOOLTIPS.fullscreen}>
+      <PlayerButton onClick={toggleFullscreen}>
+        {isFullscreen ? <LuMinimize /> : <LuFullscreen />}
+      </PlayerButton>
+    </Tooltip>
   )
 }

@@ -106,7 +106,7 @@ export default function HspPlayer({
           Your browser does not support the video tag.
         </video>
         {/* Controls */}
-        <div className="player-controls absolute bottom-0 left-0 right-0 bg-gradient-to-t from-base-100/50 via-50% via-base-100/40 to-base-100/20 backdrop-blur-sm z-10 opacity-100 data-[hidden=true]:opacity-0 transition-opacity">
+        <div className="player-controls absolute bottom-0 left-0 right-0 bg-gradient-to-t from-base-100/80 via-50% via-base-100/60 to-base-100/40 backdrop-blur-sm z-10 opacity-100 data-[hidden=true]:opacity-0 transition-opacity">
           <DurationSlider getVideoEl={getVideoEl} />
           <div className="flex justify-between gap-2">
             <div className="flex items-center">
