@@ -2,6 +2,16 @@
 
 This is a monorepo of stuff that I made to experiment more with development.
 
+## Featured
+
+- [guesart](https://web.hspln.com)
+  - A draw and guess game to gauge my techniques compared to my internship years ago and see what I can improve on more
+  - FYI, the comparison:
+    - Time taken: ~60h over the span of 1 month solo  vs ~4 working weeks in a team of 4
+    - Frontend: Better overall & used more advanced techniques. Notably: finally make the canvas responsive, handle reconnection, adding word images to make it easier to imagine what to draw, used AI to generate skeleton code.
+    - Backend: Small improvement, finally used a DB instead of memory (this caused crashes under heavy load back then). Learned & used GCP to keep it on 24/7, nginx, SSL.
+- [Custom HTML player](https://web.hspln.com/player)
+
 ## To start local development
 
 1. Check the `.env.example` file in `apps/hsp/api` and provide an `.env` based on it 
@@ -17,7 +27,7 @@ This is a monorepo of stuff that I made to experiment more with development.
 |   |-- gcp             - GCP configuration
 |       |-- README.md   - Deployment documentation
 |-- apps
-|   |-- hsp             - HSP(hammerspace), a collection of web-related experiment
+|   |-- hsp             - HSP(hammerspace), the main application
 |       |-- api         - API application
 |       |-- web         - Web application
 |-- packages
@@ -32,7 +42,7 @@ This is a monorepo of stuff that I made to experiment more with development.
   - Techs: React 19, Next.js 15, Shadcn (Radix UI + TailwindCSS)
   - Modules:
     - [guesart](https://web.hspln.com): Draw and Guess game
-      - Techs: jotai, socket.io-client
+      - Techs: socket.io-client, jotai state management
     - [Custom HTML player](https://web.hspln.com/player)
       - Techs: `Picture-in-picture API`, `Fullscreen API`, `useSyncExternalStore`, Pure React & TailwindCSS
 - Backend
@@ -61,11 +71,8 @@ This is a monorepo of stuff that I made to experiment more with development.
     - [ ] Planning
   - [ ] JS Playground
     - [ ] Planning
-  - [ ] Contrast checker
-    - [ ] Migrate to shadcn, remove old libraries
-    - [ ] Improve design
-  - [ ] Color picker
-    - [ ] Migrate to shadcn, remove old libraries
-    - [ ] Improve design
+  - [ ] Migrating, remove old libraries & improve
+    - [ ] Contrast checker
+    - [ ] Color picker
 - Configuration
   - [ ] Update react-ii8next configuration
