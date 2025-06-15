@@ -2,6 +2,14 @@
 
 This is a monorepo of stuff that I made to experiment more with development.
 
+## To start local development
+
+1. Check the `.env.example` file in `apps/hsp/api` and provide an `.env` based on it 
+   1. `cp ./apps/hsp/api/.env.example ./apps/hsp/api/.env`
+   2. `code ./apps/hsp/api/.env` (Replace `code` with the editor of your choice)
+2. Install dependencies: `pnpm install` (Provided you have installed [pnpm](https://pnpm.io/installation))
+3. Run `pnpm dev:hsp`
+
 ## Structure
 
 ```
@@ -21,19 +29,15 @@ This is a monorepo of stuff that I made to experiment more with development.
 ## Techs
 
 - Frontend web
-  - React 19
-  - Next.js 15
-  - Shadcn (Radix UI + TailwindCSS)
+  - Techs: React 19, Next.js 15, Shadcn (Radix UI + TailwindCSS)
+  - Modules:
+    - [guesart](https://web.hspln.com): Draw and Guess game
+      - Techs: jotai, socket.io-client
+    - [Custom HTML player](https://web.hspln.com/player)
+      - Techs: `Picture-in-picture API`, `Fullscreen API`, `useSyncExternalStore`, Pure React & TailwindCSS
 - Backend
-  - Nest.js
-  - Prisma
-  - MongoDB
-  - Socket.io
-- Config
-  - Turborepo - Monorepo management
-  - PNPM
-  - Prettier
-  - Eslint v9
+  - Techs: Nest.js, Socket.io, Prisma, MongoDB
+- Config: PNPM, Turborepo - Monorepo management, Prettier, Eslint v9
 - Deployment
   - Frontend web: Vercel
   - Backend: 
@@ -58,10 +62,10 @@ This is a monorepo of stuff that I made to experiment more with development.
   - [ ] JS Playground
     - [ ] Planning
   - [ ] Contrast checker
-    - [ ] Migrate to shadcn, new tailwind & react-ii8next
+    - [ ] Migrate to shadcn, remove old libraries
     - [ ] Improve design
   - [ ] Color picker
-    - [ ] Migrate to shadcn, new tailwind & react-ii8next
+    - [ ] Migrate to shadcn, remove old libraries
     - [ ] Improve design
 - Configuration
   - [ ] Update react-ii8next configuration
