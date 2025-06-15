@@ -1,5 +1,5 @@
 import { useMemo, useRef } from 'react'
-import { PlayerBaseSubCompProps } from '../types'
+import { PlayerBaseSubCompProps, HOTKEYS, TOOLTIPS } from '../types'
 import { useHTMLElState } from '../_utils/useHTMLVideoState'
 import { PlayerButton } from '../_base/button'
 import { LuVolume1, LuVolume2, LuVolumeOff } from 'react-icons/lu'
@@ -10,6 +10,7 @@ import {
 } from '@hsp/ui/src/components/base/popover'
 import { Slider } from '@hsp/ui/src/components/base/slider'
 import { useKeydown } from '../_utils/useKeydown'
+import Tooltip from '@hsp/ui/src/components/base/tooltip'
 
 const getVolumeSnapshot = (videoEl: HTMLVideoElement | null) => {
   if (!videoEl) return 0
@@ -60,13 +61,13 @@ export default function ButtonVolume({ getVideoEl }: PlayerBaseSubCompProps) {
     onVolumeChange([newVolume])
   }
 
-  useKeydown('m', toggleMute)
-  useKeydown('ArrowUp', () => {
+  useKeydown(HOTKEYS.mute, toggleMute)
+  useKeydown(HOTKEYS.volumeUp, () => {
     const videoEl = getVideoEl()
     if (!videoEl) return
     onVolumeChange([Math.min(videoEl.volume * 100 + 10, 100)])
   })
-  useKeydown('ArrowDown', () => {
+  useKeydown(HOTKEYS.volumeDown, () => {
     const videoEl = getVideoEl()
     if (!videoEl) return
     onVolumeChange([Math.max(videoEl.volume * 100 - 10, 0)])
@@ -74,9 +75,11 @@ export default function ButtonVolume({ getVideoEl }: PlayerBaseSubCompProps) {
 
   return (
     <Popover>
-      <PopoverTrigger asChild>
-        <PlayerButton>{icon}</PlayerButton>
-      </PopoverTrigger>
+      <Tooltip label={TOOLTIPS.volume}>
+        <PopoverTrigger asChild>
+          <PlayerButton>{icon}</PlayerButton>
+        </PopoverTrigger>
+      </Tooltip>
       <PopoverContent
         className="w-fit flex flex-col justify-center p-2"
         side="top"

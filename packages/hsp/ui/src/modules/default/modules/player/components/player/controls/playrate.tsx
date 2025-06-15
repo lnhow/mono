@@ -6,7 +6,8 @@ import {
 import { PlayerButton } from '../_base/button'
 import { Button } from '@hsp/ui/src/components/base/button'
 import { useHTMLElState } from '../_utils/useHTMLVideoState'
-import { PlayerBaseSubCompProps } from '../types'
+import { PlayerBaseSubCompProps, TOOLTIPS } from '../types'
+import Tooltip from '@hsp/ui/src/components/base/tooltip'
 
 export const PlaybackRates = [0.25, 0.5, 1, 1.5, 1.75, 2]
 
@@ -29,9 +30,11 @@ export default function ButtonPlayrate({ getVideoEl }: PlayerBaseSubCompProps) {
 
   return (
     <Popover>
-      <PopoverTrigger asChild>
-        <PlayerButton className='text-xs'>{playbackRate}x</PlayerButton>
-      </PopoverTrigger>
+      <Tooltip label={TOOLTIPS.playbackRate}>
+        <PopoverTrigger asChild>
+          <PlayerButton className="text-xs">{playbackRate}x</PlayerButton>
+        </PopoverTrigger>
+      </Tooltip>
       <PopoverContent className="w-fit p-0" side="top">
         <ul className="flex flex-col gap-2">
           {PlaybackRates.map((rate) => (

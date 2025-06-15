@@ -2,8 +2,9 @@ import { LuCaptions } from 'react-icons/lu'
 import { PlayerButton } from '../_base/button'
 import { useHTMLElState } from '../_utils/useHTMLVideoState'
 import { useState } from 'react'
-import { PlayerBaseSubCompProps } from '../types'
+import { PlayerBaseSubCompProps, HOTKEYS, TOOLTIPS } from '../types'
 import { useKeydown } from '../_utils/useKeydown'
+import Tooltip from '@hsp/ui/src/components/base/tooltip'
 
 export default function ButtonSubtitle({ getVideoEl }: PlayerBaseSubCompProps) {
   const isHasSubtitle = useHTMLElState(
@@ -28,19 +29,21 @@ export default function ButtonSubtitle({ getVideoEl }: PlayerBaseSubCompProps) {
     setIsEnabled(track.mode === 'showing')
   }
 
-  useKeydown('c', toggleSubtitle)
+  useKeydown(HOTKEYS.captions, toggleSubtitle)
 
   if (!isHasSubtitle) {
     return null
   }
 
   return (
-    <PlayerButton
-      onClick={toggleSubtitle}
-      className="text-xs data-[active=true]:border-b border-primary-200"
-      data-active={isEnabled}
-    >
-      <LuCaptions />
-    </PlayerButton>
+    <Tooltip label={TOOLTIPS.captions}>
+      <PlayerButton
+        onClick={toggleSubtitle}
+        className="text-xs data-[active=true]:border-b border-primary-200"
+        data-active={isEnabled}
+      >
+        <LuCaptions />
+      </PlayerButton>
+    </Tooltip>
   )
 }

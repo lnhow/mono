@@ -1,4 +1,4 @@
-import { PlayerBaseSubCompProps } from '../types'
+import { PlayerBaseSubCompProps, HOTKEYS } from '../types'
 import cn from '@hsp/ui/src/utils/cn'
 import { useHTMLElState } from '../_utils/useHTMLVideoState'
 import { Slider } from '@hsp/ui/src/components/base/slider'
@@ -67,12 +67,12 @@ export function DurationSlider({ getVideoEl }: PlayerBaseSubCompProps) {
     }
   }, [current])
 
-  useKeydown('ArrowLeft', () => {
+  useKeydown(HOTKEYS.seekBackward, () => {
     const videoEl = getVideoEl()
     if (!videoEl) return
     handleValueCommit([Math.max(0, videoEl.currentTime - 5)])
   })
-  useKeydown('ArrowRight', () => {
+  useKeydown(HOTKEYS.seekForward, () => {
     const videoEl = getVideoEl()
     if (!videoEl) return
     handleValueCommit([Math.min(duration, videoEl.currentTime + 5)])
@@ -98,7 +98,7 @@ const useVideoDuration = (getVideoEl: PlayerBaseSubCompProps['getVideoEl']) => {
     ['loadedmetadata', 'durationchange'],
     () => {
       const videoEl = getVideoEl()
-      return videoEl ? videoEl.duration : 0
+      return videoEl ? videoEl.duration || 0 : 0
     },
     () => 0,
   )
@@ -112,7 +112,7 @@ const useVideoCurrentTime = (
     ['timeupdate'],
     () => {
       const videoEl = getVideoEl()
-      return videoEl ? videoEl.currentTime : 0
+      return videoEl ? videoEl.currentTime || 0 : 0
     },
     () => 0,
   )
