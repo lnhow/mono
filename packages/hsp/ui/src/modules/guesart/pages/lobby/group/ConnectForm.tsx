@@ -2,6 +2,7 @@
 import { Button } from '@hsp/ui/src/components/base/button'
 import { useEffect } from 'react'
 
+import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
 import { useForm } from 'react-hook-form'
 import { socketAtom } from '../../../state/store'
 import { useAtomValue } from 'jotai'
@@ -27,22 +28,24 @@ export default function ConnectForm() {
     }
   }, [setValue])
 
-  const onConnect = handleSubmit(useDebounceCallback((data) => {
-    localStorage.setItem(STORAGE_KEY.USERNAME, data.username)
-    if (!socket) {
-      return
-    }
-    socket.auth = {
-      username: data.username,
-    }
-    socket.connect()
-  }, 100))
+  const onConnect = handleSubmit(
+    useDebounceCallback((data) => {
+      localStorage.setItem(STORAGE_KEY.USERNAME, data.username)
+      if (!socket) {
+        return
+      }
+      socket.auth = {
+        username: data.username,
+      }
+      socket.connect()
+    }, 100),
+  )
 
   return (
     <form onSubmit={onConnect} className="space-y-4">
       <FormInput
         control={control}
-        label='Username'
+        label="Username"
         name="username"
         InputProps={{
           maxLength: USER_NAME.MAX_LENGTH,
@@ -60,9 +63,11 @@ export default function ConnectForm() {
           },
         }}
       />
-      <Button type="submit" className="w-full" disabled={!socket}>
-        Play
-      </Button>
+      <ViewTransition name="guesart-button-primary">
+        <Button type="submit" className="w-full" disabled={!socket}>
+          Play
+        </Button>
+      </ViewTransition>
     </form>
   )
 }
