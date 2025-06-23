@@ -28,18 +28,15 @@ export default function CardDemo({
 }: CardDemoProps) {
   return (
     <ViewTransition name={transitionCard}>
-      <Link
-        href={href}
-        className="no-underline rounded-lg transition outline-primary-100 hover:outline"
-      >
-        <Card className={cn('flex flex-col gap-2 p-4', className)}>
+      <Link href={href} className={cn(className)}>
+        <Card className="flex flex-col p-4 h-full transition outline-primary-100 hover:outline">
           <ViewTransition name={transitionTitle}>
-            <CardTitle>
-              <h3 className="text-md font-bold">{title}</h3>
+            <CardTitle className="mb-4">
+              <h3 className="text-md font-normal text-fore-400">{title}</h3>
             </CardTitle>
           </ViewTransition>
           <ViewTransition name={transitionDescription}>
-            <CardDescription>
+            <CardDescription className="text-fore-200">
               <p>{description}</p>
             </CardDescription>
           </ViewTransition>
