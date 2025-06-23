@@ -5,6 +5,7 @@ import { RESET, useAtomCallback } from 'jotai/utils'
 import { usePathname, useRouter } from 'next/navigation'
 import { debounce } from 'lodash'
 
+import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
 import { sessionAtom, socketAtom } from '../../state/store'
 import { roomAtom, roomIsLoadingAtom, roomMetadataAtom } from './_state/store'
 import { SESSION_STORAGE_KEY } from '../../state/type/session'
@@ -29,10 +30,12 @@ function PagePlay() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row gap-2">
-      <RoomMain />
-      <Sidebar className="w-full md:w-[360px] md:max-w-4/12" />
-    </div>
+    <ViewTransition name="guesart-card">
+      <div className="flex flex-col md:flex-row gap-2">
+        <RoomMain />
+        <Sidebar className="w-full md:w-[360px] md:max-w-4/12" />
+      </div>
+    </ViewTransition>
   )
 }
 export default memo(PagePlay)
