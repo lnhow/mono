@@ -2,6 +2,7 @@ import './globals.css'
 import { ThemeProvider } from '@hsp/ui/src/components/theme/ThemeProvider'
 import { Toaster } from '@hsp/ui/src/components/base/sonner'
 import { Lexend } from 'next/font/google'
+import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
 
 const lexendFont = Lexend({
   subsets: ['latin', 'vietnamese'],
@@ -26,7 +27,9 @@ export default async function RootLayout({ children }: RootLocaleLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <ViewTransition>
+            {children}
+          </ViewTransition>
           <Toaster />
         </ThemeProvider>
       </body>
