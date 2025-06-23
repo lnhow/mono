@@ -8,3 +8,8 @@ catalogs:
 # Pin the versions of the packages in the workspace
   prisma:
     prisma: 6.8.2
+  react:
+    react: 19.1.0
+    react-dom: 19.1.0
+  next:
+    next: 15.3.4
