@@ -69,7 +69,7 @@
   --hsp-error-300: var(--color-red-500);
 }
 
-[data-theme=dark] {
+[data-theme='dark'] {
   --hsp-primary-100: var(--color-emerald-950);
   --hsp-primary-200: var(--color-emerald-600);
   --hsp-primary-300: var(--color-emerald-400);
