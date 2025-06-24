@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { useAtomValue } from 'jotai'
 
+import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
 import { Button } from '@hsp/ui/src/components/base/button'
 import { FormInput } from '../components/input'
 import { socketAtom } from '../../../../state/store'
@@ -25,27 +26,31 @@ export default function RoomJoinForm() {
   })
   const handleJoinRoom = useValidateRoom()
 
-  const onSubmit = handleSubmit(useDebounceCallback((data) => {
-    if (!socket) {
-      toast.error('Socket is not connected')
-      return
-    }
-    setIsLoading(true)
-    const promise = handleJoinRoom(data.roomId).finally(() => {
-      setIsLoading(false)
-    })
+  const onSubmit = handleSubmit(
+    useDebounceCallback((data) => {
+      if (!socket) {
+        toast.error('Socket is not connected')
+        return
+      }
+      setIsLoading(true)
+      const promise = handleJoinRoom(data.roomId).finally(() => {
+        setIsLoading(false)
+      })
 
-    toast.promise(promise, {
-      loading: 'Joining Room...',
-      success: 'Joined Room!',
-      error: (error) => {
-        if (error?.error === EGrtErrorCode.INVALID_DATA) {
-          return error.data.message === 'Unknown error' ? 'Room not found' : error.data.message
-        }
-        return 'Unexcepted error. Please try again later.'
-      },
-    })
-  }, 100))
+      toast.promise(promise, {
+        loading: 'Joining Room...',
+        success: 'Joined Room!',
+        error: (error) => {
+          if (error?.error === EGrtErrorCode.INVALID_DATA) {
+            return error.data.message === 'Unknown error'
+              ? 'Room not found'
+              : error.data.message
+          }
+          return 'Unexcepted error. Please try again later.'
+        },
+      })
+    }, 100),
+  )
 
   return (
     <div className="py-2">
@@ -65,9 +70,11 @@ export default function RoomJoinForm() {
             placeholder: 'Room ID',
           }}
         />
-        <Button type="submit" className="w-full" disabled={isLoading}>
-          Join Room
-        </Button>
+        <ViewTransition name="guesart-button-primary">
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            Join Room
+          </Button>
+        </ViewTransition>
       </form>
     </div>
   )

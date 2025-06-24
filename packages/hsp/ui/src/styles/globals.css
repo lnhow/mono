@@ -138,7 +138,7 @@
 /* Shadcn */
 :root {
   --background: var(--hsp-base-100);
-  --foreground: var(--hsp-fore-300);
+  --foreground: var(--hsp-fore-400);
   --card: var(--hsp-base-200);
   --card-foreground: var(--hsp-fore-300);
   --popover: oklch(1 0 0);
@@ -148,7 +148,7 @@
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted-foreground: var(--hsp-fore-300);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
@@ -182,7 +182,7 @@
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
+  --muted-foreground: var(--hsp-fore-300);
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.396 0.141 25.723);

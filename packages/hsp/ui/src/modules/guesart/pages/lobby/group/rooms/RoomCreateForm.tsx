@@ -6,6 +6,7 @@ import { useDebounceCallback } from 'usehooks-ts'
 import { useRouter } from 'next/navigation'
 import { useAtomValue } from 'jotai'
 
+import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
 import { Button } from '@hsp/ui/src/components/base/button'
 import { FormInput } from '../components/input'
 import { FormSelect } from '../components/select'
@@ -160,9 +161,11 @@ const RoomCreateForm = memo(function RoomCreateForm() {
           options={ROOM_CONSTRAINTS.ROUND_TIME_OPTIONS}
           placeholder="Select time per round"
         />
-        <Button type="submit" className="w-full" disabled={isLoading}>
-          Create Room
-        </Button>
+        <ViewTransition name="guesart-button-primary">
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            Create Room
+          </Button>
+        </ViewTransition>
       </form>
     </div>
   )
