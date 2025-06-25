@@ -16,7 +16,7 @@ export default function CardsDemo() {
         title="Custom HTML video player"
         description={
           <>
-            Built with <code>useSyncExternalStore</code> and only one{' '}
+            Built with <code>useSyncExternalStore</code> and only two{' '}
             <code>useState</code>
           </>
         }

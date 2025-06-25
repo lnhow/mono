@@ -3,7 +3,6 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@hsp/ui/src/components/base/collapsible'
-import { PlayerButton } from '../_base/button'
 import { LuInfo } from 'react-icons/lu'
 import cn from '@hsp/ui/src/utils/cn'
 import Link from '@hsp/ui/src/components/app/link'
@@ -28,7 +27,7 @@ export default function PlayerSidebar({
       </CollapsibleTrigger>
       <CollapsibleContent
         className={cn(
-          'player-sidebar text-xs overflow-y-auto px-4 pt-4 pb-8 space-y-2',
+          'player-sidebar text-xs overflow-y-auto w-full h-full px-4 pt-4 pb-8 space-y-2',
           contentClassName,
         )}
       >
