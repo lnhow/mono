@@ -62,10 +62,10 @@ export function DurationSlider({ getVideoEl }: PlayerBaseSubCompProps) {
 
   useEffect(() => {
     // Update local current time if not changing
-    if (!isChanging.current) {
+    if (!isChanging.current && current !== localCurrent) {
       setLocalCurrent(current)
     }
-  }, [current])
+  }, [current, localCurrent])
 
   useKeydown(HOTKEYS.seekBackward, () => {
     const videoEl = getVideoEl()
@@ -112,7 +112,9 @@ const useVideoCurrentTime = (
     ['timeupdate'],
     () => {
       const videoEl = getVideoEl()
-      return videoEl ? videoEl.currentTime || 0 : 0
+      // Avoid Safari send timeupdate event too frequently
+      const currentTime = videoEl ? Math.round(videoEl.currentTime) || 0 : 0
+      return currentTime
     },
     () => 0,
   )
