@@ -130,8 +130,8 @@ export default function HspPlayer({
         </div>
       </div>
       <PlayerSidebar
-        className='[--width:--spacing(60)] max-w-(--width) h-full overflow-auto z-20'
-        contentClassName='data-[state=open]:animate-collapsible-side-out data-[state=closed]:animate-collapsible-side-in'
+        className='z-20 [--width:--spacing(48)] md:[--width:--spacing(60)] absolute right-0 h-full md:relative'
+        contentClassName='data-[state=open]:w-(--width) transition-[width] data-[state=open]:animate-collapsible-side-out data-[state=closed]:animate-collapsible-side-in'
         triggerClassName="absolute top-0 transition-[right] right-0 data-[state=open]:right-(--width) z-20 bg-base-100/50 backdrop-blur-sm"
       />
     </div>
