@@ -1,7 +1,8 @@
 import '../style.css'
 
 import * as THREE from 'three'
-import gsap from 'gsap'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+// import gsap from 'gsap'
 
 // 01 Setup - Basic Scene with a Cube
 // Setup =================================
@@ -21,7 +22,17 @@ const sizes = {
 
 // Camera is the perspective from which we view the scene
 // PerspectiveCamera is a type of camera that simulates the way the human eye sees
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
+// FOV, aspect ratio, near and far clipping planes
+// - FOV (Field of View) is the vertical angle of the camera's view
+// - Aspect ratio is the width divided by the height of the viewport
+// - Near clipping plane is the closest distance at which objects are rendered
+// - Far clipping plane is the farthest distance at which objects are rendered
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
+
+// OrthographicCamera is a type of camera that does not have perspective distortion
+// - left, right, top, bottom are the boundaries of the camera's view
+// const aspectRatio = sizes.width / sizes.height
+// const camera = new THREE.OrthographicCamera(-1 * aspectRatio, 1 * aspectRatio, 1, -1, 0.1, 100)
 camera.position.z = 3
 
 const canvas = document.querySelector<HTMLCanvasElement>('#webgl')!
@@ -109,24 +120,38 @@ scene.add(axesHelper)
 
 // 03 Animation
 // const clock = new THREE.Clock() // A clock to keep track of time
-gsap.to(mesh.position, { duration: 2, delay: 1, x: 2 })
+// gsap.to(mesh.position, { duration: 2, delay: 1, x: 2 })
+
+// const cursor = new THREE.Vector2()
+const controls = new OrbitControls(camera, canvas) // OrbitControls allows you to rotate, zoom, and pan the camera
+controls.enableDamping = true // Enable damping (inertia) for smoother controls
 
 const tick: FrameRequestCallback = () => {
   // const elapsedTime = clock.getElapsedTime() // Get the elapsed time since the clock started
 
-  // mesh.rotation.y += 0.01 * elapsedTime
-  // mesh.position.x = Math.sin(elapsedTime) // Move the mesh along the X axis
-  // mesh.position.y = Math.cos(elapsedTime) // Move the mesh along the Y axis
+  // mesh.position.x = Math.sin(cursor.x * Math.PI * 2) * 2
+  // mesh.position.z = Math.cos(cursor.x * Math.PI * 2) * 2
+  // mesh.position.y = cursor.y * 4
   // camera.lookAt(mesh.position) // Make the camera look at the mesh position (a Vector3)
+
+  controls.update()
 
   renderer.render(scene, camera) // Render the scene from the perspective of the camera
   update()
 }
 
+
 const update = () => {
   requestAnimationFrame(tick) // Start the animation loop
 }
 
-mesh.position.x = -2
+// mesh.position.x = -2
 update()
 
+// window.addEventListener('mousemove', (event) => {
+//   console.log('Mouse position:', event.clientX, event.clientY)
+//   cursor.x = (event.clientX / sizes.width) - 0.5 // Normalize to [-0.5, 0.5]
+//   cursor.y = -(event.clientY / sizes.height - 0.5)
+//   mesh.position.x = (event.clientX / sizes.width) * 2 - 1 // Normalize to [-1, 1]
+//   mesh.position.y = -(event.clientY / sizes.height) * 2 + 1 // Normalize to [-1, 1]
+// })
