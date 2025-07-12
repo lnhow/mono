@@ -1,15 +1,14 @@
 import { memo, useEffect, useState } from 'react'
-import { Button, TooltipTrigger, Tooltip } from 'react-aria-components'
+// import { Button, TooltipTrigger, Tooltip } from 'react-aria-components'
 import { useFormContext } from 'react-hook-form'
-import { 
+import {
   FormContrastChecker,
   // ValidationRules,
-  nsToolsContrast
 } from '../const'
-import { useTranslation } from '@i18n/client'
+import { Button } from '@hsp/ui/src/components/base/button'
+import Tooltip from '@hsp/ui/src/components/base/tooltip'
 
 const ButtonGenLinkContrast = memo(function ButtonGenLinkContrast() {
-  const { t } = useTranslation(nsToolsContrast)
   const { getValues } = useFormContext<FormContrastChecker>()
   const [isCopied, setIsCopied] = useState(false)
   const copyURL = () => {
@@ -25,10 +24,9 @@ const ButtonGenLinkContrast = memo(function ButtonGenLinkContrast() {
         '/tools/contrast-checker?' +
         Object.keys(values)
           .map((key) => {
-            // @ts-ignore
-            return key + '=' + encodeURIComponent(values[key])
+            return key + '=' + encodeURIComponent(values[key as 'fg' | 'bg'])
           })
-          .join('&')
+          .join('&'),
     )
     setIsCopied(true)
   }
@@ -47,17 +45,11 @@ const ButtonGenLinkContrast = memo(function ButtonGenLinkContrast() {
   }, [isCopied])
 
   return (
-    <TooltipTrigger>
-      <Button className="btn btn-link w-full" onPress={copyURL}>
-        {isCopied ? t('copied') : t('permalink')}
+    <Tooltip label={'Generate Permalink'}>
+      <Button className="btn btn-link w-full" onClick={copyURL}>
+        {isCopied ? 'Copied' : 'Permalink'}
       </Button>
-      <Tooltip
-        placement="bottom"
-        className="bg-base-200 shadow-md py-1 px-3 rounded"
-      >
-        {t('permalink')}
-      </Tooltip>
-    </TooltipTrigger>
+    </Tooltip>
   )
 })
 

@@ -1,27 +1,29 @@
-import classNames from '@hsp/ui/utils/classNames'
 import {
   PropsWithChildren,
   memo,
-  useCallback,
+  useDeferredValue,
   useEffect,
   useState,
 } from 'react'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
 import { calcContrastRatio, isContrastRatioPass } from '../contrastUtils'
-import { debounce } from 'lodash'
-import { MdCheck, MdClose, MdInfo } from 'react-icons/md'
-import { Tooltip, TooltipTrigger, Button } from 'react-aria-components'
+import { LuCheck, LuX, LuInfo } from 'react-icons/lu'
 import { ValidationRules } from '../const'
+import cn from '@hsp/ui/src/utils/cn'
+import { Button } from '@hsp/ui/src/components/base/button'
+import Tooltip from '@hsp/ui/src/components/base/tooltip'
 
 export const BackgroundPreview = memo(function BackgroundPreview({
   children,
-}: PropsWithChildren) {
+  className,
+}: PropsWithChildren<{ className?: string }>) {
   const background = useWatch({ name: 'background' })
+  const backgroundDeferred = useDeferredValue(background)
 
   return (
     <div
-      style={{ background }}
-      className="pt-8 h-full rounded-xl lg:rounded-none"
+      style={{ background: backgroundDeferred }}
+      className={cn('pt-8 h-full rounded-xl transition', className)}
     >
       <div className="flex flex-col items-center justify-center">
         <TextPreview variant="bigText" />
@@ -43,6 +45,7 @@ export const StyleTextPreview = {
 
 export const TextPreview = memo(function TextPreview({ variant }: TextPreview) {
   const foreground = useWatch({ name: 'foreground' })
+  const foregroundDeferred = useDeferredValue(foreground)
   const { setValue } = useFormContext()
 
   return (
@@ -55,8 +58,8 @@ export const TextPreview = memo(function TextPreview({ variant }: TextPreview) {
             <p
               // contentEditable
               spellCheck="false"
-              style={{ color: foreground }}
-              className={classNames(StyleTextPreview[field.name], 'mb-2')}
+              style={{ color: foregroundDeferred }}
+              className={cn(StyleTextPreview[field.name], 'mb-2')}
               {...field}
               onInput={(e) => {
                 setValue(variant, (e.target as HTMLDivElement).innerText)
@@ -82,55 +85,51 @@ export const ContrastScore = memo(function ContrastScore({
 }: TextPreview) {
   const foreground = useWatch({ name: 'foreground' })
   const background = useWatch({ name: 'background' })
+  const foregroundDeferred = useDeferredValue(foreground)
+  const backgroundDeferred = useDeferredValue(background)
 
   const [ratioRating, setRatioRating] = useState({
     contrastRatio: 1,
     isPass: false,
   })
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const updateRatioRating = useCallback(
-    debounce((foreground, background, variant) => {
-      const contrastRatio = +calcContrastRatio(foreground, background).toFixed(
-        2
-      )
-      setRatioRating({
-        contrastRatio,
-        isPass: isContrastRatioPass(contrastRatio, variant === 'bigText'),
-      })
-    }, 100),
-    []
-  )
-
   useEffect(() => {
-    updateRatioRating(foreground, background, variant)
-  }, [foreground, background, variant, updateRatioRating])
+    // updateRatioRating(foregroundDeferred, backgroundDeferred, variant)
+    const contrastRatio = +calcContrastRatio(
+      foregroundDeferred,
+      backgroundDeferred,
+    ).toFixed(2)
+    setRatioRating({
+      contrastRatio,
+      isPass: isContrastRatioPass(contrastRatio, variant === 'bigText'),
+    })
+  }, [foregroundDeferred, backgroundDeferred, variant])
 
   return (
     <div
-      className={classNames(
+      className={cn(
         StyleContrastScore[variant],
-        'font-bold self-end bg-base-200/70 backdrop:blur-sm px-3 py-1 rounded flex items-center gap-4'
+        'font-bold self-end bg-base-200/70 backdrop:blur-sm ps-3 pe-1 py-1 rounded-md flex items-center gap-4',
       )}
     >
-      {ratioRating.isPass ? (
-        <MdCheck className="font-extrabold text-success" />
-      ) : (
-        <MdClose className="font-extrabold text-error" />
-      )}
+      <Tooltip label={ratioRating.isPass ? 'Pass' : 'Fail'}>
+        {ratioRating.isPass ? (
+          <LuCheck className="font-extrabold text-success" />
+        ) : (
+          <LuX className="font-extrabold text-error" />
+        )}
+      </Tooltip>
       <div className="flex items-center gap-4">
         {ratioRating.contrastRatio}:1
-        <TooltipTrigger delay={200}>
-          <Button>
-            <MdInfo />
+        <Tooltip
+          label={
+            variant === 'bigText' ? 'Pass if value > 3' : 'Pass if value > 4.5'
+          }
+        >
+          <Button size="icon" variant="ghost">
+            <LuInfo />
           </Button>
-          <Tooltip
-            placement="bottom"
-            className={'bg-base-200 shadow-lg py-1 px-2'}
-          >
-            {variant === 'bigText' ? '> 3' : '> 4.5'}
-          </Tooltip>
-        </TooltipTrigger>
+        </Tooltip>
       </div>
     </div>
   )
