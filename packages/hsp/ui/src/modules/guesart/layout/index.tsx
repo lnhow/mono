@@ -6,6 +6,7 @@ import NoSsr from '@hsp/ui/src/components/app/NoSsr'
 
 import SocketProvider from '../state/SocketProvider'
 import { JotaiProvider } from '../state/JotaiProvider'
+import { LOBBY_URL } from '../utils'
 
 const LayoutGuesart = memo(function LayoutGuesart({
   children,
@@ -17,7 +18,7 @@ const LayoutGuesart = memo(function LayoutGuesart({
       <div className="w-full z-50">
         <nav className="px-4 py-2 h-(--layout-header-height) flex justify-between">
           <ViewTransition name="header-title">
-            <ButtonLink variant="ghost" href="/">
+            <ButtonLink variant="ghost" href={LOBBY_URL}>
               guesart
             </ButtonLink>
           </ViewTransition>
