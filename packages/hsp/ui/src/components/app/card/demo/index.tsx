@@ -29,7 +29,7 @@ export default function CardDemo({
   return (
     <ViewTransition name={transitionCard}>
       <Link href={href} className={cn(className)}>
-        <Card className="flex flex-col p-4 h-full transition outline-primary-100 hover:outline">
+        <Card className="flex flex-col p-4 h-full transition outline-fore-100 hover:outline">
           <ViewTransition name={transitionTitle}>
             <CardTitle className="mb-4">
               <h3 className="text-md font-normal text-fore-400">{title}</h3>
