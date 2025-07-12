@@ -39,7 +39,6 @@ export default function RoomJoinForm() {
 
       toast.promise(promise, {
         loading: 'Joining Room...',
-        success: 'Joined Room!',
         error: (error) => {
           if (error?.error === EGrtErrorCode.INVALID_DATA) {
             return error.data.message === 'Unknown error'

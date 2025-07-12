@@ -67,6 +67,7 @@ const RoomCreateForm = memo(function RoomCreateForm() {
           id: toastId,
         })
 
+        toast.dismiss(toastId)
         router.push(getRoomUrl(data.id))
       } catch (error) {
         console.error('Error creating room:', error)
