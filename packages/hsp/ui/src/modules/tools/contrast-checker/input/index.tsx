@@ -1,20 +1,17 @@
-import { useTranslation } from '@i18n/client'
 import { memo } from 'react'
 import { Controller } from 'react-hook-form'
-import { nsToolsContrast } from '../const'
-import { HsColorPicker } from '../../../../components/common/input/HsColorPicker'
+import { HsColorPicker } from '../../../../components/app/input/color-picker'
 import ButtonGenLinkContrast from './ButtonGenUrl'
 
 export const ColorInput = memo(function ColorInput() {
-  const { t } = useTranslation(nsToolsContrast)
 
   return (
-    <div className="flex flex-col justify-center items-center mt-20">
+    <div className="flex flex-col justify-center items-center mt-20 none">
       <div className="bg-base-200/70 backdrop:blur-sm shadow-md rounded-lg p-4">
         <div className="max-w-lg flex flex-wrap gap-4 mb-4">
           <div className="flex-1 flex-shrink-0 flex flex-col min-w-[250px]">
             <label htmlFor="background" className="mb-2">
-              {t('label-background')}
+              Background
             </label>
             <Controller
               name="background"
@@ -25,7 +22,7 @@ export const ColorInput = memo(function ColorInput() {
           </div>
           <div className="flex-1 flex-shrink-0 flex flex-col min-w-[250px]">
             <label htmlFor="foreground" className="mb-2">
-              {t('label-foreground')}
+              Foreground
             </label>
             <Controller
               name="foreground"
