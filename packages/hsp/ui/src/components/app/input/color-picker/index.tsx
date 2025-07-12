@@ -1,4 +1,3 @@
-import classNames from '@hsp/ui/utils/classNames'
 import {
   ComponentPropsWithRef,
   forwardRef,
@@ -13,6 +12,7 @@ import {
 } from '@hsp/ui/src/components/base/popover'
 import { Button } from '@hsp/ui/src/components/base/button'
 import { Color, ColorArea, ColorSlider, ColorThumb, SliderTrack } from 'react-aria-components'
+import cn from '@hsp/ui/src/utils/cn'
 
 export type HsColorPickerProps = ComponentPropsWithRef<'input'> & {
   inputLabel?: {
@@ -26,7 +26,7 @@ export type HsColorPickerProps = ComponentPropsWithRef<'input'> & {
 }
 
 export const HsColorPicker = memo(
-  forwardRef<HTMLInputElement>(function HsColorPicker(
+  forwardRef<HTMLInputElement, HsColorPickerProps>(function HsColorPicker(
     { inputLabel, container, value, ...props }: HsColorPickerProps,
     ref,
   ) {
@@ -45,7 +45,8 @@ export const HsColorPicker = memo(
     return (
       <div className={container?.className}>
         <label
-          className={classNames(
+          htmlFor={props.id}
+          className={cn(
             'items-center gap-2',
             'flex h-9 w-full rounded-md border border-input bg-transparent ps-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
             inputLabel?.className,

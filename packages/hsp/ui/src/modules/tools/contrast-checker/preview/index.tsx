@@ -1,4 +1,3 @@
-import classNames from '@hsp/ui/utils/classNames'
 import {
   PropsWithChildren,
   memo,
@@ -60,7 +59,7 @@ export const TextPreview = memo(function TextPreview({ variant }: TextPreview) {
               // contentEditable
               spellCheck="false"
               style={{ color: foregroundDeferred }}
-              className={classNames(StyleTextPreview[field.name], 'mb-2')}
+              className={cn(StyleTextPreview[field.name], 'mb-2')}
               {...field}
               onInput={(e) => {
                 setValue(variant, (e.target as HTMLDivElement).innerText)
@@ -108,16 +107,18 @@ export const ContrastScore = memo(function ContrastScore({
 
   return (
     <div
-      className={classNames(
+      className={cn(
         StyleContrastScore[variant],
         'font-bold self-end bg-base-200/70 backdrop:blur-sm ps-3 pe-1 py-1 rounded-md flex items-center gap-4',
       )}
     >
-      {ratioRating.isPass ? (
-        <LuCheck className="font-extrabold text-success" />
-      ) : (
-        <LuX className="font-extrabold text-error" />
-      )}
+      <Tooltip label={ratioRating.isPass ? 'Pass' : 'Fail'}>
+        {ratioRating.isPass ? (
+          <LuCheck className="font-extrabold text-success" />
+        ) : (
+          <LuX className="font-extrabold text-error" />
+        )}
+      </Tooltip>
       <div className="flex items-center gap-4">
         {ratioRating.contrastRatio}:1
         <Tooltip

@@ -6,15 +6,14 @@ import { FormContrastChecker } from './const'
 import { BackgroundPreview } from './preview'
 import { ColorInput } from './input'
 import { useEffect } from 'react'
-import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
 
 export default function PageContrastChecker() {
   const searchParams = useSearchParams()
 
   const { ...methods } = useForm<FormContrastChecker>({
     defaultValues: {
-      foreground: '#FFFFFF',
-      background: '#000000',
+      foreground: '#000000',
+      background: '#FFFFFF',
       bigText: searchParams.get('bt') || 'This is how big text looks like',
       smallText: searchParams.get('st') || 'This is how small text looks like',
     },
@@ -33,10 +32,8 @@ export default function PageContrastChecker() {
 
   return (
     <FormProvider {...methods}>
-      <BackgroundPreview className="mx-auto max-w-2xl py-8 md:py-16 md:rounded-2xl none"></BackgroundPreview>
-      <ViewTransition update="none">
-        <ColorInput />
-      </ViewTransition>
+      <BackgroundPreview className="py-8 px-4 md:py-16 md:rounded-2xl"></BackgroundPreview>
+      <ColorInput />
     </FormProvider>
   )
 }
