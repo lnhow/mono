@@ -83,7 +83,8 @@ const RoomCreateForm = memo(function RoomCreateForm() {
 
   return (
     <div className="py-2">
-      <h2 className="text-2xl font-semibold mb-4">Create a Room</h2>
+      <h2 className="text-2xl font-semibold mb-1">Create a Room</h2>
+      <p className="text-fore-200 text-sm mb-4">Create a new room and let others play with you.</p>
       <form onSubmit={onSubmit} className="space-y-4">
         <FormInput
           control={control}
@@ -104,7 +105,7 @@ const RoomCreateForm = memo(function RoomCreateForm() {
             },
           }}
           InputProps={{
-            placeholder: 'Enter a room name',
+            placeholder: `Enter a room name (${ROOM_CONSTRAINTS.NAME.MIN_LENGTH}-${ROOM_CONSTRAINTS.NAME.MAX_LENGTH} characters)`,
             maxLength: ROOM_CONSTRAINTS.NAME.MAX_LENGTH,
           }}
         />

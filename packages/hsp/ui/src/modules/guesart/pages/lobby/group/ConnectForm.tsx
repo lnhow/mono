@@ -45,11 +45,11 @@ export default function ConnectForm() {
     <form onSubmit={onConnect} className="space-y-4">
       <FormInput
         control={control}
-        label="Username"
+        label="Enter your display name"
         name="username"
         InputProps={{
           maxLength: USER_NAME.MAX_LENGTH,
-          placeholder: 'Enter your name',
+          placeholder: `Your display name (${USER_NAME.MIN_LENGTH}-${USER_NAME.MAX_LENGTH} characters)`,
         }}
         rules={{
           required: true,
@@ -68,6 +68,9 @@ export default function ConnectForm() {
           Play
         </Button>
       </ViewTransition>
+      <p className="text-fore-200 text-sm ps-2">
+        The display name can be seen by others while playing. It can only be changed after open a new tab.
+      </p>
     </form>
   )
 }
