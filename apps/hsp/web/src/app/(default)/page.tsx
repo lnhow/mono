@@ -3,8 +3,8 @@ import CardsDemo from '@hsp/ui/src/modules/default/modules/home/page'
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col gap-4 max-w-7xl mx-auto px-4 py-8">
-      <section>
+    <div className="flex flex-col gap-4 max-w-7xl mx-auto md:px-4 py-8">
+      <section className="mt-[25%]">
         <h1 className="text-2xl font-bold mb-2">hi</h1>
         <p className="text-md text-fore-200">
           I&apos;m Hao Le (Lê Nguyên Hào) - A web developer.
