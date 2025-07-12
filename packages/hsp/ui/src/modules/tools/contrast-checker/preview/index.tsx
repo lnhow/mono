@@ -9,7 +9,6 @@ import {
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
 import { calcContrastRatio, isContrastRatioPass } from '../contrastUtils'
 import { LuCheck, LuX, LuInfo } from 'react-icons/lu'
-// import { Tooltip, TooltipTrigger, Button } from 'react-aria-components'
 import { ValidationRules } from '../const'
 import cn from '@hsp/ui/src/utils/cn'
 import { Button } from '@hsp/ui/src/components/base/button'
@@ -25,7 +24,7 @@ export const BackgroundPreview = memo(function BackgroundPreview({
   return (
     <div
       style={{ background: backgroundDeferred }}
-      className={cn('pt-8 h-full rounded-xl lg:rounded-none', className)}
+      className={cn('pt-8 h-full rounded-xl transition', className)}
     >
       <div className="flex flex-col items-center justify-center">
         <TextPreview variant="bigText" />

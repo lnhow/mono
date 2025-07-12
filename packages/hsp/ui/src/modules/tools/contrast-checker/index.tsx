@@ -1,9 +1,7 @@
 'use client'
 
-import { useTheme } from 'next-themes'
 import { useSearchParams } from 'next/navigation'
 import { FormProvider, useForm } from 'react-hook-form'
-import { THEME } from '@hsp/ui/constants/theme'
 import { FormContrastChecker } from './const'
 import { BackgroundPreview } from './preview'
 import { ColorInput } from './input'
@@ -12,12 +10,11 @@ import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
 
 export default function PageContrastChecker() {
   const searchParams = useSearchParams()
-  const theme = useTheme()
 
   const { ...methods } = useForm<FormContrastChecker>({
     defaultValues: {
-      foreground: theme.resolvedTheme === THEME.DARK ? '#FFFFFF' : '#000000',
-      background: theme.resolvedTheme === THEME.DARK ? '#000000' : '#FFFFFF',
+      foreground: '#FFFFFF',
+      background: '#000000',
       bigText: searchParams.get('bt') || 'This is how big text looks like',
       smallText: searchParams.get('st') || 'This is how small text looks like',
     },
