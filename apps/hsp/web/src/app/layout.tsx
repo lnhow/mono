@@ -20,19 +20,19 @@ type RootLocaleLayoutProps = React.PropsWithChildren<{
 export default async function RootLayout({ children }: RootLocaleLayoutProps) {
   return (
     <html suppressHydrationWarning lang="en">
-      <ViewTransition>
         <body className={lexendFont.className}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
-          >
-            {children}
-            <Toaster />
+            >
+            {/* <ViewTransition> */}
+              {children}
+              <Toaster />
+            {/* </ViewTransition> */}
           </ThemeProvider>
         </body>
-      </ViewTransition>
     </html>
   )
 }

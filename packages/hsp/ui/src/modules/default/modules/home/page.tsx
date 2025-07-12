@@ -6,9 +6,9 @@ export default function CardsDemo() {
     <div className="my-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <CardDemo
         title="guesart"
-        description="A draw and guess game build with Socket.IO."
+        description="A draw and guess game built with Socket.IO."
         href={GUESART_LOBBY_URL}
-        className='grid-span-1 sm:col-span-2 lg:col-span-2'
+        className="grid-span-1 sm:col-span-2 lg:col-span-2"
         transitionCard="guesart-card"
         transitionTitle="guesart-title"
       />
@@ -24,6 +24,13 @@ export default function CardsDemo() {
         transitionCard="player-card"
         transitionTitle="player-title"
         transitionDescription="player-description"
+      />
+      <CardDemo
+        title="Contrast checker"
+        description="A simple contrast checker for web accessibility."
+        href="/tools/contrast-checker"
+        transitionCard="contrast-checker-card"
+        transitionTitle="contrast-checker-title"
       />
     </div>
   )

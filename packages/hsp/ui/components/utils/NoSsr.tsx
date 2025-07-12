@@ -1,9 +1,3 @@
-'use client'
-import dynamic from 'next/dynamic'
-import { PropsWithChildren } from 'react'
+import NoSsr from '@hsp/ui/src/components/app/NoSsr'
 
-const NoSsr = (props: PropsWithChildren) => <>{props.children}</>
-
-export default dynamic(() => Promise.resolve(NoSsr), {
-  ssr: false,
-})
+export default NoSsr
