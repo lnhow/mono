@@ -6,18 +6,49 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 // 01 Setup - Basic Scene with a Cube
 // Setup =================================
+// Model
 const scene = new THREE.Scene()
 
 // 3D object to render
-const geometry = new THREE.BoxGeometry(1, 1, 1) 
-const material = new THREE.MeshBasicMaterial({ color: 0x0000ff })
+/**
+ * Geometry defines the shape of the object
+ * - BoxGeometry creates a box shape 
+ *    - width, height, and depth
+ *    = Segments (how many divisions along each axis, more = more triangles = more detail but cose more performance)
+ * Material defines the appearance of the object
+ */
+// const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2)
+// const geometry = new THREE.SphereGeometry(1, 32, 32) // SphereGeometry creates a sphere shape
+const geometry = new THREE.BufferGeometry() // BufferGeometry is a an efficient way to create custom geometries
+// const vertices = new Float32Array([
+//   0, 0, 0, // Vertex 1
+//   0, 1, 0, // Vertex 2
+//   1, 0, 0, // Vertex 3
+//   0, 0, 1, // Vertex 4
+//   0, 0, 0, // Vertex 5
+//   0, 1, 0, // Vertex 6
+// ])
+const count = 50
+const vertices = new Float32Array(count * 3 * 3)
+for(let i = 0; i < count * 3 * 3; i++)
+{
+    vertices[i] = (Math.random() - 0.5) * 4
+}
+
+// Transform the vertices into a Three.js compatible format and set them as the position attribute of the geometry
+const positionsAttribute = new THREE.BufferAttribute(vertices, 3) 
+geometry.setAttribute('position', positionsAttribute)
+
+const material = new THREE.MeshBasicMaterial({ color: 0x0000ff, wireframe: true }) // Basic material with a blue color and wireframe mode enabled
 const mesh = new THREE.Mesh(geometry, material)  // 3D Object ~ Mesh = Geometry + Material
 scene.add(mesh)
 
+
+// View
 // Setup camera and renderer
 const sizes = {
-  width: 800,
-  height: 600,
+  width: window.innerWidth,
+  height: window.innerHeight,
 }
 
 // Camera is the perspective from which we view the scene
@@ -44,6 +75,44 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 
+// This ensures the rendering is sharp on high DPI screens but not too heavy on performance
+// as 2 is sharp enough for most screens
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)) 
+
+// Resize the renderer when the window is resized
+window.addEventListener('resize', () => {
+  // Assign new sizes
+  sizes.width = window.innerWidth
+  sizes.height = window.innerHeight
+
+  // Update camera
+  camera.aspect = sizes.width / sizes.height
+  camera.updateProjectionMatrix()
+
+  // Update renderer
+  renderer.setSize(sizes.width, sizes.height)
+  // In case user change screen pixel ratio
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)) 
+})
+
+// Controls
+window.addEventListener('dblclick', () => {
+  const fullscreenElement = document.fullscreenElement || (document as any).webkitFullscreenElement
+  if (!fullscreenElement) {
+    // If not in fullscreen, request fullscreen on the canvas element
+    canvas.requestFullscreen().catch(err => {
+      console.error('Error attempting to enable fullscreen mode:', err)
+    })
+  } else {
+    // If in fullscreen, exit fullscreen mode
+    const exitFullscreen = document.exitFullscreen || (document as any).webkitFullscreenElement
+    if (exitFullscreen) {
+      exitFullscreen.call(document).catch(err => {
+        console.error('Error attempting to exit fullscreen mode:', err)
+      })
+    }
+  }
+})
 // Setup =================================
 
 // 02 Transformation
