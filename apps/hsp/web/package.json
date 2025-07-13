@@ -25,12 +25,12 @@
     "encoding": "^0.1.13",
     "jotai": "^2.12.4",
     "jotai-optics": "^0.4.0",
-    "next": "catalog:next",
+    "next": "catalog:gui",
     "next-themes": "0.4.6",
     "optics-ts": "^2.4.1",
     "postcss": "8.5.3",
-    "react": "catalog:react",
-    "react-dom": "catalog:react",
+    "react": "catalog:gui",
+    "react-dom": "catalog:gui",
     "react-icons": "5.5.0",
     "react-markdown": "^9.0.1",
     "remark-gfm": "^4.0.0",
@@ -43,9 +43,9 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/tsconfig": "workspace:*",
-    "@types/node": "22.13.17",
-    "@types/react": "19.0.12",
-    "@types/react-dom": "19.0.4",
+    "@types/node": "catalog:base",
+    "@types/react": "catalog:gui",
+    "@types/react-dom": "catalog:gui",
     "eslint": "^9.25.0",
     "typescript": "5.8.3"
   }

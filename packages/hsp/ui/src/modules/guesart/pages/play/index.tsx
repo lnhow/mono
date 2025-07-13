@@ -30,12 +30,10 @@ function PagePlay() {
   }
 
   return (
-    <ViewTransition name="guesart-card">
-      <div className="flex flex-col md:flex-row gap-2">
-        <RoomMain />
-        <Sidebar className="w-full md:w-[360px] md:max-w-4/12" />
-      </div>
-    </ViewTransition>
+    <div className="flex flex-col md:flex-row gap-2">
+      <RoomMain />
+      <Sidebar className="w-full md:w-[360px] md:max-w-4/12" />
+    </div>
   )
 }
 export default memo(PagePlay)

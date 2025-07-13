@@ -6,6 +6,8 @@ import NoSsr from '@hsp/ui/src/components/app/NoSsr'
 
 import SocketProvider from '../state/SocketProvider'
 import { JotaiProvider } from '../state/JotaiProvider'
+import { LOBBY_URL } from '../utils'
+import { LuHouse } from 'react-icons/lu'
 
 const LayoutGuesart = memo(function LayoutGuesart({
   children,
@@ -16,11 +18,17 @@ const LayoutGuesart = memo(function LayoutGuesart({
     <div>
       <div className="w-full z-50">
         <nav className="px-4 py-2 h-(--layout-header-height) flex justify-between">
-          <ViewTransition name="header-title">
-            <ButtonLink variant="ghost" href="/">
-              guesart
+          <div className='flex items-center gap-2'>
+            <ButtonLink variant="ghost" size="icon" href="/">
+              <LuHouse />
+              <span className="sr-only">Home</span>
             </ButtonLink>
-          </ViewTransition>
+            <ViewTransition name="header-title">
+              <ButtonLink variant="ghost" href={LOBBY_URL}>
+                guesart
+              </ButtonLink>
+            </ViewTransition>
+          </div>
           <ThemeToggle />
         </nav>
       </div>

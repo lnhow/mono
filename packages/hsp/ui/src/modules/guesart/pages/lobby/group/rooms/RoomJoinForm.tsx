@@ -39,7 +39,6 @@ export default function RoomJoinForm() {
 
       toast.promise(promise, {
         loading: 'Joining Room...',
-        success: 'Joined Room!',
         error: (error) => {
           if (error?.error === EGrtErrorCode.INVALID_DATA) {
             return error.data.message === 'Unknown error'
@@ -54,7 +53,8 @@ export default function RoomJoinForm() {
 
   return (
     <div className="py-2">
-      <h2 className="text-2xl font-semibold mb-4">Join a Room</h2>
+      <h2 className="text-2xl font-semibold mb-1">Join a Room</h2>
+      <p className="text-fore-200 text-sm mb-4">Enter the Room ID you got from other when they created the room.</p>
       <form onSubmit={onSubmit} className="space-y-4">
         <FormInput
           label="Room ID"
@@ -67,7 +67,7 @@ export default function RoomJoinForm() {
             },
           }}
           InputProps={{
-            placeholder: 'Room ID',
+            placeholder: 'Enter Room ID',
           }}
         />
         <ViewTransition name="guesart-button-primary">
