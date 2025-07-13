@@ -2,7 +2,28 @@ import '../style.css'
 
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-// import gsap from 'gsap'
+import gsap from 'gsap'
+import GUI from 'lil-gui'
+
+const gui = new GUI({
+  title: 'Debug',
+  width: 300,
+  autoPlace: true,
+  closeFolders: false,
+})
+gui.hide() // Hide the GUI by default
+window.addEventListener('keydown', (event) => {
+  if (event.ctrlKey && event.key === 'g') {
+    gui.show(gui._hidden) // Toggle the GUI when Ctrl + G is pressed
+  }
+}) // Toggle the GUI when Ctrl + G is pressed
+const debugObject = {
+  global: {
+    color: '#80c62a',
+    subdivisions: 2,
+  },
+  spin: () => {},
+}
 
 // 01 Setup - Basic Scene with a Cube
 // Setup =================================
@@ -12,14 +33,21 @@ const scene = new THREE.Scene()
 // 3D object to render
 /**
  * Geometry defines the shape of the object
- * - BoxGeometry creates a box shape 
+ * - BoxGeometry creates a box shape
  *    - width, height, and depth
  *    = Segments (how many divisions along each axis, more = more triangles = more detail but cose more performance)
  * Material defines the appearance of the object
  */
-// const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2)
+const geometry = new THREE.BoxGeometry(
+  1,
+  1,
+  1,
+  debugObject.global.subdivisions,
+  debugObject.global.subdivisions,
+  debugObject.global.subdivisions,
+)
 // const geometry = new THREE.SphereGeometry(1, 32, 32) // SphereGeometry creates a sphere shape
-const geometry = new THREE.BufferGeometry() // BufferGeometry is a an efficient way to create custom geometries
+// const geometry = new THREE.BufferGeometry() // BufferGeometry is a an efficient way to create custom geometries
 // const vertices = new Float32Array([
 //   0, 0, 0, // Vertex 1
 //   0, 1, 0, // Vertex 2
@@ -28,21 +56,62 @@ const geometry = new THREE.BufferGeometry() // BufferGeometry is a an efficient 
 //   0, 0, 0, // Vertex 5
 //   0, 1, 0, // Vertex 6
 // ])
-const count = 50
-const vertices = new Float32Array(count * 3 * 3)
-for(let i = 0; i < count * 3 * 3; i++)
-{
-    vertices[i] = (Math.random() - 0.5) * 4
+// const count = 50
+// const vertices = new Float32Array(count * 3 * 3)
+// for (let i = 0; i < count * 3 * 3; i++) {
+//   vertices[i] = (Math.random() - 0.5) * 4
+// }
+// Transform the vertices into a Three.js compatible format and set them as the position attribute of the geometry
+// const positionsAttribute = new THREE.BufferAttribute(vertices, 3)
+// geometry.setAttribute('position', positionsAttribute)
+
+const loadingManager = new THREE.LoadingManager() // Helps loading multiple assets and manage their loading state
+loadingManager.onStart = () => {
+  console.log('Loading started')
+}
+loadingManager.onLoad = () => {
+  console.log('Loading complete')
+}
+loadingManager.onProgress = (url, itemsLoaded, itemsTotal) => {
+  console.log(
+    `Loading progress: ${itemsLoaded} of ${itemsTotal} items loaded from ${url}`,
+  )
+}
+loadingManager.onError = (url) => {
+  console.error(`Error loading ${url}`)
 }
 
-// Transform the vertices into a Three.js compatible format and set them as the position attribute of the geometry
-const positionsAttribute = new THREE.BufferAttribute(vertices, 3) 
-geometry.setAttribute('position', positionsAttribute)
+const textureLoader = new THREE.TextureLoader(loadingManager)
+const texture = {
+  // color: textureLoader.load('/textures/door/color.jpg'),
+  // color: textureLoader.load('/textures/checkerboard-1024x1024.png'),
+  // color: textureLoader.load('/textures/checkerboard-8x8.png'),
+  color: textureLoader.load('/textures/minecraft.png'),
+  alpha: textureLoader.load('/textures/door/alpha.jpg'),
+  height: textureLoader.load('/textures/door/height.jpg'),
+  normal: textureLoader.load('/textures/door/normal.jpg'),
+  ambientOcclusion: textureLoader.load('/textures/door/ambientOcclusion.jpg'),
+  metalness: textureLoader.load('/textures/door/metalness.jpg'),
+  roughness: textureLoader.load('/textures/door/roughness.jpg'),
+}
+texture.color.colorSpace = THREE.SRGBColorSpace
+// texture.color.wrapS = THREE.RepeatWrapping // Repeat the texture horizontally
+// texture.color.wrapT = THREE.RepeatWrapping // Repeat the texture vertically
+// texture.color.repeat.set(2, 2) // Repeat the texture 2 times horizontally and
+// texture.color.offset.set(0.5, 0.5) // Offset the texture by 0.5 in both directions
+// texture.color.center.set(0.5, 0.5)
+// texture.color.rotation = Math.PI * 0.25 // Rotate the texture by 45 degrees (PI / 4 radians)
+texture.color.generateMipmaps = false // Disable generating smaller versions of the texture (minFilter will not work without this)
+texture.color.minFilter = THREE.NearestFilter
+texture.color.magFilter = THREE.NearestFilter // It will look blurry by default (LinearMipmapLinearFilter)
 
-const material = new THREE.MeshBasicMaterial({ color: 0x0000ff, wireframe: true }) // Basic material with a blue color and wireframe mode enabled
-const mesh = new THREE.Mesh(geometry, material)  // 3D Object ~ Mesh = Geometry + Material
+const material = new THREE.MeshBasicMaterial({
+  // color: debugObject.global.color,
+  map: texture.color, // Use the loaded texture as the material's map
+  // wireframe: true,
+}) // Basic material with a blue color and wireframe mode enabled
+const mesh = new THREE.Mesh(geometry, material) // 3D Object ~ Mesh = Geometry + Material
 scene.add(mesh)
-
 
 // View
 // Setup camera and renderer
@@ -58,7 +127,12 @@ const sizes = {
 // - Aspect ratio is the width divided by the height of the viewport
 // - Near clipping plane is the closest distance at which objects are rendered
 // - Far clipping plane is the farthest distance at which objects are rendered
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
+const camera = new THREE.PerspectiveCamera(
+  75,
+  sizes.width / sizes.height,
+  0.1,
+  100,
+)
 
 // OrthographicCamera is a type of camera that does not have perspective distortion
 // - left, right, top, bottom are the boundaries of the camera's view
@@ -77,7 +151,7 @@ renderer.setSize(sizes.width, sizes.height)
 
 // This ensures the rendering is sharp on high DPI screens but not too heavy on performance
 // as 2 is sharp enough for most screens
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)) 
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 // Resize the renderer when the window is resized
 window.addEventListener('resize', () => {
@@ -92,27 +166,30 @@ window.addEventListener('resize', () => {
   // Update renderer
   renderer.setSize(sizes.width, sizes.height)
   // In case user change screen pixel ratio
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)) 
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
 // Controls
-window.addEventListener('dblclick', () => {
-  const fullscreenElement = document.fullscreenElement || (document as any).webkitFullscreenElement
-  if (!fullscreenElement) {
-    // If not in fullscreen, request fullscreen on the canvas element
-    canvas.requestFullscreen().catch(err => {
-      console.error('Error attempting to enable fullscreen mode:', err)
-    })
-  } else {
-    // If in fullscreen, exit fullscreen mode
-    const exitFullscreen = document.exitFullscreen || (document as any).webkitFullscreenElement
-    if (exitFullscreen) {
-      exitFullscreen.call(document).catch(err => {
-        console.error('Error attempting to exit fullscreen mode:', err)
-      })
-    }
-  }
-})
+
+// window.addEventListener('dblclick', () => {
+//   const fullscreenElement =
+//     document.fullscreenElement || (document as any).webkitFullscreenElement
+//   if (!fullscreenElement) {
+//     // If not in fullscreen, request fullscreen on the canvas element
+//     canvas.requestFullscreen().catch((err) => {
+//       console.error('Error attempting to enable fullscreen mode:', err)
+//     })
+//   } else {
+//     // If in fullscreen, exit fullscreen mode
+//     const exitFullscreen =
+//       document.exitFullscreen || (document as any).webkitFullscreenElement
+//     if (exitFullscreen) {
+//       exitFullscreen.call(document).catch((err) => {
+//         console.error('Error attempting to exit fullscreen mode:', err)
+//       })
+//     }
+//   }
+// })
 // Setup =================================
 
 // 02 Transformation
@@ -139,7 +216,7 @@ scene.add(axesHelper)
 // Euler
 // Pros:
 // - Intuitive and easy to understand
-// Cons: 
+// Cons:
 // - Gimbal lock - when two axes align, you lose a degree of freedom
 // - Order of rotations matters
 // mesh.rotation.reorder('YXZ')
@@ -209,7 +286,6 @@ const tick: FrameRequestCallback = () => {
   update()
 }
 
-
 const update = () => {
   requestAnimationFrame(tick) // Start the animation loop
 }
@@ -224,3 +300,38 @@ update()
 //   mesh.position.x = (event.clientX / sizes.width) * 2 - 1 // Normalize to [-1, 1]
 //   mesh.position.y = -(event.clientY / sizes.height) * 2 + 1 // Normalize to [-1, 1]
 // })
+
+// Debugging GUI
+const objectFolder = gui.addFolder('Object')
+
+objectFolder
+  .add(mesh.position, 'y')
+  .min(-3)
+  .max(3)
+  .step(0.01)
+  .name('Mesh Y Position') // GUI control to change the Y position of the mesh
+objectFolder.add(mesh, 'visible').name('Mesh Visibility') // GUI control to toggle the visibility of the mesh
+objectFolder.add(material, 'wireframe').name('Wireframe Mode') // GUI control to toggle the wireframe mode of the material
+objectFolder
+  .addColor(debugObject.global, 'color')
+  .name('Mesh Color')
+  .onChange((value: THREE.Color) => {
+    material.color.set(value)
+  }) // GUI control to change the
+objectFolder
+  .add(debugObject.global, 'subdivisions')
+  .min(1)
+  .max(10)
+  .step(1)
+  .name('Geometry Subdivisions')
+  .onFinishChange((value: number) => {
+    mesh.geometry.dispose() // Dispose of the old geometry to free up memory
+    mesh.geometry = new THREE.BoxGeometry(1, 1, 1, value, value, value) // Create a new geometry with the updated subdivisions
+  })
+// GUI control to change the width segments of the geometry
+
+debugObject.spin = () => {
+  // Spin f0r 1 second, rotating the mesh around the Y axis a 360 degrees (2 * PI radians)
+  gsap.to(mesh.rotation, { duration: 1, y: mesh.rotation.y + Math.PI * 2 })
+}
+objectFolder.add(debugObject, 'spin').name('Spin Mesh') // GUI control to spin the mesh
