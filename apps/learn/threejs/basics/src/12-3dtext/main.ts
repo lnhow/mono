@@ -25,7 +25,7 @@ const material = new THREE.MeshMatcapMaterial({
 const fontLoader = new FontLoader()
 let textMesh: THREE.Mesh
 fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
-  const textGeometry = new TextGeometry('A text in the middle', {
+  const textGeometry = new TextGeometry('Random shapes', {
     font: font,
     size: 0.5,
     depth: 0.2,
@@ -47,13 +47,24 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
 const donuts: THREE.Mesh[] = []
 const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
 const boxGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5)
+const sphereGeometry = new THREE.SphereGeometry(0.3, 20, 20)
 
 for (let i = 0; i < OBJECTS_COUNT; i++) {
-  const isBox = Math.random() > 0.5
-  const donut = new THREE.Mesh(
-    isBox ? boxGeometry : donutGeometry,
-    material,
-  )
+  const shape = Math.floor(Math.random() * 3) // Randomly choose a shape
+  let geometry: THREE.BufferGeometry
+
+  switch (shape) {
+    case 1:
+      geometry = boxGeometry
+      break
+    case 2:
+      geometry = sphereGeometry
+      break
+    case 0:
+    default:
+      geometry = donutGeometry // Fallback to donut if something goes wrong
+  }
+  const donut = new THREE.Mesh(geometry, material)
   donut.position.set(
     (Math.random() - 0.5) * 10,
     (Math.random() - 0.5) * 10,
@@ -114,9 +125,6 @@ window.addEventListener('resize', () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
-
-
-
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true // Smooth controls
@@ -144,4 +152,3 @@ const update = () => {
 }
 
 update()
-
