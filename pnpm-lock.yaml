@@ -293,7 +293,7 @@ importers:
         specifier: ^0.4.2
         version: 0.4.2(vite@7.0.0(@types/node@22.13.17)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.37.0))
 
-  apps/learn/threejs/classic-techniques:
+  apps/learn/threejs/classic:
     dependencies:
       lil-gui:
         specifier: ^0.20.0
