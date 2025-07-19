@@ -32,5 +32,5 @@ export const SAMPLE = {
     },
   ],
   thumbPrefix:
-    'httpss://commondatastorage.googleapis.com/gtv-videos-bucket/sample/',
+    'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/',
 } as const
