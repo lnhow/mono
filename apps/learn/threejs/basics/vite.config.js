@@ -1,3 +1,4 @@
+import { rollupVersion } from 'vite'
 import restart from 'vite-plugin-restart'
 
 export default {
@@ -11,6 +12,13 @@ export default {
     build:
     {
         outDir: '../dist', // Output in the dist/ folder
+        rollupOptions: {
+            input: {
+                '0-10': '0-10/index.html',
+                '11-material': '11-material/index.html',
+                // Add more entries as needed
+            }
+        },
         emptyOutDir: true, // Empty the folder first
         sourcemap: true // Add sourcemap
     },
