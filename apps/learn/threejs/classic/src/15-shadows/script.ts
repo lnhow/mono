@@ -98,7 +98,7 @@ sphere.castShadow = true
 const textureLoader = new THREE.TextureLoader()
 
 // 1. Bake shadow onto surfaces
-// const bakedShadow = textureLoader.load('/textures/bakedShadow.jpg')
+// const bakedShadow = textureLoader.load('/15-shadow/textures/bakedShadow.jpg')
 const planeMaterial = new THREE.MeshBasicMaterial({
     // map: bakedShadow,
 })
@@ -114,7 +114,7 @@ plane.position.y = - 0.5
 scene.add(sphere, plane)
 
 // 2. Create an object with shadow
-const simpleShadow = textureLoader.load('/textures/simpleShadow.jpg')
+const simpleShadow = textureLoader.load('/15-shadow/textures/simpleShadow.jpg')
 simpleShadow.colorSpace = THREE.SRGBColorSpace
 const sphereShadow = new THREE.Mesh(
     new THREE.PlaneGeometry(2, 2),
