@@ -1,6 +1,6 @@
 'use client'
 import { Button } from '@hsp/ui/src/components/base/button'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
 import { useForm } from 'react-hook-form'
@@ -8,9 +8,11 @@ import { socketAtom } from '../../../state/store'
 import { useAtomValue } from 'jotai'
 import { FormInput } from './components/input'
 import { useDebounceCallback } from 'usehooks-ts'
+import CircularProgress from '@hsp/ui/src/components/base/progress/circular'
 
 export default function ConnectForm() {
   const { socket } = useAtomValue(socketAtom)
+  const [loading, setLoading] = useState(false)
   const { control, setValue, handleSubmit } = useForm<SocketFormValues>({
     defaultValues: {
       username: '',
@@ -34,10 +36,24 @@ export default function ConnectForm() {
       if (!socket) {
         return
       }
+      setLoading(true)
       socket.auth = {
         username: data.username,
       }
       socket.connect()
+
+      const onConnection = () => {
+        setLoading(false)
+        socket.off('connect', onConnection)
+        socket.off('connect_error', onConnectError)
+      }
+      const onConnectError: (err: Error) => void = (err) => {
+        console.error('Connection error:', err)
+        onConnection()
+      }
+
+      socket.on('connect_error', onConnectError)
+      socket.on('connect', onConnection)
     }, 100),
   )
 
@@ -64,8 +80,8 @@ export default function ConnectForm() {
         }}
       />
       <ViewTransition name="guesart-button-primary">
-        <Button type="submit" className="w-full" disabled={!socket}>
-          Play
+        <Button type="submit" className="w-full" disabled={!socket || loading}>
+          {loading ? <CircularProgress /> : 'Play'}
         </Button>
       </ViewTransition>
       <p className="text-fore-200 text-sm ps-2">
