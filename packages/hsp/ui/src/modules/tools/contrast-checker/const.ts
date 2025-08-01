@@ -1,6 +1,8 @@
+import { Color } from "@hsp/ui/src/components/app/input/color-picker"
+
 export type FormContrastChecker = {
-  foreground: string,
-  background: string,
+  foreground: Color,
+  background: Color,
   bigText: string,
   smallText: string,
 }
