@@ -2,8 +2,6 @@ import {
   ComponentPropsWithRef,
   forwardRef,
   memo,
-  useEffect,
-  useState,
 } from 'react'
 import {
   Popover,
@@ -11,9 +9,11 @@ import {
   PopoverTrigger,
 } from '@hsp/ui/src/components/base/popover'
 import { Button } from '@hsp/ui/src/components/base/button'
-import { Color, ColorArea, ColorSlider, ColorThumb, SliderTrack } from 'react-aria-components'
+import { Color, ColorArea, ColorSlider, ColorThumb, parseColor, SliderTrack } from 'react-aria-components'
 import cn from '@hsp/ui/src/utils/cn'
 
+export { parseColor }
+export type { Color }
 export type HsColorPickerProps = ComponentPropsWithRef<'input'> & {
   inputLabel?: {
     className?: string
@@ -21,8 +21,8 @@ export type HsColorPickerProps = ComponentPropsWithRef<'input'> & {
   container?: {
     className?: string
   }
-  value?: string
-  onChange?: (color: string) => void
+  value?: Color
+  onChange?: (color: Color) => void
 }
 
 export const HsColorPicker = memo(
@@ -30,16 +30,9 @@ export const HsColorPicker = memo(
     { inputLabel, container, value, ...props }: HsColorPickerProps,
     ref,
   ) {
-    const [color, setColor] = useState(value)
-
-    useEffect(() => {
-      setColor(value)
-    }, [value])
-
+    const color = value
     const handleChange = (value: Color) => {
-      const hexValue = value.toString('hex')
-      setColor(hexValue)
-      props?.onChange?.(hexValue)
+      props?.onChange?.(value)
     }
 
     return (
@@ -55,7 +48,7 @@ export const HsColorPicker = memo(
           <input
             type="text"
             {...props}
-            value={color}
+            value={color?.toString('hex')}
             ref={ref}
             className="grow bg-transparent"
           />
@@ -72,17 +65,18 @@ export const HsColorPicker = memo(
             </PopoverTrigger>
             <PopoverContent className="[--picker-size:--spacing(64)]">
               <ColorArea
-                colorSpace='rgb'
+                colorSpace="hsl"
                 value={color}
                 className="w-(--picker-size) h-(--picker-size) rounded-md"
                 onChange={handleChange}
-                xChannel='red'
-                yChannel='green'
+                xChannel="saturation"
+                yChannel="lightness"
               >
                 <ColorThumb className="z-10 rounded-full border border-fore-300 w-9 h-9" />
               </ColorArea>
               <ColorSlider
-                channel="blue"
+                colorSpace='hsl'
+                channel="hue"
                 value={color}
                 onChange={handleChange}
                 className="mt-4"

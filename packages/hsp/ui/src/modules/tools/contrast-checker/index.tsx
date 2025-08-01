@@ -6,14 +6,18 @@ import { FormContrastChecker } from './const'
 import { BackgroundPreview } from './preview'
 import { ColorInput } from './input'
 import { useEffect } from 'react'
+import { parseColor } from '@hsp/ui/src/components/app/input/color-picker'
+
+const DEFAULT_FOREGROUND = parseColor('#000000')
+const DEFAULT_BACKGROUND = parseColor('#FFFFFF')
 
 export default function PageContrastChecker() {
   const searchParams = useSearchParams()
 
   const { ...methods } = useForm<FormContrastChecker>({
     defaultValues: {
-      foreground: '#000000',
-      background: '#FFFFFF',
+      foreground: DEFAULT_FOREGROUND,
+      background: DEFAULT_BACKGROUND,
       bigText: searchParams.get('bt') || 'This is how big text looks like',
       smallText: searchParams.get('st') || 'This is how small text looks like',
     },
@@ -22,11 +26,11 @@ export default function PageContrastChecker() {
   useEffect(() => {
     const background = searchParams.get('bg')
     if (background) {
-      methods.setValue('background', background)
+      methods.setValue('background', parseColor(background))
     }
     const foreground = searchParams.get('fg')
     if (foreground) {
-      methods.setValue('foreground', foreground)
+      methods.setValue('foreground', parseColor(foreground))
     }
   }, [methods, searchParams])
 
