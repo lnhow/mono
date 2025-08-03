@@ -8,8 +8,8 @@ import {
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
 import { calcContrastRatio, isContrastRatioPass } from '../contrastUtils'
 import { LuCheck, LuX, LuInfo } from 'react-icons/lu'
-import { ValidationRules } from '../const'
-import cn from '@hsp/ui/src/utils/cn'
+import { FormContrastChecker, ValidationRules } from '../const'
+import cn from '@hsp/ui/src/utils/cn' 
 import { Button } from '@hsp/ui/src/components/base/button'
 import Tooltip from '@hsp/ui/src/components/base/tooltip'
 
@@ -17,12 +17,12 @@ export const BackgroundPreview = memo(function BackgroundPreview({
   children,
   className,
 }: PropsWithChildren<{ className?: string }>) {
-  const background = useWatch({ name: 'background' })
+  const background = useWatch<FormContrastChecker>({ name: 'background' })
   const backgroundDeferred = useDeferredValue(background)
 
   return (
     <div
-      style={{ background: backgroundDeferred }}
+      style={{ background: backgroundDeferred?.toString('hex') }}
       className={cn('pt-8 h-full rounded-xl transition', className)}
     >
       <div className="flex flex-col items-center justify-center">
@@ -44,7 +44,7 @@ export const StyleTextPreview = {
 } as const
 
 export const TextPreview = memo(function TextPreview({ variant }: TextPreview) {
-  const foreground = useWatch({ name: 'foreground' })
+  const foreground = useWatch<FormContrastChecker>({ name: 'foreground' })
   const foregroundDeferred = useDeferredValue(foreground)
   const { setValue } = useFormContext()
 
@@ -58,7 +58,7 @@ export const TextPreview = memo(function TextPreview({ variant }: TextPreview) {
             <p
               // contentEditable
               spellCheck="false"
-              style={{ color: foregroundDeferred }}
+              style={{ color: foregroundDeferred.toString('hex') }}
               className={cn(StyleTextPreview[field.name], 'mb-2')}
               {...field}
               onInput={(e) => {
@@ -83,8 +83,8 @@ export const StyleContrastScore = {
 export const ContrastScore = memo(function ContrastScore({
   variant,
 }: TextPreview) {
-  const foreground = useWatch({ name: 'foreground' })
-  const background = useWatch({ name: 'background' })
+  const foreground = useWatch<FormContrastChecker>({ name: 'foreground' })
+  const background = useWatch<FormContrastChecker>({ name: 'background' })
   const foregroundDeferred = useDeferredValue(foreground)
   const backgroundDeferred = useDeferredValue(background)
 
@@ -96,8 +96,8 @@ export const ContrastScore = memo(function ContrastScore({
   useEffect(() => {
     // updateRatioRating(foregroundDeferred, backgroundDeferred, variant)
     const contrastRatio = +calcContrastRatio(
-      foregroundDeferred,
-      backgroundDeferred,
+      foregroundDeferred.toString('hex'),
+      backgroundDeferred.toString('hex'),
     ).toFixed(2)
     setRatioRating({
       contrastRatio,

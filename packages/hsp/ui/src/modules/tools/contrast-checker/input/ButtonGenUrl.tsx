@@ -24,7 +24,7 @@ const ButtonGenLinkContrast = memo(function ButtonGenLinkContrast() {
         '/tools/contrast-checker?' +
         Object.keys(values)
           .map((key) => {
-            return key + '=' + encodeURIComponent(values[key as 'fg' | 'bg'])
+            return key + '=' + encodeURIComponent(values[key as 'fg' | 'bg'].toString('hex'))
           })
           .join('&'),
     )
