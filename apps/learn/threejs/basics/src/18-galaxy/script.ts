@@ -147,8 +147,8 @@ galaxyFolder.add(galaxyParams, 'randomness').name('Randomness').min(0).max(2).st
 galaxyFolder.add(galaxyParams, 'randomnessPower').name('Randomness Power').min(1).max(10).step(0.01).onFinishChange(createGalaxy)
 galaxyFolder.add(galaxyParams, 'yRadiusOffset').name('Y Offset').min(-5).max(5).step(0.5).onFinishChange(createGalaxy)
 galaxyFolder.add(galaxyParams, 'rotationSpped').name('Rotation speed').min(-5).max(5).step(0.1).onFinishChange(createGalaxy)
-galaxyFolder.add(galaxyParams, 'innerColor').name('Inner color').onFinishChange(createGalaxy)
-galaxyFolder.add(galaxyParams, 'outerColor').name('Outer color').onFinishChange(createGalaxy)
+galaxyFolder.addColor(galaxyParams, 'innerColor').name('Inner color').onFinishChange(createGalaxy)
+galaxyFolder.addColor(galaxyParams, 'outerColor').name('Outer color').onFinishChange(createGalaxy)
 
 /**
  * Animate

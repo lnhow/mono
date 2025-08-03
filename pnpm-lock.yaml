@@ -203,6 +203,9 @@ importers:
       jotai-optics:
         specifier: ^0.4.0
         version: 0.4.0(jotai@2.12.4(@types/react@19.1.8)(react@19.1.0))(optics-ts@2.4.1)
+      lil-gui:
+        specifier: ^0.20.0
+        version: 0.20.0
       next:
         specifier: catalog:gui
         version: 15.3.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -245,6 +248,9 @@ importers:
       tailwindcss:
         specifier: 4.1.10
         version: 4.1.10
+      three:
+        specifier: ^0.177.0
+        version: 0.177.0
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -261,6 +267,9 @@ importers:
       '@types/react-dom':
         specifier: catalog:gui
         version: 19.1.6(@types/react@19.1.8)
+      '@types/three':
+        specifier: ^0.177.0
+        version: 0.177.0
       eslint:
         specifier: ^9.25.0
         version: 9.26.0(jiti@2.4.2)
@@ -292,28 +301,6 @@ importers:
       vite-plugin-restart:
         specifier: ^0.4.2
         version: 0.4.2(vite@7.0.0(@types/node@22.13.17)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.37.0))
-
-  apps/learn/threejs/classic:
-    dependencies:
-      lil-gui:
-        specifier: ^0.20.0
-        version: 0.20.0
-      three:
-        specifier: ^0.177.0
-        version: 0.177.0
-    devDependencies:
-      '@types/three':
-        specifier: ^0.177.0
-        version: 0.177.0
-      typescript:
-        specifier: ~5.8.3
-        version: 5.8.3
-      vite:
-        specifier: ^7.0.4
-        version: 7.0.5(@types/node@22.13.17)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.37.0)
-      vite-plugin-restart:
-        specifier: ^0.4.2
-        version: 0.4.2(vite@7.0.5(@types/node@22.13.17)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.37.0))
 
   packages/configs/eslint-config:
     devDependencies:
@@ -7125,46 +7112,6 @@ packages:
 
   vite@7.0.0:
     resolution: {integrity: sha512-ixXJB1YRgDIw2OszKQS9WxGHKwLdCsbQNkpJN171udl6szi/rIySHL6/Os3s2+oE4P/FLD4dxg4mD7Wust+u5g==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': ^20.19.0 || >=22.12.0
-      jiti: '>=1.21.0'
-      less: ^4.0.0
-      lightningcss: ^1.21.0
-      sass: ^1.70.0
-      sass-embedded: ^1.70.0
-      stylus: '>=0.54.8'
-      sugarss: ^5.0.0
-      terser: ^5.16.0
-      tsx: ^4.8.1
-      yaml: ^2.4.2
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      jiti:
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      sass-embedded:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-      tsx:
-        optional: true
-      yaml:
-        optional: true
-
-  vite@7.0.5:
-    resolution: {integrity: sha512-1mncVwJxy2C9ThLwz0+2GKZyEXuC3MyWtAAlNftlZZXZDP3AJt5FmwcMit/IGGaNZ8ZOB2BNO/HFUB+CpN0NQw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -15475,27 +15422,7 @@ snapshots:
       micromatch: 4.0.8
       vite: 7.0.0(@types/node@22.13.17)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.37.0)
 
-  vite-plugin-restart@0.4.2(vite@7.0.5(@types/node@22.13.17)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.37.0)):
-    dependencies:
-      micromatch: 4.0.8
-      vite: 7.0.5(@types/node@22.13.17)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.37.0)
-
   vite@7.0.0(@types/node@22.13.17)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.37.0):
-    dependencies:
-      esbuild: 0.25.5
-      fdir: 6.4.6(picomatch@4.0.2)
-      picomatch: 4.0.2
-      postcss: 8.5.6
-      rollup: 4.44.1
-      tinyglobby: 0.2.14
-    optionalDependencies:
-      '@types/node': 22.13.17
-      fsevents: 2.3.3
-      jiti: 2.4.2
-      lightningcss: 1.29.2
-      terser: 5.37.0
-
-  vite@7.0.5(@types/node@22.13.17)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.37.0):
     dependencies:
       esbuild: 0.25.5
       fdir: 6.4.6(picomatch@4.0.2)
