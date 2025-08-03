@@ -6,7 +6,9 @@ import GUI from 'lil-gui'
  * Base
  */
 // Debug
-const gui = new GUI()
+const gui = new GUI({
+  title: 'Config'
+})
 
 // Canvas
 const canvas = document.querySelector<HTMLCanvasElement>('canvas.webgl')!
@@ -46,8 +48,8 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   100,
 )
-camera.position.y = 3
-camera.position.z = 3
+camera.position.y = 8
+camera.position.z = 8
 scene.add(camera)
 
 // Controls
@@ -74,16 +76,16 @@ const galaxyParams = {
   size: 0.01,
   branches: 5,
   randomness: 0.45,
-  randomnessPower: 3,
+  randomnessPower: 2.6,
   yRadiusOffset: 0.45,
   rotationSpped: -0.5,
-  innerColor: '#672BE3',
-  outerColor: '#E66030'
+  innerColor: '#762DE5',
+  outerColor: '#2E48E6'
 }
 
 const galaxyMaterial = new THREE.PointsMaterial({
   size: galaxyParams.size,
-  sizeAttenuation: true,
+  // sizeAttenuation: true,
   depthWrite: false,
   blending: THREE.AdditiveBlending,
   vertexColors: true,
@@ -120,7 +122,7 @@ function createGalaxy() {
 
     // Color
     const vertexColor = innerColor.clone()
-    vertexColor.lerp(outerColor, radius / galaxyParams.radius)
+    vertexColor.lerp(outerColor, radius * 0.7 / galaxyParams.radius)
     colors[indexX] = vertexColor.r
     colors[indexX + 1] = vertexColor.g
     colors[indexX + 2] = vertexColor.b
@@ -133,6 +135,7 @@ function createGalaxy() {
 }
 createGalaxy()
 
+gui.close()
 const particleFolder = gui.addFolder('Particle')
 particleFolder.add(galaxyParams, 'count').name('Particle Count').min(100).max(1000000).step(100).onFinishChange(createGalaxy)
 particleFolder.add(galaxyParams, 'size').name('Particle Size').min(0.001).max(0.1).step(0.001).onFinishChange(createGalaxy)
