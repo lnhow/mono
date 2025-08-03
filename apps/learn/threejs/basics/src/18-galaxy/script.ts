@@ -70,11 +70,13 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 const galaxyParams = {
   count: 100000,
   radius: 5,
-  radiusLag: 1.5,
+  radiusLag: 1,
   size: 0.01,
-  branches: 4,
-  randomness: 0.4,
+  branches: 5,
+  randomness: 0.45,
   randomnessPower: 3,
+  yRadiusOffset: 0.45,
+  rotationSpped: -0.5,
   innerColor: '#672BE3',
   outerColor: '#E66030'
 }
@@ -109,7 +111,7 @@ function createGalaxy() {
     const branchAngle = (i % galaxyParams.branches) / galaxyParams.branches * Math.PI * 2
 
     const randomX = Math.pow(Math.random(), galaxyParams.randomnessPower) * (Math.random() < 0.5 ? -1 : 1) * galaxyParams.randomness * radius
-    const randomY = Math.pow(Math.random(), galaxyParams.randomnessPower) * (Math.random() < 0.5 ? -1 : 1) * galaxyParams.randomness * radius + radius * 0.1
+    const randomY = Math.pow(Math.random(), galaxyParams.randomnessPower) * (Math.random() < 0.5 ? -1 : 1) * galaxyParams.randomness * radius + radius * galaxyParams.yRadiusOffset
     const randomZ = Math.pow(Math.random(), galaxyParams.randomnessPower) * (Math.random() < 0.5 ? -1 : 1) * galaxyParams.randomness * radius
 
     geometryVertices[indexX] = radius * Math.sin(branchAngle + radiusLagAngle) + randomX
@@ -140,6 +142,8 @@ galaxyFolder.add(galaxyParams, 'radiusLag').name('Spread').min(-5).max(5).step(0
 galaxyFolder.add(galaxyParams, 'branches').name('Branches').min(2).max(20).step(1).onFinishChange(createGalaxy)
 galaxyFolder.add(galaxyParams, 'randomness').name('Randomness').min(0).max(2).step(0.001).onFinishChange(createGalaxy)
 galaxyFolder.add(galaxyParams, 'randomnessPower').name('Randomness Power').min(1).max(10).step(0.01).onFinishChange(createGalaxy)
+galaxyFolder.add(galaxyParams, 'yRadiusOffset').name('Y Offset').min(-5).max(5).step(0.5).onFinishChange(createGalaxy)
+galaxyFolder.add(galaxyParams, 'rotationSpped').name('Rotation speed').min(-5).max(5).step(0.1).onFinishChange(createGalaxy)
 galaxyFolder.add(galaxyParams, 'innerColor').name('Inner color').onFinishChange(createGalaxy)
 galaxyFolder.add(galaxyParams, 'outerColor').name('Outer color').onFinishChange(createGalaxy)
 
@@ -150,6 +154,10 @@ const clock = new THREE.Clock()
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime()
+
+  if (galaxy) {
+    galaxy.rotation.y = elapsedTime * galaxyParams.rotationSpped
+  }
 
   // Update controls
   controls.update()
