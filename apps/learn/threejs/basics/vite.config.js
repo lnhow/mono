@@ -12,16 +12,25 @@ export default {
     build:
     {
         outDir: '../dist', // Output in the dist/ folder
-        rollupOptions: {
-            input: {
-                '0-10': '0-10/index.html',
-                '11-material': '11-material/index.html',
-                // Add more entries as needed
-            }
-        },
         emptyOutDir: true, // Empty the folder first
         sourcemap: true // Add sourcemap
     },
+    // {
+    //     outDir: '../dist', // Output in the dist/ folder
+    //     rollupOptions: {
+    //         input: {
+    //             '0-10': '/src/0-10/index.html',
+    //             '11-material': '/src/11-material/index.html',
+    //             '12-3dtext': '/src/12-3dtext/index.html',
+    //             '14-light': '/src/14-light/index.html',
+    //             '15-shadows': '/src/15-shadows/index.html',
+    //             '16-house': '/src/16-house/index.html',
+    //             // Add more entries as needed
+    //         }
+    //     },
+    //     emptyOutDir: true, // Empty the folder first
+    //     sourcemap: true // Add sourcemap
+    // },
     plugins:
     [
         restart({ restart: [ '../static/**', ] }) // Restart server on static file change

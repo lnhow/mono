@@ -21,22 +21,22 @@ const scene = new THREE.Scene()
  */
 const textureLoader = new THREE.TextureLoader()
 
-const doorColorTexture = textureLoader.load('./textures/door/color.jpg')
+const doorColorTexture = textureLoader.load('./basic/textures/door/color.jpg')
 doorColorTexture.colorSpace = THREE.SRGBColorSpace
-// const doorAlphaTexture = textureLoader.load('./textures/door/alpha.jpg')
+// const doorAlphaTexture = textureLoader.load('./basic/textures/door/alpha.jpg')
 // const doorAmbientOcclusionTexture = textureLoader.load(
-//   './textures/door/ambientOcclusion.jpg',
+//   './basic/textures/door/ambientOcclusion.jpg',
 // )
-// const doorHeightTexture = textureLoader.load('./textures/door/height.jpg')
-// const doorNormalTexture = textureLoader.load('./textures/door/normal.jpg')
-// const doorMetalnessTexture = textureLoader.load('./textures/door/metalness.jpg')
-// const doorRoughnessTexture = textureLoader.load('./textures/door/roughness.jpg')
-const matcapTexture = textureLoader.load('./textures/matcaps/3.png')
+// const doorHeightTexture = textureLoader.load('./basic/textures/door/height.jpg')
+// const doorNormalTexture = textureLoader.load('./basic/textures/door/normal.jpg')
+// const doorMetalnessTexture = textureLoader.load('./basic/textures/door/metalness.jpg')
+// const doorRoughnessTexture = textureLoader.load('./basic/textures/door/roughness.jpg')
+const matcapTexture = textureLoader.load('./basic/textures/matcaps/3.png')
 matcapTexture.colorSpace = THREE.SRGBColorSpace
-const gradientTexture = textureLoader.load('./textures/gradients/5.jpg')
+const gradientTexture = textureLoader.load('./basic/textures/gradients/5.jpg')
 
 const rgbeLoader = new RGBELoader()
-rgbeLoader.load('/textures/environmentMap/2k.hdr', (texture) => {
+rgbeLoader.load('/basic/textures/environmentMap/2k.hdr', (texture) => {
   texture.mapping = THREE.EquirectangularReflectionMapping
   scene.background = texture
   scene.environment = texture

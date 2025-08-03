@@ -83,16 +83,16 @@ loadingManager.onError = (url) => {
 
 const textureLoader = new THREE.TextureLoader(loadingManager)
 const texture = {
-  // color: textureLoader.load('/textures/door/color.jpg'),
-  // color: textureLoader.load('/textures/checkerboard-1024x1024.png'),
-  // color: textureLoader.load('/textures/checkerboard-8x8.png'),
-  color: textureLoader.load('/textures/minecraft.png'),
-  alpha: textureLoader.load('/textures/door/alpha.jpg'),
-  height: textureLoader.load('/textures/door/height.jpg'),
-  normal: textureLoader.load('/textures/door/normal.jpg'),
-  ambientOcclusion: textureLoader.load('/textures/door/ambientOcclusion.jpg'),
-  metalness: textureLoader.load('/textures/door/metalness.jpg'),
-  roughness: textureLoader.load('/textures/door/roughness.jpg'),
+  // color: textureLoader.load('/basic/textures/door/color.jpg'),
+  // color: textureLoader.load('/basic/textures/checkerboard-1024x1024.png'),
+  // color: textureLoader.load('/basic/textures/checkerboard-8x8.png'),
+  color: textureLoader.load('/basic/textures/minecraft.png'),
+  alpha: textureLoader.load('/basic/textures/door/alpha.jpg'),
+  height: textureLoader.load('/basic/textures/door/height.jpg'),
+  normal: textureLoader.load('/basic/textures/door/normal.jpg'),
+  ambientOcclusion: textureLoader.load('/basic/textures/door/ambientOcclusion.jpg'),
+  metalness: textureLoader.load('/basic/textures/door/metalness.jpg'),
+  roughness: textureLoader.load('/basic/textures/door/roughness.jpg'),
 }
 texture.color.colorSpace = THREE.SRGBColorSpace
 // texture.color.wrapS = THREE.RepeatWrapping // Repeat the texture horizontally

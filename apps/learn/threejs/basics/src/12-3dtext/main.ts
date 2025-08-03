@@ -15,7 +15,7 @@ const CAMERA_DISTANCE = 5
 const scene = new THREE.Scene()
 
 const textureLoader = new THREE.TextureLoader()
-const matcapTexture = textureLoader.load('./textures/matcaps/3.png')
+const matcapTexture = textureLoader.load('/basic/textures/matcaps/3.png')
 matcapTexture.colorSpace = THREE.SRGBColorSpace
 const material = new THREE.MeshMatcapMaterial({
   matcap: matcapTexture,
@@ -24,7 +24,7 @@ const material = new THREE.MeshMatcapMaterial({
 
 const fontLoader = new FontLoader()
 let textMesh: THREE.Mesh
-fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
+fontLoader.load('/basic/fonts/helvetiker_regular.typeface.json', (font) => {
   const textGeometry = new TextGeometry('Random shapes', {
     font: font,
     size: 0.5,
