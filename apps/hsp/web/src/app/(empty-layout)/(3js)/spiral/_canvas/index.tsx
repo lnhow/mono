@@ -138,8 +138,7 @@ function initScene(canvas: HTMLCanvasElement | null) {
       const randomY =
         Math.pow(Math.random(), galaxyParams.randomnessPower) *
           (Math.random() < 0.5 ? -1 : 1) *
-          galaxyParams.randomness *
-          radius +
+          galaxyParams.randomness * Math.sqrt(radius) / 2 +
         radius * galaxyParams.yRadiusOffset
       const randomZ =
         Math.pow(Math.random(), galaxyParams.randomnessPower) *
