@@ -9,11 +9,14 @@ catalogs:
   base:
     "@types/node": 22.13.17
   prisma:
-    prisma: 6.8.2
+    prisma: 6.13.0
+    "@prisma/client": 6.13.0
   gui:
     react: 19.1.0
     react-dom: 19.1.0
     "@types/react": 19.1.8
     "@types/react-dom": 19.1.6
-    next: 15.3.5
+    next: 15.4.6
+  dev:
+    "eslint": 9.32.0
   

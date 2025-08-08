@@ -47,7 +47,7 @@
     "@types/node": "catalog:base",
     "@types/react": "catalog:gui",
     "@types/react-dom": "catalog:gui",
-    "eslint": "^9.25.0",
+    "eslint": "catalog:dev",
     "jotai": "^2.12.4",
     "jotai-optics": "^0.4.0",
     "optics-ts": "^2.4.1",

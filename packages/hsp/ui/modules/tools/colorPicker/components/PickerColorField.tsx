@@ -34,7 +34,7 @@ export default function PickerColorField({
     try {
       const color = parseColor(val)
       onChange(color)
-    } catch (e) {
+    } catch {
       // ignore
     }
   }, 300)
