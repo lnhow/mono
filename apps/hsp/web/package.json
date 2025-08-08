@@ -46,7 +46,7 @@
     "@types/node": "catalog:base",
     "@types/react": "catalog:gui",
     "@types/react-dom": "catalog:gui",
-    "eslint": "^9.25.0",
+    "eslint": "catalog:dev",
     "typescript": "5.8.3"
   }
 }

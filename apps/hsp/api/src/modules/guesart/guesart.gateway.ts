@@ -166,6 +166,7 @@ export class GrtGateway
   // After websocket server is initialized
   public afterInit(server: GrtServer): void {
     // Socket.io middleware - Called once, before any connection is established
+
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     server.use(async (socket, next) => {
       const session =

@@ -5,7 +5,6 @@ import { RESET, useAtomCallback } from 'jotai/utils'
 import { usePathname, useRouter } from 'next/navigation'
 import { debounce } from 'lodash'
 
-import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
 import { sessionAtom, socketAtom } from '../../state/store'
 import { roomAtom, roomIsLoadingAtom, roomMetadataAtom } from './_state/store'
 import { SESSION_STORAGE_KEY } from '../../state/type/session'
