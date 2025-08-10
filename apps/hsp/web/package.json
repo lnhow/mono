@@ -53,6 +53,7 @@
     "@vitejs/plugin-react": "catalog:dev",
     "@testing-library/react": "catalog:dev",
     "@testing-library/dom": "catalog:dev",
+    "@testing-library/jest-dom": "catalog:dev",
     "vite-tsconfig-paths": "catalog:dev"
   }
 }

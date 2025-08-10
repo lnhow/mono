@@ -22,6 +22,7 @@ export const BackgroundPreview = memo(function BackgroundPreview({
 
   return (
     <div
+      data-testid="background-preview"
       style={{ background: backgroundDeferred?.toString('hex') }}
       className={cn('pt-8 h-full rounded-xl transition', className)}
     >
@@ -56,6 +57,7 @@ export const TextPreview = memo(function TextPreview({ variant }: TextPreview) {
         render={({ field }) => {
           return (
             <p
+              data-testid={`text-preview-${variant}`}
               // contentEditable
               spellCheck="false"
               style={{ color: foregroundDeferred.toString('hex') }}
@@ -107,6 +109,7 @@ export const ContrastScore = memo(function ContrastScore({
 
   return (
     <div
+      data-testid={`contrast-score-${variant}`}
       className={cn(
         StyleContrastScore[variant],
         'font-bold self-end bg-base-200/70 backdrop:blur-sm ps-3 pe-1 py-1 rounded-md flex items-center gap-4',
@@ -120,7 +123,7 @@ export const ContrastScore = memo(function ContrastScore({
         )}
       </Tooltip>
       <div className="flex items-center gap-4">
-        {ratioRating.contrastRatio}:1
+        <span data-testid={`contrast-ratio-${variant}`}>{ratioRating.contrastRatio}:1</span>
         <Tooltip
           label={
             variant === 'bigText' ? 'Pass if value > 3' : 'Pass if value > 4.5'
