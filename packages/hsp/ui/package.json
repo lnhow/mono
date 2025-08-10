@@ -11,7 +11,8 @@
     "access": "public"
   },
   "scripts": {
-    "lint": "eslint --ext .ts,.tsx ."
+    "lint": "eslint --ext .ts,.tsx .",
+    "test": "vitest run"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.13",
@@ -53,6 +54,7 @@
     "optics-ts": "^2.4.1",
     "socket.io-client": "^4.8.1",
     "sonner": "^2.0.3",
-    "typescript": "catalog:dev"
+    "typescript": "catalog:dev",
+    "vitest": "catalog:dev"
   }
 }

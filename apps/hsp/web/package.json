@@ -13,7 +13,7 @@
     "build": "next build",
     "deploy:start": "next start",
     "lint": "next lint",
-    "gen:graphql": "graphql-codegen"
+    "test": "vitest run"
   },
   "dependencies": {
     "@hsp/ui": "workspace:*",
@@ -47,6 +47,7 @@
     "@types/react": "catalog:gui",
     "@types/react-dom": "catalog:gui",
     "eslint": "catalog:dev",
-    "typescript": "catalog:dev"
+    "typescript": "catalog:dev",
+    "vitest": "catalog:dev"
   }
 }
