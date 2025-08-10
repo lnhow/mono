@@ -13,7 +13,7 @@
     "build": "next build",
     "deploy:start": "next start",
     "lint": "next lint",
-    "test": "vitest run"
+    "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
     "@hsp/ui": "workspace:*",
@@ -48,6 +48,11 @@
     "@types/react-dom": "catalog:gui",
     "eslint": "catalog:dev",
     "typescript": "catalog:dev",
-    "vitest": "catalog:dev"
+    "vitest": "catalog:dev",
+    "jsdom": "catalog:dev",
+    "@vitejs/plugin-react": "catalog:dev",
+    "@testing-library/react": "catalog:dev",
+    "@testing-library/dom": "catalog:dev",
+    "vite-tsconfig-paths": "catalog:dev"
   }
 }
