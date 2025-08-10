@@ -2,14 +2,15 @@
 
 import { useSearchParams } from 'next/navigation'
 import { FormProvider, useForm } from 'react-hook-form'
-import { FormContrastChecker } from './const'
+import {
+  DEFAULT_BACKGROUND,
+  DEFAULT_FOREGROUND,
+  FormContrastChecker,
+} from './const'
 import { BackgroundPreview } from './preview'
 import { ColorInput } from './input'
 import { useEffect } from 'react'
 import { parseColor } from '@hsp/ui/src/components/app/input/color-picker'
-
-const DEFAULT_FOREGROUND = parseColor('#000000')
-const DEFAULT_BACKGROUND = parseColor('#FFFFFF')
 
 export default function PageContrastChecker() {
   const searchParams = useSearchParams()
@@ -24,13 +25,17 @@ export default function PageContrastChecker() {
   })
 
   useEffect(() => {
-    const background = searchParams.get('bg')
-    if (background) {
-      methods.setValue('background', parseColor(background))
-    }
-    const foreground = searchParams.get('fg')
-    if (foreground) {
-      methods.setValue('foreground', parseColor(foreground))
+    try {
+      const background = searchParams.get('bg')
+      if (background) {
+        methods.setValue('background', parseColor(background))
+      }
+      const foreground = searchParams.get('fg')
+      if (foreground) {
+        methods.setValue('foreground', parseColor(foreground))
+      }
+    } catch (error) {
+      console.error('Error parsing default search params:', error)
     }
   }, [methods, searchParams])
 
