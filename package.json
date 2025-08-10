@@ -6,11 +6,12 @@
   },
   "private": true,
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "pnpm db:generate",
     "dev": "turbo run dev",
     "dev:hsp": "turbo run dev --filter=@hsp/app-*...",
+    "storybook": "turbo run storybook",
     "lint": "turbo run lint",
     "build": "turbo run build",
     "deploy:start": "turbo run deploy:start",
@@ -18,13 +19,15 @@
     "db:generate": "turbo run db:generate",
     "db:migrate": "turbo run db:migrate",
     "db:deploy": "turbo run db:deploy",
-    "db:studio": "turbo run db:studio"
+    "db:studio": "turbo run db:studio",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e"
   },
   "packageManager": "pnpm@10.12.2+sha512.a32540185b964ee30bb4e979e405adc6af59226b438ee4cc19f9e8773667a66d302f5bfee60a39d3cac69e35e4b96e708a71dd002b7e9359c4112a1722ac323f",
   "devDependencies": {
-    "husky": "^8.0.3",
-    "prettier": "^3.5.3",
-    "turbo": "^2.5.0"
+    "husky": "^9.1.7",
+    "prettier": "^3.6.2",
+    "turbo": "^2.5.5"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

@@ -11,7 +11,8 @@
     "access": "public"
   },
   "scripts": {
-    "lint": "eslint --ext .ts,.tsx ."
+    "lint": "eslint --ext .ts,.tsx .",
+    "test": "vitest run"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.13",
@@ -47,12 +48,19 @@
     "@types/node": "catalog:base",
     "@types/react": "catalog:gui",
     "@types/react-dom": "catalog:gui",
-    "eslint": "^9.25.0",
+    "eslint": "catalog:dev",
     "jotai": "^2.12.4",
     "jotai-optics": "^0.4.0",
     "optics-ts": "^2.4.1",
     "socket.io-client": "^4.8.1",
     "sonner": "^2.0.3",
-    "typescript": "5.8.3"
+    "typescript": "catalog:dev",
+    "vitest": "catalog:dev",
+    "jsdom": "catalog:dev",
+    "@vitejs/plugin-react": "catalog:dev",
+    "@testing-library/react": "catalog:dev",
+    "@testing-library/dom": "catalog:dev",
+    "@testing-library/jest-dom": "catalog:dev",
+    "vite-tsconfig-paths": "catalog:dev"
   }
 }

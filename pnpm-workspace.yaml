@@ -2,6 +2,7 @@ packages:
   # Turbo only accepts * globs not ** globs
   - "apps/hsp/*"
   - "apps/learn/threejs/*"
+  - "apps/*"
   - "packages/configs/*"
   - "packages/*"
   - "packages/hsp/*"
@@ -10,11 +11,23 @@ catalogs:
   base:
     "@types/node": 22.13.17
   prisma:
-    prisma: 6.8.2
+    prisma: 6.13.0
+    "@prisma/client": 6.13.0
   gui:
     react: 19.1.0
     react-dom: 19.1.0
     "@types/react": 19.1.8
     "@types/react-dom": 19.1.6
-    next: 15.3.5
-  
+    next: 15.4.6
+  dev:
+    "eslint": 9.32.0
+    "vitest": 3.2.4
+    "@vitejs/plugin-react": "5.0.0"
+    "jsdom": "26.1.0"
+    "@testing-library/react": "16.3.0"
+    "@testing-library/dom": "10.4.1"
+    "@testing-library/jest-dom": "6.6.4"
+    "vite-tsconfig-paths": "5.1.4"
+    "typescript": "5.9.2"
+    "typescript-eslint": "8.39.0"
+

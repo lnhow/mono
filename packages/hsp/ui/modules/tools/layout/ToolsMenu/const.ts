@@ -15,8 +15,8 @@ export type MenuItemGroup = {
   items: MenuItemLink[]
 }
 
-// @ts-ignore
-export const isMenuItemLink = (val: MenuItem): val is MenuItemLink => Boolean(val.href)
+
+export const isMenuItemLink = (val: MenuItem): val is MenuItemLink => Boolean((val as MenuItemLink).href)
 
 export const menuItems: MenuItem[] = [
   // {
