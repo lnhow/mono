@@ -19,4 +19,6 @@ catalogs:
     next: 15.4.6
   dev:
     "eslint": 9.32.0
+    "vitest": 3.2.4
+    "typescript": 5.9.2
   

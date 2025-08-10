@@ -47,6 +47,6 @@
     "@types/react": "catalog:gui",
     "@types/react-dom": "catalog:gui",
     "eslint": "catalog:dev",
-    "typescript": "5.8.3"
+    "typescript": "catalog:dev"
   }
 }
