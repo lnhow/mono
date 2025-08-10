@@ -11,6 +11,7 @@
     "postinstall": "pnpm db:generate",
     "dev": "turbo run dev",
     "dev:hsp": "turbo run dev --filter=@hsp/app-*...",
+    "storybook": "turbo run storybook",
     "lint": "turbo run lint",
     "build": "turbo run build",
     "deploy:start": "turbo run deploy:start",

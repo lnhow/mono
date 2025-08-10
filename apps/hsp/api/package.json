@@ -73,8 +73,8 @@
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.9.2",
-    "typescript-eslint": "^8.39.0"
+    "typescript": "catalog:dev",
+    "typescript-eslint": "catalog:dev"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -82,6 +82,10 @@
       "json",
       "ts"
     ],
+     "moduleNameMapper": {
+      "generated/(.*)": "<rootDir>/../generated/$1",
+      "^src/(.*)": "<rootDir>/../src/$1"
+    },
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {

@@ -1,4 +1,7 @@
-import { Color } from "@hsp/ui/src/components/app/input/color-picker"
+import { Color, parseColor } from "@hsp/ui/src/components/app/input/color-picker"
+
+export const DEFAULT_FOREGROUND = parseColor('#000000')
+export const DEFAULT_BACKGROUND = parseColor('#FFFFFF')
 
 export type FormContrastChecker = {
   foreground: Color,
