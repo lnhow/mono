@@ -1,4 +1,4 @@
-pm2 delete hsp-api
+pm2 delete ecosystem.config.js --only "hsp-api"
 
 git restore .
 git pull

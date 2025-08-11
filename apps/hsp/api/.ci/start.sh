@@ -1,1 +1,1 @@
-pm2 start --name hsp-api pnpm -- deploy:start --filter=@hsp/app-api
+pm2 start ecosystem.config.js
