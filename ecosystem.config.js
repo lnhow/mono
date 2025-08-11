@@ -15,6 +15,7 @@ module.exports = {
       ref: "origin/main",
       repo: "git@github.com:lnhow/mono.git",
       path: process.env.MN_PM2_PATH,
+      "pre-setup": "pwd && && ls -la",
       "post-deploy": "pnpm i && pm2 reload ecosystem.config.js --env production",
       ssh_options: "ForwardAgent=yes"
     }
