@@ -80,7 +80,7 @@ pnpm deploy:start --filter=@hsp/app-api
 ### Deploying changes
 
 ```bash
-chmod +x ~/app/apps/hsp/api/.ci/deploy.sh && ~/app/apps/hsp/api/.ci/deploy.sh
+~/app/apps/hsp/api/.ci/deploy.sh
 ```
 
 ### Configurations
@@ -138,4 +138,10 @@ server {
 pm2 startup
 pm2 start --name hsp-api pnpm -- deploy:start --filter=@hsp/app-api # Start the process named "hsp-api"
 pm2 delete hsp-api # Close the process "hsp-api" if it's running
+```
+
+Restart process on reboot
+```bash
+pm2 startup
+pm2 save
 ```
