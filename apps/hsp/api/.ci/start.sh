@@ -1,1 +1,1 @@
-pm2 startOrReload ecosystem.config.js --env production --only hsp-api
+pm2 startOrReload ecosystem.config.js --only hsp-api
