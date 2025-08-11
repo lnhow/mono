@@ -17,7 +17,7 @@ module.exports = {
       path: `${process.env.MN_PM2_PATH}/hsp-api`,
       "pre-setup": "pwd",
       "post-setup": "ls -la && npm install --global corepack@latest && corepack enable pnpm",
-      "post-deploy": "apps/hsp/api/.ci/build.sh",
+      "post-deploy": "apps/hsp/api/.ci/post-deploy.sh",
       ssh_options: "ForwardAgent=yes"
     }
   }
