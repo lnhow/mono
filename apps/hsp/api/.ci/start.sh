@@ -1,1 +1,1 @@
-pm2 startOrRestart --name hsp-api ~/apps/hsp/api/dist/src/main
+pm2 startOrRestart --name hsp-api ~/apps/hsp/api/dist/src/main.js
