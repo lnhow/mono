@@ -1,3 +1,4 @@
+require('dotenv').config({ path: './apps/hsp/api/.env' })
 module.exports = {
   apps: [
     { 
@@ -11,6 +12,9 @@ module.exports = {
       out_file: '~/logs/hsp-api/out.log',
       log_file: '~/logs/hsp-api/combined.log',
       log_date_format: 'YYYY-MM-DD HH:mm:ss:SSS',
+      env: {
+        ...process.env
+      }
     }
   ],
 }
