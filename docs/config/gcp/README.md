@@ -81,7 +81,7 @@ pnpm deploy:start --filter=@hsp/app-api
 
 ```bash
 # ssh to server
-~/app/apps/hsp/api/.ci/deploy.sh
+cd ~/app && ~/app/apps/hsp/api/.ci/deploy.sh
 ```
 
 ### Configurations
