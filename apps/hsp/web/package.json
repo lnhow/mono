@@ -5,7 +5,7 @@
   "description": "Website for Hammerspace Project, powered by Nextjs",
   "author": {
     "name": "Hao Le",
-    "email": "haoln.contactme@gmail.com"
+    "email": "haoln.7f8@gmail.com"
   },
   "type": "module",
   "scripts": {
@@ -27,6 +27,7 @@
     "encoding": "^0.1.13",
     "jotai": "^2.12.4",
     "jotai-optics": "^0.4.0",
+    "lil-gui": "^0.20.0",
     "next": "catalog:gui",
     "next-themes": "0.4.6",
     "optics-ts": "^2.4.1",
@@ -40,7 +41,8 @@
     "socket.io-client": "^4.8.1",
     "sonner": "^2.0.3",
     "swiper": "^10.3.1",
-    "tailwindcss": "4.1.10"
+    "tailwindcss": "4.1.10",
+    "three": "^0.177.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.0",
@@ -56,6 +58,7 @@
     "@types/node": "catalog:base",
     "@types/react": "catalog:gui",
     "@types/react-dom": "catalog:gui",
+    "@types/three": "^0.177.0",
     "@vitejs/plugin-react": "catalog:dev",
     "eslint": "catalog:dev",
     "eslint-plugin-storybook": "^9.1.1",
