@@ -80,6 +80,7 @@ pnpm deploy:start --filter=@hsp/app-api
 ### Deploying changes
 
 ```bash
+# ssh to server
 ~/app/apps/hsp/api/.ci/deploy.sh
 ```
 
