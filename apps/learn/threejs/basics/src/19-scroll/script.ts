@@ -98,7 +98,9 @@ const camera = new THREE.PerspectiveCamera(
   100,
 )
 camera.position.z = 6
-scene.add(camera)
+const cameraGroup = new THREE.Group() // A group for camera's parallax
+cameraGroup.add(camera)
+scene.add(cameraGroup)
 
 /**
  * Renderer
@@ -112,28 +114,8 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 // renderer.setClearAlpha(0)
 
 /**
- * Animate
+ * Move scene's y along with window.scrollY
  */
-const clock = new THREE.Clock()
-
-const tick = () => {
-  const elapsedTime = clock.getElapsedTime()
-
-  // Animate shapes
-  for (const shape of shapes) {
-    shape.rotation.x = elapsedTime * 0.1
-    shape.rotation.y = elapsedTime * -0.14
-  }
-
-  // Render
-  renderer.render(scene, camera)
-
-  // Call tick again on the next frame
-  window.requestAnimationFrame(tick)
-}
-
-tick()
-
 const onScroll = () => {
   const scrollY = window.scrollY
   const innerHeight = window.innerHeight
@@ -147,3 +129,50 @@ const onScroll = () => {
 
 window.addEventListener('scroll', onScroll)
 onScroll() // Get the correct camera position on initial load
+
+/**
+ * Move camera along with mouse's movement for parallax effect
+ */
+const cursor = {
+  dx: 0,
+  dy: 0,
+}
+window.addEventListener('mousemove', (event) => {
+  // Calculate relative amplitude of the mouse position and the center of the screen
+  cursor.dx = event.clientX / window.innerWidth - 0.5
+  cursor.dy = event.clientY / window.innerHeight - 0.5
+
+  // console.log('\x1B[35m[Dev log]\x1B[0m -> cursor:', cursor)
+})
+
+/**
+ * Scene animation loop
+ */
+const clock = new THREE.Clock()
+
+const tick = () => {
+  const elapsedTime = clock.getElapsedTime()
+
+  // Animate shapes
+  for (const shape of shapes) {
+    shape.rotation.x = elapsedTime * 0.1
+    shape.rotation.y = elapsedTime * -0.14
+  }
+
+  // Camera movement parallax
+  // With easing, a bit more advanced
+  cameraGroup.position.x = cursor.dx
+  cameraGroup.position.y = - cursor.dy // Correct movement's direction
+  // Linear, basic
+  // cameraGroup.position.x = cursor.dx
+  // cameraGroup.position.y = - cursor.dy // Correct movement's direction
+
+  // Render
+  renderer.render(scene, camera)
+
+  // Call tick again on the next frame
+  window.requestAnimationFrame(tick)
+}
+
+tick()
+
