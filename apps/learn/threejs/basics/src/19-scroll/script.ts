@@ -7,10 +7,12 @@ import GUI from 'lil-gui'
 const gui = new GUI()
 
 const parameters = {
-  materialColor: '#ffeded',
+  materialColor: '#bdffe9',
 }
 
-gui.addColor(parameters, 'materialColor')
+gui.addColor(parameters, 'materialColor').onChange(() => {
+  shapeMat.color.set(parameters.materialColor)
+})
 
 /**
  * Base
@@ -22,13 +24,46 @@ const canvas = document.querySelector('canvas.webgl')!
 const scene = new THREE.Scene()
 
 /**
- * Test cube
+ * Shapes
  */
-const cube = new THREE.Mesh(
-  new THREE.BoxGeometry(1, 1, 1),
-  new THREE.MeshBasicMaterial({ color: '#ff0000' }),
+
+// Texture
+const textureLoader = new THREE.TextureLoader()
+const shapeTexture = textureLoader.load('/19-scroll/gradients/3.jpg')
+shapeTexture.magFilter = THREE.NearestFilter
+
+const shapeMat = new THREE.MeshToonMaterial({
+  color: parameters.materialColor,
+  gradientMap: shapeTexture,
+})
+
+const shapeSpacing = 4
+
+const shape1 = new THREE.Mesh(new THREE.TorusGeometry(1, 0.4, 16, 60), shapeMat)
+const shape2 = new THREE.Mesh(new THREE.ConeGeometry(1, 2, 32), shapeMat)
+const shape3 = new THREE.Mesh(
+  new THREE.TorusKnotGeometry(0.8, 0.35, 100, 16),
+  shapeMat,
 )
-scene.add(cube)
+
+shape1.position.y = -shapeSpacing * 0
+shape2.position.y = -shapeSpacing * 1
+shape3.position.y = -shapeSpacing * 2
+
+shape1.position.x = -2
+shape2.position.x = 2
+shape3.position.x = -2
+
+const shapes = [shape1, shape2, shape3]
+
+scene.add(shape1, shape2, shape3)
+
+/**
+ * Lights
+ */
+const light = new THREE.DirectionalLight('#ffffff', 1)
+light.position.set(1, 1, 0)
+scene.add(light)
 
 /**
  * Sizes
@@ -70,9 +105,11 @@ scene.add(camera)
  */
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
+  alpha: true,
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+// renderer.setClearAlpha(0)
 
 /**
  * Animate
@@ -82,6 +119,12 @@ const clock = new THREE.Clock()
 const tick = () => {
   const elapsedTime = clock.getElapsedTime()
 
+  // Animate shapes
+  for (const shape of shapes) {
+    shape.rotation.x = elapsedTime * 0.1
+    shape.rotation.y = elapsedTime * -0.14
+  }
+
   // Render
   renderer.render(scene, camera)
 
@@ -90,3 +133,17 @@ const tick = () => {
 }
 
 tick()
+
+const onScroll = () => {
+  const scrollY = window.scrollY
+  const innerHeight = window.innerHeight
+  
+  // Update camera position based on scroll
+  // Scroll progress = window.height / window.innerHeight
+  // Scene size = shapeSpacing * shapes.length
+  camera.position.y = -(scrollY / innerHeight) * shapeSpacing
+  // console.log(scrollY, camera.position.y)
+}
+
+window.addEventListener('scroll', onScroll)
+onScroll() // Get the correct camera position on initial load
