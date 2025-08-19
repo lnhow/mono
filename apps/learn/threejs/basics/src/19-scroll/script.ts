@@ -1,18 +1,16 @@
 import * as THREE from 'three'
 import GUI from 'lil-gui'
+import { Timer } from 'three/examples/jsm/misc/Timer.js'
+import gsap from 'gsap'
 
 /**
- * Debug
+ * Configs
  */
-const gui = new GUI()
-
 const parameters = {
-  materialColor: '#bdffe9',
+  materialColor: '#69f2c4',
+  particlesCount: 200,
+  particlesColor: '#0a7f58'
 }
-
-gui.addColor(parameters, 'materialColor').onChange(() => {
-  shapeMat.color.set(parameters.materialColor)
-})
 
 /**
  * Base
@@ -57,6 +55,50 @@ shape3.position.x = -2
 const shapes = [shape1, shape2, shape3]
 
 scene.add(shape1, shape2, shape3)
+
+/**
+ * Particles
+ */
+let particles: THREE.Points | undefined = undefined
+
+const generateParticles = () => {
+  if (particles) {
+    particles.geometry.dispose()
+    if (particles.material instanceof THREE.PointsMaterial) {
+      particles.material.color.set(parameters.particlesColor)
+      particles.material.dispose()
+    } else if (Array.isArray(particles.material)) {
+      particles.material.forEach((material) => {
+        (material as THREE.PointsMaterial).dispose()
+      })
+    }
+    scene.remove(particles)
+    particles = undefined
+  }
+  const particlesCount = parameters.particlesCount
+  const positions = new Float32Array(particlesCount * 3)
+  for (let i = 0; i < particlesCount; i++) {
+    positions.set([
+      (Math.random() - 0.5) * 10,
+      shapeSpacing * 0.5 - Math.random() * shapeSpacing * shapes.length,
+      (Math.random() - 0.5) * 10,
+    ], i * 3)
+  }
+
+  const particlesGeometry = new THREE.BufferGeometry()
+  particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+  particles = new THREE.Points(
+    particlesGeometry,
+    new THREE.PointsMaterial({
+      color: parameters.particlesColor,
+      size: 0.1,
+    })
+  )
+  scene.add(particles)
+}
+
+generateParticles()
+
 
 /**
  * Lights
@@ -116,15 +158,34 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 /**
  * Move scene's y along with window.scrollY
  */
+let scrollY = window.scrollY
+const calcCurrentSection = () => {
+  return Math.round(scrollY / window.innerHeight)
+}
+let currentSection = calcCurrentSection()
 const onScroll = () => {
-  const scrollY = window.scrollY
+  scrollY = window.scrollY
   const innerHeight = window.innerHeight
-  
+
   // Update camera position based on scroll
   // Scroll progress = window.height / window.innerHeight
   // Scene size = shapeSpacing * shapes.length
   camera.position.y = -(scrollY / innerHeight) * shapeSpacing
   // console.log(scrollY, camera.position.y)
+
+  // Handle effects on reach a section
+  const newSection = calcCurrentSection()
+  if (newSection !== currentSection) {
+    currentSection = newSection
+    console.log('\x1B[35m[Dev log]\x1B[0m -> onScroll -> currentSection:', currentSection)
+    gsap.to(shapes[currentSection].rotation, {
+      duration: 1.5,
+      ease: 'power2.inOut',
+      x: '+=6',
+      y: '-=3',
+      z: '+=1.5',
+    })
+  }
 }
 
 window.addEventListener('scroll', onScroll)
@@ -148,21 +209,28 @@ window.addEventListener('mousemove', (event) => {
 /**
  * Scene animation loop
  */
-const clock = new THREE.Clock()
+const timer = new Timer()
 
 const tick = () => {
-  const elapsedTime = clock.getElapsedTime()
+  const deltaTime = timer.getDelta()
 
   // Animate shapes
   for (const shape of shapes) {
-    shape.rotation.x = elapsedTime * 0.1
-    shape.rotation.y = elapsedTime * -0.14
+    shape.rotation.x += deltaTime * 0.1
+    shape.rotation.y += deltaTime * -0.14
   }
 
   // Camera movement parallax
   // With easing, a bit more advanced
-  cameraGroup.position.x = cursor.dx
-  cameraGroup.position.y = - cursor.dy // Correct movement's direction
+  const parallaxAmp = {
+    x: cursor.dx * 0.5,
+    y: -cursor.dy * 0.5,
+  }
+
+  // const easingFactor = 0.1 // For low refresh rate screens, inconsistent
+  const easingFactor = deltaTime * 4 // For low refresh rate screens, inconsistent
+  cameraGroup.position.x += (parallaxAmp.x - cameraGroup.position.x) * easingFactor
+  cameraGroup.position.y += (parallaxAmp.y - cameraGroup.position.y) * easingFactor
   // Linear, basic
   // cameraGroup.position.x = cursor.dx
   // cameraGroup.position.y = - cursor.dy // Correct movement's direction
@@ -172,7 +240,30 @@ const tick = () => {
 
   // Call tick again on the next frame
   window.requestAnimationFrame(tick)
+  timer.update()
 }
 
 tick()
 
+/**
+ * Debug
+ */
+const gui = new GUI()
+
+gui.addColor(parameters, 'materialColor').onChange(() => {
+  shapeMat.color.set(parameters.materialColor)
+})
+gui.add(parameters, 'particlesCount', 0, 1000, 10).onChange(() => {
+  generateParticles()
+})
+gui.addColor(parameters, 'particlesColor').onChange(() => {
+  if (particles) {
+    if (particles.material instanceof THREE.PointsMaterial) {
+      particles.material.color.set(parameters.particlesColor)
+    } else if (Array.isArray(particles.material)) {
+      particles.material.forEach((material) => {
+        (material as THREE.PointsMaterial).color.set(parameters.particlesColor)
+      })
+    }
+  }
+})
