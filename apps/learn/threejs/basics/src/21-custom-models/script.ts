@@ -38,6 +38,7 @@ const gltfLoader = new GLTFLoader()
 gltfLoader.load(
   '/21-custom-models/models/FlightHelmet/glTF/FlightHelmet.gltf',
   (gltf) => {
+    gltf.scene.position.set(2, 0, 0)
     scene.add(gltf.scene)
     // The below will work, but it is lengthy
     // Worth knowing to add only a part of a model
@@ -61,8 +62,21 @@ gltfLoader.setDRACOLoader(dracoLoader)
 // Burger
 gltfLoader.load('/21-custom-models/models/Burger.glb', (gltf) => {
   gltf.scene.scale.set(0.025, 0.025, 0.025)
-  gltf.scene.position.set(1, 0, 1)
+  gltf.scene.position.set(0, 0, 1)
   scene.add(gltf.scene)
+})
+
+let foxAnimationMixer: THREE.AnimationMixer | null = null
+gltfLoader.load('/21-custom-models/models/Fox/glTF/Fox.gltf', (gltf) => {
+  gltf.scene.scale.set(0.015, 0.015, 0.015)
+  gltf.scene.position.set(0, 0, -0.25)
+  console.log('\x1B[35m[Dev log]\x1B[0m -> gltf:', gltf)
+  scene.add(gltf.scene)
+
+  // Animation
+  foxAnimationMixer = new THREE.AnimationMixer(gltf.scene)
+  const action = foxAnimationMixer.clipAction(gltf.animations[2])
+  action.play()
 })
 
 /**
@@ -146,6 +160,10 @@ const tick = () => {
 
   // Update controls
   controls.update()
+
+  if (foxAnimationMixer) {
+    foxAnimationMixer.update(deltaTime)
+  }
 
   // Render
   renderer.render(scene, camera)
