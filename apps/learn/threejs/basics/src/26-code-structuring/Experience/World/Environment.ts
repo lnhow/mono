@@ -1,0 +1,24 @@
+import { DirectionalLight } from 'three'
+import Experience from '../Experience'
+
+export default class Environment {
+  experience = Experience.instance
+  scene = this.experience.scene
+
+  sunLight: DirectionalLight | undefined
+
+  constructor() {
+    this.initSunLight()
+  }
+  
+  initSunLight() {
+    // Init sunlight
+    this.sunLight = new DirectionalLight('#ffffff', 3)
+    this.sunLight.castShadow = true
+    this.sunLight.shadow.camera.far = 15
+    this.sunLight.shadow.mapSize.set(1024, 1024)
+    this.sunLight.shadow.normalBias = 0.05
+    this.sunLight.position.set(3, 3, - 2.25)
+    this.scene.add(this.sunLight)
+  }
+}
