@@ -1,24 +1,30 @@
-import { CubeTextureLoader, EventDispatcher, TextureLoader } from 'three'
+import { CubeTexture, CubeTextureLoader, EventDispatcher, Texture, TextureLoader } from 'three'
 import type { Source } from '../sources'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { GLTFLoader, type GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
-export default class Resources extends EventDispatcher {
+export type LoadedFile = GLTF | Texture | CubeTexture
+
+export interface ResourceEventMap {
+  loadedAll: {}
+}
+
+export default class Resources extends EventDispatcher<ResourceEventMap> {
   loaders = {
     gltf: new GLTFLoader(),
     texture: new TextureLoader(),
     cubeTexture: new CubeTextureLoader(),
   }
 
-  sources: Source[]
-  toLoad: number
-  loaded: number
+  sources: readonly Source[]
+  loadedCount: number
 
-  constructor(sources: Source[]) {
+  loadedFiles: Map<string, LoadedFile> = new Map()
+
+  constructor(sources: readonly Source[]) {
     super()
 
     this.sources = sources
-    this.toLoad = sources.length
-    this.loaded = 0
+    this.loadedCount = 0
     this.load()
   }
 
@@ -34,16 +40,23 @@ export default class Resources extends EventDispatcher {
         // @ts-ignore Typescript cannot infer the params type of the loader correctly
         source.path,
         (file) => {
-          console.log(
-            '\x1B[35m[Dev log]\x1B[0m -> Resources -> load -> file:',
-            file,
-          )
+          this.onLoaded(source, file)
         },
         undefined,
         (error) => {
           console.error(`Error loading resource: ${source.path}`, error)
         },
       )
+    }
+  }
+
+  onLoaded(source: Source, file: LoadedFile) {
+    this.loadedFiles.set(source.name, file)
+    this.loadedCount++
+
+    // Check if all sources are loaded
+    if (this.loadedCount === this.sources.length) {
+      this.dispatchEvent({ type: 'loadedAll' })
     }
   }
 }
