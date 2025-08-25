@@ -5,12 +5,11 @@ import {
   Text3D,
   useMatcapTexture,
 } from '@react-three/drei'
-import { font } from './utils/const'
-import { useEffect, useMemo, useRef } from 'react'
+import { font } from '../../_shared/const'
+import { useEffect, useRef } from 'react'
 import {
   BoxGeometry,
   ConeGeometry,
-  Group,
   Mesh,
   MeshMatcapMaterial,
   SRGBColorSpace,
