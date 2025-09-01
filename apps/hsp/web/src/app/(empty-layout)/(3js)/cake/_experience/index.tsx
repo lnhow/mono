@@ -8,6 +8,7 @@ import {
 import { useSearchParams } from 'next/navigation'
 import { useHydrateAtoms } from 'jotai/utils'
 import { decodeCakeURL } from './_const'
+import Credit from './group/credit'
 
 export default function Main() {
   const searchParams = useSearchParams()
@@ -27,7 +28,8 @@ export default function Main() {
       >
         <Experience />
       </Canvas>
-      <Controls className="absolute bottom-0 left-0 right-0 z-10" />
+      <Controls className="absolute bottom-0 left-0 right-0 z-20" />
+      <Credit className="absolute bottom-0 left-0 z-10 p-4" />
     </>
   )
 }

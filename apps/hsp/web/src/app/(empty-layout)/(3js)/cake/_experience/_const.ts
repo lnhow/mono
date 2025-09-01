@@ -27,8 +27,12 @@ export const SCENE_CONFIG = {
       attributes: {
         position: [0, 4.7, 0],
       },
-      credit:
-        '"Cake 3D" (https://skfb.ly/6Rx7w) by Johana-PS is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).',
+      credit: {
+        name: 'Cake 3D',
+        url: 'https://skfb.ly/6Rx7w',
+        author: 'Johana-PS',
+        license: 'CC BY 4.0',
+      },
     },
     textColor: '#E5838E',
   },
@@ -41,8 +45,12 @@ export const SCENE_CONFIG = {
         position: [0, 2, 0],
         scale: [1.2, 1.2, 1.2],
       },
-      credit:
-        '"Chocolate Berry Cake" (https://skfb.ly/owGUT) by Anch0r is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).',
+      credit: {
+        name: '"Chocolate Berry Cake"',
+        url: 'https://skfb.ly/owGUT',
+        author: 'Anch0r',
+        license: 'CC BY 4.0',
+      },
     },
     textColor: '#591B15',
   },
@@ -55,7 +63,12 @@ export const SCENE_CONFIG = {
         position: [0, 4.6, 0],
         scale: [1.5, 1.5, 1.5],
       },
-      credit: '',
+      credit: {
+        name: '"Fruit Cake Draft"',
+        url: 'https://skfb.ly/6S7TS',
+        author: 'Rixael',
+        license: 'CC BY 4.0',
+      },
     },
     textColor: '#D14B67',
   },
