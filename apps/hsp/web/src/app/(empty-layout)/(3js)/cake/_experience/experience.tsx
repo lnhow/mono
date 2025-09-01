@@ -3,9 +3,12 @@ import { OrbitControls } from '@react-three/drei/core/OrbitControls'
 import { Perf } from 'r3f-perf'
 import { Cake1 } from './cakes/Cake1'
 import TextMessage from './message'
-import { Suspense } from 'react'
+import { Suspense, useRef } from 'react'
+import { DirectionalLight } from 'three'
 
 export default function Experience() {
+  const directionalLightRef = useRef<DirectionalLight>(null)
+
   return (
     <>
       <Perf />
@@ -18,12 +21,19 @@ export default function Experience() {
         </Suspense>
       </group>
       <ambientLight intensity={2} color="#ffa4a4" />
-      <Sparkles size={6} scale={[6, 7, 6]} position={[0, 1, 0]} color="#fdcfcf" />
+      <Sparkles
+        size={6}
+        scale={[6, 7, 6]}
+        position={[0, 1, 0]}
+        color="#fdcfcf"
+      />
       <directionalLight
         intensity={10}
         lookAt={[0, 0, 0]}
-        position={[10, 15, -5]}
+        position={[0, 5, 5]}
         color="#d8a2a2"
+        castShadow
+        ref={directionalLightRef}
       />
       <Environment
         preset="city"

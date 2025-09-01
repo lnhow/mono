@@ -87,9 +87,9 @@ export function Cake1(props: ComponentPropsWithRef<'group'>) {
   return (
     <group ref={container} {...props}>
       <primitive className="cake" object={scene} position={[0, 4.7, 0]} />
-      <mesh rotation={[-Math.PI / 2, 0, 0]}>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
         <planeGeometry args={[10, 10]} />
-        <meshStandardMaterial color="#ffffff" />
+        <meshToonMaterial color="#ffffff" />
       </mesh>
     </group>
   )
