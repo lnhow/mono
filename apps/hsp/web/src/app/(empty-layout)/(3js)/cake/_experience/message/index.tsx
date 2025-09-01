@@ -7,10 +7,11 @@ import { useEffect, useRef } from 'react'
 
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-
-const text = 'Happy\nbirthday!'
+import { useAtomValue } from 'jotai'
+import { cakeAtom, SCENE_CONFIG, TEXT } from '../_state'
 
 export default function TextMessage() {
+  const cake = useAtomValue(cakeAtom)
   const threeFont = useFont(font)
   const refText = useRef<Mesh>(null)
 
@@ -19,22 +20,18 @@ export default function TextMessage() {
       return
     }
 
-    const lines = text.split('\n')
+    const lines = cake.message.split('\n')
     const geometries = lines.map((line, index) => {
       const geometry = new TextGeometry(line, {
         // @ts-expect-error False positive
         font: threeFont,
-        size: 0.5,
+        size: TEXT.SIZE,
         depth: 0.2,
       })
 
       geometry.center()
+      geometry.translate(0, -index * TEXT.LINE_HEIGHT, 0)
 
-      if (geometry.boundingBox !== null) {
-        const geometryHeight =
-          geometry.boundingBox!.max.y - geometry.boundingBox!.min.y
-        geometry.translate(0, -index * geometryHeight * 1.2, 0)
-      }
       return geometry
     })
 
@@ -46,7 +43,7 @@ export default function TextMessage() {
     return () => {
       mergedGeometry.dispose()
     }
-  }, [threeFont])
+  }, [threeFont, cake.message])
 
   useGSAP(
     () => {
@@ -64,7 +61,7 @@ export default function TextMessage() {
 
   return (
     <Text3D font={threeFont.data} position={[0, 1.5, -2]} ref={refText}>
-      <meshToonMaterial color="#E5838E" />
+      <meshToonMaterial color={SCENE_CONFIG[cake.scene].textColor} />
     </Text3D>
   )
 }

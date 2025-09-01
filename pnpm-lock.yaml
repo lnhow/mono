@@ -276,6 +276,9 @@ importers:
       react-dom:
         specifier: catalog:gui
         version: 19.1.0(react@19.1.0)
+      react-hook-form:
+        specifier: 7.60.0
+        version: 7.60.0(react@19.1.0)
       react-icons:
         specifier: 5.5.0
         version: 5.5.0(react@19.1.0)

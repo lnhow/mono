@@ -1,7 +1,7 @@
 import { Environment, Sparkles } from '@react-three/drei'
 import { OrbitControls } from '@react-three/drei/core/OrbitControls'
 import { Perf } from 'r3f-perf'
-import { Cake1 } from './cakes/Cake1'
+import { Cake } from './Cake'
 import TextMessage from './message'
 import { Suspense, useRef } from 'react'
 import { DirectionalLight } from 'three'
@@ -15,9 +15,11 @@ export default function Experience() {
       <OrbitControls makeDefault />
       <fog attach="fog" args={['lightpink', 60, 100]} />
       <group>
-        <TextMessage />
+        <Suspense fallback={null}>
+          <TextMessage />
+        </Suspense>
         <Suspense>
-          <Cake1 />
+          <Cake />
         </Suspense>
       </group>
       <ambientLight intensity={2} color="#ffa4a4" />
