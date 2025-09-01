@@ -1,14 +1,24 @@
 'use client'
 import { Canvas } from '@react-three/fiber'
 import Experience from './experience'
-import Controls from './controls'
+import Controls from './group/controls'
+import {
+  cakeAtom,
+} from './_state'
+import { useSearchParams } from 'next/navigation'
+import { useHydrateAtoms } from 'jotai/utils'
+import { decodeCakeURL } from './_const'
 
 export default function Main() {
+  const searchParams = useSearchParams()
+  const defaultCakeVal = decodeCakeURL(searchParams.toString())
+  useHydrateAtoms([[cakeAtom, defaultCakeVal]])
+
   return (
     <>
       <Canvas
         camera={{
-          position: [3, 5, 6],
+          position: [2, 1.5, 6],
           zoom: 1.25,
           fov: 75,
           near: 0.1,

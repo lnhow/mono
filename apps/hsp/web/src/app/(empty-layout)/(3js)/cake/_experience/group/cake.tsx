@@ -5,7 +5,7 @@ import { Group } from 'three'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { useAtomValue } from 'jotai'
-import { cakeTypeAtom, SCENE_CONFIG } from './_state'
+import { cakeSceneAtom, SCENE_CONFIG } from '../_state'
 
 const ANIMATION: Record<
   'position' | 'scale' | 'rotation',
@@ -50,7 +50,7 @@ const ANIMATION: Record<
 } as const
 
 export function Cake(props: ComponentPropsWithRef<'group'>) {
-  const cakeScene = useAtomValue(cakeTypeAtom)
+  const cakeScene = useAtomValue(cakeSceneAtom)
   const { scene } = useGLTF(SCENE_CONFIG[cakeScene].model.link)
   const container = useRef<Group>(null)
 
@@ -89,5 +89,3 @@ export function Cake(props: ComponentPropsWithRef<'group'>) {
     </group>
   )
 }
-
-useGLTF.preload('/static/3js/cake/cake_3d.glb')
