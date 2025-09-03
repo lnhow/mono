@@ -39,7 +39,8 @@
     "react-dom": "catalog:gui",
     "socket.io-client": "^4.8.1",
     "sonner": "^2.0.3",
-    "tailwindcss": "4.1.10"
+    "tailwindcss": "4.1.10",
+    "tailwindcss-safe-area": "1.1.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",

@@ -49,6 +49,7 @@
     "sonner": "^2.0.3",
     "swiper": "^10.3.1",
     "tailwindcss": "4.1.10",
+    "tailwindcss-safe-area": "1.1.0",
     "three": "^0.177.0"
   },
   "devDependencies": {
