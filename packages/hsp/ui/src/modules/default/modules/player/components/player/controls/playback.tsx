@@ -1,6 +1,6 @@
 import { PLAYER_STATE, PlayerBaseSubCompProps, HOTKEYS } from '../types'
 import { PlayerButton } from '../_base/button'
-import { useHTMLElState } from '../_utils/useHTMLVideoState'
+import { useHTMLElState } from '../../../../../../../hooks/useHTMLElState'
 import { useCallback } from 'react'
 import { useKeydown } from '../_utils/useKeydown'
 import Tooltip from '@hsp/ui/src/components/base/tooltip'

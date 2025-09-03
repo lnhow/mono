@@ -18,6 +18,16 @@ export const QUERY_NAME = {
   EDIT: 'edit',
 }
 
+export const BGM = {
+  SRC: '/static/3js/cake/hpbd.mp3',
+  CREDIT: {
+    name: 'Music Box, Happy Birthday.wav',
+    author: 'InspectorJ',
+    url: 'https://freesound.org/s/369147/',
+    license: 'CC BY 4.0',
+  },
+}
+
 export const SCENE_CONFIG = {
   [ECakeScene.VANILLA]: {
     scene: ECakeScene.VANILLA,

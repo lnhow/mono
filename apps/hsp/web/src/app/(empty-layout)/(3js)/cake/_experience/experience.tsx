@@ -3,7 +3,7 @@ import { OrbitControls } from '@react-three/drei/core/OrbitControls'
 import { Perf } from 'r3f-perf'
 import { useRef } from 'react'
 import { DirectionalLight } from 'three'
-import Elements from './group/elements'
+import Elements from './scene/elements'
 
 export default function Experience() {
   const directionalLightRef = useRef<DirectionalLight>(null)
@@ -19,13 +19,11 @@ export default function Experience() {
         size={6}
         scale={[6, 7, 6]}
         position={[0, 1, 0]}
-        // color="#fdcfcf"
       />
       <directionalLight
         intensity={10}
         lookAt={[0, 0, 0]}
         position={[0, 5, 5]}
-        // color="#d8a2a2"
         castShadow
         ref={directionalLightRef}
       />

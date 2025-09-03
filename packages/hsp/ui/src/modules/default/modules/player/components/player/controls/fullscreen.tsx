@@ -3,7 +3,7 @@ import { PlayerButton } from '../_base/button'
 import {
   DocumentWithCrossBrowser,
   useHTMLElState,
-} from '../_utils/useHTMLVideoState'
+} from '../../../../../../../hooks/useHTMLElState'
 import { PlayerViewControlsProps, HOTKEYS, TOOLTIPS } from '../types'
 import { useCallback } from 'react'
 import { useKeydown } from '../_utils/useKeydown'
