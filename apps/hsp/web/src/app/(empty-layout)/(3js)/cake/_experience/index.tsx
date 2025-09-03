@@ -30,9 +30,9 @@ export default function Main() {
       >
         <Experience />
       </Canvas>
-      <Controls className="absolute bottom-0 left-0 right-0 z-20" />
-      <Credit className="absolute bottom-0 left-0 z-10 p-4" />
-      <Audio className="absolute bottom-2 right-2 z-10" />
+      <Controls className="absolute bottom-safe left-safe right-0 z-20" />
+      <Audio className="absolute bottom-safe right-safe z-20 p-1" />
+      <Credit className="absolute bottom-safe left-safe z-10 p-2" />
     </>
   )
 }
