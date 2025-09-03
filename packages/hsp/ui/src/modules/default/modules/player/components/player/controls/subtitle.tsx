@@ -1,6 +1,6 @@
 import { LuCaptions } from 'react-icons/lu'
 import { PlayerButton } from '../_base/button'
-import { useHTMLElState } from '../_utils/useHTMLVideoState'
+import { useHTMLElState } from '../../../../../../../hooks/useHTMLElState'
 import { useState } from 'react'
 import { PlayerBaseSubCompProps, HOTKEYS, TOOLTIPS } from '../types'
 import { useKeydown } from '../_utils/useKeydown'

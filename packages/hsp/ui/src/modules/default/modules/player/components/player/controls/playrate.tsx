@@ -5,7 +5,7 @@ import {
 } from '@hsp/ui/src/components/base/popover'
 import { PlayerButton } from '../_base/button'
 import { Button } from '@hsp/ui/src/components/base/button'
-import { useHTMLElState } from '../_utils/useHTMLVideoState'
+import { useHTMLElState } from '../../../../../../../hooks/useHTMLElState'
 import { PlayerBaseSubCompProps, TOOLTIPS } from '../types'
 import Tooltip from '@hsp/ui/src/components/base/tooltip'
 
