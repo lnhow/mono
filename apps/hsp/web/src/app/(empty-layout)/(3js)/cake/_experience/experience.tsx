@@ -10,16 +10,12 @@ export default function Experience() {
 
   return (
     <>
-      <Perf />
+      <Debug />
       <OrbitControls makeDefault />
       <fog attach="fog" args={['lightpink', 60, 100]} />
       <Elements />
       <ambientLight intensity={2} color="#ffa4a4" />
-      <Sparkles
-        size={6}
-        scale={[6, 7, 6]}
-        position={[0, 1, 0]}
-      />
+      <Sparkles size={6} scale={[6, 7, 6]} position={[0, 1, 0]} />
       <directionalLight
         intensity={10}
         lookAt={[0, 0, 0]}
@@ -35,4 +31,11 @@ export default function Experience() {
       />
     </>
   )
+}
+
+function Debug() {
+  if (process.env.NEXT_PUBLIC_ENV !== 'development') {
+    return null
+  }
+  return <Perf showGraph={false} />
 }
