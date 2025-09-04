@@ -20,6 +20,7 @@ export default function Main() {
   return (
     <>
       <Canvas
+        shadows
         camera={{
           position: [2, 1.5, 6],
           zoom: 1.25,
@@ -32,7 +33,7 @@ export default function Main() {
       </Canvas>
       <Controls className="absolute bottom-safe left-safe right-0 z-20" />
       <Audio className="absolute bottom-safe right-safe z-20 p-1" />
-      <Credit className="absolute bottom-safe left-safe z-10 p-2" />
+      <Credit className="absolute bottom-safe left-safe z-10 p-1" />
     </>
   )
 }

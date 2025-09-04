@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main className="min-h-screen fixed top-0 left-0 w-full h-full">
+    <main className="fixed top-0 left-0 w-full h-full">
       <Provider>
         <Main />
       </Provider>
