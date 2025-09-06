@@ -8,7 +8,6 @@
   "scripts": {
     "prepare": "husky",
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "pnpm db:generate",
     "dev": "turbo run dev",
     "dev:hsp": "turbo run dev --filter=@hsp/app-*...",
     "storybook": "turbo run storybook",
@@ -16,10 +15,6 @@
     "build": "turbo run build",
     "deploy:start": "turbo run deploy:start",
     "turbo": "turbo",
-    "db:generate": "turbo run db:generate",
-    "db:migrate": "turbo run db:migrate",
-    "db:deploy": "turbo run db:deploy",
-    "db:studio": "turbo run db:studio",
     "test": "turbo run test",
     "test:e2e": "turbo run test:e2e"
   },
