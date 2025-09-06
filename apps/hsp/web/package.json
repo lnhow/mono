@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@hsp/ui": "workspace:*",
+    "@react-three/cannon": "6.6.0",
     "@react-three/drei": "10.7.3",
     "@react-three/fiber": "9.3.0",
     "@gsap/react": "2.1.2",
