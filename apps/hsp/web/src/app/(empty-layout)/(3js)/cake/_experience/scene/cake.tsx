@@ -59,29 +59,33 @@ export function Cake(props: ComponentPropsWithRef<'group'>) {
       if (!container.current) {
         return
       }
-      gsap.fromTo(container.current.rotation, ANIMATION.rotation.from, {
-        ...ANIMATION.rotation.to,
-        duration: 1,
-        ease: 'circ.out',
-      })
-      gsap.fromTo(container.current.scale, ANIMATION.scale.from, {
-        ...ANIMATION.scale.to,
-        duration: 1,
-        ease: 'steps.out',
-      })
-      gsap.fromTo(container.current.position, ANIMATION.position.from, {
-        ...ANIMATION.position.to,
-        duration: 1,
-        ease: 'bounce.out',
-        delay: 0.2,
-      })
+      gsap
+        .timeline()
+        .fromTo(container.current.rotation, ANIMATION.rotation.from, {
+          ...ANIMATION.rotation.to,
+          duration: 1,
+          ease: 'circ.out',
+        })
+        .fromTo(container.current.scale, ANIMATION.scale.from, {
+          ...ANIMATION.scale.to,
+          duration: 1,
+          ease: 'power2.out',
+        }, 0)
+        .fromTo(container.current.position, ANIMATION.position.from, {
+          ...ANIMATION.position.to,
+          duration: 1,
+          ease: 'bounce.out',
+        }, 0.2)
     },
-    { scope: container },
+    { scope: container, dependencies: [cakeScene] },
   )
 
   return (
     <group ref={container} {...props}>
-      <primitive className="cake" object={scene} {...SCENE_CONFIG[cakeScene].model.attributes} />
+      <primitive
+        object={scene}
+        {...SCENE_CONFIG[cakeScene].model.attributes}
+      />
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
         <planeGeometry args={[10, 10]} />
         <meshToonMaterial color="#ffffff" />

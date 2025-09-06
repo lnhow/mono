@@ -11,7 +11,7 @@ import { useAtomValue } from 'jotai'
 import { cakeAtom, SCENE_CONFIG, TEXT } from '../_state'
 
 export default function TextMessage() {
-  const cake = useAtomValue(cakeAtom)
+  const cakeScene = useAtomValue(cakeAtom)
   const threeFont = useFont(font)
   const refText = useRef<Mesh>(null)
 
@@ -20,7 +20,7 @@ export default function TextMessage() {
       return
     }
 
-    const lines = cake.message.split('\n')
+    const lines = cakeScene.message.split('\n')
     const geometries = lines.map((line, index) => {
       const geometry = new TextGeometry(line, {
         // @ts-expect-error False positive
@@ -43,7 +43,7 @@ export default function TextMessage() {
     return () => {
       mergedGeometry.dispose()
     }
-  }, [threeFont, cake.message])
+  }, [threeFont, cakeScene.message])
 
   useGSAP(
     () => {
@@ -53,15 +53,15 @@ export default function TextMessage() {
       gsap.fromTo(
         refText.current.scale,
         { x: 0, y: 0, z: 0 },
-        { x: 1, y: 1, z: 1, duration: 1, delay: 0.8, ease: 'bounce.out' },
+        { x: 1, y: 1, z: 1, duration: 1, delay: 0.2, ease: 'bounce.out' },
       )
     },
-    { scope: refText },
+    { scope: refText, dependencies: [cakeScene] },
   )
 
   return (
     <Text3D font={threeFont.data} position={[0, 1.5, -2]} ref={refText}>
-      <meshToonMaterial color={SCENE_CONFIG[cake.scene].textColor} />
+      <meshToonMaterial color={SCENE_CONFIG[cakeScene.scene].textColor} />
     </Text3D>
   )
 }
