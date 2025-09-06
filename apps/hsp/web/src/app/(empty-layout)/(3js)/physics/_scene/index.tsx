@@ -97,7 +97,6 @@ const CollideAudio = () => {
     const audio = new Audio('/static/3js/20-physics/hit.mp3')
     const onCollide = (e: Event) => {
       const customEvent = e as CustomEvent<DocumentEventMap['shape-collide']>
-      console.log('\x1B[35m[Dev log]\x1B[0m -> onCollide -> e:', customEvent)
       if (customEvent.detail.force > 1.5) {
         audio.volume = Math.min(1, customEvent.detail.force / 10)
         audio.currentTime = 0
