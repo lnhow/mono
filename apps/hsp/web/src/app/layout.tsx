@@ -45,5 +45,18 @@ export const generateMetadata = async () => {
     alternates: {
       canonical: '/',
     },
+    authors: [
+      {
+        name: 'Hao Le',
+        url: process.env.NEXT_PUBLIC_HOST || 'https://www.hspln.com',
+      },
+    ],
+    creator: 'Hao Le',
+    publisher: 'Hao Le',
+    openGraph: {
+      title: 'Hao Le',
+      description: 'Hao Le\'s personal website. Web Developer. Photography and UX Enthusiast.',
+      siteName: 'Hao Le',
+    },
   }
 }
