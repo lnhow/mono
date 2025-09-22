@@ -3,7 +3,7 @@ import { LOBBY_URL as GUESART_LOBBY_URL } from '../../../guesart/utils'
 
 export default function CardsDemo() {
   return (
-    <div className="my-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <CardDemo
         title="guesart"
         description="A draw and guess game built with Socket.IO."
