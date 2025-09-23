@@ -1,6 +1,6 @@
 # About
 
-This is a monorepo of stuff that I made to experiment more with development.
+This is my personal website and my collection of various of experiments.
 
 ## Featured
 
