@@ -56,7 +56,7 @@ gltfLoader.load(
 )
 
 const dracoLoader = new DRACOLoader()
-dracoLoader.setDecoderPath('/21-custom-models/draco/')
+dracoLoader.setDecoderPath('/common/draco/')
 gltfLoader.setDRACOLoader(dracoLoader)
 
 // Burger
