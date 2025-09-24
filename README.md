@@ -1,6 +1,6 @@
 # About
 
-This is my personal website and my collection of various of experiments.
+My personal website + playground monorepo for all things JS (or TS) related
 
 ## Featured
 
