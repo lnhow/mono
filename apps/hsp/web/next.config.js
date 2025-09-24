@@ -1,4 +1,6 @@
 import { resolve } from 'path'
+// https://nextjs.org/docs/app/guides/mdx
+import createMDX from '@next/mdx'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -13,15 +15,17 @@ const nextConfig = {
       import.meta.dirname,
       '../../../packages/hsp/ui',
     )
-    config.resolve.alias['@i18n'] = resolve(
-      import.meta.dirname,
-      'i18n',
-    )
+    config.resolve.alias['@i18n'] = resolve(import.meta.dirname, 'i18n')
     return config
   },
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   experimental: {
     viewTransition: true,
-  }
+  },
 }
 
-export default nextConfig
+const withMDX = createMDX({
+  extension: /\.(md|mdx)$/,
+})
+
+export default withMDX(nextConfig)
