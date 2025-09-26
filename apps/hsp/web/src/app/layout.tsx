@@ -11,12 +11,8 @@ const lexendFont = Lexend({
   style: ['normal'],
 })
 
-type RootLocaleLayoutProps = React.PropsWithChildren<{
-  params: Promise<{ locale: string }>
-}>
-
 // Language-specific layout
-export default function RootLayout({ children }: RootLocaleLayoutProps) {
+export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html suppressHydrationWarning lang="en">
         <body className={lexendFont.className}>
