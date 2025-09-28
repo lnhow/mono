@@ -1,6 +1,7 @@
 import { resolve } from 'path'
 // https://nextjs.org/docs/app/guides/mdx
-import createMDX from '@next/mdx'
+// import createMDX from '@next/mdx'
+import { withContentCollections } from '@content-collections/next'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -24,8 +25,16 @@ const nextConfig = {
   },
 }
 
-const withMDX = createMDX({
-  extension: /\.(md|mdx)$/,
-})
+const configs = [
+  // createMDX({
+  //   extension: /\.(md|mdx)$/,
+  // }),
+  withContentCollections,
+]
 
-export default withMDX(nextConfig)
+const nextConfigWithPlugins = configs.reduce(
+  (acc, withPlugin) => withPlugin(acc),
+  nextConfig,
+)
+
+export default nextConfigWithPlugins
