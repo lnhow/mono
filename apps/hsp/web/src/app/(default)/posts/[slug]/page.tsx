@@ -3,6 +3,8 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { MDXContent } from '@content-collections/mdx/react'
 
+import MarkdownTypography from '@hsp/ui/src/components/mdx/typography'
+
 interface PostPageProps {
   params: Promise<{
     slug: string
@@ -10,7 +12,7 @@ interface PostPageProps {
 }
 
 export async function generateMetadata({
-  params
+  params,
 }: PostPageProps): Promise<Metadata> {
   const { slug } = await params
 
@@ -30,7 +32,8 @@ export async function generateMetadata({
       description: post.description,
       type: 'article',
       publishedTime: post.createdAt.toISOString(),
-      modifiedTime: post.updatedAt?.toISOString() || post.createdAt.toISOString(),
+      modifiedTime:
+        post.updatedAt?.toISOString() || post.createdAt.toISOString(),
       tags: post.tags,
     },
     twitter: {
@@ -49,16 +52,63 @@ export default async function PostPage({ params }: PostPageProps) {
     notFound()
   }
 
+  const displayDate = post.createdAt.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  })
+
   return (
-    <article className="prose prose-neutral dark:prose-invert lg:prose-lg mx-auto my-8">
-      <h1>{post.title}</h1>
-      <p className="text-sm text-gray-500">
-        Published on {post.createdAt.toDateString()}
-        {post.updatedAt && ` · Updated on ${post.updatedAt.toDateString()}`}
-      </p>
-      <div className="mt-4">
-        <MDXContent code={post.mdx} />
+    <div className="mx-auto my-8">
+      <header className='border-b border-base-500 pb-4'>
+        <div className="flex items-center gap-4 flex-wrap font-mono text-sm text-fore-200">
+          <time dateTime={post.createdAt.toISOString()}>{displayDate}</time>
+          {post.updatedAt && (
+            <>
+              <span>
+                (Updated:{' '}
+                {post.updatedAt.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })}
+                )
+              </span>
+            </>
+          )}
+          {post.readingTime && (
+            <>
+              <span>•</span>
+              <span>{Math.ceil(post.readingTime)} min read</span>
+            </>
+          )}
+        </div>
+        <h1 className="text-3xl font-semibold mt-3 mb-3 text-fore-400">
+          {post.title}
+        </h1>
+        <div>
+          <p className="text-lg text-fore-400 break-words">{post.description}</p>
+          {post.tags?.length && (
+            <div className="mt-2 flex flex-wrap gap-2 text-xs text-fore-200 font-mono">
+              {post.tags?.map((tag) => (
+                <span key={tag}>
+                  #{tag.toLowerCase()}
+                </span>
+              ))}
+            </div>
+            )}
+        </div>
+      </header>
+      <div className='flex gap-6 mt-8'>
+        <main className="prose prose-neutral dark:prose-invert lg:prose-lg max-w-[80ch] mx-auto">
+          <MarkdownTypography>
+            <MDXContent code={post.mdx} />
+          </MarkdownTypography>
+        </main>
+        <div className='basis-xs hidden lg:block outline outline-base-200 p-4 rounded'>
+          {/* TODO (haoln): Add TOC support */}
+        </div>
       </div>
-    </article>
+    </div>
   )
 }

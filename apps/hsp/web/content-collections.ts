@@ -4,9 +4,9 @@ import { z } from 'zod'
 
 // Markdown processing
 import remarkGfm from 'remark-gfm'
-// import remarkSlug from 'remark-slug'
-// import remarkAutolinkHeadings from 'remark-autolink-headings'
-// import readingTime from 'reading-time'
+import rehypeSlug from 'rehype-slug'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import readingTime from 'reading-time'
 
 const posts = defineCollection({
   name: "posts",
@@ -26,20 +26,24 @@ const posts = defineCollection({
     imageCreditUrl: z.string().optional(),
   }),
   transform: async (document, context) => {
-    const fileName = document._meta.filePath.split('/').pop()?.replace(/\.mdx$/, '') || ''
-
     const mdx = await compileMDX(context, document, {
       remarkPlugins: [
         remarkGfm,
       ],
       rehypePlugins: [
+        rehypeSlug,
+        rehypeAutolinkHeadings,
         // Add any rehype plugins here
       ],
     })
 
+    const fileName = document._meta.filePath.split('/').pop()?.replace(/\.mdx$/, '') || ''
+    const readingTimeResult = readingTime(document.content)
+
     return {
       ...document,
       mdx,
+      readingTime: readingTimeResult.minutes,
       slug: fileName,
       url: `/posts/${fileName}`,
     }

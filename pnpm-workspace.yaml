@@ -33,10 +33,11 @@ catalogs:
     # Markdown processing
     # 'remark': '^15.0.1'
     # 'remark-toc': '^6.0.0'                    # Table of contents
-    'remark-gfm': '^4.0.1'                    # GitHub Flavored Markdown (tables, task lists, etc)
-    # 'remark-slug': '^8.0.3'                   # Adds slugs to headings
-    # 'remark-autolink-headings': '^6.1.1'      # Adds links to headings
-    # 'reading-time': '^1.5.0'                  # Estimate reading time
+    'remark-gfm': '^4.0.1'                      # GitHub Flavored Markdown (tables, task lists, etc)
+    'github-slugger': '^2.0.0'                  # Generate slugs for headings
+    'rehype-autolink-headings': '^7.1.1'        # Adds links to headings
+    'rehype-slug': '^6.0.0'                     # Adds slugs to headings
+    'reading-time': '^1.5.0'                    # Estimate reading time
   dev:
     'eslint': 9.32.0
     'vitest': 3.2.4
