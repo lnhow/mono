@@ -9,12 +9,13 @@ export default function createHeading(
     children,
     ...props
   }: React.HTMLAttributes<HTMLHeadingElement>) {
+    console.log('Rendering heading:', tagName, id, children)
     return createElement(
       tagName,
       {
         ...props,
         id,
-        className: 'group scroll-mt-20 relative',
+        className: 'group scroll-mt-20 relative flex items-center',
       },
       children,
       id &&
@@ -23,10 +24,12 @@ export default function createHeading(
           {
             href: `#${id}`,
             className:
-              'opacity-0 group-hover:opacity-100 transition-opacity text-fore-200 hover:text-fore-400 ml-2 inline-block align-baseline',
+              'opacity-0 group-hover:opacity-100 transition-opacity !text-fore-200 !hover:text-fore-400 ml-4 inline-block',
             'aria-label': `Link to section`,
           },
-          createElement(MdLink, { className: 'h-4 w-4 flex-shrink-0' }),
+          createElement(MdLink, {
+            className: 'w-6 h-6 flex-shrink-0',
+          }),
         ),
     )
   }

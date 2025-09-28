@@ -44,9 +44,9 @@ export default function MarkdownTypography({
         '[&_img]:rounded-md [&_img]:my-6 [&_img]:mx-auto',
         // Tables
         '[&_table]:w-full [&_table]:my-6 [&_table]:overflow-y-auto [&_table]:border-collapse',
-        '[&_table_tr]:even:bg-base-200 [&_table_tr]:m-0 [&_table_tr]:border-t [&_table_tr]:p-0',
-        '[&_table_th]:border [&_th]:border-fore-200 [&_table_th]:px-4 [&_table_th]:py-2 [&_table_th]:text-left [&_table_th]:font-bold [&_table_th[align=center]]:text-center [&_table_th[align=right]]:text-right',
-        '[&_table_td]:border [&_th]:border-fore-200 [&_table_td]:px-4 [&_table_td]:py-2 [&_table_td]:text-left [&_table_td[align=center]]:text-center [&_table_td[align=right]]:text-right',
+        '[&_table_tr]:even:bg-base-300 [&_table_tr]:m-0 [&_table_tr]:border-t [&_table_tr]:p-0',
+        '[&_table_th]:border [&_table_th]:border-fore-100 [&_table_th]:bg-base-500 [&_table_th]:px-4 [&_table_th]:py-2 [&_table_th]:text-left [&_table_th]:font-bold [&_table_th[align=center]]:text-center [&_table_th[align=right]]:text-right',
+        '[&_table_td]:border [&_table_td]:border-fore-100 [&_table_td]:px-4 [&_table_td]:py-2 [&_table_td]:text-left [&_table_td[align=center]]:text-center [&_table_td[align=right]]:text-right',
         // Horizontal Rule
         '[&_hr]:border-fore-500 [&_hr]:my-8',
 

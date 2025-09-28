@@ -1,11 +1,10 @@
-// https://nextjs.org/docs/app/api-reference/file-conventions/mdx-components
 import type { MDXComponents } from 'mdx/types'
 
 import Link from '@hsp/ui/src/components/mdx/override/Link'
 import createHeading from '@hsp/ui/src/components/mdx/override/heading'
 import Image, { ImageProps } from '@hsp/ui/src/components/app/image'
 
-const mdxComponents: MDXComponents = {
+export const mdxComponents: MDXComponents = {
   h1: createHeading('h1'),
   h2: createHeading('h2'),
   h3: createHeading('h3'),
@@ -15,8 +14,3 @@ const mdxComponents: MDXComponents = {
   a: (props) => <Link {...props} />,
   Image: (props: ImageProps) => <Image {...props} />,
 }
-
-export function useMDXComponents(): MDXComponents {
-  return mdxComponents
-}
-

@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { MDXContent } from '@content-collections/mdx/react'
 
+import { mdxComponents } from '@/mdx-components'
 import MarkdownTypography from '@hsp/ui/src/components/mdx/typography'
 
 interface PostPageProps {
@@ -102,7 +103,10 @@ export default async function PostPage({ params }: PostPageProps) {
       <div className='flex gap-6 mt-8'>
         <main className="prose prose-neutral dark:prose-invert lg:prose-lg max-w-[80ch] mx-auto">
           <MarkdownTypography>
-            <MDXContent code={post.mdx} />
+            <MDXContent
+              code={post.mdx}
+              components={mdxComponents}
+            />
           </MarkdownTypography>
         </main>
         <div className='basis-xs hidden lg:block outline outline-base-200 p-4 rounded'>
