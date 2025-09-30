@@ -60,56 +60,59 @@ export default async function PostPage({ params }: PostPageProps) {
   })
 
   return (
-    <div className="mx-auto my-8">
-      <header className='border-b border-base-500 pb-4'>
-        <div className="flex items-center gap-4 flex-wrap font-mono text-sm text-fore-200">
-          <time dateTime={post.createdAt.toISOString()}>{displayDate}</time>
-          {post.updatedAt && (
-            <>
-              <span>
-                (Updated:{' '}
-                {post.updatedAt.toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'short',
-                  day: 'numeric',
-                })}
-                )
-              </span>
-            </>
-          )}
-          {post.readingTime && (
-            <>
-              <span>•</span>
-              <span>{Math.ceil(post.readingTime)} min read</span>
-            </>
-          )}
-        </div>
-        <h1 className="text-3xl font-semibold mt-3 mb-3 text-fore-400">
-          {post.title}
-        </h1>
-        <div>
-          <p className="text-lg text-fore-400 break-words">{post.description}</p>
-          {post.tags?.length && (
-            <div className="mt-2 flex flex-wrap gap-2 text-xs text-fore-200 font-mono">
-              {post.tags?.map((tag) => (
-                <span key={tag}>
-                  #{tag.toLowerCase()}
-                </span>
-              ))}
+    // Recommended max width for comfortable reading is 65-75 characters
+    <div className="mx-auto my-8 [--w-content:75ch]">
+      <header className="flex gap-6">
+        <div className="border-b border-base-500 flex-1 max-w-full">
+          <div className='mx-auto w-(--w-content) max-w-full'>
+            <div className="font-mono text-sm text-fore-200">
+              <time dateTime={post.createdAt.toISOString()}>{displayDate}</time>
+              {post.readingTime && (
+                <>
+                  <span> • </span>
+                  <span>{Math.ceil(post.readingTime)} min read</span>
+                </>
+              )}
             </div>
+            {post.updatedAt && (
+              <div className="font-mono text-xs text-fore-200 mt-2">
+                (Updated:{' '}
+                <time dateTime={post.updatedAt.toISOString()}>
+                  {post.updatedAt.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                  })}
+                </time>
+                )
+              </div>
             )}
+            <h1 className="text-3xl md:text-4xl font-semibold mt-6 mb-3 text-fore-400">
+              {post.title}
+            </h1>
+            <div>
+              {post.tags?.length && (
+                <div className="mt-2 flex flex-wrap gap-2 text-xs text-fore-200 font-mono">
+                  {post.tags?.map((tag) => (
+                    <span key={tag}>#{tag.toLowerCase()}</span>
+                  ))}
+                </div>
+              )}
+              <p className="text-md text-fore-200 break-words">
+                {post.description}
+              </p>
+            </div>
+          </div>
         </div>
+        <div className="basis-xs hidden lg:block min-w-60">&nbsp;</div>
       </header>
-      <div className='flex gap-6 mt-8'>
-        <main className="prose prose-neutral dark:prose-invert lg:prose-lg max-w-[80ch] mx-auto">
-          <MarkdownTypography>
-            <MDXContent
-              code={post.mdx}
-              components={mdxComponents}
-            />
+      <div className="flex gap-6 mt-8">
+        <main className="prose prose-neutral dark:prose-invert lg:prose-lg mx-auto max-md:max-w-full">
+          <MarkdownTypography className="w-(--w-content) max-w-full">
+            <MDXContent code={post.mdx} components={mdxComponents} />
           </MarkdownTypography>
         </main>
-        <div className='basis-xs hidden lg:block outline outline-base-200 p-4 rounded'>
+        <div className="basis-xs min-w-60 hidden lg:block outline outline-base-200 p-4 rounded">
           {/* TODO (haoln): Add TOC support */}
         </div>
       </div>
