@@ -62,10 +62,10 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     // Recommended max width for comfortable reading is 65-75 characters
     <div className="mx-auto my-8 [--w-content:75ch]">
-      <header className="flex gap-6">
+      <header className="flex gap-6 text-fore-200">
         <div className="border-b border-base-500 flex-1 max-w-full">
           <div className='mx-auto w-(--w-content) max-w-full'>
-            <div className="font-mono text-sm text-fore-200">
+            <div className="font-mono text-sm">
               <time dateTime={post.createdAt.toISOString()}>{displayDate}</time>
               {post.readingTime && (
                 <>
@@ -75,7 +75,7 @@ export default async function PostPage({ params }: PostPageProps) {
               )}
             </div>
             {post.updatedAt && (
-              <div className="font-mono text-xs text-fore-200 mt-2">
+              <div className="font-mono text-xs mt-2">
                 (Updated:{' '}
                 <time dateTime={post.updatedAt.toISOString()}>
                   {post.updatedAt.toLocaleDateString('en-US', {
@@ -92,13 +92,13 @@ export default async function PostPage({ params }: PostPageProps) {
             </h1>
             <div>
               {post.tags?.length && (
-                <div className="mt-2 flex flex-wrap gap-2 text-xs text-fore-200 font-mono">
+                <div className="mt-2 flex flex-wrap gap-2 text-xs font-mono">
                   {post.tags?.map((tag) => (
                     <span key={tag}>#{tag.toLowerCase()}</span>
                   ))}
                 </div>
               )}
-              <p className="text-md text-fore-200 break-words">
+              <p className="text-md break-words">
                 {post.description}
               </p>
             </div>
@@ -106,14 +106,17 @@ export default async function PostPage({ params }: PostPageProps) {
         </div>
         <div className="basis-xs hidden lg:block min-w-60">&nbsp;</div>
       </header>
-      <div className="flex gap-6 mt-8">
+      <div className="flex gap-6 mt-8 relative text-fore-200">
         <main className="prose prose-neutral dark:prose-invert lg:prose-lg mx-auto max-md:max-w-full">
           <MarkdownTypography className="w-(--w-content) max-w-full">
             <MDXContent code={post.mdx} components={mdxComponents} />
           </MarkdownTypography>
         </main>
-        <div className="basis-xs min-w-60 hidden lg:block outline outline-base-200 p-4 rounded">
+        <div className="basis-xs min-w-60 hidden lg:block sticky top-20 max-h-[calc(100vh-var(--spacing)*20)]">
           {/* TODO (haoln): Add TOC support */}
+          <div className=' outline outline-base-200 p-4 rounded max-h-[50vh] overflow-auto'>
+            Table of Contents (Coming soon)
+          </div>
         </div>
       </div>
     </div>

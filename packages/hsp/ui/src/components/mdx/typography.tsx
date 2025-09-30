@@ -31,7 +31,8 @@ export default function MarkdownTypography({
         '[&_ol]:list-decimal [&_ol]:my-6 [&_ol]:ml-6',
         '[&_li]:mt-2',
         // Blockquotes
-        '[&_blockquote]:bg-base-300 [&_blockquote]:text-fore-300 [&_blockquote]:italic [&_blockquote]:font-light [&_blockquote]:border-l-2 [&_blockquote]:border-fore-200 [&_blockquote]:pl-6 [&_blockquote]:py-2 [&_blockquote]:my-6',
+        '[&_blockquote]:text-fore-300 [&_blockquote]:italic [&_blockquote]:font-light [&_blockquote]:border-l-2 [&_blockquote]:border-fore-200 [&_blockquote]:pl-6 [&_blockquote]:py-3 [&_blockquote]:my-6',
+        '[&_blockquote_>_p:before]:content-none [&_blockquote_>_p:after]:content-none [&_blockquote_>_p]:my-1',
         // Inline code
         '[&_code]:relative [&_code]:bg-base-200 [&_code]:rounded-md [&_code]:px-0.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:font-semibold',
         // Block code
