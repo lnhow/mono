@@ -9,7 +9,6 @@ export default function createHeading(
     children,
     ...props
   }: React.HTMLAttributes<HTMLHeadingElement>) {
-    console.log('Rendering heading:', tagName, id, children)
     return createElement(
       tagName,
       {

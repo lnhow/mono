@@ -1,0 +1,31 @@
+{
+  "name": "@repo/remark-toc",
+  "version": "1.0.0",
+  "description": "A remark plugin to generate a table of contents to an object from a markdown file",
+  "type": "module",
+  "author": {
+    "name": "Hao Le",
+    "email": "haoln.7f8@gmail.com"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "lint": "eslint . --ext .ts",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --clean --watch"
+  },
+  "dependencies": {
+    "mdast-util-toc": "^7.1.0"
+  },
+  "devDependencies": {
+    "@repo/tsconfig": "workspace:*",
+    "@repo/eslint-config": "workspace:*",
+    "@types/mdast": "^4.0.0",
+    "eslint": "catalog:dev",
+    "remark": "catalog:markdown",
+    "typescript": "catalog:dev",
+    "tsup": "^8.1.1",
+    "vfile": "^6.0.3"
+  }
+}

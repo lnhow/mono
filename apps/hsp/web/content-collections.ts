@@ -7,6 +7,9 @@ import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import readingTime from 'reading-time'
+// Table of content generation
+import { remark } from 'remark'
+import remarkToc from '@repo/remark-toc'
 
 const posts = defineCollection({
   name: "posts",
@@ -26,16 +29,20 @@ const posts = defineCollection({
     imageCreditUrl: z.string().optional(),
   }),
   transform: async (document, context) => {
-    const mdx = await compileMDX(context, document, {
-      remarkPlugins: [
-        remarkGfm,
-      ],
-      rehypePlugins: [
-        rehypeSlug,
-        rehypeAutolinkHeadings,
-        // Add any rehype plugins here
-      ],
-    })
+    const [mdx, toc] = await Promise.all([
+      compileMDX(context, document, {
+        remarkPlugins: [
+          remarkGfm,
+        ],
+        rehypePlugins: [
+          rehypeSlug,
+          rehypeAutolinkHeadings,
+          // Add any rehype plugins here
+        ],
+      }),
+      remark().use(remarkToc).process(document.content),
+    ]) 
+    console.log('\x1B[35m[Dev log]\x1B[0m -> toc:', JSON.stringify(toc.data?.toc?.children, null, 2))
 
     const fileName = document._meta.filePath.split('/').pop()?.replace(/\.mdx$/, '') || ''
     const readingTimeResult = readingTime(document.content)

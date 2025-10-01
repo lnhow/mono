@@ -31,13 +31,13 @@ catalogs:
     '@content-collections/mdx': '^0.2.2'      ## Markdown support
     '@content-collections/next': '^0.2.7'     ## Next.js integration
     # Markdown processing
-    # 'remark': '^15.0.1'
-    # 'remark-toc': '^6.0.0'                    # Table of contents
     'remark-gfm': '^4.0.1'                      # GitHub Flavored Markdown (tables, task lists, etc)
     'github-slugger': '^2.0.0'                  # Generate slugs for headings
-    'rehype-autolink-headings': '^7.1.1'        # Adds links to headings
+    'rehype-autolink-headings': '^7.1.0'        # Adds links to headings
     'rehype-slug': '^6.0.0'                     # Adds slugs to headings
     'reading-time': '^1.5.0'                    # Estimate reading time
+    # Table of content generation
+    'remark': '^15.0.1'
   dev:
     'eslint': 9.32.0
     'vitest': 3.2.4
