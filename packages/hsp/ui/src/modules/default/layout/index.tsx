@@ -10,14 +10,14 @@ export default function LayoutDefault({
 }) {
   return (
     <div>
-      <div className="w-full z-50">
+      <div className="w-full z-50 sticky top-0 bg-base-100/95 backdrop-blur supports-backdrop-filter:bg-base-100/30 border-b">
         <nav className="px-4 py-2 h-(--layout-header-height) flex justify-between">
           <ViewTransition name="header-title">
             <ButtonLink variant="ghost" href="/">
               haoln
             </ButtonLink>
           </ViewTransition>
-          <div className='flex items-center gap-2'>
+          <div className="flex items-center gap-2">
             <PersonalGithubLink />
             <ThemeToggle />
           </div>

@@ -1,0 +1,88 @@
+---
+title: Test blog (and a it is a very long title to test the layout)
+description: This is a kitchen sink blog post to develop MDX features. It includes headings, links, code blocks, lists, blockquotes, images, tables, and more.
+createdAt: 2025-09-28
+updatedAt: 2025-09-28
+tags: ['test', 'mdx', 'blog']
+draft: true
+---
+
+export const metadata = {
+  title: 'Test blog',
+}
+
+# Heading 1
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+## Heading 2
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+### Heading 3
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+#### Heading 4
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+##### Heading 5
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+###### Heading 6
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+This is a paragraph with a [link](/guesart). Here is some inline code: `const x = 10;{:js}`. Here is a line break after this sentence.
+
+- Item 1
+- Item 2
+- Item 3
+
+1. First
+2. Second
+3. Third
+
+```javascript showLineNumbers title="example.js" caption="An example JavaScript file" {1} /world/ /Hello/
+const a = 'Hello'
+console.log(`${a}, world!`);
+```
+
+> Blockquote example.
+
+> [!NOTE]  
+> Highlights information that users should take into account, even when skimming.
+
+> [!TIP]
+> Optional information to help a user be more successful.
+
+> [!IMPORTANT]  
+> Crucial information necessary for users to succeed.
+
+> [!WARNING]  
+> Critical content demanding immediate user attention due to potential risks.
+
+> [!CAUTION]
+> Negative potential consequences of an action.
+
+
+![Sample Image](https://placehold.co/600x400 "Sample Image")
+
+![Sample Image](https://placehold.co/2000x400 "Sample Image")
+
+Here is a table:
+| Header 1 | Header 2 | Header 3 |
+|----------|----------|----------|
+| Cell 1   | Cell 2   | Cell 3   |
+| Cell 4   | Cell 5   | Cell 6   |
+
+Here is some **bold text** and some *italic text*.
+
+## Edge cases
+
+### Headingwithalongwordwithoutspacesandshouldbetestedforwrappingissuesmoretextafterthelongwordandcontinuingtoseehowitbehaves
+
+Some long text to see if it wraps correctly.
+thisisalongwordwithoutspacesandshouldbetestedforwrappingissuesmoretextafterthelongwordandcontinuingtoseehowitbehaves.

@@ -11,6 +11,9 @@
       ],
       "@hsp/ui/*": [
         "../../../packages/hsp/ui/*",
+      ],
+      "content-collections": [
+        "./.content-collections/generated"
       ]
     },
     "plugins": [
