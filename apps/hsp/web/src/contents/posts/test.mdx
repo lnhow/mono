@@ -4,6 +4,7 @@ description: This is a kitchen sink blog post to develop MDX features. It includ
 createdAt: 2025-09-28
 updatedAt: 2025-09-28
 tags: ['test', 'mdx', 'blog']
+draft: true
 ---
 
 export const metadata = {
@@ -11,13 +12,30 @@ export const metadata = {
 }
 
 # Heading 1
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
 ## Heading 2
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
 ### Heading 3
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
 #### Heading 4
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
 ##### Heading 5
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
 ###### Heading 6
 
-This is a paragraph with a [link](/guesart). Here is some inline code: `const x = 10;`. Here is a line break after this sentence.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+This is a paragraph with a [link](/guesart). Here is some inline code: `const x = 10;{:js}`. Here is a line break after this sentence.
 
 - Item 1
 - Item 2
@@ -27,8 +45,9 @@ This is a paragraph with a [link](/guesart). Here is some inline code: `const x 
 2. Second
 3. Third
 
-```javascript
-console.log('Hello, world!');
+```javascript showLineNumbers title="example.js" caption="An example JavaScript file" {1} /world/ /Hello/
+const a = 'Hello'
+console.log(`${a}, world!`);
 ```
 
 > Blockquote example.
@@ -60,3 +79,10 @@ Here is a table:
 | Cell 4   | Cell 5   | Cell 6   |
 
 Here is some **bold text** and some *italic text*.
+
+## Edge cases
+
+### Headingwithalongwordwithoutspacesandshouldbetestedforwrappingissuesmoretextafterthelongwordandcontinuingtoseehowitbehaves
+
+Some long text to see if it wraps correctly.
+thisisalongwordwithoutspacesandshouldbetestedforwrappingissuesmoretextafterthelongwordandcontinuingtoseehowitbehaves.

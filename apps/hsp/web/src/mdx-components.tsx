@@ -1,6 +1,6 @@
 import type { MDXComponents } from 'mdx/types'
 
-import Link from '@hsp/ui/src/components/mdx/override/Link'
+import Link from '@hsp/ui/src/components/mdx/override/link'
 import createHeading from '@hsp/ui/src/components/mdx/override/heading'
 import Image, { ImageProps } from '@hsp/ui/src/components/app/image'
 

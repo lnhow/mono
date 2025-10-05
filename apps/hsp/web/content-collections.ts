@@ -6,12 +6,25 @@ import { z } from 'zod'
 import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypePrettyCode from 'rehype-pretty-code'
+import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import readingTime from 'reading-time'
+// Table of content generation
+import { remark } from 'remark'
+import { createTocList, TocItem } from '@repo/remark-toc'
+
+const rehypePrettyCodeOptions: Partial<RehypePrettyCodeOptions> = {
+  theme: {
+    dark: 'github-dark',
+    light: 'github-light',
+  },
+  keepBackground: false,
+}
 
 const posts = defineCollection({
-  name: "posts",
-  directory: "src/contents/posts",
-  include: "**/*.mdx",
+  name: 'posts',
+  directory: 'src/contents/posts',
+  include: '**/*.mdx',
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -26,30 +39,36 @@ const posts = defineCollection({
     imageCreditUrl: z.string().optional(),
   }),
   transform: async (document, context) => {
-    const mdx = await compileMDX(context, document, {
-      remarkPlugins: [
-        remarkGfm,
-      ],
-      rehypePlugins: [
-        rehypeSlug,
-        rehypeAutolinkHeadings,
-        // Add any rehype plugins here
-      ],
-    })
+    const [mdx, toc] = await Promise.all([
+      compileMDX(context, document, {
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [
+          rehypeSlug,
+          rehypeAutolinkHeadings,
+          [rehypePrettyCode, rehypePrettyCodeOptions],
+        ],
+      }),
+      remark().use(createTocList).process(document.content),
+    ])
 
-    const fileName = document._meta.filePath.split('/').pop()?.replace(/\.mdx$/, '') || ''
+    const fileName =
+      document._meta.filePath
+        .split('/')
+        .pop()
+        ?.replace(/\.mdx$/, '') || ''
     const readingTimeResult = readingTime(document.content)
 
     return {
       ...document,
       mdx,
+      toc: JSON.stringify((toc.data?.toc || []) as TocItem[]),
       readingTime: readingTimeResult.minutes,
       slug: fileName,
       url: `/posts/${fileName}`,
     }
   },
-});
- 
+})
+
 export default defineConfig({
   collections: [posts],
-});
+})

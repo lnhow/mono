@@ -1,5 +1,6 @@
 import { createElement } from 'react'
 import { MdLink } from 'react-icons/md'
+import Link from '@hsp/ui/src/components/app/link'
 
 export default function createHeading(
   tagName: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6',
@@ -9,18 +10,19 @@ export default function createHeading(
     children,
     ...props
   }: React.HTMLAttributes<HTMLHeadingElement>) {
-    console.log('Rendering heading:', tagName, id, children)
     return createElement(
       tagName,
       {
         ...props,
         id,
-        className: 'group scroll-mt-20 relative flex items-center',
+        className: 'group scroll-mt-20 relative flex items-center break-words',
       },
-      children,
+      createElement('span', {
+        className: 'break-words max-w-full',
+      }, children),
       id &&
         createElement(
-          'a',
+          Link,
           {
             href: `#${id}`,
             className:
