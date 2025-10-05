@@ -34,7 +34,7 @@ export default function MarkdownTypography({
         '[&_blockquote]:text-fore-300 [&_blockquote]:font-light [&_blockquote]:border-l-2 [&_blockquote]:border-fore-200 [&_blockquote]:pl-6 [&_blockquote]:py-3 [&_blockquote]:my-6',
         '[&_blockquote_>_p:before]:content-none [&_blockquote_>_p:after]:content-none [&_blockquote_>_p]:my-1',
         // Inline code
-        '[&_code]:relative [&_code]:bg-base-200 [&_code]:rounded-md [&_code]:px-0.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-sm',
+        '[&_code]:relative [&_code]:bg-base-200 [&_code]:rounded-md [&_code]:p-1.5 [&_code]:font-mono [&_code]:text-sm',
         // Block code
         '[&_pre]:relative [&_pre]:bg-base-200 [&_pre]:rounded-md [&_pre]:p-4 [&_pre]:my-6 [&_pre]:overflow-x-auto [&_pre]:font-mono [&_pre]:text-sm [&_pre]:border [&_pre]:border-base-200',
         '[&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:font-mono [&_pre_code]:text-sm',

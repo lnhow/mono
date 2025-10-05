@@ -339,7 +339,7 @@ code[data-line-numbers] > [data-line]::before {
   color: var(--color-fore-100);
 }
 
-code > [data-line] {
+pre code > [data-line] {
   @apply py-1 px-2;
 }
 
@@ -359,5 +359,8 @@ code > [data-highlighted-line], code [data-highlighted-chars] {
 }
 code [data-highlighted-chars] {
   @apply p-1;
+}
+code::before, code::after {
+  content: '';
 }
 /* End Block code themes */
