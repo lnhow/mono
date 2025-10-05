@@ -6,6 +6,10 @@ export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
   title: 'Cake',
+  openGraph: {
+    title: 'Cake',
+    description: 'Someone sent a cake!',
+  }
 }
 
 export default function Page() {

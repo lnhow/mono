@@ -13,7 +13,7 @@ import {
 import { OrbitControls } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
 import { BoxGeometry, MeshStandardMaterial, SphereGeometry } from 'three'
-import { ComponentType, useEffect, useRef, useState } from 'react'
+import { ComponentType, useEffect, useState } from 'react'
 
 const randomBetween = (between = 1) => (Math.random() - 0.5) * between * 2
 interface ShapeOptions {
