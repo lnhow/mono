@@ -6,15 +6,25 @@ import { z } from 'zod'
 import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypePrettyCode from 'rehype-pretty-code'
+import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import readingTime from 'reading-time'
 // Table of content generation
 import { remark } from 'remark'
 import { createTocList, TocItem } from '@repo/remark-toc'
 
+const rehypePrettyCodeOptions: Partial<RehypePrettyCodeOptions> = {
+  theme: {
+    dark: 'github-dark',
+    light: 'github-light',
+  },
+  keepBackground: false,
+}
+
 const posts = defineCollection({
-  name: "posts",
-  directory: "src/contents/posts",
-  include: "**/*.mdx",
+  name: 'posts',
+  directory: 'src/contents/posts',
+  include: '**/*.mdx',
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -31,19 +41,21 @@ const posts = defineCollection({
   transform: async (document, context) => {
     const [mdx, toc] = await Promise.all([
       compileMDX(context, document, {
-        remarkPlugins: [
-          remarkGfm,
-        ],
+        remarkPlugins: [remarkGfm],
         rehypePlugins: [
           rehypeSlug,
           rehypeAutolinkHeadings,
-          // Add any rehype plugins here
+          [rehypePrettyCode, rehypePrettyCodeOptions],
         ],
       }),
       remark().use(createTocList).process(document.content),
-    ]) 
+    ])
 
-    const fileName = document._meta.filePath.split('/').pop()?.replace(/\.mdx$/, '') || ''
+    const fileName =
+      document._meta.filePath
+        .split('/')
+        .pop()
+        ?.replace(/\.mdx$/, '') || ''
     const readingTimeResult = readingTime(document.content)
 
     return {
@@ -55,8 +67,8 @@ const posts = defineCollection({
       url: `/posts/${fileName}`,
     }
   },
-});
- 
+})
+
 export default defineConfig({
   collections: [posts],
-});
+})

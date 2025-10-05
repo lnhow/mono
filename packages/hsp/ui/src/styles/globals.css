@@ -264,8 +264,12 @@
     --animate-accordion-down: accordion-down 0.2s ease-out;
     --animate-accordion-up: accordion-up 0.2s ease-out;
     /* Shadcn collapsible */
-    --animate-collapsible-side-in: collapsible-side-in var(--tw-duration, var(--default-transition-duration)) var(--tw-ease, var(--default-transition-timing-function));
-    --animate-collapsible-side-out: collapsible-side-out var(--tw-duration, var(--default-transition-duration)) var(--tw-ease, var(--default-transition-timing-function));
+    --animate-collapsible-side-in: collapsible-side-in
+      var(--tw-duration, var(--default-transition-duration))
+      var(--tw-ease, var(--default-transition-timing-function));
+    --animate-collapsible-side-out: collapsible-side-out
+      var(--tw-duration, var(--default-transition-duration))
+      var(--tw-ease, var(--default-transition-timing-function));
   }
 }
 
@@ -306,3 +310,54 @@
 }
 
 @import '../modules/guesart/styles.css';
+
+/* MDX Content */
+/* Block code themes */
+code[data-theme*='github-light'],
+code[data-theme*='github-light'] span {
+  color: var(--shiki-light);
+}
+
+.dark code[data-theme*='github-dark'],
+.dark code[data-theme*='github-dark'] span {
+  color: var(--shiki-dark);
+}
+
+code[data-line-numbers] {
+  counter-reset: line;
+}
+
+code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+
+  /* Other styling */
+  display: inline-block;
+  width: 0.75rem;
+  margin-right: 2rem;
+  text-align: right;
+  color: var(--color-fore-100);
+}
+
+code > [data-line] {
+  @apply py-1 px-2;
+}
+
+code[data-line-numbers-max-digits='2'] > [data-line]::before {
+  width: 1.25rem;
+}
+
+code[data-line-numbers-max-digits='3'] > [data-line]::before {
+  width: 1.75rem;
+}
+
+code[data-line-numbers-max-digits='4'] > [data-line]::before {
+  width: 2.25rem;
+}
+code > [data-highlighted-line], code [data-highlighted-chars] {
+  @apply rounded-sm bg-fore-100/30;
+}
+code [data-highlighted-chars] {
+  @apply p-1;
+}
+/* End Block code themes */

@@ -35,7 +35,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
-This is a paragraph with a [link](/guesart). Here is some inline code: `const x = 10;`. Here is a line break after this sentence.
+This is a paragraph with a [link](/guesart). Here is some inline code: `const x = 10;{:js}`. Here is a line break after this sentence.
 
 - Item 1
 - Item 2
@@ -45,8 +45,9 @@ This is a paragraph with a [link](/guesart). Here is some inline code: `const x 
 2. Second
 3. Third
 
-```js
-console.log('Hello, world!');
+```javascript showLineNumbers title="example.js" caption="An example JavaScript file" {1} /world/ /Hello/
+const a = 'Hello'
+console.log(`${a}, world!`);
 ```
 
 > Blockquote example.
