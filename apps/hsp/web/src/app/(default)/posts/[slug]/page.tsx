@@ -4,7 +4,9 @@ import { notFound } from 'next/navigation'
 import { MDXContent } from '@content-collections/mdx/react'
 
 import { mdxComponents } from '@/mdx-components'
+import { isProductionEnv } from '@/common/utils/common'
 import MarkdownTypography from '@hsp/ui/src/components/mdx/typography'
+import TableOfContents from '@hsp/ui/src/components/mdx/toc'
 
 interface PostPageProps {
   params: Promise<{
@@ -12,12 +14,21 @@ interface PostPageProps {
   }>
 }
 
+const getPost = (slug: string) => {
+  return allPosts.find((post) => {
+    if (isProductionEnv && post.draft) {
+      return false
+    }
+    return post.slug === slug
+  })
+}
+
 export async function generateMetadata({
   params,
 }: PostPageProps): Promise<Metadata> {
   const { slug } = await params
 
-  const post = allPosts.find((post) => post.slug === slug)
+  const post = getPost(slug)
   if (!post) {
     return {
       title: 'Post Not Found',
@@ -48,7 +59,7 @@ export async function generateMetadata({
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params
 
-  const post = allPosts.find((post) => post.slug === slug)
+  const post = getPost(slug)
   if (!post) {
     notFound()
   }
@@ -58,13 +69,14 @@ export default async function PostPage({ params }: PostPageProps) {
     month: 'short',
     day: 'numeric',
   })
+  const toc = post.toc ? JSON.parse(post.toc) : []
 
   return (
     // Recommended max width for comfortable reading is 65-75 characters
     <div className="mx-auto my-8 [--w-content:75ch]">
       <header className="flex gap-6 text-fore-200">
-        <div className="border-b border-base-500 flex-1 max-w-full">
-          <div className='mx-auto w-(--w-content) max-w-full'>
+        <div className="border-b border-base-500 flex-1 max-w-full pb-4">
+          <div className="mx-auto w-(--w-content) max-w-full">
             <div className="font-mono text-sm">
               <time dateTime={post.createdAt.toISOString()}>{displayDate}</time>
               {post.readingTime && (
@@ -98,9 +110,7 @@ export default async function PostPage({ params }: PostPageProps) {
                   ))}
                 </div>
               )}
-              <p className="text-md break-words">
-                {post.description}
-              </p>
+              <p className="text-md break-words mt-2">{post.description}</p>
             </div>
           </div>
         </div>
@@ -108,15 +118,15 @@ export default async function PostPage({ params }: PostPageProps) {
       </header>
       <div className="flex gap-6 mt-8 relative text-fore-200">
         <main className="prose prose-neutral dark:prose-invert lg:prose-lg mx-auto max-md:max-w-full">
-          <MarkdownTypography className="w-(--w-content) max-w-full">
+          <MarkdownTypography className="w-(--w-content) max-w-full break-words">
             <MDXContent code={post.mdx} components={mdxComponents} />
           </MarkdownTypography>
         </main>
         <div className="basis-xs min-w-60 hidden lg:block sticky top-20 max-h-[calc(100vh-var(--spacing)*20)]">
-          {/* TODO (haoln): Add TOC support */}
-          <div className=' outline outline-base-200 p-4 rounded max-h-[50vh] overflow-auto'>
-            Table of Contents (Coming soon)
-          </div>
+          <TableOfContents
+            toc={toc}
+            className="max-h-[50vh] overflow-auto outline outline-base-200 p-6 rounded"
+          />
         </div>
       </div>
     </div>

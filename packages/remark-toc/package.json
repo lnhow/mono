@@ -16,7 +16,8 @@
     "dev": "tsup src/index.ts --format cjs,esm --dts --clean --watch"
   },
   "dependencies": {
-    "mdast-util-toc": "^7.1.0"
+    "unist-util-visit": "5.0.0",
+    "github-slugger": "^2.0.0"
   },
   "devDependencies": {
     "@repo/tsconfig": "workspace:*",

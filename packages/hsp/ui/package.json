@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
+    "@repo/remark-toc": "workspace:*",
     "@repo/tsconfig": "workspace:*",
     "@types/lodash": "^4.17.0",
     "@types/node": "catalog:base",

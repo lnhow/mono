@@ -9,7 +9,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import readingTime from 'reading-time'
 // Table of content generation
 import { remark } from 'remark'
-import remarkToc from '@repo/remark-toc'
+import { createTocList, TocItem } from '@repo/remark-toc'
 
 const posts = defineCollection({
   name: "posts",
@@ -40,9 +40,8 @@ const posts = defineCollection({
           // Add any rehype plugins here
         ],
       }),
-      remark().use(remarkToc).process(document.content),
+      remark().use(createTocList).process(document.content),
     ]) 
-    console.log('\x1B[35m[Dev log]\x1B[0m -> toc:', JSON.stringify(toc.data?.toc?.children, null, 2))
 
     const fileName = document._meta.filePath.split('/').pop()?.replace(/\.mdx$/, '') || ''
     const readingTimeResult = readingTime(document.content)
@@ -50,6 +49,7 @@ const posts = defineCollection({
     return {
       ...document,
       mdx,
+      toc: JSON.stringify((toc.data?.toc || []) as TocItem[]),
       readingTime: readingTimeResult.minutes,
       slug: fileName,
       url: `/posts/${fileName}`,

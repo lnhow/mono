@@ -82,7 +82,6 @@
     "eslint": "catalog:dev",
     "eslint-plugin-storybook": "^9.1.1",
     "jsdom": "catalog:dev",
-    "github-slugger": "catalog:markdown",
     "playwright": "^1.54.2",
     "reading-time": "catalog:markdown",
     "remark": "catalog:markdown",
