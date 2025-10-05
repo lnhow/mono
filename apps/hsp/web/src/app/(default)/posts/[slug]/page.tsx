@@ -74,8 +74,8 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     // Recommended max width for comfortable reading is 65-75 characters
     <div className="mx-auto my-8 [--w-content:75ch]">
-      <header className="flex gap-6 text-fore-200">
-        <div className="border-b border-base-500 flex-1 max-w-full pb-4">
+      <header className="flex gap-8 text-fore-200">
+        <div className="border-b border-base-500 flex-1 max-w-full pb-6">
           <div className="mx-auto w-(--w-content) max-w-full">
             <div className="font-mono text-sm">
               <time dateTime={post.createdAt.toISOString()}>{displayDate}</time>
@@ -110,22 +110,22 @@ export default async function PostPage({ params }: PostPageProps) {
                   ))}
                 </div>
               )}
-              <p className="text-md break-words mt-2">{post.description}</p>
+              <p className="text-md break-words mt-4">{post.description}</p>
             </div>
           </div>
         </div>
         <div className="basis-xs hidden lg:block min-w-60">&nbsp;</div>
       </header>
-      <div className="flex gap-6 mt-8 relative text-fore-200">
+      <div className="flex gap-8 mt-8 relative text-fore-200">
         <main className="prose prose-neutral dark:prose-invert lg:prose-lg mx-auto max-md:max-w-full">
           <MarkdownTypography className="w-(--w-content) max-w-full break-words">
             <MDXContent code={post.mdx} components={mdxComponents} />
           </MarkdownTypography>
         </main>
-        <div className="basis-xs min-w-60 hidden lg:block sticky top-20 max-h-[calc(100vh-var(--spacing)*20)]">
+        <div className="basis-xs hidden lg:block min-w-60 sticky top-20 max-h-[calc(100vh-var(--spacing)*20)]">
           <TableOfContents
             toc={toc}
-            className="max-h-[50vh] overflow-auto outline outline-base-200 p-6 rounded"
+            className="max-h-[50vh] overflow-auto p-6"
           />
         </div>
       </div>

@@ -19,11 +19,11 @@ export default function MarkdownTypography({
         '[&_h1]:font-light [&_h1]:text-fore-500 [&_h1]:tracking-tight [&_h1]:mt-12 [&_h1]:mb-6 [&_h1]:text-4xl [&_h1:first-child]:mt-0',
         '[&_h2]:font-light [&_h2]:text-fore-500 [&_h2]:tracking-tight [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-3xl [&_h1:first-child]:mt-0 [&_h2]:pb-2 [&_h2]:border-b [&_h2]:border-base-500',
         '[&_h3]:font-light [&_h3]:text-fore-500 [&_h3]:tracking-tight [&_h3]:mt-8 [&_h3]:mb-4 [&_h3]:text-2xl',
-        '[&_h4]:font-light [&_h4]:text-fore-500 [&_h4]:tracking-tight [&_h4]:mt-6 [&_h4]:mb-3 [&_h4]:text-xl',
-        '[&_h5]:font-light [&_h5]:text-fore-500 [&_h5]:tracking-tight [&_h5]:mt-6 [&_h5]:mb-3 [&_h5]:text-lg',
-        '[&_h6]:font-light [&_h6]:text-fore-500 [&_h6]:tracking-tight [&_h6]:mt-6 [&_h6]:mb-3 [&_h6]:text-base',
+        '[&_h4]:font-light [&_h4]:text-fore-500 [&_h4]:tracking-tight [&_h4]:mt-8 [&_h4]:mb-3 [&_h4]:text-xl',
+        '[&_h5]:font-light [&_h5]:text-fore-500 [&_h5]:tracking-tight [&_h5]:mt-8 [&_h5]:mb-3 [&_h5]:text-lg',
+        '[&_h6]:font-light [&_h6]:text-fore-500 [&_h6]:tracking-tight [&_h6]:mt-8 [&_h6]:mb-3 [&_h6]:text-base',
         // Paragraphs
-        '[&_p]:leading-7 [&_p]:mt-6',
+        '[&_p]:leading-7 [&_p]:mt-4',
         // Links
         '[&_a]:text-primary-400 [&_a]:font-medium [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary-400/80 [&_a]:transition-colors',
         // Lists
@@ -31,7 +31,7 @@ export default function MarkdownTypography({
         '[&_ol]:list-decimal [&_ol]:my-6 [&_ol]:ml-6',
         '[&_li]:mt-2',
         // Blockquotes
-        '[&_blockquote]:text-fore-300 [&_blockquote]:italic [&_blockquote]:font-light [&_blockquote]:border-l-2 [&_blockquote]:border-fore-200 [&_blockquote]:pl-6 [&_blockquote]:py-3 [&_blockquote]:my-6',
+        '[&_blockquote]:text-fore-300 [&_blockquote]:font-light [&_blockquote]:border-l-2 [&_blockquote]:border-fore-200 [&_blockquote]:pl-6 [&_blockquote]:py-3 [&_blockquote]:my-6',
         '[&_blockquote_>_p:before]:content-none [&_blockquote_>_p:after]:content-none [&_blockquote_>_p]:my-1',
         // Inline code
         '[&_code]:relative [&_code]:bg-base-200 [&_code]:rounded-md [&_code]:px-0.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:font-semibold',

@@ -67,10 +67,10 @@ export function TableOfContentsInternal({
 
   return (
     <nav aria-label="Table of contents" className={className}>
-      <h3 className="text-lg font-semibold pb-2 border-b border-base-200 mb-2 text-fore-300">
+      <h3 className="text-md font-semibold mb-2 text-fore-300">
         Table of Contents
       </h3>
-      <ul className="list-none break-words">
+      <ul className="list-none break-words text-sm">
         {toc.map((item) => (
           <li
             key={item.slug}
