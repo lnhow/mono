@@ -35,17 +35,17 @@
   --hsp-accent-400: var(--color-cyan-600);
   --hsp-accent-500: var(--color-cyan-800);
 
-  --hsp-fore-100: var(--color-zinc-400);
-  --hsp-fore-200: var(--color-zinc-600);
-  --hsp-fore-300: var(--color-zinc-800);
-  --hsp-fore-400: var(--color-zinc-900);
-  --hsp-fore-500: var(--color-zinc-950);
+  --hsp-fore-100: var(--color-zinc-300);
+  --hsp-fore-200: var(--color-zinc-500);
+  --hsp-fore-300: var(--color-zinc-600);
+  --hsp-fore-400: var(--color-zinc-800);
+  --hsp-fore-500: var(--color-zinc-900);
 
   --hsp-base-100: var(--color-neutral-200);
   --hsp-base-200: var(--color-neutral-100);
-  --hsp-base-300: var(--color-zinc-50);
-  --hsp-base-400: var(--color-zinc-100);
-  --hsp-base-500: var(--color-zinc-200);
+  --hsp-base-300: var(--color-neutral-50);
+  --hsp-base-400: var(--color-zinc-200);
+  --hsp-base-500: var(--color-zinc-100);
 
   --hsp-warning-100: var(--color-amber-100);
   --hsp-warning-200: var(--color-amber-300);
@@ -77,13 +77,13 @@
 
   --hsp-fore-100: var(--color-zinc-600);
   --hsp-fore-200: var(--color-zinc-500);
-  --hsp-fore-300: var(--color-zinc-300);
+  --hsp-fore-300: var(--color-zinc-400);
   --hsp-fore-400: var(--color-zinc-200);
   --hsp-fore-500: var(--color-zinc-100);
 
   --hsp-base-100: var(--color-neutral-900);
   --hsp-base-200: var(--color-neutral-800);
-  --hsp-base-300: var(--color-zinc-950);
+  --hsp-base-300: var(--color-neutral-700);
   --hsp-base-400: var(--color-zinc-900);
   --hsp-base-500: var(--color-zinc-800);
 

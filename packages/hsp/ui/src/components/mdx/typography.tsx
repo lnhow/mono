@@ -17,7 +17,7 @@ export default function MarkdownTypography({
         'text-fore-300',
         // Headings
         '[&_h1]:font-light [&_h1]:text-fore-500 [&_h1]:tracking-tight [&_h1]:mt-12 [&_h1]:mb-6 [&_h1]:text-4xl [&_h1:first-child]:mt-0',
-        '[&_h2]:font-light [&_h2]:text-fore-500 [&_h2]:tracking-tight [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-3xl [&_h1:first-child]:mt-0 [&_h2]:pb-2 [&_h2]:border-b [&_h2]:border-base-500',
+        '[&_h2]:font-light [&_h2]:text-fore-500 [&_h2]:tracking-tight [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-3xl [&_h1:first-child]:mt-0 [&_h2]:pb-2 [&_h2]:border-b [&_h2]:border-fore-100',
         '[&_h3]:font-light [&_h3]:text-fore-500 [&_h3]:tracking-tight [&_h3]:mt-8 [&_h3]:mb-4 [&_h3]:text-2xl',
         '[&_h4]:font-light [&_h4]:text-fore-500 [&_h4]:tracking-tight [&_h4]:mt-8 [&_h4]:mb-3 [&_h4]:text-xl',
         '[&_h5]:font-light [&_h5]:text-fore-500 [&_h5]:tracking-tight [&_h5]:mt-8 [&_h5]:mb-3 [&_h5]:text-lg',
@@ -36,7 +36,7 @@ export default function MarkdownTypography({
         // Inline code
         '[&_code]:relative [&_code]:bg-base-200 [&_code]:rounded-md [&_code]:p-1.5 [&_code]:font-mono [&_code]:text-sm',
         // Block code
-        '[&_pre]:relative [&_pre]:bg-base-200 [&_pre]:rounded-md [&_pre]:p-4 [&_pre]:my-6 [&_pre]:overflow-x-auto [&_pre]:font-mono [&_pre]:text-sm [&_pre]:border [&_pre]:border-base-200',
+        '[&_pre]:relative [&_pre]:bg-base-200 [&_pre]:rounded-md [&_pre]:p-4 [&_pre]:my-6 [&_pre]:overflow-x-auto [&_pre]:font-mono [&_pre]:text-sm [&_pre]:border [&_pre]:border-base-500',
         '[&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:font-mono [&_pre_code]:text-sm',
         '[&_figure]:my-6 [&_figure_figcaption]:text-xs [&_figure_figcaption]:px-2 [&_figure_figcaption]:py-1 [&_figure_pre]:m-0',
         '[&_figure_[data-rehype-pretty-code-title]]:text-sm [&_figure_[data-rehype-pretty-code-title]]:px-2 [&_figure_[data-rehype-pretty-code-title]]:py-1',
@@ -47,8 +47,8 @@ export default function MarkdownTypography({
         '[&_img]:rounded-md [&_img]:my-6 [&_img]:mx-auto',
         // Tables
         '[&_table]:w-full [&_table]:my-6 [&_table]:overflow-y-auto [&_table]:border-collapse',
-        '[&_table_tr]:even:bg-base-300 [&_table_tr]:m-0 [&_table_tr]:border-t [&_table_tr]:p-0',
-        '[&_table_th]:border [&_table_th]:border-fore-100 [&_table_th]:bg-base-500 [&_table_th]:px-4 [&_table_th]:py-2 [&_table_th]:text-left [&_table_th]:font-bold [&_table_th[align=center]]:text-center [&_table_th[align=right]]:text-right',
+        '[&_table_tr]:even:bg-base-500 [&_table_tr]:m-0 [&_table_tr]:border-t [&_table_tr]:p-0',
+        '[&_table_th]:border [&_table_th]:border-fore-100 [&_table_th]:bg-base-300 [&_table_th]:px-4 [&_table_th]:py-2 [&_table_th]:text-left [&_table_th]:font-bold [&_table_th[align=center]]:text-center [&_table_th[align=right]]:text-right',
         '[&_table_td]:border [&_table_td]:border-fore-100 [&_table_td]:px-4 [&_table_td]:py-2 [&_table_td]:text-left [&_table_td[align=center]]:text-center [&_table_td[align=right]]:text-right',
         // Horizontal Rule
         '[&_hr]:border-fore-500 [&_hr]:my-8',

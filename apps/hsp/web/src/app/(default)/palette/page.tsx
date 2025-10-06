@@ -1,4 +1,17 @@
+import { isProductionEnv } from "@/common/utils/common"
+import { Metadata } from "next"
+import { notFound } from "next/navigation"
+
+export const metadata: Metadata = {
+  title: 'Palette',
+  description: 'HSP Design System color palette and guidelines',
+}
+
 export default function Page() {
+  if (isProductionEnv) {
+    notFound()
+  }
+
   return (
     <div className="max-w-5xl mx-2 md:mx-auto">
       <div className="lg:flex lg:space-x-6 ">
@@ -67,7 +80,7 @@ export default function Page() {
             colors={['bg-error-100', 'bg-error-200', 'bg-error-300']}
           />
         </div>
-        <div className="mt-6 flex-2/6 bg-base-300 p-4 rounded-lg shadow-lg">
+        <div className="mt-6 flex-2/6 bg-base-500 p-4 rounded-lg shadow-lg">
           <h2 className="text-2xl font-light">General guidelines</h2>
           <p className="text-sm text-fore-200">Smaller number is for background elements.</p>
           <p className="text-sm text-fore-200">Higher number is for foreground elements.</p>
