@@ -35,13 +35,17 @@ export async function generateMetadata({
     }
   }
 
-  // TODO (haoln): Add open graph image support
+  const ogImageSearchParams = new URLSearchParams()
+  ogImageSearchParams.set('title', post.title)
+  ogImageSearchParams.set('description', post.description || '')
+
   return {
     title: post.title,
     description: post.description,
     openGraph: {
       title: post.title,
       description: post.description,
+      images: ['/og?' + ogImageSearchParams.toString()],
       type: 'article',
       publishedTime: post.createdAt.toISOString(),
       modifiedTime:
@@ -75,7 +79,7 @@ export default async function PostPage({ params }: PostPageProps) {
     // Recommended max width for comfortable reading is 65-75 characters
     <div className="mx-auto my-8 [--w-content:75ch]">
       <header className="flex gap-8 text-fore-200">
-        <div className="border-b border-base-500 flex-1 max-w-full pb-6">
+        <div className="border-b border-fore-100 flex-1 max-w-full pb-6">
           <div className="mx-auto w-(--w-content) max-w-full">
             <div className="font-mono text-sm">
               <time dateTime={post.createdAt.toISOString()}>{displayDate}</time>
