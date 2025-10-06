@@ -2,6 +2,8 @@ import './globals.css'
 import { ThemeProvider } from '@hsp/ui/src/components/theme/ThemeProvider'
 import { Toaster } from '@hsp/ui/src/components/base/sonner'
 import { Lexend } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const lexendFont = Lexend({
   subsets: ['latin', 'vietnamese'],
@@ -25,6 +27,8 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
             {/* <ViewTransition> */}
               {children}
               <Toaster />
+              <Analytics />
+              <SpeedInsights />
             {/* </ViewTransition> */}
           </ThemeProvider>
         </body>
