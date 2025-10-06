@@ -35,13 +35,17 @@ export async function generateMetadata({
     }
   }
 
-  // TODO (haoln): Add open graph image support
+  const ogImageSearchParams = new URLSearchParams()
+  ogImageSearchParams.set('title', post.title)
+  ogImageSearchParams.set('description', post.description || '')
+
   return {
     title: post.title,
     description: post.description,
     openGraph: {
       title: post.title,
       description: post.description,
+      images: ['/og?' + ogImageSearchParams.toString()],
       type: 'article',
       publishedTime: post.createdAt.toISOString(),
       modifiedTime:
