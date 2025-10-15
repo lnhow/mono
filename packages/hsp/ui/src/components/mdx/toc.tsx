@@ -1,8 +1,8 @@
-// 'use client'
+'use client'
 import type { TocItem } from '@repo/remark-toc'
 import Link from '../app/link'
 import cn from '@hsp/ui/src/utils/cn'
-// import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const headingLevelClassMap: Record<number, string> = {
   1: 'ml-0',
@@ -34,36 +34,44 @@ export function TableOfContentsInternal({
   className,
 }: TableOfContentsProps) {
   // TODO (haoln): Test this function futher
-  // const [activeId, setActiveId] = useState<string | null>(null)
+  const [activeId, setActiveId] = useState<string | null>(null)
 
-  // useEffect(() => {
-  //   const ratios: Record<string, number> = {}
-  //   const observer = new IntersectionObserver((entries) => {
-  //     entries.forEach((entry) => {
-  //       ratios[entry.target.id] = entry.intersectionRatio
+  useEffect(() => {
+    const ratios: Record<string, number> = toc.reduce((acc, item) => {
+      acc[item.slug] = 0.0
+      return acc
+    }, {} as Record<string, number>)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(
+        (entry) => {
+          ratios[entry.target.id] = entry.intersectionRatio
+          // Find the first entry with ratio > 0.0
+          const activeEntry = toc.find((item) => {
+            return (ratios[item.slug] || 0.0) > 0.0
+          })
+          if (activeEntry) {
+            setActiveId(activeEntry.slug)
+          }
+        },
+        {
+          root: null, // Use the viewport as the root
+          rootMargin: '0px 0px 100% 0px', // Margin around the root
+          threshold: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], // Percentage to trigger
+        },
+      )
+    })
 
-  //       const maxRatio = Math.max(...Object.values(ratios), 0.1)
-  //       console.log('\x1B[35m[Dev log]\x1B[0m -> TableOfContentsInternal -> maxRatio:', ratios)
-  //       const activeEntry = entries.find((e) => ratios[e.target.id] === maxRatio)
-  //       if (activeEntry) {
-  //         setActiveId(activeEntry.target.id)
-  //       }
-  //     }, {
-  //       root: null, // Use the viewport as the root
-  //       rootMargin: "0px 0px 100% 0px", // Margin around the root
-  //       threshold: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], // Percentage to trigger
-  //     })
-  //   })
+    const headings = document.querySelectorAll(
+      'h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]',
+    )
+    headings.forEach((heading) => {
+      observer.observe(heading)
+    })
 
-  //   const headings = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]')
-  //   headings.forEach((heading) => {
-  //     observer.observe(heading)
-  //   })
-
-  //   return () => {
-  //     observer.disconnect()
-  //   }
-  // }, [])
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
 
   return (
     <nav aria-label="Table of contents" className={className}>
@@ -80,9 +88,9 @@ export function TableOfContentsInternal({
               href={`#${item.slug}`}
               className={cn(
                 'text-fore-200 no-underline hover:underline',
-                // activeId === item.slug
-                //   ? 'font-semibold text-fore-400'
-                //   : undefined,
+                activeId === item.slug
+                  ? 'text-fore-500'
+                  : undefined,
               )}
             >
               {item.title}

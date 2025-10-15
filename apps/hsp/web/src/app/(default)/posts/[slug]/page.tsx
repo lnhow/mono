@@ -88,7 +88,7 @@ export default async function PostPage({ params }: PostPageProps) {
     // Recommended max width for comfortable reading is 65-75 characters
     <div className="mx-auto my-8 [--w-content:75ch]">
       <header className="flex gap-8 text-fore-200">
-        <ViewTransition name={transitionName.card}>
+        <ViewTransition name={transitionName.card} update="none">
           <div className="flex-1 max-w-full pb-6">
             <div className="mx-auto w-(--w-content) max-w-full">
               <div className="font-mono text-sm">

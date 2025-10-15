@@ -17,7 +17,7 @@ export default function Link({
   }
 
   return (
-    <a target="_blank" rel="noopener noreferrer" {...props}>
+    <a target="_blank" rel="noopener noreferrer" {...props} href={href}>
       {children}
     </a>
   )
