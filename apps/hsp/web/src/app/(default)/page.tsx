@@ -10,8 +10,15 @@ export default function HomePage() {
     .filter((post) => PostUtils.shouldShow(post.draft) && post.slug !== 'test')
     .sort((a, b) => {
       // Sort by date descending
+      // Use updatedAt if available, otherwise use createdAt
+      // If both are the same, sort by createdAt descending
       const dateA = new Date(a.updatedAt || a.createdAt).getTime()
       const dateB = new Date(b.updatedAt || b.createdAt).getTime()
+
+      if (dateA === dateB) {
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      }
+
       return dateB - dateA
     })
     .slice(0, 9)
