@@ -17,6 +17,8 @@ export const PostUtils = {
       card: `post-${slug}`,
       title: `post-title-${slug}`,
       description: `post-description-${slug}`,
+      stats: `post-stats-${slug}`,
+      tag: `post-tag-${slug}`,
       // img: `post-img-${slug}`,
     }
   },
@@ -28,5 +30,18 @@ export const PostUtils = {
       return false
     }
     return true
+  },
+  formatDate: (date: HsPost['createdAt'] | HsPost['updatedAt']) => {
+    return new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    }).format(new Date(date!))
+  },
+  formatReadingTime: (minutes: HsPost['readingTimeMinutes']) => {
+    if (minutes < 1) {
+      return 'Less than a min read'
+    }
+    return `${minutes} min read`
   },
 }

@@ -8,6 +8,7 @@ import MarkdownTypography from '@hsp/ui/src/components/mdx/typography'
 import TableOfContents from '@hsp/ui/src/components/mdx/toc'
 import { PostUtils } from '@hsp/ui/src/modules/posts/utils'
 import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
+import { PostTags } from '@hsp/ui/src/modules/posts/card'
 
 interface PostPageProps {
   params: Promise<{
@@ -76,11 +77,10 @@ export default async function PostPage({ params }: PostPageProps) {
     notFound()
   }
 
-  const displayDate = post.createdAt.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  })
+  const createdDate = PostUtils.formatDate(post.createdAt)
+  const updatedDate = post.updatedAt
+    ? PostUtils.formatDate(post.updatedAt)
+    : null
   const toc = post.toc ? JSON.parse(post.toc) : []
   const transitionName = PostUtils.getTransitionName(slug)
 
@@ -91,26 +91,24 @@ export default async function PostPage({ params }: PostPageProps) {
         <ViewTransition name={transitionName.card} update="none">
           <div className="flex-1 max-w-full pb-6">
             <div className="mx-auto w-(--w-content) max-w-full">
-              <div className="font-mono text-sm">
-                <time dateTime={post.createdAt.toISOString()}>
-                  {displayDate}
-                </time>
-                {post.readingTime && (
-                  <>
-                    <span> • </span>
-                    <span>{Math.ceil(post.readingTime)} min read</span>
-                  </>
-                )}
-              </div>
+              <ViewTransition name={transitionName.stats}>
+                <div className="font-mono text-sm">
+                  <time dateTime={post.createdAt.toISOString()}>
+                    {createdDate}
+                  </time>
+                  {post.readingTime && (
+                    <>
+                      <span> • </span>
+                      <span>{Math.ceil(post.readingTime)} min read</span>
+                    </>
+                  )}
+                </div>
+              </ViewTransition>
               {post.updatedAt && (
                 <div className="font-mono text-xs mt-2">
                   (Updated:{' '}
                   <time dateTime={post.updatedAt.toISOString()}>
-                    {post.updatedAt.toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric',
-                    })}
+                    {updatedDate}
                   </time>
                   )
                 </div>
@@ -121,13 +119,20 @@ export default async function PostPage({ params }: PostPageProps) {
                 </h1>
               </ViewTransition>
               <div>
-                {post.tags?.length && (
-                  <div className="mt-2 flex flex-wrap gap-2 text-xs font-mono">
-                    {post.tags?.map((tag) => (
-                      <span key={tag}>#{tag.toLowerCase()}</span>
-                    ))}
-                  </div>
-                )}
+                <PostTags
+                  tags={post.tags || []}
+                  transitionName={transitionName.tag}
+                  className="mt-2"
+                />
+                {/* {post.tags?.length && (
+                  <ViewTransition name={transitionName.tag}>
+                    <div className="mt-2 flex flex-wrap gap-2 text-xs font-mono">
+                      {post.tags?.map((tag) => (
+                        <span key={tag}>#{tag.toLowerCase()}</span>
+                      ))}
+                    </div>
+                  </ViewTransition>
+                )} */}
                 <ViewTransition name={transitionName.description}>
                   <p className="text-md break-words mt-4">{post.description}</p>
                 </ViewTransition>

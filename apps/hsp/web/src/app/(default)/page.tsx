@@ -18,7 +18,7 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col gap-4 max-w-7xl mx-auto md:px-4 py-8">
-      <section className="mt-[18%]">
+      <section className="mt-[18%] mb-[9%]">
         <h1 className="text-4xl">
           <span className="text-fore-200 text-6xl font-bold">Hi,</span>
           <br /> I&apos;m Hao
@@ -28,25 +28,27 @@ export default function HomePage() {
           Web Developer. Photography and UX Enthusiast.
         </h2>
       </section>
+      {posts.length > 0 && (
+        <section className="mt-8">
+          <h2 className="text-2xl mb-4">Latest Posts</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {posts.map((post) => (
+              <CardPost
+                key={post.slug}
+                title={post.title}
+                description={post.description}
+                readingTimeMinutes={post.readingTime}
+                createdAt={post.createdAt}
+                updatedAt={post.updatedAt}
+                slug={post.slug}
+                tags={post.tags || []}
+              />
+            ))}
+          </div>
+        </section>
+      )}
       <section className="mt-8">
-        <h2 className="text-2xl mb-2">Latest Posts</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {posts.map((post) => (
-            <CardPost
-              key={post.slug}
-              title={post.title}
-              description={post.description}
-              readingTimeMinutes={post.readingTime}
-              createdAt={post.createdAt}
-              updatedAt={post.updatedAt}
-              slug={post.slug}
-              tags={post.tags || []}
-            />
-          ))}
-        </div>
-      </section>
-      <section className="mt-8">
-        <h2 className="text-2xl mb-2">Things I built for fun</h2>
+        <h2 className="text-2xl mb-4">Things I built for fun</h2>
         <CardsDemo />
       </section>
     </div>
