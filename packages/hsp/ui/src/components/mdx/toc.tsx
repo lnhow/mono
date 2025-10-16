@@ -2,7 +2,11 @@
 import type { TocItem } from '@repo/remark-toc'
 import Link from '../app/link'
 import cn from '@hsp/ui/src/utils/cn'
-import { useEffect, useState } from 'react'
+import {
+  useEffect,
+  useState,
+  // useSyncExternalStore
+} from 'react'
 
 const headingLevelClassMap: Record<number, string> = {
   1: 'ml-0',
@@ -29,6 +33,29 @@ export default function TableOfContents({
   return <TableOfContentsInternal toc={toc} className={className} />
 }
 
+// For use later with <Activity /> in React 19.2
+// const useMediaQuery = (query: string, defaultState: boolean) => {
+//   return useSyncExternalStore(
+//     (notifyChange) => {
+//       if (typeof window === 'undefined' || !window.matchMedia) {
+//         return () => {}
+//       }
+//       const mediaQueryList = window.matchMedia(query)
+//       mediaQueryList.addEventListener('change', notifyChange)
+//       return () => {
+//         mediaQueryList.removeEventListener('change', notifyChange)
+//       }
+//     },
+//     () => {
+//       if (typeof window === 'undefined' || !window.matchMedia) {
+//         return false
+//       }
+//       return window.matchMedia(query).matches
+//     },
+//     () => defaultState,
+//   )
+// }
+
 export function TableOfContentsInternal({
   toc,
   className,
@@ -37,10 +64,13 @@ export function TableOfContentsInternal({
   const [activeId, setActiveId] = useState<string | null>(null)
 
   useEffect(() => {
-    const ratios: Record<string, number> = toc.reduce((acc, item) => {
-      acc[item.slug] = 0.0
-      return acc
-    }, {} as Record<string, number>)
+    const ratios: Record<string, number> = toc.reduce(
+      (acc, item) => {
+        acc[item.slug] = 0.0
+        return acc
+      },
+      {} as Record<string, number>,
+    )
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(
         (entry) => {
@@ -71,7 +101,7 @@ export function TableOfContentsInternal({
     return () => {
       observer.disconnect()
     }
-  }, [])
+  }, [toc])
 
   return (
     <nav aria-label="Table of contents" className={className}>
@@ -88,9 +118,7 @@ export function TableOfContentsInternal({
               href={`#${item.slug}`}
               className={cn(
                 'text-fore-200 no-underline hover:underline',
-                activeId === item.slug
-                  ? 'text-fore-500'
-                  : undefined,
+                activeId === item.slug ? 'text-fore-500' : undefined,
               )}
             >
               {item.title}
