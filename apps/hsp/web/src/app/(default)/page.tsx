@@ -1,3 +1,5 @@
+import PersonalGithub from '@hsp/ui/src/modules/personal/github'
+import PersonalLinkedinLink from '@hsp/ui/src/modules/personal/linkedin'
 import CardsDemo from '@hsp/ui/src/modules/default/modules/home/page'
 import CardPost from '@hsp/ui/src/modules/posts/card'
 import { PostUtils } from '@hsp/ui/src/modules/posts/utils'
@@ -34,6 +36,10 @@ export default function HomePage() {
         <h2 className="text-md text-fore-200">
           Web Developer. Photography and UX Enthusiast.
         </h2>
+        <div className='flex gap-2 flex-wrap mt-6'>
+          <PersonalGithub />
+          <PersonalLinkedinLink />
+        </div>
       </section>
       {posts.length > 0 && (
         <section className="mt-8">

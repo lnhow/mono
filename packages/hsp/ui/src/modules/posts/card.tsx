@@ -27,7 +27,7 @@ export default function CardPost({
       <Card
         asChild
         className={cn(
-          'flex flex-col p-4 h-full min-h-32 transition outline-fore-100 hover:outline relative',
+          'flex flex-col px-4 py-5 h-full min-h-32 transition outline-fore-100 hover:outline relative',
           className,
         )}
       >

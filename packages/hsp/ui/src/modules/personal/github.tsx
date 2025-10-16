@@ -1,8 +1,21 @@
 import { ButtonLink } from '@hsp/ui/src/components/base/button'
-import Tooltip from '@hsp/ui/src/components/base/tooltip'
 import { LuGithub } from 'react-icons/lu'
+import Tooltip from '@hsp/ui/src/components/base/tooltip'
 
-export default function PersonalGithubLink() {
+export default function PersonalGithub() {
+  return (
+    <ButtonLink
+      href="https://github.com/lnhow"
+      target="_blank"
+      variant="outline"
+    >
+      <LuGithub />
+      <span>GitHub</span>
+    </ButtonLink>
+  )
+}
+
+export function PersonalGithubIcon() {
   return (
     <Tooltip label="My GitHub">
       <ButtonLink
