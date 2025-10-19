@@ -1,6 +1,6 @@
 import './globals.css'
 import { ThemeProvider } from '@hsp/ui/utils/theme/ThemeProvider'
-import { Toaster } from '@hsp/ui/components/base/sonner'
+import { Toaster } from '@hsp/ui/components/sonner'
 import { Lexend } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'

@@ -1,4 +1,4 @@
-import { Skeleton } from '@hsp/ui/components/base/skeleton'
+import { Skeleton } from '@hsp/ui/components/skeleton'
 import cn from '@hsp/ui/utils/cn'
 
 export default function SidebarSkeleton({ className }: { className?: string }) {

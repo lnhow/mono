@@ -4,8 +4,8 @@
 import { useCopyToClipboard as _useCopyToClipboard } from 'usehooks-ts'
 import { memo, useCallback, useEffect, useRef } from 'react'
 import { LuCheck, LuCopy } from 'react-icons/lu'
-import { Button } from '@hsp/ui/components/base/button'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@hsp/ui/components/base/tooltip/base'
+import { Button } from '@hsp/ui/components/button'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@hsp/ui/components/tooltip/base'
 
 
 export function useCopyToClipboard(): [boolean, (text: string) => void] {

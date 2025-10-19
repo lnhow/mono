@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
 import ViewTransition from '@hsp/ui/utils/react/view-transition'
-import { Card } from '@hsp/ui/components/base/card'
+import { Card } from '@hsp/ui/components/card'
 import { FormGroup } from './group'
 
 function PageLobby() {

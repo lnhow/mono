@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useAtomValue } from 'jotai'
 
 import ViewTransition from '@hsp/ui/utils/react/view-transition'
-import { Button } from '@hsp/ui/components/base/button'
+import { Button } from '@hsp/ui/components/button'
 import { FormInput } from '../components/input'
 import { FormSelect } from '../components/select'
 import {

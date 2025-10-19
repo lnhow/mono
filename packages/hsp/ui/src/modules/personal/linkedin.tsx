@@ -1,4 +1,4 @@
-import { ButtonLink } from '@hsp/ui/components/base/button'
+import { ButtonLink } from '@hsp/ui/components/button'
 import { LuLinkedin } from 'react-icons/lu'
 
 export default function PersonalLinkedinLink() {

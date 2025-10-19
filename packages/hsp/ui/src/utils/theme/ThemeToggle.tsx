@@ -3,14 +3,14 @@
 import { LuMoon as Moon, LuSun as Sun } from 'react-icons/lu'
 import { useTheme } from 'next-themes'
 
-import { Button } from '@hsp/ui/components/base/button'
+import { Button } from '@hsp/ui/components/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@hsp/ui/components/base/dropdown-menu'
-import Tooltip from '../../components/base/tooltip'
+} from '@hsp/ui/components/dropdown-menu'
+import Tooltip from '../../components/tooltip'
 
 export function ThemeToggle() {
   const { setTheme } = useTheme()

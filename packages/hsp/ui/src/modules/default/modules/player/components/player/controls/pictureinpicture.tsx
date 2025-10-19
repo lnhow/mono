@@ -9,7 +9,7 @@ import {
 } from '@hsp/ui/utils/browser/pictureinpicture'
 import { useKeydown } from '../_utils/useKeydown'
 import { HOTKEYS, TOOLTIPS } from '../types'
-import Tooltip from '@hsp/ui/components/base/tooltip'
+import Tooltip from '@hsp/ui/components/tooltip'
 
 const PictureInPictureType = {
   video: {

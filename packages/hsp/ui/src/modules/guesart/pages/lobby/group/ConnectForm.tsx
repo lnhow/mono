@@ -1,5 +1,5 @@
 'use client'
-import { Button } from '@hsp/ui/components/base/button'
+import { Button } from '@hsp/ui/components/button'
 import { useEffect, useState } from 'react'
 
 import ViewTransition from '@hsp/ui/utils/react/view-transition'
@@ -8,7 +8,7 @@ import { socketAtom } from '../../../state/store'
 import { useAtomValue } from 'jotai'
 import { FormInput } from './components/input'
 import { useDebounceCallback } from 'usehooks-ts'
-import CircularProgress from '@hsp/ui/components/base/progress/circular'
+import CircularProgress from '@hsp/ui/components/progress/circular'
 
 export default function ConnectForm() {
   const { socket } = useAtomValue(socketAtom)

@@ -4,7 +4,7 @@ import { toast } from 'sonner'
 import { useAtomValue } from 'jotai'
 
 import ViewTransition from '@hsp/ui/utils/react/view-transition'
-import { Button } from '@hsp/ui/components/base/button'
+import { Button } from '@hsp/ui/components/button'
 import { FormInput } from '../components/input'
 import { socketAtom } from '../../../../state/store'
 import { EGrtErrorCode } from '../../../../state/type/socket'

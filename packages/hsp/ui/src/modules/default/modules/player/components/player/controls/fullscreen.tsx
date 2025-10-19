@@ -7,7 +7,7 @@ import {
 import { PlayerViewControlsProps, HOTKEYS, TOOLTIPS } from '../types'
 import { useCallback } from 'react'
 import { useKeydown } from '../_utils/useKeydown'
-import Tooltip from '@hsp/ui/components/base/tooltip'
+import Tooltip from '@hsp/ui/components/tooltip'
 
 const getFullscreenSnapshot = () => {
   return Boolean(

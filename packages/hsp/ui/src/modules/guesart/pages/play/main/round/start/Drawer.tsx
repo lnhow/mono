@@ -1,6 +1,6 @@
 import { ComponentProps, memo, useEffect, useMemo } from 'react'
 import Container from '../../../_components/Container'
-import { Button } from '@hsp/ui/components/base/button'
+import { Button } from '@hsp/ui/components/button'
 import { useCountdown } from 'usehooks-ts'
 import WordBox from '../../../_components/WordBox'
 import { useAtomValue } from 'jotai'

@@ -8,8 +8,8 @@ import {
   SelectContent,
   SelectItem,
   SelectValue,
-} from '@hsp/ui/components/base/select'
-import { Label } from '@hsp/ui/components/base/label'
+} from '@hsp/ui/components/select'
+import { Label } from '@hsp/ui/components/label'
 
 export const FormSelect = genericMemo(function FormSelect<
   T extends FieldValues,

@@ -1,9 +1,9 @@
-import { Button } from '@hsp/ui/components/base/button'
+import { Button } from '@hsp/ui/components/button'
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@hsp/ui/components/base/collapsible'
+} from '@hsp/ui/components/collapsible'
 
 export default function Rules() {
   return (

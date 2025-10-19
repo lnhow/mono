@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-import { fn } from 'storybook/test';
+import { fn } from 'storybook/test'
 
-import { Button } from '@hsp/ui/components/base/button';
+import { Button } from '@hsp/ui/components/button'
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -16,10 +16,10 @@ const meta = {
   tags: ['autodocs'],
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: { onClick: fn() },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof Button>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
@@ -27,25 +27,25 @@ export const Primary: Story = {
     variant: 'primary',
     children: 'Button',
   },
-};
+}
 
 export const Secondary: Story = {
   args: {
     variant: 'secondary',
     children: 'Button',
   },
-};
+}
 
 export const Large: Story = {
   args: {
     size: 'lg',
     children: 'Button',
   },
-};
+}
 
 export const Small: Story = {
   args: {
     size: 'sm',
     children: 'Button',
   },
-};
+}

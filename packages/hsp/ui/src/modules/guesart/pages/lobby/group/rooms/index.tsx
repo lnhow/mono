@@ -7,7 +7,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from '@hsp/ui/components/base/tabs'
+} from '@hsp/ui/components/tabs'
 import { useSearchParams } from 'next/navigation'
 
 const Lobby = memo(function Lobby() {
