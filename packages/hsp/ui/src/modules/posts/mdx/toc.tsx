@@ -1,6 +1,6 @@
 'use client'
 import type { TocItem } from '@repo/remark-toc'
-import Link from '../app/link'
+import Link from '@hsp/ui/components/app/link'
 import cn from '@hsp/ui/utils/cn'
 import {
   useEffect,
