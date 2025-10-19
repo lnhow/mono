@@ -2,7 +2,7 @@ import { memo } from 'react'
 import { roomRoundAtom } from '../../../../_state/store'
 import { useAtomValue } from 'jotai'
 import { useIsDrawer } from '../../../../_state/hooks'
-import { resizeUnsplashImage } from '@hsp/ui/src/modules/guesart/utils'
+import { resizeUnsplashImage } from '@hsp/ui/modules/guesart/utils'
 
 export const Word = memo(function Word() {
   const { word, wordImg } = useAtomValue(roomRoundAtom)

@@ -25,6 +25,8 @@ const GEOMETRIES = [
   new ConeGeometry(undefined, undefined, 3),
 ]
 
+// TODO: Fix cannot call impure function Math.random()
+/* eslint-disable react-hooks/purity */
 export default function Experience() {
   const [matcapTexture] = useMatcapTexture(
     '7B5254_E9DCC7_B19986_C8AC91',

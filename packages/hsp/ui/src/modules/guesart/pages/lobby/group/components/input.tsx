@@ -1,9 +1,9 @@
 import { ComponentPropsWithoutRef } from 'react'
 import { Controller, FieldValues } from 'react-hook-form'
 
-import { Input } from '@hsp/ui/src/components/base/input'
-import { Label } from '@hsp/ui/src/components/base/label'
-import genericMemo from '@hsp/ui/src/utils/react/genericMemo'
+import { Input } from '@hsp/ui/components/input'
+import { Label } from '@hsp/ui/components/label'
+import genericMemo from '@hsp/ui/utils/react/generic-memo'
 
 export const FormInput = genericMemo(function FormInput<T extends FieldValues>({
   label,

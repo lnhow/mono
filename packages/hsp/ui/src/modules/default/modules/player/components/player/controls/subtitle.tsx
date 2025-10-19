@@ -1,10 +1,10 @@
 import { LuCaptions } from 'react-icons/lu'
 import { PlayerButton } from '../_base/button'
-import { useHTMLElState } from '../../../../../../../hooks/useHTMLElState'
+import { useHTMLElState } from '@hsp/ui/utils/react/use-html-el-state'
 import { useState } from 'react'
 import { PlayerBaseSubCompProps, HOTKEYS, TOOLTIPS } from '../types'
 import { useKeydown } from '../_utils/useKeydown'
-import Tooltip from '@hsp/ui/src/components/base/tooltip'
+import Tooltip from '@hsp/ui/components/tooltip'
 
 export default function ButtonSubtitle({ getVideoEl }: PlayerBaseSubCompProps) {
   const isHasSubtitle = useHTMLElState(

@@ -3,7 +3,7 @@ import { PlayerListInternal } from '../../sidebar/Players'
 import Container from '../../_components/Container'
 import { useAtomValue } from 'jotai'
 import { roomPlayersAtom } from '../../_state/store'
-import { Card } from '@hsp/ui/src/components/base/card'
+import { Card } from '@hsp/ui/components/card'
 import ButtonLeaveRoom from '../../_components/ButtonLeaveRoom'
 
 const GameEnd = memo(function GameEnd() {

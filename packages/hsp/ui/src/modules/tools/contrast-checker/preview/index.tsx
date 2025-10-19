@@ -9,9 +9,9 @@ import { Controller, useFormContext, useWatch } from 'react-hook-form'
 import { calcContrastRatio, isContrastRatioPass } from '../contrastUtils'
 import { LuCheck, LuX, LuInfo } from 'react-icons/lu'
 import { FormContrastChecker, ValidationRules } from '../const'
-import cn from '@hsp/ui/src/utils/cn' 
-import { Button } from '@hsp/ui/src/components/base/button'
-import Tooltip from '@hsp/ui/src/components/base/tooltip'
+import cn from '@hsp/ui/utils/cn'
+import { Button } from '@hsp/ui/components/button'
+import Tooltip from '@hsp/ui/components/tooltip'
 
 export const BackgroundPreview = memo(function BackgroundPreview({
   children,

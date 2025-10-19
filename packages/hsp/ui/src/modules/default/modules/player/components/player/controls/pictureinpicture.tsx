@@ -6,10 +6,10 @@ import {
   detectPictureInPictureSupport,
   TRequestDPIPOptions,
   WindowWithDocumentPictureInPicture,
-} from '@hsp/ui/src/utils/browser/pictureinpicture'
+} from '@hsp/ui/utils/browser/pictureinpicture'
 import { useKeydown } from '../_utils/useKeydown'
 import { HOTKEYS, TOOLTIPS } from '../types'
-import Tooltip from '@hsp/ui/src/components/base/tooltip'
+import Tooltip from '@hsp/ui/components/tooltip'
 
 const PictureInPictureType = {
   video: {

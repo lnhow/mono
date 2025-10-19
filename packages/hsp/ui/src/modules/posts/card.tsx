@@ -1,7 +1,7 @@
-import cn from '@hsp/ui/src/utils/cn'
-import Link from '../../components/app/link'
+import cn from '@hsp/ui/utils/cn'
+import Link from '../../components/link'
 import ViewTransition from '../../utils/react/view-transition'
-import { Card, CardDescription, CardTitle } from '../../components/base/card'
+import { Card, CardDescription, CardTitle } from '../../components/card'
 import { HsPost, PostUtils } from './utils'
 
 export type CardPostProps = {

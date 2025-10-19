@@ -1,16 +1,16 @@
 import { useMemo, useRef } from 'react'
 import { PlayerBaseSubCompProps, HOTKEYS, TOOLTIPS } from '../types'
-import { useHTMLElState } from '../../../../../../../hooks/useHTMLElState'
+import { useHTMLElState } from '@hsp/ui/utils/react/use-html-el-state'
 import { PlayerButton } from '../_base/button'
 import { LuVolume1, LuVolume2, LuVolumeOff } from 'react-icons/lu'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@hsp/ui/src/components/base/popover'
-import { Slider } from '@hsp/ui/src/components/base/slider'
+} from '@hsp/ui/components/popover'
+import { Slider } from '@hsp/ui/components/slider'
 import { useKeydown } from '../_utils/useKeydown'
-import Tooltip from '@hsp/ui/src/components/base/tooltip'
+import Tooltip from '@hsp/ui/components/tooltip'
 
 const getVolumeSnapshot = (videoEl: HTMLVideoElement | null) => {
   if (!videoEl) return 0

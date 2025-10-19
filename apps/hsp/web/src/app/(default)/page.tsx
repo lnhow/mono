@@ -1,8 +1,8 @@
-import PersonalGithub from '@hsp/ui/src/modules/personal/github'
-import PersonalLinkedinLink from '@hsp/ui/src/modules/personal/linkedin'
-import CardsDemo from '@hsp/ui/src/modules/default/modules/home/page'
-import CardPost from '@hsp/ui/src/modules/posts/card'
-import { PostUtils } from '@hsp/ui/src/modules/posts/utils'
+import PersonalGithub from '@hsp/ui/modules/personal/github'
+import PersonalLinkedinLink from '@hsp/ui/modules/personal/linkedin'
+import CardsDemo from '@hsp/ui/modules/default/modules/home/page'
+import CardPost from '@hsp/ui/modules/posts/card'
+import { PostUtils } from '@hsp/ui/modules/posts/utils'
 import { allPosts } from 'content-collections'
 import { Metadata } from 'next'
 

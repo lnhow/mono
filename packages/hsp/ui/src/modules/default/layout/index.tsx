@@ -1,7 +1,7 @@
-import ViewTransition from '@hsp/ui/src/utils/react/view-transition'
-import { ButtonLink } from '@hsp/ui/src/components/base/button'
-import { ThemeToggle } from '@hsp/ui/src/components/theme/ThemeToggle'
-import { PersonalGithubIcon } from '@hsp/ui/src/modules/personal/github'
+import ViewTransition from '@hsp/ui/utils/react/view-transition'
+import { ButtonLink } from '@hsp/ui/components/button'
+import { ThemeToggle } from '@hsp/ui/utils/theme/ThemeToggle'
+import { PersonalGithubIcon } from '@hsp/ui/modules/personal/github'
 
 export default function LayoutDefault({
   children,

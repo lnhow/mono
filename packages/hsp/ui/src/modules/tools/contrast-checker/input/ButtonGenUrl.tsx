@@ -5,8 +5,8 @@ import {
   FormContrastChecker,
   // ValidationRules,
 } from '../const'
-import { Button } from '@hsp/ui/src/components/base/button'
-import Tooltip from '@hsp/ui/src/components/base/tooltip'
+import { Button } from '@hsp/ui/components/button'
+import Tooltip from '@hsp/ui/components/tooltip'
 
 const ButtonGenLinkContrast = memo(function ButtonGenLinkContrast() {
   const { getValues } = useFormContext<FormContrastChecker>()

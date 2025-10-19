@@ -4,13 +4,13 @@ import { render, screen } from '@testing-library/react'
 import PagePlayer from './page'
 import { PropsWithChildren } from 'react'
 
-vi.mock('@hsp/ui/src/modules/default/modules/player/demo', () => {
+vi.mock('@hsp/ui/modules/default/modules/player/demo', () => {
   return {
     default: () => <div>Mocked Demo Player</div>,
   }
 })
 
-vi.mock('@hsp/ui/src/utils/react/view-transition', () => {
+vi.mock('@hsp/ui/utils/react/view-transition', () => {
   return {
     default: ({ children }: PropsWithChildren) => children,
   }

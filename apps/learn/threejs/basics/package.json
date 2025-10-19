@@ -9,14 +9,14 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@types/three": "^0.177.0",
+    "@types/three": "catalog:three",
     "gsap": "^3.12.2",
     "typescript": "~5.8.3",
     "vite": "^7.0.0",
     "vite-plugin-restart": "^0.4.2"
   },
   "dependencies": {
-    "three": "^0.177.0",
-    "lil-gui": "^0.20.0"
+    "three": "catalog:three",
+    "lil-gui": "catalog:three"
   }
 }

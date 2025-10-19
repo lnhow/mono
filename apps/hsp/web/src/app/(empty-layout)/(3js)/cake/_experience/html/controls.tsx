@@ -1,19 +1,19 @@
 'use client'
 
 import { cakeAtom, ECakeScene, encodeCakeURL, SCENE_CONFIG, TEXT } from '../_state'
-import { Label } from '@hsp/ui/src/components/base/label'
+import { Label } from '@hsp/ui/components/label'
 import { useAtom, useAtomValue } from 'jotai'
-import cn from '@hsp/ui/src/utils/cn'
+import cn from '@hsp/ui/utils/cn'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hsp/ui/src/components/base/select'
-import { Button } from '@hsp/ui/src/components/base/button'
+} from '@hsp/ui/components/select'
+import { Button } from '@hsp/ui/components/button'
 import { useMemo } from 'react'
-import { useCopyToClipboard } from '@hsp/ui/src/components/app/button/ButtonCopy'
+import { useCopyToClipboard } from '@hsp/ui/components/button-copy'
 
 export default function Controls({ className }: { className?: string }) {
   const [cake, setCake] = useAtom(cakeAtom)

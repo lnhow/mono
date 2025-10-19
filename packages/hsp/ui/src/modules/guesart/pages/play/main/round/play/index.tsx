@@ -10,11 +10,11 @@ import {
 } from 'react'
 import { debounce } from 'lodash'
 import { useAtomValue } from 'jotai'
-import { socketAtom } from '@hsp/ui/src/modules/guesart/state/store'
+import { socketAtom } from '@hsp/ui/modules/guesart/state/store'
 import {
   EClientToServerEvents,
   EServerToClientEvents,
-} from '@hsp/ui/src/modules/guesart/state/type/socket'
+} from '@hsp/ui/modules/guesart/state/type/socket'
 import {
   DEFAULT_BRUSH_SIZES,
   DEFAULT_COLOR,
@@ -25,9 +25,9 @@ import {
 import ToolsPanel from './ToolsPanel'
 import InfoPanel from './InfoPanel'
 import Container from '../../../_components/Container'
-import { breakpoints } from '@hsp/ui/src/styles/const'
+import { breakpoints } from '@hsp/ui/styles/const'
 import { useIsDrawer } from '../../../_state/hooks'
-import cn from '@hsp/ui/src/utils/cn'
+import cn from '@hsp/ui/utils/cn'
 
 const RoundPlay = memo(function RoundPlay() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)

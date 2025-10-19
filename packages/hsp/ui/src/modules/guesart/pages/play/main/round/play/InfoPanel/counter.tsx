@@ -1,8 +1,8 @@
 import { useAtomValue } from 'jotai'
 import { memo, useEffect, useMemo, useState } from 'react'
 import { roomRoundAtom } from '../../../../_state/store'
-import { socketAtom } from '@hsp/ui/src/modules/guesart/state/store'
-import { EClientToServerEvents } from '@hsp/ui/src/modules/guesart/state/type/socket'
+import { socketAtom } from '@hsp/ui/modules/guesart/state/store'
+import { EClientToServerEvents } from '@hsp/ui/modules/guesart/state/type/socket'
 
 export const Counter = memo(function Counter() {
   const { socket } = useAtomValue(socketAtom)

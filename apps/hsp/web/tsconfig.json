@@ -10,7 +10,7 @@
         "./i18n/*",
       ],
       "@hsp/ui/*": [
-        "../../../packages/hsp/ui/*",
+        "../../../packages/hsp/ui/src/*",
       ],
       "content-collections": [
         "./.content-collections/generated"
