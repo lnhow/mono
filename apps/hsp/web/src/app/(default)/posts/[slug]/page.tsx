@@ -4,9 +4,11 @@ import { notFound } from 'next/navigation'
 import { MDXContent } from '@content-collections/mdx/react'
 
 import { mdxComponents } from '@/mdx-components'
-import { isProductionEnv } from '@/common/utils/common'
 import MarkdownTypography from '@hsp/ui/src/components/mdx/typography'
 import TableOfContents from '@hsp/ui/src/components/mdx/toc'
+import { PostUtils } from '@hsp/ui/src/modules/posts/utils'
+import ViewTransition from '@hsp/ui/src/utils/react/view-transition'
+import { PostTags } from '@hsp/ui/src/modules/posts/card'
 
 interface PostPageProps {
   params: Promise<{
@@ -16,7 +18,7 @@ interface PostPageProps {
 
 const getPost = (slug: string) => {
   return allPosts.find((post) => {
-    if (isProductionEnv && post.draft) {
+    if (!PostUtils.shouldShow(post.draft)) {
       return false
     }
     return post.slug === slug
@@ -27,7 +29,7 @@ const getPost = (slug: string) => {
 export function generateStaticParams() {
   return allPosts.map((post) => ({
     slug: post.slug,
-  }));
+  }))
 }
 
 export async function generateMetadata({
@@ -75,56 +77,69 @@ export default async function PostPage({ params }: PostPageProps) {
     notFound()
   }
 
-  const displayDate = post.createdAt.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  })
+  const createdDate = PostUtils.formatDate(post.createdAt)
+  const updatedDate = post.updatedAt
+    ? PostUtils.formatDate(post.updatedAt)
+    : null
   const toc = post.toc ? JSON.parse(post.toc) : []
+  const transitionName = PostUtils.getTransitionName(slug)
 
   return (
     // Recommended max width for comfortable reading is 65-75 characters
     <div className="mx-auto my-8 [--w-content:75ch]">
       <header className="flex gap-8 text-fore-200">
-        <div className="border-b border-fore-100 flex-1 max-w-full pb-6">
-          <div className="mx-auto w-(--w-content) max-w-full">
-            <div className="font-mono text-sm">
-              <time dateTime={post.createdAt.toISOString()}>{displayDate}</time>
-              {post.readingTime && (
-                <>
-                  <span> • </span>
-                  <span>{Math.ceil(post.readingTime)} min read</span>
-                </>
-              )}
-            </div>
-            {post.updatedAt && (
-              <div className="font-mono text-xs mt-2">
-                (Updated:{' '}
-                <time dateTime={post.updatedAt.toISOString()}>
-                  {post.updatedAt.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                  })}
-                </time>
-                )
-              </div>
-            )}
-            <h1 className="text-3xl md:text-4xl font-semibold mt-6 mb-3 text-fore-400">
-              {post.title}
-            </h1>
-            <div>
-              {post.tags?.length && (
-                <div className="mt-2 flex flex-wrap gap-2 text-xs font-mono">
-                  {post.tags?.map((tag) => (
-                    <span key={tag}>#{tag.toLowerCase()}</span>
-                  ))}
+        <ViewTransition name={transitionName.card} update="none">
+          <div className="flex-1 max-w-full pb-6">
+            <div className="mx-auto w-(--w-content) max-w-full">
+              <ViewTransition name={transitionName.stats}>
+                <div className="font-mono text-sm">
+                  <time dateTime={post.createdAt.toISOString()}>
+                    {createdDate}
+                  </time>
+                  {post.readingTime && (
+                    <>
+                      <span> • </span>
+                      <span>{Math.ceil(post.readingTime)} min read</span>
+                    </>
+                  )}
+                </div>
+              </ViewTransition>
+              {post.updatedAt && (
+                <div className="font-mono text-xs mt-2">
+                  (Updated:{' '}
+                  <time dateTime={post.updatedAt.toISOString()}>
+                    {updatedDate}
+                  </time>
+                  )
                 </div>
               )}
-              <p className="text-md break-words mt-4">{post.description}</p>
+              <ViewTransition name={transitionName.title}>
+                <h1 className="text-3xl md:text-4xl font-semibold mt-6 mb-3 text-fore-400">
+                  {post.title}
+                </h1>
+              </ViewTransition>
+              <div>
+                <PostTags
+                  tags={post.tags || []}
+                  transitionName={transitionName.tag}
+                  className="mt-2"
+                />
+                {/* {post.tags?.length && (
+                  <ViewTransition name={transitionName.tag}>
+                    <div className="mt-2 flex flex-wrap gap-2 text-xs font-mono">
+                      {post.tags?.map((tag) => (
+                        <span key={tag}>#{tag.toLowerCase()}</span>
+                      ))}
+                    </div>
+                  </ViewTransition>
+                )} */}
+                <ViewTransition name={transitionName.description}>
+                  <p className="text-md break-words mt-4">{post.description}</p>
+                </ViewTransition>
+              </div>
             </div>
           </div>
-        </div>
+        </ViewTransition>
         <div className="basis-xs hidden lg:block min-w-60">&nbsp;</div>
       </header>
       <div className="flex gap-8 mt-8 relative text-fore-200">

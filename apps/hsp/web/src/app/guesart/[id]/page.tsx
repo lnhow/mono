@@ -1,6 +1,6 @@
 import PagePlay from '@hsp/ui/src/modules/guesart/pages/play'
 import { Metadata } from 'next'
-import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
+import ViewTransition from '@hsp/ui/src/utils/react/view-transition'
 
 // Force static generation for this page
 // [id] is the room id. but only used on the client side

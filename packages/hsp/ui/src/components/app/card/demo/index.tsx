@@ -1,7 +1,7 @@
 import cn from '@hsp/ui/src/utils/cn'
 import Link from '../../link'
 import { ReactNode } from 'react'
-import ViewTransition from '../../ViewTransition'
+import ViewTransition from '../../../../utils/react/view-transition'
 import { Card, CardDescription, CardTitle } from '../../../base/card'
 
 export type CardDemoProps = {
@@ -29,7 +29,7 @@ export default function CardDemo({
   return (
     <ViewTransition name={transitionCard}>
       <Link href={href} className={cn(className)}>
-        <Card className="flex flex-col p-4 h-full min-h-32 transition outline-fore-100 hover:outline">
+        <Card className="flex flex-col px-4 py-5 h-full min-h-32 transition outline-fore-100 hover:outline">
           <ViewTransition name={transitionTitle}>
             <CardTitle className="mb-6">
               <h3 className="text-md font-normal text-fore-400">{title}</h3>

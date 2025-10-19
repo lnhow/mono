@@ -27,9 +27,9 @@ export default function MarkdownTypography({
         // Links
         '[&_a]:text-primary-400 [&_a]:font-medium [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary-400/80 [&_a]:transition-colors',
         // Lists
-        '[&_ul]:list-disc [&_ul]:my-6 [&_ul]:ml-6',
-        '[&_ol]:list-decimal [&_ol]:my-6 [&_ol]:ml-6',
-        '[&_li]:mt-2',
+        '[&_ul]:list-disc [&_ul]:my-6 [&_ul]:ml-1',
+        '[&_ol]:list-decimal [&_ol]:my-6 [&_ol]:ms-1',
+        '[&_li]:my-2 [&_li_p]:my-3 [&_li>ul]:mt-3 [&_li_ol]:mt-3',
         // Blockquotes
         '[&_blockquote]:text-fore-300 [&_blockquote]:font-light [&_blockquote]:border-l-2 [&_blockquote]:border-fore-200 [&_blockquote]:pl-6 [&_blockquote]:py-3 [&_blockquote]:my-6',
         '[&_blockquote_>_p:before]:content-none [&_blockquote_>_p:after]:content-none [&_blockquote_>_p]:my-1',
@@ -54,7 +54,7 @@ export default function MarkdownTypography({
         '[&_hr]:border-fore-500 [&_hr]:my-8',
 
         // Strong/Bold
-        '[&_strong]:font-semibold',
+        '[&_strong]:font-medium [&_strong]:text-fore-400',
         '[&_b]:font-semibold',
         // Emphasis/Italic
         '[&_em]:italic',

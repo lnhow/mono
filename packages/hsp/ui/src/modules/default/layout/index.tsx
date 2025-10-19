@@ -1,7 +1,7 @@
-import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
+import ViewTransition from '@hsp/ui/src/utils/react/view-transition'
 import { ButtonLink } from '@hsp/ui/src/components/base/button'
 import { ThemeToggle } from '@hsp/ui/src/components/theme/ThemeToggle'
-import PersonalGithubLink from './components/github-link'
+import { PersonalGithubIcon } from '@hsp/ui/src/modules/personal/github'
 
 export default function LayoutDefault({
   children,
@@ -10,15 +10,15 @@ export default function LayoutDefault({
 }) {
   return (
     <div>
-      <div className="w-full z-50 sticky top-0 bg-base-100/95 backdrop-blur supports-backdrop-filter:bg-base-100/30 border-b">
-        <nav className="px-4 py-2 h-(--layout-header-height) flex justify-between">
+      <div className="w-full z-50 sticky top-0 bg-base-100/95 backdrop-blur supports-backdrop-filter:bg-base-100/30">
+        <nav className="px-4 py-2 mx-auto lg:container lg:px-0 h-(--layout-header-height) flex justify-between">
           <ViewTransition name="header-title">
             <ButtonLink variant="ghost" href="/">
               haoln
             </ButtonLink>
           </ViewTransition>
           <div className="flex items-center gap-2">
-            <PersonalGithubLink />
+            <PersonalGithubIcon />
             <ThemeToggle />
           </div>
         </nav>

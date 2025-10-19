@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
+import ViewTransition from '@hsp/ui/src/utils/react/view-transition'
 import { ButtonLink } from '@hsp/ui/src/components/base/button'
 import { ThemeToggle } from '@hsp/ui/src/components/theme/ThemeToggle'
 import NoSsr from '@hsp/ui/src/components/app/NoSsr'
@@ -17,7 +17,7 @@ const LayoutGuesart = memo(function LayoutGuesart({
   return (
     <div>
       <div className="w-full z-50">
-        <nav className="px-4 py-2 h-(--layout-header-height) flex justify-between">
+        <nav className="px-4 py-2 mx-auto lg:container lg:px-0 h-(--layout-header-height) flex justify-between">
           <div className='flex items-center gap-2'>
             <ButtonLink variant="ghost" size="icon" href="/">
               <LuHouse />
