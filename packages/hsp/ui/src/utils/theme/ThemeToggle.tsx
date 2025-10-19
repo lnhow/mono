@@ -10,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@hsp/ui/components/base/dropdown-menu'
-import Tooltip from '../base/tooltip'
+import Tooltip from '../../components/base/tooltip'
 
 export function ThemeToggle() {
   const { setTheme } = useTheme()
