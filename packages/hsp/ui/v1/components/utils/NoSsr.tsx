@@ -1,3 +1,3 @@
-import NoSsr from '@hsp/ui/src/components/app/NoSsr'
+import NoSsr from '@hsp/ui/components/app/NoSsr'
 
 export default NoSsr

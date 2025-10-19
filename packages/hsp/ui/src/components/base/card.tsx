@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Slot } from "radix-ui"
-import cn from '@hsp/ui/src/utils/cn'
+import cn from '@hsp/ui/utils/cn'
 
 export interface CardProps
   extends React.HTMLAttributes<HTMLDivElement> {

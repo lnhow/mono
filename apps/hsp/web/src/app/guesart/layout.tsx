@@ -1,3 +1,3 @@
-import LayoutGuesart from '@hsp/ui/src/modules/guesart/layout'
+import LayoutGuesart from '@hsp/ui/modules/guesart/layout'
 
 export default LayoutGuesart

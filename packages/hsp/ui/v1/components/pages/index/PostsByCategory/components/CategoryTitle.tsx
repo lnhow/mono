@@ -1,9 +1,9 @@
 import { getTranslation } from '@i18n/server'
-import { NwCategoryProps } from '@hsp/ui/v1/types/components/category.type'
+import { NwCategoryProps } from '@hsp/ui/../v1/types/components/category.type'
 import Link from 'next/link'
 import { PropsWithChildren } from 'react'
 import { MdOutlineChevronRight } from 'react-icons/md'
-import { nsCommon } from '@hsp/ui/v1/components/common/types'
+import { nsCommon } from '@hsp/ui/../v1/components/common/types'
 
 export default async function CategoryTitle({
   data,

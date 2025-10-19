@@ -1,5 +1,5 @@
-import { NwCategoryProps } from '@hsp/ui/v1/types/components/category.type'
-import { NwPostGroupProps } from '@hsp/ui/v1/types/components/posts.type'
+import { NwCategoryProps } from '@hsp/ui/../v1/types/components/category.type'
+import { NwPostGroupProps } from '@hsp/ui/../v1/types/components/posts.type'
 import CategoryTitle from './components/CategoryTitle'
 import PostGroup from './components/PostsGroup'
 

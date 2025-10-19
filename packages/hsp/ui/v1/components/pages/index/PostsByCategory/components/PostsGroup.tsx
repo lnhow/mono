@@ -1,6 +1,6 @@
-import { NwPostGroupProps } from '@hsp/ui/v1/types/components/posts.type'
-import NwPostBase from '@hsp/ui/v1/components/common/NwPost/NwPostBase'
-import NwPostHero from '@hsp/ui/v1/components/common/NwPost/NwPostHero'
+import { NwPostGroupProps } from '@hsp/ui/../v1/types/components/posts.type'
+import NwPostBase from '@hsp/ui/../v1/components/common/NwPost/NwPostBase'
+import NwPostHero from '@hsp/ui/../v1/components/common/NwPost/NwPostHero'
 
 export default function PostGroup({ data }: NwPostGroupProps) {
   const sidePosts = data.slice(1, 3)

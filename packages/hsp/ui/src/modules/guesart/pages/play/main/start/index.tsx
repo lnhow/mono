@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { useAtomValue } from 'jotai'
-import { Button } from '@hsp/ui/src/components/base/button'
-import ButtonCopy from '@hsp/ui/src/components/app/button/ButtonCopy'
+import { Button } from '@hsp/ui/components/base/button'
+import ButtonCopy from '@hsp/ui/components/app/button/ButtonCopy'
 
 import { roomMetadataAtom, TGameState } from '../../_state/store'
 import { sessionAtom, socketAtom } from '../../../../state/store'
@@ -13,7 +13,7 @@ import { ROOM_CONSTRAINTS } from '../../../lobby/group/rooms/RoomCreateForm'
 import { ERoomTheme } from '../../../../state/type/room'
 import { EClientToServerEvents } from '../../../../state/type/socket'
 import { debounce } from 'lodash'
-import { DEFAULT_DEBOUNCE_TIME } from '@hsp/ui/src/utils/debounce'
+import { DEFAULT_DEBOUNCE_TIME } from '@hsp/ui/utils/debounce'
 
 const GameStart = memo(function GameStart() {
   const metaData = useAtomValue(roomMetadataAtom)

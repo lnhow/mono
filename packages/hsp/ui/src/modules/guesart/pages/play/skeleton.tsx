@@ -1,4 +1,4 @@
-import { Skeleton } from '@hsp/ui/src/components/base/skeleton'
+import { Skeleton } from '@hsp/ui/components/base/skeleton'
 import SidebarSkeleton from './sidebar/skeleton'
 
 export default function RoomSkeleton() {

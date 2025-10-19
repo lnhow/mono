@@ -1,12 +1,12 @@
-import { Button } from '@hsp/ui/src/components/base/button'
-import { Card } from '@hsp/ui/src/components/base/card'
+import { Button } from '@hsp/ui/components/base/button'
+import { Card } from '@hsp/ui/components/base/card'
 import { Dispatch, memo, SetStateAction, useMemo } from 'react'
 import { LuUndo, LuX } from 'react-icons/lu'
 import ColorSelector from './ColorSelector'
 import { CanvasContextGetter, loadImageToCanvas } from '../const'
 import { debounce } from 'lodash'
-import { DEFAULT_DEBOUNCE_TIME } from '@hsp/ui/src/utils/debounce'
-import Tooltip from '@hsp/ui/src/components/base/tooltip'
+import { DEFAULT_DEBOUNCE_TIME } from '@hsp/ui/utils/debounce'
+import Tooltip from '@hsp/ui/components/base/tooltip'
 
 const ToolsPanel = memo(function ToolsPanel({
   getCanvasContext,

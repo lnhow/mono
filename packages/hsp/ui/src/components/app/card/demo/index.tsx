@@ -1,4 +1,4 @@
-import cn from '@hsp/ui/src/utils/cn'
+import cn from '@hsp/ui/utils/cn'
 import Link from '../../link'
 import { ReactNode } from 'react'
 import ViewTransition from '../../../../utils/react/view-transition'

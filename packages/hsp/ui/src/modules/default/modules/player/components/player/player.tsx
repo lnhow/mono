@@ -1,5 +1,5 @@
 'use client'
-import cn from '@hsp/ui/src/utils/cn'
+import cn from '@hsp/ui/utils/cn'
 import {
   ComponentProps,
   ComponentPropsWithoutRef,

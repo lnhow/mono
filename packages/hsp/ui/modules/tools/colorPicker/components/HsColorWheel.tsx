@@ -1,4 +1,4 @@
-import cn from '@hsp/ui/src/utils/cn'
+import cn from '@hsp/ui/utils/cn'
 import {
   ColorThumb,
   ColorWheel,

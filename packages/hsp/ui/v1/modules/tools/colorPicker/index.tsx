@@ -13,7 +13,7 @@ import { nsToolColorPicker } from './const'
 import PickerColorField from './components/PickerColorField'
 import HsColorArea from './components/HsColorArea'
 import HsColorSlider from './components/HsColorSlider'
-import cn from '@hsp/ui/src/utils/cn'
+import cn from '@hsp/ui/utils/cn'
 import HsColorWheel from './components/HsColorWheel'
 
 export default function PageToolColorPicker() {

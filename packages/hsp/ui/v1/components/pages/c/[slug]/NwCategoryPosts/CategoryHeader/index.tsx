@@ -2,9 +2,9 @@ import Link from 'next/link'
 import {
   NwCategoryGroupProps,
   NwCategoryProps,
-} from '@hsp/ui/v1/types/components/category.type'
-import { WithClassName } from '@hsp/ui/src/utils/react/types'
-import cn from '@hsp/ui/src/utils/cn'
+} from '@hsp/ui/../v1/types/components/category.type'
+import { WithClassName } from '@hsp/ui/utils/react/types'
+import cn from '@hsp/ui/utils/cn'
 
 export default function NwCategoryHeader({ data }: NwCategoryProps) {
   return (

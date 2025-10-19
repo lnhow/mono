@@ -8,7 +8,7 @@ import {
   LuCircle as Circle,
 } from 'react-icons/lu'
 
-import cn from '@hsp/ui/src/utils/cn'
+import cn from '@hsp/ui/utils/cn'
 
 const DropdownMenu = DropdownMenuPrimitive.Root
 

@@ -4,7 +4,7 @@ import { NwPaginationProps } from './type'
 import { MdOutlineChevronLeft, MdOutlineChevronRight } from 'react-icons/md'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
-import cn from '@hsp/ui/src/utils/cn'
+import cn from '@hsp/ui/utils/cn'
 
 export type { NwPaginationProps } from './type'
 

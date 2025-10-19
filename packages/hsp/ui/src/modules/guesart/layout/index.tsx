@@ -1,8 +1,8 @@
 import { memo } from 'react'
-import ViewTransition from '@hsp/ui/src/utils/react/view-transition'
-import { ButtonLink } from '@hsp/ui/src/components/base/button'
-import { ThemeToggle } from '@hsp/ui/src/components/theme/ThemeToggle'
-import NoSsr from '@hsp/ui/src/components/app/NoSsr'
+import ViewTransition from '@hsp/ui/utils/react/view-transition'
+import { ButtonLink } from '@hsp/ui/components/base/button'
+import { ThemeToggle } from '@hsp/ui/components/theme/ThemeToggle'
+import NoSsr from '@hsp/ui/components/app/NoSsr'
 
 import SocketProvider from '../state/SocketProvider'
 import { JotaiProvider } from '../state/JotaiProvider'

@@ -7,10 +7,10 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@hsp/ui/src/components/base/popover'
-import { Button } from '@hsp/ui/src/components/base/button'
+} from '@hsp/ui/components/base/popover'
+import { Button } from '@hsp/ui/components/base/button'
 import { Color, ColorArea, ColorSlider, ColorThumb, parseColor, SliderTrack } from 'react-aria-components'
-import cn from '@hsp/ui/src/utils/cn'
+import cn from '@hsp/ui/utils/cn'
 
 export { parseColor }
 export type { Color }

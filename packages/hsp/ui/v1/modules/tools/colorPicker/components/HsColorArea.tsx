@@ -1,5 +1,5 @@
 import { ColorArea, ColorThumb, type ColorAreaProps } from 'react-aria-components'
-import cn from '@hsp/ui/src/utils/cn'
+import cn from '@hsp/ui/utils/cn'
 
 export default function HsColorArea({
   className,

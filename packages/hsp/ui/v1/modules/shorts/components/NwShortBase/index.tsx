@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import Link from '@hsp/ui/v1/shared/components/navigation/Link'
-import cn from '@hsp/ui/src/utils/cn'
+import Link from '@hsp/ui/../v1/shared/components/navigation/Link'
+import cn from '@hsp/ui/utils/cn'
 import { TShort } from '../../shorts'
 
 export type NwShortBaseProps = {

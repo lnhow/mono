@@ -1,7 +1,7 @@
 import { PlayerBaseSubCompProps, HOTKEYS } from '../types'
-import cn from '@hsp/ui/src/utils/cn'
+import cn from '@hsp/ui/utils/cn'
 import { useHTMLElState } from '../../../../../../../hooks/useHTMLElState'
-import { Slider } from '@hsp/ui/src/components/base/slider'
+import { Slider } from '@hsp/ui/components/base/slider'
 import { useEffect, useRef, useState } from 'react'
 import { useKeydown } from '../_utils/useKeydown'
 

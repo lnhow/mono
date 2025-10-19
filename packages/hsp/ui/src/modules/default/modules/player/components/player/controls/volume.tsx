@@ -7,10 +7,10 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@hsp/ui/src/components/base/popover'
-import { Slider } from '@hsp/ui/src/components/base/slider'
+} from '@hsp/ui/components/base/popover'
+import { Slider } from '@hsp/ui/components/base/slider'
 import { useKeydown } from '../_utils/useKeydown'
-import Tooltip from '@hsp/ui/src/components/base/tooltip'
+import Tooltip from '@hsp/ui/components/base/tooltip'
 
 const getVolumeSnapshot = (videoEl: HTMLVideoElement | null) => {
   if (!videoEl) return 0

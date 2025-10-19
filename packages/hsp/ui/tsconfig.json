@@ -11,10 +11,7 @@
         "../../../apps/hsp/web/i18n/*"
       ],
       "@hsp/ui/*": [
-        "./*"
-      ],
-      "@/hsp/*": [
-        "../../../packages/hsp/src/*"
+        "./src/*"
       ]
     },
     "outDir": "dist",

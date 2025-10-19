@@ -1,7 +1,7 @@
 'use client'
 
 import Link, { LinkProps } from '@hsp/ui/shared/components/navigation/Link'
-import cn from '@hsp/ui/src/utils/cn'
+import cn from '@hsp/ui/utils/cn'
 import { useTranslation } from '@i18n/client'
 import { usePathname } from 'next/navigation'
 import { memo, useMemo } from 'react'

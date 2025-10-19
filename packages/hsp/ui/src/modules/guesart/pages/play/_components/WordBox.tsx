@@ -1,4 +1,4 @@
-import { resizeUnsplashImage } from '@hsp/ui/src/modules/guesart/utils'
+import { resizeUnsplashImage } from '@hsp/ui/modules/guesart/utils'
 import { TGameState } from '../_state/store'
 
 const IMAGE_WIDTH = 256 // px

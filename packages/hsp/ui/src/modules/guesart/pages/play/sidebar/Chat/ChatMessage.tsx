@@ -8,7 +8,7 @@ import {
   TSystemMessage,
   TUserMessage,
 } from '../../_state/store'
-import cn from '@hsp/ui/src/utils/cn'
+import cn from '@hsp/ui/utils/cn'
 import { ESystemMessageContent } from '../../../../state/type/room'
 
 export type ChatMessageProps = {

@@ -1,4 +1,4 @@
-import { ButtonLink } from '@hsp/ui/src/components/base/button'
+import { ButtonLink } from '@hsp/ui/components/base/button'
 import { LOBBY_URL } from '../../../utils'
 
 export default function ButtonLeaveRoom() {

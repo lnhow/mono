@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { ComponentPropsWithoutRef } from 'react'
-import cn from '@hsp/ui/src/utils/cn'
+import cn from '@hsp/ui/utils/cn'
 
 export type NwPostImageProps = ComponentPropsWithoutRef<typeof Image> & {
   roundedSize?: string

@@ -4,9 +4,9 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@hsp/ui/src/components/base/popover'
-import { Button } from '@hsp/ui/src/components/base/button'
-import Tooltip from '@hsp/ui/src/components/base/tooltip'
+} from '@hsp/ui/components/base/popover'
+import { Button } from '@hsp/ui/components/base/button'
+import Tooltip from '@hsp/ui/components/base/tooltip'
 
 const ColorSelector = memo(function ColorSelector({
   getCanvasContext,

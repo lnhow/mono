@@ -1,6 +1,6 @@
-import { NwPostGroupProps } from '@hsp/ui/v1/types/components/posts.type'
-import { WithClassName } from '@hsp/ui/src/utils/react/types'
-import cn from '@hsp/ui/src/utils/cn'
+import { NwPostGroupProps } from '@hsp/ui/../v1/types/components/posts.type'
+import { WithClassName } from '@hsp/ui/utils/react/types'
+import cn from '@hsp/ui/utils/cn'
 
 import NwPostBase from '../NwPostBase'
 import { TNwPagination } from '../../NwPagination/type'

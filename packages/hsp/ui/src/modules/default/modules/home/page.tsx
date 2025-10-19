@@ -1,4 +1,4 @@
-import CardDemo from '@hsp/ui/src/components/app/card/demo'
+import CardDemo from '@hsp/ui/components/app/card/demo'
 import { LOBBY_URL as GUESART_LOBBY_URL } from '../../../guesart/utils'
 
 export default function CardsDemo() {

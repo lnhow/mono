@@ -1,8 +1,8 @@
 import { getTranslation } from '@i18n/server'
-import NwEmptyList from '@hsp/ui/v1/components/common/NwPost/NwPostList/Empty'
+import NwEmptyList from '@hsp/ui/../v1/components/common/NwPost/NwPostList/Empty'
 import NwPostsWithPagination, {
   NwPostsWithPaginationProps,
-} from '@hsp/ui/v1/components/common/NwPost/NwPostList/WithPagination'
+} from '@hsp/ui/../v1/components/common/NwPost/NwPostList/WithPagination'
 import { nsPageSearch } from '../types'
 
 export default async function NwSearchList({

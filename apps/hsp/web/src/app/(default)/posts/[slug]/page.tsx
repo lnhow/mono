@@ -4,11 +4,11 @@ import { notFound } from 'next/navigation'
 import { MDXContent } from '@content-collections/mdx/react'
 
 import { mdxComponents } from '@/mdx-components'
-import MarkdownTypography from '@hsp/ui/src/components/mdx/typography'
-import TableOfContents from '@hsp/ui/src/components/mdx/toc'
-import { PostUtils } from '@hsp/ui/src/modules/posts/utils'
-import ViewTransition from '@hsp/ui/src/utils/react/view-transition'
-import { PostTags } from '@hsp/ui/src/modules/posts/card'
+import MarkdownTypography from '@hsp/ui/components/mdx/typography'
+import TableOfContents from '@hsp/ui/components/mdx/toc'
+import { PostUtils } from '@hsp/ui/modules/posts/utils'
+import ViewTransition from '@hsp/ui/utils/react/view-transition'
+import { PostTags } from '@hsp/ui/modules/posts/card'
 
 interface PostPageProps {
   params: Promise<{

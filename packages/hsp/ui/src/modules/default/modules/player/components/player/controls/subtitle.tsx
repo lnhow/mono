@@ -4,7 +4,7 @@ import { useHTMLElState } from '../../../../../../../hooks/useHTMLElState'
 import { useState } from 'react'
 import { PlayerBaseSubCompProps, HOTKEYS, TOOLTIPS } from '../types'
 import { useKeydown } from '../_utils/useKeydown'
-import Tooltip from '@hsp/ui/src/components/base/tooltip'
+import Tooltip from '@hsp/ui/components/base/tooltip'
 
 export default function ButtonSubtitle({ getVideoEl }: PlayerBaseSubCompProps) {
   const isHasSubtitle = useHTMLElState(

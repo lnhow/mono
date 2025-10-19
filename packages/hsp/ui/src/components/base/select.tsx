@@ -8,7 +8,7 @@ import {
   LuChevronUp as ChevronUp,
 } from 'react-icons/lu'
 
-import cn from '@hsp/ui/src/utils/cn'
+import cn from '@hsp/ui/utils/cn'
 
 const Select = SelectPrimitive.Root
 

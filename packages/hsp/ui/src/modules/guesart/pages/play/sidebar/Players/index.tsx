@@ -1,5 +1,5 @@
-import { Card } from '@hsp/ui/src/components/base/card'
-import cn from '@hsp/ui/src/utils/cn'
+import { Card } from '@hsp/ui/components/base/card'
+import cn from '@hsp/ui/utils/cn'
 import { useListenRoomPlayers } from '../../_state/hooks'
 import { useAtomValue } from 'jotai'
 import {
@@ -10,7 +10,7 @@ import {
 import { sessionAtom } from '../../../../state/store'
 import { LuMicVocal } from 'react-icons/lu'
 import { PlayerDto } from '../../../../state/type/room'
-import Tooltip from '@hsp/ui/src/components/base/tooltip'
+import Tooltip from '@hsp/ui/components/base/tooltip'
 
 export default function PlayersList({ className }: { className?: string }) {
   const players = useAtomValue(roomPlayersAtom)

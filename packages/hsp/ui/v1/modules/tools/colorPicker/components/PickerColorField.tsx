@@ -1,4 +1,4 @@
-import cn from '@hsp/ui/src/utils/cn'
+import cn from '@hsp/ui/utils/cn'
 import { useEffect, useState } from 'react'
 import {
   Color,
@@ -8,7 +8,7 @@ import {
   parseColor,
 } from 'react-aria-components'
 import { useDebounceCallback } from 'usehooks-ts'
-import ButtonCopy from '@hsp/ui/src/components/app/button/ButtonCopy'
+import ButtonCopy from '@hsp/ui/components/app/button/ButtonCopy'
 
 export default function PickerColorField({
   onChange,
