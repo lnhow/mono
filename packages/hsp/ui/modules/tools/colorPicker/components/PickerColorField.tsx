@@ -8,7 +8,7 @@ import {
   parseColor,
 } from 'react-aria-components'
 import { useDebounceCallback } from 'usehooks-ts'
-import ButtonCopy from '@hsp/ui/components/common/input/CopyButton'
+import ButtonCopy from '@hsp/ui/src/components/app/button/ButtonCopy'
 
 export default function PickerColorField({
   onChange,
