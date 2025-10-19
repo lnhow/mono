@@ -1,4 +1,4 @@
-import { default as HspLink } from '@hsp/ui/utils/app/link'
+import { default as HspLink } from '@hsp/ui/components/link'
 
 export default function Link({
   href,

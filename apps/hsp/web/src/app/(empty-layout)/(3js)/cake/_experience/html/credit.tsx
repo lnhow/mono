@@ -1,6 +1,6 @@
 import { useAtomValue } from "jotai"
 import { BGM, cakeSceneAtom, SCENE_CONFIG } from "../_state"
-import Link from "@hsp/ui/utils/app/link"
+import Link from "@hsp/ui/components/link"
 import { useMemo } from "react"
 
 export default function Credit({ className }: { className?: string }) {

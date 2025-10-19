@@ -1,5 +1,5 @@
 import cn from '@hsp/ui/utils/cn'
-import Link from '../../utils/app/link'
+import Link from '../../components/link'
 import { ReactNode } from 'react'
 import ViewTransition from '../../utils/react/view-transition'
 import { Card, CardDescription, CardTitle } from '../../components/card'

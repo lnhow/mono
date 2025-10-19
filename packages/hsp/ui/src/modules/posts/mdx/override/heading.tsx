@@ -1,6 +1,6 @@
 import { createElement } from 'react'
 import { MdLink } from 'react-icons/md'
-import Link from '@hsp/ui/utils/app/link'
+import Link from '@hsp/ui/components/link'
 
 export default function createHeading(
   tagName: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6',

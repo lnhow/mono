@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { useAtomValue } from 'jotai'
 import { Button } from '@hsp/ui/components/button'
-import ButtonCopy from '@hsp/ui/utils/app/button-copy'
+import ButtonCopy from '@hsp/ui/components/button-copy'
 
 import { roomMetadataAtom, TGameState } from '../../_state/store'
 import { sessionAtom, socketAtom } from '../../../../state/store'
