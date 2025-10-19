@@ -2,7 +2,7 @@ import { memo } from 'react'
 import ViewTransition from '@hsp/ui/utils/react/view-transition'
 import { ButtonLink } from '@hsp/ui/components/base/button'
 import { ThemeToggle } from '@hsp/ui/components/theme/ThemeToggle'
-import NoSsr from '@hsp/ui/components/app/NoSsr'
+import NoSsr from '@hsp/ui/utils/nextjs/no-ssr'
 
 import SocketProvider from '../state/SocketProvider'
 import { JotaiProvider } from '../state/JotaiProvider'
