@@ -1,4 +1,4 @@
-import isProductionEnv from '@hsp/ui/utils/nextjs/isProduction'
+import isProductionEnv from '@hsp/ui/utils/nextjs/is-production'
 
 export type HsPost = {
   slug: string
