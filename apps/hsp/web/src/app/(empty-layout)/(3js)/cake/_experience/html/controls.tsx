@@ -1,7 +1,7 @@
 'use client'
 
 import { cakeAtom, ECakeScene, encodeCakeURL, SCENE_CONFIG, TEXT } from '../_state'
-import { Label } from '@hsp/ui/components/base/label'
+import { Label } from '@hsp/ui/components/label'
 import { useAtom, useAtomValue } from 'jotai'
 import cn from '@hsp/ui/utils/cn'
 import {
@@ -10,8 +10,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hsp/ui/components/base/select'
-import { Button } from '@hsp/ui/components/base/button'
+} from '@hsp/ui/components/select'
+import { Button } from '@hsp/ui/components/button'
 import { useMemo } from 'react'
 import { useCopyToClipboard } from '@hsp/ui/utils/app/button-copy'
 
