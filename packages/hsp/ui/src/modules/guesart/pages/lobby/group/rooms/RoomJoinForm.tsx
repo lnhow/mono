@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { useAtomValue } from 'jotai'
 
-import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
+import ViewTransition from '@hsp/ui/src/utils/react/view-transition'
 import { Button } from '@hsp/ui/src/components/base/button'
 import { FormInput } from '../components/input'
 import { socketAtom } from '../../../../state/store'

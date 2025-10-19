@@ -2,7 +2,7 @@
 import { Button } from '@hsp/ui/src/components/base/button'
 import { useEffect, useState } from 'react'
 
-import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
+import ViewTransition from '@hsp/ui/src/utils/react/view-transition'
 import { useForm } from 'react-hook-form'
 import { socketAtom } from '../../../state/store'
 import { useAtomValue } from 'jotai'

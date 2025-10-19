@@ -10,7 +10,7 @@ vi.mock('@hsp/ui/src/modules/default/modules/player/demo', () => {
   }
 })
 
-vi.mock('@hsp/ui/src/components/app/ViewTransition', () => {
+vi.mock('@hsp/ui/src/utils/react/view-transition', () => {
   return {
     default: ({ children }: PropsWithChildren) => children,
   }
@@ -18,6 +18,6 @@ vi.mock('@hsp/ui/src/components/app/ViewTransition', () => {
 
 test('renders page', () => {
   render(<PagePlayer />)
-  
+
   expect(screen.getByRole('heading', { level: 1, name: 'Custom HTML video player' })).toBeDefined()
 })

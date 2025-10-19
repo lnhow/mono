@@ -7,7 +7,7 @@ import { mdxComponents } from '@/mdx-components'
 import MarkdownTypography from '@hsp/ui/src/components/mdx/typography'
 import TableOfContents from '@hsp/ui/src/components/mdx/toc'
 import { PostUtils } from '@hsp/ui/src/modules/posts/utils'
-import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
+import ViewTransition from '@hsp/ui/src/utils/react/view-transition'
 import { PostTags } from '@hsp/ui/src/modules/posts/card'
 
 interface PostPageProps {

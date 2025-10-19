@@ -6,7 +6,7 @@ import { useDebounceCallback } from 'usehooks-ts'
 import { useRouter } from 'next/navigation'
 import { useAtomValue } from 'jotai'
 
-import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
+import ViewTransition from '@hsp/ui/src/utils/react/view-transition'
 import { Button } from '@hsp/ui/src/components/base/button'
 import { FormInput } from '../components/input'
 import { FormSelect } from '../components/select'

@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import DemoPlayer from '@hsp/ui/src/modules/default/modules/player/demo'
-import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
+import ViewTransition from '@hsp/ui/src/utils/react/view-transition'
 
 export const metadata: Metadata = {
   title: 'Custom HTML video player - hsp',

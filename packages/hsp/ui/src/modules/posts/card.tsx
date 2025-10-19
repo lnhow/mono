@@ -1,6 +1,6 @@
 import cn from '@hsp/ui/src/utils/cn'
 import Link from '../../components/app/link'
-import ViewTransition from '../../components/app/ViewTransition'
+import ViewTransition from '../../utils/react/view-transition'
 import { Card, CardDescription, CardTitle } from '../../components/base/card'
 import { HsPost, PostUtils } from './utils'
 

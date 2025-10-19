@@ -1,7 +1,7 @@
 import cn from '@hsp/ui/src/utils/cn'
 import Link from '../../link'
 import { ReactNode } from 'react'
-import ViewTransition from '../../ViewTransition'
+import ViewTransition from '../../../../utils/react/view-transition'
 import { Card, CardDescription, CardTitle } from '../../../base/card'
 
 export type CardDemoProps = {

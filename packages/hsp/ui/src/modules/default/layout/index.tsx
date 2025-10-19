@@ -1,4 +1,4 @@
-import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
+import ViewTransition from '@hsp/ui/src/utils/react/view-transition'
 import { ButtonLink } from '@hsp/ui/src/components/base/button'
 import { ThemeToggle } from '@hsp/ui/src/components/theme/ThemeToggle'
 import { PersonalGithubIcon } from '@hsp/ui/src/modules/personal/github'

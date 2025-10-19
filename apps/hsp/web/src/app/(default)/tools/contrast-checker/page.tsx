@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { Metadata } from 'next'
 import BasePageContrastChecker from '@hsp/ui/src/modules/tools/contrast-checker/index'
-import ViewTransition from '@hsp/ui/src/components/app/ViewTransition'
+import ViewTransition from '@hsp/ui/src/utils/react/view-transition'
 
 export const dynamic = 'force-static'
 
