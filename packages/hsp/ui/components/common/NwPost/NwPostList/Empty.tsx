@@ -1,11 +1,11 @@
 import { MdOutlineInventory2 } from 'react-icons/md'
-import PropsWithClassName from '@hsp/ui/types/components/common.type'
 import classNames from '@hsp/ui/utils/classNames'
+import { WithClassName } from '@hsp/ui/src/utils/react/types'
 
 export default function NwEmptyList({
   title = 'No results found',
   className,
-}: PropsWithClassName<{ title?: string }>) {
+}: WithClassName & { title?: string }) {
   return (
     <div
       className={classNames(

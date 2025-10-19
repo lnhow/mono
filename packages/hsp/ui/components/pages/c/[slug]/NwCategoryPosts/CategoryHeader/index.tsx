@@ -3,7 +3,7 @@ import {
   NwCategoryGroupProps,
   NwCategoryProps,
 } from '@hsp/ui/types/components/category.type'
-import PropsWithClassName from '@hsp/ui/types/components/common.type'
+import { WithClassName } from '@hsp/ui/src/utils/react/types'
 import classNames from '@hsp/ui/utils/classNames'
 
 export default function NwCategoryHeader({ data }: NwCategoryProps) {
@@ -21,7 +21,7 @@ export default function NwCategoryHeader({ data }: NwCategoryProps) {
 function ChildCategory({
   data,
   className,
-}: PropsWithClassName<NwCategoryGroupProps>) {
+}: WithClassName & NwCategoryGroupProps) {
   if (!data.length) {
     return <></>
   }

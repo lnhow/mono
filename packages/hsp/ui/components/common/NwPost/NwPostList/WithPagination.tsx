@@ -1,5 +1,5 @@
 import { NwPostGroupProps } from '@hsp/ui/types/components/posts.type'
-import PropsWithClassName from '@hsp/ui/types/components/common.type'
+import { WithClassName } from '@hsp/ui/src/utils/react/types'
 import classNames from '@hsp/ui/utils/classNames'
 
 import NwPostBase from '../NwPostBase'
@@ -14,7 +14,7 @@ export default function NwPostsWithPagination({
   data,
   pagination,
   className
-}: PropsWithClassName<NwPostsWithPaginationProps>) {
+}: WithClassName & NwPostsWithPaginationProps) {
   return (
     <>
       <div className={classNames('min-h-[50vh] mt-6', className)}>
