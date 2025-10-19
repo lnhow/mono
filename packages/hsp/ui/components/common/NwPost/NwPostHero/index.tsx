@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { NwPostProps } from '@hsp/ui/types/components/posts.type'
 import NwPostImage from '../components/NwPostImage'
 import { NwPostContentProps, NwPostCoverProps } from '../NwPostBase'
-import classNames from '@hsp/ui/utils/classNames'
+import cn from '@hsp/ui/src/utils/cn'
 
 export type NwPostHeroProps = {
   styles?: {
@@ -48,7 +48,7 @@ export const NwPostHeroCover = ({
   propsImage,
 }: NwPostCoverProps) => {
   return (
-    <div className={classNames('shrink-0 w-full sm:w-3/5 md:w-1/2 lg:w-2/3', styles)}>
+    <div className={cn('shrink-0 w-full sm:w-3/5 md:w-1/2 lg:w-2/3', styles)}>
       <Link href={hrefUrl} title={title}>
         <NwPostImage
           priority
@@ -78,20 +78,20 @@ export const NwPostHeroContent = ({
 }: NwPostHeroContentProps) => {
   return (
     <div
-      className={classNames(
+      className={cn(
         'min-w-0 z-10 absolute flex flex-col items-end w-2/3 right-2 top-1/4',
         styles?.container
       )}
     >
       <div
-        className={classNames(
+        className={cn(
           'bg-base-300/95 p-2 rounded-lg',
           styles?.titleContainer
         )}
       >
         <Link href={hrefUrl} title={title}>
           <h2
-            className={classNames(
+            className={cn(
               'md:text-base text-sm font-extralight line-clamp-2',
               styles?.title
             )}
@@ -101,13 +101,13 @@ export const NwPostHeroContent = ({
         </Link>
       </div>
       <div
-        className={classNames(
+        className={cn(
           'w-[75%] mt-1 p-1 rounded-md bg-base-100/90 invert',
           styles?.descriptionContainer
         )}
       >
         <p
-          className={classNames(
+          className={cn(
             'font-light text-ellipsis line-clamp-2 text-xs',
             styles?.description
           )}

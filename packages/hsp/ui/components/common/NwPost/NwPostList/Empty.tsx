@@ -1,5 +1,5 @@
 import { MdOutlineInventory2 } from 'react-icons/md'
-import classNames from '@hsp/ui/utils/classNames'
+import cn from '@hsp/ui/src/utils/cn'
 import { WithClassName } from '@hsp/ui/src/utils/react/types'
 
 export default function NwEmptyList({
@@ -8,7 +8,7 @@ export default function NwEmptyList({
 }: WithClassName & { title?: string }) {
   return (
     <div
-      className={classNames(
+      className={cn(
         'flex flex-col items-center justify-center',
         className
       )}

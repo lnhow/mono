@@ -1,7 +1,7 @@
 'use client'
 
 import Link, { LinkProps } from '@hsp/ui/shared/components/navigation/Link'
-import classNames from '@hsp/ui/utils/classNames'
+import cn from '@hsp/ui/src/utils/cn'
 import { useTranslation } from '@i18n/client'
 import { usePathname } from 'next/navigation'
 import { memo, useMemo } from 'react'
@@ -46,7 +46,7 @@ const ToolsLink = memo(function ToolsLink({
   return (
     <li className='row'>
       <Link
-        className={classNames(
+        className={cn(
           'btn btn-neutral flex justify-center items-center',
           isSelected && 'btn-active'
         )}
@@ -92,7 +92,7 @@ const ToolsGroupLink = memo(function ToolsGroupLink({
   return (
     <li className='w-[132px]'>
       <Link
-        className={classNames(
+        className={cn(
           'btn bg-base-300 flex flex-col justify-center items-center px-2 py-3 h-full relative',
           isSelected && 'btn-active'
         )}

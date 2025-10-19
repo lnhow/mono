@@ -4,7 +4,7 @@ import { NwPaginationProps } from './type'
 import { MdOutlineChevronLeft, MdOutlineChevronRight } from 'react-icons/md'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
-import classNames from '../../../utils/classNames'
+import cn from '@hsp/ui/src/utils/cn'
 
 export type { NwPaginationProps } from './type'
 
@@ -114,7 +114,7 @@ export const NwPaginationButton = memo(function NwPaginationButton({
         href={disabled ? '#' : newUrl}
         aria-disabled={disabled}
         data-disabled={disabled}
-        className={classNames(
+        className={cn(
           'join-item btn btn-sm',
           disabled && 'btn-disabled',
           active && 'btn-active',

@@ -13,7 +13,7 @@ import { nsToolColorPicker } from './const'
 import PickerColorField from './components/PickerColorField'
 import HsColorArea from './components/HsColorArea'
 import HsColorSlider from './components/HsColorSlider'
-import classNames from '@hsp/ui/utils/classNames'
+import cn from '@hsp/ui/src/utils/cn'
 import HsColorWheel from './components/HsColorWheel'
 
 export default function PageToolColorPicker() {
@@ -78,7 +78,7 @@ export default function PageToolColorPicker() {
                   isDisabled={!isAlpha}
                 >
                   <SliderTrack
-                    className={classNames(
+                    className={cn(
                       'w-full h-6 rounded transition-opacity',
                       !isAlpha && 'opacity-25'
                     )}

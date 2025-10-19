@@ -1,4 +1,4 @@
-import classNames from '@hsp/ui/utils/classNames'
+import cn from '@hsp/ui/src/utils/cn'
 import {
   ColorSlider,
   ColorSliderProps,
@@ -16,7 +16,7 @@ export default function HsColorSlider(props: ColorSliderProps) {
         <SliderOutput />
       </div>
       <SliderTrack
-        className={classNames(
+        className={cn(
           'w-full h-4 rounded transition-opacity',
           props.isDisabled && 'opacity-25'
         )}

@@ -4,7 +4,7 @@ import {
   NwCategoryProps,
 } from '@hsp/ui/types/components/category.type'
 import { WithClassName } from '@hsp/ui/src/utils/react/types'
-import classNames from '@hsp/ui/utils/classNames'
+import cn from '@hsp/ui/src/utils/cn'
 
 export default function NwCategoryHeader({ data }: NwCategoryProps) {
   return (
@@ -26,7 +26,7 @@ function ChildCategory({
     return <></>
   }
   return (
-    <div className={classNames('flex flex-wrap gap-2', className)}>
+    <div className={cn('flex flex-wrap gap-2', className)}>
       {data.map((category) => {
         if (!category.attributes.slugUrl) {
           return <></>

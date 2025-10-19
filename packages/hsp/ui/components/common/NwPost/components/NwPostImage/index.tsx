@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { ComponentPropsWithoutRef } from 'react'
-import classNames from '@hsp/ui/utils/classNames'
+import cn from '@hsp/ui/src/utils/cn'
 
 export type NwPostImageProps = ComponentPropsWithoutRef<typeof Image> & {
   roundedSize?: string
@@ -28,7 +28,7 @@ export default function NwPostImage({
         width={0}
         height={0}
         sizes="100vw"
-        className={classNames(
+        className={cn(
           `w-full h-full object-contain absolute inset-0 ${roundedSize} bg-base-300`,
           className,
         )}

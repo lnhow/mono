@@ -1,5 +1,5 @@
 import { ColorArea, ColorThumb, type ColorAreaProps } from 'react-aria-components'
-import classNames from '@hsp/ui/utils/classNames'
+import cn from '@hsp/ui/src/utils/cn'
 
 export default function HsColorArea({
   className,
@@ -8,7 +8,7 @@ export default function HsColorArea({
   return (
     <ColorArea
       {...props}
-      className={classNames('w-20 h-20 rounded', className)}
+      className={cn('w-20 h-20 rounded', className)}
     >
       <ColorThumb className="w-4 h-4 rounded-full shadow-xl !bg-white border-slate-700 border-opacity-60 border" />
     </ColorArea>

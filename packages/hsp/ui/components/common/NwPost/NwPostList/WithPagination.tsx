@@ -1,6 +1,6 @@
 import { NwPostGroupProps } from '@hsp/ui/types/components/posts.type'
 import { WithClassName } from '@hsp/ui/src/utils/react/types'
-import classNames from '@hsp/ui/utils/classNames'
+import cn from '@hsp/ui/src/utils/cn'
 
 import NwPostBase from '../NwPostBase'
 import { TNwPagination } from '../../NwPagination/type'
@@ -17,7 +17,7 @@ export default function NwPostsWithPagination({
 }: WithClassName & NwPostsWithPaginationProps) {
   return (
     <>
-      <div className={classNames('min-h-[50vh] mt-6', className)}>
+      <div className={cn('min-h-[50vh] mt-6', className)}>
         {data.map((post) => {
           return (
             <div key={post.id} className="mb-6">

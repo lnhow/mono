@@ -1,4 +1,4 @@
-import classNames from '@hsp/ui/utils/classNames'
+import cn from '@hsp/ui/src/utils/cn'
 import { useEffect, useState } from 'react'
 import {
   Color,
@@ -49,7 +49,7 @@ export default function PickerColorField({
       name={props.label}
       aria-label={props.label}
       value={color}
-      className={classNames('flex flex-col gap-1', props.className)}
+      className={cn('flex flex-col gap-1', props.className)}
       onChange={handleChange}
       isReadOnly={props.readOnly}
     >

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { NwPostProps } from '@hsp/ui/types/components/posts.type'
 import NwPostImage from '../components/NwPostImage'
-import classNames from '@hsp/ui/utils/classNames'
+import cn from '@hsp/ui/src/utils/cn'
 
 export type NwPostBaseProps = {
   styles?: {
@@ -20,7 +20,7 @@ export default function NwPostBase({ data, styles }: NwPostBaseProps) {
   const description = data.attributes.description || ''
 
   return (
-    <article className={classNames('flex', styles?.container)}>
+    <article className={cn('flex', styles?.container)}>
       <NwPostCover
         coverUrl={coverUrl}
         hrefUrl={hrefUrl}
@@ -55,7 +55,7 @@ export function NwPostCover({
   return (
     <>
       {coverUrl && (
-        <div className={classNames('shrink-0 w-28 lg:w-40 overflow-hidden', styles)}>
+        <div className={cn('shrink-0 w-28 lg:w-40 overflow-hidden', styles)}>
           <Link href={hrefUrl} title={title}>
             <NwPostImage src={coverUrl} alt={title || ''} {...propsImage} />
           </Link>
@@ -84,14 +84,14 @@ export function NwPostContent({
 }: NwPostContentProps) {
   return (
     <div
-      className={classNames(
+      className={cn(
         'ml-2 min-w-0 flex-[2] py-2 pr-2',
         styles?.container
       )}
     >
       <Link href={hrefUrl} title={title}>
         <h4
-          className={classNames(
+          className={cn(
             'text-md font-extralight line-clamp-1 lg:line-clamp-2',
             styles?.title
           )}
@@ -100,7 +100,7 @@ export function NwPostContent({
         </h4>
       </Link>
       <p
-        className={classNames(
+        className={cn(
           'mt-2 text-xs font-light line-clamp-3 lg:line-clamp-2 max-md:hidden',
           styles?.description
         )}

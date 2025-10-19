@@ -1,4 +1,4 @@
-import classNames from '@hsp/ui/utils/classNames'
+import cn from '@hsp/ui/src/utils/cn'
 import {
   ColorThumb,
   ColorWheel,
@@ -16,7 +16,7 @@ export default function HsColorWheel({
     <ColorWheel {...props}>
       <ColorWheelTrack />
       <ColorThumb
-        className={classNames(
+        className={cn(
           'w-6 h-6 rounded-full shadow-sm border-white border',
           thumbClassName
         )}
