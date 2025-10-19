@@ -1,5 +1,5 @@
 import { Controller } from 'react-hook-form'
-import { HsColorPicker } from '../../../../components/app/input/color-picker'
+import { HsColorPicker } from '../../../../components/color-picker'
 import ButtonGenLinkContrast from './ButtonGenUrl'
 
 export function ColorInput() {

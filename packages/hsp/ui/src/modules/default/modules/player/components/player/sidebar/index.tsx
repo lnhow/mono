@@ -5,7 +5,7 @@ import {
 } from '@hsp/ui/components/base/collapsible'
 import { LuInfo } from 'react-icons/lu'
 import cn from '@hsp/ui/utils/cn'
-import Link from '@hsp/ui/components/app/link'
+import Link from '@hsp/ui/utils/app/link'
 import { Button } from '@hsp/ui/components/base/button'
 
 export default function PlayerSidebar({

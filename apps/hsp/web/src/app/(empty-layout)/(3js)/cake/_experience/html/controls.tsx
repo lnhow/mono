@@ -13,7 +13,7 @@ import {
 } from '@hsp/ui/components/base/select'
 import { Button } from '@hsp/ui/components/base/button'
 import { useMemo } from 'react'
-import { useCopyToClipboard } from '@hsp/ui/components/app/button/ButtonCopy'
+import { useCopyToClipboard } from '@hsp/ui/utils/app/button-copy'
 
 export default function Controls({ className }: { className?: string }) {
   const [cake, setCake] = useAtom(cakeAtom)

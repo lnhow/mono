@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Slot } from 'radix-ui'
 import { cva, type VariantProps } from 'class-variance-authority'
 
-import Link from '@hsp/ui/components/app/link'
+import Link from '@hsp/ui/utils/app/link'
 
 import cn from '@hsp/ui/utils/cn'
 

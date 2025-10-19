@@ -10,7 +10,7 @@ import {
 import { BackgroundPreview } from './preview'
 import { ColorInput } from './input'
 import { useEffect } from 'react'
-import { parseColor } from '@hsp/ui/components/app/input/color-picker'
+import { parseColor } from '@hsp/ui/components/color-picker'
 
 export default function PageContrastChecker() {
   const searchParams = useSearchParams()

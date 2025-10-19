@@ -10,7 +10,7 @@ import { useTranslation } from '@i18n/client'
 import { Controller, useForm } from 'react-hook-form'
 import { useCopyToClipboard } from 'usehooks-ts'
 import { toSlug } from './utils'
-import ButtonCopy from '@hsp/ui/components/app/button/ButtonCopy'
+import ButtonCopy from '@hsp/ui/utils/app/button-copy'
 
 export type TConverterSlugForm = {
   textToSlug: string

@@ -1,4 +1,4 @@
-import { Color, parseColor } from "@hsp/ui/components/app/input/color-picker"
+import { Color, parseColor } from "@hsp/ui/components/color-picker"
 
 export const DEFAULT_FOREGROUND = parseColor('#000000')
 export const DEFAULT_BACKGROUND = parseColor('#FFFFFF')
