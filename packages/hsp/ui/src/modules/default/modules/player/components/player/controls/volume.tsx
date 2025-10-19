@@ -1,6 +1,6 @@
 import { useMemo, useRef } from 'react'
 import { PlayerBaseSubCompProps, HOTKEYS, TOOLTIPS } from '../types'
-import { useHTMLElState } from '../../../../../../../hooks/useHTMLElState'
+import { useHTMLElState } from '@hsp/ui/utils/react/use-html-el-state'
 import { PlayerButton } from '../_base/button'
 import { LuVolume1, LuVolume2, LuVolumeOff } from 'react-icons/lu'
 import {

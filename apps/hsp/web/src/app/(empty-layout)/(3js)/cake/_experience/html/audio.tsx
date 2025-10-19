@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { BGM } from '../_const'
 import { Button } from '@hsp/ui/components/base/button'
-import { useHTMLElState } from '@hsp/ui/hooks/useHTMLElState'
+import { useHTMLElState } from '@hsp/ui/utils/react/use-html-el-state'
 import { LuPause, LuPlay } from 'react-icons/lu'
 
 export default function Audio({ className }: { className?: string }) {

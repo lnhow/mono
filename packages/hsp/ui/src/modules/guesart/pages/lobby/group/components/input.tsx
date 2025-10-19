@@ -3,7 +3,7 @@ import { Controller, FieldValues } from 'react-hook-form'
 
 import { Input } from '@hsp/ui/components/base/input'
 import { Label } from '@hsp/ui/components/base/label'
-import genericMemo from '@hsp/ui/utils/react/genericMemo'
+import genericMemo from '@hsp/ui/utils/react/generic-memo'
 
 export const FormInput = genericMemo(function FormInput<T extends FieldValues>({
   label,
