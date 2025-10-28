@@ -4,7 +4,7 @@ import { Dispatch, memo, SetStateAction, useMemo } from 'react'
 import { LuUndo, LuX } from 'react-icons/lu'
 import ColorSelector from './ColorSelector'
 import { CanvasContextGetter, loadImageToCanvas } from '../const'
-import { debounce } from 'lodash'
+import debounce from 'lodash.debounce'
 import { DEFAULT_DEBOUNCE_TIME } from '@hsp/ui/utils/debounce'
 import Tooltip from '@hsp/ui/components/tooltip'
 

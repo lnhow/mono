@@ -18,6 +18,7 @@ export const nextJsConfig = [
   eslintConfigPrettier,
   ...tseslint.configs.recommended,
   {
+    // Recommended rules for React + add globals for service workers and Node.js
     ...pluginReact.configs.flat.recommended,
     languageOptions: {
       ...pluginReact.configs.flat.recommended.languageOptions,

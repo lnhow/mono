@@ -3,7 +3,7 @@ import { memo, useCallback, useEffect } from 'react'
 import { useAtomValue } from 'jotai'
 import { RESET, useAtomCallback } from 'jotai/utils'
 import { usePathname, useRouter } from 'next/navigation'
-import { debounce } from 'lodash'
+import debounce from 'lodash.debounce'
 
 import { sessionAtom, socketAtom } from '../../state/store'
 import { roomAtom, roomIsLoadingAtom, roomMetadataAtom } from './_state/store'

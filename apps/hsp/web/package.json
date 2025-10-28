@@ -1,6 +1,6 @@
 {
   "name": "@hsp/app-web",
-  "version": "0.1.1",
+  "version": "0.2.1",
   "private": true,
   "description": "Website for Hammerspace Project, powered by Nextjs",
   "author": {
@@ -12,7 +12,7 @@
     "dev": "next dev",
     "build": "next build",
     "deploy:start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "test": "vitest run --passWithNoTests",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -43,7 +43,6 @@
     "next-themes": "catalog:gui",
     "optics-ts": "^2.4.1",
     "postcss": "8.5.3",
-    "r3f-perf": "catalog:three",
     "react": "catalog:gui",
     "react-dom": "catalog:gui",
     "react-hook-form": "7.60.0",
@@ -86,6 +85,7 @@
     "eslint-plugin-storybook": "^9.1.1",
     "jsdom": "catalog:dev",
     "playwright": "^1.54.2",
+    "r3f-perf": "catalog:three",
     "reading-time": "catalog:markdown",
     "rehype-autolink-headings": "catalog:markdown",
     "rehype-slug": "catalog:markdown",
