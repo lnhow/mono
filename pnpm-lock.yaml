@@ -368,9 +368,6 @@ importers:
       postcss:
         specifier: 8.5.3
         version: 8.5.3
-      r3f-perf:
-        specifier: catalog:three
-        version: 7.2.3(@react-three/fiber@9.3.0(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.177.0))(@types/react@19.2.2)(@types/three@0.177.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.177.0)(use-sync-external-store@1.5.0(react@19.2.0))
       react:
         specifier: catalog:gui
         version: 19.2.0
@@ -492,6 +489,9 @@ importers:
       playwright:
         specifier: ^1.54.2
         version: 1.54.2
+      r3f-perf:
+        specifier: catalog:three
+        version: 7.2.3(@react-three/fiber@9.3.0(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.177.0))(@types/react@19.2.2)(@types/three@0.177.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.177.0)(use-sync-external-store@1.5.0(react@19.2.0))
       reading-time:
         specifier: catalog:markdown
         version: 1.5.0
