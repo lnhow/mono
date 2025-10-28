@@ -2,7 +2,7 @@ import { PlayerBaseSubCompProps, HOTKEYS } from '../types'
 import cn from '@hsp/ui/utils/cn'
 import { useHTMLElState } from '@hsp/ui/utils/react/use-html-el-state'
 import { Slider } from '@hsp/ui/components/slider'
-import { useEffect, useRef, useState } from 'react'
+import { startTransition, useEffect, useRef, useState } from 'react'
 import { useKeydown } from '../_utils/useKeydown'
 
 export function DurationIndicator({
@@ -63,7 +63,9 @@ export function DurationSlider({ getVideoEl }: PlayerBaseSubCompProps) {
   useEffect(() => {
     // Update local current time if not changing
     if (!isChanging.current && current !== localCurrent) {
-      setLocalCurrent(current)
+      startTransition(() => {
+        setLocalCurrent(current)
+      })
     }
   }, [current, localCurrent])
 

@@ -8,7 +8,7 @@ import {
   memo,
   startTransition,
 } from 'react'
-import { debounce } from 'lodash'
+import debounce from 'lodash.debounce'
 import { useAtomValue } from 'jotai'
 import { socketAtom } from '@hsp/ui/modules/guesart/state/store'
 import {

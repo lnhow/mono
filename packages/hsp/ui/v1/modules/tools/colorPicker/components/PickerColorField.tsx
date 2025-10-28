@@ -1,5 +1,5 @@
 import cn from '@hsp/ui/utils/cn'
-import { useEffect, useState } from 'react'
+import { startTransition, useEffect, useState } from 'react'
 import {
   Color,
   Input,
@@ -24,7 +24,9 @@ export default function PickerColorField({
   const [color, setColor] = useState(props.value)
 
   useEffect(() => {
-    setColor(props.value)
+    startTransition(() => {
+      setColor(props.value)
+    })
   }, [props.value])
 
   const updateParentColor = useDebounceCallback((val: string) => {

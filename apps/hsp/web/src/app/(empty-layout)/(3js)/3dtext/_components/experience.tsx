@@ -1,4 +1,4 @@
-import { Perf } from 'r3f-perf'
+// import { Perf } from 'r3f-perf'
 import {
   Center,
   OrbitControls,
@@ -57,7 +57,6 @@ export default function Experience() {
 
   return (
     <>
-      <Perf />
       <OrbitControls makeDefault />
       <Center>
         <Text3D
