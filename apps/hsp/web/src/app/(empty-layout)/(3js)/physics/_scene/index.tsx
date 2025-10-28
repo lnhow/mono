@@ -10,8 +10,8 @@ import {
   useBox,
   CollideEvent,
 } from '@react-three/cannon'
-import { OrbitControls } from '@react-three/drei'
-import { Perf } from 'r3f-perf'
+import { OrbitControls, PerformanceMonitor } from '@react-three/drei'
+// import { Perf } from 'r3f-perf'
 import { BoxGeometry, MeshStandardMaterial, SphereGeometry } from 'three'
 import { ComponentType, useEffect, useState } from 'react'
 
@@ -78,7 +78,8 @@ export default function Scene() {
           <Plane />
           <OrbitControls />
         </Physics>
-        <Perf position="top-left" />
+        <PerformanceMonitor />
+        {/* <Perf position="top-left" /> */}
       </Canvas>
       <CollideAudio />
       <Leva />

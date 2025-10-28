@@ -12,7 +12,7 @@ import ButtonLeaveRoom from '../../_components/ButtonLeaveRoom'
 import { ROOM_CONSTRAINTS } from '../../../lobby/group/rooms/RoomCreateForm'
 import { ERoomTheme } from '../../../../state/type/room'
 import { EClientToServerEvents } from '../../../../state/type/socket'
-import { debounce } from 'lodash'
+import debounce from 'lodash.debounce'
 import { DEFAULT_DEBOUNCE_TIME } from '@hsp/ui/utils/debounce'
 
 const GameStart = memo(function GameStart() {

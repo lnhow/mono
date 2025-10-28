@@ -19,5 +19,16 @@ export default [
     rules: {
       "react/no-unknown-property": ["off", { "ignore": ["JSX"] }],
     }
-  }
+  },
+  {
+    ignores: [
+      'node_modules/**',
+      '.next/**',
+      'out/**',
+      'build/**',
+      'next-env.d.ts',
+      '.content-collections/**',
+      '.storybook/**',
+    ],
+  },
 ]

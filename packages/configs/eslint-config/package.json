@@ -16,7 +16,7 @@
     "eslint-plugin-only-warn": "^1.1.0",
     "eslint-plugin-react": "catalog:gui",
     "eslint-plugin-react-hooks": "catalog:gui",
-    "eslint-plugin-turbo": "^2.5.0",
+    "eslint-plugin-turbo": "^2.5.8",
     "globals": "^16.0.0",
     "typescript": "catalog:dev",
     "typescript-eslint": "catalog:dev"

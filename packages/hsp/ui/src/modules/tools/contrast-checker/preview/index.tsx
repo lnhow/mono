@@ -1,6 +1,7 @@
 import {
   PropsWithChildren,
   memo,
+  startTransition,
   useDeferredValue,
   useEffect,
   useState,
@@ -101,9 +102,11 @@ export const ContrastScore = memo(function ContrastScore({
       foregroundDeferred.toString('hex'),
       backgroundDeferred.toString('hex'),
     ).toFixed(2)
-    setRatioRating({
-      contrastRatio,
-      isPass: isContrastRatioPass(contrastRatio, variant === 'bigText'),
+    startTransition(() => {
+      setRatioRating({
+        contrastRatio,
+        isPass: isContrastRatioPass(contrastRatio, variant === 'bigText'),
+      })
     })
   }, [foregroundDeferred, backgroundDeferred, variant])
 

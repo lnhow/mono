@@ -37,6 +37,7 @@ export default function ConnectForm() {
         return
       }
       setLoading(true)
+      // eslint-disable-next-line react-hooks/immutability
       socket.auth = {
         username: data.username,
       }
