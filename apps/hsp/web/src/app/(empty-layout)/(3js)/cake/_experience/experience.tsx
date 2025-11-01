@@ -1,7 +1,7 @@
 import { Environment, Sparkles } from '@react-three/drei'
 import { OrbitControls } from '@react-three/drei/core/OrbitControls'
 // import { Perf } from 'r3f-perf'
-import { useRef } from 'react'
+import { Suspense, useRef } from 'react'
 import { DirectionalLight } from 'three'
 import Elements from './scene/elements'
 
@@ -13,7 +13,9 @@ export default function Experience() {
       {/* <Debug /> */}
       <OrbitControls makeDefault />
       <fog attach="fog" args={['lightpink', 60, 100]} />
-      <Elements />
+      <Suspense fallback={null}>
+        <Elements />
+      </Suspense>
       <ambientLight intensity={2} color="#ffa4a4" />
       <Sparkles size={6} scale={[6, 7, 6]} position={[0, 1, 0]} />
       <directionalLight

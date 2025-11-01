@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import TextMessage from './message'
 import { Cake } from './cake'
 import { useAtomValue } from 'jotai'
@@ -13,12 +12,8 @@ export default function Elements() {
 
   return (
     <group>
-      <Suspense fallback={null}>
-        <TextMessage />
-      </Suspense>
-      <Suspense>
-        <Cake />
-      </Suspense>
+      <TextMessage />
+      <Cake />
     </group>
   )
 }
