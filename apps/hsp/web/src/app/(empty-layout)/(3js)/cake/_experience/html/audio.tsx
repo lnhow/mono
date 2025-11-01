@@ -1,10 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { memo, useEffect, useRef } from 'react'
 import { BGM } from '../_const'
 import { Button } from '@hsp/ui/components/button'
 import { useHTMLElState } from '@hsp/ui/utils/react/use-html-el-state'
 import { LuPause, LuPlay } from 'react-icons/lu'
 
-export default function Audio({ className }: { className?: string }) {
+function Audio({ className }: { className?: string }) {
   const elAudio = useRef<HTMLAudioElement>(null)
   const isPlaying = useHTMLElState(
     () => elAudio.current,
@@ -16,12 +16,16 @@ export default function Audio({ className }: { className?: string }) {
   )
 
   useEffect(() => {
+    const _elAudio = elAudio.current
     const handleAutoplay = () => {
-      elAudio.current?.play()
+      _elAudio?.play()
       document.removeEventListener('click', handleAutoplay)
     }
+
     document.addEventListener('click', handleAutoplay)
+
     return () => {
+      _elAudio?.pause()
       document.removeEventListener('click', handleAutoplay)
     }
   }, [])
@@ -50,3 +54,5 @@ export default function Audio({ className }: { className?: string }) {
     </div>
   )
 }
+
+export default memo(Audio)
