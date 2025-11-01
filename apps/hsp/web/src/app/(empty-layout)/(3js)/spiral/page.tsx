@@ -1,10 +1,20 @@
 import { Metadata } from 'next'
+import { ViewTransition } from 'react'
 import CanvasSpiral from './_canvas'
 
 export const metadata: Metadata = {
-  title: 'Spiral'
+  title: 'Galaxy Generator',
+  description: 'A galaxy spiral generator built with Three.js.',
+  openGraph: {
+    title: 'Galaxy Generator',
+    description: 'A galaxy spiral generator built with Three.js.',
+  }
 }
 
 export default function PageSpiral() {
-  return <CanvasSpiral />
+  return (
+    <ViewTransition name="spiral-card" update="none">
+      <CanvasSpiral />
+    </ViewTransition>
+  )
 }
