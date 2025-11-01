@@ -32,7 +32,7 @@ catalogs:
   three:
     '@react-three/cannon': '6.6.0'
     '@react-three/drei': '10.7.6'
-    '@react-three/fiber': '9.3.0'
+    '@react-three/fiber': '9.4.0'
     r3f-perf: 7.2.3
     'three': '^0.177.0'
     '@types/three': '^0.177.0'
