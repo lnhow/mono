@@ -1,0 +1,49 @@
+name: Deploy @hsp/app-api
+on:
+  push:
+    branches:
+      - deploy
+    paths:
+      - 'apps/hsp/api/**'
+      - '.github/workflows/deploy_hsp_api.yml'
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        turbo-version: [2.5.8]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: "package.json"
+          cache: 'pnpm'
+
+      - name: Install Turbo CLI globally
+        run: |
+          pnpm add -g turbo@${{ matrix.turbo-version }}
+
+      - name: Prune @hsp/app-api
+        run: |
+          turbo prune @hsp/app-api
+
+      - name: Install build dependencies
+        run: |
+          pnpm -C out install --frozen-lockfile --filter @hsp/app-api...
+
+      - name: Build project
+        run: |
+          pnpm -C out run build --filter @hsp/app-api
+
+      - name: Deploy to Production
+        if: success()
+        run: |
+          echo "Deploying HSP API to production..."
+          # Add your deployment commands here
+
