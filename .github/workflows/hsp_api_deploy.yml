@@ -5,7 +5,7 @@ on:
       - deploy
     paths:
       - 'apps/hsp/api/**'
-      - '.github/workflows/deploy_hsp_api.yml'
+      - '.github/workflows/hsp_api_deploy.yml'
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
