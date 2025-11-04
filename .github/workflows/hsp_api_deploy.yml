@@ -46,6 +46,7 @@ jobs:
         uses: easingthemes/ssh-deploy@v5.1.0
         if: success()
         with:
+          ARGS: "-azc" # Reduced logging because of large logs
           SSH_PRIVATE_KEY: '${{ secrets.SSH_PRIVATE_KEY }}'
           SOURCE: ./out ./ecosystem.config.js
           REMOTE_HOST: '${{ secrets.REMOTE_HOST }}'
