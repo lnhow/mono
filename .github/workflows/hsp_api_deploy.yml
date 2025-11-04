@@ -1,0 +1,60 @@
+name: Deploy @hsp/app-api
+on:
+  push:
+    branches:
+      - deploy
+    paths:
+      - 'apps/hsp/api/**'
+      - '.github/workflows/deploy_hsp_api.yml'
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        turbo-version: [2.5.8]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: "package.json"
+          cache: 'pnpm'
+
+      - name: Install Turbo CLI
+        run: |
+          pnpm add -g turbo@${{ matrix.turbo-version }}
+
+      - name: Prune @hsp/app-api
+        run: |
+          turbo prune @hsp/app-api
+
+      - name: Install build dependencies
+        run: |
+          pnpm -C out install --frozen-lockfile --filter @hsp/app-api...
+
+      - name: Build @hsp/app-api
+        run: |
+          pnpm -C out run build --filter @hsp/app-api
+
+      - name: Deploy to Remote
+        # https://github.com/marketplace/actions/ssh-deploy
+        uses: easingthemes/ssh-deploy@v5.1.0
+        if: success()
+        with:
+          SSH_PRIVATE_KEY: '${{ secrets.SSH_PRIVATE_KEY }}'
+          SOURCE: ./out ./ecosystem.config.js
+          REMOTE_HOST: '${{ secrets.REMOTE_HOST }}'
+          REMOTE_USER: '${{ secrets.REMOTE_USER }}'
+          TARGET: '${{ secrets.HSP_API_REMOTE_TARGET }}'
+          SCRIPT_BEFORE: |
+            pm2 delete hsp-api --silent || true
+          SCRIPT_AFTER: |
+            cp ${{ secrets.HSP_API_ENV_FILE }} ${{ secrets.HSP_API_REMOTE_TARGET }}/out/apps/hsp/api/.env
+            cd ${{ secrets.HSP_API_REMOTE_TARGET }}
+            ls -al
+            pm2 startOrReload ecosystem.config.js --only hsp-api

@@ -25,18 +25,18 @@ corepack enable
 npm install pm2 -g
 pm2 --version # Should print "5.1.0".
 
-# nano
-sudo apt install nano -y
-
-# git
+# Install toolings
+# nano    Quick file editor
+# rsync   Copy builds to remote
+# git     
+# nginx   HTTPS/SSL
 sudo apt update
-sudo apt install git -y
+sudo apt install nano rsync git nginx -y
+
+# config git
 git --version
 git config --global user.name "Your Name"
 git config --global user.email "youremail@example.com"
-
-# nginx
-sudo apt install nginx -y
 ```
 
 4. Configure SSL for nginx (optional)
@@ -82,6 +82,22 @@ pnpm deploy:start --filter=@hsp/app-api
 ```bash
 # ssh to server
 cd ~/app && ~/app/apps/hsp/api/.ci/deploy.sh
+```
+
+#### GitHub Action
+
+Develop locally
+- Install [nektos/act](https://github.com/nektos/act)
+  - Homebrew: `brew install act`
+- Cmd `act -W '.github/workflows/hsp_api_deploy.yml' --container-architecture linux/amd64 --secret-file .env.act`
+- `.env.act`
+
+```
+REMOTE_HOST="127.0.0.1"
+REMOTE_USER="your_remote_user"
+REMOTE_TARGET="/home/your_remote_user/folder"
+ENV_FILE="/home/your_remote_user/..."
+SSH_PRIVATE_KEY="-----BEGIN OPENSSH PRIVATE KEY-----..."
 ```
 
 ### Configurations
