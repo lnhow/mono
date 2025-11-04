@@ -25,7 +25,7 @@ jobs:
           node-version-file: "package.json"
           cache: 'pnpm'
 
-      - name: Install Turbo CLI globally
+      - name: Install Turbo CLI
         run: |
           pnpm add -g turbo@${{ matrix.turbo-version }}
 
@@ -37,13 +37,23 @@ jobs:
         run: |
           pnpm -C out install --frozen-lockfile --filter @hsp/app-api...
 
-      - name: Build project
+      - name: Build @hsp/app-api
         run: |
           pnpm -C out run build --filter @hsp/app-api
 
-      - name: Deploy to Production
+      - name: Deploy to Remote
+        # https://github.com/marketplace/actions/ssh-deploy
+        uses: easingthemes/ssh-deploy@v5.1.0
         if: success()
-        run: |
-          echo "Deploying HSP API to production..."
-          # Add your deployment commands here
-
+        with:
+          SSH_PRIVATE_KEY: '${{ secrets.SSH_PRIVATE_KEY }}'
+          SOURCE: ./out ./ecosystem.config.js
+          REMOTE_HOST: '${{ secrets.REMOTE_HOST }}'
+          REMOTE_USER: '${{ secrets.REMOTE_USER }}'
+          TARGET: '${{ secrets.REMOTE_TARGET }}'
+          SCRIPT_BEFORE: |
+            pm2 delete hsp-api --silent || true
+          SCRIPT_AFTER: |
+            cp ${{ secrets.ENV_FILE }} ${{ secrets.REMOTE_TARGET }}/out/apps/hsp/api/.env
+            ls -al ${{ secrets.REMOTE_TARGET }}
+            pm2 startOrReload ${{ secrets.REMOTE_TARGET }}/ecosystem.config.js --only hsp-api

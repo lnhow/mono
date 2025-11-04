@@ -25,18 +25,18 @@ corepack enable
 npm install pm2 -g
 pm2 --version # Should print "5.1.0".
 
-# nano
-sudo apt install nano -y
-
-# git
+# Install toolings
+# nano    Quick file editor
+# rsync   Copy builds to remote
+# git     
+# nginx   HTTPS/SSL
 sudo apt update
-sudo apt install git -y
+sudo apt install nano rsync git nginx -y
+
+# config git
 git --version
 git config --global user.name "Your Name"
 git config --global user.email "youremail@example.com"
-
-# nginx
-sudo apt install nginx -y
 ```
 
 4. Configure SSL for nginx (optional)
