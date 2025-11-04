@@ -84,6 +84,22 @@ pnpm deploy:start --filter=@hsp/app-api
 cd ~/app && ~/app/apps/hsp/api/.ci/deploy.sh
 ```
 
+#### GitHub Action
+
+Develop locally
+- Install [nektos/act](https://github.com/nektos/act)
+  - Homebrew: `brew install act`
+- Cmd `act -W '.github/workflows/hsp_api_deploy.yml' --container-architecture linux/amd64 --secret-file .env.act`
+- `.env.act`
+
+```
+REMOTE_HOST="127.0.0.1"
+REMOTE_USER="your_remote_user"
+REMOTE_TARGET="/home/your_remote_user/folder"
+ENV_FILE="/home/your_remote_user/..."
+SSH_PRIVATE_KEY="-----BEGIN OPENSSH PRIVATE KEY-----..."
+```
+
 ### Configurations
 
 #### Nginx Reverse Proxy
