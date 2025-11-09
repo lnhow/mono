@@ -38,6 +38,7 @@
     "@nestjs/jwt": "^11.0.0",
     "@nestjs/platform-express": "^11.1.6",
     "@nestjs/platform-socket.io": "^11.1.6",
+    "@nestjs/swagger": "^11.2.1",
     "@nestjs/websockets": "^11.1.6",
     "@prisma/client": "catalog:prisma",
     "@socket.io/mongo-adapter": "^0.3.2",
@@ -83,7 +84,7 @@
       "json",
       "ts"
     ],
-     "moduleNameMapper": {
+    "moduleNameMapper": {
       "generated/(.*)": "<rootDir>/../generated/$1",
       "^src/(.*)": "<rootDir>/../src/$1"
     },
