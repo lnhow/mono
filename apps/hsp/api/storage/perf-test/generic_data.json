@@ -1,0 +1,2831 @@
+{
+  "hashTags": [
+    "Lifestyle",
+    "Decor",
+    "Decor",
+    "Gadgets",
+    "Coffee",
+    "Art",
+    "Gadgets",
+    "Coffee",
+    "Lifestyle",
+    "Home",
+    "Home",
+    "Coffee",
+    "Handmade",
+    "Art",
+    "Handmade",
+    "Books",
+    "Books",
+    "Handmade",
+    "Decor",
+    "Handmade",
+    "Lifestyle",
+    "Gadgets",
+    "Books",
+    "Gadgets"
+  ],
+  "banners": {
+    "main": {
+      "desktop": [
+        {
+          "id": 268707,
+          "title": "Get Started with Pottery",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "linkUrl": "#",
+          "isLoggedOut": 0,
+          "rating": 0
+        },
+        {
+          "id": 612943,
+          "title": "New Arrivals This Week",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "linkUrl": "#",
+          "isLoggedOut": 0,
+          "rating": 0
+        },
+        {
+          "id": 692264,
+          "title": "Our Weekly Bestsellers",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "linkUrl": "#",
+          "isLoggedOut": 0,
+          "rating": 0
+        },
+        {
+          "id": 685825,
+          "title": "Exclusive Summer Collection",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "linkUrl": "#",
+          "isLoggedOut": 1,
+          "rating": 0
+        },
+        {
+          "id": 955386,
+          "title": "Exclusive Summer Collection",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "linkUrl": "#",
+          "isLoggedOut": 0,
+          "rating": 0
+        },
+        {
+          "id": 709294,
+          "title": "Our Weekly Bestsellers",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "linkUrl": "#",
+          "isLoggedOut": 0,
+          "rating": 0
+        },
+        {
+          "id": 559605,
+          "title": "Get Started with Pottery",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "linkUrl": "#",
+          "isLoggedOut": 0,
+          "rating": 0
+        },
+        {
+          "id": 259108,
+          "title": "Limited Time Discount",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "linkUrl": "#",
+          "isLoggedOut": 0,
+          "rating": 0
+        }
+      ],
+      "mobile": [
+        {
+          "id": 110809,
+          "title": "Our Weekly Bestsellers",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "linkUrl": "#",
+          "isLoggedOut": 0,
+          "rating": 0
+        },
+        {
+          "id": 907839,
+          "title": "Exclusive Summer Collection",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "linkUrl": "#",
+          "isLoggedOut": 0,
+          "rating": 0
+        },
+        {
+          "id": 227152,
+          "title": "Limited Time Discount",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "linkUrl": "#",
+          "isLoggedOut": 0,
+          "rating": 0
+        },
+        {
+          "id": 154070,
+          "title": "Our Weekly Bestsellers",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "linkUrl": "#",
+          "isLoggedOut": 1,
+          "rating": 0
+        },
+        {
+          "id": 686928,
+          "title": "Limited Time Discount",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "linkUrl": "#",
+          "isLoggedOut": 0,
+          "rating": 0
+        },
+        {
+          "id": 289641,
+          "title": "Limited Time Discount",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "linkUrl": "#",
+          "isLoggedOut": 0,
+          "rating": 0
+        },
+        {
+          "id": 366511,
+          "title": "New Arrivals This Week",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "linkUrl": "#",
+          "isLoggedOut": 0,
+          "rating": 0
+        }
+      ]
+    },
+    "sub": {
+      "desktop": [],
+      "mobile": []
+    },
+    "partner": {
+      "mobile": [
+        {
+          "id": 59783,
+          "bannerType": 1,
+          "bannerUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "description": "Decor",
+          "linkUrl": "#",
+          "positionType": 6
+        },
+        {
+          "id": 220471,
+          "bannerType": 1,
+          "bannerUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "description": "Books",
+          "linkUrl": "#",
+          "positionType": 5
+        }
+      ],
+      "desktop": [
+        {
+          "id": 941581,
+          "bannerType": 1,
+          "bannerUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "description": "Coffee",
+          "linkUrl": "#",
+          "positionType": 6
+        },
+        {
+          "id": 771314,
+          "bannerType": 1,
+          "bannerUrl": "https://via.placeholder.com/400x250.png?text=Item",
+          "description": "Handmade",
+          "linkUrl": "#",
+          "positionType": 5
+        }
+      ]
+    }
+  },
+  "subBanner": {
+    "title": "Meet the Artist",
+    "youtubeId": "Books",
+    "detailUrl": "#",
+    "isNew": false,
+    "rating": 0,
+    "thumbnailUrl": "https://via.placeholder.com/400x250.png?text=Item"
+  },
+  "timeLines": [
+    {
+      "id": 580640,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 49800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 3904,
+        "name": "UrbanHomestead",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 53217,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 49800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7431,
+        "name": "TheCoffeeHub",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 411935,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 9275,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 875722,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 49800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 9824,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 14263,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 4351,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 429205,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 19800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8380,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 966018,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 6717,
+        "name": "TheCoffeeHub",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 180775,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 19800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 1354,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 27677,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 2597,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 818790,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 19800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8915,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 86720,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 10000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5865,
+        "name": "TheCoffeeHub",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 692571,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8663,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 809098,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8324,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 595813,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 49800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 6961,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 659485,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 29800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 4774,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 23527,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 100000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 3504,
+        "name": "TheCoffeeHub",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 895806,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 100000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8644,
+        "name": "UrbanHomestead",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 944761,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 6462,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 335907,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5096,
+        "name": "UrbanHomestead",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 203730,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 1698,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 139568,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5638,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 663095,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 100000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 2227,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 856299,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 100000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 1411,
+        "name": "TheCoffeeHub",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 457738,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 19800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 3319,
+        "name": "TheCoffeeHub",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 790258,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7277,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 935902,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8722,
+        "name": "UrbanHomestead",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 726365,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 10000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7908,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 191445,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 9423,
+        "name": "TheCoffeeHub",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 17633,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5502,
+        "name": "TheCoffeeHub",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 510846,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 29800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7079,
+        "name": "UrbanHomestead",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    }
+  ],
+  "streaming": {
+    "heroArea": {
+      "id": 4069,
+      "type": "Coffee",
+      "thumbnailUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "title": "Meet the Artist",
+      "detailUrl": "#",
+      "livestream": {
+        "statusType": 0,
+        "scheduledStartTime": 0,
+        "isPublic": false,
+        "hlsUrl": null
+      },
+      "video": {
+        "totalTimeInSec": 303,
+        "accessLevel": 2,
+        "publishedAt": "Handmade",
+        "previewUrl": {
+          "hlsUrl": "#",
+          "dashUrl": "#"
+        },
+        "videoUrl": {
+          "hlsUrl": "#",
+          "dashUrl": "#"
+        }
+      },
+      "sellerInfo": {
+        "id": 5609,
+        "nickName": "StudioFinds",
+        "isoName": "GENERIC_COUNTRY_CODE",
+        "detailUrl": "#"
+      }
+    },
+    "sliderArea": [
+      {
+        "id": 790263,
+        "type": "Handmade",
+        "thumbnailUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "title": "New Arrivals This Week",
+        "detailUrl": "#",
+        "livestream": {
+          "statusType": 0,
+          "scheduledStartTime": 0,
+          "isPublic": false,
+          "hlsUrl": null
+        },
+        "video": {
+          "totalTimeInSec": 399,
+          "accessLevel": 1,
+          "publishedAt": 0,
+          "previewUrl": {
+            "hlsUrl": "#",
+            "dashUrl": "#"
+          },
+          "videoUrl": null
+        },
+        "sellerInfo": {
+          "id": 8286,
+          "nickName": "UrbanHomestead",
+          "isoName": "GENERIC_COUNTRY_CODE",
+          "detailUrl": "#"
+        }
+      },
+      {
+        "id": 760344,
+        "type": "Coffee",
+        "thumbnailUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "title": "Limited Time Discount",
+        "detailUrl": "#",
+        "livestream": {
+          "statusType": 0,
+          "scheduledStartTime": 0,
+          "isPublic": false,
+          "hlsUrl": null
+        },
+        "video": {
+          "totalTimeInSec": 278,
+          "accessLevel": 2,
+          "publishedAt": "Lifestyle",
+          "previewUrl": {
+            "hlsUrl": "#",
+            "dashUrl": "#"
+          },
+          "videoUrl": {
+            "hlsUrl": "#",
+            "dashUrl": "#"
+          }
+        },
+        "sellerInfo": {
+          "id": 6570,
+          "nickName": "TheCoffeeHub",
+          "isoName": "GENERIC_COUNTRY_CODE",
+          "detailUrl": "#"
+        }
+      },
+      {
+        "id": 400625,
+        "type": "Decor",
+        "thumbnailUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "title": "Limited Time Discount",
+        "detailUrl": "#",
+        "livestream": {
+          "statusType": 0,
+          "scheduledStartTime": 0,
+          "isPublic": false,
+          "hlsUrl": null
+        },
+        "video": {
+          "totalTimeInSec": 2031,
+          "accessLevel": 2,
+          "publishedAt": "Decor",
+          "previewUrl": {
+            "hlsUrl": "#",
+            "dashUrl": "#"
+          },
+          "videoUrl": {
+            "hlsUrl": "#",
+            "dashUrl": "#"
+          }
+        },
+        "sellerInfo": {
+          "id": 5035,
+          "nickName": "ModernLiving",
+          "isoName": "GENERIC_COUNTRY_CODE",
+          "detailUrl": "#"
+        }
+      },
+      {
+        "id": 418571,
+        "type": "Home",
+        "thumbnailUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "title": "Limited Time Discount",
+        "detailUrl": "#",
+        "livestream": {
+          "statusType": 0,
+          "scheduledStartTime": 0,
+          "isPublic": false,
+          "hlsUrl": null
+        },
+        "video": {
+          "totalTimeInSec": 196,
+          "accessLevel": 2,
+          "publishedAt": "Coffee",
+          "previewUrl": {
+            "hlsUrl": "#",
+            "dashUrl": "#"
+          },
+          "videoUrl": {
+            "hlsUrl": "#",
+            "dashUrl": "#"
+          }
+        },
+        "sellerInfo": {
+          "id": 9279,
+          "nickName": "StudioFinds",
+          "isoName": "GENERIC_COUNTRY_CODE",
+          "detailUrl": "#"
+        }
+      },
+      {
+        "id": 811467,
+        "type": "Decor",
+        "thumbnailUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "title": "Meet the Artist",
+        "detailUrl": "#",
+        "livestream": {
+          "statusType": 0,
+          "scheduledStartTime": 0,
+          "isPublic": false,
+          "hlsUrl": null
+        },
+        "video": {
+          "totalTimeInSec": 444,
+          "accessLevel": 2,
+          "publishedAt": "Handmade",
+          "previewUrl": {
+            "hlsUrl": "#",
+            "dashUrl": "#"
+          },
+          "videoUrl": {
+            "hlsUrl": "#",
+            "dashUrl": "#"
+          }
+        },
+        "sellerInfo": {
+          "id": 9619,
+          "nickName": "TheCoffeeHub",
+          "isoName": "GENERIC_COUNTRY_CODE",
+          "detailUrl": "#"
+        }
+      },
+      {
+        "id": 997645,
+        "type": "Decor",
+        "thumbnailUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "title": "Meet the Artist",
+        "detailUrl": "#",
+        "livestream": {
+          "statusType": 0,
+          "scheduledStartTime": 0,
+          "isPublic": false,
+          "hlsUrl": null
+        },
+        "video": {
+          "totalTimeInSec": 357,
+          "accessLevel": 2,
+          "publishedAt": "Handmade",
+          "previewUrl": {
+            "hlsUrl": "#",
+            "dashUrl": "#"
+          },
+          "videoUrl": {
+            "hlsUrl": "#",
+            "dashUrl": "#"
+          }
+        },
+        "sellerInfo": {
+          "id": 9400,
+          "nickName": "TheCoffeeHub",
+          "isoName": "GENERIC_COUNTRY_CODE",
+          "detailUrl": "#"
+        }
+      }
+    ]
+  },
+  "newNavis": [
+    {
+      "label": "Books",
+      "url": "#",
+      "icon": "Coffee",
+      "isBeta": false,
+      "items": [
+        {
+          "label": "Handmade",
+          "url": "#"
+        },
+        {
+          "label": "Handmade",
+          "url": "#"
+        },
+        {
+          "label": "Lifestyle",
+          "url": "#"
+        },
+        {
+          "label": "Handmade",
+          "url": "#"
+        },
+        {
+          "label": "Coffee",
+          "url": "#"
+        }
+      ]
+    },
+    {
+      "label": "Gadgets",
+      "url": "#",
+      "icon": "Coffee",
+      "isBeta": false,
+      "items": [
+        {
+          "label": "Lifestyle",
+          "url": "#"
+        },
+        {
+          "label": "Books",
+          "url": "#"
+        },
+        {
+          "label": "Lifestyle",
+          "url": "#"
+        },
+        {
+          "label": "Home",
+          "url": "#"
+        },
+        {
+          "label": "Coffee",
+          "url": "#"
+        },
+        {
+          "label": "Gadgets",
+          "url": "#"
+        },
+        {
+          "label": "Lifestyle",
+          "url": "#"
+        },
+        {
+          "label": "Lifestyle",
+          "url": "#"
+        }
+      ]
+    },
+    {
+      "label": "Books",
+      "url": "#",
+      "icon": "Home",
+      "isBeta": false,
+      "items": [
+        {
+          "label": "Lifestyle",
+          "url": "#"
+        },
+        {
+          "label": "Decor",
+          "url": "#"
+        },
+        {
+          "label": "Art",
+          "url": "#"
+        },
+        {
+          "label": "Gadgets",
+          "url": "#"
+        },
+        {
+          "label": "Decor",
+          "url": "#"
+        },
+        {
+          "label": "Books",
+          "url": "#"
+        }
+      ]
+    },
+    {
+      "label": "Coffee",
+      "url": "#",
+      "icon": "Gadgets",
+      "isBeta": true,
+      "items": [
+        {
+          "label": "Home",
+          "url": "#"
+        },
+        {
+          "label": "Home",
+          "url": "#"
+        },
+        {
+          "label": "Lifestyle",
+          "url": "#"
+        },
+        {
+          "label": "Gadgets",
+          "url": "#"
+        },
+        {
+          "label": "Decor",
+          "url": "#"
+        },
+        {
+          "label": "Books",
+          "url": "#"
+        },
+        {
+          "label": "Art",
+          "url": "#"
+        },
+        {
+          "label": "Handmade",
+          "url": "#"
+        },
+        {
+          "label": "Handmade",
+          "url": "#"
+        },
+        {
+          "label": "Art",
+          "url": "#"
+        },
+        {
+          "label": "Lifestyle",
+          "url": "#"
+        },
+        {
+          "label": "Lifestyle",
+          "url": "#"
+        }
+      ]
+    },
+    {
+      "label": "Home",
+      "url": "#",
+      "icon": "Home",
+      "isBeta": false,
+      "items": [
+        {
+          "label": "Lifestyle",
+          "url": "#"
+        },
+        {
+          "label": "Handmade",
+          "url": "#"
+        },
+        {
+          "label": "Decor",
+          "url": "#"
+        },
+        {
+          "label": "Gadgets",
+          "url": "#"
+        }
+      ]
+    },
+    {
+      "label": "Books",
+      "url": "#",
+      "icon": "Art",
+      "isBeta": true,
+      "items": []
+    },
+    {
+      "label": "Art",
+      "url": "#",
+      "icon": "Gadgets",
+      "isBeta": false,
+      "items": []
+    },
+    {
+      "label": "Home",
+      "url": "#",
+      "icon": "Coffee",
+      "isBeta": false,
+      "items": []
+    }
+  ],
+  "rankings": {
+    "title": "Get Started with Pottery",
+    "label": "Coffee",
+    "productType": "Art",
+    "url": "#",
+    "items": [
+      {
+        "id": 133481,
+        "name": "Wireless Bluetooth Earbuds",
+        "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "price": 1000,
+        "url": "#",
+        "sellerInfo": {
+          "id": 3532,
+          "name": "UrbanHomestead",
+          "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+        }
+      },
+      {
+        "id": 788647,
+        "name": "Cedarwood Scented Candle",
+        "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "price": 2000,
+        "url": "#",
+        "sellerInfo": {
+          "id": 6176,
+          "name": "StudioFinds",
+          "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+        }
+      },
+      {
+        "id": 728956,
+        "name": "Cedarwood Scented Candle",
+        "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "price": 1000,
+        "url": "#",
+        "sellerInfo": {
+          "id": 2697,
+          "name": "StudioFinds",
+          "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+        }
+      }
+    ]
+  },
+  "interviewVideos": [
+    {
+      "id": 681313,
+      "type": "Handmade",
+      "thumbnailUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "title": "Meet the Artist",
+      "detailUrl": "#",
+      "livestream": {
+        "statusType": 0,
+        "scheduledStartTime": 0,
+        "isPublic": false,
+        "hlsUrl": null
+      },
+      "video": {
+        "totalTimeInSec": 354,
+        "accessLevel": 2,
+        "publishedAt": "Decor",
+        "previewUrl": {
+          "hlsUrl": "#",
+          "dashUrl": "#"
+        },
+        "videoUrl": {
+          "hlsUrl": "#",
+          "dashUrl": "#"
+        }
+      },
+      "sellerInfo": {
+        "id": 8116,
+        "nickName": "TheCoffeeHub",
+        "isoName": "GENERIC_COUNTRY_CODE",
+        "detailUrl": "#"
+      }
+    },
+    {
+      "id": 923594,
+      "type": "Decor",
+      "thumbnailUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "title": "Meet the Artist",
+      "detailUrl": "#",
+      "livestream": {
+        "statusType": 0,
+        "scheduledStartTime": 0,
+        "isPublic": false,
+        "hlsUrl": null
+      },
+      "video": {
+        "totalTimeInSec": 1045,
+        "accessLevel": 2,
+        "publishedAt": "Gadgets",
+        "previewUrl": {
+          "hlsUrl": "#",
+          "dashUrl": "#"
+        },
+        "videoUrl": {
+          "hlsUrl": "#",
+          "dashUrl": "#"
+        }
+      },
+      "sellerInfo": {
+        "id": 6625,
+        "nickName": "ModernLiving",
+        "isoName": "GENERIC_COUNTRY_CODE",
+        "detailUrl": "#"
+      }
+    },
+    {
+      "id": 78602,
+      "type": "Art",
+      "thumbnailUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "title": "Meet the Artist",
+      "detailUrl": "#",
+      "livestream": {
+        "statusType": 0,
+        "scheduledStartTime": 0,
+        "isPublic": false,
+        "hlsUrl": null
+      },
+      "video": {
+        "totalTimeInSec": 517,
+        "accessLevel": 2,
+        "publishedAt": "Decor",
+        "previewUrl": {
+          "hlsUrl": "#",
+          "dashUrl": "#"
+        },
+        "videoUrl": {
+          "hlsUrl": "#",
+          "dashUrl": "#"
+        }
+      },
+      "sellerInfo": {
+        "id": 5580,
+        "nickName": "StudioFinds",
+        "isoName": "GENERIC_COUNTRY_CODE",
+        "detailUrl": "#"
+      }
+    },
+    {
+      "id": 57904,
+      "type": "Handmade",
+      "thumbnailUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "title": "Meet the Artist",
+      "detailUrl": "#",
+      "livestream": {
+        "statusType": 0,
+        "scheduledStartTime": 0,
+        "isPublic": false,
+        "hlsUrl": null
+      },
+      "video": {
+        "totalTimeInSec": 451,
+        "accessLevel": 2,
+        "publishedAt": "Art",
+        "previewUrl": {
+          "hlsUrl": "#",
+          "dashUrl": "#"
+        },
+        "videoUrl": {
+          "hlsUrl": "#",
+          "dashUrl": "#"
+        }
+      },
+      "sellerInfo": {
+        "id": 5601,
+        "nickName": "TheCoffeeHub",
+        "isoName": "GENERIC_COUNTRY_CODE",
+        "detailUrl": "#"
+      }
+    },
+    {
+      "id": 361715,
+      "type": "Coffee",
+      "thumbnailUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "title": "Meet the Artist",
+      "detailUrl": "#",
+      "livestream": {
+        "statusType": 0,
+        "scheduledStartTime": 0,
+        "isPublic": false,
+        "hlsUrl": null
+      },
+      "video": {
+        "totalTimeInSec": 357,
+        "accessLevel": 2,
+        "publishedAt": "Gadgets",
+        "previewUrl": {
+          "hlsUrl": "#",
+          "dashUrl": "#"
+        },
+        "videoUrl": {
+          "hlsUrl": "#",
+          "dashUrl": "#"
+        }
+      },
+      "sellerInfo": {
+        "id": 2652,
+        "nickName": "TheCoffeeHub",
+        "isoName": "GENERIC_COUNTRY_CODE",
+        "detailUrl": "#"
+      }
+    }
+  ],
+  "saleOffToolProducts": [
+    {
+      "id": 583647,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 6128,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 435378,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 1461,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 782414,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7322,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 418049,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 10000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 2697,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 738097,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7076,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 371912,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 9979,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 249624,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 5000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5104,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 894042,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 5000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 3236,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 322432,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 49800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8704,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 94784,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 3524,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 393774,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 6176,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 113975,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 4826,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 769503,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 1944,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 813735,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 1696,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 269784,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 100000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8778,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 782161,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 9660,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 406850,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 10000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5591,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 314451,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 19800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7808,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 857321,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 10000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8558,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 93233,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 10000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 4440,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 13444,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 100000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8328,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 182705,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 49800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5824,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 718334,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 10000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5484,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 361406,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7036,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 801128,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 5000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 9253,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 268676,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 4833,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 841575,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 10000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7096,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 305886,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 19800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5581,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 41258,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 10000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 2185,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 444391,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 6124,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    }
+  ],
+  "newFaces": [
+    {
+      "id": 732230,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "UrbanHomestead",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 141999,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "UrbanHomestead",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 668356,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "ArtisanCrafts",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 257760,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "UrbanHomestead",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 84157,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "TheCoffeeHub",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 257608,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "UrbanHomestead",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 801127,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "TheCoffeeHub",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 870425,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "ArtisanCrafts",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 346513,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "ArtisanCrafts",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 780650,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "ArtisanCrafts",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 147573,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "TheCoffeeHub",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 204554,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "ModernLiving",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 298416,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "TheCoffeeHub",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 732940,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "ArtisanCrafts",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 792701,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "StudioFinds",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 485121,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "TheCoffeeHub",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 134262,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "ArtisanCrafts",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 349603,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "UrbanHomestead",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 966848,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "ArtisanCrafts",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 782163,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "ModernLiving",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 169991,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "StudioFinds",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 554316,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "ModernLiving",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 756461,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "UrbanHomestead",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 997420,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "UrbanHomestead",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 870422,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "ArtisanCrafts",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 354399,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "TheCoffeeHub",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 147551,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "UrbanHomestead",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 129759,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "UrbanHomestead",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 932578,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "ArtisanCrafts",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    },
+    {
+      "id": 482613,
+      "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar",
+      "nickName": "UrbanHomestead",
+      "isoName": "GENERIC_COUNTRY_CODE",
+      "detailUrl": "#",
+      "isGgjCertificationDeveloper": false
+    }
+  ],
+  "newProducts": [
+    {
+      "id": 947477,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5506,
+        "name": "TheCoffeeHub",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 269784,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 5000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8110,
+        "name": "UrbanHomestead",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 673551,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 1391,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 164095,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8802,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 435251,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 6814,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 456633,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 2516,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 31398,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7862,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 166710,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 5000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8632,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 737890,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 4053,
+        "name": "TheCoffeeHub",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 26860,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 10000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 1827,
+        "name": "TheCoffeeHub",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 839958,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 29800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5519,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 17820,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 29800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 4531,
+        "name": "UrbanHomestead",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 789972,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 1177,
+        "name": "UrbanHomestead",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 559092,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 1395,
+        "name": "UrbanHomestead",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 877864,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 9617,
+        "name": "UrbanHomestead",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 354651,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5354,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 997636,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 6434,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 686861,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 10000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 3585,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 222837,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5462,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 303429,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5117,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 37207,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 2697,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 236441,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 10000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 2618,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 435773,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 10000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7898,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 339023,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 19800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7322,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 878144,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7378,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 85741,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 3280,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 769151,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 9617,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 269747,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 10000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 2229,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 296316,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5354,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 941011,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7034,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    }
+  ],
+  "prProducts": [
+    {
+      "id": 986684,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7289,
+        "name": "TheCoffeeHub",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 139598,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 5000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 2420,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 252972,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 5000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 2990,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 761751,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 3418,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 691907,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 5000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 2235,
+        "name": "TheCoffeeHub",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 403831,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 100000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8516,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 659960,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7241,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 957976,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 10000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7965,
+        "name": "TheCoffeeHub",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 96378,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5600,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 732560,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 29800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 1409,
+        "name": "UrbanHomestead",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 349635,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 5000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8943,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 907094,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 3968,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 84149,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 9180,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 780655,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 100000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5519,
+        "name": "TheCoffeeHub",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 169992,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 1289,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 870425,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 5000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 2616,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 613038,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 2728,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 878074,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 3447,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 257760,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 19800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7822,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 485121,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7167,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 84157,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 1399,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 257608,
+      "name": "Handcrafted Leather Wallet",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5519,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 16999,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 100000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 4038,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 801127,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 4902,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 870422,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 1157,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 354399,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8295,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 346513,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 2515,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 780650,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 29800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8105,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 147573,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 3968,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 134262,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 10000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 1698,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    }
+  ],
+  "newProductRanking": {
+    "title": "New Arrivals This Week",
+    "label": "Books",
+    "productType": "Lifestyle",
+    "url": "#",
+    "items": [
+      {
+        "id": 412435,
+        "name": "Abstract Canvas Art",
+        "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "price": 5000,
+        "url": "#",
+        "sellerInfo": {
+          "id": 7322,
+          "name": "StudioFinds",
+          "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+        }
+      },
+      {
+        "id": 855476,
+        "name": "Handcrafted Leather Wallet",
+        "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "price": 100000,
+        "url": "#",
+        "sellerInfo": {
+          "id": 3236,
+          "name": "ModernLiving",
+          "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+        }
+      },
+      {
+        "id": 966018,
+        "name": "Wireless Bluetooth Earbuds",
+        "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "price": 10000,
+        "url": "#",
+        "sellerInfo": {
+          "id": 6176,
+          "name": "ModernLiving",
+          "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+        }
+      },
+      {
+        "id": 788647,
+        "name": "Gourmet Coffee Beans",
+        "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "price": 1000,
+        "url": "#",
+        "sellerInfo": {
+          "id": 8704,
+          "name": "StudioFinds",
+          "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+        }
+      },
+      {
+        "id": 728956,
+        "name": "Gourmet Coffee Beans",
+        "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "price": 1000,
+        "url": "#",
+        "sellerInfo": {
+          "id": 3524,
+          "name": "ModernLiving",
+          "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+        }
+      },
+      {
+        "id": 790258,
+        "name": "Wireless Bluetooth Earbuds",
+        "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "price": 10000,
+        "url": "#",
+        "sellerInfo": {
+          "id": 6176,
+          "name": "ModernLiving",
+          "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+        }
+      },
+      {
+        "id": 935902,
+        "name": "Cedarwood Scented Candle",
+        "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "price": 500,
+        "url": "#",
+        "sellerInfo": {
+          "id": 4826,
+          "name": "ModernLiving",
+          "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+        }
+      },
+      {
+        "id": 191445,
+        "name": "Handcrafted Leather Wallet",
+        "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "price": 500,
+        "url": "#",
+        "sellerInfo": {
+          "id": 1944,
+          "name": "StudioFinds",
+          "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+        }
+      },
+      {
+        "id": 17633,
+        "name": "Cedarwood Scented Candle",
+        "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "price": 10000,
+        "url": "#",
+        "sellerInfo": {
+          "id": 1696,
+          "name": "StudioFinds",
+          "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+        }
+      },
+      {
+        "id": 510846,
+        "name": "Wireless Bluetooth Earbuds",
+        "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+        "price": 2000,
+        "url": "#",
+        "sellerInfo": {
+          "id": 8778,
+          "name": "ModernLiving",
+          "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+        }
+      }
+    ]
+  },
+  "recommends": [
+    {
+      "id": 482613,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 100000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 9660,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 166710,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 100000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5591,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 737890,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 19800,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7808,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 26860,
+      "name": "Cedarwood Scented Candle",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 100000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8558,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 839958,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 100000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 4440,
+        "name": "ArtisanCrafts",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 17820,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 8328,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 789972,
+      "name": "Wireless Bluetooth Earbuds",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5824,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 559092,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5484,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 877864,
+      "name": "Abstract Canvas Art",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7036,
+        "name": "TheCoffeeHub",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 354651,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2500,
+      "url": "#",
+      "sellerInfo": {
+        "id": 9253,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 997636,
+      "name": "Gourmet Coffee Beans",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 1000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 4833,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 686861,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 2000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 7096,
+        "name": "ModernLiving",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    },
+    {
+      "id": 222837,
+      "name": "Premium Artisanal Vase",
+      "imageUrl": "https://via.placeholder.com/400x250.png?text=Item",
+      "price": 5000,
+      "url": "#",
+      "sellerInfo": {
+        "id": 5581,
+        "name": "StudioFinds",
+        "avatarUrl": "https://via.placeholder.com/100x100.png?text=Avatar"
+      }
+    }
+  ]
+}
