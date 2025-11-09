@@ -9,6 +9,10 @@
         "include": "../generated/prisma",
         "outDir": "./dist/generated",
         "watchAssets": true
+      },
+      {
+        "include": "src/**/*.json",
+        "outDir": "./dist/src"
       }
     ]
   }
