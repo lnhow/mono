@@ -23,12 +23,12 @@ export interface Product {
 
 const ProductCard = ({ product }: { product: Product }) => (
   <Card className="flex flex-col p-3 transition-shadow duration-300 hover:shadow-lg">
-    <div className="relative aspect-[4/3] overflow-hidden rounded-md">
+    <div className="relative aspect-square overflow-hidden rounded-md">
       <Image
         src={product.imageUrl}
         alt={product.name}
         width={400}
-        height={300}
+        height={400}
         unoptimized
         className="w-full h-full object-cover"
       />

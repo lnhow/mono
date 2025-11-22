@@ -95,4 +95,10 @@ export class PerfTestController {
   findPrProducts(@Query('delay') delay: string) {
     return this.perfTestService.findOne('prProducts', parseInt(delay, 10) || 0)
   }
+
+  @Get('login-info')
+  @ApiQuery({ name: 'delay', required: false, type: Number })
+  getLoginInfo(@Query('delay') delay: string) {
+    return this.perfTestService.loginInfo(parseInt(delay, 10) || 0)
+  }
 }

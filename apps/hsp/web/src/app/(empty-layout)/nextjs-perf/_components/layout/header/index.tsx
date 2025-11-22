@@ -2,14 +2,14 @@ import {
   LuMenu as Menu,
   LuSearch as Search,
   LuShoppingCart as ShoppingCart,
-  LuUser as User,
   LuBell as Bell,
 } from 'react-icons/lu'
 import { Button } from '@hsp/ui/components/button'
 import { ThemeToggle } from '@hsp/ui/utils/theme/ThemeToggle'
-import { mockCompanyName } from '../data/mockData'
+import { mockCompanyName } from '../../data/mockData'
+import { PropsWithChildren } from 'react'
 
-const Header = () => (
+const Header = ({ children }: PropsWithChildren) => (
   <header className="fixed top-0 left-0 right-0 z-50 flex h-(--header-height) items-center justify-between bg-base-200 px-4 shadow-md">
     {/* Left: Logo and Menu */}
     <div className="flex items-center space-x-3">
@@ -58,9 +58,7 @@ const Header = () => (
       <Button variant="ghost" size="icon">
         <ShoppingCart className="h-6 w-6" />
       </Button>
-      <Button variant="secondary" size="icon" className="rounded-full">
-        <User className="h-6 w-6" />
-      </Button>
+      {children}
     </div>
   </header>
 )
