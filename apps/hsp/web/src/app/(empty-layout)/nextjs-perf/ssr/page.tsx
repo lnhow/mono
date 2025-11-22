@@ -1,29 +1,37 @@
-import App from '../_components'
-import { mockProducts } from '../_components/data/mockData'
+import apiClient from '../_components/data/http'
 import BannerAndVideoSection from '../_components/sections/BannerAndVideoSection'
 import HashtagSection from '../_components/sections/HashtagSection'
 import ProductListSection from '../_components/sections/ProductListSection'
 import StreamingSection from '../_components/sections/StreamingSection'
 import TimelineAndNewsSection from '../_components/sections/TimelineAndNewsSection'
+import { DELAY } from '../_const'
 
-export default function SSRPage() {
+export default async function SSRPage() {
+  const data = await apiClient
+    .get(`/api/perf-test?delay=${DELAY}`)
+    .then((res) => res.data)
+  console.log(
+    '\x1B[35m[Dev log]\x1B[0m -> SSRPage -> hashtags:',
+    Object.keys(data),
+  )
+
   return (
     <>
-      <HashtagSection />
+      <HashtagSection data={data.hashTags} />
       <BannerAndVideoSection />
-      <TimelineAndNewsSection />
+      <TimelineAndNewsSection timeline={data.timeLines} news={data.newNavis} />
       <StreamingSection />
       {/* <div className="h-[1px] w-full bg-gray-200" />{' '} */}
       {/* Section Separator */}
       {/* Reusable Product Lists */}
-      <ProductListSection title="Recommended for You" products={mockProducts} />
       <ProductListSection
-        title="Best Sellers in Electronics"
-        products={mockProducts}
+        title="Recommended for You"
+        products={data.recommends}
       />
+      <ProductListSection title="New Arrivals" products={data.newProducts} />
       <ProductListSection
         title="Flash Deals (Ending Soon)"
-        products={mockProducts}
+        products={data.prProducts}
       />
     </>
   )

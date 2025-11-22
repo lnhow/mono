@@ -1,11 +1,11 @@
 import { IconType } from 'react-icons/lib'
-import {
-  LuZap as Zap,
-  LuDollarSign as DollarSign,
-  LuMonitor as Monitor,
-  LuTrendingUp as TrendingUp,
-  LuChartBar as BarChart,
-} from 'react-icons/lu'
+// import {
+//   LuZap as Zap,
+//   LuDollarSign as DollarSign,
+//   LuMonitor as Monitor,
+//   LuTrendingUp as TrendingUp,
+//   LuChartBar as BarChart,
+// } from 'react-icons/lu'
 
 export interface NavLink {
   label: string
@@ -47,13 +47,13 @@ export interface Video {
 export const mockCompanyName = 'Acme'
 
 
-export const mockHashtags: Hashtag[] = [
-  { term: '#SmartwatchPro', icon: Zap, color: 'text-blue-500' },
-  { term: '#BudgetLaptop', icon: DollarSign, color: 'text-green-500' },
-  { term: '#NewArrivals', icon: TrendingUp, color: 'text-purple-500' },
-  { term: '#StockMarket', icon: BarChart, color: 'text-yellow-600' },
-  { term: '#StreamingLive', icon: Monitor, color: 'text-red-500' },
-]
+// export const mockHashtags: Hashtag[] = [
+//   { term: '#SmartwatchPro', icon: Zap, color: 'text-blue-500' },
+//   { term: '#BudgetLaptop', icon: DollarSign, color: 'text-green-500' },
+//   { term: '#NewArrivals', icon: TrendingUp, color: 'text-purple-500' },
+//   { term: '#StockMarket', icon: BarChart, color: 'text-yellow-600' },
+//   { term: '#StreamingLive', icon: Monitor, color: 'text-red-500' },
+// ]
 
 export const mockTimeline: TimelineItem[] = [
   { id: 1, user: 'User123', product: 'Laptop X', time: '1m ago' },

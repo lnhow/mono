@@ -1,38 +1,42 @@
 'use client'
-import React from 'react';
-import { LuDollarSign as DollarSign, LuHeart as Heart, LuStar as Star } from 'react-icons/lu';
-import Image from 'next/image';
-import Card from './Card';
-import cn from '@hsp/ui/utils/cn';
-import { Button } from '@hsp/ui/components/button';
+import React from 'react'
+import {
+  LuDollarSign as DollarSign,
+  // LuStar as Star
+} from 'react-icons/lu'
+import Image from 'next/image'
+import Card from './Card'
+// import cn from '@hsp/ui/utils/cn';
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  discount?: number;
-  image: string;
-  rating: number;
-  reviews: number;
-  isFavorite: boolean;
+export interface Product {
+  id: number
+  name: string
+  imageUrl: string
+  price: number
+  url: string
+  sellerInfo: {
+    id: number
+    name: string
+    avatarUrl: string
+  }
 }
 
 const ProductCard = ({ product }: { product: Product }) => (
   <Card className="flex flex-col p-3 transition-shadow duration-300 hover:shadow-lg">
     <div className="relative aspect-[4/3] overflow-hidden rounded-md">
       <Image
-        src={product.image}
+        src={product.imageUrl}
         alt={product.name}
         width={400}
         height={300}
         unoptimized
         className="w-full h-full object-cover"
       />
-      {product.discount && (
+      {/* {product.discount && (
         <span className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
           -{product.discount}%
         </span>
-      )}
+      )} */}
     </div>
     <div className="mt-3 flex flex-col flex-grow">
       <h3 className="text-sm font-medium text-fore-300 line-clamp-2 flex-grow">
@@ -43,7 +47,7 @@ const ProductCard = ({ product }: { product: Product }) => (
         {product.price.toFixed(2)}
       </div>
       <div className="flex items-center text-xs text-fore-200 mt-1">
-        <div className="flex text-yellow-500 mr-1">
+        {/* <div className="flex text-yellow-500 mr-1">
           {Array(5)
             .fill(null)
             .map((_, i) => (
@@ -57,8 +61,8 @@ const ProductCard = ({ product }: { product: Product }) => (
                 )}
               />
             ))}
-        </div>
-        ({product.reviews})
+        </div> */}
+        {/* ({product.reviews}) */}
       </div>
     </div>
     {/* <Button
@@ -73,6 +77,6 @@ const ProductCard = ({ product }: { product: Product }) => (
       />
     </Button> */}
   </Card>
-);
+)
 
-export default ProductCard;
+export default ProductCard

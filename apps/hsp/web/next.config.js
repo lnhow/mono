@@ -7,6 +7,13 @@ import { withContentCollections } from '@content-collections/next'
 const nextConfig = {
   reactStrictMode: true,
   cacheComponents: true,
+  cacheLife: {
+    threeMinutes: {
+      stale: 60 * 3,
+      revalidate: 60 * 3,
+      expire: 60 * 6,
+    },
+  },
   transpilePackages: ['@hsp/ui', '@repo/i18n'],
   env: {
     // Will be available on both server and client

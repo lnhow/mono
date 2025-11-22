@@ -1,17 +1,6 @@
 import React from 'react';
-import ProductCard from '../ProductCard';
+import ProductCard, { Product } from '../ProductCard';
 import Card from '../Card';
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  discount?: number;
-  image: string;
-  rating: number;
-  reviews: number;
-  isFavorite: boolean;
-}
 
 const ProductListSection = ({
   title,
@@ -28,7 +17,7 @@ const ProductListSection = ({
       </button>
     </div>
     <div className="flex px-4 pb-6 gap-4 overflow-x-auto scrollbar-hide [&>*]:min-w-64">
-      {products.slice(0, 6).map((product) => (
+      {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </div>
