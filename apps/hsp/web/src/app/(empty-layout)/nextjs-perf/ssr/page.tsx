@@ -7,8 +7,17 @@ import TimelineAndNewsSection from '../_components/child/sections/TimelineAndNew
 import WebVitals from '../_components/utils/web-vitals'
 import { DELAY } from '../_components/const'
 import { fetchUserData } from '../_components/child/data/api-server'
+import { Suspense } from 'react'
 
 export default async function SSRPage() {
+  return (
+    <Suspense>
+      <WithData />
+    </Suspense>
+  )
+}
+
+async function WithData() {
   const user = await fetchUserData()
   const data = await apiClient
     .get(`/api/perf-test?delay=${DELAY}`)

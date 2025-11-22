@@ -1,3 +1,4 @@
+import { ReactNode, Suspense } from 'react'
 import { fetchUserData } from '../_components/child/data/api-server'
 import { mockCompanyName } from '../_components/child/data/mockData'
 import Header from '../_components/child/layout/header'
@@ -5,31 +6,39 @@ import Header from '../_components/child/layout/header'
 import Sidebar from '../_components/child/layout/sidebar'
 import { AuthProvider } from './_components/auth/provider'
 import HeaderUserInfo from './_components/auth/user-info'
+import NoSsr from '@hsp/ui/utils/nextjs/no-ssr'
 
 export default async function SSRLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const user = await fetchUserData()
-
   return (
-    <AuthProvider user={user}>
-      <div className="min-h-screen font-sans [--header-height:calc(var(--spacing)*16)]">
-        <Header>
-          <HeaderUserInfo />
-        </Header>
-        <div className="flex pt-16 [&>.sidebar]:hidden [&>.sidebar]:lg:flex [--sidebar-width:calc(var(--spacing)*56)]">
-          <Sidebar />
-          {/* Main Content Area */}
-          <div className="flex-1 lg:ml-(--sidebar-width) w-[calc(100vw-var(--sidebar-width))] p-4 md:p-6 space-y-6">
-            {children}
-            <footer className="py-8 text-center text-sm text-gray-500">
-              © 2025 {mockCompanyName} Clone. All rights reserved.
-            </footer>
+    <NoSsr>
+      <Suspense>
+        <AuthProviderWithData>
+          <div className="min-h-screen font-sans [--header-height:calc(var(--spacing)*16)]">
+            <Header>
+              <HeaderUserInfo />
+            </Header>
+            <div className="flex pt-16 [&>.sidebar]:hidden [&>.sidebar]:lg:flex [--sidebar-width:calc(var(--spacing)*56)]">
+              <Sidebar />
+              {/* Main Content Area */}
+              <div className="flex-1 lg:ml-(--sidebar-width) w-[calc(100vw-var(--sidebar-width))] p-4 md:p-6 space-y-6">
+                {children}
+                <footer className="py-8 text-center text-sm text-gray-500">
+                  © 2025 {mockCompanyName} Clone. All rights reserved.
+                </footer>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </AuthProvider>
+        </AuthProviderWithData>
+      </Suspense>
+    </NoSsr>
   )
+}
+
+async function AuthProviderWithData({ children }: { children: ReactNode }) {
+  const user = await fetchUserData()
+  return <AuthProvider user={user}>{children}</AuthProvider>
 }

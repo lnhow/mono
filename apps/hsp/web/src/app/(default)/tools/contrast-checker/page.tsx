@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, Suspense } from 'react'
 import { Metadata } from 'next'
 import BasePageContrastChecker from '@hsp/ui/modules/tools/contrast-checker/index'
 import ViewTransition from '@hsp/ui/utils/react/view-transition'
@@ -18,7 +18,9 @@ const PageContrastChecker = memo(function PageContrastChecker() {
         </h1>
       </ViewTransition>
       <ViewTransition name="contrast-checker-card" update="none">
-        <BasePageContrastChecker />
+        <Suspense>
+          <BasePageContrastChecker />
+        </Suspense>
       </ViewTransition>
     </div>
   )

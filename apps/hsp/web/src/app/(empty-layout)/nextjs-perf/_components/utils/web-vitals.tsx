@@ -1,6 +1,12 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { onLCP, onTTFB, onFCP, Metric } from 'web-vitals'
+import {
+  onLCP,
+  onTTFB,
+  onFCP,
+  // onCLS, onINP,
+  Metric,
+} from 'web-vitals'
 import cn from '@hsp/ui/utils/cn'
 
 interface WebVitalsProps {
@@ -12,10 +18,10 @@ const WebVitals: React.FC<WebVitalsProps> = ({ className }) => {
     Partial<Record<Metric['name'], Metric['value'] | undefined>>
   >({
     LCP: undefined,
-    // CLS: undefined,
-    // INP: undefined,
     TTFB: undefined,
     FCP: undefined,
+    // CLS: undefined,
+    // INP: undefined,
   })
 
   useEffect(() => {
@@ -24,10 +30,10 @@ const WebVitals: React.FC<WebVitalsProps> = ({ className }) => {
     }
 
     onLCP(reportMetric)
-    // onCLS(reportMetric)
-    // onINP(reportMetric)
     onTTFB(reportMetric)
     onFCP(reportMetric)
+    // onCLS(reportMetric)
+    // onINP(reportMetric)
   }, [])
 
   return (
@@ -46,9 +52,11 @@ const WebVitals: React.FC<WebVitalsProps> = ({ className }) => {
           >
             <h6 className="text-fore-100">{name}</h6>
             <p className="text-sm">
-              {typeof value !== 'undefined'
-                ? `${(value! / 1000).toFixed(2)}s`
-                : <>_</>}
+              {typeof value !== 'undefined' ? (
+                `${(value! / 1000).toFixed(2)}s`
+              ) : (
+                <>_</>
+              )}
             </p>
             {/* Keep the width consistent */}
             <p className="text-sm invisible h-0" aria-hidden="true">
