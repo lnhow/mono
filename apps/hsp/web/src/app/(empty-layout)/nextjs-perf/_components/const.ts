@@ -3,4 +3,4 @@
 //   params: Params
 // }
 
-export const DELAY = 800
+export const DELAY = 500

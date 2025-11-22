@@ -6,6 +6,7 @@ import {
 } from 'react-icons/lu'
 import Image from 'next/image'
 import Card from './Card'
+import cn from '@hsp/ui/utils/cn'
 // import cn from '@hsp/ui/utils/cn';
 
 export interface Product {
@@ -21,8 +22,19 @@ export interface Product {
   }
 }
 
-const ProductCard = ({ product }: { product: Product }) => (
-  <Card className="flex flex-col p-3 transition-shadow duration-300 hover:shadow-lg">
+const ProductCard = ({
+  product,
+  className,
+}: {
+  product: Product
+  className?: string
+}) => (
+  <Card
+    className={cn(
+      'flex flex-col p-3 transition-shadow duration-300 hover:shadow-lg',
+      className,
+    )}
+  >
     <div className="relative aspect-square overflow-hidden rounded-md">
       <Image
         src={product.imageUrl}
@@ -78,5 +90,23 @@ const ProductCard = ({ product }: { product: Product }) => (
     </Button> */}
   </Card>
 )
+
+export const ProductCardSkeleton: React.FC<{ className?: string }> = ({ className }) => (
+  <Card
+    className={cn(
+      'flex flex-col p-3 transition-shadow duration-300 hover:shadow-lg',
+      className,
+    )}
+  >
+    <div className="relative aspect-square overflow-hidden rounded-md">
+      <div className="w-full h-full bg-base-300 animate-pulse" />
+    </div>
+    <div className="mt-3 flex flex-col flex-grow">
+      <div className="h-4 w-32 bg-base-300 rounded mb-2 animate-pulse" />
+      <div className="h-4 w-16 bg-base-300 rounded mb-2 animate-pulse" />
+      <div className="h-3 w-20 bg-base-300 rounded animate-pulse" />
+    </div>
+  </Card>
+);
 
 export default ProductCard

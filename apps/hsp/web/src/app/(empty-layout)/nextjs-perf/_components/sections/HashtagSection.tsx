@@ -1,11 +1,11 @@
-import React from 'react';
-import { Button } from '@hsp/ui/components/button';
+import React from 'react'
+import { Button } from '@hsp/ui/components/button'
 // import { mockHashtags } from '../data/mockData';
-import Card from '../Card';
+import Card from '../Card'
 // import cn from '@hsp/ui/utils/cn';
 
 interface HashtagSectionProps {
-  data: Array<string>;
+  data: Array<string>
 }
 
 const HashtagSection = ({ data }: HashtagSectionProps) => (
@@ -27,6 +27,20 @@ const HashtagSection = ({ data }: HashtagSectionProps) => (
       ))}
     </div>
   </Card>
-);
+)
 
-export default HashtagSection;
+export const HashtagSectionSkeleton = () => (
+  <Card className="p-4">
+    <div className="mb-3 h-7 w-32 bg-base-300 rounded animate-pulse" />
+    <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide [&>*]:flex-shrink-0">
+      {[...Array(6)].map((_, i) => (
+        <div
+          key={i}
+          className="h-8 w-16 bg-base-300 rounded-full animate-pulse"
+        />
+      ))}
+    </div>
+  </Card>
+)
+
+export default HashtagSection

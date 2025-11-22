@@ -52,7 +52,7 @@ const TimelineAndNewsSection = ({
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
       {/* Timeline: Recently Bought */}
-      <Card className="md:col-span-2 min-h-60">
+      <Card className="md:col-span-2 min-h-93">
         <Card.Title className="flex items-center justify-between mb-3">
           <h2 className="text-lg font-semibold text-fore-400 flex items-center">
             <Clock className="h-5 w-5 mr-2 text-red-600" />
@@ -62,9 +62,12 @@ const TimelineAndNewsSection = ({
             View All
           </Button>
         </Card.Title>
-        <Card.Body className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
+        <Card.Body className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory scroll-p-4">
           {groupedTimeline.map((group, groupIndex) => (
-            <div key={groupIndex} className="flex flex-col space-y-4 flex-shrink-0">
+            <div
+              key={groupIndex}
+              className="flex flex-col space-y-4 flex-shrink-0 snap-start"
+            >
               {group.map((item) => (
                 <ProductItem key={item.id} item={item} />
               ))}
@@ -74,7 +77,7 @@ const TimelineAndNewsSection = ({
       </Card>
 
       {/* News/Navigation Placeholder */}
-      <Card className="md:col-span-2 min-h-60">
+      <Card className="md:col-span-2 min-h-93">
         <Card.Title>
           <h2 className="text-lg font-semibold text-fore-400 mb-3">News</h2>
         </Card.Title>
@@ -116,6 +119,45 @@ function ProductItem({ item }: { item: Product }) {
       {/* <span className="text-fore-300">bought</span> */}
       <span className="font-medium text-fore-400">{item.name}</span>
       {/* <span className="text-fore-300">({item.time})</span> */}
+    </div>
+  )
+}
+
+// Skeleton component for TimelineAndNewsSection
+export const TimelineAndNewsSectionSkeleton = () => {
+  return (
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+      {/* Timeline: Recently Bought */}
+      <Card className="md:col-span-2 min-h-93">
+        <Card.Title className="flex items-center justify-between mb-3">
+          <h2 className="text-lg font-semibold text-fore-400 flex items-center">
+            <Clock className="h-5 w-5 mr-2 text-red-600" />
+            Live Purchases Feed
+          </h2>
+          <Button variant="link" size="sm">
+            View All
+          </Button>
+        </Card.Title>
+        <Card.Body className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
+          {/* Timeline skeleton items go here */}
+          <div className="h-10 bg-base-300 rounded w-full animate-pulse" />
+        </Card.Body>
+      </Card>
+
+      {/* News/Navigation Placeholder */}
+      <Card className="md:col-span-2 min-h-93">
+        <Card.Title>
+          <h2 className="text-lg font-semibold text-fore-400 mb-3">News</h2>
+        </Card.Title>
+        <Card.Body>
+          <ul className="space-y-2 text-sm">
+            {/* News skeleton items go here */}
+            <li className="h-4 bg-base-300 rounded w-full animate-pulse" />
+            <li className="h-4 bg-base-300 rounded w-full animate-pulse" />
+            <li className="h-4 bg-base-300 rounded w-full animate-pulse" />
+          </ul>
+        </Card.Body>
+      </Card>
     </div>
   )
 }

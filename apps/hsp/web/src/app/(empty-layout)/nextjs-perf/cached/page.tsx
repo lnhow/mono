@@ -1,45 +1,56 @@
 import apiClient from '../_components/data/http'
 import BannerAndVideoSection from '../_components/sections/BannerAndVideoSection'
-import HashtagSection from '../_components/sections/HashtagSection'
-import ProductListSection from '../_components/sections/ProductListSection'
-import StreamingSection from '../_components/sections/StreamingSection'
-import TimelineAndNewsSection from '../_components/sections/TimelineAndNewsSection'
+import HashtagSection, {
+  HashtagSectionSkeleton,
+} from '../_components/sections/HashtagSection'
+import ProductListSection, {
+  ProductListSectionSkeleton,
+} from '../_components/sections/ProductListSection'
+import StreamingSection, {
+  StreamingSectionSkeleton,
+} from '../_components/sections/StreamingSection'
+import TimelineAndNewsSection, {
+  TimelineAndNewsSectionSkeleton,
+} from '../_components/sections/TimelineAndNewsSection'
 import WebVitals from '../_components/utils/web-vitals'
 import { DELAY } from '../_components/const'
 import { cacheLife } from 'next/cache'
 import { Suspense } from 'react'
+import { fetchUserData } from '../_components/data/api-server'
 
 export default async function SSRPage() {
   return (
     <>
-      <Hashtags />
+      <Suspense fallback={<HashtagSectionSkeleton />}>
+        <Hashtags />
+      </Suspense>
       <BannerAndVideoSection />
-      <Suspense fallback={<div>Loading Timelines and News...</div>}>
+      <Suspense fallback={<TimelineAndNewsSectionSkeleton />}>
         <TimelinesAndNews />
       </Suspense>
-      <Suspense fallback={<div>Loading Streaming...</div>}>
+      <Suspense fallback={<StreamingSectionSkeleton />}>
         <StreamingSection />
       </Suspense>
       {/* <div className="h-[1px] w-full bg-gray-200" />{' '} */}
       {/* Section Separator */}
       {/* Reusable Product Lists */}
-      <Suspense fallback={<div>Loading Recommended Products...</div>}>
+      <Suspense fallback={<ProductListSectionSkeleton />}>
         <Recommends />
       </Suspense>
-      <Suspense fallback={<div>Loading New Products...</div>}>
+      <Suspense fallback={<ProductListSectionSkeleton />}>
         <NewProducts />
       </Suspense>
-      <Suspense fallback={<div>Loading PR Products...</div>}>
+      <Suspense fallback={<ProductListSectionSkeleton />}>
         <PrProducts />
       </Suspense>
-      <WebVitals className='top-20 bottom-[unset]'/>
+      <WebVitals />
     </>
   )
 }
 
 async function Hashtags() {
-  'use cache'
-  cacheLife('hours')
+  // 'use cache'
+  // cacheLife('hours')
 
   const data = await apiClient
     .get(`/api/perf-test/hashTags?delay=${DELAY}`)
@@ -48,8 +59,8 @@ async function Hashtags() {
 }
 
 async function TimelinesAndNews() {
-  'use cache'
-  cacheLife('minutes')
+  // 'use cache'
+  // cacheLife('minutes')
   const [timeLines, newNavis] = await Promise.all([
     apiClient
       .get(`/api/perf-test/timeLines?delay=${DELAY}`)
@@ -62,8 +73,13 @@ async function TimelinesAndNews() {
 }
 
 async function Recommends() {
-  'use cache'
-  cacheLife('hours')
+  // 'use cache'
+  // cacheLife('hours')
+  const user = await fetchUserData()
+  if (!user) {
+    return null
+  }
+
   const data = await apiClient
     .get(`/api/perf-test/recommends?delay=${DELAY}`)
     .then((res) => res.data)
@@ -71,8 +87,8 @@ async function Recommends() {
 }
 
 async function NewProducts() {
-  'use cache'
-  cacheLife('threeMinutes')
+  // 'use cache'
+  // cacheLife('hours')
   const data = await apiClient
     .get(`/api/perf-test/newProducts?delay=${DELAY}`)
     .then((res) => res.data)
@@ -80,8 +96,8 @@ async function NewProducts() {
 }
 
 async function PrProducts() {
-  'use cache'
-  cacheLife('threeMinutes')
+  // 'use cache'
+  // cacheLife('hours')
   const data = await apiClient
     .get(`/api/perf-test/prProducts?delay=${DELAY}`)
     .then((res) => res.data)
