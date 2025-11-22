@@ -48,7 +48,11 @@ const WebVitals: React.FC<WebVitalsProps> = ({ className }) => {
             <p className="text-sm">
               {typeof value !== 'undefined'
                 ? `${(value! / 1000).toFixed(2)}s`
-                : '_'}
+                : <>_</>}
+            </p>
+            {/* Keep the width consistent */}
+            <p className="text-sm invisible h-0" aria-hidden="true">
+              0.00s
             </p>
           </li>
         ))}
