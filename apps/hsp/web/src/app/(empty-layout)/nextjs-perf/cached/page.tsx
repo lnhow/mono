@@ -18,6 +18,10 @@ import { Suspense } from 'react'
 import { fetchUserData } from '../_components/child/data/api-server'
 import { cacheLife } from 'next/cache'
 
+export const metadata = {
+  title: 'NextJS Suspense + Cache component',
+}
+
 export default async function SSRPage() {
   return (
     <>

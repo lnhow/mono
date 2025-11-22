@@ -5,7 +5,6 @@ import ComparisonIframe, { IframeHandle } from './iframe'
 import { Button } from '@hsp/ui/components/button'
 import { LuRefreshCcw } from 'react-icons/lu'
 import cn from '@hsp/ui/utils/cn'
-import { is } from 'zod/v4/locales'
 
 export default function Comparison() {
   const [isHorizontal, setIsHorizontal] = useState(false)

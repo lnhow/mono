@@ -7,13 +7,14 @@ import TimelineAndNewsSection from '../_components/child/sections/TimelineAndNew
 import WebVitals from '../_components/utils/web-vitals'
 import { DELAY } from '../_components/const'
 import { fetchUserData } from '../_components/child/data/api-server'
-import { Suspense } from 'react'
+
+export const metadata = {
+  title: 'NextJS SSR, No Suspense',
+}
 
 export default async function SSRPage() {
   return (
-    <Suspense>
-      <WithData />
-    </Suspense>
+    <WithData />
   )
 }
 
