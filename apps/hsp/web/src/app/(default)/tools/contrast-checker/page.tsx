@@ -1,15 +1,13 @@
-import { memo, Suspense } from 'react'
+'use cache'
+
 import { Metadata } from 'next'
 import BasePageContrastChecker from '@hsp/ui/modules/tools/contrast-checker/index'
 import ViewTransition from '@hsp/ui/utils/react/view-transition'
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: 'Color Contrast Checker',
-  }
+export const metadata: Metadata = {
+  title: 'Color Contrast Checker',
 }
-
-const PageContrastChecker = memo(function PageContrastChecker() {
+export default async function PageContrastChecker() {
   return (
     <div className="max-w-lg mx-auto">
       <ViewTransition name="contrast-checker-title">
@@ -18,12 +16,8 @@ const PageContrastChecker = memo(function PageContrastChecker() {
         </h1>
       </ViewTransition>
       <ViewTransition name="contrast-checker-card" update="none">
-        <Suspense>
-          <BasePageContrastChecker />
-        </Suspense>
+        <BasePageContrastChecker />
       </ViewTransition>
     </div>
   )
-})
-
-export default PageContrastChecker
+}

@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
 import Main from './_experience'
 import { Provider } from 'jotai'
-import { Suspense, ViewTransition } from 'react'
+import { ViewTransition } from 'react'
+import NoSsr from '@hsp/ui/utils/nextjs/no-ssr'
 
 export const metadata: Metadata = {
   title: 'Cake',
@@ -12,9 +13,10 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Page() {
+export default async function PageCake() {
+  'use cache'
   return (
-    <Suspense>
+    <NoSsr>
       <ViewTransition name="cake-card" update="none">
         <main className="fixed top-0 left-0 w-full h-full">
           <Provider>
@@ -26,6 +28,6 @@ export default function Page() {
           </div>
         </main>
       </ViewTransition>
-    </Suspense>
+    </NoSsr>
   )
 }
