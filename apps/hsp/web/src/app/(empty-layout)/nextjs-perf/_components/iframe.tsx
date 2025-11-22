@@ -2,10 +2,15 @@
 
 import { Button, ButtonLink } from '@hsp/ui/components/button'
 import cn from '@hsp/ui/utils/cn'
-import { RefObject, useCallback, useImperativeHandle, useRef } from 'react'
+import { memo, RefObject, useCallback, useImperativeHandle, useRef } from 'react'
 import { LuExternalLink, LuRefreshCcw } from 'react-icons/lu'
 
-export default function ComparisonIframe({
+export interface IframeHandle {
+  iframe: HTMLIFrameElement | null
+  reload: () => void
+}
+
+export default memo(function ComparisonIframe({
   title,
   src,
   className,
@@ -16,7 +21,7 @@ export default function ComparisonIframe({
   src: string
   className?: string
   iframeClassName?: string
-  ref?: RefObject<{ iframe: HTMLIFrameElement | null; reload: () => void }>
+  ref?: RefObject<IframeHandle | null>
 }) {
   const refIframe = useRef<HTMLIFrameElement>(null)
   const reloadIframe = useCallback(() => {
@@ -71,4 +76,4 @@ export default function ComparisonIframe({
       ></iframe>
     </div>
   )
-}
+})
