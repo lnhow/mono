@@ -1,6 +1,7 @@
 import PagePlay from '@hsp/ui/modules/guesart/pages/play'
 import { Metadata } from 'next'
 import ViewTransition from '@hsp/ui/utils/react/view-transition'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   title: 'Play - guesart',
@@ -9,8 +10,10 @@ export const metadata: Metadata = {
 
 export default function PageIndex() {
   return (
-    <ViewTransition name="guesart-card">
-      <PagePlay />
-    </ViewTransition>
+    <Suspense>
+      <ViewTransition name="guesart-card">
+        <PagePlay />
+      </ViewTransition>
+    </Suspense>
   )
 }
