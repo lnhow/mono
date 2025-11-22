@@ -3,8 +3,6 @@ import { Metadata } from 'next'
 import BasePageContrastChecker from '@hsp/ui/modules/tools/contrast-checker/index'
 import ViewTransition from '@hsp/ui/utils/react/view-transition'
 
-export const dynamic = 'force-static'
-
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'Color Contrast Checker',

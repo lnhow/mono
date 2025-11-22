@@ -3,8 +3,6 @@ import Main from './_experience'
 import { Provider } from 'jotai'
 import { ViewTransition } from 'react'
 
-export const dynamic = 'force-static'
-
 export const metadata: Metadata = {
   title: 'Cake',
   description: 'Someone sent a cake!',
