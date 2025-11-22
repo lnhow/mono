@@ -3,7 +3,7 @@ import { mockCompanyName } from '../_components/data/mockData'
 import Header from '../_components/layout/header'
 import { HeaderUserInfo } from '../_components/layout/header/user-info/server'
 import Sidebar from '../_components/layout/sidebar'
-import { AuthProvider } from './_features/auth/provider'
+import { AuthProvider } from './_components/auth/provider'
 
 export default async function SSRLayout({
   children,

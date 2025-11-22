@@ -83,6 +83,9 @@ catalogs:
     react-dom:
       specifier: 19.2.0
       version: 19.2.0
+    react-icons:
+      specifier: 5.5.0
+      version: 5.5.0
     sharp:
       specifier: ^0.34.4
       version: 0.34.4
@@ -381,7 +384,7 @@ importers:
         specifier: 7.60.0
         version: 7.60.0(react@19.2.0)
       react-icons:
-        specifier: 5.5.0
+        specifier: catalog:gui
         version: 5.5.0(react@19.2.0)
       rehype-pretty-code:
         specifier: catalog:markdown
@@ -410,6 +413,9 @@ importers:
       three:
         specifier: catalog:three
         version: 0.177.0
+      web-vitals:
+        specifier: ^5.1.0
+        version: 5.1.0
     devDependencies:
       '@chromatic-com/storybook':
         specifier: ^4.1.0
@@ -625,7 +631,7 @@ importers:
         specifier: 7.60.0
         version: 7.60.0(react@19.2.0)
       react-icons:
-        specifier: 5.5.0
+        specifier: catalog:gui
         version: 5.5.0(react@19.2.0)
       tailwind-merge:
         specifier: ^3.3.1
@@ -9365,6 +9371,9 @@ packages:
 
   web-namespaces@2.0.1:
     resolution: {integrity: sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==}
+
+  web-vitals@5.1.0:
+    resolution: {integrity: sha512-ArI3kx5jI0atlTtmV0fWU3fjpLmq/nD3Zr1iFFlJLaqa5wLBkUSzINwBPySCX/8jRyjlmy1Volw1kz1g9XE4Jg==}
 
   webgl-constants@1.1.1:
     resolution: {integrity: sha512-LkBXKjU5r9vAW7Gcu3T5u+5cvSvh5WwINdr0C+9jpzVB41cjQAP5ePArDtk/WHYdVj0GefCgM73BA7FlIiNtdg==}
@@ -20000,6 +20009,8 @@ snapshots:
       defaults: 1.0.4
 
   web-namespaces@2.0.1: {}
+
+  web-vitals@5.1.0: {}
 
   webgl-constants@1.1.1: {}
 

@@ -807,205 +807,52 @@
   },
   "newNavis": [
     {
-      "label": "Books",
+      "label": "#1 Books Handmade Handmade Lifestyle Handmade Coffee",
       "url": "#",
       "icon": "Coffee",
-      "isBeta": false,
-      "items": [
-        {
-          "label": "Handmade",
-          "url": "#"
-        },
-        {
-          "label": "Handmade",
-          "url": "#"
-        },
-        {
-          "label": "Lifestyle",
-          "url": "#"
-        },
-        {
-          "label": "Handmade",
-          "url": "#"
-        },
-        {
-          "label": "Coffee",
-          "url": "#"
-        }
-      ]
+      "isBeta": false
     },
     {
-      "label": "Gadgets",
+      "label": "#2 Gadgets Lifestyle Home Books Coffee Lifestyle",
       "url": "#",
       "icon": "Coffee",
-      "isBeta": false,
-      "items": [
-        {
-          "label": "Lifestyle",
-          "url": "#"
-        },
-        {
-          "label": "Books",
-          "url": "#"
-        },
-        {
-          "label": "Lifestyle",
-          "url": "#"
-        },
-        {
-          "label": "Home",
-          "url": "#"
-        },
-        {
-          "label": "Coffee",
-          "url": "#"
-        },
-        {
-          "label": "Gadgets",
-          "url": "#"
-        },
-        {
-          "label": "Lifestyle",
-          "url": "#"
-        },
-        {
-          "label": "Lifestyle",
-          "url": "#"
-        }
-      ]
+      "isBeta": false
     },
     {
-      "label": "Books",
+      "label": "#3 Books Decor Art Gadgets Decor",
       "url": "#",
       "icon": "Home",
-      "isBeta": false,
-      "items": [
-        {
-          "label": "Lifestyle",
-          "url": "#"
-        },
-        {
-          "label": "Decor",
-          "url": "#"
-        },
-        {
-          "label": "Art",
-          "url": "#"
-        },
-        {
-          "label": "Gadgets",
-          "url": "#"
-        },
-        {
-          "label": "Decor",
-          "url": "#"
-        },
-        {
-          "label": "Books",
-          "url": "#"
-        }
-      ]
+      "isBeta": false
     },
     {
-      "label": "Coffee",
+      "label": "#4 Coffee Home Home Lifestyle Gadgets Decor Books Art",
       "url": "#",
       "icon": "Gadgets",
-      "isBeta": true,
-      "items": [
-        {
-          "label": "Home",
-          "url": "#"
-        },
-        {
-          "label": "Home",
-          "url": "#"
-        },
-        {
-          "label": "Lifestyle",
-          "url": "#"
-        },
-        {
-          "label": "Gadgets",
-          "url": "#"
-        },
-        {
-          "label": "Decor",
-          "url": "#"
-        },
-        {
-          "label": "Books",
-          "url": "#"
-        },
-        {
-          "label": "Art",
-          "url": "#"
-        },
-        {
-          "label": "Handmade",
-          "url": "#"
-        },
-        {
-          "label": "Handmade",
-          "url": "#"
-        },
-        {
-          "label": "Art",
-          "url": "#"
-        },
-        {
-          "label": "Lifestyle",
-          "url": "#"
-        },
-        {
-          "label": "Lifestyle",
-          "url": "#"
-        }
-      ]
+      "isBeta": true
     },
     {
-      "label": "Home",
+      "label": "#5 Home Lifestyle Handmade Gadgets",
       "url": "#",
       "icon": "Home",
-      "isBeta": false,
-      "items": [
-        {
-          "label": "Lifestyle",
-          "url": "#"
-        },
-        {
-          "label": "Handmade",
-          "url": "#"
-        },
-        {
-          "label": "Decor",
-          "url": "#"
-        },
-        {
-          "label": "Gadgets",
-          "url": "#"
-        }
-      ]
+      "isBeta": false
     },
     {
-      "label": "Books",
+      "label": "#6 Books",
       "url": "#",
       "icon": "Art",
-      "isBeta": true,
-      "items": []
+      "isBeta": true
     },
     {
-      "label": "Art",
+      "label": "#7 Art",
       "url": "#",
       "icon": "Gadgets",
-      "isBeta": false,
-      "items": []
+      "isBeta": false
     },
     {
-      "label": "Home",
+      "label": "#8 Home",
       "url": "#",
       "icon": "Coffee",
-      "isBeta": false,
-      "items": []
+      "isBeta": false
     }
   ],
   "rankings": {

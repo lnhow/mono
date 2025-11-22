@@ -4,8 +4,8 @@ import Header from '../_components/layout/header'
 import Sidebar from '../_components/layout/sidebar'
 import { UserInfoSkeleton } from '../_components/layout/header/user-info/server'
 import { fetchUserData } from '../_components/data/api-server'
-import { AuthProvider } from './_features/auth/provider'
-import HeaderUserInfo from './_features/auth/user-info'
+import { AuthProvider } from './_components/auth/provider'
+import HeaderUserInfo from './_components/auth/user-info'
 
 export default function CachedLayout({
   children,

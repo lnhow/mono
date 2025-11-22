@@ -4,7 +4,8 @@ import HashtagSection from '../_components/sections/HashtagSection'
 import ProductListSection from '../_components/sections/ProductListSection'
 import StreamingSection from '../_components/sections/StreamingSection'
 import TimelineAndNewsSection from '../_components/sections/TimelineAndNewsSection'
-import { DELAY } from '../_const'
+import WebVitals from '../_components/utils/web-vitals'
+import { DELAY } from '../_components/const'
 import { cacheLife } from 'next/cache'
 import { Suspense } from 'react'
 
@@ -31,6 +32,7 @@ export default async function SSRPage() {
       <Suspense fallback={<div>Loading PR Products...</div>}>
         <PrProducts />
       </Suspense>
+      <WebVitals className='top-20 bottom-[unset]'/>
     </>
   )
 }

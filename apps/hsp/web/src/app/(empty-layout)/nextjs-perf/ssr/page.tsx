@@ -4,7 +4,8 @@ import HashtagSection from '../_components/sections/HashtagSection'
 import ProductListSection from '../_components/sections/ProductListSection'
 import StreamingSection from '../_components/sections/StreamingSection'
 import TimelineAndNewsSection from '../_components/sections/TimelineAndNewsSection'
-import { DELAY } from '../_const'
+import WebVitals from '../_components/utils/web-vitals'
+import { DELAY } from '../_components/const'
 
 export default async function SSRPage() {
   const data = await apiClient
@@ -33,6 +34,7 @@ export default async function SSRPage() {
         title="Flash Deals (Ending Soon)"
         products={data.prProducts}
       />
+      <WebVitals className='top-20 bottom-[unset]'/>
     </>
   )
 }
