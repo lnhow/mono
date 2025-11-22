@@ -1,16 +1,5 @@
 import { Skeleton } from '@hsp/ui/components/skeleton'
-import { fetchUserData } from '../../../data/api-server'
-import { LoginButton, UserInfo } from './client'
 import { Button } from '@hsp/ui/components/button'
-
-export async function HeaderUserInfo() {
-  // Simulate fetching user data
-  const user = await fetchUserData()
-  if (!user) {
-    return <LoginButton />
-  }
-  return <UserInfo data={user} />
-}
 
 export function UserInfoSkeleton() {
   return (

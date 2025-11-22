@@ -1,6 +1,6 @@
 'use client'
 import { createContext, PropsWithChildren, useContext } from 'react'
-import { MockLoginResponse } from '../../../_components/data/api-server'
+import { MockLoginResponse } from '../../../_components/child/data/api-server'
 
 type AuthContextType = {
   user: Promise<MockLoginResponse | null>

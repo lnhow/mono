@@ -3,7 +3,7 @@ import { useAuth } from './provider'
 import {
   LoginButton,
   UserInfo,
-} from '../../../_components/layout/header/user-info/client'
+} from '../../../_components/child/layout/header/user-info/client'
 
 export default function HeaderUserInfo() {
   const { user } = useAuth()

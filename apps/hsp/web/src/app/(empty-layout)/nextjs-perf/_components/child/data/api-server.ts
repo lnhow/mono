@@ -1,4 +1,5 @@
 'use server'
+import { cache } from 'react'
 import apiClient, { sleep } from './http'
 import { cookies } from 'next/headers'
 
@@ -13,7 +14,7 @@ export interface MockLoginResponse {
   avatarUrl: string
 }
 
-export const fetchUserData = async () => {
+export const fetchUserData = cache(async () => {
   const cookieStore = await cookies()
   const auth = cookieStore.get(COOKIE.NAME)
 
@@ -29,7 +30,7 @@ export const fetchUserData = async () => {
   } catch {
     return null
   }
-}
+})
 
 export async function login() {
   await sleep()

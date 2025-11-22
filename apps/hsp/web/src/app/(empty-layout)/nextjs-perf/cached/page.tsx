@@ -1,22 +1,22 @@
-import apiClient from '../_components/data/http'
-import BannerAndVideoSection from '../_components/sections/BannerAndVideoSection'
+import apiClient from '../_components/child/data/http'
+import BannerAndVideoSection from '../_components/child/sections/BannerAndVideoSection'
 import HashtagSection, {
   HashtagSectionSkeleton,
-} from '../_components/sections/HashtagSection'
+} from '../_components/child/sections/HashtagSection'
 import ProductListSection, {
   ProductListSectionSkeleton,
-} from '../_components/sections/ProductListSection'
+} from '../_components/child/sections/ProductListSection'
 import StreamingSection, {
   StreamingSectionSkeleton,
-} from '../_components/sections/StreamingSection'
+} from '../_components/child/sections/StreamingSection'
 import TimelineAndNewsSection, {
   TimelineAndNewsSectionSkeleton,
-} from '../_components/sections/TimelineAndNewsSection'
+} from '../_components/child/sections/TimelineAndNewsSection'
 import WebVitals from '../_components/utils/web-vitals'
 import { DELAY } from '../_components/const'
-import { cacheLife } from 'next/cache'
 import { Suspense } from 'react'
-import { fetchUserData } from '../_components/data/api-server'
+import { fetchUserData } from '../_components/child/data/api-server'
+import { cacheLife } from 'next/cache'
 
 export default async function SSRPage() {
   return (
@@ -59,8 +59,8 @@ async function Hashtags() {
 }
 
 async function TimelinesAndNews() {
-  // 'use cache'
-  // cacheLife('minutes')
+  'use cache'
+  cacheLife('minutes')
   const [timeLines, newNavis] = await Promise.all([
     apiClient
       .get(`/api/perf-test/timeLines?delay=${DELAY}`)

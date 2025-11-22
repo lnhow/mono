@@ -1,9 +1,10 @@
-import { fetchUserData } from '../_components/data/api-server'
-import { mockCompanyName } from '../_components/data/mockData'
-import Header from '../_components/layout/header'
-import { HeaderUserInfo } from '../_components/layout/header/user-info/server'
-import Sidebar from '../_components/layout/sidebar'
+import { fetchUserData } from '../_components/child/data/api-server'
+import { mockCompanyName } from '../_components/child/data/mockData'
+import Header from '../_components/child/layout/header'
+
+import Sidebar from '../_components/child/layout/sidebar'
 import { AuthProvider } from './_components/auth/provider'
+import HeaderUserInfo from './_components/auth/user-info'
 
 export default async function SSRLayout({
   children,

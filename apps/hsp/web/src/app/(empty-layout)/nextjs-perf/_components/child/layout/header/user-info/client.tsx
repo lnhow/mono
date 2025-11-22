@@ -2,7 +2,6 @@
 import { useTransition } from 'react'
 import { login, logout, MockLoginResponse } from '../../../data/api-server'
 import { Button } from '@hsp/ui/components/button'
-import cn from '@hsp/ui/utils/cn'
 
 export function UserInfo({ data }: { data: MockLoginResponse }) {
   const [isPending, setTransition] = useTransition()

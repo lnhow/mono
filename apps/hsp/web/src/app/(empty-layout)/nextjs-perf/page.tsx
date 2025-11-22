@@ -21,7 +21,7 @@ export default function Page() {
           iframeClassName="min-h-[50vh] flex-1 h-full"
         />
         <ComparisonIframe
-          title="NextJS 16 Cache component"
+          title="NextJS 16 Suspense + LCP Cache"
           src="/nextjs-perf/cached"
           className="flex flex-col"
           iframeClassName="min-h-[50vh] flex-1"

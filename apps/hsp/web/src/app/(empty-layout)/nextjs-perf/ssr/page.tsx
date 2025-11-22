@@ -1,12 +1,12 @@
-import apiClient from '../_components/data/http'
-import BannerAndVideoSection from '../_components/sections/BannerAndVideoSection'
-import HashtagSection from '../_components/sections/HashtagSection'
-import ProductListSection from '../_components/sections/ProductListSection'
-import StreamingSection from '../_components/sections/StreamingSection'
-import TimelineAndNewsSection from '../_components/sections/TimelineAndNewsSection'
+import apiClient from '../_components/child/data/http'
+import BannerAndVideoSection from '../_components/child/sections/BannerAndVideoSection'
+import HashtagSection from '../_components/child/sections/HashtagSection'
+import ProductListSection from '../_components/child/sections/ProductListSection'
+import StreamingSection from '../_components/child/sections/StreamingSection'
+import TimelineAndNewsSection from '../_components/child/sections/TimelineAndNewsSection'
 import WebVitals from '../_components/utils/web-vitals'
 import { DELAY } from '../_components/const'
-import { fetchUserData } from '../_components/data/api-server'
+import { fetchUserData } from '../_components/child/data/api-server'
 
 export default async function SSRPage() {
   const user = await fetchUserData()

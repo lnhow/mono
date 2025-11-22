@@ -33,18 +33,23 @@ const WebVitals: React.FC<WebVitalsProps> = ({ className }) => {
   return (
     <div
       className={cn(
-        'fixed bottom-4 right-4 bg-base-400/80 p-3 shadow-lg rounded-lg text-sm text-fore-400',
+        'fixed bottom-4 right-4 bg-base-400/80 p-1 shadow-lg rounded-lg text-sm text-fore-400',
         className,
       )}
     >
-      <h3 className="font-semibold">Web Vitals</h3>
-      <ul className="text-xs">
+      <h3 className="text-center">Web Vitals</h3>
+      <ul className="text-xs flex space-x-2">
         {Object.entries(metrics).map(([name, value]) => (
-          <li key={name} className="mb-1">
-            <strong className="text-fore-100">{name}:</strong>{' '}
-            {typeof value !== 'undefined'
-              ? `${(value! / 1000).toFixed(2)}s`
-              : '_'}
+          <li
+            key={name}
+            className="mb-1 text-center bg-base-200 rounded-md px-2 py-1"
+          >
+            <h6 className="text-fore-100">{name}</h6>
+            <p className="text-sm">
+              {typeof value !== 'undefined'
+                ? `${(value! / 1000).toFixed(2)}s`
+                : '_'}
+            </p>
           </li>
         ))}
       </ul>

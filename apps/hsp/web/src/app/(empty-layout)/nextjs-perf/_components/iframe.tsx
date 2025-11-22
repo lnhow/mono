@@ -2,7 +2,7 @@
 
 import { Button, ButtonLink } from '@hsp/ui/components/button'
 import cn from '@hsp/ui/utils/cn'
-import { useRef } from 'react'
+import { RefObject, useCallback, useImperativeHandle, useRef } from 'react'
 import { LuExternalLink, LuRefreshCcw } from 'react-icons/lu'
 
 export default function ComparisonIframe({
@@ -10,13 +10,31 @@ export default function ComparisonIframe({
   src,
   className,
   iframeClassName,
+  ref,
 }: {
   title: string
   src: string
   className?: string
   iframeClassName?: string
+  ref?: RefObject<{ iframe: HTMLIFrameElement | null; reload: () => void }>
 }) {
   const refIframe = useRef<HTMLIFrameElement>(null)
+  const reloadIframe = useCallback(() => {
+    if (!refIframe.current) {
+      return
+    }
+    // eslint-disable-next-line no-self-assign
+    refIframe.current.src = refIframe.current.src
+  }, [])
+
+  useImperativeHandle(ref, () => {
+    return {
+      reload: reloadIframe,
+      get iframe() {
+        return refIframe.current
+      }
+    }
+  })
 
   return (
     <div className={cn('flex-1 w-full border rounded-t-lg', className)}>
@@ -37,13 +55,7 @@ export default function ComparisonIframe({
             size="icon"
             variant="ghost"
             aria-label="Refresh Iframe"
-            onClick={() => {
-              if (!refIframe.current) {
-                return
-              }
-              // eslint-disable-next-line no-self-assign
-              refIframe.current.src = refIframe.current.src
-            }}
+            onClick={reloadIframe}
           >
             <LuRefreshCcw />
           </Button>
