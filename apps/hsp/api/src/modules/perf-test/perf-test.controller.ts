@@ -83,4 +83,22 @@ export class PerfTestController {
   findNewProducts(@Query('delay') delay: string) {
     return this.perfTestService.findOne('newProducts', parseInt(delay, 10) || 0)
   }
+
+  @Get('recommends')
+  @ApiQuery({ name: 'delay', required: false, type: Number })
+  findRecommends(@Query('delay') delay: string) {
+    return this.perfTestService.findOne('recommends', parseInt(delay, 10) || 0)
+  }
+
+  @Get('prProducts')
+  @ApiQuery({ name: 'delay', required: false, type: Number })
+  findPrProducts(@Query('delay') delay: string) {
+    return this.perfTestService.findOne('prProducts', parseInt(delay, 10) || 0)
+  }
+
+  @Get('login-info')
+  @ApiQuery({ name: 'delay', required: false, type: Number })
+  getLoginInfo(@Query('delay') delay: string) {
+    return this.perfTestService.loginInfo(parseInt(delay, 10) || 0)
+  }
 }

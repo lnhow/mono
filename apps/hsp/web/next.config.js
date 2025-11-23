@@ -6,6 +6,14 @@ import { withContentCollections } from '@content-collections/next'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  cacheComponents: true,
+  cacheLife: {
+    threeMinutes: {
+      stale: 60 * 3,
+      revalidate: 60 * 3,
+      expire: 60 * 6,
+    },
+  },
   transpilePackages: ['@hsp/ui', '@repo/i18n'],
   env: {
     // Will be available on both server and client
@@ -22,6 +30,16 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   experimental: {
     viewTransition: true,
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 }
 

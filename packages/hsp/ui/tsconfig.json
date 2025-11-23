@@ -1,6 +1,9 @@
 {
   "extends": "@repo/tsconfig/lib-react.json",
   "compilerOptions": {
+    "composite": true,
+    "incremental": true,
+    "noEmit": false,
     "plugins": [
       {
         "name": "next"

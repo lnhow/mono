@@ -107,25 +107,26 @@ export const encodeCakeURL = (message: string, scene: ECakeScene, edit = false) 
 }
 
 export const decodeCakeURL = (url: string) => {
-  const params = new URLSearchParams(url)
-  const message = params.get(QUERY_NAME.MESSAGE)
-  const scene = params.get(QUERY_NAME.SCENE)
-  const edit = params.get(QUERY_NAME.EDIT)
-
-  const sceneFromParams = SCENE_CONFIG[scene as keyof typeof SCENE_CONFIG]
-  let defaultMessage = defaultCake.message
 
   try {
+    const params = new URLSearchParams(url)
+    const message = params.get(QUERY_NAME.MESSAGE)
+    const edit = params.get(QUERY_NAME.EDIT)
+    let defaultMessage = defaultCake.message
+
+    const scene = params.get(QUERY_NAME.SCENE)
+    const sceneFromParams = SCENE_CONFIG[scene as keyof typeof SCENE_CONFIG]
     if (message) {
       defaultMessage = decodeMessage(message || '')
+    }
+    return {
+      message: defaultMessage,
+      scene: sceneFromParams ? sceneFromParams.scene : defaultCake.scene,
+      edit: edit === 'true',
     }
   } catch (error) {
     console.log('Failed to decode message:', error)
   }
 
-  return {
-    message: defaultMessage,
-    scene: sceneFromParams ? sceneFromParams.scene : defaultCake.scene,
-    edit: edit === 'true',
-  }
+  return defaultCake
 }
