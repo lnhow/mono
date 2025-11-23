@@ -11,9 +11,10 @@ import Credit from './html/credit'
 import Audio from './html/audio'
 import { Loader } from '@react-three/drei/web/Loader'
 import {
-  Activity,
+  // Activity,
   memo,
   startTransition,
+  // Suspense,
   useEffect,
   useRef,
   useState,
@@ -22,10 +23,6 @@ import {
 import { useProgress } from '@react-three/drei/web'
 
 export default function Main() {
-  const searchParams = useSearchParams()
-  const defaultCakeVal = decodeCakeURL(searchParams.toString())
-  useHydrateAtoms([[cakeAtom, defaultCakeVal]])
-
   return (
     <>
       <Canvas
@@ -43,9 +40,21 @@ export default function Main() {
       </Canvas>
       <HtmlUI />
       <Loader />
+      <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-neutral-900">
+        <h1 className="sr-only">Cake</h1>
+        <p>Loading...</p>
+      </div>
     </>
   )
 }
+
+export const Hydrate = memo(function Hydrate() {
+  const searchParams = useSearchParams()
+  const defaultCakeVal = decodeCakeURL(searchParams.toString())
+  useHydrateAtoms([[cakeAtom, defaultCakeVal]])
+
+  return null
+})
 
 const HtmlUI = memo(function HtmlUI() {
   const progress = useProgress()
@@ -69,12 +78,18 @@ const HtmlUI = memo(function HtmlUI() {
 
   return (
     <ViewTransition update="none">
-      <Activity mode={loading ? 'hidden' : 'visible'}>
-        <Controls className="absolute bottom-safe left-safe right-0 z-20" />
-        <Audio className="absolute bottom-safe right-safe z-20 p-1" />
-        <Credit className="absolute bottom-safe left-safe z-10 p-1" />
-        <Loader />
-      </Activity>
+      {/* TODO: Find workarounds */}
+      {/* Activity cause audio to keep playing on NextJS 16.0.3 - React 19.2 */}
+      {/* <Activity mode={loading ? 'hidden' : 'visible'}> */}
+      {loading ? null : (
+        <>
+          <Controls className="absolute bottom-safe left-safe right-0 z-20" />
+          <Audio className="absolute bottom-safe right-safe z-20 p-1" />
+          <Credit className="absolute bottom-safe left-safe z-10 p-1" />
+          <Loader />
+        </>
+      )}
+      {/* </Activity> */}
     </ViewTransition>
   )
 })

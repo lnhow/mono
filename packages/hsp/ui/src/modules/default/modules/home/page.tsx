@@ -10,6 +10,7 @@ export default function CardsDemo() {
           title={demo.title}
           description={demo.description}
           href={demo.href}
+          external={demo.external}
           className={demo.wide ? 'sm:col-span-2 lg:col-span-2' : ''}
           transitionCard={`${demo.id}-card`}
           transitionTitle={`${demo.id}-title`}
@@ -56,5 +57,8 @@ const demos = [
     title: 'Happy Birthday Cake',
     description: 'Add your own message to the cake and send it to your friends!',
     href: '/cake?edit=true',
+    // TODO: Fix me
+    // !IMPORTANT: Open in a new tab to avoid issues with React Three Fiber and Next 16 back/forward incompatibility
+    external: true,
   }
 ]

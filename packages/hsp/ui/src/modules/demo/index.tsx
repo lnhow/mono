@@ -8,7 +8,8 @@ export type CardDemoProps = {
   title: ReactNode
   description: ReactNode
   href: string
-  imgSrc?: string
+  external?: boolean
+  // imgSrc?: string
   className?: string
   transitionCard?: string
   transitionTitle?: string
@@ -20,6 +21,7 @@ export default function CardDemo({
   title,
   description,
   href,
+  external,
   // imgSrc,
   className = '',
   transitionCard,
@@ -28,7 +30,12 @@ export default function CardDemo({
 }: CardDemoProps) {
   return (
     <ViewTransition name={transitionCard}>
-      <Link href={href} className={cn(className)}>
+      <Link
+        href={href}
+        className={cn(className)}
+        target={external ? '_blank' : undefined}
+        rel={external ? 'noopener noreferrer' : undefined}
+      >
         <Card className="flex flex-col px-4 py-5 h-full min-h-32 transition outline-fore-100 hover:outline">
           <ViewTransition name={transitionTitle}>
             <CardTitle className="mb-6">

@@ -1,3 +1,4 @@
+'use client'
 import { Environment, Sparkles } from '@react-three/drei'
 import { OrbitControls } from '@react-three/drei/core/OrbitControls'
 // import { Perf } from 'r3f-perf'

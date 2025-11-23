@@ -1,8 +1,9 @@
+// TODO: Fix navigational issues due to React Three Fiber and Next 16 back/forward incompatibility
 import { Metadata } from 'next'
-import Main from './_experience'
+import { Suspense, ViewTransition } from 'react'
 import { Provider } from 'jotai'
-import { ViewTransition } from 'react'
-import NoSsr from '@hsp/ui/utils/nextjs/no-ssr'
+import Main from './_experience'
+import { Hydrate } from './_experience'
 
 export const metadata: Metadata = {
   title: 'Cake',
@@ -14,20 +15,16 @@ export const metadata: Metadata = {
 }
 
 export default async function PageCake() {
-  'use cache'
   return (
-    <NoSsr>
-      <ViewTransition name="cake-card" update="none">
-        <main className="fixed top-0 left-0 w-full h-full">
-          <Provider>
-            <Main />
-          </Provider>
-          <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-neutral-900">
-            <h1 className="sr-only">Cake</h1>
-            <p>Loading...</p>
-          </div>
-        </main>
-      </ViewTransition>
-    </NoSsr>
+    <ViewTransition name="cake-card" update="none">
+      <main className="fixed top-0 left-0 w-full h-full">
+        <Provider>
+          <Suspense>
+            <Hydrate />
+          </Suspense>
+          <Main />
+        </Provider>
+      </main>
+    </ViewTransition>
   )
 }
