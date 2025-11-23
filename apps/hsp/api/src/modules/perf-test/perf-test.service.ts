@@ -10,14 +10,14 @@ export interface MockLoginResponse {
 
 @Injectable()
 export class PerfTestService {
-  async findAll(delay: number = 0): Promise<any> {
+  async findAll(delay: number = 0): Promise<typeof data> {
     if (delay) {
       await sleep(delay)
     }
     return data
   }
 
-  async findOne(section: string, delay: number = 0): Promise<any> {
+  async findOne(section: keyof typeof data, delay: number = 0) {
     if (delay) {
       await sleep(delay)
     }
@@ -31,7 +31,7 @@ export class PerfTestService {
     return {
       id: 1,
       username: 'mock_user',
-      avatarUrl: 'https://i.pravatar.cc/150?img=3',
+      avatarUrl: 'https://i.pravatar.cc/150?img=67',
     }
   }
 }

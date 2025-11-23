@@ -30,6 +30,12 @@ const demos = [
     wide: true,
   },
   {
+    id: 'nextjs-perf',
+    title: 'NextJS Performance',
+    description: 'Comparing NextJS 16 current SSR vs the new Suspense + Cache Component.',
+    href: '/nextjs-perf',
+  },
+  {
     id: 'contrast-checker',
     title: 'Contrast checker',
     description: 'A simple contrast checker for web accessibility.',

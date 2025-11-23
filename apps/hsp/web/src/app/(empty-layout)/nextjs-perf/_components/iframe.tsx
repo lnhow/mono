@@ -13,12 +13,14 @@ export interface IframeHandle {
 export default memo(function ComparisonIframe({
   title,
   src,
+  codeSrc,
   className,
   iframeClassName,
   ref,
 }: {
   title: string
   src: string
+  codeSrc: string
   className?: string
   iframeClassName?: string
   ref?: RefObject<IframeHandle | null>
@@ -64,6 +66,16 @@ export default memo(function ComparisonIframe({
           >
             <LuRefreshCcw />
           </Button>
+          <ButtonLink
+            size="icon"
+            variant="ghost"
+            aria-label="View Source Code"
+            target="_blank"
+            rel="noopener noreferrer"
+            href={codeSrc}
+          >
+            <LuExternalLink />
+          </ButtonLink>
         </div>
       </div>
       <iframe
