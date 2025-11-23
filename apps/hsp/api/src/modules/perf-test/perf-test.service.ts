@@ -31,7 +31,7 @@ export class PerfTestService {
     return {
       id: 1,
       username: 'mock_user',
-      avatarUrl: 'https://i.pravatar.cc/150?img=3',
+      avatarUrl: 'https://i.pravatar.cc/150?img=67',
     }
   }
 }

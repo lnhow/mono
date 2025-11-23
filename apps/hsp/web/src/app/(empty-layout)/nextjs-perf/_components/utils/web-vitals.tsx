@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import {
   onLCP,
   onTTFB,
@@ -11,9 +11,10 @@ import cn from '@hsp/ui/utils/cn'
 
 interface WebVitalsProps {
   className?: string
+  footer?: ReactNode
 }
 
-const WebVitals: React.FC<WebVitalsProps> = ({ className }) => {
+const WebVitals: React.FC<WebVitalsProps> = ({ className, footer }) => {
   const [metrics, setMetrics] = useState<
     Partial<Record<Metric['name'], Metric['value'] | undefined>>
   >({
@@ -65,6 +66,7 @@ const WebVitals: React.FC<WebVitalsProps> = ({ className }) => {
           </li>
         ))}
       </ul>
+      {footer}
     </div>
   )
 }
