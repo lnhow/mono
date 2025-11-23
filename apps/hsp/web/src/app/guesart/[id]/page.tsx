@@ -1,8 +1,9 @@
 'use cache'
 
-import PagePlay from '@hsp/ui/modules/guesart/pages/play'
+import { Suspense, ViewTransition } from 'react'
 import { Metadata } from 'next'
-import ViewTransition from '@hsp/ui/utils/react/view-transition'
+import PagePlay from '@hsp/ui/modules/guesart/pages/play'
+import RoomSkeleton from '@hsp/ui/modules/guesart/pages/play/skeleton'
 
 export const metadata: Metadata = {
   title: 'Play - guesart',
@@ -12,7 +13,9 @@ export const metadata: Metadata = {
 export default async function PageIndex() {
   return (
     <ViewTransition name="guesart-card">
-      <PagePlay />
+      <Suspense fallback={<RoomSkeleton />}>
+        <PagePlay />
+      </Suspense>
     </ViewTransition>
   )
 }
