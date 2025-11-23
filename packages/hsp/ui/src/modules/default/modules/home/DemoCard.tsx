@@ -1,8 +1,8 @@
 import cn from '@hsp/ui/utils/cn'
-import Link from '../../components/link'
+import Link from '@hsp/ui/components/link'
 import { ReactNode } from 'react'
-import ViewTransition from '../../utils/react/view-transition'
-import { Card, CardDescription, CardTitle } from '../../components/card'
+import ViewTransition from '@hsp/ui/utils/react/view-transition'
+import { Card, CardDescription, CardTitle } from '@hsp/ui/components/card'
 
 export type CardDemoProps = {
   title: ReactNode
@@ -37,11 +37,11 @@ export default function CardDemo({
         rel={external ? 'noopener noreferrer' : undefined}
       >
         <Card className="flex flex-col px-4 py-5 h-full min-h-32 transition outline-fore-100 hover:outline">
-          <ViewTransition name={transitionTitle}>
-            <CardTitle className="mb-6">
+          <CardTitle className="mb-6">
+            <ViewTransition name={transitionTitle}>
               <h3 className="text-md font-normal text-fore-400">{title}</h3>
-            </CardTitle>
-          </ViewTransition>
+            </ViewTransition>
+          </CardTitle>
           <ViewTransition name={transitionDescription}>
             <CardDescription className="text-fore-200">
               <p>{description}</p>

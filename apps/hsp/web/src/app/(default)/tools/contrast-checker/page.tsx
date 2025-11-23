@@ -1,5 +1,3 @@
-'use cache'
-
 import { Metadata } from 'next'
 import BasePageContrastChecker from '@hsp/ui/modules/tools/contrast-checker/index'
 import ViewTransition from '@hsp/ui/utils/react/view-transition'
@@ -9,7 +7,6 @@ export const metadata: Metadata = {
   title: 'Color Contrast Checker',
 }
 export default async function PageContrastChecker() {
-  'use cache'
   return (
     <div className="max-w-lg mx-auto">
       <ViewTransition name="contrast-checker-title">
