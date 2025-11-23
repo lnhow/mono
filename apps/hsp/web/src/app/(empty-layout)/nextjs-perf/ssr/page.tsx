@@ -23,11 +23,15 @@ async function WithData() {
   const data = await apiClient
     .get(`/api/perf-test?delay=${DELAY}`)
     .then((res) => res.data)
+  console.log('\x1B[35m[Dev log]\x1B[0m -> WithData -> data:', data.banners)
 
   return (
     <>
       <HashtagSection data={data.hashTags} />
-      <BannerAndVideoSection />
+      <BannerAndVideoSection
+        banners={data.banners.main}
+        subBanner={data.subBanner}
+      />
       <TimelineAndNewsSection timeline={data.timeLines} news={data.newNavis} />
       <StreamingSection />
       {user && (

@@ -28,7 +28,7 @@ export default async function SSRPage() {
       <Suspense fallback={<HashtagSectionSkeleton />}>
         <Hashtags />
       </Suspense>
-      <BannerAndVideoSection />
+      <TopBanner />
       <Suspense fallback={<TimelineAndNewsSectionSkeleton />}>
         <TimelinesAndNews />
       </Suspense>
@@ -60,6 +60,21 @@ async function Hashtags() {
     .get(`/api/perf-test/hashTags?delay=${DELAY}`)
     .then((res) => res.data)
   return <HashtagSection data={data} />
+}
+
+async function TopBanner() {
+  'use cache'
+  // cacheLife('hours')
+  const data = await apiClient
+    .get(`/api/perf-test/banner?delay=${DELAY}`)
+    .then((res) => res.data)
+  console.log('\x1B[35m[Dev log]\x1B[0m -> TopBanner -> data:', data)
+  return (
+    <BannerAndVideoSection
+      banners={data.banner.main}
+      subBanner={data.subBanner}
+    />
+  )
 }
 
 async function TimelinesAndNews() {

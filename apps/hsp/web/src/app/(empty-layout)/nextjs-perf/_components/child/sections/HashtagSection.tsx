@@ -33,7 +33,7 @@ export const HashtagSectionSkeleton = () => (
   <Card className="p-4">
     <div className="mb-3 h-7 w-32 bg-base-300 rounded animate-pulse" />
     <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide [&>*]:flex-shrink-0">
-      {[...Array(6)].map((_, i) => (
+      {[...Array(10)].map((_, i) => (
         <div
           key={i}
           className="h-8 w-16 bg-base-300 rounded-full animate-pulse"

@@ -18,16 +18,19 @@ export class PerfTestController {
     return this.perfTestService.findOne('hashTags', parseInt(delay, 10) || 0)
   }
 
-  @Get('banners')
+  @Get('banner')
   @ApiQuery({ name: 'delay', required: false, type: Number })
-  findBanners(@Query('delay') delay: string = '0') {
-    return this.perfTestService.findOne('banners', parseInt(delay, 10) || 0)
-  }
-
-  @Get('subBanner')
-  @ApiQuery({ name: 'delay', required: false, type: Number })
-  findSubBanner(@Query('delay') delay: string = '0') {
-    return this.perfTestService.findOne('subBanner', parseInt(delay, 10) || 0)
+  async findBanners(@Query('delay') delay: string = '0') {
+    const [banner, subBanner] = await Promise.all([
+      this.perfTestService.findOne('banners', parseInt(delay, 10) || 0),
+      this.perfTestService.findOne('subBanner', parseInt(delay, 10) || 0),
+    ])
+    const data = {
+      banner,
+      subBanner,
+    }
+    console.log('\x1B[35m[Dev log]\x1B[0m -> findBanners -> data:', data)
+    return data
   }
 
   @Get('timeLines')

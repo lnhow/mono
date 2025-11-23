@@ -32,73 +32,22 @@
           "id": 268707,
           "title": "Get Started with Pottery",
           "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "imageUrl": "https://placehold.co/180x180/d1d5db/4b5563?text=Item",
-          "linkUrl": "#",
-          "isLoggedOut": 0,
-          "rating": 0
+          "imageUrl": "https://placehold.co/1920x270/EF4444/d1d5db?text=Banner+1",
+          "linkUrl": "#"
         },
         {
           "id": 612943,
           "title": "New Arrivals This Week",
           "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "imageUrl": "https://placehold.co/180x180/d1d5db/4b5563?text=Item",
-          "linkUrl": "#",
-          "isLoggedOut": 0,
-          "rating": 0
+          "imageUrl": "https://placehold.co/1920x270/8e7644/d1d5db?text=Banner+2",
+          "linkUrl": "#"
         },
         {
           "id": 692264,
           "title": "Our Weekly Bestsellers",
           "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "imageUrl": "https://placehold.co/180x180/d1d5db/4b5563?text=Item",
-          "linkUrl": "#",
-          "isLoggedOut": 0,
-          "rating": 0
-        },
-        {
-          "id": 685825,
-          "title": "Exclusive Summer Collection",
-          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "imageUrl": "https://placehold.co/180x180/d1d5db/4b5563?text=Item",
-          "linkUrl": "#",
-          "isLoggedOut": 1,
-          "rating": 0
-        },
-        {
-          "id": 955386,
-          "title": "Exclusive Summer Collection",
-          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "imageUrl": "https://placehold.co/180x180/d1d5db/4b5563?text=Item",
-          "linkUrl": "#",
-          "isLoggedOut": 0,
-          "rating": 0
-        },
-        {
-          "id": 709294,
-          "title": "Our Weekly Bestsellers",
-          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "imageUrl": "https://placehold.co/180x180/d1d5db/4b5563?text=Item",
-          "linkUrl": "#",
-          "isLoggedOut": 0,
-          "rating": 0
-        },
-        {
-          "id": 559605,
-          "title": "Get Started with Pottery",
-          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "imageUrl": "https://placehold.co/180x180/d1d5db/4b5563?text=Item",
-          "linkUrl": "#",
-          "isLoggedOut": 0,
-          "rating": 0
-        },
-        {
-          "id": 259108,
-          "title": "Limited Time Discount",
-          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "imageUrl": "https://placehold.co/180x180/d1d5db/4b5563?text=Item",
-          "linkUrl": "#",
-          "isLoggedOut": 0,
-          "rating": 0
+          "imageUrl": "https://placehold.co/1920x270/4d895c/d1d5db?text=Banner+3",
+          "linkUrl": "#"
         }
       ],
       "mobile": [
@@ -106,64 +55,22 @@
           "id": 110809,
           "title": "Our Weekly Bestsellers",
           "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "imageUrl": "https://placehold.co/180x180/d1d5db/4b5563?text=Item",
-          "linkUrl": "#",
-          "isLoggedOut": 0,
-          "rating": 0
+          "imageUrl": "https://placehold.co/640x270/EF4444/d1d5db/?text=Banner+1",
+          "linkUrl": "#"
         },
         {
           "id": 907839,
           "title": "Exclusive Summer Collection",
           "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "imageUrl": "https://placehold.co/180x180/d1d5db/4b5563?text=Item",
-          "linkUrl": "#",
-          "isLoggedOut": 0,
-          "rating": 0
+          "imageUrl": "https://placehold.co/640x270/4b5563/d1d5db?text=Banner+2",
+          "linkUrl": "#"
         },
         {
           "id": 227152,
           "title": "Limited Time Discount",
           "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "imageUrl": "https://placehold.co/180x180/d1d5db/4b5563?text=Item",
-          "linkUrl": "#",
-          "isLoggedOut": 0,
-          "rating": 0
-        },
-        {
-          "id": 154070,
-          "title": "Our Weekly Bestsellers",
-          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "imageUrl": "https://placehold.co/180x180/d1d5db/4b5563?text=Item",
-          "linkUrl": "#",
-          "isLoggedOut": 1,
-          "rating": 0
-        },
-        {
-          "id": 686928,
-          "title": "Limited Time Discount",
-          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "imageUrl": "https://placehold.co/180x180/d1d5db/4b5563?text=Item",
-          "linkUrl": "#",
-          "isLoggedOut": 0,
-          "rating": 0
-        },
-        {
-          "id": 289641,
-          "title": "Limited Time Discount",
-          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "imageUrl": "https://placehold.co/180x180/d1d5db/4b5563?text=Item",
-          "linkUrl": "#",
-          "isLoggedOut": 0,
-          "rating": 0
-        },
-        {
-          "id": 366511,
-          "title": "New Arrivals This Week",
-          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "imageUrl": "https://placehold.co/180x180/d1d5db/4b5563?text=Item",
-          "linkUrl": "#",
-          "isLoggedOut": 0,
-          "rating": 0
+          "imageUrl": "https://placehold.co/640x270/4b5563/d1d5db?text=Banner+3",
+          "linkUrl": "#"
         }
       ]
     },
@@ -216,7 +123,7 @@
     "detailUrl": "#",
     "isNew": false,
     "rating": 0,
-    "thumbnailUrl": "https://placehold.co/180x180/d1d5db/4b5563?text=Item"
+    "thumbnailUrl": "https://placehold.co/240x135/e60076/d1d5db?text=Video"
   },
   "timeLines": [
     {
