@@ -1,0 +1,14 @@
+button.react-button {
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  --lightness: 50%;
+  background: hsl(180, 100%, var(--lightness));
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+button.react-button:hover, button.react-button:focus {
+  --lightness: 80%;
+}

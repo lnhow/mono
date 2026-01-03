@@ -1,6 +1,7 @@
-# Rsbuild project
+# MFE React 1
 
 This is a micro-frontend test React app built with Rsbuild.
+It exposes React components to be consumed by other apps.
 
 ## Setup
 
@@ -15,19 +16,19 @@ pnpm install
 Start the dev server, and the app will be available at [http://localhost:3000](http://localhost:3000).
 
 ```bash
-pnpm run dev
+pnpm run dev -F=mfe-\*
 ```
 
 Build the app for production:
 
 ```bash
-pnpm run build
+pnpm run build -F=mfe-\*
 ```
 
 Preview the production build locally:
 
 ```bash
-pnpm run preview
+pnpm run preview -F=mfe-\*
 ```
 
 ## Learn more

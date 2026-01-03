@@ -1,6 +1,7 @@
-import type { CSSProperties } from 'react'
+import { useState, type CSSProperties } from 'react'
+import Button from './button'
 
-interface CardProps {
+export interface CardProps {
   title: string
   description: string
   style?: CSSProperties
@@ -8,6 +9,7 @@ interface CardProps {
 }
 
 const Card = ({ title, description, style, children }: CardProps) => {
+  const [state, setState] = useState(0)
   return (
     <div
       style={{
@@ -41,6 +43,9 @@ const Card = ({ title, description, style, children }: CardProps) => {
       >
         This card component is from MFE React 1.
       </p>
+      <Button onClick={() => setState((s) => s + 1)}>
+        State from React: {state}
+      </Button>
     </div>
   )
 }

@@ -5,6 +5,9 @@ export default createModuleFederationConfig({
   exposes: {
     './button': './src/components/button',
     './card': './src/components/card',
+    './bridges/button': './src/components/bridges/button',
+    './bridges/card': './src/components/bridges/card',
+    './bridges/card-dummy': './src/components/bridges/card-dummy',
   },
   filename: 'remoteEntry.js',
   shared: {
@@ -15,5 +18,9 @@ export default createModuleFederationConfig({
     'react-dom': {
       singleton: true,
     },
+  },
+  bridge: {
+    react: 'v19',
+    enableBridgeRouter: false,
   },
 });

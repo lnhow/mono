@@ -1,15 +1,12 @@
-const Button = () => {
+import './button.css'
+
+const Button = ({
+  children,
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
-    <button
-      style={{
-        border: 'none',
-        padding: '12px 24px',
-        fontSize: '16px',
-        borderRadius: '8px',
-        background: 'aqua',
-      }}
-    >
-      Button from MFE React 1
+    <button className="react-button" {...props}>
+      {children || 'Button from MFE React 1'}
     </button>
   )
 }

@@ -1,7 +1,8 @@
-# MFE React 2
+# MFE Vue
 
-This is a micro-frontend test React app built with Rsbuild.
-It consumes React components from MFE React 1.
+This is a micro-frontend test Vue app built with Rsbuild.
+It consumes React components from MFE React 1 in the following flow:
+- `@module-federation/runtime` import the module dynamically in runtime (so Vue does not complain)
 
 ## Setup
 
