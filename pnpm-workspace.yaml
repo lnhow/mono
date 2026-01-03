@@ -1,6 +1,7 @@
 packages:
   # Turbo only accepts * globs not ** globs
   - 'apps/hsp/*'
+  - 'apps/explore/*'
   - 'apps/learn/threejs/*'
   - 'apps/*'
   - 'packages/configs/*'
