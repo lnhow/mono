@@ -282,6 +282,9 @@ importers:
       vue:
         specifier: ^3.5.25
         version: 3.5.26(typescript@5.9.3)
+      vue-router:
+        specifier: ^4.6.4
+        version: 4.6.4(vue@3.5.26(typescript@5.9.3))
     devDependencies:
       '@module-federation/rsbuild-plugin':
         specifier: ^0.22.0
