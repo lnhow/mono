@@ -5,7 +5,7 @@ import CardPost from '@hsp/ui/modules/posts/card'
 import { PostUtils } from '@hsp/ui/modules/posts/utils'
 import { allPosts } from 'content-collections'
 import { Metadata } from 'next'
-import PaperTexture from './_components/natural-paper.png'
+import PaperTexture from './_components/hero/natural-paper.png'
 import Time from './_components/hero/time'
 
 const getLatestPosts = (n = 10) => {
