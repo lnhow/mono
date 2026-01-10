@@ -16,6 +16,14 @@
   all: unset;
 }
 
+@utility bg-dash {
+  background-image: radial-gradient(
+    circle,
+    var(--color-fore-100) 1px,
+    transparent 1px
+  );
+}
+
 :root {
   --hsp-primary-100: var(--color-emerald-50);
   --hsp-primary-200: var(--color-emerald-200);

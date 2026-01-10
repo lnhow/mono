@@ -89,6 +89,9 @@ catalogs:
     sharp:
       specifier: ^0.34.5
       version: 0.34.5
+    tailwindcss:
+      specifier: 4.1.18
+      version: 4.1.18
   markdown:
     '@content-collections/core':
       specifier: ^0.11.1
@@ -481,7 +484,7 @@ importers:
         version: 4.0.15
       '@tailwindcss/typography':
         specifier: ^0.5.16
-        version: 0.5.16(tailwindcss@4.1.10)
+        version: 0.5.16(tailwindcss@4.1.18)
       '@vercel/analytics':
         specifier: ^1.5.0
         version: 1.5.0(next@16.0.10(@babel/core@7.28.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(vue-router@4.6.4(vue@3.5.26(typescript@5.9.2)))(vue@3.5.26(typescript@5.9.2))
@@ -555,11 +558,11 @@ importers:
         specifier: ^2.0.3
         version: 2.0.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       tailwindcss:
-        specifier: 4.1.10
-        version: 4.1.10
+        specifier: catalog:gui
+        version: 4.1.18
       tailwindcss-safe-area:
         specifier: 1.1.0
-        version: 1.1.0(tailwindcss@4.1.10)
+        version: 1.1.0(tailwindcss@4.1.18)
       three:
         specifier: catalog:three
         version: 0.181.2
@@ -749,7 +752,7 @@ importers:
         version: 0.27.16(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@tailwindcss/typography':
         specifier: ^0.5.16
-        version: 0.5.16(tailwindcss@4.1.10)
+        version: 0.5.16(tailwindcss@4.1.18)
       class-variance-authority:
         specifier: 0.7.1
         version: 0.7.1
@@ -787,11 +790,11 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       tailwindcss:
-        specifier: 4.1.10
-        version: 4.1.10
+        specifier: catalog:gui
+        version: 4.1.18
       tailwindcss-safe-area:
         specifier: 1.1.0
-        version: 1.1.0(tailwindcss@4.1.10)
+        version: 1.1.0(tailwindcss@4.1.18)
       tw-animate-css:
         specifier: 1.3.5
         version: 1.3.5
@@ -9576,8 +9579,8 @@ packages:
   tailwindcss@4.0.15:
     resolution: {integrity: sha512-6ZMg+hHdMJpjpeCCFasX7K+U615U9D+7k5/cDK/iRwl6GptF24+I/AbKgOnXhVKePzrEyIXutLv36n4cRsq3Sg==}
 
-  tailwindcss@4.1.10:
-    resolution: {integrity: sha512-P3nr6WkvKV/ONsTzj6Gb57sWPMX29EPNPopo7+FcpkQaNsrNpZ1pv8QmrYI2RqEKD7mlGqLnGovlcYnBK0IqUA==}
+  tailwindcss@4.1.18:
+    resolution: {integrity: sha512-4+Z+0yiYyEtUVCScyfHCxOYP06L5Ne+JiHhY2IjR2KWMIWhJOYZKLSGZaP5HkZ8+bY0cxfzwDE5uOmzFXyIwxw==}
 
   tapable@2.2.1:
     resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
@@ -14866,13 +14869,13 @@ snapshots:
       postcss: 8.5.3
       tailwindcss: 4.0.15
 
-  '@tailwindcss/typography@0.5.16(tailwindcss@4.1.10)':
+  '@tailwindcss/typography@0.5.16(tailwindcss@4.1.18)':
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 4.1.10
+      tailwindcss: 4.1.18
 
   '@testing-library/dom@10.4.1':
     dependencies:
@@ -21194,13 +21197,13 @@ snapshots:
 
   tailwind-merge@3.3.1: {}
 
-  tailwindcss-safe-area@1.1.0(tailwindcss@4.1.10):
+  tailwindcss-safe-area@1.1.0(tailwindcss@4.1.18):
     dependencies:
-      tailwindcss: 4.1.10
+      tailwindcss: 4.1.18
 
   tailwindcss@4.0.15: {}
 
-  tailwindcss@4.1.10: {}
+  tailwindcss@4.1.18: {}
 
   tapable@2.2.1: {}
 
