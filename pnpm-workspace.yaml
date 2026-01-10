@@ -1,6 +1,7 @@
 packages:
   # Turbo only accepts * globs not ** globs
   - 'apps/hsp/*'
+  - 'apps/explore/*'
   - 'apps/learn/threejs/*'
   - 'apps/*'
   - 'packages/configs/*'
@@ -30,6 +31,7 @@ catalogs:
     '@next/eslint-plugin-next': 16.0.10
     next-themes: 0.4.6
     radix-ui: 1.4.3
+    tailwindcss: 4.1.18
   three:
     '@react-three/cannon': '6.6.0'
     '@react-three/drei': '10.7.7'

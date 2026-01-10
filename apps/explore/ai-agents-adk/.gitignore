@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+.python-version
+venv/
+env/
+.venv/
+build/
+dist/
+*.egg-info/
+.coverage
+.mypy_cache/
+.pytest_cache/
+
+# Environment files
+.env
+.env.local
+.flaskenv
+
+# IDE and OS files
+.idea/ # For PyCharm
+.vscode/ # Optional, depends on project standards
+.DS_Store # macOS files
+Thumbs.db # Windows files
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+.adk
