@@ -5,10 +5,12 @@ import CardPost from '@hsp/ui/modules/posts/card'
 import { PostUtils } from '@hsp/ui/modules/posts/utils'
 import { allPosts } from 'content-collections'
 import { Metadata } from 'next'
+import PaperTexture from './_components/hero/natural-paper.png'
+import Time from './_components/hero/time'
 
-export default function HomePage() {
+const getLatestPosts = (n = 10) => {
   // Get the latest 10 posts
-  const posts = allPosts
+  return allPosts
     .filter((post) => PostUtils.shouldShow(post.draft) && post.slug !== 'test')
     .sort((a, b) => {
       // Sort by date descending
@@ -23,29 +25,68 @@ export default function HomePage() {
 
       return dateB - dateA
     })
-    .slice(0, 9)
+    .slice(0, n - 1)
+}
+
+export default function HomePage() {
+  const latestPosts = getLatestPosts()
 
   return (
-    <div className="flex flex-col gap-4 max-w-7xl mx-auto md:px-4 py-8">
-      <section className="mt-[18%] mb-[9%]">
-        <h1 className="text-4xl">
-          <span className="text-fore-200 text-6xl font-bold">Hi,</span>
-          <br /> I&apos;m Hao
-        </h1>
-        <p className="text-xs text-fore-100 mb-4">(Lê Nguyên Hào)</p>
-        <h2 className="text-md text-fore-200">
-          Web Developer. Photography and UX Enthusiast.
-        </h2>
-        <div className='flex gap-2 flex-wrap mt-6'>
-          <PersonalGithub />
-          <PersonalLinkedinLink />
+    <div className="flex flex-col gap-4 md:px-4 pb-8">
+      <section className="relative -mx-(--layout-spacing) px-(--layout-spacing) py-10 md:-mx-[calc(var(--layout-spacing)+4*var(--spacing))] flex flex-col justify-center">
+        <div className="@container relative max-w-7xl mx-auto w-full mb-2 h-4 border-fore-100 border-x border-t rounded-t-2xl">
+          <div className="absolute -top-3 left-4 right-4 flex gap-3 overflow-hidden">
+            <Time
+              className="border-x border-fore-100 px-1 bg-base-100 text-sm text-ellipsis w-23 text-right whitespace-nowrap"
+              mode="date"
+              format={{
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric',
+              }}
+            />
+            <Time
+              className="hidden @xs:inline-block border-x border-fore-100 px-1 bg-base-100 text-sm text-ellipsis w-23 text-right whitespace-nowrap"
+              format={{
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+              }}
+            />
+          </div>
         </div>
+        <div
+          className="w- max-w-[calc(var(--container-7xl)-var(--spacing)*8)] flex-1 xl:w-full relative bg-repeat py-22 mx-4 xl:mx-auto md:px-[calc(var(--layout-spacing)+4*var(--spacing))] bg-dash"
+          style={{
+            backgroundSize: '6px 2.5rem',
+          }}
+        >
+          <h1 className="text-4xl">
+            <span className="text-fore-200 text-6xl font-bold">Hi,</span>
+            <br /> I&apos;m Hào
+          </h1>
+          {/*<p className="text-xs text-fore-100 mb-4">(Lê Nguyên Hào)</p>*/}
+          <h2 className="text-md text-fore-200 mt-1 leading-10">
+            Web Developer. Photography and UX Enthusiast.
+          </h2>
+          <div className="flex gap-2 flex-wrap mt-8">
+            <PersonalGithub />
+            <PersonalLinkedinLink />
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto w-full mt-2 h-4 border-fore-100 border-x border-b rounded-b-2xl" />
+        <div
+          className="absolute w-full h-full top-0 left-0 mix-blend-overlay bg-repeat pointer-events-none z-10 bg-fore-400 dark:bg-transparent"
+          style={{
+            backgroundImage: `url(${PaperTexture.src.toString()})`,
+          }}
+        />
       </section>
-      {posts.length > 0 && (
-        <section className="mt-8">
+      {latestPosts.length > 0 && (
+        <section className="mt-8 max-w-7xl mx-auto">
           <h2 className="text-2xl mb-4">Latest Posts</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {posts.map((post) => (
+            {latestPosts.map((post) => (
               <CardPost
                 key={post.slug}
                 title={post.title}
@@ -60,7 +101,7 @@ export default function HomePage() {
           </div>
         </section>
       )}
-      <section className="mt-8">
+      <section className="mt-8 max-w-7xl mx-auto">
         <h2 className="text-2xl mb-4">Things I built for fun</h2>
         <CardsDemo />
       </section>
