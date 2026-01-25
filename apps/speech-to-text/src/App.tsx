@@ -19,13 +19,14 @@ import { Input } from './components/ui/input'
 import { Button } from './components/ui/button'
 import { Label } from './components/ui/label'
 import { Progress } from './components/ui/progress'
-import { useTranscription } from './hooks/use-transcription'
+import { useTranscription } from './lib/transpile/use-transcription'
 // import { useWebSpeech } from './hooks/use-web-speech';
 // import { Mic, PauseCircle, PlayCircle } from 'lucide-react'
+import { DEFAULT_MODEL, LANGUAGE_OPTIONS, MODEL_OPTIONS } from './lib/transpile/types'
 
 function App() {
   const [audioFile, setAudioFile] = useState<File | null>(null)
-  const [selectedModel, setSelectedModel] = useState<string>('whisper-tiny.en')
+  const [selectedModel, setSelectedModel] = useState<string>(DEFAULT_MODEL)
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en')
   const [transcriptionResult, setTranscriptionResult] = useState<string>('')
 
@@ -111,9 +112,11 @@ function App() {
                   <SelectValue placeholder="Select a model" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="whisper-tiny.en">
-                    Xenova/whisper-tiny.en
-                  </SelectItem>
+                  {Object.entries(MODEL_OPTIONS).map(([value, label]) => (
+                    <SelectItem key={value} value={value}>
+                      {label}
+                    </SelectItem>
+                  ))}
                   {isWebSpeechSupported ? (
                     <SelectItem value="web-speech-api">
                       Web Speech API
@@ -136,10 +139,11 @@ function App() {
                   <SelectValue placeholder="Select language" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="en">English</SelectItem>
-                  <SelectItem value="es">Spanish</SelectItem>
-                  <SelectItem value="fr">French</SelectItem>
-                  <SelectItem value="de">German</SelectItem>
+                  {LANGUAGE_OPTIONS.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
