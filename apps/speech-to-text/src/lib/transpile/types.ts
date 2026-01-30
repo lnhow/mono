@@ -19,6 +19,8 @@ export const DEFAULT_MODEL = MODEL_OPTIONS['Xenova/whisper-base']
 
 export type ModelOption = keyof typeof MODEL_OPTIONS
 
+export const SAMPLING_RATE = 16000
+
 // Options ===================================================================
 
 // Message Types =============================================================
@@ -28,7 +30,7 @@ export interface ReqLoadModel {
 }
 export interface ReqTranscribe {
   type: 'transcribe'
-  audio: ArrayBuffer
+  audio: Float32Array<ArrayBuffer>
   language: string
 }
 

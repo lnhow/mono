@@ -22,7 +22,12 @@ import { Progress } from './components/ui/progress'
 import { useTranscription } from './lib/transpile/use-transcription'
 // import { useWebSpeech } from './hooks/use-web-speech';
 // import { Mic, PauseCircle, PlayCircle } from 'lucide-react'
-import { DEFAULT_MODEL, LANGUAGE_OPTIONS, MODEL_OPTIONS } from './lib/transpile/types'
+import {
+  DEFAULT_MODEL,
+  LANGUAGE_OPTIONS,
+  MODEL_OPTIONS,
+} from './lib/transpile/types'
+import type { ProgressStatusInfo } from 'node_modules/@huggingface/transformers/types/utils/core'
 
 function App() {
   const [audioFile, setAudioFile] = useState<File | null>(null)
@@ -78,7 +83,7 @@ function App() {
   }, [webSpeechTranscript, selectedModel]);
   */
 
-  const progressValue = progress ? Math.round(progress.progress) : 0
+  // const progressValue = progress ? Math.round(progress.progress) : 0
 
   const currentError = transcriptionError // selectedModel === "web-speech-api" ? webSpeechError : transcriptionError;
 
@@ -149,24 +154,39 @@ function App() {
             </div>
           </div>
 
-          {isModelLoading && selectedModel !== 'web-speech-api' && (
+          {Object.keys(progress).length > 0 && (
+            <>
+              Loading
+              {Object.keys(progress).map((item) => {
+                const percentage = (progress[item] as ProgressStatusInfo)?.progress || 0
+                return (
+                  <ProgressBar
+                    key={item}
+                    percentage={percentage}
+                    label={item}
+                  />
+                )
+              })}
+            </>
+          )}
+          {/*{isModelLoading && selectedModel !== 'web-speech-api' && (
             <div className="space-y-2">
               <Label>Loading model: {progressValue}%</Label>
               <Progress value={progressValue} />
             </div>
-          )}
+          )}*/}
 
           {currentError && (
             <p className="text-red-500 text-sm">{currentError}</p>
           )}
-          {progress &&
+          {/*{progress &&
             progress.status === 'transcribing' &&
             selectedModel !== 'web-speech-api' && (
               <div className="space-y-2">
                 <Label>Transcribing: {progressValue}%</Label>
                 <Progress value={progressValue} />
               </div>
-            )}
+            )}*/}
 
           {/* {selectedModel === "web-speech-api" ? (
             <Button onClick={isRecording ? stopRecording : startRecording} className="w-full" disabled={!isWebSpeechSupported}>
@@ -210,3 +230,15 @@ function App() {
 }
 
 export default App
+
+function ProgressBar({ percentage, label }: { percentage?: number, label: string }) {
+  return (
+    <div className="space-y-2">
+      <div className='flex items-center justify-between'>
+        <Label className="text-xs">{label}</Label>
+        <span className="text-xs">{Math.round(percentage || 0)}%</span>
+      </div>
+      <Progress value={percentage || 0} />
+    </div>
+  )
+}
