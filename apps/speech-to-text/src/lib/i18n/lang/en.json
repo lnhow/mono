@@ -1,0 +1,31 @@
+{
+  "app": {
+    "speech-to-text": "Speech to Text",
+    "transcribe": "Transcribe",
+    "loading": "Loading...",
+    "no-support": "Speech recognition is not supported in this browser.",
+    "result-placeholder": "Transcribed text will appear here...",
+    "audio-file": {
+      "title": "Audio File",
+      "placeholder": "Select an audio file..."
+    },
+    "model": {
+      "title": "Model",
+      "whisper-tiny-en-desc": "English, lightweight (39M, ~1 GB VRAM)",
+      "whisper-base-en-desc": "English, better accuracy (74M, ~1 GB VRAM)",
+      "whisper-small-en-desc": "English, more accuracy (244M, ~2 GB VRAM)",
+      "whisper-tiny-desc": "Multilingual, lightweight (39M, ~1 GB VRAM)",
+      "whisper-base-desc": "Multilingual, better accuracy (74M, ~1 GB VRAM)",
+      "whisper-small-desc": "Multilingual, more accuracy (244M, ~2 GB VRAM)",
+      "PhoWhisper-tiny-desc": "Vietnamese, lightweight (39M, ~1 GB VRAM)",
+      "PhoWhisper-base-desc": "Vietnamese, better accuracy (74M, ~1 GB VRAM)",
+      "PhoWhisper-small-desc": "Vietnamese, more accuracy (244M, ~2 GB VRAM)"
+    },
+    "language": {
+      "title": "Language",
+      "placeholder": "Select a language...",
+      "vietnamese": "Vietnamese",
+      "english": "English"
+    }
+  }
+}

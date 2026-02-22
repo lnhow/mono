@@ -1,13 +1,6 @@
 import { useState, useCallback /* , useEffect, startTransition */ } from 'react'
 import type { ChangeEvent } from 'react'
-import {
-  Card,
-  CardContent,
-  // CardDescription,
-  CardHeader,
-  CardTitle,
-} from './components/ui/card'
-// import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs'
+import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card'
 import {
   Select,
   SelectContent,
@@ -20,26 +13,37 @@ import { Button } from './components/ui/button'
 import { Label } from './components/ui/label'
 import { Progress } from './components/ui/progress'
 import { useTranscription } from './lib/transpile/use-transcription'
-// import { useWebSpeech } from './hooks/use-web-speech';
-// import { Mic, PauseCircle, PlayCircle } from 'lucide-react'
 import {
-  // DEFAULT_MODEL,
+  DEFAULT_MODEL,
   LANGUAGE_OPTIONS,
-  // MODEL_OPTIONS,
+  MODEL_OPTIONS,
+  MODEL_SELECT_OPTIONS,
+  type ModelOption,
+  type SupportedLanguage,
 } from './lib/transpile/types'
 import type { ProgressStatusInfo } from 'node_modules/@huggingface/transformers/types/utils/core'
+import { useTranslations } from 'use-intl'
+import { LangSelector } from './lib/i18n/LangSelector'
 
 function App() {
+  const t = useTranslations('app')
   const [audioFile, setAudioFile] = useState<File | null>(null)
-  // const [selectedModel, setSelectedModel] = useState<string>(DEFAULT_MODEL)
-  const [selectedLanguage, setSelectedLanguage] = useState<string>(LANGUAGE_OPTIONS[0].value)
+  const [selectedLanguage, setSelectedLanguage] = useState<SupportedLanguage>(
+    LANGUAGE_OPTIONS[0].value,
+  )
+  const [selectedModel, setSelectedModel] = useState<ModelOption>(() => {
+    const defaultModelForLanguage =
+      MODEL_SELECT_OPTIONS[selectedLanguage]?.default
+    return defaultModelForLanguage || DEFAULT_MODEL
+  })
+  const modelOptions = MODEL_SELECT_OPTIONS[selectedLanguage]?.options
   const [transcriptionResult, setTranscriptionResult] = useState<string>('')
 
   const {
     transcribe,
     isLoading,
     progress,
-    error: transcriptionError,
+    error: currentError,
   } = useTranscription({
     onTranscriptionUpdate: (result) => {
       if (result.append) {
@@ -49,8 +53,6 @@ function App() {
       }
     },
   })
-
-  // const isWebSpeechSupported = false // Mocked for now
 
   const handleFileChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -63,105 +65,94 @@ function App() {
     [],
   )
 
+  const handleModelChange = useCallback((value: ModelOption) => {
+    setSelectedModel(value)
+  }, [])
+
+  const handleLanguageChange = useCallback((value: SupportedLanguage) => {
+    setSelectedLanguage(value)
+    // Optionally reset model selection when language changes
+    const defaultModelForLanguage = MODEL_SELECT_OPTIONS[value]?.default
+    setSelectedModel(defaultModelForLanguage || '')
+  }, [])
+
   const handleTranscribe = async () => {
-    if (!audioFile) {
-      alert('Please select an audio file first.')
-      return
-    }
-    if (isLoading) {
-      alert('Model is still loading. Please wait.')
+    if (!audioFile || isLoading) {
       return
     }
 
     setTranscriptionResult('') // Clear previous result
-    const result = await transcribe(audioFile, selectedLanguage)
+    const result = await transcribe({
+      audioFile,
+      language: selectedLanguage,
+      modelName: selectedModel,
+    })
     if (result) {
       setTranscriptionResult(result.text)
     }
   }
 
-  /*
-  // Effect to update transcriptionResult when webSpeechTranscript changes
-  useEffect(() => {
-    if (selectedModel === "web-speech-api" && webSpeechTranscript) {
-      startTransition(() => {
-        setTranscriptionResult(webSpeechTranscript);
-      });
-    }
-  }, [webSpeechTranscript, selectedModel]);
-  */
-
-  // const progressValue = progress ? Math.round(progress.progress) : 0
-
-  const currentError = transcriptionError // selectedModel === "web-speech-api" ? webSpeechError : transcriptionError;
-
   return (
-    <div className="flex flex-col md:flex-row">
-      <Card className="w-full md:w-80 md:min-h-screen">
-        <CardHeader>
-          <CardTitle>Speech to Text</CardTitle>
-          {/*<CardDescription>
-            Transcribe your audio files with ease.
-          </CardDescription>*/}
+    <div className="flex flex-col md:flex-row bg-muted/50">
+      <title>{t('speech-to-text')}</title>
+      <Card className="w-full md:w-80 md:min-h-screen md:rounded-tl-none md:rounded-bl-none">
+        <CardHeader className="space-y-2 flex flex-row items-center justify-between">
+          <CardTitle>{t('speech-to-text')}</CardTitle>
+          <LangSelector />
         </CardHeader>
         <CardContent className="space-y-4">
-          {/*{selectedModel !== 'web-speech-api' && (*/}
           <div className="grid w-full items-center gap-1.5">
-            <Label htmlFor="audio-file">Audio File</Label>
+            <Label htmlFor="audio-file">{t('audio-file.title')}</Label>
             <Input
               id="audio-file"
               type="file"
               accept="audio/*"
               onChange={handleFileChange}
+              placeholder={t('audio-file.placeholder')}
             />
           </div>
-          {/*)}*/}
-          {/*<div className="grid gap-1.5">
-            <Label htmlFor="model-select">Model</Label>
-            <Select value={selectedModel} onValueChange={setSelectedModel}>
-              <SelectTrigger id="model-select">
-                <SelectValue placeholder="Select a model" />
-              </SelectTrigger>
-              <SelectContent>
-                {Object.entries(MODEL_OPTIONS).map(([value, label]) => (
-                  <SelectItem key={value} value={value}>
-                    {label}
-                  </SelectItem>
-                ))}
-                {isWebSpeechSupported ? (
-                  <SelectItem value="web-speech-api">
-                    Web Speech API
-                  </SelectItem>
-                ) : (
-                  <SelectItem value="web-speech-api" disabled>
-                    Web Speech API (Not Supported)
-                  </SelectItem>
-                )}
-              </SelectContent>
-            </Select>
-          </div>*/}
 
           <div className="grid gap-1.5">
-            <Label htmlFor="language-select">Language</Label>
+            <Label htmlFor="language-select">{t('language.title')}</Label>
             <Select
               value={selectedLanguage}
-              onValueChange={setSelectedLanguage}
+              onValueChange={handleLanguageChange}
             >
               <SelectTrigger id="language-select">
-                <SelectValue placeholder="Select language" />
+                <SelectValue placeholder={t('language.placeholder')} />
               </SelectTrigger>
               <SelectContent>
                 {LANGUAGE_OPTIONS.map((option) => (
                   <SelectItem key={option.value} value={option.value}>
-                    {option.label}
+                    {t(`language.${option.label}`)}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
 
+          <div className="grid gap-1.5">
+            <Label htmlFor="model-select">{t('model.title')}</Label>
+            <Select value={selectedModel} onValueChange={handleModelChange}>
+              <SelectTrigger id="model-select">
+                <SelectValue placeholder="Select a model" aria-label={selectedModel}>
+                  {MODEL_OPTIONS[selectedModel]}
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                {modelOptions.map((options) => (
+                  <SelectItem key={options.value} value={options.value}>
+                    <div>
+                      {options.label}
+                      <p className='text-muted-foreground text-xs'>{t(`model.${options.label}-desc`)}</p>
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
           {Object.keys(progress).length > 0 && (
-            <div className="space-y-4">
+            <div className="space-y-4 w-full">
               {Object.keys(progress).map((item) => {
                 if (progress[item]?.status === 'transcribing') {
                   return null
@@ -187,13 +178,13 @@ function App() {
             className="w-full"
             disabled={!audioFile || isLoading}
           >
-            {isLoading ? 'Loading...' : 'Transcribe'}
+            {isLoading ? t('loading') : t('transcribe')}
           </Button>
         </CardContent>
       </Card>
-      <div className="flex-1 h-screen p-4 overflow-auto bg-muted/50 text-foreground text-sm">
+      <div className="flex-1 h-screen p-4 overflow-auto text-foreground text-sm">
         {transcriptionResult ||
-          'Transcript will appear here after transcription.'}
+          (isLoading ? t('loading') : t('result-placeholder'))}
       </div>
     </div>
   )
@@ -209,9 +200,9 @@ function ProgressBar({
   label: string
 }) {
   return (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between">
-        <Label className="text-xs">{label}</Label>
+    <div className="space-y-2 w-full">
+      <div className="flex items-center justify-between w-full">
+        <Label className="text-xs flex-1 text-ellipsis wrap-break-word overflow-hidden w-full">{label}</Label>
         <span className="text-xs">{Math.round(percentage || 0)}%</span>
       </div>
       <Progress value={percentage || 0} />

@@ -1,5 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { SAMPLING_RATE, type ReqLoadModel, type ReqTranscribe, type WorkerResponse } from './types'
+import {
+  SAMPLING_RATE,
+  type ModelOption,
+  type ReqLoadModel,
+  type ReqTranscribe,
+  type WorkerResponse,
+} from './types'
 import TranscriptionWorker from './worker.ts?worker'
 import type { ProgressInfo } from '@huggingface/transformers'
 
@@ -20,27 +26,6 @@ type TranscriptionProgressMap = {
   [index: string]: ProgressInfo | TranscribeStatusInfo | null
 }
 
-const selectAudioBufferChannel = (audioBuffer: AudioBuffer) => {
-  // Taken from https://github.com/xenova/whisper-web/blob/81869ed62970ff4373509b6004a6c9a3f0c5b64d/src/hooks/useTranscriber.ts#L152
-  // TODO: Try to understand this better
-  if (audioBuffer.numberOfChannels !== 2) {
-    // If not stereo, return the first channel
-    return audioBuffer.getChannelData(0)
-  } else {
-    // If stereo, average the two channels
-    const scaling = Math.SQRT2
-    const left = audioBuffer.getChannelData(0)
-    const right = audioBuffer.getChannelData(1)
-    const length = audioBuffer.length
-    const combined = new Float32Array(length)
-
-    for (let i = 0; i < length; i++) {
-      combined[i] = scaling * (left[i] + right[i]) / 2
-    }
-    return combined
-  }
-}
-
 export function useTranscription({
   onTranscriptionUpdate,
 }: {
@@ -52,7 +37,9 @@ export function useTranscription({
 
   const workerRef = useRef<Worker | null>(null)
 
-  const resolveRef = useRef<((result: TranscriptionResult) => void) | null>(null)
+  const resolveRef = useRef<((result: TranscriptionResult) => void) | null>(
+    null,
+  )
   const onTranscriptionCallbackRef = useRef(onTranscriptionUpdate)
   useEffect(() => {
     onTranscriptionCallbackRef.current = onTranscriptionUpdate
@@ -113,7 +100,9 @@ export function useTranscription({
           break
         case 'model-loaded':
           setIsReady(true)
-          setProgress({})
+          // if (data.initializing) {
+          //   setProgress({})
+          // }
           break
         case 'error':
           console.error('Worker error:', data.error)
@@ -121,10 +110,13 @@ export function useTranscription({
           setProgress({})
           break
         case 'transcribing':
-          onTranscriptionCallbackRef.current?.({ text: data.output.text, append: true })
+          onTranscriptionCallbackRef.current?.({
+            text: data.output.text,
+            append: true,
+          })
           break
         case 'complete':
-          // onTranscriptionCallbackRef.current({ text: data.output.text })
+          onTranscriptionCallbackRef.current({ text: data.output.text })
           // Resolve the pending transcription promise
           if (resolveRef.current) {
             resolveRef.current({ text: data.output.text })
@@ -132,9 +124,6 @@ export function useTranscription({
           }
           setProgress({})
           break
-        default:
-          // This handles progress updates from Transformers.js
-          // setProgress(data as TranscriptionProgress)
       }
     }
 
@@ -152,34 +141,23 @@ export function useTranscription({
   }, [])
 
   const transcribe = useCallback(
-    async (audioFile: File, language: string): Promise<TranscriptionResult | null> => {
+    async ({
+      audioFile,
+      language,
+      modelName,
+    }: {
+      audioFile: File
+      language: string
+      modelName: ModelOption
+    }): Promise<TranscriptionResult | null> => {
       // console.log('[devlog]:', 'Starting transcription for file:', audioFile.name)
       if (!workerRef.current || !isReady) {
         setError('Transcription model not loaded.')
         return null
       }
+
       // https://github.com/xenova/whisper-web/blob/main/src/components/AudioManager.tsx#L572
-      //
-      // const urlObj = URL.createObjectURL(audioFile)
-      // const mimeType = audioFile.type
-
-      const buffer = await new Promise<AudioBuffer>((resolve) => {
-        const reader = new FileReader()
-        // console.log('[devlog]:', 'Reading audio file as array buffer:', audioFile.name)
-        reader.addEventListener('load', async (e) => {
-          const arrayBuffer = e.target?.result as ArrayBuffer // Get the ArrayBuffer
-          if (!arrayBuffer) return
-
-          const audioCTX = new AudioContext({
-            sampleRate: SAMPLING_RATE,
-          })
-
-          const decoded = await audioCTX.decodeAudioData(arrayBuffer)
-          // console.log('[devlog]:', 'Audio file decoded:', decoded)
-          resolve(decoded)
-        })
-        reader.readAsArrayBuffer(audioFile)
-      })
+      const buffer = await readAudioFileToBuffer(audioFile)
 
       try {
         setError(null)
@@ -205,6 +183,7 @@ export function useTranscription({
             type: 'transcribe',
             audio,
             language,
+            modelName,
           } as ReqTranscribe)
         })
       } catch (err) {
@@ -220,4 +199,45 @@ export function useTranscription({
   const isLoading = Object.keys(progress).length > 0
 
   return { transcribe, progress, error, isReady, isLoading }
+}
+
+function readAudioFileToBuffer(file: File): Promise<AudioBuffer> {
+  return new Promise<AudioBuffer>((resolve) => {
+    const reader = new FileReader()
+    // console.log('[devlog]:', 'Reading audio file as array buffer:', audioFile.name)
+    reader.addEventListener('load', async (e) => {
+      const arrayBuffer = e.target?.result as ArrayBuffer // Get the ArrayBuffer
+      if (!arrayBuffer) return
+
+      const audioCTX = new AudioContext({
+        sampleRate: SAMPLING_RATE,
+      })
+
+      const decoded = await audioCTX.decodeAudioData(arrayBuffer)
+      // console.log('[devlog]:', 'Audio file decoded:', decoded)
+      resolve(decoded)
+    })
+    reader.readAsArrayBuffer(file)
+  })
+}
+
+function selectAudioBufferChannel(audioBuffer: AudioBuffer) {
+  // Taken from https://github.com/xenova/whisper-web/blob/81869ed62970ff4373509b6004a6c9a3f0c5b64d/src/hooks/useTranscriber.ts#L152
+  // TODO: Try to understand this better
+  if (audioBuffer.numberOfChannels !== 2) {
+    // If not stereo, return the first channel
+    return audioBuffer.getChannelData(0)
+  } else {
+    // If stereo, average the two channels
+    const scaling = Math.SQRT2
+    const left = audioBuffer.getChannelData(0)
+    const right = audioBuffer.getChannelData(1)
+    const length = audioBuffer.length
+    const combined = new Float32Array(length)
+
+    for (let i = 0; i < length; i++) {
+      combined[i] = (scaling * (left[i] + right[i])) / 2
+    }
+    return combined
+  }
 }

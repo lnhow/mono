@@ -6,9 +6,9 @@ import {
 } from '@huggingface/transformers'
 import {
   DEFAULT_MODEL,
-  MsgModelLoaded,
   type ModelOption,
   type ReqTranscribe,
+  type ResModelLoaded,
   type ResModelLoading,
   type ResTranscribing,
   type WorkerRequest,
@@ -30,9 +30,13 @@ class TranscribePipeline {
     this.instance = null
   }
 
-  static async loadModel() {
+  static async loadModel(initializing = false) {
     if (TranscribePipeline.instance) {
-      self.postMessage(MsgModelLoaded)
+      self.postMessage({
+        type: 'model-loaded',
+        modelName: this.model,
+        initializing,
+      } as ResModelLoaded)
       return
     }
 
@@ -52,11 +56,15 @@ class TranscribePipeline {
       this.streamer = new TextStreamer(this.instance.tokenizer, {
         skip_prompt: true,
         callback_function: (text) => {
-          console.log('[devlog]: Transcription update:', text)
+          // console.log('[devlog]: Transcription update:', text)
           self.postMessage({ type: 'transcribing', output: { text } } as ResTranscribing)
         },
       })
-      self.postMessage(MsgModelLoaded)
+      self.postMessage({
+        type: 'model-loaded',
+        modelName: this.model,
+        initializing,
+      } as ResModelLoaded)
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : 'Unknown error'
@@ -70,7 +78,7 @@ self.onmessage = async (event: MessageEvent<WorkerRequest>) => {
 
   switch (type) {
     case 'load-model':
-      await TranscribePipeline.loadModel()
+      await TranscribePipeline.loadModel(true)
       break
     case 'transcribe':
       await handleTranscription(event.data)
@@ -85,6 +93,12 @@ async function handleTranscription(data: ReqTranscribe) {
   if (!TranscribePipeline.instance || !TranscribePipeline.streamer) {
     self.postMessage({ status: 'error', error: 'Model not loaded' })
     return
+  }
+
+  if (data.modelName && data.modelName !== TranscribePipeline.model) {
+    console.log('[devlog]: Switching model to', data.modelName)
+    await TranscribePipeline.switchModel(data.modelName)
+    await TranscribePipeline.loadModel()
   }
 
   try {
@@ -107,6 +121,8 @@ async function handleTranscription(data: ReqTranscribe) {
         streamer: TranscribePipeline.streamer, // Use the TextStreamer for real-time output
       },
     )
+
+    console.log('[devlog]: Transcription complete', output)
 
     self.postMessage({ type: 'complete', output })
   } catch (error) {
