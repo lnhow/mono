@@ -1,0 +1,33 @@
+{
+  "app": {
+    "speech-to-text": "Chuyển giọng nói thành văn bản",
+    "transcribe": "Chuyển đổi",
+    "loading": "Đang tải...",
+    "no-support": "Nhận dạng giọng nói không được hỗ trợ trong trình duyệt này.",
+    "result-placeholder": "Văn bản chuyển đổi sẽ xuất hiện ở đây...",
+    "copy": "Sao chép",
+    "copied": "Đã sao chép",
+    "audio-file": {
+      "title": "Tệp âm thanh",
+      "placeholder": "Chọn một tệp âm thanh..."
+    },
+    "model": {
+      "title": "Mô hình",
+      "whisper-tiny-en-desc": "Tiếng Anh, nhẹ (39M, ~1 GB VRAM)",
+      "whisper-base-en-desc": "Tiếng Anh, chính xác hơn (74M, ~1 GB VRAM)",
+      "whisper-small-en-desc": "Tiếng Anh, chính xác tầm trung (244M, ~2 GB VRAM)",
+      "whisper-tiny-desc": "Đa ngôn ngữ, nhẹ (39M, ~1 GB VRAM)",
+      "whisper-base-desc": "Đa ngôn ngữ, chính xác hơn (74M, ~1 GB VRAM)",
+      "whisper-small-desc": "Đa ngôn ngữ, chính xác tầm trung (244M, ~2 GB VRAM)",
+      "PhoWhisper-tiny-desc": "Tiếng Việt, nhẹ (39M, ~1 GB VRAM)",
+      "PhoWhisper-base-desc": "Tiếng Việt, chính xác hơn (74M, ~1 GB VRAM)",
+      "PhoWhisper-small-desc": "Tiếng Việt, chính xác tầm trung (244M, ~2 GB VRAM)"
+    },
+    "language": {
+      "title": "Ngôn ngữ",
+      "placeholder": "Chọn một ngôn ngữ...",
+      "vietnamese": "Tiếng Việt",
+      "english": "Tiếng Anh"
+    }
+  }
+}
