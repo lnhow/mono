@@ -5,6 +5,8 @@
     "loading": "Loading...",
     "no-support": "Speech recognition is not supported in this browser.",
     "result-placeholder": "Transcribed text will appear here...",
+    "copy": "Copy",
+    "copied": "Copied",
     "audio-file": {
       "title": "Audio File",
       "placeholder": "Select an audio file..."

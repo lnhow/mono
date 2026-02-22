@@ -39,6 +39,8 @@ function App() {
   const modelOptions = MODEL_SELECT_OPTIONS[selectedLanguage]?.options
   const [transcriptionResult, setTranscriptionResult] = useState<string>('')
 
+  const [isCopied, setIsCopied] = useState(false)
+
   const {
     transcribe,
     isLoading,
@@ -92,6 +94,20 @@ function App() {
     }
   }
 
+  const handleCopyResultToClipboard = useCallback(() => {
+    if (transcriptionResult) {
+      setIsCopied(true)
+      navigator.clipboard.writeText(transcriptionResult)
+        .then(() => {
+          setTimeout(() => setIsCopied(false), 2000) // Reset copy state after 2 seconds
+        })
+        .catch((err) => {
+          console.error('Failed to copy text: ', err)
+          setIsCopied(false)
+        })
+    }
+  }, [transcriptionResult])
+
   return (
     <div className="flex flex-col md:flex-row bg-muted/50">
       <title>{t('speech-to-text')}</title>
@@ -135,7 +151,10 @@ function App() {
             <Label htmlFor="model-select">{t('model.title')}</Label>
             <Select value={selectedModel} onValueChange={handleModelChange}>
               <SelectTrigger id="model-select">
-                <SelectValue placeholder="Select a model" aria-label={selectedModel}>
+                <SelectValue
+                  placeholder="Select a model"
+                  aria-label={selectedModel}
+                >
                   {MODEL_OPTIONS[selectedModel]}
                 </SelectValue>
               </SelectTrigger>
@@ -144,7 +163,9 @@ function App() {
                   <SelectItem key={options.value} value={options.value}>
                     <div>
                       {options.label}
-                      <p className='text-muted-foreground text-xs'>{t(`model.${options.label}-desc`)}</p>
+                      <p className="text-muted-foreground text-xs">
+                        {t(`model.${options.label}-desc`)}
+                      </p>
                     </div>
                   </SelectItem>
                 ))}
@@ -182,9 +203,20 @@ function App() {
           </Button>
         </CardContent>
       </Card>
-      <div className="flex-1 h-screen p-4 overflow-auto text-foreground text-sm">
-        {transcriptionResult ||
-          (isLoading ? t('loading') : t('result-placeholder'))}
+      <div className="flex-1 relative">
+        <div className="h-screen w-full px-4 pb-4 md:px-8 md:pb-8 pt-16 overflow-auto text-foreground text-sm resize-none">
+          {transcriptionResult ||
+            (isLoading ? t('loading') : t('result-placeholder'))}
+        </div>
+        {transcriptionResult && (
+          <Button
+            onClick={handleCopyResultToClipboard}
+            className="absolute top-4 right-4"
+            disabled={isLoading}
+          >
+            {t(isCopied ? 'copied' : 'copy')}
+          </Button>
+        )}
       </div>
     </div>
   )
@@ -202,7 +234,9 @@ function ProgressBar({
   return (
     <div className="space-y-2 w-full">
       <div className="flex items-center justify-between w-full">
-        <Label className="text-xs flex-1 text-ellipsis wrap-break-word overflow-hidden w-full">{label}</Label>
+        <Label className="text-xs flex-1 text-ellipsis wrap-break-word overflow-hidden w-full">
+          {label}
+        </Label>
         <span className="text-xs">{Math.round(percentage || 0)}%</span>
       </div>
       <Progress value={percentage || 0} />

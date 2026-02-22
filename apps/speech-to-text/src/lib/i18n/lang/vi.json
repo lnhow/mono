@@ -5,6 +5,8 @@
     "loading": "Đang tải...",
     "no-support": "Nhận dạng giọng nói không được hỗ trợ trong trình duyệt này.",
     "result-placeholder": "Văn bản chuyển đổi sẽ xuất hiện ở đây...",
+    "copy": "Sao chép",
+    "copied": "Đã sao chép",
     "audio-file": {
       "title": "Tệp âm thanh",
       "placeholder": "Chọn một tệp âm thanh..."
