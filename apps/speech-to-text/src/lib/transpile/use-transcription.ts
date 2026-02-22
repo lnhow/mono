@@ -5,6 +5,7 @@ import type { ProgressInfo } from '@huggingface/transformers'
 
 type TranscriptionResult = {
   text: string
+  append?: boolean
 }
 
 type TranscribeStatusInfo = {
@@ -40,16 +41,22 @@ const selectAudioBufferChannel = (audioBuffer: AudioBuffer) => {
   }
 }
 
-export function useTranscription() {
-  const [isModelLoading, setIsModelLoading] = useState<boolean>(true)
+export function useTranscription({
+  onTranscriptionUpdate,
+}: {
+  onTranscriptionUpdate: (result: TranscriptionResult) => void
+}) {
   const [progress, setProgress] = useState<TranscriptionProgressMap>({})
   const [error, setError] = useState<string | null>(null)
   const [isReady, setIsReady] = useState<boolean>(false)
 
   const workerRef = useRef<Worker | null>(null)
-  const resolveRef = useRef<
-    ((result: TranscriptionResult | null) => void) | null
-  >(null)
+
+  const resolveRef = useRef<((result: TranscriptionResult) => void) | null>(null)
+  const onTranscriptionCallbackRef = useRef(onTranscriptionUpdate)
+  useEffect(() => {
+    onTranscriptionCallbackRef.current = onTranscriptionUpdate
+  }, [onTranscriptionUpdate])
 
   useEffect(() => {
     // workerRef.current ??= new Worker(new URL('./worker.ts', import.meta.url), {
@@ -63,6 +70,7 @@ export function useTranscription() {
 
     const onMessageReceived = (event: MessageEvent) => {
       const data = event.data as WorkerResponse
+      // console.log('[devlog]:', 'Message received from worker:', data)
 
       switch (data.type) {
         case 'model-loading':
@@ -72,7 +80,6 @@ export function useTranscription() {
               // Model file start load: add a new progress item to the list.
               const progress = data.progress
               setIsReady(false)
-              setIsModelLoading(true)
               setProgress((prev) => ({
                 ...prev,
                 [progress.file]: data.progress,
@@ -99,28 +106,26 @@ export function useTranscription() {
               break
             }
             case 'ready': {
-              setIsModelLoading(false)
               setIsReady(true)
               break
             }
           }
           break
         case 'model-loaded':
-          setIsModelLoading(false)
           setIsReady(true)
           setProgress({})
           break
         case 'error':
           console.error('Worker error:', data.error)
           setError(data.error || 'An error occurred during transcription.')
-          setIsModelLoading(false)
           setProgress({})
-          if (resolveRef.current) {
-            resolveRef.current(null)
-            resolveRef.current = null
-          }
+          break
+        case 'transcribing':
+          onTranscriptionCallbackRef.current?.({ text: data.output.text, append: true })
           break
         case 'complete':
+          // onTranscriptionCallbackRef.current({ text: data.output.text })
+          // Resolve the pending transcription promise
           if (resolveRef.current) {
             resolveRef.current({ text: data.output.text })
             resolveRef.current = null
@@ -133,34 +138,9 @@ export function useTranscription() {
       }
     }
 
-    //   if (data.type === 'ready') {
-    //     setIsModelLoading(false)
-    //     setIsReady(true)
-    //     setProgress(null)
-    //   } else if (data.status === 'error') {
-    //     console.error('Worker error:', data.error)
-    //     setError(data.error || 'An error occurred during transcription.')
-    //     setIsModelLoading(false)
-    //     setProgress(null)
-    //     if (resolveRef.current) {
-    //       resolveRef.current(null)
-    //       resolveRef.current = null
-    //     }
-    //   } else if (data.status === 'complete') {
-    //     if (resolveRef.current) {
-    //       resolveRef.current({ text: data.output.text })
-    //       resolveRef.current = null
-    //     }
-    //     setProgress(null)
-    //   } else if {
-    //     // This handles progress updates from Transformers.js
-    //     setProgress(data)
-    //   }
-    // }
-
     worker.addEventListener('message', onMessageReceived)
 
-    console.log('[devlog]:', 'Transcription worker initialized.', worker)
+    // console.log('[devlog]:', 'Transcription worker initialized.', worker)
     // Initialize the worker and load the model
     worker.postMessage({ type: 'load-model' } as ReqLoadModel)
 
@@ -172,8 +152,8 @@ export function useTranscription() {
   }, [])
 
   const transcribe = useCallback(
-    async (audioFile: File): Promise<TranscriptionResult | null> => {
-      console.log('[devlog]:', 'Starting transcription for file:', audioFile.name)
+    async (audioFile: File, language: string): Promise<TranscriptionResult | null> => {
+      // console.log('[devlog]:', 'Starting transcription for file:', audioFile.name)
       if (!workerRef.current || !isReady) {
         setError('Transcription model not loaded.')
         return null
@@ -185,7 +165,7 @@ export function useTranscription() {
 
       const buffer = await new Promise<AudioBuffer>((resolve) => {
         const reader = new FileReader()
-        console.log('[devlog]:', 'Reading audio file as array buffer:', audioFile.name)
+        // console.log('[devlog]:', 'Reading audio file as array buffer:', audioFile.name)
         reader.addEventListener('load', async (e) => {
           const arrayBuffer = e.target?.result as ArrayBuffer // Get the ArrayBuffer
           if (!arrayBuffer) return
@@ -195,7 +175,7 @@ export function useTranscription() {
           })
 
           const decoded = await audioCTX.decodeAudioData(arrayBuffer)
-          console.log('[devlog]:', 'Audio file decoded:', decoded)
+          // console.log('[devlog]:', 'Audio file decoded:', decoded)
           resolve(decoded)
         })
         reader.readAsArrayBuffer(audioFile)
@@ -223,7 +203,8 @@ export function useTranscription() {
           resolveRef.current = resolve
           workerRef.current?.postMessage({
             type: 'transcribe',
-            audio: audio,
+            audio,
+            language,
           } as ReqTranscribe)
         })
       } catch (err) {
@@ -236,5 +217,7 @@ export function useTranscription() {
     [isReady],
   )
 
-  return { transcribe, isModelLoading, progress, error, isReady }
+  const isLoading = Object.keys(progress).length > 0
+
+  return { transcribe, progress, error, isReady, isLoading }
 }
