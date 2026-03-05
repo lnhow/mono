@@ -26,25 +26,25 @@ catalogs:
     '@mdx-js/loader': '3.1.1'
     '@mdx-js/react': '3.1.1'
     '@next/mdx': '15.5.4'
-    next: 16.0.10
+    next: 16.1.6
+    '@next/eslint-plugin-next': 16.1.6
     'sharp': '^0.34.5'
-    '@next/eslint-plugin-next': 16.0.10
     next-themes: 0.4.6
     radix-ui: 1.4.3
     tailwindcss: 4.1.18
   three:
     '@react-three/cannon': '6.6.0'
     '@react-three/drei': '10.7.7'
-    '@react-three/fiber': '9.4.2'
-    r3f-perf: 7.2.3
-    'three': '^0.181.0'
-    '@types/three': '^0.181.0'
+    '@react-three/fiber': '9.5.0'
+    r3f-perf: 7.2.3 # TODO: Outdated, unused, but keeping for now to see if there are any alternatives
+    'three': '^0.183.2'
+    '@types/three': '^0.183.1'
     lil-gui: '0.20.0'
   markdown:
     # Content Collections (to manage markdown content)
     '@content-collections/core': '^0.11.1'
     '@content-collections/mdx': '^0.2.2' ## Markdown support
-    '@content-collections/next': '^0.2.7' ## Next.js integration
+    '@content-collections/next': '^0.2.11' ## Next.js integration
     # Markdown processing
     'remark-gfm': '^4.0.1' # GitHub Flavored Markdown (tables, task lists, etc)
     'rehype-autolink-headings': '^7.1.0' # Adds links to headings
