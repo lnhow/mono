@@ -1,4 +1,8 @@
 {
   "editor.wordWrap": "wordWrapColumn",
-  "editor.wordWrapColumn": 80
+  "editor.wordWrapColumn": 80,
+
+  "git.blame.editorDecoration.enabled": true,
+  "git.blame.editorDecoration.template": "${authorName} (${authorDateAgo}), ${subject}",
+  "git.blame.ignoreWhitespace": true
 }
