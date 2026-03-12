@@ -54,7 +54,6 @@ export async function generateMetadata({
     openGraph: {
       title: post.title,
       description: post.description,
-      images: ['/og?' + ogImageSearchParams.toString()],
       type: 'article',
       publishedTime: post.createdAt.toISOString(),
       modifiedTime:
