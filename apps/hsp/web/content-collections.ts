@@ -37,6 +37,7 @@ const posts = defineCollection({
     imageAlt: z.string().optional(),
     imageCredit: z.string().optional(),
     imageCreditUrl: z.string().optional(),
+    content: z.string(),
   }),
   transform: async (document, context) => {
     const [mdx, toc] = await Promise.all([
@@ -70,5 +71,5 @@ const posts = defineCollection({
 })
 
 export default defineConfig({
-  collections: [posts],
+  content: [posts],
 })
