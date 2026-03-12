@@ -44,6 +44,11 @@ catalogs:
     '@types/three': '^0.183.1'
     lil-gui: '0.21.0'
   markdown:
+    # Requirements for React
+    '@types/mdx': '2.0.13'
+    # '@next/mdx': '^16.1.6'
+    '@mdx-js/loader': '3.1.1'
+    '@mdx-js/react': '3.1.1'
     # Content Collections (to manage markdown content)
     '@content-collections/core': '^0.14.2'
     '@content-collections/mdx': '^0.2.2' ## Markdown support
@@ -57,12 +62,12 @@ catalogs:
     'reading-time': '^1.5.0' # Estimate reading time
     # Table of content generation
     'remark': '^15.0.1'
-    '@types/mdx': '2.0.13'
   dev:
     'eslint': 9.39.4
     '@eslint/js': '^9.39.4'
     'vitest': 4.0.18
     '@vitest/browser': '4.0.18'
+    '@vitest/browser-playwright': '4.0.18'
     '@vitest/coverage-v8': '4.0.18'
     '@vitejs/plugin-react': '5.1.4'
     'jsdom': '28.1.0'

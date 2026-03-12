@@ -23,7 +23,6 @@ async function WithData() {
   const data = await apiClient
     .get(`/api/perf-test?delay=${DELAY}`)
     .then((res) => res.data)
-  console.log('\x1B[35m[Dev log]\x1B[0m -> WithData -> data:', data.banners)
 
   return (
     <>
