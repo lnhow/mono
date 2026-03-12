@@ -2,7 +2,7 @@
   "name": "mono",
   "version": "1.0.0",
   "engines": {
-    "node": ">=22.13.1"
+    "node": ">=24.11.0"
   },
   "private": true,
   "scripts": {
@@ -18,7 +18,7 @@
     "test": "turbo run test",
     "test:e2e": "turbo run test:e2e"
   },
-  "packageManager": "pnpm@10.12.2+sha512.a32540185b964ee30bb4e979e405adc6af59226b438ee4cc19f9e8773667a66d302f5bfee60a39d3cac69e35e4b96e708a71dd002b7e9359c4112a1722ac323f",
+  "packageManager": "pnpm@10.32.1",
   "devDependencies": {
     "husky": "^9.1.7",
     "prettier": "^3.6.2",

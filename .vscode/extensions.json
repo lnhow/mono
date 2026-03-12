@@ -1,0 +1,20 @@
+{
+  "recommendations": [
+    // Static analysis linters
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+
+    // Making errors & todos more obvious
+    "usernamehw.errorlens",
+    "tekumara.typos-vscode",
+    "yoavbls.pretty-ts-errors",
+    "gruntfuggly.todo-tree",
+
+    // API
+    "prisma.prisma",
+
+    // GUI
+    "bradlc.vscode-tailwindcss",
+    "unifiedjs.vscode-mdx"
+  ]
+}

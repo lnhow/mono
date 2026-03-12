@@ -20,7 +20,7 @@
     "@module-federation/rsbuild-plugin": "^0.22.0",
     "@rsbuild/core": "^1.6.14",
     "@rsbuild/plugin-react": "^1.4.2",
-    "@types/react": "^19.2.7",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",

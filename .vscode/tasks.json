@@ -1,0 +1,38 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+    {
+      "label": "pnpm: dev hsp",
+      "detail": "turbo run dev -F=@hsp/app-*...",
+      "type": "shell",
+      "command": "pnpm dev -F='@hsp/app-*...'",
+      "group": "none",
+      "problemMatcher": [
+        "$tsc-watch"
+      ],
+      "isBackground": true
+    },
+    {
+      "label": "pnpm: dev @learn-threejs/basics",
+      "detail": "turbo run dev -F=@learn-threejs/basics...",
+      "type": "shell",
+      "command": "pnpm dev -F='@learn-threejs/basics...'",
+      "group": "none",
+      "problemMatcher": [
+        "$tsc-watch"
+      ],
+      "isBackground": true
+    },
+    {
+      "label": "pnpm: dev speech-to-text",
+      "detail": "turbo run dev -F=speech-to-text...",
+      "type": "shell",
+      "command": "pnpm dev -F='speech-to-text...'",
+      "group": "none",
+      "problemMatcher": [
+        "$tsc-watch"
+      ],
+      "isBackground": true
+    }
+  ]
+}

@@ -29,7 +29,6 @@ export class PerfTestController {
       banner,
       subBanner,
     }
-    console.log('\x1B[35m[Dev log]\x1B[0m -> findBanners -> data:', data)
     return data
   }
 
