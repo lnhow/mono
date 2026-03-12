@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "installCommand": "pnpm install --frozen-lockfile --filter @hsp/app-web...",
+  "buildCommand": "turbo run build --filter=@hsp/app-web...",
+  "devCommand": "turbo run dev --filter=@hsp/app-web..."
+}
