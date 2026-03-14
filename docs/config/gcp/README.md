@@ -3,7 +3,7 @@
 1. Install the gcloud CLI
 2. Authenticate with gcloud
 
-## Compute Engine (or VPS)
+## Set up VM softwares
 1. Create a Compute Engine instance
 2. SSH into the instance
 3. Install global dependencies
@@ -47,7 +47,12 @@ sudo apt install certbot python3-certbot-nginx -y
 # Continue on https://certbot.eff.org/instructions?ws=nginx&os=pip
 ```
 
-5. Create a new SSH key and add it to your GitHub account's SSH keys.
+## Deploying changes
+### (Deprecated) 1. SSH to the VM, build and update on there
+
+#### Setting up
+
+1. Create a new SSH key and add it to your GitHub account's SSH keys.
 ```bash
 # Generate a new SSH key:
 ssh-keygen -t ed25519 -C "github@email.com"
@@ -58,7 +63,7 @@ nano /path/to/.ssh/id_ed25519.pub
 # Copy the contents of the file to your GitHub account's SSH keys.
 ```
 
-6. Clone the source code
+2. Clone the source code
 
 ```bash
 # Make a new directory for your projects:
@@ -66,7 +71,7 @@ mkdir ~/app
 git clone git@github.com:yourusername/yourrepo.git ~/app
 ```
 
-7. Install dependencies
+3. Install dependencies
 
 ```bash
 cd ~/app
@@ -77,32 +82,58 @@ pnpm build --filter=@hsp/app-api
 pnpm deploy:start --filter=@hsp/app-api
 ```
 
-### Deploying changes
+#### Usage
 
 ```bash
 # ssh to server
 cd ~/app && ~/app/apps/hsp/api/.ci/deploy.sh
 ```
 
-#### GitHub Action
+### 2. GitHub Action
 
-Develop locally
-- Install [nektos/act](https://github.com/nektos/act)
+Example: API HSP Deploy workflow: `.github/workflows/hsp_api_deploy.yml`
+1. Push to branch `deploy`
+2. Install dependencies & build code on GitHub Action
+3. Once done:
+  1.  GitHub Action SSH to VM
+  2.  `rsync` (copy) build output to VM 
+  3.  Copy environment variables and restart API process
+
+#### Setting up
+1. Generate a new SSH key pair
+    ```bash
+    ssh-keygen -t rsa -f ~/.ssh/file-name -C <your_remote_user>
+    # This will create:
+    # - file-name.pub
+    # - file-name
+    ```
+    This will create:
+    - `file-name.pub`: SSH public key
+    - `file-name`: SSH private key
+2. Add the content of `file-name.pub` to the VM instance's config
+3. Add the following variables to [GitHub Action secrets](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets):
+    ```
+    REMOTE_HOST="<public IP of VM instance>"
+    REMOTE_USER="<your_remote_user>"
+    REMOTE_TARGET="/home/your_remote_user/folder"
+    ENV_FILE="/home/your_remote_user/..."
+    SSH_PRIVATE_KEY="<content_of_the_SSH_private_key>"
+    ```
+
+Test locally if the Github Action run correctly
+1. Install [nektos/act](https://github.com/nektos/act)
   - Homebrew: `brew install act`
-- Cmd `act -W '.github/workflows/hsp_api_deploy.yml' --container-architecture linux/amd64 --secret-file .env.act`
-- `.env.act`
+2. Create a `.env.act` file and the above variables to it
+    ```
+    REMOTE_HOST="<public IP of VM instance>"
+    REMOTE_USER="<your_remote_user>"
+    REMOTE_TARGET="/home/your_remote_user/folder"
+    ENV_FILE="/home/your_remote_user/..."
+    SSH_PRIVATE_KEY="<content_of_the_SSH_private_key>"
+    ```
+3. Run `act -W '.github/workflows/hsp_api_deploy.yml' --container-architecture linux/amd64 --secret-file .env.act`
 
-```
-REMOTE_HOST="127.0.0.1"
-REMOTE_USER="your_remote_user"
-REMOTE_TARGET="/home/your_remote_user/folder"
-ENV_FILE="/home/your_remote_user/..."
-SSH_PRIVATE_KEY="-----BEGIN OPENSSH PRIVATE KEY-----..."
-```
-
-### Configurations
-
-#### Nginx Reverse Proxy
+## Nginx Reverse Proxy
 ```bash
 # cd /etc/nginx/sites-available
 # sudo nano <server_name>.config
@@ -150,15 +181,38 @@ server {
 # If "conflicting" is displayed, run "sudo unlink /etc/nginx/sites-enabled/default"
 # sudo systemctl restart nginx
 ```
-#### PM2
+
+## PM2
+
+- Start service process with PM2
 ```bash
 pm2 startup
 pm2 start --name hsp-api pnpm -- deploy:start --filter=@hsp/app-api # Start the process named "hsp-api"
 pm2 delete hsp-api # Close the process "hsp-api" if it's running
 ```
 
-Restart process on reboot
+- Restart service process on reboot
 ```bash
 pm2 startup
 pm2 save
 ```
+
+- Logrotate
+  - If this is not configured, our logs may overflow storage
+```bash
+pm2 install pm2-logrotate
+
+# Config:
+#  - Create new log file if current file exceeds 10MB
+#  - Keep the last 10 log files
+#  - Keep log files uncompressed for integrate with GCP Log Explorer
+pm2 set pm2-logrotate:max_size 10M
+pm2 set pm2-logrotate:retain 10
+pm2 set pm2-logrotate:compress false
+```
+
+## GCP Logging
+- Install [OpsAgent](https://docs.cloud.google.com/stackdriver/docs/solutions/agents/ops-agent/installation)
+  - OpsAgent allows GCP to monitor logs externally
+  - 
+
