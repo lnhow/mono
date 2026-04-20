@@ -1,2 +1,2 @@
 echo Running hook pre-commit
-npx @biomejs/biome check --staged
+npx lint-staged
