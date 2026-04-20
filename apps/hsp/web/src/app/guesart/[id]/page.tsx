@@ -1,9 +1,9 @@
 'use cache'
 
-import { Suspense, ViewTransition } from 'react'
-import { Metadata } from 'next'
 import PagePlay from '@hsp/ui/modules/guesart/pages/play'
 import RoomSkeleton from '@hsp/ui/modules/guesart/pages/play/skeleton'
+import type { Metadata } from 'next'
+import { Suspense, ViewTransition } from 'react'
 
 export const metadata: Metadata = {
   title: 'Play - guesart',

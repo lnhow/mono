@@ -2,7 +2,7 @@ import cn from '@hsp/ui/utils/cn'
 import {
   ColorThumb,
   ColorWheel,
-  ColorWheelProps,
+  type ColorWheelProps,
   ColorWheelTrack,
 } from 'react-aria-components'
 
@@ -18,7 +18,7 @@ export default function HsColorWheel({
       <ColorThumb
         className={cn(
           'w-6 h-6 rounded-full shadow-sm border-white border',
-          thumbClassName
+          thumbClassName,
         )}
       />
     </ColorWheel>

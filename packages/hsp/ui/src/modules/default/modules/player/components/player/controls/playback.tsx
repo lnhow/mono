@@ -1,9 +1,9 @@
-import { PLAYER_STATE, PlayerBaseSubCompProps, HOTKEYS } from '../types'
-import { PlayerButton } from '../_base/button'
+import Tooltip from '@hsp/ui/components/tooltip'
 import { useHTMLElState } from '@hsp/ui/utils/react/use-html-el-state'
 import { useCallback } from 'react'
+import { PlayerButton } from '../_base/button'
 import { useKeydown } from '../_utils/useKeydown'
-import Tooltip from '@hsp/ui/components/tooltip'
+import { HOTKEYS, PLAYER_STATE, type PlayerBaseSubCompProps } from '../types'
 
 export const usePlaybackState = (
   getVideoEl: PlayerBaseSubCompProps['getVideoEl'],

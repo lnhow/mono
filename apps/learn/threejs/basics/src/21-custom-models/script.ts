@@ -1,7 +1,7 @@
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import GUI from 'lil-gui'
-import { GLTFLoader, DRACOLoader } from 'three/examples/jsm/Addons.js'
+import * as THREE from 'three'
+import { DRACOLoader, GLTFLoader } from 'three/examples/jsm/Addons.js'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 /**
  * Base

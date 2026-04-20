@@ -1,9 +1,9 @@
 import { Suspense } from 'react'
+import { fetchUserData } from '../_components/child/data/api-server'
 import { mockCompanyName } from '../_components/child/data/mockData'
 import Header from '../_components/child/layout/header'
-import Sidebar from '../_components/child/layout/sidebar'
 import { UserInfoSkeleton } from '../_components/child/layout/header/user-info/skeleton'
-import { fetchUserData } from '../_components/child/data/api-server'
+import Sidebar from '../_components/child/layout/sidebar'
 import { AuthProvider } from './_components/auth/provider'
 import HeaderUserInfo from './_components/auth/user-info'
 

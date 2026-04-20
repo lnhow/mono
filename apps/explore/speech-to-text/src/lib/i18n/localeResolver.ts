@@ -11,7 +11,7 @@ export function resolveLocale(): string {
 
   const browserLocale = navigator.language || DEFAULT_LOCALE
   const resolvedLocale = SUPPORTED_LOCALES.find((loc) =>
-    browserLocale.toLowerCase().startsWith(loc)
+    browserLocale.toLowerCase().startsWith(loc),
   )
   return resolvedLocale || DEFAULT_LOCALE
 }

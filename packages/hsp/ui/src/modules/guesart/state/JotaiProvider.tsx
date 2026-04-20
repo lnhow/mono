@@ -1,6 +1,6 @@
 'use client'
 import { createStore, Provider } from 'jotai'
-import { memo, PropsWithChildren } from 'react'
+import { memo, type PropsWithChildren } from 'react'
 
 export const store = createStore()
 

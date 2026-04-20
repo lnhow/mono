@@ -3,7 +3,7 @@ import { Environment, Sparkles } from '@react-three/drei'
 import { OrbitControls } from '@react-three/drei/core/OrbitControls'
 // import { Perf } from 'r3f-perf'
 import { Suspense, useRef } from 'react'
-import { DirectionalLight } from 'three'
+import type { DirectionalLight } from 'three'
 import Elements from './scene/elements'
 
 export default function Experience() {

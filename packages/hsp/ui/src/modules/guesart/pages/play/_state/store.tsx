@@ -1,7 +1,12 @@
 'use client'
-import { focusAtom } from 'jotai-optics'
-import { ERoomStatus, ERoomTheme, PlayerDto, RoomInfoResponseDto } from '../../../state/type/room'
 import { atomWithReset } from 'jotai/utils'
+import { focusAtom } from 'jotai-optics'
+import {
+  ERoomStatus,
+  ERoomTheme,
+  type PlayerDto,
+  type RoomInfoResponseDto,
+} from '../../../state/type/room'
 
 export enum MessageType {
   SYSTEM = -1,
@@ -86,11 +91,23 @@ export const roomAtom = atomWithReset<TGameState>({
   messages: [],
 })
 
-export const roomIsLoadingAtom = focusAtom(roomAtom, (game) => game.prop('isLoading'))
-export const roomPlayersAtom = focusAtom(roomAtom, (game) => game.prop('players'))
-export const roomMetadataAtom = focusAtom(roomAtom, (game) => game.prop('metadata'))
-export const roomMessagesAtom = focusAtom(roomAtom, (game) => game.prop('messages'))
-export const roomStatusAtom = focusAtom(roomMetadataAtom, (metadata) => metadata.prop('status'))
+export const roomIsLoadingAtom = focusAtom(roomAtom, (game) =>
+  game.prop('isLoading'),
+)
+export const roomPlayersAtom = focusAtom(roomAtom, (game) =>
+  game.prop('players'),
+)
+export const roomMetadataAtom = focusAtom(roomAtom, (game) =>
+  game.prop('metadata'),
+)
+export const roomMessagesAtom = focusAtom(roomAtom, (game) =>
+  game.prop('messages'),
+)
+export const roomStatusAtom = focusAtom(roomMetadataAtom, (metadata) =>
+  metadata.prop('status'),
+)
 
 export const roomRoundAtom = focusAtom(roomAtom, (game) => game.prop('round'))
-export const roundStatusAtom = focusAtom(roomRoundAtom, (round) => round.prop('status'))
+export const roundStatusAtom = focusAtom(roomRoundAtom, (round) =>
+  round.prop('status'),
+)

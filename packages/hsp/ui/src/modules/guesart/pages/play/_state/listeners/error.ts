@@ -1,11 +1,11 @@
 import { toast } from 'sonner'
 import {
-  EGrtErrorCode,
+  type EGrtErrorCode,
   EServerToClientEvents,
   GrtErrorMessages,
-  GrtServerToClientEventsPayload,
+  type GrtServerToClientEventsPayload,
 } from '../../../../state/type/socket'
-import { TInitListener } from './_type'
+import type { TInitListener } from './_type'
 
 export const initError: TInitListener = (socket) => {
   socket.on(EServerToClientEvents.ERROR, onError)

@@ -1,12 +1,16 @@
-import { memo, useCallback, useState } from 'react'
-import { CanvasContextGetter, DEFAULT_COLOR, DRAWING_COLORS } from '../const'
+import { Button } from '@hsp/ui/components/button'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@hsp/ui/components/popover'
-import { Button } from '@hsp/ui/components/button'
 import Tooltip from '@hsp/ui/components/tooltip'
+import { memo, useCallback, useState } from 'react'
+import {
+  type CanvasContextGetter,
+  DEFAULT_COLOR,
+  DRAWING_COLORS,
+} from '../const'
 
 const ColorSelector = memo(function ColorSelector({
   getCanvasContext,

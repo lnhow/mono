@@ -92,9 +92,16 @@ export const decodeMessage = (str: string) => {
   return decodeURIComponent(atob(str))
 }
 
-export const encodeCakeURL = (message: string, scene: ECakeScene, edit = false) => {
+export const encodeCakeURL = (
+  message: string,
+  scene: ECakeScene,
+  edit = false,
+) => {
   const params = new URLSearchParams()
-  params.set(QUERY_NAME.MESSAGE, encodeMessage(message.trim().slice(0, TEXT.MAX_LENGTH)))
+  params.set(
+    QUERY_NAME.MESSAGE,
+    encodeMessage(message.trim().slice(0, TEXT.MAX_LENGTH)),
+  )
   params.set(QUERY_NAME.SCENE, scene)
 
   // Only include the edit parameter if it's true
@@ -102,12 +109,10 @@ export const encodeCakeURL = (message: string, scene: ECakeScene, edit = false) 
     params.set(QUERY_NAME.EDIT, 'true')
   }
 
-
   return params.toString()
 }
 
 export const decodeCakeURL = (url: string) => {
-
   try {
     const params = new URLSearchParams(url)
     const message = params.get(QUERY_NAME.MESSAGE)

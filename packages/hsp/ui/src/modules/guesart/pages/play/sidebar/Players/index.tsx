@@ -1,16 +1,16 @@
 import { Card } from '@hsp/ui/components/card'
+import Tooltip from '@hsp/ui/components/tooltip'
 import cn from '@hsp/ui/utils/cn'
-import { useListenRoomPlayers } from '../../_state/hooks'
 import { useAtomValue } from 'jotai'
+import { LuMicVocal } from 'react-icons/lu'
+import { sessionAtom } from '../../../../state/store'
+import type { PlayerDto } from '../../../../state/type/room'
+import { useListenRoomPlayers } from '../../_state/hooks'
 import {
   roomMetadataAtom,
   roomPlayersAtom,
-  TGameState,
+  type TGameState,
 } from '../../_state/store'
-import { sessionAtom } from '../../../../state/store'
-import { LuMicVocal } from 'react-icons/lu'
-import { PlayerDto } from '../../../../state/type/room'
-import Tooltip from '@hsp/ui/components/tooltip'
 
 export default function PlayersList({ className }: { className?: string }) {
   const players = useAtomValue(roomPlayersAtom)

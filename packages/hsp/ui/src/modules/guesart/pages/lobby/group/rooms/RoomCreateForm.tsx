@@ -1,29 +1,27 @@
 'use client'
+import { Button } from '@hsp/ui/components/button'
+import ViewTransition from '@hsp/ui/utils/react/view-transition'
+import { useAtomValue } from 'jotai'
+import { useRouter } from 'next/navigation'
 import { memo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { useDebounceCallback } from 'usehooks-ts'
-import { useRouter } from 'next/navigation'
-import { useAtomValue } from 'jotai'
-
-import ViewTransition from '@hsp/ui/utils/react/view-transition'
-import { Button } from '@hsp/ui/components/button'
-import { FormInput } from '../components/input'
-import { FormSelect } from '../components/select'
+import { socketAtom } from '../../../../state/store'
 import {
   ERoomTheme,
   ERoomTimeOption,
   ROOM_TIME_OPTIONS,
-  RoomCreateRequestDto,
-  RoomCreateResponseDto,
+  type RoomCreateRequestDto,
+  type RoomCreateResponseDto,
 } from '../../../../state/type/room'
-import { socketAtom } from '../../../../state/store'
 import {
   EClientToServerEvents,
   EServerToClientEvents,
 } from '../../../../state/type/socket'
-
 import { getRoomUrl } from '../../../../utils'
+import { FormInput } from '../components/input'
+import { FormSelect } from '../components/select'
 
 const RoomCreateForm = memo(function RoomCreateForm() {
   const { socket } = useAtomValue(socketAtom)
@@ -85,7 +83,9 @@ const RoomCreateForm = memo(function RoomCreateForm() {
   return (
     <div className="py-2">
       <h2 className="text-2xl font-semibold mb-1">Create a Room</h2>
-      <p className="text-fore-200 text-sm mb-4">Create a new room and let others play with you.</p>
+      <p className="text-fore-200 text-sm mb-4">
+        Create a new room and let others play with you.
+      </p>
       <form onSubmit={onSubmit} className="space-y-4">
         <FormInput
           control={control}

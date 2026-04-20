@@ -1,4 +1,4 @@
-import { IconType } from 'react-icons/lib'
+import type { IconType } from 'react-icons/lib'
 // import {
 //   LuZap as Zap,
 //   LuDollarSign as DollarSign,
@@ -45,7 +45,6 @@ export interface Video {
 }
 
 export const mockCompanyName = 'Acme'
-
 
 // export const mockHashtags: Hashtag[] = [
 //   { term: '#SmartwatchPro', icon: Zap, color: 'text-blue-500' },

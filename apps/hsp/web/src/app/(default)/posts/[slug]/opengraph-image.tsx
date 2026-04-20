@@ -1,8 +1,8 @@
+import { PostUtils } from '@hsp/ui/modules/posts/utils'
 import { allPosts } from 'content-collections'
+import { notFound } from 'next/navigation'
 // import { NextRequest } from 'next/server'
 import { generateImage } from '../../../(api)/og/_og.service'
-import { PostUtils } from '@hsp/ui/modules/posts/utils'
-import { notFound } from 'next/navigation'
 
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
@@ -44,6 +44,6 @@ export default async function Image({
       h1: { fontSize: title.length > 50 ? '3rem' : '5rem' },
       h2: { fontSize: description.length > 100 ? '1.5rem' : '1.75rem' },
       container: { padding: title.length > 50 ? '5rem' : '10rem' },
-    }
+    },
   })
 }

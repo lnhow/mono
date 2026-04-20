@@ -1,10 +1,10 @@
 'use client'
 import { use } from 'react'
-import { useAuth } from './provider'
 import {
   LoginButton,
   UserInfo,
 } from '../../../_components/child/layout/header/user-info/client'
+import { useAuth } from './provider'
 
 export default function HeaderUserInfo() {
   const { user: userPromise } = useAuth()

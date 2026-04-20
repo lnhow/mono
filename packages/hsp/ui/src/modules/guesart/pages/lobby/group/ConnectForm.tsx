@@ -1,14 +1,14 @@
 'use client'
 import { Button } from '@hsp/ui/components/button'
-import { useEffect, useState } from 'react'
+import CircularProgress from '@hsp/ui/components/progress/circular'
 
 import ViewTransition from '@hsp/ui/utils/react/view-transition'
-import { useForm } from 'react-hook-form'
-import { socketAtom } from '../../../state/store'
 import { useAtomValue } from 'jotai'
-import { FormInput } from './components/input'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { useDebounceCallback } from 'usehooks-ts'
-import CircularProgress from '@hsp/ui/components/progress/circular'
+import { socketAtom } from '../../../state/store'
+import { FormInput } from './components/input'
 
 export default function ConnectForm() {
   const { socket } = useAtomValue(socketAtom)
@@ -86,7 +86,8 @@ export default function ConnectForm() {
         </Button>
       </ViewTransition>
       <p className="text-fore-200 text-sm ps-2">
-        The display name can be seen by others while playing. It can only be changed after open a new tab.
+        The display name can be seen by others while playing. It can only be
+        changed after open a new tab.
       </p>
     </form>
   )

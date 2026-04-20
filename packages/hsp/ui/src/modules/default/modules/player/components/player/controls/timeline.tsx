@@ -1,9 +1,9 @@
-import { PlayerBaseSubCompProps, HOTKEYS } from '../types'
+import { Slider } from '@hsp/ui/components/slider'
 import cn from '@hsp/ui/utils/cn'
 import { useHTMLElState } from '@hsp/ui/utils/react/use-html-el-state'
-import { Slider } from '@hsp/ui/components/slider'
 import { startTransition, useEffect, useRef, useState } from 'react'
 import { useKeydown } from '../_utils/useKeydown'
+import { HOTKEYS, type PlayerBaseSubCompProps } from '../types'
 
 export function DurationIndicator({
   className,

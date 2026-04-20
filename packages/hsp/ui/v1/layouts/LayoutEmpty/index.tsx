@@ -1,4 +1,4 @@
-import { BaseLayoutProps } from '../types'
+import type { BaseLayoutProps } from '../types'
 
 export default function LayoutEmpty({ children }: BaseLayoutProps) {
   return (

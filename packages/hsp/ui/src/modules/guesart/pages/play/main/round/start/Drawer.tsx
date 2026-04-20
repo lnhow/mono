@@ -1,12 +1,12 @@
-import { ComponentProps, memo, useEffect, useMemo } from 'react'
-import Container from '../../../_components/Container'
 import { Button } from '@hsp/ui/components/button'
-import { useCountdown } from 'usehooks-ts'
-import WordBox from '../../../_components/WordBox'
-import { useAtomValue } from 'jotai'
-import { roomRoundAtom } from '../../../_state/store'
 import { socketAtom } from '@hsp/ui/modules/guesart/state/store'
 import { EClientToServerEvents } from '@hsp/ui/modules/guesart/state/type/socket'
+import { useAtomValue } from 'jotai'
+import { type ComponentProps, memo, useEffect, useMemo } from 'react'
+import { useCountdown } from 'usehooks-ts'
+import Container from '../../../_components/Container'
+import WordBox from '../../../_components/WordBox'
+import { roomRoundAtom } from '../../../_state/store'
 
 export const RoundStartDrawer = memo(function RoundStartDrawer() {
   const round = useAtomValue(roomRoundAtom)
@@ -30,7 +30,7 @@ interface DrawerViewProps extends ComponentProps<typeof RoundStartButton> {
 
 export const RoundStartDrawerInternal = memo(function DrawerView({
   word,
-  wordImg: wordImg,
+  wordImg,
   onStart,
 }: DrawerViewProps) {
   return (

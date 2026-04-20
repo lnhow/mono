@@ -1,8 +1,8 @@
 'use client'
+import { Button, ButtonLink } from '@hsp/ui/components/button'
+import cn from '@hsp/ui/utils/cn'
 import { useRef, useState, ViewTransition } from 'react'
 import { LuCode, LuRefreshCcw } from 'react-icons/lu'
-import cn from '@hsp/ui/utils/cn'
-import { Button, ButtonLink } from '@hsp/ui/components/button'
 import { DELAY } from './const'
 
 const COMPARISONS = {
@@ -109,9 +109,9 @@ export default function Comparison() {
   )
 }
 
-import { memo, RefObject, useCallback, useImperativeHandle } from 'react'
-import { LuExternalLink } from 'react-icons/lu'
 import Tooltip from '@hsp/ui/components/tooltip'
+import { memo, type RefObject, useCallback, useImperativeHandle } from 'react'
+import { LuExternalLink } from 'react-icons/lu'
 
 export interface IframeHandle {
   iframe: HTMLIFrameElement | null

@@ -1,11 +1,11 @@
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import GUI from 'lil-gui'
+import * as THREE from 'three'
 import {
   GLTFLoader,
   // GroundedSkybox,
   // RGBELoader,
 } from 'three/examples/jsm/Addons.js'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 /**
  * Base
@@ -92,7 +92,7 @@ environmentMap.colorSpace = THREE.SRGBColorSpace
 scene.background = environmentMap
 
 const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(256, {
-  type: THREE.FloatType
+  type: THREE.FloatType,
 })
 const cubeCamera = new THREE.CubeCamera(0.1, 100, cubeRenderTarget) // Camera that render 6 square textures
 cubeCamera.layers.set(1)

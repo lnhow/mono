@@ -1,7 +1,8 @@
-import React from 'react'
 import { Button } from '@hsp/ui/components/button'
+import React from 'react'
 // import { mockHashtags } from '../data/mockData';
 import Card from '../Card'
+
 // import cn from '@hsp/ui/utils/cn';
 
 interface HashtagSectionProps {

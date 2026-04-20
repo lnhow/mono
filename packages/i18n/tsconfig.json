@@ -5,10 +5,8 @@
       {
         "name": "@typescript-eslint"
       }
-    ],
+    ]
   },
-  "include": [
-    "src/**/*.ts",
-  ],
+  "include": ["src/**/*.ts"],
   "exclude": ["dist", "build", "node_modules"]
 }

@@ -1,5 +1,5 @@
-import { Skeleton } from '@hsp/ui/components/skeleton'
 import { Button } from '@hsp/ui/components/button'
+import { Skeleton } from '@hsp/ui/components/skeleton'
 
 export function UserInfoSkeleton() {
   return (

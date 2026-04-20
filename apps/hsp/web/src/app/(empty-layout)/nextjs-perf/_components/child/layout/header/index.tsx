@@ -1,13 +1,13 @@
+import { Button } from '@hsp/ui/components/button'
+import { ThemeToggle } from '@hsp/ui/utils/theme/ThemeToggle'
+import type { PropsWithChildren } from 'react'
 import {
+  LuBell as Bell,
   LuMenu as Menu,
   LuSearch as Search,
   LuShoppingCart as ShoppingCart,
-  LuBell as Bell,
 } from 'react-icons/lu'
-import { Button } from '@hsp/ui/components/button'
-import { ThemeToggle } from '@hsp/ui/utils/theme/ThemeToggle'
 import { mockCompanyName } from '../../data/mockData'
-import { PropsWithChildren } from 'react'
 
 const Header = ({ children }: PropsWithChildren) => (
   <header className="fixed top-0 left-0 right-0 z-50 flex h-(--header-height) items-center justify-between bg-base-200 px-4 shadow-md">

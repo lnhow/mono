@@ -1,10 +1,10 @@
-import Link from 'next/link'
-import {
+import type {
   NwCategoryGroupProps,
   NwCategoryProps,
 } from '@hsp/ui/../v1/types/components/category.type'
-import { WithClassName } from '@hsp/ui/utils/react/types'
 import cn from '@hsp/ui/utils/cn'
+import type { WithClassName } from '@hsp/ui/utils/react/types'
+import Link from 'next/link'
 
 export default function NwCategoryHeader({ data }: NwCategoryProps) {
   return (

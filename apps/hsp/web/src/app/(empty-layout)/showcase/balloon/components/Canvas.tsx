@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import Scene from './viewModel/Scene'
 import GiftBox from './GiftBox'
+import Scene from './viewModel/Scene'
 // Ref: https://codepen.io/robin-ivi/pen/ZEWYNEQ
 
 export default function Canvas() {

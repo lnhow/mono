@@ -10,7 +10,7 @@ export default class Debug {
     }
 
     this.ui = new GUI({
-      title: 'Debug'
+      title: 'Debug',
     })
   }
 }

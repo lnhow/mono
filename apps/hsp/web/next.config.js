@@ -1,7 +1,7 @@
-import { resolve } from 'path'
 // https://nextjs.org/docs/app/guides/mdx
 // import createMDX from '@next/mdx'
 import { withContentCollections } from '@content-collections/next'
+import { resolve } from 'path'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

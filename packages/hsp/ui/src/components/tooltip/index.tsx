@@ -1,9 +1,9 @@
 import { memo } from 'react'
 import {
-  TooltipProvider,
-  TooltipTrigger,
   Tooltip as BaseTooltip,
   TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from './base'
 
 const Tooltip = memo(function Tooltip({

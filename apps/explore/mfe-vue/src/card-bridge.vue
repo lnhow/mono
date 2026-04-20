@@ -10,7 +10,7 @@
  * DO NOT USE THIS FILE IN PRODUCTION. IT IS FOR DEMONSTRATION PURPOSES ONLY.
  * Use `createBridgeComponent` from `@module-federation/bridge-vue3` instead.
  */
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 
 const props = defineProps({
   title: {

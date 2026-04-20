@@ -1,4 +1,4 @@
-import { createModuleFederationConfig } from '@module-federation/rsbuild-plugin';
+import { createModuleFederationConfig } from '@module-federation/rsbuild-plugin'
 
 export default createModuleFederationConfig({
   name: 'remote',
@@ -23,4 +23,4 @@ export default createModuleFederationConfig({
     react: 'v19',
     enableBridgeRouter: false,
   },
-});
+})

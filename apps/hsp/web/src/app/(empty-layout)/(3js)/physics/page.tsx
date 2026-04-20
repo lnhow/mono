@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Scene from './_scene'
 
 export const metadata: Metadata = {

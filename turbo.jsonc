@@ -2,31 +2,14 @@
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "build/**",
-        "dist/**",
-        ".next/**"
-      ],
-      "env": [
-        "NODE_ENV"
-      ]
+      "dependsOn": ["^build"],
+      "outputs": ["build/**", "dist/**", ".next/**"],
+      "env": ["NODE_ENV"]
     },
     "@hsp/app-api#build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "env": [
-        "API_*"
-      ],
-      "outputs": [
-        "dist/**"
-      ]
-    },
-    "lint": {
-      "outputs": []
+      "dependsOn": ["^build"],
+      "env": ["API_*"],
+      "outputs": ["dist/**"]
     },
     "dev": {
       "cache": false,
@@ -35,7 +18,7 @@
     },
     "@hsp/app-web#dev": {
       // API need to be running for GUI to work
-      "with": [ "@hsp/app-api#dev" ],
+      "with": ["@hsp/app-api#dev"],
       "cache": false,
       "persistent": true,
       "interruptible": true
@@ -47,69 +30,37 @@
     "deploy:start": {
       "cache": false,
       "persistent": true,
-      "env": [
-        "API_*"
-      ]
+      "env": ["API_*"]
     },
     "db:generate": {
-      "dependsOn": [
-        "^db:generate"
-      ],
-      "outputs": [
-        "generated/prisma"
-      ],
-      "env": [
-        "API_*"
-      ]
+      "dependsOn": ["^db:generate"],
+      "outputs": ["generated/prisma"],
+      "env": ["API_*"]
     },
     "db:migrate": {
-      "dependsOn": [
-        "^db:migrate"
-      ],
-      "outputs": [
-        "generated/prisma"
-      ],
-      "env": [
-        "API_*"
-      ]
+      "dependsOn": ["^db:migrate"],
+      "outputs": ["generated/prisma"],
+      "env": ["API_*"]
     },
     "db:deploy": {
-      "dependsOn": [
-        "^db:deploy"
-      ],
-      "outputs": [
-        "generated/prisma"
-      ],
-      "env": [
-        "API_*"
-      ]
+      "dependsOn": ["^db:deploy"],
+      "outputs": ["generated/prisma"],
+      "env": ["API_*"]
     },
     "db:studio": {
-      "dependsOn": [
-        "^db:studio"
-      ],
-      "outputs": [
-        "generated/prisma"
-      ],
-      "env": [
-        "API_*"
-      ]
+      "dependsOn": ["^db:studio"],
+      "outputs": ["generated/prisma"],
+      "env": ["API_*"]
     },
     "test": {
-      "dependsOn": [
-        "^test"
-      ],
+      "dependsOn": ["^test"],
       "outputs": []
     },
     "test:e2e": {
-      "dependsOn": [
-        "^test:e2e"
-      ],
+      "dependsOn": ["^test:e2e"],
       "outputs": []
     }
   },
-  "globalEnv": [
-    "PORT"
-  ],
+  "globalEnv": ["PORT"],
   "ui": "tui"
 }

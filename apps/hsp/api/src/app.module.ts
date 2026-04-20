@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
-import { HealthCheckModule } from './modules/health/health.module'
-import { GrtWSModule } from './modules/guesart/guesart.module'
 import { ConfigModule } from '@nestjs/config'
+import { GrtWSModule } from './modules/guesart/guesart.module'
+import { HealthCheckModule } from './modules/health/health.module'
 import { PerfTestModule } from './modules/perf-test/perf-test.module'
 
 @Module({

@@ -2,7 +2,11 @@ export const LOBBY_URL = '/guesart'
 
 export const getRoomUrl = (roomId: string) => `/guesart/${roomId}`
 
-export const resizeUnsplashImage = (url?: string, width: number = 100, quality: number = 80) => {
+export const resizeUnsplashImage = (
+  url?: string,
+  width: number = 100,
+  quality: number = 80,
+) => {
   if (!url) {
     return ''
   }

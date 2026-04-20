@@ -1,12 +1,12 @@
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import GUI from 'lil-gui'
+import * as THREE from 'three'
 import {
   DRACOLoader,
   GLTFLoader,
   // GroundedSkybox,
   RGBELoader,
 } from 'three/examples/jsm/Addons.js'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 /**
  * Base
@@ -34,23 +34,25 @@ gltfLoader.setDRACOLoader(dracoLoader)
 //   },
 // )
 
-gltfLoader.load(
-  '/21-custom-models/models/Burger.glb',
-  (gltf) => {
-    gltf.scene.scale.set(0.5, 0.5, 0.5)
-    gltf.scene.position.set(0, 2.5, 0)
-    scene.add(gltf.scene)
+gltfLoader.load('/21-custom-models/models/Burger.glb', (gltf) => {
+  gltf.scene.scale.set(0.5, 0.5, 0.5)
+  gltf.scene.position.set(0, 2.5, 0)
+  scene.add(gltf.scene)
 
-    updateSceneShadows()
-  },
-)
-
+  updateSceneShadows()
+})
 
 const textureLoader = new THREE.TextureLoader()
-const floorTexture = textureLoader.load('/25-realistic/textures/wood_cabinet_worn_long/wood_cabinet_worn_long_diff_1k.jpg')
+const floorTexture = textureLoader.load(
+  '/25-realistic/textures/wood_cabinet_worn_long/wood_cabinet_worn_long_diff_1k.jpg',
+)
 floorTexture.colorSpace = THREE.SRGBColorSpace
-const floorARMTexture = textureLoader.load('/25-realistic/textures/wood_cabinet_worn_long/wood_cabinet_worn_long_arm_1k.jpg')
-const floorNormalTexture = textureLoader.load('/25-realistic/textures/wood_cabinet_worn_long/wood_cabinet_worn_long_nor_gl_1k.png')
+const floorARMTexture = textureLoader.load(
+  '/25-realistic/textures/wood_cabinet_worn_long/wood_cabinet_worn_long_arm_1k.jpg',
+)
+const floorNormalTexture = textureLoader.load(
+  '/25-realistic/textures/wood_cabinet_worn_long/wood_cabinet_worn_long_nor_gl_1k.png',
+)
 
 const floor = new THREE.Mesh(
   new THREE.PlaneGeometry(10, 10),
@@ -60,15 +62,21 @@ const floor = new THREE.Mesh(
     aoMap: floorARMTexture,
     roughnessMap: floorARMTexture,
     normalMap: floorNormalTexture,
-  })
+  }),
 )
-floor.rotation.x = - Math.PI / 2
+floor.rotation.x = -Math.PI / 2
 scene.add(floor)
 
-const wallTexture = textureLoader.load('/25-realistic/textures/castle_brick_broken_06/castle_brick_broken_06_diff_1k.jpg')
+const wallTexture = textureLoader.load(
+  '/25-realistic/textures/castle_brick_broken_06/castle_brick_broken_06_diff_1k.jpg',
+)
 wallTexture.colorSpace = THREE.SRGBColorSpace
-const wallARMTexture = textureLoader.load('/25-realistic/textures/castle_brick_broken_06/castle_brick_broken_06_arm_1k.jpg')
-const wallNormalTexture = textureLoader.load('/25-realistic/textures/castle_brick_broken_06/castle_brick_broken_06_nor_gl_1k.png')
+const wallARMTexture = textureLoader.load(
+  '/25-realistic/textures/castle_brick_broken_06/castle_brick_broken_06_arm_1k.jpg',
+)
+const wallNormalTexture = textureLoader.load(
+  '/25-realistic/textures/castle_brick_broken_06/castle_brick_broken_06_nor_gl_1k.png',
+)
 
 const wall = new THREE.Mesh(
   new THREE.PlaneGeometry(10, 10),
@@ -78,7 +86,7 @@ const wall = new THREE.Mesh(
     aoMap: wallARMTexture,
     roughnessMap: wallARMTexture,
     normalMap: wallNormalTexture,
-  })
+  }),
 )
 wall.position.y = 5
 wall.position.z = -5
@@ -99,10 +107,30 @@ scene.add(directionalLight)
 
 // const directionalLightHelper = new THREE.CameraHelper(directionalLight.shadow.camera)
 // scene.add(directionalLightHelper)
-gui.add(directionalLight, 'intensity').min(0).max(10).step(0.001).name('lightIntensity')
-gui.add(directionalLight.position, 'x').min(- 10).max(20).step(0.001).name('lightX')
-gui.add(directionalLight.position, 'y').min(- 10).max(10).step(0.001).name('lightY')
-gui.add(directionalLight.position, 'z').min(- 10).max(10).step(0.001).name('lightZ')
+gui
+  .add(directionalLight, 'intensity')
+  .min(0)
+  .max(10)
+  .step(0.001)
+  .name('lightIntensity')
+gui
+  .add(directionalLight.position, 'x')
+  .min(-10)
+  .max(20)
+  .step(0.001)
+  .name('lightX')
+gui
+  .add(directionalLight.position, 'y')
+  .min(-10)
+  .max(10)
+  .step(0.001)
+  .name('lightY')
+gui
+  .add(directionalLight.position, 'z')
+  .min(-10)
+  .max(10)
+  .step(0.001)
+  .name('lightZ')
 gui.add(directionalLight, 'castShadow')
 // Fix "shadow acne"
 directionalLight.shadow.normalBias = 0.036 // Round surface
@@ -119,18 +147,21 @@ const ENVIRONMENT_MAP = '0'
 // - Contains 360 degree view of the surrounding
 // - HDR
 const rgbeLoader = new RGBELoader() // HDR image loader
-rgbeLoader.load(`/24-environment-map/environmentMaps/${ENVIRONMENT_MAP}/2k.hdr`, (data) => {
-  data.mapping = THREE.EquirectangularReflectionMapping
+rgbeLoader.load(
+  `/24-environment-map/environmentMaps/${ENVIRONMENT_MAP}/2k.hdr`,
+  (data) => {
+    data.mapping = THREE.EquirectangularReflectionMapping
 
-  // Normal background
-  scene.background = data
-  // Ground-projected skybox
-  // const skybox = new GroundedSkybox(data, 15, 80)
-  // skybox.position.y = 15
-  // scene.add(skybox)
+    // Normal background
+    scene.background = data
+    // Ground-projected skybox
+    // const skybox = new GroundedSkybox(data, 15, 80)
+    // skybox.position.y = 15
+    // scene.add(skybox)
 
-  scene.environment = data
-})
+    scene.environment = data
+  },
+)
 
 const updateSceneShadows = () => {
   scene.traverse((child) => {

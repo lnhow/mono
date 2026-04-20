@@ -1,6 +1,6 @@
-import { ImageResponse } from 'next/og'
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
+import { ImageResponse } from 'next/og'
 // Note: Cannot use OKLCH color here
 
 // OpenGraph image generation
@@ -56,44 +56,42 @@ export async function generateImage({
   ])
 
   return new ImageResponse(
-    (
-      <div
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: '0 10rem',
+        width: '100%',
+        height: '100%',
+        backgroundColor: colors['base-100'],
+        fontFamily: 'Lexend, Arial, sans-serif',
+        color: colors['fore-500'],
+        position: 'relative',
+        ..._style.container,
+      }}
+    >
+      <h1 style={{ margin: 0, ..._style.h1 }}>{title}</h1>
+      <h2
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          padding: '0 10rem',
-          width: '100%',
-          height: '100%',
-          backgroundColor: colors['base-100'],
-          fontFamily: 'Lexend, Arial, sans-serif',
-          color: colors['fore-500'],
-          position: 'relative',
-          ..._style.container,
+          fontWeight: 300,
+          color: colors['fore-300'],
+          ..._style.h2,
         }}
       >
-        <h1 style={{ margin: 0, ..._style.h1 }}>{title}</h1>
-        <h2
-          style={{
-            fontWeight: 300,
-            color: colors['fore-300'],
-            ..._style.h2,
-          }}
-        >
-          {description}
-        </h2>
-        <p
-          style={{
-            fontSize: '1.125rem',
-            fontWeight: 300,
-            color: colors['fore-100'],
-            margin: '2.5rem 0 0 0',
-          }}
-        >
-          {process.env.NEXT_PUBLIC_HOST || 'https://www.hspln.com'}
-        </p>
-      </div>
-    ),
+        {description}
+      </h2>
+      <p
+        style={{
+          fontSize: '1.125rem',
+          fontWeight: 300,
+          color: colors['fore-100'],
+          margin: '2.5rem 0 0 0',
+        }}
+      >
+        {process.env.NEXT_PUBLIC_HOST || 'https://www.hspln.com'}
+      </p>
+    </div>,
     {
       ...size,
       fonts: [

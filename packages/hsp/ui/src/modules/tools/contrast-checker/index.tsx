@@ -1,16 +1,16 @@
 'use client'
 
+import { parseColor } from '@hsp/ui/components/color-picker'
 import { useSearchParams } from 'next/navigation'
+import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import {
   DEFAULT_BACKGROUND,
   DEFAULT_FOREGROUND,
-  FormContrastChecker,
+  type FormContrastChecker,
 } from './const'
-import { BackgroundPreview } from './preview'
 import { ColorInput } from './input'
-import { useEffect } from 'react'
-import { parseColor } from '@hsp/ui/components/color-picker'
+import { BackgroundPreview } from './preview'
 
 export default function PageContrastChecker() {
   const searchParams = useSearchParams()

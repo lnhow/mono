@@ -1,9 +1,8 @@
 'use client'
 
-import * as React from 'react'
-import { Tabs as TabsPrimitive } from 'radix-ui'
-
 import cn from '@hsp/ui/utils/cn'
+import { Tabs as TabsPrimitive } from 'radix-ui'
+import * as React from 'react'
 
 const Tabs = TabsPrimitive.Root
 
@@ -52,4 +51,4 @@ const TabsContent = React.forwardRef<
 ))
 TabsContent.displayName = TabsPrimitive.Content.displayName
 
-export { Tabs, TabsList, TabsTrigger, TabsContent }
+export { Tabs, TabsContent, TabsList, TabsTrigger }

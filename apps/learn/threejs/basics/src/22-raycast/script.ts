@@ -1,7 +1,7 @@
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import GUI from 'lil-gui'
+import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/Addons.js'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 /**
  * Base
@@ -35,7 +35,6 @@ const object3 = new THREE.Mesh(
 )
 object3.position.x = 2
 
-
 const objects = [object1, object2, object3]
 
 scene.add(...objects)
@@ -49,7 +48,6 @@ gltfLoader.load('/22-raycast/models/Duck/glTF-Binary/Duck.glb', (gltf) => {
   model = gltf.scene
   mouseRaycastTargets.push(gltf.scene)
 })
-
 
 /**
  * Lights
@@ -146,7 +144,7 @@ const tick = () => {
   const elapsedTime = clock.getElapsedTime()
 
   objects.forEach((object, index) => {
-    const modifier = 0.05 * Math.pow(index, 2) + 0.45 * index + 0.3
+    const modifier = 0.05 * index ** 2 + 0.45 * index + 0.3
     object.position.y = Math.sin(elapsedTime * modifier) * 1.5
     object.material.color.set('red')
   })
@@ -166,7 +164,8 @@ const tick = () => {
   })
 
   mouseRaycaster.setFromCamera(mouseCoords, camera)
-  const mouseIntersections = mouseRaycaster.intersectObjects(mouseRaycastTargets)
+  const mouseIntersections =
+    mouseRaycaster.intersectObjects(mouseRaycastTargets)
   // console.log('\x1B[35m[Dev log]\x1B[0m -> intersections:', intersections)
   mouseIntersections.forEach((intersect) => {
     const obj = intersect.object as THREE.Mesh
@@ -194,8 +193,7 @@ const tick = () => {
     if (modelIntersect.length) {
       // console.log('\x1B[35m[Dev log]\x1B[0m -> tick -> intersect:', modelIntersect)
       model.scale.set(1.2, 1.2, 1.2)
-    }
-    else {
+    } else {
       model.scale.set(1, 1, 1)
     }
   }

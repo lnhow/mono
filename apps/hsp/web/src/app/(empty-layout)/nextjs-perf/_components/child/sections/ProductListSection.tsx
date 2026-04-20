@@ -1,6 +1,6 @@
 import React from 'react'
-import ProductCard, { Product, ProductCardSkeleton } from '../ProductCard'
 import Card from '../Card'
+import ProductCard, { type Product, ProductCardSkeleton } from '../ProductCard'
 
 const ProductListSection = ({
   title,
@@ -16,7 +16,11 @@ const ProductListSection = ({
     </div>
     <div className="flex px-4 pb-6 gap-4 overflow-x-auto scrollbar-hide [&>*]:min-w-64 snap-x snap-mandatory scroll-p-4">
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} className="snap-start" />
+        <ProductCard
+          key={product.id}
+          product={product}
+          className="snap-start"
+        />
       ))}
     </div>
   </Card>

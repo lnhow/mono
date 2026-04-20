@@ -1,5 +1,6 @@
-import React, { ComponentPropsWithRef } from 'react'
 import cn from '@hsp/ui/utils/cn'
+import type React from 'react'
+import type { ComponentPropsWithRef } from 'react'
 
 const Card = ({
   className,
@@ -21,16 +22,7 @@ Card.Title = function CardTitle({
   children: React.ReactNode
   className?: string
 }) {
-  return (
-    <div
-      className={cn(
-        'p-4',
-        className,
-      )}
-    >
-      {children}
-    </div>
-  )
+  return <div className={cn('p-4', className)}>{children}</div>
 }
 
 Card.Body = function CardBody({
@@ -40,16 +32,7 @@ Card.Body = function CardBody({
   children: React.ReactNode
   className?: string
 }) {
-  return (
-    <div
-      className={cn(
-        'px-4 pb-6',
-        className,
-      )}
-    >
-      {children}
-    </div>
-  )
+  return <div className={cn('px-4 pb-6', className)}>{children}</div>
 }
 
 export default Card

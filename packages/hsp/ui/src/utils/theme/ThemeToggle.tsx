@@ -1,18 +1,21 @@
 'use client'
 
-import { LuMoon as Moon, LuSun as Sun } from 'react-icons/lu'
-import { useTheme } from 'next-themes'
-
-import { Button, ButtonProps } from '@hsp/ui/components/button'
+import { Button, type ButtonProps } from '@hsp/ui/components/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@hsp/ui/components/dropdown-menu'
+import { useTheme } from 'next-themes'
+import { LuMoon as Moon, LuSun as Sun } from 'react-icons/lu'
 import Tooltip from '../../components/tooltip'
 
-export function ThemeToggle({ variant = 'outline' }: { variant?: ButtonProps['variant'] }) {
+export function ThemeToggle({
+  variant = 'outline',
+}: {
+  variant?: ButtonProps['variant']
+}) {
   const { setTheme } = useTheme()
 
   return (

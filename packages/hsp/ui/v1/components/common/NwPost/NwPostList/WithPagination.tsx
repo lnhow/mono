@@ -1,10 +1,9 @@
-import { NwPostGroupProps } from '@hsp/ui/../v1/types/components/posts.type'
-import { WithClassName } from '@hsp/ui/utils/react/types'
+import type { NwPostGroupProps } from '@hsp/ui/../v1/types/components/posts.type'
 import cn from '@hsp/ui/utils/cn'
-
-import NwPostBase from '../NwPostBase'
-import { TNwPagination } from '../../NwPagination/type'
+import type { WithClassName } from '@hsp/ui/utils/react/types'
 import NwPagination from '../../NwPagination'
+import type { TNwPagination } from '../../NwPagination/type'
+import NwPostBase from '../NwPostBase'
 
 export type NwPostsWithPaginationProps = NwPostGroupProps & {
   pagination: TNwPagination
@@ -13,7 +12,7 @@ export type NwPostsWithPaginationProps = NwPostGroupProps & {
 export default function NwPostsWithPagination({
   data,
   pagination,
-  className
+  className,
 }: WithClassName & NwPostsWithPaginationProps) {
   return (
     <>

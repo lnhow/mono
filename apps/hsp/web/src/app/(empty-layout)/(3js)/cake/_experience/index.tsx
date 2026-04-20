@@ -1,15 +1,9 @@
 'use client'
-import { Canvas } from '@react-three/fiber'
-import Experience from './experience'
-import { cakeAtom } from './_state'
-import { useSearchParams } from 'next/navigation'
-import { useHydrateAtoms } from 'jotai/utils'
-import { decodeCakeURL } from './_const'
-
-import Controls from './html/controls'
-import Credit from './html/credit'
-import Audio from './html/audio'
+import { useProgress } from '@react-three/drei/web'
 import { Loader } from '@react-three/drei/web/Loader'
+import { Canvas } from '@react-three/fiber'
+import { useHydrateAtoms } from 'jotai/utils'
+import { useSearchParams } from 'next/navigation'
 import {
   // Activity,
   memo,
@@ -20,7 +14,12 @@ import {
   useState,
   ViewTransition,
 } from 'react'
-import { useProgress } from '@react-three/drei/web'
+import { decodeCakeURL } from './_const'
+import { cakeAtom } from './_state'
+import Experience from './experience'
+import Audio from './html/audio'
+import Controls from './html/controls'
+import Credit from './html/credit'
 
 export default function Main() {
   return (

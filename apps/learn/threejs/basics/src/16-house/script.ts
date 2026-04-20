@@ -1,8 +1,8 @@
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { Timer } from 'three/addons/misc/Timer.js'
 import GUI from 'lil-gui'
+import * as THREE from 'three'
+import { Timer } from 'three/addons/misc/Timer.js'
 import { Sky } from 'three/addons/objects/Sky.js'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 /**
  * Base
@@ -116,11 +116,13 @@ const houseRoofARMTexture = textureLoader.load(
 const houseRoofNormalTexture = textureLoader.load(
   '/16-house/roof/wood_peeling_paint_weathered_nor_gl_1k.webp',
 )
-;[houseRoofTexture, houseRoofARMTexture, houseRoofNormalTexture].forEach((texture: THREE.Texture) => {
-  texture.wrapS = THREE.RepeatWrapping
-  texture.wrapT = THREE.RepeatWrapping
-  texture.repeat.set(4,1)
-})
+;[houseRoofTexture, houseRoofARMTexture, houseRoofNormalTexture].forEach(
+  (texture: THREE.Texture) => {
+    texture.wrapS = THREE.RepeatWrapping
+    texture.wrapT = THREE.RepeatWrapping
+    texture.repeat.set(4, 1)
+  },
+)
 const houseRoof = new THREE.Mesh(
   new THREE.ConeGeometry(3.5, houseRoofHeight, 4),
   new THREE.MeshStandardMaterial({
@@ -137,16 +139,22 @@ house.add(houseRoof)
 
 const houseDoorTexture = textureLoader.load('/16-house/door/color.webp')
 const houseDoorAlphaTexture = textureLoader.load('/16-house/door/alpha.webp')
-const houseDoorAOTexture = textureLoader.load('/16-house/door/ambientOcclusion.webp')
+const houseDoorAOTexture = textureLoader.load(
+  '/16-house/door/ambientOcclusion.webp',
+)
 const houseDoorHeightTexture = textureLoader.load('/16-house/door/height.webp')
 const houseDoorNormalTexture = textureLoader.load('/16-house/door/normal.webp')
-const houseDoorMetalnessTexture = textureLoader.load('/16-house/door/metalness.webp')
-const houseDoorRoughnessTexture = textureLoader.load('/16-house/door/roughness.webp')
+const houseDoorMetalnessTexture = textureLoader.load(
+  '/16-house/door/metalness.webp',
+)
+const houseDoorRoughnessTexture = textureLoader.load(
+  '/16-house/door/roughness.webp',
+)
 
 const houseDoorHeight = 2.2
 const houseDoor = new THREE.Mesh(
   new THREE.PlaneGeometry(2.2, houseDoorHeight, 100, 100),
-  new THREE.MeshStandardMaterial({ 
+  new THREE.MeshStandardMaterial({
     map: houseDoorTexture,
     transparent: true,
     alphaMap: houseDoorAlphaTexture,
@@ -168,17 +176,23 @@ house.add(houseDoor)
 
 houseWalls.castShadow = true
 houseWalls.receiveShadow = true
-houseRoof.castShadow = true 
+houseRoof.castShadow = true
 floor.receiveShadow = true
 
 scene.add(house)
 // End of house =======================
 
 // Bushes =============================
-const bushTexture = textureLoader.load('/16-house/bushes/forest_leaves_03_diff_1k.webp')
+const bushTexture = textureLoader.load(
+  '/16-house/bushes/forest_leaves_03_diff_1k.webp',
+)
 bushTexture.colorSpace = THREE.SRGBColorSpace
-const bushARMTexture = textureLoader.load('/16-house/bushes/forest_leaves_03_arm_1k.webp')
-const bushNormalTexture = textureLoader.load('/16-house/bushes/forest_leaves_03_nor_gl_1k.webp')
+const bushARMTexture = textureLoader.load(
+  '/16-house/bushes/forest_leaves_03_arm_1k.webp',
+)
+const bushNormalTexture = textureLoader.load(
+  '/16-house/bushes/forest_leaves_03_nor_gl_1k.webp',
+)
 
 const bushGeometry = new THREE.SphereGeometry(1, 16, 16)
 const bushMaterial = new THREE.MeshStandardMaterial({
@@ -237,11 +251,13 @@ const rockMaterial = new THREE.MeshStandardMaterial({
   normalMap: rockNormalTexture,
 })
 
-;[houseRoofTexture, houseRoofARMTexture, houseRoofNormalTexture].forEach((texture: THREE.Texture) => {
-  texture.wrapS = THREE.RepeatWrapping
-  texture.wrapT = THREE.RepeatWrapping
-  texture.repeat.set(4,1)
-})
+;[houseRoofTexture, houseRoofARMTexture, houseRoofNormalTexture].forEach(
+  (texture: THREE.Texture) => {
+    texture.wrapS = THREE.RepeatWrapping
+    texture.wrapT = THREE.RepeatWrapping
+    texture.repeat.set(4, 1)
+  },
+)
 
 const rocks = new THREE.Group()
 const rocksInnerRadius = 4
@@ -288,8 +304,8 @@ directionalLight.shadow.mapSize.width = 256
 directionalLight.shadow.mapSize.height = 256
 directionalLight.shadow.camera.top = 8
 directionalLight.shadow.camera.right = 8
-directionalLight.shadow.camera.bottom = - 8
-directionalLight.shadow.camera.left = - 8
+directionalLight.shadow.camera.bottom = -8
+directionalLight.shadow.camera.left = -8
 directionalLight.shadow.camera.near = 1
 directionalLight.shadow.camera.far = 20
 
@@ -393,26 +409,53 @@ const tick = () => {
   const firefly1Angle = elapsedTime * 0.3
   firefly1.position.set(
     Math.sin(firefly1Angle) * 1 + 4,
-    Math.max(Math.sin(firefly1Angle) * Math.sin(firefly1Angle * 2.34) * Math.sin(firefly1Angle * 3.45) * 0.3, 0.16),
+    Math.max(
+      Math.sin(firefly1Angle) *
+        Math.sin(firefly1Angle * 2.34) *
+        Math.sin(firefly1Angle * 3.45) *
+        0.3,
+      0.16,
+    ),
     Math.cos(firefly1Angle) * 1 + 4,
   )
-  firefly1.intensity = Math.max(Math.sin(elapsedTime * 48) * Math.sin(firefly1Angle * 5.34) * 20, 8)
-  
+  firefly1.intensity = Math.max(
+    Math.sin(elapsedTime * 48) * Math.sin(firefly1Angle * 5.34) * 20,
+    8,
+  )
+
   const firefly2Angle = -elapsedTime * 0.4
   firefly2.position.set(
     Math.sin(firefly2Angle) * 2 + -3.5,
-    Math.max(Math.sin(firefly2Angle) * Math.sin(firefly2Angle * 3.34) * Math.sin(firefly2Angle * 2.1) * 0.2, 0.14),
+    Math.max(
+      Math.sin(firefly2Angle) *
+        Math.sin(firefly2Angle * 3.34) *
+        Math.sin(firefly2Angle * 2.1) *
+        0.2,
+      0.14,
+    ),
     Math.cos(firefly2Angle) * 3 + 3.5,
   )
-  firefly2.intensity = Math.max(Math.sin(elapsedTime * 27) * Math.sin(firefly2Angle * 4.34) * 6, 5)
-  
+  firefly2.intensity = Math.max(
+    Math.sin(elapsedTime * 27) * Math.sin(firefly2Angle * 4.34) * 6,
+    5,
+  )
+
   const firefly3Angle = elapsedTime * 0.223
   firefly3.position.set(
     Math.sin(firefly3Angle) * 4 + 3,
-    Math.max(Math.sin(firefly3Angle) * Math.sin(firefly3Angle * 3.34) * Math.sin(firefly3Angle * 2.1) * 0.3, 0.1),
+    Math.max(
+      Math.sin(firefly3Angle) *
+        Math.sin(firefly3Angle * 3.34) *
+        Math.sin(firefly3Angle * 2.1) *
+        0.3,
+      0.1,
+    ),
     Math.cos(firefly3Angle) * 2.5 + -4,
   )
-  firefly2.intensity = Math.max(Math.sin(elapsedTime * 18) * Math.sin(firefly3Angle * 1.34) * 10, 3)
+  firefly2.intensity = Math.max(
+    Math.sin(elapsedTime * 18) * Math.sin(firefly3Angle * 1.34) * 10,
+    3,
+  )
 
   // Update controls
   controls.update()

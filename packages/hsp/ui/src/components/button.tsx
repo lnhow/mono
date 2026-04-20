@@ -1,18 +1,15 @@
-import * as React from 'react'
-import { Slot } from 'radix-ui'
-import { cva, type VariantProps } from 'class-variance-authority'
-
 import Link from '@hsp/ui/components/link'
-
 import cn from '@hsp/ui/utils/cn'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { Slot } from 'radix-ui'
+import * as React from 'react'
 
 const buttonVariants = cva(
   'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
   {
     variants: {
       variant: {
-        default:
-          'bg-fore-400 text-base-500 shadow hover:bg-fore-400/80',
+        default: 'bg-fore-400 text-base-500 shadow hover:bg-fore-400/80',
         destructive:
           'bg-error-100 text-error-300 shadow-sm hover:bg-error-100/80',
         outline:

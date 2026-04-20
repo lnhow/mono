@@ -1,5 +1,3 @@
-
-
 // Credits go to jsturgis: https://gist.github.com/jsturgis/3b19447b304616f18657
 export const SAMPLE = {
   videos: [
@@ -16,7 +14,6 @@ export const SAMPLE = {
           srcLang: 'en',
           src: '/static/default/player/big-buck-bunny.vtt',
         },
-        
       ],
       thumb: 'images/BigBuckBunny.jpg',
       title: 'Big Buck Bunny',

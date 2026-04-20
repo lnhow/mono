@@ -1,4 +1,4 @@
-import type { ProgressInfo } from "@huggingface/transformers"
+import type { ProgressInfo } from '@huggingface/transformers'
 
 // Options ===================================================================
 
@@ -29,7 +29,7 @@ export const MODEL_OPTIONS = {
 export type ModelOption = keyof typeof MODEL_OPTIONS
 
 export const MODEL_SELECT_OPTIONS = {
-  'vi': {
+  vi: {
     default: 'huuquyet/PhoWhisper-base',
     options: [
       { value: 'huuquyet/PhoWhisper-tiny', label: 'PhoWhisper-tiny' },
@@ -40,7 +40,7 @@ export const MODEL_SELECT_OPTIONS = {
       { value: 'Xenova/whisper-small', label: 'whisper-small' },
     ],
   },
-  'en': {
+  en: {
     default: 'Xenova/whisper-base.en',
     options: [
       { value: 'Xenova/whisper-tiny.en', label: 'whisper-tiny-en' },
@@ -99,6 +99,11 @@ export interface ResComplete {
   }
 }
 
-export type WorkerResponse = ResModelLoading | ResModelLoaded | ResError | ResComplete | ResTranscribing
+export type WorkerResponse =
+  | ResModelLoading
+  | ResModelLoaded
+  | ResError
+  | ResComplete
+  | ResTranscribing
 
 // Message Types =============================================================

@@ -1,12 +1,12 @@
+import type GUI from 'lil-gui'
 import {
-  CubeTexture,
+  type CubeTexture,
   DirectionalLight,
   Mesh,
   MeshStandardMaterial,
   SRGBColorSpace,
 } from 'three'
 import Experience from '../Experience'
-import type GUI from 'lil-gui'
 
 export default class Environment {
   experience = Experience.instance

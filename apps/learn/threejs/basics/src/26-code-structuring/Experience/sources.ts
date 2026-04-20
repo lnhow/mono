@@ -1,14 +1,16 @@
-import { TextureLoader } from "three";
+import { TextureLoader } from 'three'
 
-export type Source = {
-  name: string;
-  type: 'cubeTexture';
-  path: string[];
-} | {
-  name: string;
-  type: 'gltf' | 'texture';
-  path: string;
-}
+export type Source =
+  | {
+      name: string
+      type: 'cubeTexture'
+      path: string[]
+    }
+  | {
+      name: string
+      type: 'gltf' | 'texture'
+      path: string
+    }
 
 const sources: readonly Source[] = [
   {
@@ -21,23 +23,23 @@ const sources: readonly Source[] = [
       '/26-code-structuring/textures/environmentMap/px.jpg',
       '/26-code-structuring/textures/environmentMap/py.jpg',
       '/26-code-structuring/textures/environmentMap/pz.jpg',
-    ]
+    ],
   },
   {
     name: 'grassColorTexture',
     type: 'texture',
-    path: '/26-code-structuring/textures/dirt/color.jpg'
+    path: '/26-code-structuring/textures/dirt/color.jpg',
   },
   {
     name: 'grassNormalTexture',
     type: 'texture',
-    path: '/26-code-structuring/textures/dirt/normal.jpg'
+    path: '/26-code-structuring/textures/dirt/normal.jpg',
   },
   {
     name: 'foxModel',
     type: 'gltf',
-    path: '/26-code-structuring/models/Fox/glTF/Fox.gltf'
+    path: '/26-code-structuring/models/Fox/glTF/Fox.gltf',
   },
 ]
 
-export default sources;
+export default sources

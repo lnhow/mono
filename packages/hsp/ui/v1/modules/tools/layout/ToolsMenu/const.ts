@@ -1,22 +1,30 @@
-import { MdCode, MdContrast, MdCss, MdHtml, MdLink, MdPalette, MdQuestionMark } from 'react-icons/md'
-import { IconType } from 'react-icons'
+import type { IconType } from 'react-icons'
+import {
+  MdCode,
+  MdContrast,
+  MdCss,
+  MdHtml,
+  MdLink,
+  MdPalette,
+  MdQuestionMark,
+} from 'react-icons/md'
 
 export type MenuItem = MenuItemLink | MenuItemGroup
 
 export type MenuItemLink = {
-  href: string,
-  key: string,
+  href: string
+  key: string
   icon?: IconType
   external?: boolean
 }
 
 export type MenuItemGroup = {
-  key: string,
+  key: string
   items: MenuItemLink[]
 }
 
-
-export const isMenuItemLink = (val: MenuItem): val is MenuItemLink => Boolean((val as MenuItemLink).href)
+export const isMenuItemLink = (val: MenuItem): val is MenuItemLink =>
+  Boolean((val as MenuItemLink).href)
 
 export const menuItems: MenuItem[] = [
   // {
@@ -35,7 +43,7 @@ export const menuItems: MenuItem[] = [
         href: '/tools/color-picker',
         key: 'color-picker',
         icon: MdPalette,
-      }
+      },
     ],
   },
   {
@@ -74,7 +82,7 @@ export const menuItems: MenuItem[] = [
         key: 'can-i-use',
         icon: MdQuestionMark,
         external: true,
-      }
-    ]
-  }
+      },
+    ],
+  },
 ]

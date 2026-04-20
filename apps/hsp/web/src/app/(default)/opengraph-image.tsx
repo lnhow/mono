@@ -1,4 +1,4 @@
-import { generateImage } from "../(api)/og/_og.service"
+import { generateImage } from '../(api)/og/_og.service'
 
 // OpenGraph image generation
 export const alt = 'Hao Le - Web Developer'

@@ -1,13 +1,13 @@
-import { Color, parseColor } from "@hsp/ui/components/color-picker"
+import { type Color, parseColor } from '@hsp/ui/components/color-picker'
 
 export const DEFAULT_FOREGROUND = parseColor('#000000')
 export const DEFAULT_BACKGROUND = parseColor('#FFFFFF')
 
 export type FormContrastChecker = {
-  foreground: Color,
-  background: Color,
-  bigText: string,
-  smallText: string,
+  foreground: Color
+  background: Color
+  bigText: string
+  smallText: string
 }
 
 export const ValidationRules = {
@@ -18,5 +18,5 @@ export const ValidationRules = {
   smallText: {
     min: 10,
     max: 96,
-  }
+  },
 }

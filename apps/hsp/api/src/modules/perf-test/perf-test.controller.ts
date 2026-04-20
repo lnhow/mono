@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common'
-import { PerfTestService } from './perf-test.service'
 import { ApiQuery } from '@nestjs/swagger'
+import type { PerfTestService } from './perf-test.service'
 
 @Controller('perf-test')
 export class PerfTestController {

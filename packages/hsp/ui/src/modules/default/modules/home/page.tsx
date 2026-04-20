@@ -1,5 +1,5 @@
-import CardDemo from './DemoCard'
 import { LOBBY_URL as GUESART_LOBBY_URL } from '../../../guesart/utils'
+import CardDemo from './DemoCard'
 
 export default function CardsDemo() {
   return (
@@ -32,7 +32,8 @@ const demos = [
   {
     id: 'nextjs-perf',
     title: 'NextJS Performance',
-    description: 'Comparing NextJS 16 current SSR vs the new Suspense + Cache Component.',
+    description:
+      'Comparing NextJS 16 current SSR vs the new Suspense + Cache Component.',
     href: '/nextjs-perf',
   },
   {
@@ -61,10 +62,11 @@ const demos = [
   {
     id: 'cake',
     title: 'Happy Birthday Cake',
-    description: 'Add your own message to the cake and send it to your friends!',
+    description:
+      'Add your own message to the cake and send it to your friends!',
     href: '/cake?edit=true',
     // TODO: Fix me
     // !IMPORTANT: Open in a new tab to avoid issues with React Three Fiber and Next 16 back/forward incompatibility
     external: true,
-  }
+  },
 ]

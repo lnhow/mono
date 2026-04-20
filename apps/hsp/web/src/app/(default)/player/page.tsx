@@ -1,6 +1,6 @@
-import { Metadata } from 'next'
 import DemoPlayer from '@hsp/ui/modules/default/modules/player/demo'
 import ViewTransition from '@hsp/ui/utils/react/view-transition'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Custom HTML video player - hsp',
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function PagePlayer() {
   return (
     <div className="flex min-h-(--layout-full-height) flex-col items-center justify-center -mx-(--layout-spacing) md:mx-0">
-      <div className='p-2'>
+      <div className="p-2">
         <ViewTransition name="player-title">
           <h1 className="text-2xl font-medium text-center text-balance">
             Custom HTML video player

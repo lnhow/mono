@@ -1,7 +1,7 @@
-import Scene from './Scene'
-import options from './options'
-import Shard from './Shard'
 import LetterColor from './Color'
+import options from './options'
+import Scene from './Scene'
+import Shard from './Shard'
 
 export enum Phase {
   FIREWORK,
@@ -75,7 +75,7 @@ export default class Letter {
 
   drawLetter(
     x: number = this.options.x + this.options.offsetX,
-    y: number = this.options.y + this.options.offsetY
+    y: number = this.options.y + this.options.offsetY,
   ) {
     this.ctx.fillStyle = this.options.color.toHSLA(70)
     this.ctx.fillText(this.options.char, x, y)
@@ -114,7 +114,7 @@ class PhaseFirework extends PhaseState {
   reachTime = options.firework.reachTime.base
   lineWidth = options.firework.lineWidth.base
   velocityY = 0
-  prevPoints: { x: number, y: number, width: number }[] = []
+  prevPoints: { x: number; y: number; width: number }[] = []
 
   start() {
     this.tick = 0
@@ -170,7 +170,7 @@ class PhaseFirework extends PhaseState {
 
       // Set the color and width of the line
       this.letter.ctx.strokeStyle = this.letter.options.color.toAlpha(
-        i / this.prevPoints.length
+        i / this.prevPoints.length,
       )
       this.letter.ctx.lineWidth = point.width * lineWidthFactor * i
       // Draw
@@ -239,8 +239,8 @@ class PhaseBlast extends PhaseState {
           this.letter.options.y,
           shardX,
           shardY,
-          this.letter.options.color
-        )
+          this.letter.options.color,
+        ),
       )
     }
   }
@@ -263,14 +263,14 @@ class PhaseBlast extends PhaseState {
         this.letter.ctx.beginPath()
         this.letter.ctx.fillStyle = this.letter.options.color.toHSLA(
           50 + 50 * progressX,
-          progressX
+          progressX,
         )
         this.letter.ctx.arc(
           this.letter.options.x,
           this.letter.options.y,
           progressY * this.circleSize,
           0,
-          PhaseBlast.Tau
+          PhaseBlast.Tau,
         )
         this.letter.ctx.fill()
 
@@ -292,14 +292,14 @@ class PhaseBlast extends PhaseState {
         this.letter.ctx.beginPath()
         this.letter.ctx.fillStyle = this.letter.options.color.toHSLA(
           100,
-          1 - progressY
+          1 - progressY,
         )
         this.letter.ctx.arc(
           this.letter.options.x,
           this.letter.options.y,
           this.circleSize,
           0,
-          PhaseBlast.Tau
+          PhaseBlast.Tau,
         )
         this.letter.ctx.fill()
 
@@ -401,11 +401,15 @@ class PhaseBalloon extends PhaseState {
         this.baloonY += this.vy -= options.gravity // minus gravity to make the balloon float up
         ctx.fillStyle = this.letter.options.color.toHSLA()
         this.drawBalloon(this.baloonX, this.baloonY, this.baloonSize)
-        this.drawBalloonString(this.baloonX, this.baloonY, this.baloonY + this.baloonSize)
+        this.drawBalloonString(
+          this.baloonX,
+          this.baloonY,
+          this.baloonY + this.baloonSize,
+        )
 
         this.letter.drawLetter(
           this.baloonX + this.letter.options.offsetX,
-          this.baloonY + this.letter.options.offsetY + this.baloonSize
+          this.baloonY + this.letter.options.offsetY + this.baloonSize,
         )
       }
     }
@@ -428,7 +432,7 @@ class PhaseBalloon extends PhaseState {
       x - size / 4,
       y - size,
       x,
-      y - size
+      y - size,
     )
     ctx.bezierCurveTo(x + size / 4, y - size, x + size / 2, y - size / 2, x, y)
     ctx.fill()

@@ -1,5 +1,5 @@
 import cn from '@hsp/ui/utils/cn'
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 interface MarkdownTypographyProps {
   children: ReactNode
@@ -60,7 +60,7 @@ export default function MarkdownTypography({
         '[&_em]:italic',
         '[&_i]:italic',
         // Small text
-        "[&_small]:text-sm [&_small]:font-medium [&_small]:leading-none",
+        '[&_small]:text-sm [&_small]:font-medium [&_small]:leading-none',
         className,
       )}
     >

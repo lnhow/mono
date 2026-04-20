@@ -1,9 +1,9 @@
 'use client'
-import { memo, PropsWithChildren, useEffect } from 'react'
+import { useSetAtom } from 'jotai'
+import { memo, type PropsWithChildren, useEffect } from 'react'
 import { io } from 'socket.io-client'
 import { sessionAtom, socketAtom } from './store'
-import { useSetAtom } from 'jotai'
-import { EServerToClientEvents, GrtSocket } from './type/socket'
+import { EServerToClientEvents, type GrtSocket } from './type/socket'
 
 const getSocketUrl = () => {
   return `${process.env.NEXT_PUBLIC_API_URL}/api/guesart/v1`

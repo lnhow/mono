@@ -134,7 +134,7 @@ class BackgroundDrawer {
   static isDoneLoading = false
   static backgroundColor = new LetterColor(
     options.canvas.backgroundLoading.h,
-    options.canvas.backgroundLoading.s
+    options.canvas.backgroundLoading.s,
   )
   public static start() {
     BackgroundDrawer.tick = 0
@@ -150,8 +150,8 @@ class BackgroundDrawer {
       }
       BackgroundDrawer.drawBackground(
         BackgroundDrawer.backgroundColor.toHSLA(
-          options.canvas.backgroundLoading.lMax
-        )
+          options.canvas.backgroundLoading.lMax,
+        ),
       )
       return true
     }
@@ -163,16 +163,16 @@ class BackgroundDrawer {
     const ctx = Scene.ctx
     const progress = Math.min(
       BackgroundDrawer.tick / options.canvas.backgroundLoading.time,
-      1
+      1,
     )
     ctx.fillStyle = BackgroundDrawer.backgroundColor.toHSLA(
       options.canvas.backgroundLoading.l +
         Math.min(
           BackgroundDrawer.tick / options.canvas.backgroundLoading.time,
-          1
+          1,
         ) *
           (options.canvas.backgroundLoading.lMax -
-            options.canvas.backgroundLoading.l)
+            options.canvas.backgroundLoading.l),
     )
     ctx.fillRect(0, 0, Scene.width, Scene.height)
     if (progress === 1) {

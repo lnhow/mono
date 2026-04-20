@@ -1,13 +1,13 @@
-import Color from './Color'
-import Scene from './Scene'
+import type Color from './Color'
 import options from './options'
+import Scene from './Scene'
 
 export default class Shard {
   x: number
   y: number
   dx: number
   dy: number
-  prevPoints: { x: number, y: number }[] = []
+  prevPoints: { x: number; y: number }[] = []
   color: Color
   alive: boolean
   size: number

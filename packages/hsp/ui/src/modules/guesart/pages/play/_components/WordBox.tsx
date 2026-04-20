@@ -1,5 +1,5 @@
 import { resizeUnsplashImage } from '@hsp/ui/modules/guesart/utils'
-import { TGameState } from '../_state/store'
+import type { TGameState } from '../_state/store'
 
 const IMAGE_WIDTH = 256 // px
 
@@ -8,7 +8,10 @@ const WordBox = ({
   wordImg,
   title,
   className,
-}: Pick<TGameState['round'], 'word' | 'wordImg'> & { title: string, className?: string }) => {
+}: Pick<TGameState['round'], 'word' | 'wordImg'> & {
+  title: string
+  className?: string
+}) => {
   const imgUrl = wordImg ? resizeUnsplashImage(wordImg, IMAGE_WIDTH) : ''
 
   return (

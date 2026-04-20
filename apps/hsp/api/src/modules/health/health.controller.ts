@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common'
-import { PrismaService } from '../_prisma/prisma.service'
+import type { PrismaService } from '../_prisma/prisma.service'
 // import { ApiTags } from '@nestjs/swagger'
 
 // @ApiTags('Health')

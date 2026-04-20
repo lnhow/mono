@@ -2,7 +2,13 @@
 
 import { Button, ButtonLink } from '@hsp/ui/components/button'
 import cn from '@hsp/ui/utils/cn'
-import { memo, RefObject, useCallback, useImperativeHandle, useRef } from 'react'
+import {
+  memo,
+  type RefObject,
+  useCallback,
+  useImperativeHandle,
+  useRef,
+} from 'react'
 import { LuExternalLink, LuRefreshCcw } from 'react-icons/lu'
 
 export interface IframeHandle {
@@ -39,7 +45,7 @@ export default memo(function ComparisonIframe({
       reload: reloadIframe,
       get iframe() {
         return refIframe.current
-      }
+      },
     }
   })
 

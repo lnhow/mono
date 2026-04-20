@@ -1,8 +1,8 @@
 import { NwVerticalDivider } from '@hsp/ui/../v1/components/common/NwDivider/Vertical'
-import Link from '@hsp/ui/../v1/shared/components/navigation/Link'
-import { MdOutlineHome, MdOutlineApps } from 'react-icons/md'
-import { getRequestLocale, getTranslation } from '@i18n/server'
 import { nsCommon } from '@hsp/ui/../v1/components/common/types'
+import Link from '@hsp/ui/../v1/shared/components/navigation/Link'
+import { getRequestLocale, getTranslation } from '@i18n/server'
+import { MdOutlineApps, MdOutlineHome } from 'react-icons/md'
 
 export default async function Navbar() {
   const { t } = await getTranslation(nsCommon)

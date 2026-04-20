@@ -1,20 +1,24 @@
 'use client'
-import {
-  useRef,
-  useState,
-  useEffect,
-  useCallback,
-  SyntheticEvent,
-  memo,
-  startTransition,
-} from 'react'
-import debounce from 'lodash.debounce'
-import { useAtomValue } from 'jotai'
 import { socketAtom } from '@hsp/ui/modules/guesart/state/store'
 import {
   EClientToServerEvents,
   EServerToClientEvents,
 } from '@hsp/ui/modules/guesart/state/type/socket'
+import { breakpoints } from '@hsp/ui/styles/const'
+import cn from '@hsp/ui/utils/cn'
+import { useAtomValue } from 'jotai'
+import debounce from 'lodash.debounce'
+import {
+  memo,
+  type SyntheticEvent,
+  startTransition,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
+import Container from '../../../_components/Container'
+import { useIsDrawer } from '../../../_state/hooks'
 import {
   DEFAULT_BRUSH_SIZES,
   DEFAULT_COLOR,
@@ -22,12 +26,8 @@ import {
   ID_CANVAS_CONTAINER,
   loadImageToCanvas,
 } from './const'
-import ToolsPanel from './ToolsPanel'
 import InfoPanel from './InfoPanel'
-import Container from '../../../_components/Container'
-import { breakpoints } from '@hsp/ui/styles/const'
-import { useIsDrawer } from '../../../_state/hooks'
-import cn from '@hsp/ui/utils/cn'
+import ToolsPanel from './ToolsPanel'
 
 const RoundPlay = memo(function RoundPlay() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)

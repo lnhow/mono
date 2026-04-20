@@ -9,29 +9,25 @@
   "publishConfig": {
     "access": "public"
   },
-  "scripts": {
-    "lint": "eslint --ext .ts,.tsx ."
-  },
+  "scripts": {},
   "dependencies": {
     "accept-language": "3.0.18",
-    "react-cookie": "7.1.0",
-    "react-i18next": "15.4.1",
     "i18next": "24.2.3",
     "i18next-browser-languagedetector": "8.0.4",
-    "i18next-resources-to-backend": "1.2.1"
+    "i18next-resources-to-backend": "1.2.1",
+    "react-cookie": "7.1.0",
+    "react-i18next": "15.4.1"
   },
   "devDependencies": {
+    "@repo/tsconfig": "workspace:*",
     "@types/node": "catalog:base",
     "@types/react": "catalog:gui",
     "@types/react-dom": "catalog:gui",
-    "@repo/tsconfig": "workspace:*",
-    "@repo/eslint-config": "workspace:*",
-    "eslint": "catalog:dev",
     "typescript": "catalog:dev"
   },
   "peerDependencies": {
+    "next": "catalog:gui",
     "react": "catalog:gui",
-    "react-dom": "catalog:gui",
-    "next": "catalog:gui"
+    "react-dom": "catalog:gui"
   }
 }

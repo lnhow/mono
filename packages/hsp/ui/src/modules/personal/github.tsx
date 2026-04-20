@@ -1,6 +1,6 @@
 import { ButtonLink } from '@hsp/ui/components/button'
-import { LuGithub } from 'react-icons/lu'
 import Tooltip from '@hsp/ui/components/tooltip'
+import { LuGithub } from 'react-icons/lu'
 
 export default function PersonalGithub() {
   return (

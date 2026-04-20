@@ -1,10 +1,10 @@
 import { useAtomValue, useSetAtom } from 'jotai'
+import { useEffect, useMemo } from 'react'
 import { sessionAtom, socketAtom } from '../../../state/store'
 import {
   EServerToClientEvents,
-  GrtServerToClientEventsPayload,
+  type GrtServerToClientEventsPayload,
 } from '../../../state/type/socket'
-import { useEffect, useMemo } from 'react'
 import { roomPlayersAtom, roomRoundAtom } from './store'
 
 export const useIsDrawer = () => {
@@ -31,10 +31,7 @@ export const useListenRoomPlayers = () => {
       setPlayers(players)
     }
 
-    socket.on(
-      EServerToClientEvents.ROOM_USERS,
-      updateUserInfo,
-    )
+    socket.on(EServerToClientEvents.ROOM_USERS, updateUserInfo)
     return () => {
       socket.off(EServerToClientEvents.ROOM_USERS, updateUserInfo)
     }

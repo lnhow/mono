@@ -1,10 +1,9 @@
 import '../style.css'
 
+import GUI from 'lil-gui'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
-
-import GUI from 'lil-gui'
 
 const gui = new GUI({
   title: 'Debug',
@@ -141,7 +140,9 @@ const material = new THREE.MeshPhysicalMaterial({
 })
 
 gui.add(material, 'clearcoat', 0, 1, 0.0001).name('Clearcoat')
-gui.add(material, 'clearcoatRoughness', 0, 1, 0.0001).name('Clearcoat Roughness')
+gui
+  .add(material, 'clearcoatRoughness', 0, 1, 0.0001)
+  .name('Clearcoat Roughness')
 
 gui.add(material, 'sheen', 0, 1, 0.0001).name('Sheen')
 gui.addColor(material, 'sheenColor').name('Sheen Color')
@@ -149,9 +150,12 @@ gui.add(material, 'sheenRoughness', 0, 1, 0.0001).name('Sheen Roughness')
 
 gui.add(material, 'iridescence', 0, 1, 0.0001).name('Iridescence')
 gui.add(material, 'iridescenceIOR', 1, 2, 0.0001).name('Iridescence IOR')
-gui.add(material.iridescenceThicknessRange, '0', 0, 1000, 1).name('Iridescence Thickness Range Min')
-gui.add(material.iridescenceThicknessRange, '1', 0, 1000, 1).name('Iridescence Thickness Range Max')
-
+gui
+  .add(material.iridescenceThicknessRange, '0', 0, 1000, 1)
+  .name('Iridescence Thickness Range Min')
+gui
+  .add(material.iridescenceThicknessRange, '1', 0, 1000, 1)
+  .name('Iridescence Thickness Range Max')
 
 gui.add(material, 'roughness', 0, 1, 0.0001).name('Roughness')
 gui.add(material, 'metalness', 0, 1, 0.0001).name('Metalness')
@@ -161,7 +165,6 @@ gui.add(material, 'metalness', 0, 1, 0.0001).name('Metalness')
 // const pointLight = new THREE.PointLight(0xffffff, 30)
 // pointLight.position.set(2, 3, 4)
 // scene.add(pointLight)
-
 
 const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.5, 64, 64), material)
 sphere.position.x = -1.5
@@ -175,9 +178,6 @@ const torus = new THREE.Mesh(
 torus.position.x = 1.5
 
 scene.add(sphere, plane, torus)
-
-
-
 
 // View
 // Setup camera and renderer
@@ -220,9 +220,6 @@ window.addEventListener('resize', () => {
   // In case user change screen pixel ratio
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
-
-
-
 
 // Controls
 const controls = new OrbitControls(camera, canvas)

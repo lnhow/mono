@@ -1,17 +1,16 @@
 import { defineCollection, defineConfig } from '@content-collections/core'
 import { compileMDX } from '@content-collections/mdx'
-import { z } from 'zod'
-
-// Markdown processing
-import remarkGfm from 'remark-gfm'
-import rehypeSlug from 'rehype-slug'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypePrettyCode from 'rehype-pretty-code'
-import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
+import { createTocList, type TocItem } from '@repo/remark-toc'
 import readingTime from 'reading-time'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
+import rehypePrettyCode from 'rehype-pretty-code'
+import rehypeSlug from 'rehype-slug'
 // Table of content generation
 import { remark } from 'remark'
-import { createTocList, TocItem } from '@repo/remark-toc'
+// Markdown processing
+import remarkGfm from 'remark-gfm'
+import { z } from 'zod'
 
 const rehypePrettyCodeOptions: Partial<RehypePrettyCodeOptions> = {
   theme: {

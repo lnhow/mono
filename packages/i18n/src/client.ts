@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react'
 import i18next from 'i18next'
+import LanguageDetector from 'i18next-browser-languagedetector'
+import resourcesToBackend from 'i18next-resources-to-backend'
+import { useEffect, useState } from 'react'
+import { useCookies } from 'react-cookie'
 import {
   initReactI18next,
   useTranslation as useTranslationOrg,
 } from 'react-i18next'
-import { useCookies } from 'react-cookie'
-import resourcesToBackend from 'i18next-resources-to-backend'
-import LanguageDetector from 'i18next-browser-languagedetector'
-import { DEFAULT_COOKIE_NAMES, TGetOptions } from './types'
+import { DEFAULT_COOKIE_NAMES, type TGetOptions } from './types'
 
 export default function initI18nextClient({
   getOptions,
   languages,
   langCookieName = DEFAULT_COOKIE_NAMES.LANG,
-}: { getOptions: TGetOptions,} & {
+}: { getOptions: TGetOptions } & {
   languages: string[]
   langCookieName?: string
 }) {
@@ -25,8 +25,8 @@ export default function initI18nextClient({
     .use(
       resourcesToBackend(
         (language: string, namespace: string) =>
-          import(`@i18n/langs/${language}/${namespace}.json`)
-      )
+          import(`@i18n/langs/${language}/${namespace}.json`),
+      ),
     )
     .init({
       ...getOptions(),
@@ -42,7 +42,7 @@ export default function initI18nextClient({
     lang?: string,
     options: {
       keyPrefix?: string
-    } = {}
+    } = {},
   ) {
     const [cookies, setCookie] = useCookies([langCookieName])
     const ret = useTranslationOrg(ns, options)
@@ -66,7 +66,7 @@ export default function initI18nextClient({
       useEffect(() => {
         if (cookies.i18next === lang) return
         setCookie(langCookieName, lang, { path: '/' })
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [lang, cookies.i18next])
     }
     return ret

@@ -1,6 +1,6 @@
 'use client'
 import { atom } from 'jotai'
-import { GrtSocket } from './type/socket'
+import type { GrtSocket } from './type/socket'
 
 export type SocketStateType = {
   socket: GrtSocket | null
@@ -16,5 +16,3 @@ export const sessionAtom = atom({
   userId: '',
   userName: '',
 })
-
-

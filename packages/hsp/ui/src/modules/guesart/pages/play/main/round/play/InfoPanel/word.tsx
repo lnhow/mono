@@ -1,16 +1,14 @@
-import { memo } from 'react'
-import { roomRoundAtom } from '../../../../_state/store'
-import { useAtomValue } from 'jotai'
-import { useIsDrawer } from '../../../../_state/hooks'
 import { resizeUnsplashImage } from '@hsp/ui/modules/guesart/utils'
+import { useAtomValue } from 'jotai'
+import { memo } from 'react'
+import { useIsDrawer } from '../../../../_state/hooks'
+import { roomRoundAtom } from '../../../../_state/store'
 
 export const Word = memo(function Word() {
   const { word, wordImg } = useAtomValue(roomRoundAtom)
   const isDrawer = useIsDrawer()
 
-  return (
-    <InternalWord word={word} wordImg={wordImg} isDrawer={isDrawer} />
-  )
+  return <InternalWord word={word} wordImg={wordImg} isDrawer={isDrawer} />
 })
 
 function InternalWord({

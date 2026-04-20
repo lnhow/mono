@@ -1,8 +1,7 @@
 {
   "recommendations": [
     // Static analysis linters
-    "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint",
+    "biomejs.biome",
 
     // Making errors & todos more obvious
     "usernamehw.errorlens",

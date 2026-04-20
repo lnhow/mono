@@ -1,5 +1,8 @@
 export default class LetterColor {
-  constructor(private hue: number, private saturation = 80) {}
+  constructor(
+    private hue: number,
+    private saturation = 80,
+  ) {}
   toHSLA(light = 50, alp = 1) {
     return `hsla(${this.hue}, ${this.saturation}%, ${light}%, ${alp})`
   }

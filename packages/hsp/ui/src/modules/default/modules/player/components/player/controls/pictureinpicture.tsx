@@ -1,15 +1,19 @@
-import { LuPictureInPicture2 } from 'react-icons/lu'
-import { PlayerButton } from '../_base/button'
-import { PlayerBaseSubCompProps, PlayerViewControlsProps } from '../types'
-import { useCallback, useSyncExternalStore } from 'react'
+import Tooltip from '@hsp/ui/components/tooltip'
 import {
   detectPictureInPictureSupport,
-  TRequestDPIPOptions,
-  WindowWithDocumentPictureInPicture,
+  type TRequestDPIPOptions,
+  type WindowWithDocumentPictureInPicture,
 } from '@hsp/ui/utils/browser/pictureinpicture'
+import { useCallback, useSyncExternalStore } from 'react'
+import { LuPictureInPicture2 } from 'react-icons/lu'
+import { PlayerButton } from '../_base/button'
 import { useKeydown } from '../_utils/useKeydown'
-import { HOTKEYS, TOOLTIPS } from '../types'
-import Tooltip from '@hsp/ui/components/tooltip'
+import {
+  HOTKEYS,
+  type PlayerBaseSubCompProps,
+  type PlayerViewControlsProps,
+  TOOLTIPS,
+} from '../types'
 
 const PictureInPictureType = {
   video: {
@@ -112,9 +116,7 @@ const ButtonPictureInPictureBase = ({
   handleClick: () => void
 }) => {
   return (
-    <Tooltip
-      label={TOOLTIPS.pictureInPicture}
-    >
+    <Tooltip label={TOOLTIPS.pictureInPicture}>
       <PlayerButton onClick={handleClick}>
         <LuPictureInPicture2 />
       </PlayerButton>

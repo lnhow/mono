@@ -9,6 +9,7 @@ button.react-button {
   transition: opacity 0.3s;
 }
 
-button.react-button:hover, button.react-button:focus {
+button.react-button:hover,
+button.react-button:focus {
   --lightness: 80%;
 }

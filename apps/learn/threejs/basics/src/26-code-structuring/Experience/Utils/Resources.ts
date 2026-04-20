@@ -1,6 +1,12 @@
-import { CubeTexture, CubeTextureLoader, EventDispatcher, Texture, TextureLoader } from 'three'
+import {
+  type CubeTexture,
+  CubeTextureLoader,
+  EventDispatcher,
+  type Texture,
+  TextureLoader,
+} from 'three'
+import { type GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import type { Source } from '../sources'
-import { GLTFLoader, type GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 export type LoadedFile = GLTF | Texture | CubeTexture
 
@@ -37,7 +43,7 @@ export default class Resources extends EventDispatcher<ResourceEventMap> {
       }
 
       loader.load(
-        // @ts-ignore Typescript cannot infer the params type of the loader correctly
+        // @ts-expect-error Typescript cannot infer the params type of the loader correctly
         source.path,
         (file) => {
           this.onLoaded(source, file)

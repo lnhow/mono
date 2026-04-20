@@ -1,5 +1,5 @@
-import { Getter, Setter } from 'jotai'
-import { GrtSocket } from '../../../../state/type/socket'
+import type { Getter, Setter } from 'jotai'
+import type { GrtSocket } from '../../../../state/type/socket'
 
 export type TInitListener = (
   socket: GrtSocket,

@@ -1,7 +1,7 @@
 import {
-  pipeline,
-  env,
   type AutomaticSpeechRecognitionPipeline,
+  env,
+  pipeline,
   TextStreamer,
 } from '@huggingface/transformers'
 import {
@@ -25,44 +25,51 @@ class TranscribePipeline {
   static streamer: TextStreamer | null = null
 
   static async switchModel(modelName: ModelOption) {
-    await this.instance?.dispose()
-    this.model = modelName
-    this.instance = null
+    await TranscribePipeline.instance?.dispose()
+    TranscribePipeline.model = modelName
+    TranscribePipeline.instance = null
   }
 
   static async loadModel(initializing = false) {
     if (TranscribePipeline.instance) {
       self.postMessage({
         type: 'model-loaded',
-        modelName: this.model,
+        modelName: TranscribePipeline.model,
         initializing,
       } as ResModelLoaded)
       return
     }
 
     try {
-      this.instance = await pipeline<'automatic-speech-recognition'>(
-        'automatic-speech-recognition',
-        DEFAULT_MODEL,
+      TranscribePipeline.instance =
+        await pipeline<'automatic-speech-recognition'>(
+          'automatic-speech-recognition',
+          DEFAULT_MODEL,
+          {
+            progress_callback: (data) => {
+              self.postMessage({
+                type: 'model-loading',
+                progress: data,
+              } as ResModelLoading)
+            },
+          },
+        )
+      TranscribePipeline.streamer = new TextStreamer(
+        TranscribePipeline.instance.tokenizer,
         {
-          progress_callback: (data) => {
+          skip_prompt: true,
+          callback_function: (text) => {
+            // console.log('[devlog]: Transcription update:', text)
             self.postMessage({
-              type: 'model-loading',
-              progress: data,
-            } as ResModelLoading)
+              type: 'transcribing',
+              output: { text },
+            } as ResTranscribing)
           },
         },
       )
-      this.streamer = new TextStreamer(this.instance.tokenizer, {
-        skip_prompt: true,
-        callback_function: (text) => {
-          // console.log('[devlog]: Transcription update:', text)
-          self.postMessage({ type: 'transcribing', output: { text } } as ResTranscribing)
-        },
-      })
       self.postMessage({
         type: 'model-loaded',
-        modelName: this.model,
+        modelName: TranscribePipeline.model,
         initializing,
       } as ResModelLoaded)
     } catch (error) {

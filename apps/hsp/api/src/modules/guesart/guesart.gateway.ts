@@ -1,13 +1,4 @@
 import {
-  SubscribeMessage,
-  WebSocketGateway,
-  OnGatewayInit,
-  OnGatewayConnection,
-  OnGatewayDisconnect,
-  MessageBody,
-  ConnectedSocket,
-} from '@nestjs/websockets'
-import {
   Inject,
   UseFilters,
   UseGuards,
@@ -15,21 +6,30 @@ import {
   ValidationPipe,
 } from '@nestjs/common'
 import {
-  EGrtErrorCode,
-  GrtServer,
-  GrtSocket,
-  GrtWsException,
-  EClientToServerEvents,
-  GrtClientToServerEventsPayload,
-  GrtWsResponse,
-  EServerToClientEvents,
-} from './types/ws'
-import { GrtService } from './guesart.service'
-import { GrtSessionService } from './session/session.service'
-import { GrtAuthGuard } from './guesart.guard'
+  ConnectedSocket,
+  MessageBody,
+  type OnGatewayConnection,
+  type OnGatewayDisconnect,
+  type OnGatewayInit,
+  SubscribeMessage,
+  WebSocketGateway,
+} from '@nestjs/websockets'
 import { GrtWsExceptionsFilter } from './guesart.exception'
+import { GrtAuthGuard } from './guesart.guard'
+import { GrtService } from './guesart.service'
 import { GrtRoomService } from './room/room.service'
-import { RoomBaseDto, RoomCreateRequestDto } from './room/room.type'
+import type { RoomBaseDto, RoomCreateRequestDto } from './room/room.type'
+import { GrtSessionService } from './session/session.service'
+import {
+  EClientToServerEvents,
+  EGrtErrorCode,
+  EServerToClientEvents,
+  type GrtClientToServerEventsPayload,
+  type GrtServer,
+  type GrtSocket,
+  GrtWsException,
+  type GrtWsResponse,
+} from './types/ws'
 
 @UseFilters(new GrtWsExceptionsFilter())
 @UseGuards(GrtAuthGuard) // Run on every events, except handleConnection and handleDisconnect

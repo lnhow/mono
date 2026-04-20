@@ -1,15 +1,15 @@
-import { ComponentPropsWithoutRef } from 'react'
-import { Controller, FieldValues } from 'react-hook-form'
-
-import genericMemo from '@hsp/ui/utils/react/generic-memo'
+import { Label } from '@hsp/ui/components/label'
 import {
   Select,
-  SelectTrigger,
   SelectContent,
   SelectItem,
+  SelectTrigger,
   SelectValue,
 } from '@hsp/ui/components/select'
-import { Label } from '@hsp/ui/components/label'
+
+import genericMemo from '@hsp/ui/utils/react/generic-memo'
+import type { ComponentPropsWithoutRef } from 'react'
+import { Controller, type FieldValues } from 'react-hook-form'
 
 export const FormSelect = genericMemo(function FormSelect<
   T extends FieldValues,
@@ -25,10 +25,12 @@ export const FormSelect = genericMemo(function FormSelect<
   label: string
   InputProps?: ComponentPropsWithoutRef<typeof Select>
   placeholder?: string
-  options: {
-    value: string
-    label: string
-  }[] | string[]
+  options:
+    | {
+        value: string
+        label: string
+      }[]
+    | string[]
 } & Omit<ComponentPropsWithoutRef<typeof Controller<T>>, 'render'>) {
   return (
     <div>
@@ -44,7 +46,8 @@ export const FormSelect = genericMemo(function FormSelect<
             <div>
               <Select
                 {...InputProps}
-                onValueChange={field.onChange} defaultValue={field.value}
+                onValueChange={field.onChange}
+                defaultValue={field.value}
               >
                 <SelectTrigger>
                   <SelectValue placeholder={placeholder} />

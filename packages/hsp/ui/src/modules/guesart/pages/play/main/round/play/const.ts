@@ -1,4 +1,4 @@
-import { SyntheticEvent } from 'react'
+import type { SyntheticEvent } from 'react'
 
 export const ID_CANVAS_CONTAINER = 'canvas-container'
 export const DEFAULT_BRUSH_SIZES = [4, 8, 16] as const
@@ -13,14 +13,17 @@ export const DRAWING_COLORS = [
   '#800080', // Purple - For shadows and depth
   '#FFA500', // Orange - For sunset tones and warm accents
   '#808080', // Gray - For shading and neutral tones
-  '#20B2AA',  // Light Sea Green - For ocean and tropical themes
-  '#DDA0DD',  // Plum - For soft, dreamy effects
-  '#CD853F',  // Peru - For wood and earth textures
-  '#4B0082'   // Indigo - For deep shadows and night scenes
+  '#20B2AA', // Light Sea Green - For ocean and tropical themes
+  '#DDA0DD', // Plum - For soft, dreamy effects
+  '#CD853F', // Peru - For wood and earth textures
+  '#4B0082', // Indigo - For deep shadows and night scenes
 ] as const
 export const DEFAULT_COLOR = DRAWING_COLORS[0]
 
-export type CanvasContextGetter = () => CanvasRenderingContext2D | null | undefined
+export type CanvasContextGetter = () =>
+  | CanvasRenderingContext2D
+  | null
+  | undefined
 
 export const getPointerCoords = (
   canvas: HTMLCanvasElement | null,

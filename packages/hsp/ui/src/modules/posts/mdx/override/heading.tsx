@@ -1,6 +1,6 @@
+import Link from '@hsp/ui/components/link'
 import { createElement } from 'react'
 import { MdLink } from 'react-icons/md'
-import Link from '@hsp/ui/components/link'
 
 export default function createHeading(
   tagName: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6',
@@ -17,9 +17,13 @@ export default function createHeading(
         id,
         className: 'group scroll-mt-20 relative flex items-center break-words',
       },
-      createElement('span', {
-        className: 'break-words max-w-full',
-      }, children),
+      createElement(
+        'span',
+        {
+          className: 'break-words max-w-full',
+        },
+        children,
+      ),
       id &&
         createElement(
           Link,

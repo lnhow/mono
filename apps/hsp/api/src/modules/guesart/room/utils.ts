@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto'
-import { ChatResponseDto, ESystemMessageContent } from './room.type'
-import { SessionDto } from '../session/session.type'
+import type { SessionDto } from '../session/session.type'
+import type { ChatResponseDto, ESystemMessageContent } from './room.type'
 
 export const DEFAULT_DATE = new Date(0)
 export const ROOM_PREFIX = 'room'

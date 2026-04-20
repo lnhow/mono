@@ -1,10 +1,9 @@
 'use client'
 
-import * as React from 'react'
-import { Accordion as AccordionPrimitive } from 'radix-ui'
-import { LuChevronDown as ChevronDown } from 'react-icons/lu'
-
 import cn from '@hsp/ui/utils/cn'
+import { Accordion as AccordionPrimitive } from 'radix-ui'
+import * as React from 'react'
+import { LuChevronDown as ChevronDown } from 'react-icons/lu'
 
 const Accordion = AccordionPrimitive.Root
 
@@ -54,4 +53,4 @@ const AccordionContent = React.forwardRef<
 ))
 AccordionContent.displayName = AccordionPrimitive.Content.displayName
 
-export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }
+export { Accordion, AccordionContent, AccordionItem, AccordionTrigger }

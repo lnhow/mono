@@ -1,5 +1,5 @@
 import PageLobby from '@hsp/ui/modules/guesart/pages/lobby'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'guesart',

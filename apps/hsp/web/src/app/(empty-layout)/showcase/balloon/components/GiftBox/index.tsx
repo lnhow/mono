@@ -1,10 +1,10 @@
 // Ref: https://codesandbox.io/p/sandbox/gift-box-css-v1vrb?file=%2Fsrc%2FGiftBoxAnimation.js%3A27%2C12-27%2C19
-import { ComponentPropsWithoutRef } from 'react'
+import type { ComponentPropsWithoutRef } from 'react'
 import './style.css'
+import cn from '@hsp/ui/utils/cn'
+import Image from 'next/image'
 import box from './box.png'
 import boxLid from './box-lid.png'
-import Image from 'next/image'
-import cn from '@hsp/ui/utils/cn'
 
 export default function GiftBox({
   started,
@@ -16,7 +16,7 @@ export default function GiftBox({
       data-start={started}
       className={cn(
         'group box flex flex-col justify-center items-center fixed bottom-8 left-[calc(50%-40px)] w-20',
-        'data-[start=true]:pointer-events-none'
+        'data-[start=true]:pointer-events-none',
       )} //
       title="Nhấn để mở"
     >

@@ -6,16 +6,16 @@
  * Use `createBridgeComponent` from `@module-federation/bridge-react` instead.
  */
 
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import Card, { type CardProps } from '../card'
-import { StrictMode } from 'react'
 
 export const mount = (el: HTMLElement, props: CardProps) => {
   const root = createRoot(el)
   root.render(
     <StrictMode>
       <Card {...props} />
-    </StrictMode>
+    </StrictMode>,
   )
 
   return () => {

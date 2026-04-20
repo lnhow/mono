@@ -1,8 +1,8 @@
+import Slugger from 'github-slugger'
 import type { Root } from 'mdast'
-import type { VFile } from 'vfile'
 
 import { visit } from 'unist-util-visit'
-import Slugger from 'github-slugger'
+import type { VFile } from 'vfile'
 
 export interface TocItem {
   title: string
@@ -12,7 +12,7 @@ export interface TocItem {
 
 export function createTocList() {
   return (tree: Root, file: VFile) => {
-    // Notes: 
+    // Notes:
     // We match rehype-slug's behavior by using github-slugger, which ensures unique slugs
     const slugger = new Slugger()
     const toc = [] as TocItem[]
@@ -24,7 +24,7 @@ export function createTocList() {
           title += child.value
         }
       })
-      
+
       const slug = slugger.slug(title)
       toc.push({ title, level: node.depth, slug })
     })

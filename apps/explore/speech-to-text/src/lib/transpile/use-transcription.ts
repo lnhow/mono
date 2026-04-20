@@ -1,13 +1,13 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import type { ProgressInfo } from '@huggingface/transformers'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import {
-  SAMPLING_RATE,
   type ModelOption,
   type ReqLoadModel,
   type ReqTranscribe,
+  SAMPLING_RATE,
   type WorkerResponse,
 } from './types'
 import TranscriptionWorker from './worker.ts?worker'
-import type { ProgressInfo } from '@huggingface/transformers'
 
 type TranscriptionResult = {
   text: string

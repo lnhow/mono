@@ -1,19 +1,19 @@
 'use client'
-import { button, Leva, useControls } from 'leva'
-import { Canvas, useFrame } from '@react-three/fiber'
 import {
+  type CollideEvent,
   Physics,
+  type Triplet,
+  useBox,
   useContactMaterial,
   usePlane,
   useSphere,
-  Triplet,
-  useBox,
-  CollideEvent,
 } from '@react-three/cannon'
 import { OrbitControls, PerformanceMonitor } from '@react-three/drei'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { button, Leva, useControls } from 'leva'
+import { type ComponentType, useEffect, useState } from 'react'
 // import { Perf } from 'r3f-perf'
 import { BoxGeometry, MeshStandardMaterial, SphereGeometry } from 'three'
-import { ComponentType, useEffect, useState } from 'react'
 
 const randomBetween = (between = 1) => (Math.random() - 0.5) * between * 2
 interface ShapeOptions {
@@ -51,9 +51,9 @@ export default function Scene() {
         createBoxProps(Math.max(0.2, Math.random() * 0.5)),
       ])
     }),
-    'Reset': button(() => {
+    Reset: button(() => {
       setShapes([])
-    })
+    }),
   })
 
   return (
@@ -119,11 +119,13 @@ interface ShapeProps {
   radius: number
 }
 const onShapeCollide = (e: CollideEvent) => {
-  document.dispatchEvent(new CustomEvent<DocumentEventMap['shape-collide']>('shape-collide', {
-    detail: {
-      force: e.contact.impactVelocity
-    }
-  }))
+  document.dispatchEvent(
+    new CustomEvent<DocumentEventMap['shape-collide']>('shape-collide', {
+      detail: {
+        force: e.contact.impactVelocity,
+      },
+    }),
+  )
 }
 
 const sphereDefaultOpts = {

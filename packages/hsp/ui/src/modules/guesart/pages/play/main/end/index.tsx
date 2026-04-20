@@ -1,10 +1,10 @@
-import { memo } from 'react'
-import { PlayerListInternal } from '../../sidebar/Players'
-import Container from '../../_components/Container'
-import { useAtomValue } from 'jotai'
-import { roomPlayersAtom } from '../../_state/store'
 import { Card } from '@hsp/ui/components/card'
+import { useAtomValue } from 'jotai'
+import { memo } from 'react'
 import ButtonLeaveRoom from '../../_components/ButtonLeaveRoom'
+import Container from '../../_components/Container'
+import { roomPlayersAtom } from '../../_state/store'
+import { PlayerListInternal } from '../../sidebar/Players'
 
 const GameEnd = memo(function GameEnd() {
   const players = useAtomValue(roomPlayersAtom)

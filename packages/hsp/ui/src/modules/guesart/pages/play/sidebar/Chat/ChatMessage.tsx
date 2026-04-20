@@ -1,15 +1,14 @@
-import { memo } from 'react'
+import cn from '@hsp/ui/utils/cn'
 import { useAtomValue } from 'jotai'
-
+import { memo } from 'react'
 import { sessionAtom } from '../../../../state/store'
+import { ESystemMessageContent } from '../../../../state/type/room'
 import {
   MessageType,
-  TBaseMessage,
-  TSystemMessage,
-  TUserMessage,
+  type TBaseMessage,
+  type TSystemMessage,
+  type TUserMessage,
 } from '../../_state/store'
-import cn from '@hsp/ui/utils/cn'
-import { ESystemMessageContent } from '../../../../state/type/room'
 
 export type ChatMessageProps = {
   msg: TBaseMessage
@@ -68,7 +67,9 @@ const getSystemMessageContent = ({
 }) => {
   const systemMsg = msg as TSystemMessage
   const isCurrentUser = systemMsg.user?.id === metadata.currentUserId
-  const textUserName = isCurrentUser ? 'You' : systemMsg.user?.name || 'A player'
+  const textUserName = isCurrentUser
+    ? 'You'
+    : systemMsg.user?.name || 'A player'
 
   switch (msg.content) {
     case ESystemMessageContent.JOIN_ROOM:

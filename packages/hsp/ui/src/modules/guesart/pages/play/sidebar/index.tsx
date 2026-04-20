@@ -1,6 +1,6 @@
 import cn from '@hsp/ui/utils/cn'
-import PlayersList from './Players'
 import Chat from './Chat'
+import PlayersList from './Players'
 
 export default function Sidebar({ className }: { className?: string }) {
   return (

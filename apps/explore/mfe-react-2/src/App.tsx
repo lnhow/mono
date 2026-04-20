@@ -1,6 +1,6 @@
 import './App.css'
-import Card from 'mfe1/card'
 import Button from 'mfe1/button'
+import Card from 'mfe1/card'
 
 const App = () => {
   return (

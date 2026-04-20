@@ -1,8 +1,7 @@
-import { Server, Socket } from 'socket.io'
-import { EventsMap } from 'socket.io/dist/typed-events'
-import { SessionDto } from '../session/session.type'
-import { WsException, WsResponse } from '@nestjs/websockets'
-import {
+import { WsException, type WsResponse } from '@nestjs/websockets'
+import type { Server, Socket } from 'socket.io'
+import type { EventsMap } from 'socket.io/dist/typed-events'
+import type {
   ChatResponseDto,
   PlayerDto,
   RoomBaseDto,
@@ -10,6 +9,7 @@ import {
   RoomCreateResponseDto,
   RoomInfoResponseDto,
 } from '../room/room.type'
+import type { SessionDto } from '../session/session.type'
 
 // Server to Client Events ======================================
 export enum EServerToClientEvents {

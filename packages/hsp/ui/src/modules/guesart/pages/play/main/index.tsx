@@ -1,11 +1,11 @@
+import { useAtomValue } from 'jotai'
 import { memo } from 'react'
+import { ERoomStatus } from '../../../state/type/room'
+import { roomStatusAtom } from '../_state/store'
 // import RoomRound from "./round";
 import GameEnd from './end'
-import GameStart from './start'
 import GameRound from './round'
-import { useAtomValue } from 'jotai'
-import { roomStatusAtom } from '../_state/store'
-import { ERoomStatus } from '../../../state/type/room'
+import GameStart from './start'
 
 function RoomMain() {
   const status = useAtomValue(roomStatusAtom)

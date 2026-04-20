@@ -3,18 +3,10 @@
   "compilerOptions": {
     "paths": {
       "baseUrl": ["."],
-      "@/*": [
-        "./src/*",
-      ],
-      "@i18n/*": [
-        "./i18n/*",
-      ],
-      "@hsp/ui/*": [
-        "../../../packages/hsp/ui/src/*",
-      ],
-      "content-collections": [
-        "./.content-collections/generated"
-      ]
+      "@/*": ["./src/*"],
+      "@i18n/*": ["./i18n/*"],
+      "@hsp/ui/*": ["../../../packages/hsp/ui/src/*"],
+      "content-collections": ["./.content-collections/generated"]
     },
     "plugins": [
       {
@@ -24,7 +16,7 @@
   },
   "references": [
     {
-      "path": "../../../packages/hsp/ui",
+      "path": "../../../packages/hsp/ui"
     }
   ],
   "include": [
@@ -34,7 +26,5 @@
     "**/*.tsx",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

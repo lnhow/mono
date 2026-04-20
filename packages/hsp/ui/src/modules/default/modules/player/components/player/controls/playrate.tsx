@@ -1,13 +1,13 @@
+import { Button } from '@hsp/ui/components/button'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@hsp/ui/components/popover'
-import { PlayerButton } from '../_base/button'
-import { Button } from '@hsp/ui/components/button'
-import { useHTMLElState } from '@hsp/ui/utils/react/use-html-el-state'
-import { PlayerBaseSubCompProps, TOOLTIPS } from '../types'
 import Tooltip from '@hsp/ui/components/tooltip'
+import { useHTMLElState } from '@hsp/ui/utils/react/use-html-el-state'
+import { PlayerButton } from '../_base/button'
+import { type PlayerBaseSubCompProps, TOOLTIPS } from '../types'
 
 export const PlaybackRates = [0.25, 0.5, 1, 1.5, 1.75, 2]
 

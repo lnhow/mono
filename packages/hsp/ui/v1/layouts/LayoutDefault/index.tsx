@@ -1,6 +1,6 @@
-import { BaseLayoutProps } from '../types'
-import { NavBar } from '../components/Header'
 import Footer from '../components/Footer'
+import { NavBar } from '../components/Header'
+import type { BaseLayoutProps } from '../types'
 
 export type LayoutDefaultProps = BaseLayoutProps
 

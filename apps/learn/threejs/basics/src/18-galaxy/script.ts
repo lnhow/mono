@@ -1,13 +1,13 @@
+import GUI from 'lil-gui'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import GUI from 'lil-gui'
 
 /**
  * Base
  */
 // Debug
 const gui = new GUI({
-  title: 'Config'
+  title: 'Config',
 })
 
 // Canvas
@@ -80,7 +80,7 @@ const galaxyParams = {
   yRadiusOffset: 0.45,
   rotationSpped: -0.5,
   innerColor: '#762DE5',
-  outerColor: '#2E48E6'
+  outerColor: '#2E48E6',
 }
 
 const galaxyMaterial = new THREE.PointsMaterial({
@@ -110,24 +110,43 @@ function createGalaxy() {
     const indexX = i * 3
     const radius = Math.random() * galaxyParams.radius
     const radiusLagAngle = radius * galaxyParams.radiusLag
-    const branchAngle = (i % galaxyParams.branches) / galaxyParams.branches * Math.PI * 2
+    const branchAngle =
+      ((i % galaxyParams.branches) / galaxyParams.branches) * Math.PI * 2
 
-    const randomX = Math.pow(Math.random(), galaxyParams.randomnessPower) * (Math.random() < 0.5 ? -1 : 1) * galaxyParams.randomness * radius
-    const randomY = Math.pow(Math.random(), galaxyParams.randomnessPower) * (Math.random() < 0.5 ? -1 : 1) * galaxyParams.randomness * radius + radius * galaxyParams.yRadiusOffset
-    const randomZ = Math.pow(Math.random(), galaxyParams.randomnessPower) * (Math.random() < 0.5 ? -1 : 1) * galaxyParams.randomness * radius
+    const randomX =
+      Math.random() ** galaxyParams.randomnessPower *
+      (Math.random() < 0.5 ? -1 : 1) *
+      galaxyParams.randomness *
+      radius
+    const randomY =
+      Math.random() ** galaxyParams.randomnessPower *
+        (Math.random() < 0.5 ? -1 : 1) *
+        galaxyParams.randomness *
+        radius +
+      radius * galaxyParams.yRadiusOffset
+    const randomZ =
+      Math.random() ** galaxyParams.randomnessPower *
+      (Math.random() < 0.5 ? -1 : 1) *
+      galaxyParams.randomness *
+      radius
 
-    geometryVertices[indexX] = radius * Math.sin(branchAngle + radiusLagAngle) + randomX
+    geometryVertices[indexX] =
+      radius * Math.sin(branchAngle + radiusLagAngle) + randomX
     geometryVertices[indexX + 1] = randomY
-    geometryVertices[indexX + 2] = radius * Math.cos(branchAngle + radiusLagAngle) + randomZ
+    geometryVertices[indexX + 2] =
+      radius * Math.cos(branchAngle + radiusLagAngle) + randomZ
 
     // Color
     const vertexColor = innerColor.clone()
-    vertexColor.lerp(outerColor, radius * 0.7 / galaxyParams.radius)
+    vertexColor.lerp(outerColor, (radius * 0.7) / galaxyParams.radius)
     colors[indexX] = vertexColor.r
     colors[indexX + 1] = vertexColor.g
     colors[indexX + 2] = vertexColor.b
   }
-  geometry.setAttribute('position', new THREE.BufferAttribute(geometryVertices, 3))
+  geometry.setAttribute(
+    'position',
+    new THREE.BufferAttribute(geometryVertices, 3),
+  )
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
 
   galaxy = new THREE.Points(geometry, galaxyMaterial)
@@ -137,18 +156,78 @@ createGalaxy()
 
 gui.close()
 const particleFolder = gui.addFolder('Particle')
-particleFolder.add(galaxyParams, 'count').name('Particle Count').min(100).max(1000000).step(100).onFinishChange(createGalaxy)
-particleFolder.add(galaxyParams, 'size').name('Particle Size').min(0.001).max(0.1).step(0.001).onFinishChange(createGalaxy)
+particleFolder
+  .add(galaxyParams, 'count')
+  .name('Particle Count')
+  .min(100)
+  .max(1000000)
+  .step(100)
+  .onFinishChange(createGalaxy)
+particleFolder
+  .add(galaxyParams, 'size')
+  .name('Particle Size')
+  .min(0.001)
+  .max(0.1)
+  .step(0.001)
+  .onFinishChange(createGalaxy)
 const galaxyFolder = gui.addFolder('Galaxy')
-galaxyFolder.add(galaxyParams, 'radius').name('Radius').min(1).max(40).step(1).onFinishChange(createGalaxy)
-galaxyFolder.add(galaxyParams, 'radiusLag').name('Spread').min(-5).max(5).step(0.001).onFinishChange(createGalaxy)
-galaxyFolder.add(galaxyParams, 'branches').name('Branches').min(2).max(20).step(1).onFinishChange(createGalaxy)
-galaxyFolder.add(galaxyParams, 'randomness').name('Randomness').min(0).max(2).step(0.001).onFinishChange(createGalaxy)
-galaxyFolder.add(galaxyParams, 'randomnessPower').name('Randomness Power').min(1).max(10).step(0.01).onFinishChange(createGalaxy)
-galaxyFolder.add(galaxyParams, 'yRadiusOffset').name('Y Offset').min(-5).max(5).step(0.5).onFinishChange(createGalaxy)
-galaxyFolder.add(galaxyParams, 'rotationSpped').name('Rotation speed').min(-5).max(5).step(0.1).onFinishChange(createGalaxy)
-galaxyFolder.addColor(galaxyParams, 'innerColor').name('Inner color').onFinishChange(createGalaxy)
-galaxyFolder.addColor(galaxyParams, 'outerColor').name('Outer color').onFinishChange(createGalaxy)
+galaxyFolder
+  .add(galaxyParams, 'radius')
+  .name('Radius')
+  .min(1)
+  .max(40)
+  .step(1)
+  .onFinishChange(createGalaxy)
+galaxyFolder
+  .add(galaxyParams, 'radiusLag')
+  .name('Spread')
+  .min(-5)
+  .max(5)
+  .step(0.001)
+  .onFinishChange(createGalaxy)
+galaxyFolder
+  .add(galaxyParams, 'branches')
+  .name('Branches')
+  .min(2)
+  .max(20)
+  .step(1)
+  .onFinishChange(createGalaxy)
+galaxyFolder
+  .add(galaxyParams, 'randomness')
+  .name('Randomness')
+  .min(0)
+  .max(2)
+  .step(0.001)
+  .onFinishChange(createGalaxy)
+galaxyFolder
+  .add(galaxyParams, 'randomnessPower')
+  .name('Randomness Power')
+  .min(1)
+  .max(10)
+  .step(0.01)
+  .onFinishChange(createGalaxy)
+galaxyFolder
+  .add(galaxyParams, 'yRadiusOffset')
+  .name('Y Offset')
+  .min(-5)
+  .max(5)
+  .step(0.5)
+  .onFinishChange(createGalaxy)
+galaxyFolder
+  .add(galaxyParams, 'rotationSpped')
+  .name('Rotation speed')
+  .min(-5)
+  .max(5)
+  .step(0.1)
+  .onFinishChange(createGalaxy)
+galaxyFolder
+  .addColor(galaxyParams, 'innerColor')
+  .name('Inner color')
+  .onFinishChange(createGalaxy)
+galaxyFolder
+  .addColor(galaxyParams, 'outerColor')
+  .name('Outer color')
+  .onFinishChange(createGalaxy)
 
 /**
  * Animate

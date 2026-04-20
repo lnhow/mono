@@ -1,4 +1,4 @@
-import { Test, TestingModule } from '@nestjs/testing'
+import { Test, type TestingModule } from '@nestjs/testing'
 import { PerfTestController } from './perf-test.controller'
 import { PerfTestService } from './perf-test.service'
 

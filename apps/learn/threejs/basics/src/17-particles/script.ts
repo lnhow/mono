@@ -1,6 +1,6 @@
+import GUI from 'lil-gui'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import GUI from 'lil-gui'
 
 /**
  * Base
@@ -65,20 +65,17 @@ for (let i = 0; i < PARTICLE_COUNT; i++) {
   vertices[pos + 1] = Math.sin(xyAngle) * Math.sin(xzAngle) * radius
   // z
   vertices[pos + 2] = Math.cos(xzAngle) * radius
-  
-  colors[pos] = Math.random()      // red
-  colors[pos + 1] = Math.random()  // green
-  colors[pos + 2] = Math.random()  // blue
+
+  colors[pos] = Math.random() // red
+  colors[pos + 1] = Math.random() // green
+  colors[pos + 2] = Math.random() // blue
 }
 
 particlesGeometry.setAttribute(
   'position',
   new THREE.BufferAttribute(vertices, 3),
 )
-particlesGeometry.setAttribute(
-  'color',
-  new THREE.BufferAttribute(colors, 3),
-)
+particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
 
 const particles = new THREE.Points(particlesGeometry, particlesMat)
 scene.add(particles)
@@ -141,7 +138,7 @@ const tick = () => {
 
   particles.rotation.y = elapsedTime * 0.2
   particles.rotation.z = elapsedTime * 0.1
-  
+
   // This is quite resource-intensive
   // for (let i = 0; i < PARTICLE_COUNT; i++) {
   //   const indexX = i * 3

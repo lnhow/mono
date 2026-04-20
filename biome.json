@@ -1,0 +1,95 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.12/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": false,
+    "includes": ["**"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 80
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "style": {
+        "noNonNullAssertion": "warn",
+        "useNodejsImportProtocol": "warn",
+        "useTemplate": "warn"
+      },
+      "correctness": {
+        "noUnusedImports": "warn",
+        "noUnusedVariables": "warn",
+        "noInvalidUseBeforeDeclaration": "warn",
+        "noSelfAssign": "warn",
+        "noInvalidPositionAtImportRule": "warn"
+      },
+      "complexity": {
+        "noBannedTypes": "warn",
+        "useLiteralKeys": "warn",
+        "noStaticOnlyClass": "warn",
+        "noUselessTernary": "warn",
+        "noUselessFragments": "warn",
+        "useOptionalChain": "warn",
+        "noUselessSwitchCase": "warn"
+      },
+      "suspicious": {
+        "noExplicitAny": "warn",
+        "noAssignInExpressions": "warn",
+        "noDoubleEquals": "warn"
+      },
+      "a11y": {
+        "noAutofocus": "warn",
+        "noNoninteractiveElementToInteractiveRole": "warn",
+        "useButtonType": "warn",
+        "useIframeTitle": "warn",
+        "useMediaCaption": "warn",
+        "useSemanticElements": "warn",
+        "useValidAnchor": "warn"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "jsxQuoteStyle": "double",
+      "semicolons": "asNeeded",
+      "trailingCommas": "all"
+    },
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
+  "css": {
+    "parser": {
+      "cssModules": true,
+      "tailwindDirectives": true
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["**/public/**"],
+      "linter": {
+        "enabled": false
+      },
+      "formatter": {
+        "enabled": false
+      }
+    }
+  ]
+}

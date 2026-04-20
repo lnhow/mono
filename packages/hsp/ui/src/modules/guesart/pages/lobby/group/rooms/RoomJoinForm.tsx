@@ -1,16 +1,15 @@
 'use client'
+import { Button } from '@hsp/ui/components/button'
+import ViewTransition from '@hsp/ui/utils/react/view-transition'
+import { useAtomValue } from 'jotai'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import { useAtomValue } from 'jotai'
-
-import ViewTransition from '@hsp/ui/utils/react/view-transition'
-import { Button } from '@hsp/ui/components/button'
-import { FormInput } from '../components/input'
+import { useDebounceCallback } from 'usehooks-ts'
 import { socketAtom } from '../../../../state/store'
 import { EGrtErrorCode } from '../../../../state/type/socket'
-import { useState } from 'react'
+import { FormInput } from '../components/input'
 import { useValidateRoom } from './utils'
-import { useDebounceCallback } from 'usehooks-ts'
 
 interface JoinRoomFormValues {
   roomId: string
@@ -54,7 +53,9 @@ export default function RoomJoinForm() {
   return (
     <div className="py-2">
       <h2 className="text-2xl font-semibold mb-1">Join a Room</h2>
-      <p className="text-fore-200 text-sm mb-4">Enter the Room ID you got from other when they created the room.</p>
+      <p className="text-fore-200 text-sm mb-4">
+        Enter the Room ID you got from other when they created the room.
+      </p>
       <form onSubmit={onSubmit} className="space-y-4">
         <FormInput
           label="Room ID"

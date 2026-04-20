@@ -1,5 +1,5 @@
+import type { TInitListener } from './_type'
 import { initError } from './error'
-import { TInitListener } from './_type'
 import { initGameStateListener } from './game'
 
 export const initSocket: TInitListener = (socket, state) => {

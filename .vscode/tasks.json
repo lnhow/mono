@@ -1,15 +1,13 @@
 {
-	"version": "2.0.0",
-	"tasks": [
+  "version": "2.0.0",
+  "tasks": [
     {
       "label": "pnpm: dev hsp",
       "detail": "turbo run dev -F=@hsp/app-*...",
       "type": "shell",
       "command": "pnpm dev -F='@hsp/app-*...'",
       "group": "none",
-      "problemMatcher": [
-        "$tsc-watch"
-      ],
+      "problemMatcher": ["$tsc-watch"],
       "isBackground": true
     },
     {
@@ -18,9 +16,7 @@
       "type": "shell",
       "command": "pnpm dev -F='@learn-threejs/basics...'",
       "group": "none",
-      "problemMatcher": [
-        "$tsc-watch"
-      ],
+      "problemMatcher": ["$tsc-watch"],
       "isBackground": true
     },
     {
@@ -29,9 +25,7 @@
       "type": "shell",
       "command": "pnpm dev -F='speech-to-text...'",
       "group": "none",
-      "problemMatcher": [
-        "$tsc-watch"
-      ],
+      "problemMatcher": ["$tsc-watch"],
       "isBackground": true
     }
   ]

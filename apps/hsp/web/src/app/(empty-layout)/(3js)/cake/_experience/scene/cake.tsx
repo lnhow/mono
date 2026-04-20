@@ -1,10 +1,9 @@
-import React, { ComponentPropsWithRef, useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
-import { Group } from 'three'
-
-import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+import { useGLTF } from '@react-three/drei'
+import gsap from 'gsap'
 import { useAtomValue } from 'jotai'
+import React, { type ComponentPropsWithRef, useRef } from 'react'
+import type { Group } from 'three'
 import { cakeSceneAtom, SCENE_CONFIG } from '../_state'
 
 const ANIMATION: Record<
@@ -66,26 +65,33 @@ export function Cake(props: ComponentPropsWithRef<'group'>) {
           duration: 1,
           ease: 'circ.out',
         })
-        .fromTo(container.current.scale, ANIMATION.scale.from, {
-          ...ANIMATION.scale.to,
-          duration: 1,
-          ease: 'power2.out',
-        }, 0)
-        .fromTo(container.current.position, ANIMATION.position.from, {
-          ...ANIMATION.position.to,
-          duration: 1,
-          ease: 'bounce.out',
-        }, 0.2)
+        .fromTo(
+          container.current.scale,
+          ANIMATION.scale.from,
+          {
+            ...ANIMATION.scale.to,
+            duration: 1,
+            ease: 'power2.out',
+          },
+          0,
+        )
+        .fromTo(
+          container.current.position,
+          ANIMATION.position.from,
+          {
+            ...ANIMATION.position.to,
+            duration: 1,
+            ease: 'bounce.out',
+          },
+          0.2,
+        )
     },
     { scope: container, dependencies: [cakeScene] },
   )
 
   return (
     <group ref={container} {...props}>
-      <primitive
-        object={scene}
-        {...SCENE_CONFIG[cakeScene].model.attributes}
-      />
+      <primitive object={scene} {...SCENE_CONFIG[cakeScene].model.attributes} />
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
         <planeGeometry args={[10, 10]} />
         <meshToonMaterial color="#ffffff" />

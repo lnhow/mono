@@ -1,6 +1,6 @@
-import { Metadata } from 'next'
 import BasePageContrastChecker from '@hsp/ui/modules/tools/contrast-checker/index'
 import ViewTransition from '@hsp/ui/utils/react/view-transition'
+import type { Metadata } from 'next'
 import { Suspense } from 'react'
 
 export const metadata: Metadata = {

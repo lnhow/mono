@@ -1,14 +1,14 @@
+import ButtonCopy from '@hsp/ui/components/button-copy'
 import cn from '@hsp/ui/utils/cn'
 import { startTransition, useEffect, useState } from 'react'
 import {
-  Color,
+  type Color,
   Input,
   Label,
-  TextField,
   parseColor,
+  TextField,
 } from 'react-aria-components'
 import { useDebounceCallback } from 'usehooks-ts'
-import ButtonCopy from '@hsp/ui/components/button-copy'
 
 export default function PickerColorField({
   onChange,
@@ -57,7 +57,7 @@ export default function PickerColorField({
     >
       <Label className="label p-0">{props.label}</Label>
       <div className="input input-bordered flex items-center pr-2">
-        <Input className='grow bg-transparent' placeholder={props.label} />
+        <Input className="grow bg-transparent" placeholder={props.label} />
         <ButtonCopy textToCopy={color} />
       </div>
     </TextField>

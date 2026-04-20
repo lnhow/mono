@@ -1,7 +1,7 @@
 import { EventDispatcher } from 'three'
 
 interface SizesEventMap {
-  'resize': {}
+  resize: {}
 }
 
 export default class Sizes extends EventDispatcher<SizesEventMap> {

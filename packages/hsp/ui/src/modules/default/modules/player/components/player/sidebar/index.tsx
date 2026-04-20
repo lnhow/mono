@@ -1,12 +1,12 @@
+import { Button } from '@hsp/ui/components/button'
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@hsp/ui/components/collapsible'
-import { LuInfo } from 'react-icons/lu'
-import cn from '@hsp/ui/utils/cn'
 import Link from '@hsp/ui/components/link'
-import { Button } from '@hsp/ui/components/button'
+import cn from '@hsp/ui/utils/cn'
+import { LuInfo } from 'react-icons/lu'
 
 export default function PlayerSidebar({
   className = '',

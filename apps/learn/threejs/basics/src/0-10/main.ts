@@ -1,9 +1,9 @@
 import '../style.css'
 
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import gsap from 'gsap'
 import GUI from 'lil-gui'
+import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 const gui = new GUI({
   title: 'Debug',
@@ -90,7 +90,9 @@ const texture = {
   alpha: textureLoader.load('/basic/textures/door/alpha.jpg'),
   height: textureLoader.load('/basic/textures/door/height.jpg'),
   normal: textureLoader.load('/basic/textures/door/normal.jpg'),
-  ambientOcclusion: textureLoader.load('/basic/textures/door/ambientOcclusion.jpg'),
+  ambientOcclusion: textureLoader.load(
+    '/basic/textures/door/ambientOcclusion.jpg',
+  ),
   metalness: textureLoader.load('/basic/textures/door/metalness.jpg'),
   roughness: textureLoader.load('/basic/textures/door/roughness.jpg'),
 }

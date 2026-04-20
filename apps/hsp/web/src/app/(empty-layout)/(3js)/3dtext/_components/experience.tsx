@@ -5,17 +5,17 @@ import {
   Text3D,
   useMatcapTexture,
 } from '@react-three/drei'
-import { font } from '../../_shared/const'
+import { useFrame } from '@react-three/fiber'
 import { useEffect, useRef } from 'react'
 import {
   BoxGeometry,
   ConeGeometry,
-  Mesh,
+  type Mesh,
   MeshMatcapMaterial,
   SRGBColorSpace,
   TorusGeometry,
 } from 'three'
-import { useFrame } from '@react-three/fiber'
+import { font } from '../../_shared/const'
 
 const ITEMS = 100
 const EMPTY_ARRAY = [...Array(ITEMS)]

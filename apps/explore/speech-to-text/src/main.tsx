@@ -1,9 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
 import { IntlProvider } from 'use-intl'
-import { resolveLocale, loadTranslations } from './lib/i18n/localeResolver'
+import App from './App.tsx'
+import { loadTranslations, resolveLocale } from './lib/i18n/localeResolver'
 
 const locale = resolveLocale()
 const messages = await loadTranslations(locale)

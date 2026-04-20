@@ -1,8 +1,7 @@
-import { expect, test, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
-
+import type { PropsWithChildren } from 'react'
+import { expect, test, vi } from 'vitest'
 import PagePlayer from './page'
-import { PropsWithChildren } from 'react'
 
 vi.mock('@hsp/ui/modules/default/modules/player/demo', () => {
   return {
@@ -19,5 +18,7 @@ vi.mock('@hsp/ui/utils/react/view-transition', () => {
 test('renders page', () => {
   render(<PagePlayer />)
 
-  expect(screen.getByRole('heading', { level: 1, name: 'Custom HTML video player' })).toBeDefined()
+  expect(
+    screen.getByRole('heading', { level: 1, name: 'Custom HTML video player' }),
+  ).toBeDefined()
 })

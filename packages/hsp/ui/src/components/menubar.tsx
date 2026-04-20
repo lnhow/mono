@@ -1,14 +1,13 @@
 'use client'
 
-import * as React from 'react'
+import cn from '@hsp/ui/utils/cn'
 import { Menubar as MenubarPrimitive } from 'radix-ui'
+import type * as React from 'react'
 import {
   LuCheck as CheckIcon,
   LuChevronRight as ChevronRightIcon,
   LuCircle as CircleIcon,
 } from 'react-icons/lu'
-
-import cn from '@hsp/ui/utils/cn'
 
 function Menubar({
   className,
@@ -262,19 +261,19 @@ function MenubarSubContent({
 
 export {
   Menubar,
-  MenubarPortal,
-  MenubarMenu,
-  MenubarTrigger,
+  MenubarCheckboxItem,
   MenubarContent,
   MenubarGroup,
-  MenubarSeparator,
-  MenubarLabel,
   MenubarItem,
-  MenubarShortcut,
-  MenubarCheckboxItem,
+  MenubarLabel,
+  MenubarMenu,
+  MenubarPortal,
   MenubarRadioGroup,
   MenubarRadioItem,
+  MenubarSeparator,
+  MenubarShortcut,
   MenubarSub,
-  MenubarSubTrigger,
   MenubarSubContent,
+  MenubarSubTrigger,
+  MenubarTrigger,
 }

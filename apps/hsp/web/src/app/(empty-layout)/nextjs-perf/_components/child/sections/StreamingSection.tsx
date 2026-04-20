@@ -1,7 +1,7 @@
-import React from 'react';
-import Card from '../Card';
-import { mockVideos } from '../data/mockData';
-import Image from 'next/image';
+import Image from 'next/image'
+import React from 'react'
+import Card from '../Card'
+import { mockVideos } from '../data/mockData'
 
 const StreamingSection = () => (
   <Card className="p-4">
@@ -18,7 +18,7 @@ const StreamingSection = () => (
             width="600"
             height="338"
             unoptimized
-            className='w-full h-auto'
+            className="w-full h-auto"
           />
           <span className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded">
             LIVE
@@ -40,7 +40,7 @@ const StreamingSection = () => (
                 width="600"
                 height="338"
                 unoptimized
-                className='w-full h-full object-cover'
+                className="w-full h-full object-cover"
               />
               {video.duration === 'LIVE' ? (
                 <span className="absolute top-1 right-1 bg-red-600 text-white text-xs px-1 rounded">
@@ -63,7 +63,7 @@ const StreamingSection = () => (
       </div>
     </div>
   </Card>
-);
+)
 
 export const StreamingSectionSkeleton = () => (
   <Card className="p-4">
@@ -83,6 +83,6 @@ export const StreamingSectionSkeleton = () => (
       </div>
     </div>
   </Card>
-);
+)
 
-export default StreamingSection;
+export default StreamingSection

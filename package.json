@@ -11,17 +11,19 @@
     "dev": "turbo run dev",
     "dev:hsp": "turbo run dev --filter=@hsp/app-*...",
     "storybook": "turbo run storybook",
-    "lint": "turbo run lint",
+    "lint": "biome lint",
     "build": "turbo run build",
     "deploy:start": "turbo run deploy:start",
     "turbo": "turbo",
     "test": "turbo run test",
-    "test:e2e": "turbo run test:e2e"
+    "test:e2e": "turbo run test:e2e",
+    "format": "biome format --write",
+    "check": "biome check --write"
   },
   "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319",
   "devDependencies": {
+    "@biomejs/biome": "2.4.12",
     "husky": "^9.1.7",
-    "prettier": "^3.6.2",
     "turbo": "^2.5.8"
   },
   "pnpm": {

@@ -1,11 +1,11 @@
-import React from 'react'
-import Image from 'next/image'
 import { Button } from '@hsp/ui/components/button'
-import Card from '../Card'
+import Image from 'next/image'
+import React from 'react'
 import {
   LuClock as Clock,
   // LuUser as User
 } from 'react-icons/lu'
+import Card from '../Card'
 // import { mockTimeline } from '../data/mockData'
 
 export interface Product {

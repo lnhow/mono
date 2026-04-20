@@ -1,12 +1,9 @@
-import { memo, useEffect, useMemo } from 'react'
-import {
-  roomRoundAtom,
-  TGameState,
-} from '../../../_state/store'
-import Container from '../../../_components/Container'
-import { useCountdown } from 'usehooks-ts'
-import WordBox from '../../../_components/WordBox'
 import { useAtomValue } from 'jotai'
+import { memo, useEffect, useMemo } from 'react'
+import { useCountdown } from 'usehooks-ts'
+import Container from '../../../_components/Container'
+import WordBox from '../../../_components/WordBox'
+import { roomRoundAtom, type TGameState } from '../../../_state/store'
 
 const RoundEnd = memo(function RoundEnd() {
   const round = useAtomValue(roomRoundAtom)

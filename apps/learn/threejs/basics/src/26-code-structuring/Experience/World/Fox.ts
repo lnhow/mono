@@ -1,7 +1,7 @@
+import type GUI from 'lil-gui'
+import { type AnimationAction, AnimationMixer, Mesh } from 'three'
 import type { GLTF } from 'three/examples/jsm/Addons.js'
 import Experience from '../Experience'
-import { AnimationAction, AnimationMixer, Mesh } from 'three'
-import type GUI from 'lil-gui'
 
 export default class Fox {
   experience = Experience.instance

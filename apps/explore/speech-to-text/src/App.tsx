@@ -1,6 +1,12 @@
-import { useState, useCallback /* , useEffect, startTransition */ } from 'react'
+import type { ProgressStatusInfo } from 'node_modules/@huggingface/transformers/types/utils/core'
 import type { ChangeEvent } from 'react'
+import { useCallback, /* , useEffect, startTransition */ useState } from 'react'
+import { useTranslations } from 'use-intl'
+import { Button } from './components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card'
+import { Input } from './components/ui/input'
+import { Label } from './components/ui/label'
+import { Progress } from './components/ui/progress'
 import {
   Select,
   SelectContent,
@@ -8,11 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from './components/ui/select'
-import { Input } from './components/ui/input'
-import { Button } from './components/ui/button'
-import { Label } from './components/ui/label'
-import { Progress } from './components/ui/progress'
-import { useTranscription } from './lib/transpile/use-transcription'
+import { LangSelector } from './lib/i18n/LangSelector'
 import {
   DEFAULT_MODEL,
   LANGUAGE_OPTIONS,
@@ -21,9 +23,7 @@ import {
   type ModelOption,
   type SupportedLanguage,
 } from './lib/transpile/types'
-import type { ProgressStatusInfo } from 'node_modules/@huggingface/transformers/types/utils/core'
-import { useTranslations } from 'use-intl'
-import { LangSelector } from './lib/i18n/LangSelector'
+import { useTranscription } from './lib/transpile/use-transcription'
 
 function App() {
   const t = useTranslations('app')
@@ -97,7 +97,8 @@ function App() {
   const handleCopyResultToClipboard = useCallback(() => {
     if (transcriptionResult) {
       setIsCopied(true)
-      navigator.clipboard.writeText(transcriptionResult)
+      navigator.clipboard
+        .writeText(transcriptionResult)
         .then(() => {
           setTimeout(() => setIsCopied(false), 2000) // Reset copy state after 2 seconds
         })

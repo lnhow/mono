@@ -1,18 +1,18 @@
+import { Button } from '@hsp/ui/components/button'
+import Tooltip from '@hsp/ui/components/tooltip'
+import cn from '@hsp/ui/utils/cn'
 import {
-  PropsWithChildren,
   memo,
+  type PropsWithChildren,
   startTransition,
   useDeferredValue,
   useEffect,
   useState,
 } from 'react'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
+import { LuCheck, LuInfo, LuX } from 'react-icons/lu'
+import { type FormContrastChecker, ValidationRules } from '../const'
 import { calcContrastRatio, isContrastRatioPass } from '../contrastUtils'
-import { LuCheck, LuX, LuInfo } from 'react-icons/lu'
-import { FormContrastChecker, ValidationRules } from '../const'
-import cn from '@hsp/ui/utils/cn'
-import { Button } from '@hsp/ui/components/button'
-import Tooltip from '@hsp/ui/components/tooltip'
 
 export const BackgroundPreview = memo(function BackgroundPreview({
   children,
@@ -126,7 +126,9 @@ export const ContrastScore = memo(function ContrastScore({
         )}
       </Tooltip>
       <div className="flex items-center gap-4">
-        <span data-testid={`contrast-ratio-${variant}`}>{ratioRating.contrastRatio}:1</span>
+        <span data-testid={`contrast-ratio-${variant}`}>
+          {ratioRating.contrastRatio}:1
+        </span>
         <Tooltip
           label={
             variant === 'bigText' ? 'Pass if value > 3' : 'Pass if value > 4.5'

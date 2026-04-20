@@ -2,7 +2,7 @@ import { EventDispatcher } from 'three'
 import { Timer } from 'three/examples/jsm/Addons.js'
 
 interface TimeEventMap {
-  'tick': {}
+  tick: {}
 }
 
 export default class Time extends EventDispatcher<TimeEventMap> {

@@ -36,7 +36,6 @@ export interface DocumentPictureInPicture {
   requestWindow(options?: TRequestDPIPOptions): Promise<Window>
 }
 
-
 export interface DocumentPictureInPictureEvent {
   window: Window
 }

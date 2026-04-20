@@ -1,7 +1,7 @@
 'use client'
 import { useAtomValue } from 'jotai'
-import ConnectForm from './ConnectForm'
 import { sessionAtom } from '../../../state/store'
+import ConnectForm from './ConnectForm'
 import Lobby from './rooms'
 
 export function FormGroup() {

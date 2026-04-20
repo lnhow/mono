@@ -1,4 +1,4 @@
-import Maybe from './common/maybe'
+import type Maybe from './common/maybe'
 
 export default interface NwImage {
   attributes: {

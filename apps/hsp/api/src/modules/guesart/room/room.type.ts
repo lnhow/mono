@@ -6,7 +6,7 @@ import {
   Min,
   MinLength,
 } from 'class-validator'
-import { Room } from 'generated/prisma'
+import type { Room } from 'generated/prisma'
 
 export enum ERoomTheme {
   ANIMALS = 'animals',

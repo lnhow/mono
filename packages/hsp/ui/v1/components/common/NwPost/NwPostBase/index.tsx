@@ -1,7 +1,7 @@
-import Link from 'next/link'
-import { NwPostProps } from '@hsp/ui/../v1/types/components/posts.type'
-import NwPostImage from '../components/NwPostImage'
+import type { NwPostProps } from '@hsp/ui/../v1/types/components/posts.type'
 import cn from '@hsp/ui/utils/cn'
+import Link from 'next/link'
+import NwPostImage from '../components/NwPostImage'
 
 export type NwPostBaseProps = {
   styles?: {
@@ -83,17 +83,12 @@ export function NwPostContent({
   styles,
 }: NwPostContentProps) {
   return (
-    <div
-      className={cn(
-        'ml-2 min-w-0 flex-[2] py-2 pr-2',
-        styles?.container
-      )}
-    >
+    <div className={cn('ml-2 min-w-0 flex-[2] py-2 pr-2', styles?.container)}>
       <Link href={hrefUrl} title={title}>
         <h4
           className={cn(
             'text-md font-extralight line-clamp-1 lg:line-clamp-2',
-            styles?.title
+            styles?.title,
           )}
         >
           {title}
@@ -102,7 +97,7 @@ export function NwPostContent({
       <p
         className={cn(
           'mt-2 text-xs font-light line-clamp-3 lg:line-clamp-2 max-md:hidden',
-          styles?.description
+          styles?.description,
         )}
       >
         {description}

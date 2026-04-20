@@ -1,9 +1,9 @@
-import { ERoomTheme } from './room.type'
 import animals from 'src/../storage/words/animals.json'
 import everydayObjects from 'src/../storage/words/everyday_objects.json'
 import food from 'src/../storage/words/food.json'
 import fruits from 'src/../storage/words/fruits.json'
 import vehicle from 'src/../storage/words/vehicles.json'
+import { ERoomTheme } from './room.type'
 
 export type TWord = {
   word: string
@@ -28,7 +28,7 @@ export default class WordRepository {
     word: string
     wordImg?: string
   } {
-    const themeWords = this.words[theme]
+    const themeWords = WordRepository.words[theme]
     const word = RandomRepository.getRandomArray(themeWords, (word) => {
       if (!filter.length) return true
       return !filter.includes(word.word)
@@ -53,7 +53,7 @@ export default class WordRepository {
   }
 
   public static findWordImage(theme: ERoomTheme, word: string): string {
-    const themeWords = this.words[theme]
+    const themeWords = WordRepository.words[theme]
     const wordInfo = themeWords.find((wordInfo) => wordInfo.word === word)
     return wordInfo?.imageUrl || ''
   }

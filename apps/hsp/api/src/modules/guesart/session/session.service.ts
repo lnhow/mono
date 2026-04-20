@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common'
-import { JwtService } from '@nestjs/jwt'
+import type { ConfigService } from '@nestjs/config'
+import type { JwtService } from '@nestjs/jwt'
 import { randomUUID } from 'crypto'
-import { ConfigService } from '@nestjs/config'
-import { SessionDto, SessionPayload, USER_NAME } from './session.type'
-import { GrtSocket } from '../types/ws'
+import type { GrtSocket } from '../types/ws'
+import { type SessionDto, type SessionPayload, USER_NAME } from './session.type'
 
 @Injectable()
 export class GrtSessionService {

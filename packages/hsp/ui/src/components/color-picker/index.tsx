@@ -1,19 +1,22 @@
-import {
-  ComponentPropsWithRef,
-  forwardRef,
-  memo,
-} from 'react'
+import { Button } from '@hsp/ui/components/button'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@hsp/ui/components/popover'
-import { Button } from '@hsp/ui/components/button'
-import { Color, ColorArea, ColorSlider, ColorThumb, parseColor, SliderTrack } from 'react-aria-components'
 import cn from '@hsp/ui/utils/cn'
+import { type ComponentPropsWithRef, forwardRef, memo } from 'react'
+import {
+  type Color,
+  ColorArea,
+  ColorSlider,
+  ColorThumb,
+  parseColor,
+  SliderTrack,
+} from 'react-aria-components'
 
-export { parseColor }
 export type { Color }
+export { parseColor }
 export type HsColorPickerProps = ComponentPropsWithRef<'input'> & {
   inputLabel?: {
     className?: string
@@ -75,7 +78,7 @@ export const HsColorPicker = memo(
                 <ColorThumb className="z-10 rounded-full border border-fore-300 w-9 h-9" />
               </ColorArea>
               <ColorSlider
-                colorSpace='hsl'
+                colorSpace="hsl"
                 channel="hue"
                 value={color}
                 onChange={handleChange}

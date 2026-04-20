@@ -1,5 +1,5 @@
-import { Socket } from 'socket.io-client'
-import {
+import type { Socket } from 'socket.io-client'
+import type {
   ChatResponseDto,
   PlayerDto,
   RoomBaseDto,
@@ -7,7 +7,7 @@ import {
   RoomCreateResponseDto,
   RoomInfoResponseDto,
 } from './room'
-import { SessionDto } from './session'
+import type { SessionDto } from './session'
 
 // Server to Client Events ======================================
 export enum EServerToClientEvents {

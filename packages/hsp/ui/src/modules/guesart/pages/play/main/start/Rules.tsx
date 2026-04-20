@@ -10,9 +10,11 @@ export default function Rules() {
     <div className="bg-base-100 rounded-lg m-4 shadow">
       <Collapsible>
         <CollapsibleTrigger className="w-full" asChild>
-          <Button variant="secondary" className="bg-transparent">Game Rules</Button>
+          <Button variant="secondary" className="bg-transparent">
+            Game Rules
+          </Button>
         </CollapsibleTrigger>
-        <CollapsibleContent className='transition-all'>
+        <CollapsibleContent className="transition-all">
           <div className="m-4 text-sm">
             <div>
               <h3 className="font-bold text-primary-400">✅ Correct Guess</h3>

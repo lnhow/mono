@@ -1,13 +1,13 @@
-import { LuFullscreen, LuMinimize } from 'react-icons/lu'
-import { PlayerButton } from '../_base/button'
+import Tooltip from '@hsp/ui/components/tooltip'
 import {
-  DocumentWithCrossBrowser,
+  type DocumentWithCrossBrowser,
   useHTMLElState,
 } from '@hsp/ui/utils/react/use-html-el-state'
-import { PlayerViewControlsProps, HOTKEYS, TOOLTIPS } from '../types'
 import { useCallback } from 'react'
+import { LuFullscreen, LuMinimize } from 'react-icons/lu'
+import { PlayerButton } from '../_base/button'
 import { useKeydown } from '../_utils/useKeydown'
-import Tooltip from '@hsp/ui/components/tooltip'
+import { HOTKEYS, type PlayerViewControlsProps, TOOLTIPS } from '../types'
 
 const getFullscreenSnapshot = () => {
   return Boolean(

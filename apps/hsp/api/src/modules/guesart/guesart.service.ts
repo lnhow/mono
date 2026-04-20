@@ -1,16 +1,16 @@
 import { Injectable, Logger } from '@nestjs/common'
-import {
-  GrtServer,
-  GrtSocket,
-  GrtClientToServerEventsPayload,
-  EClientToServerEvents,
-  GrtWsResponse,
-  GrtServerToClientEventsPayload,
-  EServerToClientEvents,
-} from './types/ws'
+import type { OnGatewayInit } from '@nestjs/websockets'
 import { randomUUID } from 'crypto'
-import { OnGatewayInit } from '@nestjs/websockets'
 import { GrtSessionService } from './session/session.service'
+import {
+  type EClientToServerEvents,
+  EServerToClientEvents,
+  type GrtClientToServerEventsPayload,
+  type GrtServer,
+  type GrtServerToClientEventsPayload,
+  type GrtSocket,
+  type GrtWsResponse,
+} from './types/ws'
 
 @Injectable()
 export class GrtService implements OnGatewayInit<GrtServer> {

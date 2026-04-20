@@ -1,6 +1,6 @@
 'use client'
 import dynamic from 'next/dynamic'
-import { PropsWithChildren } from 'react'
+import type { PropsWithChildren } from 'react'
 
 const NoSsr = (props: PropsWithChildren) => <>{props.children}</>
 

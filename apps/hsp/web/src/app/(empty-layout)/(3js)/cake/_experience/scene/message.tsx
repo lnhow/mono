@@ -1,13 +1,12 @@
-import { Text3D, useFont } from '@react-three/drei'
-import { font } from '../../../_shared/const'
-import { Mesh } from 'three/src/Three.js'
-import { TextGeometry } from 'three/addons/geometries/TextGeometry.js'
-import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js'
-import { useEffect, useRef } from 'react'
-
 import { useGSAP } from '@gsap/react'
+import { Text3D, useFont } from '@react-three/drei'
 import gsap from 'gsap'
 import { useAtomValue } from 'jotai'
+import { useEffect, useRef } from 'react'
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js'
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js'
+import type { Mesh } from 'three/src/Three.js'
+import { font } from '../../../_shared/const'
 import { cakeAtom, SCENE_CONFIG, TEXT } from '../_state'
 
 export default function TextMessage() {

@@ -1,7 +1,7 @@
 'use server'
+import { cookies } from 'next/headers'
 import { cache } from 'react'
 import apiClient, { sleep } from './http'
-import { cookies } from 'next/headers'
 
 const COOKIE = {
   NAME: 'mock_auth',

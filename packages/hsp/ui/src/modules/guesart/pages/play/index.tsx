@@ -1,23 +1,22 @@
 'use client'
-import { memo, useCallback, useEffect } from 'react'
 import { useAtomValue } from 'jotai'
 import { RESET, useAtomCallback } from 'jotai/utils'
-import { usePathname, useRouter } from 'next/navigation'
 import debounce from 'lodash.debounce'
+import { usePathname, useRouter } from 'next/navigation'
+import { memo, useCallback, useEffect } from 'react'
 
 import { sessionAtom, socketAtom } from '../../state/store'
-import { roomAtom, roomIsLoadingAtom, roomMetadataAtom } from './_state/store'
 import { SESSION_STORAGE_KEY } from '../../state/type/session'
 import {
   EClientToServerEvents,
   EServerToClientEvents,
 } from '../../state/type/socket'
 import { LOBBY_URL } from '../../utils'
-
+import { initSocket } from './_state/listeners'
+import { roomAtom, roomIsLoadingAtom, roomMetadataAtom } from './_state/store'
+import RoomMain from './main'
 import Sidebar from './sidebar'
 import RoomSkeleton from './skeleton'
-import RoomMain from './main'
-import { initSocket } from './_state/listeners'
 
 function PagePlay() {
   const isLoading = useAtomValue(roomIsLoadingAtom)

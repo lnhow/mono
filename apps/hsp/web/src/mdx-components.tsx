@@ -1,9 +1,8 @@
-import type { MDXComponents } from 'mdx/types'
-
-import Link from '@hsp/ui/modules/posts/mdx/override/link'
+import Image, { type ImageProps } from '@hsp/ui/components/image'
 import createHeading from '@hsp/ui/modules/posts/mdx/override/heading'
-import Image, { ImageProps } from '@hsp/ui/components/image'
-import { AnchorHTMLAttributes } from 'react'
+import Link from '@hsp/ui/modules/posts/mdx/override/link'
+import type { MDXComponents } from 'mdx/types'
+import type { AnchorHTMLAttributes } from 'react'
 
 export const mdxComponents: MDXComponents = {
   h1: createHeading('h1'),

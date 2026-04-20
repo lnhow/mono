@@ -1,3 +1,6 @@
+import { cacheLife } from 'next/cache'
+import { Suspense } from 'react'
+import { fetchUserData } from '../_components/child/data/api-server'
 import apiClient from '../_components/child/data/http'
 import BannerAndVideoSection from '../_components/child/sections/BannerAndVideoSection'
 import HashtagSection, {
@@ -12,11 +15,8 @@ import StreamingSection, {
 import TimelineAndNewsSection, {
   TimelineAndNewsSectionSkeleton,
 } from '../_components/child/sections/TimelineAndNewsSection'
-import WebVitals from '../_components/utils/web-vitals'
 import { DELAY } from '../_components/const'
-import { Suspense } from 'react'
-import { fetchUserData } from '../_components/child/data/api-server'
-import { cacheLife } from 'next/cache'
+import WebVitals from '../_components/utils/web-vitals'
 
 export const metadata = {
   title: 'NextJS Suspense + Cache component',

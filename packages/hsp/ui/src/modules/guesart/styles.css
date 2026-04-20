@@ -2,30 +2,31 @@
   :root {
     --game-topbar-height: --spacing(16);
     --game-canvas-height: calc(
-      var(--layout-full-height) - var(--game-topbar-height) - --spacing(2)
+      var(--layout-full-height) -
+      var(--game-topbar-height) -
+      --spacing(2)
     );
   }
-
 }
 .animation-dots::before {
-  content: '';
+  content: "";
   animation: dots 1.5s infinite;
 }
 
 @keyframes dots {
   0% {
-    content: '';
+    content: "";
   }
   25% {
-    content: '.';
+    content: ".";
   }
   50% {
-    content: '..';
+    content: "..";
   }
   75% {
-    content: '...';
+    content: "...";
   }
   100% {
-    content: '';
+    content: "";
   }
 }

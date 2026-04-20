@@ -1,9 +1,9 @@
 import './globals.css'
-import { ThemeProvider } from '@hsp/ui/utils/theme/ThemeProvider'
 import { Toaster } from '@hsp/ui/components/sonner'
-import { Lexend } from 'next/font/google'
+import { ThemeProvider } from '@hsp/ui/utils/theme/ThemeProvider'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Lexend } from 'next/font/google'
 
 const lexendFont = Lexend({
   subsets: ['latin', 'vietnamese'],
@@ -17,21 +17,21 @@ const lexendFont = Lexend({
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html suppressHydrationWarning lang="en">
-        <body className={lexendFont.className}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-            >
-            {/* <ViewTransition> */}
-              {children}
-              <Toaster />
-              <Analytics />
-              <SpeedInsights />
-            {/* </ViewTransition> */}
-          </ThemeProvider>
-        </body>
+      <body className={lexendFont.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {/* <ViewTransition> */}
+          {children}
+          <Toaster />
+          <Analytics />
+          <SpeedInsights />
+          {/* </ViewTransition> */}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
@@ -55,7 +55,8 @@ export const generateMetadata = async () => {
     publisher: 'Hao Le',
     openGraph: {
       title: 'Hao Le',
-      description: 'Hao Le\'s personal website. Web Developer. Photography and UX Enthusiast.',
+      description:
+        "Hao Le's personal website. Web Developer. Photography and UX Enthusiast.",
       siteName: 'Hao Le',
     },
   }

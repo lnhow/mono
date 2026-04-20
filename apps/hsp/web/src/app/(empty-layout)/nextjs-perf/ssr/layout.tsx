@@ -1,12 +1,11 @@
-import { ReactNode, Suspense } from 'react'
+import NoSsr from '@hsp/ui/utils/nextjs/no-ssr'
+import { type ReactNode, Suspense } from 'react'
 import { fetchUserData } from '../_components/child/data/api-server'
 import { mockCompanyName } from '../_components/child/data/mockData'
 import Header from '../_components/child/layout/header'
-
 import Sidebar from '../_components/child/layout/sidebar'
 import { AuthProvider } from './_components/auth/provider'
 import HeaderUserInfo from './_components/auth/user-info'
-import NoSsr from '@hsp/ui/utils/nextjs/no-ssr'
 
 export default async function SSRLayout({
   children,

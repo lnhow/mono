@@ -8,7 +8,7 @@
   animation: wiggle 1s infinite;
   animation-delay: var(--bounce-time);
 }
-.box .lid[data-start='true'] {
+.box .lid[data-start="true"] {
   animation: none;
 }
 .box .bottom {
@@ -16,7 +16,7 @@
   animation-direction: reverse;
   animation-delay: var(--bounce-time);
 }
-.box .bottom[data-start='true'] {
+.box .bottom[data-start="true"] {
   animation: none;
 }
 

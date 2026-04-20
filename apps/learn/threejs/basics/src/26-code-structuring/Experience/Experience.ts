@@ -1,13 +1,12 @@
 import { Material, Mesh, Scene } from 'three'
-import Sizes from './Utils/Sizes'
-import Time from './Utils/Time'
 import Camera from './Camera'
 import Renderer from './Renderer'
-import World from './World/World'
-import Resources from './Utils/Resources'
-
 import sources from './sources'
 import Debug from './Utils/Debug'
+import Resources from './Utils/Resources'
+import Sizes from './Utils/Sizes'
+import Time from './Utils/Time'
+import World from './World/World'
 
 export default class Experience {
   public canvas: HTMLCanvasElement
@@ -27,10 +26,10 @@ export default class Experience {
 
   private static _instance: Experience | null = null
   public static get instance(): Experience {
-    if (!this._instance) {
-      this._instance = new Experience(document.createElement('canvas'))
+    if (!Experience._instance) {
+      Experience._instance = new Experience(document.createElement('canvas'))
     }
-    return this._instance
+    return Experience._instance
   }
 
   constructor(canvas: HTMLCanvasElement) {

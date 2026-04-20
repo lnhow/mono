@@ -1,21 +1,19 @@
+import { fetchUserData } from '../_components/child/data/api-server'
 import apiClient from '../_components/child/data/http'
 import BannerAndVideoSection from '../_components/child/sections/BannerAndVideoSection'
 import HashtagSection from '../_components/child/sections/HashtagSection'
 import ProductListSection from '../_components/child/sections/ProductListSection'
 import StreamingSection from '../_components/child/sections/StreamingSection'
 import TimelineAndNewsSection from '../_components/child/sections/TimelineAndNewsSection'
-import WebVitals from '../_components/utils/web-vitals'
 import { DELAY } from '../_components/const'
-import { fetchUserData } from '../_components/child/data/api-server'
+import WebVitals from '../_components/utils/web-vitals'
 
 export const metadata = {
   title: 'NextJS SSR, No Suspense',
 }
 
 export default async function SSRPage() {
-  return (
-    <WithData />
-  )
+  return <WithData />
 }
 
 async function WithData() {

@@ -1,7 +1,7 @@
-import * as THREE from 'three'
-import GUI from 'lil-gui'
-import { Timer } from 'three/examples/jsm/misc/Timer.js'
 import gsap from 'gsap'
+import GUI from 'lil-gui'
+import * as THREE from 'three'
+import { Timer } from 'three/examples/jsm/misc/Timer.js'
 
 /**
  * Configs
@@ -9,7 +9,7 @@ import gsap from 'gsap'
 const parameters = {
   materialColor: '#69f2c4',
   particlesCount: 200,
-  particlesColor: '#0a7f58'
+  particlesColor: '#0a7f58',
 }
 
 /**
@@ -59,7 +59,7 @@ scene.add(shape1, shape2, shape3)
 /**
  * Particles
  */
-let particles: THREE.Points | undefined = undefined
+let particles: THREE.Points | undefined
 
 const generateParticles = () => {
   if (particles) {
@@ -69,7 +69,7 @@ const generateParticles = () => {
       particles.material.dispose()
     } else if (Array.isArray(particles.material)) {
       particles.material.forEach((material) => {
-        (material as THREE.PointsMaterial).dispose()
+        ;(material as THREE.PointsMaterial).dispose()
       })
     }
     scene.remove(particles)
@@ -78,27 +78,32 @@ const generateParticles = () => {
   const particlesCount = parameters.particlesCount
   const positions = new Float32Array(particlesCount * 3)
   for (let i = 0; i < particlesCount; i++) {
-    positions.set([
-      (Math.random() - 0.5) * 10,
-      shapeSpacing * 0.5 - Math.random() * shapeSpacing * shapes.length,
-      (Math.random() - 0.5) * 10,
-    ], i * 3)
+    positions.set(
+      [
+        (Math.random() - 0.5) * 10,
+        shapeSpacing * 0.5 - Math.random() * shapeSpacing * shapes.length,
+        (Math.random() - 0.5) * 10,
+      ],
+      i * 3,
+    )
   }
 
   const particlesGeometry = new THREE.BufferGeometry()
-  particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+  particlesGeometry.setAttribute(
+    'position',
+    new THREE.BufferAttribute(positions, 3),
+  )
   particles = new THREE.Points(
     particlesGeometry,
     new THREE.PointsMaterial({
       color: parameters.particlesColor,
       size: 0.1,
-    })
+    }),
   )
   scene.add(particles)
 }
 
 generateParticles()
-
 
 /**
  * Lights
@@ -177,7 +182,10 @@ const onScroll = () => {
   const newSection = calcCurrentSection()
   if (newSection !== currentSection) {
     currentSection = newSection
-    console.log('\x1B[35m[Dev log]\x1B[0m -> onScroll -> currentSection:', currentSection)
+    console.log(
+      '\x1B[35m[Dev log]\x1B[0m -> onScroll -> currentSection:',
+      currentSection,
+    )
     gsap.to(shapes[currentSection].rotation, {
       duration: 1.5,
       ease: 'power2.inOut',
@@ -229,8 +237,10 @@ const tick = () => {
 
   // const easingFactor = 0.1 // For low refresh rate screens, inconsistent
   const easingFactor = deltaTime * 4 // For low refresh rate screens, inconsistent
-  cameraGroup.position.x += (parallaxAmp.x - cameraGroup.position.x) * easingFactor
-  cameraGroup.position.y += (parallaxAmp.y - cameraGroup.position.y) * easingFactor
+  cameraGroup.position.x +=
+    (parallaxAmp.x - cameraGroup.position.x) * easingFactor
+  cameraGroup.position.y +=
+    (parallaxAmp.y - cameraGroup.position.y) * easingFactor
   // Linear, basic
   // cameraGroup.position.x = cursor.dx
   // cameraGroup.position.y = - cursor.dy // Correct movement's direction
@@ -262,7 +272,7 @@ gui.addColor(parameters, 'particlesColor').onChange(() => {
       particles.material.color.set(parameters.particlesColor)
     } else if (Array.isArray(particles.material)) {
       particles.material.forEach((material) => {
-        (material as THREE.PointsMaterial).color.set(parameters.particlesColor)
+        ;(material as THREE.PointsMaterial).color.set(parameters.particlesColor)
       })
     }
   }

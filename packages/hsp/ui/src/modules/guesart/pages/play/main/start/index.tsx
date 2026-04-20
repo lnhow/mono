@@ -1,19 +1,17 @@
-import { memo } from 'react'
-import { useAtomValue } from 'jotai'
 import { Button } from '@hsp/ui/components/button'
 import ButtonCopy from '@hsp/ui/components/button-copy'
-
-import { roomMetadataAtom, TGameState } from '../../_state/store'
-import { sessionAtom, socketAtom } from '../../../../state/store'
-import Container from '../../_components/Container'
-
-import Rules from './Rules'
-import ButtonLeaveRoom from '../../_components/ButtonLeaveRoom'
-import { ROOM_CONSTRAINTS } from '../../../lobby/group/rooms/RoomCreateForm'
-import { ERoomTheme } from '../../../../state/type/room'
-import { EClientToServerEvents } from '../../../../state/type/socket'
-import debounce from 'lodash.debounce'
 import { DEFAULT_DEBOUNCE_TIME } from '@hsp/ui/utils/debounce'
+import { useAtomValue } from 'jotai'
+import debounce from 'lodash.debounce'
+import { memo } from 'react'
+import { sessionAtom, socketAtom } from '../../../../state/store'
+import type { ERoomTheme } from '../../../../state/type/room'
+import { EClientToServerEvents } from '../../../../state/type/socket'
+import { ROOM_CONSTRAINTS } from '../../../lobby/group/rooms/RoomCreateForm'
+import ButtonLeaveRoom from '../../_components/ButtonLeaveRoom'
+import Container from '../../_components/Container'
+import { roomMetadataAtom, type TGameState } from '../../_state/store'
+import Rules from './Rules'
 
 const GameStart = memo(function GameStart() {
   const metaData = useAtomValue(roomMetadataAtom)

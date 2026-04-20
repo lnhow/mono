@@ -1,7 +1,7 @@
-import React from 'react'
-import Card from '../Card'
-import { LuPlay as PlayCircle } from 'react-icons/lu'
 import Image from 'next/image'
+import React from 'react'
+import { LuPlay as PlayCircle } from 'react-icons/lu'
+import Card from '../Card'
 
 // For banners.main.desktop (array of banner objects)
 export interface Banner {

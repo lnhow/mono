@@ -2,10 +2,10 @@
 import { useAtom, useAtomValue } from 'jotai'
 import { memo, startTransition, useEffect, useRef } from 'react'
 import { socketAtom } from '../../../../state/store'
-import ChatMessage from './ChatMessage'
+import type { ChatResponseDto } from '../../../../state/type/room'
 import { EServerToClientEvents } from '../../../../state/type/socket'
-import { ChatResponseDto } from '../../../../state/type/room'
-import { roomMessagesAtom, MessageType } from '../../_state/store'
+import { MessageType, roomMessagesAtom } from '../../_state/store'
+import ChatMessage from './ChatMessage'
 
 const ChatList = memo(function ChatList({ className }: { className?: string }) {
   const { socket } = useAtomValue(socketAtom)
@@ -19,19 +19,25 @@ const ChatList = memo(function ChatList({ className }: { className?: string }) {
 
     const onNewUserMessage = (message: ChatResponseDto) => {
       startTransition(() => {
-        setMessages((prev) => [...prev, {
-          ...message,
-          type: MessageType.USER,
-        }])
+        setMessages((prev) => [
+          ...prev,
+          {
+            ...message,
+            type: MessageType.USER,
+          },
+        ])
       })
     }
 
     const onNewSystemMessage = (message: ChatResponseDto) => {
       startTransition(() => {
-        setMessages((prev) => [...prev, {
-          ...message,
-          type: MessageType.SYSTEM,
-        }])
+        setMessages((prev) => [
+          ...prev,
+          {
+            ...message,
+            type: MessageType.SYSTEM,
+          },
+        ])
       })
     }
 

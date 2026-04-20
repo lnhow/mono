@@ -1,14 +1,13 @@
-import { allPosts } from 'content-collections'
-import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 import { MDXContent } from '@content-collections/mdx/react'
-
-import { mdxComponents } from '@/mdx-components'
-import MarkdownTypography from '@hsp/ui/modules/posts/mdx/typography'
+import { PostTags } from '@hsp/ui/modules/posts/card'
 import TableOfContents from '@hsp/ui/modules/posts/mdx/toc'
+import MarkdownTypography from '@hsp/ui/modules/posts/mdx/typography'
 import { PostUtils } from '@hsp/ui/modules/posts/utils'
 import ViewTransition from '@hsp/ui/utils/react/view-transition'
-import { PostTags } from '@hsp/ui/modules/posts/card'
+import { allPosts } from 'content-collections'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { mdxComponents } from '@/mdx-components'
 
 interface PostPageProps {
   params: Promise<{

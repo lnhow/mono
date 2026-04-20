@@ -1,6 +1,6 @@
-import { Catch, ArgumentsHost } from '@nestjs/common'
+import { type ArgumentsHost, Catch } from '@nestjs/common'
 import { BaseWsExceptionFilter } from '@nestjs/websockets'
-import { GrtWsException, GrtSocket } from './types/ws'
+import { type GrtSocket, GrtWsException } from './types/ws'
 
 @Catch()
 export class GrtWsExceptionsFilter extends BaseWsExceptionFilter<GrtWsException> {

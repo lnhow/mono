@@ -1,5 +1,5 @@
-import { NextResponse, NextRequest } from 'next/server'
 import acceptLanguage from 'accept-language'
+import { type NextRequest, NextResponse } from 'next/server'
 import { DEFAULT_COOKIE_NAMES, DEFAULT_LANGUAGE } from './types'
 
 export const HEADER_REFERER = 'referer' as const
@@ -25,10 +25,12 @@ export default function createMiddleware({
   acceptLanguage.languages(languages)
   function resolveLanguage(req: NextRequest) {
     const lngInPath = languages.find((lang) =>
-      req.nextUrl.pathname.startsWith(`/${lang}`)
+      req.nextUrl.pathname.startsWith(`/${lang}`),
     )
     if (lngInPath || req.cookies.has(langCookieName)) {
-      const lngInCookie = acceptLanguage.get(req.cookies.get(langCookieName)?.value)
+      const lngInCookie = acceptLanguage.get(
+        req.cookies.get(langCookieName)?.value,
+      )
       const resolvedLng = lngInPath || lngInCookie || defaultLanguage
       return {
         lng: resolvedLng,
@@ -40,7 +42,7 @@ export default function createMiddleware({
     return {
       lng: req.headers.has(DEFAULT_COOKIE_NAMES.ACCEPT_LANGUAGE)
         ? acceptLanguage.get(
-            req.headers.get(DEFAULT_COOKIE_NAMES.ACCEPT_LANGUAGE)
+            req.headers.get(DEFAULT_COOKIE_NAMES.ACCEPT_LANGUAGE),
           ) || defaultLanguage
         : defaultLanguage,
       redirect: true,
@@ -60,8 +62,11 @@ export default function createMiddleware({
       const redirectUrl = new URL(
         req.nextUrl.pathname.startsWith(`/${lng}`)
           ? req.nextUrl
-          : `/${lng}` + req.nextUrl.pathname + '?' + req.nextUrl.searchParams.toString(),
-        req.url
+          : `/${lng}` +
+              req.nextUrl.pathname +
+              '?' +
+              req.nextUrl.searchParams.toString(),
+        req.url,
       )
       console.log('Redirecting to', `${redirectUrl}`)
       const response = NextResponse.redirect(redirectUrl)
@@ -79,7 +84,7 @@ export default function createMiddleware({
     if (req.headers.has(HEADER_REFERER)) {
       const refererUrl = new URL(req.headers.get(HEADER_REFERER) as string)
       const lngInReferer = languages.find((l) =>
-        refererUrl.pathname.startsWith(`/${l}`)
+        refererUrl.pathname.startsWith(`/${l}`),
       )
       if (lngInReferer) response.cookies.set(langCookieName, lngInReferer)
       return response

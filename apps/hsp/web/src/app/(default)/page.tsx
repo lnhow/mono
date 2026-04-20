@@ -1,10 +1,10 @@
+import CardsDemo from '@hsp/ui/modules/default/modules/home/page'
 import PersonalGithub from '@hsp/ui/modules/personal/github'
 import PersonalLinkedinLink from '@hsp/ui/modules/personal/linkedin'
-import CardsDemo from '@hsp/ui/modules/default/modules/home/page'
 import CardPost from '@hsp/ui/modules/posts/card'
 import { PostUtils } from '@hsp/ui/modules/posts/utils'
 import { allPosts } from 'content-collections'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import PaperTexture from './_components/hero/natural-paper.png'
 import Time from './_components/hero/time'
 

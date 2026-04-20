@@ -1,19 +1,19 @@
 'use client'
 import cn from '@hsp/ui/utils/cn'
 import {
-  ComponentProps,
-  ComponentPropsWithoutRef,
+  type ComponentProps,
+  type ComponentPropsWithoutRef,
   useCallback,
   useEffect,
   useRef,
 } from 'react'
-import { ButtonPlayback, togglePlayback } from './controls/playback'
 import { ButtonFullscreen } from './controls/fullscreen'
-import { DurationIndicator, DurationSlider } from './controls/timeline'
 import ButtonPictureInPicture from './controls/pictureinpicture'
-import ButtonVolume from './controls/volume'
+import { ButtonPlayback, togglePlayback } from './controls/playback'
 import ButtonPlayrate from './controls/playrate'
 import ButtonSubtitle from './controls/subtitle'
+import { DurationIndicator, DurationSlider } from './controls/timeline'
+import ButtonVolume from './controls/volume'
 import PlayerSidebar from './sidebar'
 
 export type TracksProps = Pick<
@@ -102,7 +102,9 @@ export default function HspPlayer({
           {sources?.map((src, index) => (
             <source key={index} src={src} type="video/mp4" />
           ))}
-          {tracks?.map((track, index) => <track key={index} {...track} />)}
+          {tracks?.map((track, index) => (
+            <track key={index} {...track} />
+          ))}
           Your browser does not support the video tag.
         </video>
         {/* Controls */}
@@ -130,8 +132,8 @@ export default function HspPlayer({
         </div>
       </div>
       <PlayerSidebar
-        className='z-20 [--width:--spacing(48)] md:[--width:--spacing(60)] absolute right-0 h-full md:relative'
-        contentClassName='data-[state=open]:w-(--width) transition-[width] data-[state=open]:animate-collapsible-side-out data-[state=closed]:animate-collapsible-side-in'
+        className="z-20 [--width:--spacing(48)] md:[--width:--spacing(60)] absolute right-0 h-full md:relative"
+        contentClassName="data-[state=open]:w-(--width) transition-[width] data-[state=open]:animate-collapsible-side-out data-[state=closed]:animate-collapsible-side-in"
         triggerClassName="absolute top-0 transition-[right] right-0 data-[state=open]:right-(--width) z-20 bg-base-100/50 backdrop-blur-sm"
       />
     </div>

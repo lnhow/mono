@@ -1,6 +1,6 @@
 import { getTranslation } from '@i18n/server'
-import SubmitButton from './SubmitButton'
 import { nsPageSearch } from '../types'
+import SubmitButton from './SubmitButton'
 
 export type NwSearchData = {
   query?: string
@@ -12,7 +12,10 @@ export type NwSearchBoxProps = {
   onSearch?: (formData: FormData) => void
 }
 
-export default async function NwSearchBox({ data, onSearch }: NwSearchBoxProps) {
+export default async function NwSearchBox({
+  data,
+  onSearch,
+}: NwSearchBoxProps) {
   const { t } = await getTranslation(nsPageSearch)
   return (
     <form action={onSearch} className="flex flex-row">

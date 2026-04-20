@@ -1,7 +1,7 @@
-import { memo } from 'react';
-import { RoundStartDrawer } from './Drawer';
-import { RoundStartGuesser } from './Guesser';
-import { useIsDrawer } from '../../../_state/hooks';
+import { memo } from 'react'
+import { useIsDrawer } from '../../../_state/hooks'
+import { RoundStartDrawer } from './Drawer'
+import { RoundStartGuesser } from './Guesser'
 
 const RoundStart = memo(function RoundStart() {
   const isDrawer = useIsDrawer()
@@ -10,9 +10,7 @@ const RoundStart = memo(function RoundStart() {
     return <RoundStartGuesser />
   }
 
-  return (
-    <RoundStartDrawer />
-  )
-});
+  return <RoundStartDrawer />
+})
 
-export default RoundStart;
+export default RoundStart

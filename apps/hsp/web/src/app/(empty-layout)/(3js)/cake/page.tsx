@@ -1,9 +1,9 @@
 // TODO: Fix navigational issues due to React Three Fiber and Next 16 back/forward incompatibility
-import { Metadata } from 'next'
-import { Suspense, ViewTransition } from 'react'
+
 import { Provider } from 'jotai'
-import Main from './_experience'
-import { Hydrate } from './_experience'
+import type { Metadata } from 'next'
+import { Suspense, ViewTransition } from 'react'
+import Main, { Hydrate } from './_experience'
 
 export const metadata: Metadata = {
   title: 'Cake',

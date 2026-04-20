@@ -1,16 +1,11 @@
 'use client'
-import {
-  Button,
-  Form,
-  Input,
-  TextField,
-} from 'react-aria-components'
-import { nsToolURL } from '../const'
+import ButtonCopy from '@hsp/ui/components/button-copy'
 import { useTranslation } from '@i18n/client'
+import { Button, Form, Input, TextField } from 'react-aria-components'
 import { Controller, useForm } from 'react-hook-form'
 import { useCopyToClipboard } from 'usehooks-ts'
+import { nsToolURL } from '../const'
 import { toSlug } from './utils'
-import ButtonCopy from '@hsp/ui/components/button-copy'
 
 export type TConverterSlugForm = {
   textToSlug: string

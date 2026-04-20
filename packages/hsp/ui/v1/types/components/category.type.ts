@@ -1,4 +1,4 @@
-import NwCategory from '../category'
+import type NwCategory from '../category'
 
 export type NwCategoryProps = {
   data: NwCategory

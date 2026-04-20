@@ -1,26 +1,28 @@
-import { Injectable, Logger, OnModuleDestroy } from '@nestjs/common'
-import { PrismaService } from 'src/modules/_prisma/prisma.service'
-import {
-  EClientToServerEvents,
-  EGrtErrorCode,
-  EServerToClientEvents,
-  GrtClientToServerEventsPayload,
-  GrtServer,
-  GrtSocket,
-  GrtWsException,
-} from '../types/ws'
+import { Injectable, Logger, type OnModuleDestroy } from '@nestjs/common'
+import type { OnGatewayInit } from '@nestjs/websockets'
+import { RoomStatus } from 'generated/prisma'
+import { ObjectId } from 'mongodb'
+import { sleep } from 'src/_utils/sleep'
+import type { PrismaService } from 'src/modules/_prisma/prisma.service'
 import { GrtSessionService } from '../session/session.service'
 import {
-  ROOM_TIME_OPTIONS,
-  RoomBaseDto,
-  RoomChatRequestDto,
-  RoomCreateResponseDto,
+  type EClientToServerEvents,
+  EGrtErrorCode,
+  EServerToClientEvents,
+  type GrtClientToServerEventsPayload,
+  type GrtServer,
+  type GrtSocket,
+  GrtWsException,
+} from '../types/ws'
+import {
+  type ERoomTheme,
   ESystemMessageContent,
-  RoomCreateRequestDto,
-  ERoomTheme,
+  ROOM_TIME_OPTIONS,
+  type RoomBaseDto,
+  type RoomChatRequestDto,
+  type RoomCreateRequestDto,
+  type RoomCreateResponseDto,
 } from './room.type'
-import { RoomStatus } from 'generated/prisma'
-import { OnGatewayInit } from '@nestjs/websockets'
 import {
   buildChatMessage,
   buildSystemMessage,
@@ -30,9 +32,7 @@ import {
   socketRoomId,
   socketUserRoomId,
 } from './utils'
-import { ObjectId } from 'mongodb'
 import WordRepository, { RandomRepository } from './word.repository'
-import { sleep } from 'src/_utils/sleep'
 
 const PREFIX_VALIDATION = 'Validation:' as const
 

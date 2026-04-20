@@ -1,12 +1,12 @@
+import { Button } from '@hsp/ui/components/button'
+import Tooltip from '@hsp/ui/components/tooltip'
 import { memo, useEffect, useState } from 'react'
 // import { Button, TooltipTrigger, Tooltip } from 'react-aria-components'
 import { useFormContext } from 'react-hook-form'
-import {
+import type {
   FormContrastChecker,
   // ValidationRules,
 } from '../const'
-import { Button } from '@hsp/ui/components/button'
-import Tooltip from '@hsp/ui/components/tooltip'
 
 const ButtonGenLinkContrast = memo(function ButtonGenLinkContrast() {
   const { getValues } = useFormContext<FormContrastChecker>()
@@ -24,7 +24,11 @@ const ButtonGenLinkContrast = memo(function ButtonGenLinkContrast() {
         '/tools/contrast-checker?' +
         Object.keys(values)
           .map((key) => {
-            return key + '=' + encodeURIComponent(values[key as 'fg' | 'bg'].toString('hex'))
+            return (
+              key +
+              '=' +
+              encodeURIComponent(values[key as 'fg' | 'bg'].toString('hex'))
+            )
           })
           .join('&'),
     )

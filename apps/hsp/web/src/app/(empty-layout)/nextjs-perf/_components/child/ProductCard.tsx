@@ -1,12 +1,12 @@
 'use client'
-import React from 'react'
+import cn from '@hsp/ui/utils/cn'
+import Image from 'next/image'
+import type React from 'react'
 import {
   LuDollarSign as DollarSign,
   // LuStar as Star
 } from 'react-icons/lu'
-import Image from 'next/image'
 import Card from './Card'
-import cn from '@hsp/ui/utils/cn'
 // import cn from '@hsp/ui/utils/cn';
 
 export interface Product {
@@ -91,7 +91,9 @@ const ProductCard = ({
   </Card>
 )
 
-export const ProductCardSkeleton: React.FC<{ className?: string }> = ({ className }) => (
+export const ProductCardSkeleton: React.FC<{ className?: string }> = ({
+  className,
+}) => (
   <Card
     className={cn(
       'flex flex-col p-3 transition-shadow duration-300 hover:shadow-lg',
@@ -107,6 +109,6 @@ export const ProductCardSkeleton: React.FC<{ className?: string }> = ({ classNam
       <div className="h-3 w-20 bg-base-300 rounded animate-pulse" />
     </div>
   </Card>
-);
+)
 
 export default ProductCard

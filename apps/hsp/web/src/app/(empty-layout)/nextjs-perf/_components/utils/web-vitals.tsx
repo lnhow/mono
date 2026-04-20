@@ -1,13 +1,14 @@
 'use client'
-import React, { ReactNode, useEffect, useState } from 'react'
+import cn from '@hsp/ui/utils/cn'
+import type React from 'react'
+import { type ReactNode, useEffect, useState } from 'react'
 import {
+  // onCLS, onINP,
+  type Metric,
+  onFCP,
   onLCP,
   onTTFB,
-  onFCP,
-  // onCLS, onINP,
-  Metric,
 } from 'web-vitals'
-import cn from '@hsp/ui/utils/cn'
 
 interface WebVitalsProps {
   className?: string

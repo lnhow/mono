@@ -1,20 +1,20 @@
 'use client'
+import cn from '@hsp/ui/utils/cn'
+import { useTranslation } from '@i18n/client'
 import { useCallback, useState } from 'react'
 import {
   ColorSlider,
   ColorSwatch,
   ColorThumb,
+  parseColor,
   SliderTrack,
   Switch,
-  parseColor,
 } from 'react-aria-components'
-import { useTranslation } from '@i18n/client'
-import { nsToolColorPicker } from './const'
-import PickerColorField from './components/PickerColorField'
 import HsColorArea from './components/HsColorArea'
 import HsColorSlider from './components/HsColorSlider'
-import cn from '@hsp/ui/utils/cn'
 import HsColorWheel from './components/HsColorWheel'
+import PickerColorField from './components/PickerColorField'
+import { nsToolColorPicker } from './const'
 
 export default function PageToolColorPicker() {
   const { t } = useTranslation(nsToolColorPicker)
@@ -80,7 +80,7 @@ export default function PageToolColorPicker() {
                   <SliderTrack
                     className={cn(
                       'w-full h-6 rounded transition-opacity',
-                      !isAlpha && 'opacity-25'
+                      !isAlpha && 'opacity-25',
                     )}
                   >
                     <ColorThumb className="w-2 h-8 top-3 rounded-full shadow border border-white" />

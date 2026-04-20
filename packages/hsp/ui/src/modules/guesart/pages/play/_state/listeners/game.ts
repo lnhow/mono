@@ -1,10 +1,10 @@
 import { ERoomStatus } from '../../../../state/type/room'
 import {
   EServerToClientEvents,
-  GrtServerToClientEventsPayload,
+  type GrtServerToClientEventsPayload,
 } from '../../../../state/type/socket'
 import { roomRoundAtom, roomStatusAtom } from '../store'
-import { TInitListener } from './_type'
+import type { TInitListener } from './_type'
 
 export const initGameStateListener: TInitListener = (socket, state) => {
   function onNextRound(
@@ -54,9 +54,12 @@ export const initGameStateListener: TInitListener = (socket, state) => {
     state.set(roomRoundAtom, (prev) => {
       const currentHint = prev.word
       // Merge the current hint with the new hint
-      const hint = currentHint.split('').map((char, index) => {
-        return char === '*' ? data.word.charAt(index) : char
-      }).join('')
+      const hint = currentHint
+        .split('')
+        .map((char, index) => {
+          return char === '*' ? data.word.charAt(index) : char
+        })
+        .join('')
       return {
         ...prev,
         word: hint,

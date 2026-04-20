@@ -1,19 +1,21 @@
 import { useSyncExternalStore } from 'react'
 
-type SupportedElement = HTMLElement | Document;
-type EventKeysForEl<El extends SupportedElement> = 
-  El extends HTMLVideoElement ? keyof HTMLVideoElementEventMap :
-  El extends HTMLAudioElement ? keyof HTMLMediaElementEventMap :
-  El extends Document ? keyof DocumentEventMapCrossBrowser :
-  keyof HTMLElementEventMap;
+type SupportedElement = HTMLElement | Document
+type EventKeysForEl<El extends SupportedElement> = El extends HTMLVideoElement
+  ? keyof HTMLVideoElementEventMap
+  : El extends HTMLAudioElement
+    ? keyof HTMLMediaElementEventMap
+    : El extends Document
+      ? keyof DocumentEventMapCrossBrowser
+      : keyof HTMLElementEventMap
 
-export const useHTMLElState = function <T, El extends SupportedElement>(
-  getEl: (() => El | null),
+export const useHTMLElState = <T, El extends SupportedElement>(
+  getEl: () => El | null,
   events: EventKeysForEl<El>[],
   getSnapshot: () => T,
   getServerSnapshot?: () => T,
-) {
-  return useSyncExternalStore(
+) =>
+  useSyncExternalStore(
     (onChange) => {
       const el = getEl()
       if (!el) return () => {}
@@ -31,12 +33,11 @@ export const useHTMLElState = function <T, El extends SupportedElement>(
     getSnapshot,
     getServerSnapshot,
   )
-}
 
 export interface DocumentEventMapCrossBrowser extends DocumentEventMap {
-  webkitfullscreenchange: Event;
-  mozfullscreenchange: Event;
-  MSFullscreenChange: Event;
+  webkitfullscreenchange: Event
+  mozfullscreenchange: Event
+  MSFullscreenChange: Event
 }
 
 export interface DocumentWithCrossBrowser extends Document {

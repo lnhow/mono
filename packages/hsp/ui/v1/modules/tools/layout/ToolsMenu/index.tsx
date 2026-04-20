@@ -1,19 +1,21 @@
 'use client'
 
-import Link, { LinkProps } from '@hsp/ui/../v1/shared/components/navigation/Link'
+import Link, {
+  type LinkProps,
+} from '@hsp/ui/../v1/shared/components/navigation/Link'
 import cn from '@hsp/ui/utils/cn'
 import { useTranslation } from '@i18n/client'
 import { usePathname } from 'next/navigation'
 import { memo, useMemo } from 'react'
+import { MdOpenInNew } from 'react-icons/md'
 import { nsLayoutTools } from '../const'
 import {
-  MenuItem,
-  MenuItemGroup,
-  MenuItemLink,
   isMenuItemLink,
+  type MenuItem,
+  type MenuItemGroup,
+  type MenuItemLink,
   menuItems,
 } from './const'
-import { MdOpenInNew } from 'react-icons/md'
 
 export default function SideMenu() {
   return (
@@ -44,11 +46,11 @@ const ToolsLink = memo(function ToolsLink({
     return pathname.endsWith(href.toString())
   }, [pathname, href])
   return (
-    <li className='row'>
+    <li className="row">
       <Link
         className={cn(
           'btn btn-neutral flex justify-center items-center',
-          isSelected && 'btn-active'
+          isSelected && 'btn-active',
         )}
         href={href}
         {...props}
@@ -62,12 +64,8 @@ const ToolsLink = memo(function ToolsLink({
 const ToolsGroup = memo(function ToolsGroup({ item }: { item: MenuItemGroup }) {
   const { t } = useTranslation(nsLayoutTools)
   return (
-    <li className='row'>
-      <h6
-        className={
-          'px-4 py-1 mb-2 menu-title'
-        }
-      >
+    <li className="row">
+      <h6 className={'px-4 py-1 mb-2 menu-title'}>
         <span className="leading-8">{t(item.key)}</span>
       </h6>
       <ul className="flex flex-wrap gap-2">
@@ -90,11 +88,11 @@ const ToolsGroupLink = memo(function ToolsGroupLink({
     return pathname.endsWith(item.href.toString())
   }, [pathname, item.href])
   return (
-    <li className='w-[132px]'>
+    <li className="w-[132px]">
       <Link
         className={cn(
           'btn bg-base-300 flex flex-col justify-center items-center px-2 py-3 h-full relative',
-          isSelected && 'btn-active'
+          isSelected && 'btn-active',
         )}
         title={t(item.key)}
         href={item.href}

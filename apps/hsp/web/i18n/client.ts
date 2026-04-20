@@ -1,6 +1,6 @@
 'use client'
+import { getOptions, LANG_COOKIE_NAME, LANGUAGES } from '@i18n/config'
 import initI18nextClient from '@repo/i18n/src/client'
-import { LANGUAGES, LANG_COOKIE_NAME, getOptions } from '@i18n/config'
 
 export const useTranslation = initI18nextClient({
   getOptions,

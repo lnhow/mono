@@ -81,7 +81,7 @@ const options = {
     },
     string: {
       size: 1.5,
-    }
+    },
   },
 }
 

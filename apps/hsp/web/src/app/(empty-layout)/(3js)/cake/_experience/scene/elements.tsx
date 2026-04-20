@@ -1,7 +1,7 @@
-import TextMessage from './message'
-import { Cake } from './cake'
 import { useAtomValue } from 'jotai'
 import { cakeSceneAtom } from '../_state'
+import { Cake } from './cake'
+import TextMessage from './message'
 
 export default function Elements() {
   const cake = useAtomValue(cakeSceneAtom)

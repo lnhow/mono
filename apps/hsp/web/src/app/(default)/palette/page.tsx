@@ -1,5 +1,5 @@
 import isProductionEnv from '@hsp/ui/utils/nextjs/is-production'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 export const metadata: Metadata = {

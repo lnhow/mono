@@ -1,6 +1,6 @@
 import cn from '@hsp/ui/utils/cn'
-import ChatList from './ChatList'
 import ChatInput from './ChatInput'
+import ChatList from './ChatList'
 
 export default function Chat({ className }: { className?: string }) {
   return (
@@ -9,7 +9,7 @@ export default function Chat({ className }: { className?: string }) {
         Messages
       </h2>
       <ChatList className="space-y-2 mb-4 flex-1 overflow-y-auto px-4" />
-      <ChatInput className='px-2' />
+      <ChatInput className="px-2" />
     </div>
   )
 }

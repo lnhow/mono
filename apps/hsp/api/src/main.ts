@@ -1,9 +1,9 @@
+import { ConfigService } from '@nestjs/config'
 import { NestFactory } from '@nestjs/core'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
+import { isDevEnv } from './_utils/development'
 import { AppModule } from './app.module'
 import { MongoIoAdapter } from './gateways/mongo.adapter'
-import { ConfigService } from '@nestjs/config'
-import { isDevEnv } from './_utils/development'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)

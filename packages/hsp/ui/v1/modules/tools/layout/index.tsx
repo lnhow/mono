@@ -1,9 +1,9 @@
 'use client'
+import NoSsr from '@hsp/ui/../v1/components/utils/NoSsr'
+import type { BaseLayoutProps } from '@hsp/ui/../v1/layouts/types'
 import { Suspense } from 'react'
 import { MdMenu } from 'react-icons/md'
-import { BaseLayoutProps } from '@hsp/ui/../v1/layouts/types'
 import SideMenu from './ToolsMenu'
-import NoSsr from '@hsp/ui/../v1/components/utils/NoSsr'
 
 export default function ToolsLayout({ children }: BaseLayoutProps) {
   return (

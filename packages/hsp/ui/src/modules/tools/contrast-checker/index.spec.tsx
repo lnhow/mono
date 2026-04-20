@@ -1,11 +1,10 @@
-import { ExpectStatic, it, vi } from 'vitest'
 import { fireEvent, render, screen, within } from '@testing-library/react'
-
+import { useSearchParams } from 'next/navigation'
+import { parseColor } from 'react-aria-components'
+import { type ExpectStatic, it, vi } from 'vitest'
 import PageContrastChecker from '.'
 import { DEFAULT_BACKGROUND, DEFAULT_FOREGROUND } from './const'
-import { parseColor } from 'react-aria-components'
 import { calcContrastRatio } from './contrastUtils'
-import { useSearchParams } from 'next/navigation'
 
 function expectPreviewBackground(expect: ExpectStatic, color: string) {
   expect(screen.getByTestId('background-preview').style.background).toBe(color)
@@ -59,8 +58,12 @@ describe('Contrast Checker Page', () => {
     }
     const outputContrastRatio = `${calcContrastRatio(testColor.foreground.toString('hex'), testColor.background.toString('hex')).toFixed(2)}:1`
 
-    const foregroundInput = screen.getByRole('textbox', { name: /foreground/i })
-    const backgroundInput = screen.getByRole('textbox', { name: /background/i })
+    const foregroundInput = screen.getByRole('textbox', {
+      name: /foreground/i,
+    })
+    const backgroundInput = screen.getByRole('textbox', {
+      name: /background/i,
+    })
 
     fireEvent.input(foregroundInput, {
       target: { value: testColor.foreground.toString('hex') },
@@ -91,7 +94,7 @@ describe('Contrast Checker Page', () => {
       foreground: parseColor('#00FF00'),
       background: parseColor('#0000FF'),
     }
-    const outputContrastRatio = `${calcContrastRatio(testColor.foreground.toString('hex'), testColor.background.toString('hex')).toFixed(2)}:1`;
+    const outputContrastRatio = `${calcContrastRatio(testColor.foreground.toString('hex'), testColor.background.toString('hex')).toFixed(2)}:1`
 
     vi.mocked(useSearchParams).mockReturnValue(
       new URLSearchParams({

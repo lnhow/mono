@@ -1,8 +1,8 @@
 'use client'
+import GUI from 'lil-gui'
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import GUI from 'lil-gui'
 
 export default function CanvasSpiral() {
   const refCanvas = useRef<HTMLCanvasElement>(null)
@@ -131,17 +131,19 @@ function initScene(canvas: HTMLCanvasElement | null) {
         ((i % galaxyParams.branches) / galaxyParams.branches) * Math.PI * 2
 
       const randomX =
-        Math.pow(Math.random(), galaxyParams.randomnessPower) *
+        Math.random() ** galaxyParams.randomnessPower *
         (Math.random() < 0.5 ? -1 : 1) *
         galaxyParams.randomness *
         radius
       const randomY =
-        Math.pow(Math.random(), galaxyParams.randomnessPower) *
+        (Math.random() ** galaxyParams.randomnessPower *
           (Math.random() < 0.5 ? -1 : 1) *
-          galaxyParams.randomness * Math.sqrt(radius) / 2 +
+          galaxyParams.randomness *
+          Math.sqrt(radius)) /
+          2 +
         radius * galaxyParams.yRadiusOffset
       const randomZ =
-        Math.pow(Math.random(), galaxyParams.randomnessPower) *
+        Math.random() ** galaxyParams.randomnessPower *
         (Math.random() < 0.5 ? -1 : 1) *
         galaxyParams.randomness *
         radius

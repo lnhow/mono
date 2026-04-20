@@ -1,7 +1,7 @@
-import Image from 'next/image'
 import Link from '@hsp/ui/../v1/shared/components/navigation/Link'
 import cn from '@hsp/ui/utils/cn'
-import { TShort } from '../../shorts'
+import Image from 'next/image'
+import type { TShort } from '../../shorts'
 
 export type NwShortBaseProps = {
   styles?: {
@@ -32,7 +32,7 @@ export default function NwShortBase({ data, styles }: NwShortBaseProps) {
           'group flex card image-full h-full hover:shadow-lg transition-shadow duration-300 ease-in-out',
           'before:bg-gradient-to-br before:from-base-300 before:to-base-100',
           'before:!opacity-0 hover:before:!opacity-60 before:transition-opacity before:duration-200 before:ease-in-out',
-          styles?.container
+          styles?.container,
         )}
       >
         {coverUrl && (
@@ -50,7 +50,7 @@ export default function NwShortBase({ data, styles }: NwShortBaseProps) {
         <div
           className={cn(
             'card-body justify-end items-end px-4 py-6 text-text-300',
-            styles?.container
+            styles?.container,
           )}
         >
           <h4
@@ -58,16 +58,14 @@ export default function NwShortBase({ data, styles }: NwShortBaseProps) {
               'text-lg font-bold lg:line-clamp-2 py-1 px-2 rounded-lg shadow-sm text-text-300',
               'bg-gradient-to-br from-base-100 bg-base-300 bg-opacity-80',
               'border-r-2 group-hover:border-r-4 border-neutral transition-[border] duration-200 ease-in-out',
-              styles?.content?.title
+              styles?.content?.title,
             )}
           >
             {title}
           </h4>
           <div className="mt-1 max-w-[90%]">
             <div className="bg-gradient-to-br from-base-300 bg-base-100 bg-opacity-60 p-2 shadow-sm rounded-sm text-text-300">
-              <p
-                className={cn('text-sm', styles?.content?.description)}
-              >
+              <p className={cn('text-sm', styles?.content?.description)}>
                 {description}
               </p>
               <div className="text-right text-sm font-bold">

@@ -1,6 +1,6 @@
-import NwCategory from './category'
-import Maybe from './common/maybe'
-import NwImage from './image'
+import type NwCategory from './category'
+import type Maybe from './common/maybe'
+import type NwImage from './image'
 
 export default interface NwPost {
   id: string

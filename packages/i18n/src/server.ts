@@ -8,8 +8,8 @@
 import { createInstance } from 'i18next'
 import resourcesToBackend from 'i18next-resources-to-backend'
 import { initReactI18next } from 'react-i18next/initReactI18next'
-import { DEFAULT_LANGUAGE, TGetOptions } from './types'
 import { getRequestLocale } from './RequestLocale'
+import { DEFAULT_LANGUAGE, type TGetOptions } from './types'
 
 // Class version
 export default class I18nServer {
@@ -17,7 +17,7 @@ export default class I18nServer {
     getOptions,
     defaultLanguage = DEFAULT_LANGUAGE,
   }: {
-    getOptions: TGetOptions,
+    getOptions: TGetOptions
     defaultLanguage: string
   }) {
     this._getOptions = getOptions
@@ -29,16 +29,17 @@ export default class I18nServer {
     lang?: string,
     options: {
       keyPrefix?: string
-    } = {}
+    } = {},
   ) {
-    const resolvedLang = lang || await getRequestLocale() || this._defaultLanguage
+    const resolvedLang =
+      lang || (await getRequestLocale()) || this._defaultLanguage
     // console.log('[Debug Log] -> I18nServer -> resolvedLang:', resolvedLang)
     const i18nextInstance = await this.initI18next(resolvedLang, ns)
     return {
       t: i18nextInstance.getFixedT(
         resolvedLang,
         Array.isArray(ns) ? ns[0] : ns,
-        options.keyPrefix
+        options.keyPrefix,
       ),
       i18n: i18nextInstance,
     }
@@ -51,8 +52,8 @@ export default class I18nServer {
       .use(
         resourcesToBackend(
           (language: string, namespace: string) =>
-            import(`@i18n/langs/${language}/${namespace}.json`)
-        )
+            import(`@i18n/langs/${language}/${namespace}.json`),
+        ),
       )
       .init(this._getOptions(lang, ns))
     return i18nInstance

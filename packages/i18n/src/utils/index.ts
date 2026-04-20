@@ -1,8 +1,8 @@
 /**
  * Usage: nextRedirect(prefixPathname(locale, '/'))
- * @param locale 
- * @param pathname 
- * @returns 
+ * @param locale
+ * @param pathname
+ * @returns
  */
 export async function prefixPathname(locale?: string, pathname = '') {
   let localizedHref = '/' + locale

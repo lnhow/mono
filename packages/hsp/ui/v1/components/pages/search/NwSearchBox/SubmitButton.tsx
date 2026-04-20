@@ -1,6 +1,6 @@
 'use client'
-import { MdOutlineSearch } from 'react-icons/md'
 import { useFormStatus } from 'react-dom'
+import { MdOutlineSearch } from 'react-icons/md'
 
 export default function SubmitButton() {
   const { pending } = useFormStatus()
@@ -11,7 +11,7 @@ export default function SubmitButton() {
       disabled={pending}
       aria-disabled={pending}
     >
-      <MdOutlineSearch className='icon-md' />
+      <MdOutlineSearch className="icon-md" />
     </button>
   )
 }

@@ -1,10 +1,10 @@
 // src/gateways/mongo.adapter.ts
 
+import type { ConfigService } from '@nestjs/config'
 import { IoAdapter } from '@nestjs/platform-socket.io'
-import { Server, ServerOptions } from 'socket.io'
-import { MongoClient } from 'mongodb'
 import { createAdapter } from '@socket.io/mongo-adapter'
-import { ConfigService } from '@nestjs/config'
+import { MongoClient } from 'mongodb'
+import type { Server, ServerOptions } from 'socket.io'
 
 // const COLLECTION_USER_SESSIONS = 'grt_user_sessions'
 

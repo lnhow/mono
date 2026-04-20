@@ -1,4 +1,13 @@
-import { CircleGeometry, Material, Mesh, MeshStandardMaterial, RepeatWrapping, SRGBColorSpace, Texture, type BufferGeometry } from 'three'
+import {
+  type BufferGeometry,
+  CircleGeometry,
+  type Material,
+  Mesh,
+  MeshStandardMaterial,
+  RepeatWrapping,
+  SRGBColorSpace,
+  type Texture,
+} from 'three'
 import Experience from '../Experience'
 
 export default class Floor {
@@ -8,8 +17,8 @@ export default class Floor {
 
   geometry?: BufferGeometry
   textures?: {
-    color: Texture,
-    normal: Texture,
+    color: Texture
+    normal: Texture
   }
   materials?: Material
   mesh?: Mesh
@@ -35,7 +44,7 @@ export default class Floor {
     this.textures.color.repeat.set(1.5, 1.5)
     this.textures.color.wrapS = RepeatWrapping
     this.textures.color.wrapT = RepeatWrapping
-    
+
     this.textures.normal.repeat.set(1.5, 1.5)
     this.textures.normal.wrapS = RepeatWrapping
     this.textures.normal.wrapT = RepeatWrapping
@@ -47,16 +56,13 @@ export default class Floor {
     }
     this.materials = new MeshStandardMaterial({
       map: this.textures.color,
-      normalMap: this.textures.normal
+      normalMap: this.textures.normal,
     })
   }
 
   setMesh() {
-    this.mesh = new Mesh(
-      this.geometry!,
-      this.materials!
-    )
-    this.mesh.rotation.x = - Math.PI * 0.5
+    this.mesh = new Mesh(this.geometry!, this.materials!)
+    this.mesh.rotation.x = -Math.PI * 0.5
     this.mesh.receiveShadow = true
     this.scene.add(this.mesh)
   }

@@ -1,8 +1,8 @@
-import cn from '@hsp/ui/utils/cn'
-import Link from '@hsp/ui/components/link'
-import { ReactNode } from 'react'
-import ViewTransition from '@hsp/ui/utils/react/view-transition'
 import { Card, CardDescription, CardTitle } from '@hsp/ui/components/card'
+import Link from '@hsp/ui/components/link'
+import cn from '@hsp/ui/utils/cn'
+import ViewTransition from '@hsp/ui/utils/react/view-transition'
+import type { ReactNode } from 'react'
 
 export type CardDemoProps = {
   title: ReactNode

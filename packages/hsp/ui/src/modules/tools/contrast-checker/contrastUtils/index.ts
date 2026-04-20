@@ -41,15 +41,15 @@ export function calcRelativeLuminance(hex: string) {
     0.2126 *
       (normalizedRGB.r <= 0.0328
         ? normalizedRGB.r / 12.92
-        : Math.pow((normalizedRGB.r + 0.055) / 1.055, 2.4)) +
+        : ((normalizedRGB.r + 0.055) / 1.055) ** 2.4) +
     0.7152 *
       (normalizedRGB.g <= 0.0328
         ? normalizedRGB.g / 12.92
-        : Math.pow((normalizedRGB.g + 0.055) / 1.055, 2.4)) +
+        : ((normalizedRGB.g + 0.055) / 1.055) ** 2.4) +
     0.0722 *
       (normalizedRGB.b <= 0.0328
         ? normalizedRGB.b / 12.92
-        : Math.pow((normalizedRGB.b + 0.055) / 1.055, 2.4))
+        : ((normalizedRGB.b + 0.055) / 1.055) ** 2.4)
   )
 }
 
