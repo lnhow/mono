@@ -3,9 +3,12 @@ import { Badge } from '@folio/ui/components/badge'
 import { allPosts } from 'content-collections'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { ViewTransition } from 'react'
 
 import { mdxComponents } from '@/components/mdx-components'
 import { getPostBySlug, getPostStaticParams } from '@/lib/posts'
+import { createPostMetadata } from '@/lib/site-metadata'
+import { getPostTransitionNames } from '@/lib/post-transitions'
 
 interface PostPageProps {
   params: Promise<{ slug: string }>
@@ -19,29 +22,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   const { slug } = await params
   const post = getPostBySlug(allPosts, slug)
 
-  if (!post) {
-    return { title: 'Post not found' }
-  }
-
-  return {
-    title: post.title,
-    description: post.description,
-    alternates: { canonical: post.url },
-    openGraph: {
-      type: 'article',
-      url: post.url,
-      title: post.title,
-      description: post.description,
-      publishedTime: post.createdAt.toISOString(),
-      modifiedTime: (post.updatedAt ?? post.createdAt).toISOString(),
-      tags: post.tags,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description: post.description,
-    },
-  }
+  return createPostMetadata(post)
 }
 
 export default async function PostPage({ params }: PostPageProps) {
@@ -52,31 +33,45 @@ export default async function PostPage({ params }: PostPageProps) {
     notFound()
   }
 
+  const transitionNames = getPostTransitionNames(post.slug)
+
   return (
-    <article className="mx-auto max-w-3xl">
-      <header className="space-y-5 border-b pb-8">
-        <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
-          <time dateTime={post.createdAt.toISOString()}>
-            {new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(
-              post.createdAt,
-            )}
-          </time>
-          <span aria-hidden="true">·</span>
-          <span>{Math.max(1, Math.ceil(post.readingTime))} min read</span>
+    <ViewTransition name={transitionNames.card} update="none">
+      <article className="mx-auto max-w-3xl">
+        <header className="space-y-5 border-b pb-8">
+          <ViewTransition name={transitionNames.stats}>
+            <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
+              <time dateTime={post.createdAt.toISOString()}>
+                {new Intl.DateTimeFormat('en-US', {
+                  dateStyle: 'long',
+                }).format(post.createdAt)}
+              </time>
+              <span aria-hidden="true">·</span>
+              <span>{Math.max(1, Math.ceil(post.readingTime))} min read</span>
+            </div>
+          </ViewTransition>
+          <ViewTransition name={transitionNames.title}>
+            <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+              {post.title}
+            </h1>
+          </ViewTransition>
+          <ViewTransition name={transitionNames.description}>
+            <p className="text-lg leading-8 text-muted-foreground">
+              {post.description}
+            </p>
+          </ViewTransition>
+          <ViewTransition name={transitionNames.tags}>
+            <div className="flex flex-wrap gap-2">
+              {post.tags.map((tag) => (
+                <Badge key={tag}>{tag}</Badge>
+              ))}
+            </div>
+          </ViewTransition>
+        </header>
+        <div className="prose prose-neutral mt-10 max-w-none prose-headings:scroll-mt-20">
+          <MDXContent code={post.mdx} components={mdxComponents} />
         </div>
-        <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-          {post.title}
-        </h1>
-        <p className="text-lg leading-8 text-muted-foreground">{post.description}</p>
-        <div className="flex flex-wrap gap-2">
-          {post.tags.map((tag) => (
-            <Badge key={tag}>{tag}</Badge>
-          ))}
-        </div>
-      </header>
-      <div className="prose prose-neutral mt-10 max-w-none prose-headings:scroll-mt-20">
-        <MDXContent code={post.mdx} components={mdxComponents} />
-      </div>
-    </article>
+      </article>
+    </ViewTransition>
   )
 }

@@ -1,5 +1,6 @@
 export interface PostRecord {
   slug: string
+  url?: string
   createdAt: Date
   updatedAt?: Date
   draft?: boolean

@@ -5,12 +5,9 @@ import Link from 'next/link'
 import { ExperimentList } from '@/components/experiment-list'
 import { PostCard } from '@/components/post-card'
 import { getVisiblePosts } from '@/lib/posts'
+import { homeMetadata } from '@/lib/site-metadata'
 
-export const metadata: Metadata = {
-  title: 'Hao Le',
-  description: 'Web developer, photography and UX enthusiast.',
-  alternates: { canonical: '/' },
-}
+export const metadata: Metadata = homeMetadata
 
 export default function HomePage() {
   const latestPosts = getVisiblePosts(allPosts).slice(0, 3)

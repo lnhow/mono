@@ -3,16 +3,26 @@ import { describe, expect, it } from 'vitest'
 import { experiments } from './experiments'
 
 describe('experiments', () => {
-  it('uses unique slugs', () => {
+  it('contains the exact migrated experiment slugs', () => {
     const slugs = experiments.map(({ slug }) => slug)
 
+    expect(slugs).toEqual([
+      '3d-text',
+      'cake',
+      'physics',
+      'spiral',
+      'palette',
+      'player',
+      'contrast-checker',
+      'nextjs-performance',
+    ])
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 
   it('links to absolute HTTPS locations outside the stable route contract', () => {
     for (const experiment of experiments) {
       expect(new URL(experiment.href).protocol).toBe('https:')
-      expect(experiment.href).toMatch(/^https:\/\/www\.hspln\.com\//)
+      expect(experiment.href).toMatch(/^https:\/\/www\.haoln7f8\.com\//)
     }
   })
 

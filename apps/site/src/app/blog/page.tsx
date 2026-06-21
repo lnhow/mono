@@ -2,8 +2,8 @@ import { allPosts } from 'content-collections'
 import type { Metadata } from 'next'
 
 import { PostCard } from '@/components/post-card'
-import { blogMetadata } from '@/lib/blog-metadata'
 import { getVisiblePosts } from '@/lib/posts'
+import { blogMetadata } from '@/lib/site-metadata'
 
 export const metadata: Metadata = blogMetadata
 
