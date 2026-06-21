@@ -4,15 +4,15 @@ My personal website + playground monorepo for all things Javacript+related
 
 ## Featured
 
-- [My personal blog](https://hspln.com)
+- [My personal blog](https://haoln7f8.com)
   - React 19.2, NextJS 16, TailwindCSS, shadcn
-- [guesart](https://hspln.com/guesart)
+- [guesart](https://haoln7f8.com/guesart)
   - A draw and guess game to gauge my techniques compared to my internship years ago and see what I can improve on more
   - FYI, the comparison:
     - Time taken: ~60h over the span of 1 month solo  vs ~4 working weeks in a team of 4
     - Frontend: Better overall & used more advanced techniques. Notably: finally make the canvas responsive, handle reconnection, adding word images to make it easier to imagine what to draw, used AI to generate skeleton code.
     - Backend: Small improvement, finally used a DB instead of memory (this caused crashes under heavy load back then). Learned & used GCP to keep it on 24/7, nginx, SSL.
-- [Custom HTML player](https://hspln.com/player)
+- [Custom HTML player](https://haoln7f8.com/player)
 
 ## To start local development
 
@@ -43,9 +43,9 @@ My personal website + playground monorepo for all things Javacript+related
 - Frontend web
   - Techs: React 19.2, Next.js 16, Shadcn (Radix UI + TailwindCSS)
   - Modules:
-    - [guesart](https://web.hspln.com): Draw and Guess game
+    - [guesart](https://web.haoln7f8.com): Draw and Guess game
       - Techs: socket.io-client, jotai state management
-    - [Custom HTML player](https://web.hspln.com/player)
+    - [Custom HTML player](https://web.haoln7f8.com/player)
       - Techs: `Picture-in-picture API`, `Fullscreen API`, `useSyncExternalStore`, Pure React & TailwindCSS
 - Backend
   - Techs: Nest.js, Socket.io, Prisma, MongoDB

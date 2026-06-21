@@ -1,6 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "radix-nova",
+  "style": "radix-maia",
   "rsc": true,
   "tsx": true,
   "tailwind": {
@@ -18,7 +18,7 @@
     "lib": "@/lib",
     "hooks": "@folio/ui/hooks"
   },
-  "menuColor": "default",
+  "menuColor": "default-translucent",
   "menuAccent": "subtle",
   "registries": {}
 }

@@ -119,7 +119,7 @@ Run `pnpm --filter @folio/site test -- src/lib/experiments.test.ts`. Expected: f
 
 - [ ] **Step 3: Implement the typed catalog**
 
-Export readonly `Experiment` and `ExperimentCategory` types plus entries linking to existing production experiments including 3D text, cake, physics, spiral, palette, player, contrast checker, and Next.js performance. Build URLs against `https://www.hspln.com`; the new app does not own these routes.
+Export readonly `Experiment` and `ExperimentCategory` types plus entries linking to existing production experiments including 3D text, cake, physics, spiral, palette, player, contrast checker, and Next.js performance. Build URLs against `https://www.haoln7f8.com`; the new app does not own these routes.
 
 - [ ] **Step 4: Run and confirm GREEN**
 

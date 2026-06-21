@@ -14,7 +14,7 @@ export interface Experiment {
   category: ExperimentCategory
 }
 
-const legacyOrigin = 'https://www.hspln.com'
+const legacyOrigin = 'https://www.haoln7f8.com'
 
 export const experiments = [
   {

@@ -113,6 +113,6 @@ export const metadata: Metadata = {
   title: 'Hao Le',
   description: 'Web Developer. Photography and UX Enthusiast.',
   openGraph: {
-    url: process.env.NEXT_PUBLIC_HOST || 'https://www.hspln.com',
+    url: process.env.NEXT_PUBLIC_HOST || 'https://www.haoln7f8.com',
   },
 }

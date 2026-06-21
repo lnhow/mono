@@ -39,7 +39,7 @@ The site imports explicit `@folio/ui` subpath exports. Site-level compositions s
 
 The three real MDX posts are copied unchanged into the new app. `test.mdx` is excluded because it is a development fixture rather than published content. At build time, Content Collections validates frontmatter and compiles MDX. Routes read the generated collection, filter out `draft` and `archived` posts in every environment, and sort by `updatedAt ?? createdAt`, descending, with creation date and slug as deterministic tie-breakers.
 
-Post metadata includes canonical URLs, article timestamps, tags, Open Graph data, and Twitter card data. Root metadata defines the production URL from `NEXT_PUBLIC_SITE_URL`, falling back to `https://www.hspln.com`. Sitemap and robots use the same URL helper to avoid inconsistent origins.
+Post metadata includes canonical URLs, article timestamps, tags, Open Graph data, and Twitter card data. Root metadata defines the production URL from `NEXT_PUBLIC_SITE_URL`, falling back to `https://www.haoln7f8.com`. Sitemap and robots use the same URL helper to avoid inconsistent origins.
 
 ## Presentation
 
