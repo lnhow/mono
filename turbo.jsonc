@@ -101,6 +101,12 @@
       ],
       "outputs": []
     },
+    "typecheck": {
+      "dependsOn": [
+        "^typecheck"
+      ],
+      "outputs": []
+    },
     "test:e2e": {
       "dependsOn": [
         "^test:e2e"

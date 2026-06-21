@@ -1,0 +1,44 @@
+{
+  "name": "@folio/site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -p 10240",
+    "build": "next build",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "typecheck": "next typegen && tsc --noEmit"
+  },
+  "dependencies": {
+    "@content-collections/mdx": "catalog:markdown",
+    "@content-collections/next": "catalog:markdown",
+    "@mdx-js/react": "catalog:markdown",
+    "@folio/ui": "workspace:*",
+    "@tailwindcss/postcss": "catalog:gui",
+    "@tailwindcss/typography": "catalog:gui",
+    "next": "catalog:gui",
+    "react": "catalog:gui",
+    "react-dom": "catalog:gui",
+    "rehype-autolink-headings": "catalog:markdown",
+    "rehype-pretty-code": "catalog:markdown",
+    "rehype-slug": "catalog:markdown",
+    "remark-gfm": "catalog:markdown",
+    "shiki": "catalog:markdown",
+    "tailwindcss": "catalog:gui"
+  },
+  "devDependencies": {
+    "@content-collections/core": "catalog:markdown",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/tsconfig": "workspace:*",
+    "@types/mdx": "catalog:markdown",
+    "@types/node": "catalog:base",
+    "@types/react": "catalog:gui",
+    "@types/react-dom": "catalog:gui",
+    "eslint": "catalog:dev",
+    "reading-time": "catalog:markdown",
+    "typescript": "catalog:dev",
+    "vitest": "catalog:dev",
+    "zod": "^4.1.11"
+  }
+}

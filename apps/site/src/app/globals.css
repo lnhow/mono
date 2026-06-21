@@ -1,0 +1,16 @@
+@import "@folio/ui/globals.css";
+@plugin "@tailwindcss/typography";
+@source "../../../../packages/ui/src";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-underline-offset: 0.2em;
+}
