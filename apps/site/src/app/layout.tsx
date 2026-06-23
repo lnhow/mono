@@ -1,13 +1,13 @@
 import { cn } from '@folio/ui/lib/utils'
 import type { Metadata } from 'next'
-import { Geist } from 'next/font/google'
+import { Noto_Sans } from 'next/font/google'
 
 import { SiteHeader } from '@/components/site-header'
 import { rootMetadata } from '@/lib/site-metadata'
 
 import './globals.css'
 
-const geist = Geist({ subsets: ['latin'], variable: '--font-sans' })
+const notoSans = Noto_Sans({ subsets: ['latin'], variable: '--font-sans' })
 
 export const metadata: Metadata = rootMetadata
 
@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn('font-sans', geist.variable)}
+      className={cn(notoSans.className, 'font-sans')}
       data-scroll-behavior="smooth"
     >
       <body>

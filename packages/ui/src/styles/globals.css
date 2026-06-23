@@ -1,7 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway+Dots&family=Raleway:wght@400;500;600;700;800&display=swap");
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
 @theme inline {
   --color-background: var(--background);
@@ -19,10 +18,27 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-cta: var(--cta);
   --color-cta-foreground: var(--cta-foreground);
-  --color-sticky-note: var(--sticky-note);
-  --color-sticky-note-green: var(--sticky-note-green);
+  --color-instrument: var(--instrument);
+  --color-instrument-foreground: var(--instrument-foreground);
+  --color-instrument-muted: var(--instrument-muted);
+  --color-signal-red: var(--signal-red);
+  --color-signal-red-foreground: var(--signal-red-foreground);
+  --color-signal-red-muted: var(--signal-red-muted);
+  --color-signal-green: var(--signal-green);
+  --color-signal-green-foreground: var(--signal-green-foreground);
+  --color-signal-green-muted: var(--signal-green-muted);
+  --color-signal-amber: var(--signal-amber);
+  --color-signal-amber-foreground: var(--signal-amber-foreground);
+  --color-signal-amber-muted: var(--signal-amber-muted);
+  --color-signal-blue: var(--signal-blue);
+  --color-signal-blue-foreground: var(--signal-blue-foreground);
+  --color-signal-blue-muted: var(--signal-blue-muted);
+  --color-hud-line: var(--hud-line);
+  --color-hud-line-soft: var(--hud-line-soft);
+  --color-hud-line-faint: var(--hud-line-faint);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -30,9 +46,9 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --font-heading: "Raleway", sans-serif;
-  --font-sans: "Raleway", sans-serif;
-  --font-display: "Raleway Dots", "Raleway", sans-serif;
+  --font-heading: 'Noto Sans', sans-serif;
+  --font-sans: 'Noto Sans', sans-serif;
+  --font-display: 'Noto Sans', sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -52,42 +68,97 @@
 }
 
 :root {
-  --background: #fffef9;
-  --foreground: #403b31;
-  --card: var(--color-amber-50);
-  --card-foreground: #403b31;
-  --popover: #fffef9;
-  --popover-foreground: #403b31;
-  --primary: var(--color-yellow-300);
-  --primary-foreground: var(--color-yellow-950);
-  --secondary: #f5f1e7;
-  --secondary-foreground: #403b31;
-  --muted: #f5f1e7;
-  --muted-foreground: #756e60;
-  --accent: var(--color-green-300);
-  --accent-foreground: var(--color-green-950);
-  --destructive: var(--color-red-600);
-  --cta: var(--color-green-300);
-  --cta-foreground: var(--color-green-950);
-  --sticky-note: #fff9df;
-  --sticky-note-green: #f1f8df;
-  --border: #d6d1c2;
-  --input: #d6d1c2;
-  --ring: #a39a86;
-  --radius: 2rem;
-  --chart-1: var(--color-green-300);
-  --chart-2: var(--color-yellow-300);
-  --chart-3: var(--color-amber-300);
-  --chart-4: var(--color-lime-300);
-  --chart-5: var(--color-orange-300);
-  --sidebar: #fffef9;
-  --sidebar-foreground: #403b31;
-  --sidebar-primary: var(--color-yellow-300);
-  --sidebar-primary-foreground: var(--color-yellow-950);
-  --sidebar-accent: var(--color-green-300);
-  --sidebar-accent-foreground: var(--color-green-950);
-  --sidebar-border: #d6d1c2;
-  --sidebar-ring: #a39a86;
+  --background: #f0f1ec;
+  --foreground: #111416;
+  --card: #fafaf5;
+  --card-foreground: #111416;
+  --popover: #fafaf5;
+  --popover-foreground: #111416;
+  --primary: var(--signal-blue);
+  --primary-foreground: var(--signal-blue-foreground);
+  --secondary: #fafaf5;
+  --secondary-foreground: #111416;
+  --muted: #d1d5ce;
+  --muted-foreground: #5f6662;
+  --accent: var(--signal-amber);
+  --accent-foreground: var(--signal-amber-foreground);
+  --destructive: var(--signal-red);
+  --destructive-foreground: var(--signal-red-foreground);
+  --cta: var(--instrument);
+  --cta-foreground: var(--instrument-foreground);
+  --instrument: #15191b;
+  --instrument-foreground: #f8f8f2;
+  --instrument-muted: #23282b;
+  --signal-red: #ff4d3d;
+  --signal-red-foreground: #260300;
+  --signal-red-muted: #ffe1dc;
+  --signal-green: #1fa66a;
+  --signal-green-foreground: #06190f;
+  --signal-green-muted: #d8f3e6;
+  --signal-amber: #f4b63f;
+  --signal-amber-foreground: #241600;
+  --signal-amber-muted: #fff0cb;
+  --signal-blue: #42aee8;
+  --signal-blue-foreground: #001826;
+  --signal-blue-muted: #d9f1ff;
+  --hud-line: rgba(17, 20, 22, 0.34);
+  --hud-line-soft: rgba(17, 20, 22, 0.14);
+  --hud-line-faint: rgba(17, 20, 22, 0.08);
+  --border: #d1d5ce;
+  --input: #d1d5ce;
+  --ring: #858d87;
+  --radius: 0;
+  --chamfer-sm: 10px;
+  --chamfer-md: 18px;
+  --chamfer-lg: 34px;
+  --chart-1: var(--signal-green);
+  --chart-2: var(--signal-blue);
+  --chart-3: var(--signal-amber);
+  --chart-4: var(--signal-red);
+  --chart-5: var(--instrument-muted);
+  --sidebar: #fafaf5;
+  --sidebar-foreground: #111416;
+  --sidebar-primary: var(--instrument);
+  --sidebar-primary-foreground: var(--instrument-foreground);
+  --sidebar-accent: var(--signal-blue);
+  --sidebar-accent-foreground: var(--signal-blue-foreground);
+  --sidebar-border: #d1d5ce;
+  --sidebar-ring: #858d87;
+}
+
+.dark,
+[data-theme='dark'] {
+  --background: #15191b;
+  --foreground: #f8f8f2;
+  --card: #1f2528;
+  --card-foreground: #f8f8f2;
+  --popover: #1f2528;
+  --popover-foreground: #f8f8f2;
+  --secondary: #1f2528;
+  --secondary-foreground: #f8f8f2;
+  --muted: #2d3637;
+  --muted-foreground: #a7aea8;
+  --instrument: #f8f8f2;
+  --instrument-foreground: #111416;
+  --instrument-muted: #d6ddd8;
+  --signal-red-muted: #3a1816;
+  --signal-green-muted: #123326;
+  --signal-amber-muted: #3a2a12;
+  --signal-blue-muted: #102d3d;
+  --hud-line: rgba(248, 248, 242, 0.42);
+  --hud-line-soft: rgba(248, 248, 242, 0.18);
+  --hud-line-faint: rgba(248, 248, 242, 0.08);
+  --border: #2d3637;
+  --input: #2d3637;
+  --ring: #8b9693;
+  --sidebar: #1f2528;
+  --sidebar-foreground: #f8f8f2;
+  --sidebar-primary: var(--instrument);
+  --sidebar-primary-foreground: var(--instrument-foreground);
+  --sidebar-accent: var(--signal-blue);
+  --sidebar-accent-foreground: var(--signal-blue-foreground);
+  --sidebar-border: #2d3637;
+  --sidebar-ring: #8b9693;
 }
 
 @layer base {
@@ -100,5 +171,159 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+@layer utilities {
+  .chamfer-surface {
+    --chamfer-surface-size: var(--chamfer-md);
+    clip-path: polygon(
+      var(--chamfer-surface-size) 0,
+      100% 0,
+      100% calc(100% - var(--chamfer-surface-size)),
+      calc(100% - var(--chamfer-surface-size)) 100%,
+      0 100%,
+      0 var(--chamfer-surface-size)
+    );
+  }
+
+  .chamfer-surface-lg {
+    --chamfer-surface-size: var(--chamfer-lg);
+    clip-path: polygon(
+      var(--chamfer-surface-size) 0,
+      calc(100% - var(--chamfer-surface-size)) 0,
+      100% var(--chamfer-surface-size),
+      100% calc(100% - var(--chamfer-surface-size)),
+      calc(100% - var(--chamfer-surface-size)) 100%,
+      var(--chamfer-surface-size) 100%,
+      0 calc(100% - var(--chamfer-surface-size)),
+      0 var(--chamfer-surface-size)
+    );
+  }
+
+  .chamfer-button {
+    --chamfer-button-major: var(--chamfer-md);
+    --chamfer-button-minor: var(--chamfer-sm);
+    --chamfer-button-notch: 11px;
+    clip-path: polygon(
+      var(--chamfer-button-major) 0,
+      calc(100% - var(--chamfer-button-minor)) 0,
+      100% var(--chamfer-button-notch),
+      calc(100% - var(--chamfer-button-major)) 100%,
+      var(--chamfer-button-minor) 100%,
+      0 calc(100% - var(--chamfer-button-notch))
+    );
+  }
+
+  .chamfer-outline {
+    --chamfer-outline-color: var(--border);
+    --chamfer-outline-fill: var(--background);
+    --chamfer-outline-size: 2px;
+    --chamfer-button-major: var(--chamfer-md);
+    --chamfer-button-minor: var(--chamfer-sm);
+    --chamfer-button-notch: 11px;
+    background: transparent;
+    clip-path: none;
+    isolation: isolate;
+    position: relative;
+  }
+
+  .chamfer-outline::before,
+  .chamfer-outline::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .chamfer-outline::before {
+    background: var(--chamfer-outline-color);
+    clip-path: polygon(
+      var(--chamfer-button-major) 0,
+      calc(100% - var(--chamfer-button-minor)) 0,
+      100% var(--chamfer-button-notch),
+      calc(100% - var(--chamfer-button-major)) 100%,
+      var(--chamfer-button-minor) 100%,
+      0 calc(100% - var(--chamfer-button-notch))
+    );
+    inset: 0;
+    z-index: -2;
+  }
+
+  .chamfer-outline::after {
+    background: var(--chamfer-outline-fill);
+    clip-path: polygon(
+      max(0px, calc(var(--chamfer-button-major) - var(--chamfer-outline-size)))
+        0,
+      calc(
+          100% -
+            max(
+              0px,
+              calc(var(--chamfer-button-minor) - var(--chamfer-outline-size))
+            )
+        )
+        0,
+      100%
+        max(
+          0px,
+          calc(var(--chamfer-button-notch) - var(--chamfer-outline-size))
+        ),
+      calc(
+          100% -
+            max(
+              0px,
+              calc(var(--chamfer-button-major) - var(--chamfer-outline-size))
+            )
+        )
+        100%,
+      max(0px, calc(var(--chamfer-button-minor) - var(--chamfer-outline-size)))
+        100%,
+      0
+        calc(
+          100% -
+            max(
+              0px,
+              calc(var(--chamfer-button-notch) - var(--chamfer-outline-size))
+            )
+        )
+    );
+    inset: var(--chamfer-outline-size);
+    z-index: -1;
+  }
+
+  .bg-halftone {
+    --halftone-color: currentColor;
+    --halftone-dot-size: 1.2px;
+    --halftone-dot-gap: 9px;
+    background-image: radial-gradient(
+      circle,
+      var(--halftone-color) 0 var(--halftone-dot-size),
+      transparent calc(var(--halftone-dot-size) + 0.25px)
+    );
+    background-size: var(--halftone-dot-gap) var(--halftone-dot-gap);
+  }
+
+  .bg-halftone-accent {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .bg-halftone-accent::after {
+    --halftone-color: currentColor;
+    --halftone-dot-size: 1.2px;
+    --halftone-dot-gap: 9px;
+    background-image: radial-gradient(
+      circle,
+      var(--halftone-color) 0 var(--halftone-dot-size),
+      transparent calc(var(--halftone-dot-size) + 0.25px)
+    );
+    background-size: var(--halftone-dot-gap) var(--halftone-dot-gap);
+    content: '';
+    height: var(--halftone-accent-size, 76px);
+    opacity: var(--halftone-opacity, 0.18);
+    pointer-events: none;
+    position: absolute;
+    right: var(--halftone-accent-offset, 20px);
+    top: var(--halftone-accent-offset, 20px);
+    width: var(--halftone-accent-size, 76px);
   }
 }
