@@ -4,7 +4,9 @@ import Link from 'next/link'
 
 import { ExperimentList } from '@/components/experiment-list'
 import { PostCard } from '@/components/post-card'
+import { PortfolioSections } from '@/components/portfolio-sections'
 import { getVisiblePosts } from '@/lib/posts'
+import { portfolio } from '@/lib/portfolio'
 import { homeMetadata } from '@/lib/site-metadata'
 
 export const metadata: Metadata = homeMetadata
@@ -16,24 +18,30 @@ export default function HomePage() {
     <div className="space-y-20">
       <section className="max-w-3xl space-y-6 py-12">
         <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-          Web developer · Ho Chi Minh City
+          {portfolio.eyebrow}
         </p>
         <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">
-          Hi, I’m Hào.
+          {portfolio.heading}
         </h1>
         <p className="text-lg leading-8 text-muted-foreground sm:text-xl">
-          I build for the web and write about software, learning, and the ideas
-          that stay with me. I’m also interested in photography and UX.
+          {portfolio.introduction}
         </p>
         <div className="flex gap-5 text-sm font-medium">
-          <a className="underline" href="https://github.com/lnhow">
-            GitHub
-          </a>
-          <a className="underline" href="https://www.linkedin.com/in/lnhow/">
-            LinkedIn
-          </a>
+          {portfolio.socials.map((social) => (
+            <a
+              className="underline"
+              href={social.href}
+              key={social.label}
+              rel="noreferrer"
+              target="_blank"
+            >
+              {social.label}
+            </a>
+          ))}
         </div>
       </section>
+
+      <PortfolioSections />
 
       <section className="space-y-6">
         <div className="flex items-end justify-between gap-4">
