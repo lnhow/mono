@@ -39,20 +39,22 @@ The site should not import `next/font/google` for Geist for this direction. The 
 
 ## Light Tokens
 
+Repeated shadcn semantic colors remain available as aliases so components preserve their expected token API without duplicating concrete palette values.
+
 ```css
---background: #f0f1ec;
---foreground: #111416;
---card: #fafaf5;
---card-foreground: #111416;
---popover: #fafaf5;
---popover-foreground: #111416;
+--background: oklch(0.956 0.0067 115.71);
+--foreground: oklch(0.1889 0.0062 236.93);
+--card: var(--secondary);
+--card-foreground: var(--secondary-foreground);
+--popover: var(--secondary);
+--popover-foreground: var(--secondary-foreground);
 
 --primary: var(--signal-blue);
 --primary-foreground: var(--signal-blue-foreground);
---secondary: #fafaf5;
---secondary-foreground: #111416;
---muted: #d1d5ce;
---muted-foreground: #5f6662;
+--secondary: oklch(0.9837 0.0066 106.52);
+--secondary-foreground: var(--foreground);
+--muted: oklch(0.8679 0.0104 131.37);
+--muted-foreground: oklch(0.5029 0.0107 161.06);
 --accent: var(--signal-amber);
 --accent-foreground: var(--signal-amber-foreground);
 --destructive: var(--signal-red);
@@ -60,30 +62,39 @@ The site should not import `next/font/google` for Geist for this direction. The 
 --cta: var(--instrument);
 --cta-foreground: var(--instrument-foreground);
 
---instrument: #15191b;
---instrument-foreground: #f8f8f2;
---instrument-muted: #23282b;
+--instrument: oklch(0.2101 0.0073 229.25);
+--instrument-foreground: oklch(0.9775 0.0079 106.55);
+--instrument-muted: oklch(0.2731 0.0091 234.05);
 
---signal-red: #ff4d3d;
---signal-red-foreground: #260300;
---signal-red-muted: #ffe1dc;
---signal-green: #1fa66a;
---signal-green-foreground: #06190f;
---signal-green-muted: #d8f3e6;
---signal-amber: #f4b63f;
---signal-amber-foreground: #241600;
---signal-amber-muted: #fff0cb;
---signal-blue: #42aee8;
---signal-blue-foreground: #001826;
---signal-blue-muted: #d9f1ff;
+--signal-red: oklch(0.671 0.2168 29.19);
+--signal-red-foreground: oklch(0.1756 0.063 34.07);
+--signal-red-muted: oklch(0.933 0.034 29);
+--signal-green: oklch(0.6421 0.1426 157.76);
+--signal-green-foreground: oklch(0.1934 0.0329 158.81);
+--signal-green-muted: oklch(0.9409 0.0332 165.14);
+--signal-amber: oklch(0.8138 0.1475 79.72);
+--signal-amber-foreground: oklch(0.2133 0.0444 78.32);
+--signal-amber-muted: oklch(0.9577 0.0507 88.57);
+--signal-blue: oklch(0.714 0.1284 236.3);
+--signal-blue-foreground: oklch(0.1977 0.0426 236.05);
+--signal-blue-muted: oklch(0.9448 0.0316 233.29);
 
---hud-line: rgba(17, 20, 22, 0.34);
---hud-line-soft: rgba(17, 20, 22, 0.14);
---hud-line-faint: rgba(17, 20, 22, 0.08);
+--hud-line: oklch(0.1889 0.0062 236.93 / 34%);
+--hud-line-soft: oklch(0.1889 0.0062 236.93 / 14%);
+--hud-line-faint: oklch(0.1889 0.0062 236.93 / 8%);
 
---border: #d1d5ce;
---input: #d1d5ce;
---ring: #858d87;
+--border: var(--muted);
+--input: var(--muted);
+--ring: oklch(0.635 0.0128 153.53);
+
+--sidebar: var(--secondary);
+--sidebar-foreground: var(--secondary-foreground);
+--sidebar-primary: var(--instrument);
+--sidebar-primary-foreground: var(--instrument-foreground);
+--sidebar-accent: var(--primary);
+--sidebar-accent-foreground: var(--primary-foreground);
+--sidebar-border: var(--border);
+--sidebar-ring: var(--ring);
 
 --radius: 0;
 --chamfer-sm: 10px;
@@ -94,34 +105,22 @@ The site should not import `next/font/google` for Geist for this direction. The 
 ## Dark Tokens
 
 ```css
---background: #15191b;
---foreground: #f8f8f2;
---card: #1f2528;
---card-foreground: #f8f8f2;
---popover: #1f2528;
---popover-foreground: #f8f8f2;
-
---secondary: #1f2528;
---secondary-foreground: #f8f8f2;
---muted: #2d3637;
---muted-foreground: #a7aea8;
-
---instrument: #f8f8f2;
---instrument-foreground: #111416;
---instrument-muted: #d6ddd8;
-
---signal-red-muted: #3a1816;
---signal-green-muted: #123326;
---signal-amber-muted: #3a2a12;
---signal-blue-muted: #102d3d;
-
---hud-line: rgba(248, 248, 242, 0.42);
---hud-line-soft: rgba(248, 248, 242, 0.18);
---hud-line-faint: rgba(248, 248, 242, 0.08);
-
---border: #2d3637;
---input: #2d3637;
---ring: #8b9693;
+--background: oklch(0.2101 0.0073 229.25);
+--foreground: oklch(0.9775 0.0079 106.55);
+--secondary: oklch(0.2598 0.0103 229.34);
+--muted: oklch(0.3249 0.0123 204.76);
+--muted-foreground: oklch(0.7435 0.0116 149.8);
+--instrument: oklch(0.9775 0.0079 106.55);
+--instrument-foreground: oklch(0.1889 0.0062 236.93);
+--instrument-muted: oklch(0.8908 0.0101 155.08);
+--signal-red-muted: oklch(0.2589 0.0543 24.99);
+--signal-green-muted: oklch(0.2919 0.0459 164.93);
+--signal-amber-muted: oklch(0.2977 0.0442 75.75);
+--signal-blue-muted: oklch(0.2832 0.0454 235.69);
+--hud-line: oklch(0.9775 0.0079 106.55 / 42%);
+--hud-line-soft: oklch(0.9775 0.0079 106.55 / 18%);
+--hud-line-faint: oklch(0.9775 0.0079 106.55 / 8%);
+--ring: oklch(0.6633 0.0134 177.8);
 ```
 
 ## Token Usage
