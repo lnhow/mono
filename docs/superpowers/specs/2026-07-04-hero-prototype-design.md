@@ -24,7 +24,7 @@ Route-shell selection will be explicit in the shared layout so the prototype is 
 
 ### FuturisticClock
 
-`FuturisticClock` is a client component with a responsive SVG visualization and an HTML text readout. It owns the current local time and animation lifecycle but does not own page positioning.
+`FuturisticClock` is a browser-only client component with a responsive SVG visualization and an HTML text readout. The route loads it with server rendering disabled so the server never emits a timestamp that can disagree with the visitor's clock during hydration. Its reserved layout box is initially transparent, then fades in after the component mounts. This prevents both time-text hydration mismatches and visible layout movement. It owns the current local time and animation lifecycle but does not own page positioning.
 
 The SVG contains four concentric rings, ordered from outside to inside:
 
@@ -57,11 +57,11 @@ The component cancels its active animation frame or timer on unmount and when th
 
 ### ScrollRuler
 
-`ScrollRuler` is a fixed-position client component. It draws a vertical CSS ruler along the right edge with major and minor ticks and a `scroll-height` label. The displayed value and marker position are derived from normalized document scroll progress:
+`ScrollRuler` is a client component made of two coordinated layers. A document-flow track is positioned along the right edge and spans the complete document scroll height, so its ticks move with the page. A viewport-fixed indicator remains in place while the document and track scroll behind it. The indicator contains the vertical `scroll-height` label and the current absolute `scrollY` value in pixels.
 
-`scrollY / (scrollHeight - innerHeight)`
+Large pixel values use a compact, one-decimal representation: `1234 px` becomes `1.2k px`, and `1234567 px` becomes `1.2m px`. Values below 1000 remain whole pixels.
 
-Progress is clamped to `[0, 1]`, and a non-scrollable document resolves to zero. Scroll and resize updates are scheduled through `requestAnimationFrame` to avoid repeated synchronous rendering during an event burst. Listeners and pending frames are cleaned up on unmount.
+The current scroll position is clamped to `[0, document.scrollHeight - innerHeight]`. A non-scrollable document resolves to zero. Scroll and resize updates are scheduled through `requestAnimationFrame` to avoid repeated synchronous rendering during an event burst. Listeners and pending frames are cleaned up on unmount.
 
 ## Composition and Responsive Behavior
 
@@ -73,20 +73,22 @@ The page uses the site's existing neutral palette and type system, with high-con
 
 ## Pure Calculations and Testing
 
-Time-to-angle conversion and scroll-progress normalization live in framework-independent helpers. Unit tests cover:
+Time-to-angle conversion, scroll-position clamping, and compact pixel formatting live in framework-independent helpers. Unit tests cover:
 
 - Continuous angles for a fixed timestamp.
 - Discrete reduced-motion angles.
 - Twelve-hour wrapping.
-- Scroll progress at the start, midpoint, end, over-scroll bounds, and a non-scrollable page.
+- Scroll position at the start, midpoint, end, over-scroll bounds, and a non-scrollable page.
+- Pixel labels below 1000 and compact `k` and `m` labels at representative boundaries.
 
-Component tests verify the three reusable components can be rendered independently and expose their key accessible text. Browser verification checks the mobile crop, wider-screen full clock, live time movement, reduced-motion ticking, user-agent value, and ruler response while scrolling.
+Component tests verify the three reusable components can be rendered independently and expose their key accessible text. Browser verification checks the clock's reserved transparent state and post-mount fade-in, mobile crop, wider-screen full clock, live time movement, reduced-motion ticking, user-agent value, full-document ruler track, fixed indicator, and updating compact pixel value while scrolling.
 
 ## Error and Compatibility Behavior
 
+- The clock is excluded from server rendering; its reserved transparent box becomes visible only after mount.
 - Server rendering never reads browser globals.
 - Missing `matchMedia` support falls back to normal animation.
-- A non-scrollable or temporarily zero-height document reports zero progress.
+- A non-scrollable or temporarily zero-height document reports a zero-pixel position.
 - SVG and textual time remain understandable if decorative CSS fails.
 
 ## Acceptance Criteria
@@ -94,8 +96,10 @@ Component tests verify the three reusable components can be rendered independent
 - `/hero-prototype` renders without the shared site chrome while all existing routes remain unchanged.
 - The three features are separate reusable components and the route only composes them.
 - Four SVG rings and four two-decimal angle values track local time.
+- The clock emits no server timestamp and fades in after browser mount without layout movement.
 - Normal motion is continuous; reduced motion ticks once per second without interpolation.
 - The clock is cropped on mobile and fully visible on sufficiently wide screens.
 - The user-agent text reflects the visitor's browser.
-- The ruler value and marker respond to scrolling.
+- The ruler track spans and scrolls with the full document while its indicator stays fixed in the viewport.
+- The indicator reports current scroll pixels with one-decimal `k` and `m` truncation for large values.
 - Automated tests, lint, type checking, and the production build pass.
