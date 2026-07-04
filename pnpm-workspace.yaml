@@ -7,6 +7,21 @@ packages:
   - 'packages/configs/*'
   - 'packages/*'
   - 'packages/hsp/*'
+allowBuilds:
+  '@nestjs/core': set this to true or false
+  '@prisma/client': set this to true or false
+  '@prisma/engines': set this to true or false
+  '@scarf/scarf': set this to true or false
+  '@swc/core': set this to true or false
+  '@vercel/speed-insights': set this to true or false
+  core-js: set this to true or false
+  esbuild: set this to true or false
+  nice-napi: set this to true or false
+  onnxruntime-node: set this to true or false
+  prisma: set this to true or false
+  protobufjs: set this to true or false
+  sharp: set this to true or false
+  unrs-resolver: set this to true or false
 catalogs:
   # Pin the versions of the packages in the workspace
   base:
@@ -26,6 +41,7 @@ catalogs:
     '@next/eslint-plugin-next': 16.2.6
     'sharp': '^0.34.5'
     next-themes: 0.4.6
+    motion: 12.42.2
     radix-ui: 1.4.3
     # TailwindCSS
     tailwindcss: 4.3.0
