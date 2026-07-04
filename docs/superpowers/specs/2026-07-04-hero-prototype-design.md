@@ -55,7 +55,7 @@ The normal and reduced timing strategies are isolated in keyed internal controll
 
 ### UserAgentDisplay
 
-`UserAgentDisplay` is a client component that reads `navigator.userAgent` after hydration. It renders a stable placeholder before the browser value is available, wraps long values, and exposes the text as ordinary selectable content. It owns no absolute or fixed positioning.
+`UserAgentDisplay` is a client component that reads `navigator.userAgent` after hydration. During SSR and hydration it renders the existing shared `Skeleton` component in a fixed-size multiline shape matching the eventual text block. The same skeleton remains as the fault fallback if `navigator` is unavailable, reading the user agent throws, or the returned value is empty. This avoids exposing an incorrect synthetic value and prevents layout movement. Once available, the user-agent string replaces the skeleton, wraps naturally, and remains ordinary selectable content. The component owns no absolute or fixed positioning.
 
 ### ScrollRuler
 
@@ -83,7 +83,7 @@ Time-to-angle conversion, scroll-position clamping, and compact pixel formatting
 - Scroll position at the start, midpoint, end, over-scroll bounds, and a non-scrollable page.
 - Pixel labels below 1000 and compact `k` and `m` labels at representative boundaries.
 
-Component tests verify the three reusable components can be rendered independently and expose their key accessible text. Browser verification checks the clock's reserved transparent state and post-mount fade-in, mobile crop, wider-screen full clock, live time movement, reduced-motion ticking, user-agent value, full-document ruler track, fixed indicator, and updating compact pixel value while scrolling.
+Component tests verify the three reusable components can be rendered independently and expose their key accessible text. User-agent tests cover the server/hydration skeleton, successful browser replacement, and unavailable or invalid browser values retaining the skeleton. Browser verification checks the clock's reserved transparent state and post-mount fade-in, mobile crop, wider-screen full clock, live time movement, reduced-motion ticking, user-agent value, full-document ruler track, fixed indicator, and updating compact pixel value while scrolling.
 
 ## Error and Compatibility Behavior
 
@@ -103,6 +103,7 @@ Component tests verify the three reusable components can be rendered independent
 - Normal motion is continuous; reduced motion ticks once per second without interpolation.
 - The clock is cropped on mobile and fully visible on sufficiently wide screens.
 - The user-agent text reflects the visitor's browser.
+- The user-agent area uses a stable shared skeleton through SSR and hydration and retains it on browser API failure.
 - The ruler track spans and scrolls with the full document while its indicator stays fixed in the viewport.
 - The indicator reports current scroll pixels with one-decimal `k` and `m` truncation for large values.
 - Automated tests, lint, type checking, and the production build pass.
