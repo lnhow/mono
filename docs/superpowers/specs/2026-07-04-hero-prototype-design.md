@@ -1,0 +1,101 @@
+# Futuristic Hero Prototype Design
+
+## Goal
+
+Build a standalone `/hero-prototype` page in `apps/site` that prototypes three reusable technical-display components from the supplied mobile reference: a futuristic clock, a browser user-agent display, and a scroll ruler. The existing homepage remains unchanged.
+
+## Scope
+
+The prototype includes only:
+
+- The live clock and its four concentric time rings.
+- The current browser user-agent display.
+- The right-edge scroll ruler and its live scroll value.
+
+The name, biography, decorative grid, device indicators, red curve, and other reference elements are explicitly excluded.
+
+## Route Isolation
+
+`/hero-prototype` is a full-bleed page. It must not render the shared site header, footer, centered width constraint, or standard page padding. Existing routes retain the current shared shell and the current `/` page is not modified.
+
+Route-shell selection will be explicit in the shared layout so the prototype is isolated without coupling any of its three components to route detection. This preserves the components for later placement on the homepage or elsewhere.
+
+## Components
+
+### FuturisticClock
+
+`FuturisticClock` is a client component with a responsive SVG visualization and an HTML text readout. It owns the current local time and animation lifecycle but does not own page positioning.
+
+The SVG contains four concentric rings, ordered from outside to inside:
+
+1. Milliseconds
+2. Seconds
+3. Minutes
+4. Hours
+
+Each ring has distinct tick density and weight. The rings rotate according to their current time-derived angle, and the four angles are displayed to two decimal places near their respective rings. The date and 12-hour time readout use the visitor's local time zone.
+
+Normal-motion mode uses one `requestAnimationFrame` loop. Angles are continuous:
+
+- Milliseconds: progress through the current second.
+- Seconds: seconds plus millisecond progress.
+- Minutes: minutes plus second progress.
+- Hours: 12-hour position plus minute progress.
+
+Reduced-motion mode uses a one-second aligned timer and makes discrete mechanical jumps with no interpolation:
+
+- Milliseconds jump to zero.
+- Seconds advance in six-degree steps.
+- Minutes and hours advance to their discrete positions for the current whole second.
+- Time and angle labels update on the same tick.
+
+The component cancels its active animation frame or timer on unmount and when the media preference changes.
+
+### UserAgentDisplay
+
+`UserAgentDisplay` is a client component that reads `navigator.userAgent` after hydration. It renders a stable placeholder before the browser value is available, wraps long values, and exposes the text as ordinary selectable content. It owns no absolute or fixed positioning.
+
+### ScrollRuler
+
+`ScrollRuler` is a fixed-position client component. It draws a vertical CSS ruler along the right edge with major and minor ticks and a `scroll-height` label. The displayed value and marker position are derived from normalized document scroll progress:
+
+`scrollY / (scrollHeight - innerHeight)`
+
+Progress is clamped to `[0, 1]`, and a non-scrollable document resolves to zero. Scroll and resize updates are scheduled through `requestAnimationFrame` to avoid repeated synchronous rendering during an event burst. Listeners and pending frames are cleaned up on unmount.
+
+## Composition and Responsive Behavior
+
+The prototype page supplies layout only. It places the user-agent display at the upper left, the clock around the left-center, and the ruler on the right edge. It includes sufficient vertical height to demonstrate the ruler.
+
+On mobile, the clock is deliberately oversized and offset beyond the left viewport edge, reproducing the partial crop in the supplied reference. Its date/time readout remains visible. At wider breakpoints, the clock scales and repositions until the complete SVG fits within the viewport.
+
+The page uses the site's existing neutral palette and type system, with high-contrast dark clock accents and light technical guide marks. The SVG scales through its `viewBox`; tick geometry is not recalculated for each breakpoint.
+
+## Pure Calculations and Testing
+
+Time-to-angle conversion and scroll-progress normalization live in framework-independent helpers. Unit tests cover:
+
+- Continuous angles for a fixed timestamp.
+- Discrete reduced-motion angles.
+- Twelve-hour wrapping.
+- Scroll progress at the start, midpoint, end, over-scroll bounds, and a non-scrollable page.
+
+Component tests verify the three reusable components can be rendered independently and expose their key accessible text. Browser verification checks the mobile crop, wider-screen full clock, live time movement, reduced-motion ticking, user-agent value, and ruler response while scrolling.
+
+## Error and Compatibility Behavior
+
+- Server rendering never reads browser globals.
+- Missing `matchMedia` support falls back to normal animation.
+- A non-scrollable or temporarily zero-height document reports zero progress.
+- SVG and textual time remain understandable if decorative CSS fails.
+
+## Acceptance Criteria
+
+- `/hero-prototype` renders without the shared site chrome while all existing routes remain unchanged.
+- The three features are separate reusable components and the route only composes them.
+- Four SVG rings and four two-decimal angle values track local time.
+- Normal motion is continuous; reduced motion ticks once per second without interpolation.
+- The clock is cropped on mobile and fully visible on sufficiently wide screens.
+- The user-agent text reflects the visitor's browser.
+- The ruler value and marker respond to scrolling.
+- Automated tests, lint, type checking, and the production build pass.
