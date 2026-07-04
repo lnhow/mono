@@ -1,0 +1,54 @@
+// @vitest-environment jsdom
+
+import { act, cleanup, render, screen } from '@testing-library/react'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+
+import { FuturisticClock } from './futuristic-clock'
+
+vi.mock('motion/react', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('motion/react')>()
+  return {
+    ...actual,
+    useAnimationFrame: vi.fn(),
+    useReducedMotion: () => true,
+  }
+})
+
+afterEach(() => {
+  cleanup()
+  vi.useRealTimers()
+})
+
+describe('FuturisticClock', () => {
+  it('renders four independently labelled time rings and readouts', () => {
+    render(<FuturisticClock />)
+
+    expect(screen.getByRole('timer')).toBeTruthy()
+    expect(screen.getByLabelText('Four-ring local time clock')).toBeTruthy()
+    expect(document.querySelectorAll('[data-ring]')).toHaveLength(4)
+    expect(document.querySelectorAll('[data-angle]')).toHaveLength(4)
+    expect(document.querySelectorAll('.hero-clock-index')).toHaveLength(0)
+    expect(document.querySelector('.hero-clock-connector')).toBeTruthy()
+    for (const ring of document.querySelectorAll<SVGGElement>('[data-ring]')) {
+      expect(ring.style.transformBox).toBe('view-box')
+      expect(ring.style.transformOrigin).toBe('50% 50%')
+    }
+    expect(screen.getByText(/AM|PM/)).toBeTruthy()
+  })
+
+  it('jumps to the mechanical position on the next whole second', () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date(2026, 5, 26, 12, 34, 56, 500))
+    render(<FuturisticClock />)
+
+    expect(document.querySelector('[data-angle="milliseconds"]')?.textContent).toBe(
+      '180.00°',
+    )
+
+    act(() => vi.advanceTimersByTime(500))
+
+    expect(document.querySelector('[data-angle="milliseconds"]')?.textContent).toBe(
+      '0.00°',
+    )
+  })
+})
