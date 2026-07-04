@@ -73,12 +73,13 @@ a {
   stroke-linecap: square;
 }
 
-.hero-clock-index {
-  stroke: var(--hero-ink);
-}
-
 .hero-clock-core {
   fill: var(--hero-accent);
+}
+
+.hero-clock-connector {
+  stroke: color-mix(in oklab, var(--foreground) 28%, transparent);
+  stroke-width: 2;
 }
 
 .hero-clock-readout {

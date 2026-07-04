@@ -78,7 +78,7 @@ function ClockRing({
   return (
     <motion.g
       data-ring={key}
-      style={{ rotate: angle, transformOrigin: `${CENTER}px ${CENTER}px` }}
+      style={{ rotate: angle, transformBox: 'view-box', transformOrigin: 'center' }}
     >
       <circle
         className="hero-clock-guide"
@@ -91,22 +91,14 @@ function ClockRing({
         <line
           className="hero-clock-tick"
           key={index}
-          strokeWidth={index % 5 === 0 ? width * 1.6 : width}
+          strokeWidth={index % 7 === 0 ? width * 1.45 : width}
           transform={`rotate(${(index / ticks) * 360} ${CENTER} ${CENTER})`}
           x1={CENTER}
           x2={CENTER}
           y1={CENTER - radius}
-          y2={CENTER - radius + (index % 5 === 0 ? length * 1.5 : length)}
+          y2={CENTER - radius + (index % 7 === 0 ? length * 1.35 : length)}
         />
       ))}
-      <line
-        className="hero-clock-index"
-        strokeWidth={Math.max(4, width * 1.8)}
-        x1={CENTER}
-        x2={CENTER}
-        y1={CENTER - radius - 8}
-        y2={CENTER - radius + length * 2.2}
-      />
     </motion.g>
   )
 }
@@ -172,6 +164,11 @@ export function FuturisticClock() {
             key={definition.key}
           />
         ))}
+        <path
+          className="hero-clock-connector"
+          d={`M ${CENTER} ${CENTER} L 560 248 H 700`}
+          fill="none"
+        />
       </svg>
 
       <div className="hero-clock-readout">

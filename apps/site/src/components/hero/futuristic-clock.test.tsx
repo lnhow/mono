@@ -27,6 +27,12 @@ describe('FuturisticClock', () => {
     expect(screen.getByLabelText('Four-ring local time clock')).toBeTruthy()
     expect(document.querySelectorAll('[data-ring]')).toHaveLength(4)
     expect(document.querySelectorAll('[data-angle]')).toHaveLength(4)
+    expect(document.querySelectorAll('.hero-clock-index')).toHaveLength(0)
+    expect(document.querySelector('.hero-clock-connector')).toBeTruthy()
+    for (const ring of document.querySelectorAll<SVGGElement>('[data-ring]')) {
+      expect(ring.style.transformBox).toBe('view-box')
+      expect(ring.style.transformOrigin).toBe('50% 50%')
+    }
     expect(screen.getByText(/AM|PM/)).toBeTruthy()
   })
 
