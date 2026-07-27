@@ -9,7 +9,12 @@ import {
 } from 'motion/react'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 
-import { getClockSnapshot, type ClockAngles, type ClockSnapshot } from '@/lib/hero/time'
+import {
+  getClockSnapshot,
+  type ClockAngles,
+  type ClockSnapshot,
+} from '@/lib/hero/time'
+import { cn } from '@folio/ui/lib/utils'
 
 const CENTER = 400
 
@@ -27,9 +32,31 @@ const timeFormatter = new Intl.DateTimeFormat('en-US', {
 })
 
 const ringDefinitions = [
-  { key: 'milliseconds', radius: 310, ticks: 100, length: 10, width: 1.5 },
-  { key: 'seconds', radius: 278, ticks: 60, length: 16, width: 2 },
-  { key: 'minutes', radius: 238, ticks: 60, length: 22, width: 3 },
+  {
+    key: 'milliseconds',
+    radius: 310,
+    ticks: 100,
+    length: 10,
+    width: 1.5,
+    color: 'stroke-hud-line-faint',
+  },
+  {
+    key: 'seconds',
+    radius: 278,
+    ticks: 60,
+    length: 16,
+    width: 2,
+    color: 'stroke-hud-line-soft',
+  },
+  {
+    key: 'minutes',
+    radius: 238,
+    ticks: 60,
+    length: 22,
+    width: 3,
+    showCircle: true,
+    color: 'stroke-hud-line',
+  },
   { key: 'hours', radius: 190, ticks: 12, length: 34, width: 7 },
 ] as const satisfies ReadonlyArray<{
   key: keyof ClockAngles
@@ -37,6 +64,8 @@ const ringDefinitions = [
   ticks: number
   length: number
   width: number
+  showCircle?: boolean
+  color?: string
 }>
 
 interface ClockControllerProps {
@@ -52,10 +81,13 @@ function MechanicalClockController({ onSnapshot }: ClockControllerProps) {
   useEffect(() => {
     let interval: ReturnType<typeof setInterval> | undefined
     const update = () => onSnapshot(getClockSnapshot(new Date(), true))
-    const timeout = setTimeout(() => {
-      update()
-      interval = setInterval(update, 1000)
-    }, 1000 - (Date.now() % 1000))
+    const timeout = setTimeout(
+      () => {
+        update()
+        interval = setInterval(update, 1000)
+      },
+      1000 - (Date.now() % 1000),
+    )
 
     return () => {
       clearTimeout(timeout)
@@ -73,24 +105,32 @@ function ClockRing({
   angle: MotionValue<number>
   definition: (typeof ringDefinitions)[number]
 }) {
-  const { key, length, radius, ticks, width } = definition
+  const { key, length, radius, ticks, width, color, showCircle } = definition
 
   return (
     <motion.g
       data-ring={key}
-      style={{ rotate: angle, transformBox: 'view-box', transformOrigin: 'center' }}
+      style={{
+        rotate: angle,
+        transformBox: 'view-box',
+        transformOrigin: 'center',
+      }}
     >
-      <circle
-        className="hero-clock-guide"
-        cx={CENTER}
-        cy={CENTER}
-        fill="none"
-        r={radius}
-      />
+      {showCircle && (
+        <circle
+          className="hero-clock-guide"
+          cx={CENTER}
+          cy={CENTER}
+          fill="none"
+          stroke="currentColor"
+          r={radius}
+        />
+      )}
       {Array.from({ length: ticks }, (_, index) => (
         <line
-          className="hero-clock-tick"
+          className={cn('hero-clock-tick', color)}
           key={index}
+          stroke="currentColor"
           strokeWidth={index % 7 === 0 ? width * 1.45 : width}
           transform={`rotate(${(index / ticks) * 360} ${CENTER} ${CENTER})`}
           x1={CENTER}
@@ -113,20 +153,25 @@ export function FuturisticClock() {
     () => ({ milliseconds, seconds, minutes, hours }),
     [hours, milliseconds, minutes, seconds],
   )
-  const angleRefs = useRef<Partial<Record<keyof ClockAngles, HTMLOutputElement | null>>>({})
+  const angleRefs = useRef<
+    Partial<Record<keyof ClockAngles, HTMLOutputElement | null>>
+  >({})
   const dateRef = useRef<HTMLTimeElement>(null)
   const timeRef = useRef<HTMLTimeElement>(null)
   const reducedMotion = useReducedMotion()
 
   const updateSnapshot = useCallback(
     (snapshot: ClockSnapshot) => {
-      for (const key of Object.keys(snapshot.angles) as Array<keyof ClockAngles>) {
+      for (const key of Object.keys(snapshot.angles) as Array<
+        keyof ClockAngles
+      >) {
         values[key].set(snapshot.angles[key])
         const output = angleRefs.current[key]
         if (output) output.value = `${snapshot.angles[key].toFixed(2)}°`
       }
 
-      if (dateRef.current) dateRef.current.textContent = dateFormatter.format(snapshot.date)
+      if (dateRef.current)
+        dateRef.current.textContent = dateFormatter.format(snapshot.date)
       if (timeRef.current) {
         timeRef.current.dateTime = snapshot.date.toISOString()
         timeRef.current.textContent = timeFormatter.format(snapshot.date)
@@ -145,9 +190,15 @@ export function FuturisticClock() {
       transition={{ duration: reducedMotion ? 0 : 0.45 }}
     >
       {reducedMotion ? (
-        <MechanicalClockController key="mechanical" onSnapshot={updateSnapshot} />
+        <MechanicalClockController
+          key="mechanical"
+          onSnapshot={updateSnapshot}
+        />
       ) : (
-        <ContinuousClockController key="continuous" onSnapshot={updateSnapshot} />
+        <ContinuousClockController
+          key="continuous"
+          onSnapshot={updateSnapshot}
+        />
       )}
 
       <svg

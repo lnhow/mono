@@ -1,4 +1,4 @@
-@import "@folio/ui/globals.css";
+@import '@folio/ui/globals.css';
 @plugin "@tailwindcss/typography";
 @source "../../../../packages/ui/src";
 
@@ -68,10 +68,10 @@ a {
   stroke-width: 2;
 }
 
-.hero-clock-tick {
+/* .hero-clock-tick {
   stroke: color-mix(in oklab, var(--foreground) 42%, transparent);
   stroke-linecap: square;
-}
+} */
 
 .hero-clock-core {
   fill: var(--hero-accent);
@@ -131,17 +131,19 @@ a {
   border-right: 1px solid var(--hero-line);
   background:
     repeating-linear-gradient(
-      to bottom,
-      transparent 0 9px,
-      var(--hero-line) 9px 11px,
-      transparent 11px 20px
-    ) right / 0.65rem 20px repeat-y,
+        to bottom,
+        transparent 0 9px,
+        var(--hero-line) 9px 11px,
+        transparent 11px 20px
+      )
+      right / 0.65rem 20px repeat-y,
     repeating-linear-gradient(
-      to bottom,
-      transparent 0 99px,
-      color-mix(in oklab, var(--foreground) 36%, transparent) 99px 101px,
-      transparent 101px 200px
-    ) right / 1.1rem 200px repeat-y;
+        to bottom,
+        transparent 0 99px,
+        color-mix(in oklab, var(--foreground) 36%, transparent) 99px 101px,
+        transparent 101px 200px
+      )
+      right / 1.1rem 200px repeat-y;
 }
 
 .hero-scroll-ruler-indicator {

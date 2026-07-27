@@ -2,8 +2,7 @@ import type { Metadata } from 'next'
 
 import { ScrollRuler } from '@/components/hero/scroll-ruler'
 import { UserAgentDisplay } from '@/components/hero/user-agent-display'
-
-import { FuturisticClockLoader } from './futuristic-clock-loader'
+import { MechaHero } from '@/components/hero/mecha-hero'
 
 export const metadata: Metadata = {
   title: 'Futuristic Hero Prototype',
@@ -13,12 +12,12 @@ export const metadata: Metadata = {
 export default function HeroPrototypePage() {
   return (
     <main className="hero-prototype-page">
-      <div className="hero-prototype-stage">
-        <div className="hero-prototype-user-agent">
+      <div className="hero-prototype-stage relative">
+        <div className="hero-prototype-user-agent absolute top-4 left-4 z-50 mix-blend-difference pointer-events-auto">
           <UserAgentDisplay />
         </div>
-        <div className="hero-prototype-clock">
-          <FuturisticClockLoader />
+        <div className="w-full">
+          <MechaHero />
         </div>
       </div>
       <ScrollRuler />
