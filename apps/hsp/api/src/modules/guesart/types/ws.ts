@@ -1,5 +1,4 @@
-import { Server, Socket } from 'socket.io'
-import { EventsMap } from 'socket.io/dist/typed-events'
+import { Server, Socket, DefaultEventsMap } from 'socket.io'
 import { SessionDto } from '../session/session.type'
 import { WsException, WsResponse } from '@nestjs/websockets'
 import {
@@ -121,14 +120,14 @@ export enum EGrtErrorCode {
 export type GrtServer = Server<
   GrtClientToServerEvents,
   GrtServerToClientEvents,
-  EventsMap,
+  DefaultEventsMap,
   GrtSocketData
 >
 
 export type GrtSocket = Socket<
   GrtClientToServerEvents,
   GrtServerToClientEvents,
-  EventsMap,
+  DefaultEventsMap,
   GrtSocketData
 >
 

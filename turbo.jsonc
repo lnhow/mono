@@ -35,7 +35,7 @@
     },
     "@hsp/app-web#dev": {
       // API need to be running for GUI to work
-      "with": [ "@hsp/app-api#dev" ],
+      "with": [ "@hsp/app-api#dev", "@repo/remark-toc#dev" ],
       "cache": false,
       "persistent": true,
       "interruptible": true
