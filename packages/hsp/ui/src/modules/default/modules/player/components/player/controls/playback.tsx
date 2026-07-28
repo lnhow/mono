@@ -45,7 +45,6 @@ export const ButtonPlayback = ({ getVideoEl }: PlayerBaseSubCompProps) => {
 
   // Handle keydown for playback control
   useKeydown(HOTKEYS.playPause, onClick)
-  useKeydown(HOTKEYS.playPause2, onClick)
 
   return (
     <Tooltip label={playbackState.nextState.tooltip}>
