@@ -115,7 +115,9 @@ const useVideoCurrentTime = (
     () => {
       const videoEl = getVideoEl()
       // Avoid Safari send timeupdate event too frequently
-      const currentTime = videoEl ? Math.round(videoEl.currentTime) || 0 : 0
+      const currentTime = videoEl
+        ? Math.round(videoEl.currentTime * 10) / 10 || 0
+        : 0
       return currentTime
     },
     () => 0,

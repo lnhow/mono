@@ -7,16 +7,21 @@
     "name": "Hao Le",
     "email": "haoln.7f8@gmail.com"
   },
-  "main": "./dist/index.js",
+  "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
-    "lint": "eslint . --ext .ts",
-    "dev": "tsup src/index.ts --format cjs,esm --dts --clean --watch"
+    "build": "tsdown src/index.ts",
+    "lint": "eslint . --ext .ts"
   },
   "dependencies": {
-    "unist-util-visit": "5.0.0",
+    "unist-util-visit": "5.1.0",
     "github-slugger": "^2.0.0"
   },
   "devDependencies": {
@@ -26,7 +31,7 @@
     "eslint": "catalog:dev",
     "remark": "catalog:markdown",
     "typescript": "catalog:dev",
-    "tsup": "^8.1.1",
+    "tsdown": "^0.22.14",
     "vfile": "^6.0.3"
   }
 }

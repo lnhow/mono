@@ -102,11 +102,13 @@ export default function HspPlayer({
           {sources?.map((src, index) => (
             <source key={index} src={src} type="video/mp4" />
           ))}
-          {tracks?.map((track, index) => <track key={index} {...track} />)}
+          {tracks?.map((track, index) => (
+            <track key={index} {...track} />
+          ))}
           Your browser does not support the video tag.
         </video>
         {/* Controls */}
-        <div className="player-controls absolute bottom-0 left-0 right-0 bg-gradient-to-t from-base-100/80 via-50% via-base-100/60 to-base-100/40 backdrop-blur-sm z-10 opacity-100 data-[hidden=true]:opacity-0 transition-opacity">
+        <div className="player-controls absolute bottom-0 left-0 right-0 bg-linear-to-t from-base-100/80 via-50% via-base-100/60 to-base-100/40 backdrop-blur-sm z-10 opacity-100 data-[hidden=true]:opacity-0 transition-opacity">
           <DurationSlider getVideoEl={getVideoEl} />
           <div className="flex justify-between gap-2">
             <div className="flex items-center">
@@ -130,8 +132,8 @@ export default function HspPlayer({
         </div>
       </div>
       <PlayerSidebar
-        className='z-20 [--width:--spacing(48)] md:[--width:--spacing(60)] absolute right-0 h-full md:relative'
-        contentClassName='data-[state=open]:w-(--width) transition-[width] data-[state=open]:animate-collapsible-side-out data-[state=closed]:animate-collapsible-side-in'
+        className="z-20 [--width:--spacing(48)] md:[--width:--spacing(60)] absolute right-0 h-full md:relative"
+        contentClassName="data-[state=open]:w-(--width) transition-[width] data-[state=open]:animate-collapsible-side-out data-[state=closed]:animate-collapsible-side-in"
         triggerClassName="absolute top-0 transition-[right] right-0 data-[state=open]:right-(--width) z-20 bg-base-100/50 backdrop-blur-sm"
       />
     </div>
