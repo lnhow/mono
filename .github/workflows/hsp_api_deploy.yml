@@ -7,22 +7,22 @@ on:
       - 'apps/hsp/api/**'
       - '.github/workflows/hsp_api_deploy.yml'
 jobs:
-  build-and-deploy:
+  build-and-deploy-hsp-api:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        turbo-version: [2.5.8]
+        turbo-version: [2.10.7]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6.0.9
 
       - name: Install Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7.0.0
         with:
-          node-version-file: "package.json"
+          node-version-file: 'package.json'
           cache: 'pnpm'
 
       - name: Install Turbo CLI
@@ -43,10 +43,10 @@ jobs:
 
       - name: Deploy to Remote
         # https://github.com/marketplace/actions/ssh-deploy
-        uses: easingthemes/ssh-deploy@v5.1.0
+        uses: easingthemes/ssh-deploy@v6.0.3
         if: success()
         with:
-          ARGS: "-azc" # Reduced logging because of large logs
+          ARGS: '-azc' # Reduced logging because of large logs
           SSH_PRIVATE_KEY: '${{ secrets.SSH_PRIVATE_KEY }}'
           SOURCE: ./out ./ecosystem.config.js
           REMOTE_HOST: '${{ secrets.REMOTE_HOST }}'
