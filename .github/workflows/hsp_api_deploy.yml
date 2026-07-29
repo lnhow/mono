@@ -2,13 +2,12 @@ name: Deploy @hsp/app-api
 on:
   push:
     branches:
-      # - deploy
-      - chore/bump-deploy-action
+      - deploy
     paths:
       - 'apps/hsp/api/**'
       - '.github/workflows/hsp_api_deploy.yml'
 jobs:
-  build-and-deploy:
+  build-and-deploy-hsp-api:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -42,21 +41,21 @@ jobs:
         run: |
           pnpm -C out run build --filter @hsp/app-api
 
-      # - name: Deploy to Remote
-      #   # https://github.com/marketplace/actions/ssh-deploy
-      #   uses: easingthemes/ssh-deploy@v6.0.3
-      #   if: success()
-      #   with:
-      #     ARGS: '-azc' # Reduced logging because of large logs
-      #     SSH_PRIVATE_KEY: '${{ secrets.SSH_PRIVATE_KEY }}'
-      #     SOURCE: ./out ./ecosystem.config.js
-      #     REMOTE_HOST: '${{ secrets.REMOTE_HOST }}'
-      #     REMOTE_USER: '${{ secrets.REMOTE_USER }}'
-      #     TARGET: '${{ secrets.HSP_API_REMOTE_TARGET }}'
-      #     SCRIPT_BEFORE: |
-      #       pm2 delete hsp-api --silent || true
-      #     SCRIPT_AFTER: |
-      #       cp ${{ secrets.HSP_API_ENV_FILE }} ${{ secrets.HSP_API_REMOTE_TARGET }}/out/apps/hsp/api/.env
-      #       cd ${{ secrets.HSP_API_REMOTE_TARGET }}
-      #       ls -al
-      #       pm2 startOrReload ecosystem.config.js --only hsp-api
+      - name: Deploy to Remote
+        # https://github.com/marketplace/actions/ssh-deploy
+        uses: easingthemes/ssh-deploy@v6.0.3
+        if: success()
+        with:
+          ARGS: '-azc' # Reduced logging because of large logs
+          SSH_PRIVATE_KEY: '${{ secrets.SSH_PRIVATE_KEY }}'
+          SOURCE: ./out ./ecosystem.config.js
+          REMOTE_HOST: '${{ secrets.REMOTE_HOST }}'
+          REMOTE_USER: '${{ secrets.REMOTE_USER }}'
+          TARGET: '${{ secrets.HSP_API_REMOTE_TARGET }}'
+          SCRIPT_BEFORE: |
+            pm2 delete hsp-api --silent || true
+          SCRIPT_AFTER: |
+            cp ${{ secrets.HSP_API_ENV_FILE }} ${{ secrets.HSP_API_REMOTE_TARGET }}/out/apps/hsp/api/.env
+            cd ${{ secrets.HSP_API_REMOTE_TARGET }}
+            ls -al
+            pm2 startOrReload ecosystem.config.js --only hsp-api
