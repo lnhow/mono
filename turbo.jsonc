@@ -34,6 +34,7 @@
       "interruptible": true
     },
     "@hsp/app-web#dev": {
+      "dependsOn": ["@repo/remark-toc#build"],
       // API need to be running for GUI to work
       "with": [ "@hsp/app-api#dev" ],
       "cache": false,

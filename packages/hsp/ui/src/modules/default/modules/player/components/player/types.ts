@@ -4,7 +4,6 @@ export const SKIP_DURATION = 5 // seconds
 
 export const HOTKEYS = {
   playPause: ' ',
-  playPause2: 'k',
   volumeUp: 'ArrowUp',
   volumeDown: 'ArrowDown',
   mute: 'm',
@@ -16,9 +15,9 @@ export const HOTKEYS = {
 }
 
 export const TOOLTIPS = {
-  play: 'Play (k)',
-  pause: 'Pause (k)',
-  replay: 'Replay (k)',
+  play: 'Play',
+  pause: 'Pause',
+  replay: 'Replay',
   volume: 'Volume (↑/↓)',
   mute: 'Mute (m)',
   pictureInPicture: 'Picture-in-Picture (i)',

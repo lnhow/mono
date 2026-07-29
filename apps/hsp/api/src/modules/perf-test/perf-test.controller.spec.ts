@@ -25,7 +25,7 @@ describe('PerfTestController', () => {
       const result = { data: 'all' }
       jest
         .spyOn(service, 'findAll')
-        .mockImplementation(async () => Promise.resolve(result))
+        .mockImplementation(async () => Promise.resolve(result as any))
       expect(await controller.findAll('0')).toBe(result)
     })
 
@@ -57,10 +57,10 @@ describe('PerfTestController', () => {
         const result = { data: section }
         jest
           .spyOn(service, 'findOne')
-          .mockImplementation(async () => Promise.resolve(result))
+          .mockImplementation(async () => Promise.resolve(result as any))
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const controllerMethod =
-          controller[
+          (controller as any)[
             `find${section.charAt(0).toUpperCase() + section.slice(1)}`
           ]
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access

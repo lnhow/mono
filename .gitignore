@@ -12,3 +12,5 @@ node_modules
 
 # Build
 out/
+# TypeScript cache
+*.tsbuildinfo
