@@ -15,3 +15,5 @@ node_modules
 out/
 .superpowers/brainstorm/
 .worktrees/
+# TypeScript cache
+*.tsbuildinfo

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function PagePlayer() {
   return (
     <div className="flex min-h-(--layout-full-height) flex-col items-center justify-center -mx-(--layout-spacing) md:mx-0">
-      <div className='p-2'>
+      <div className="p-2">
         <ViewTransition name="player-title">
           <h1 className="text-2xl font-medium text-center text-balance">
             Custom HTML video player
@@ -22,7 +22,7 @@ export default function PagePlayer() {
           </p>
         </ViewTransition>
       </div>
-      <ViewTransition name="player-card">
+      <ViewTransition name="player-card" update="none">
         <DemoPlayer />
       </ViewTransition>
     </div>
