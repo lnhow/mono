@@ -34,6 +34,8 @@ export interface GalaxyParams {
   }
   /** Hex or CSS color for the innermost particles. */
   readonly innerColor: string
+  /** Hex or CSS color at the midpoint of the galaxy. */
+  readonly midColor: string
   /** Hex or CSS color for the outermost particles. */
   readonly outerColor: string
 }
@@ -55,8 +57,9 @@ export const GALAXY_PARAMS: GalaxyParams = {
   baseTilt: (0 * Math.PI) / 180,
   baseTiltZ: (-30 * Math.PI) / 180,
   offset: { x: -4.5, y: -1, z: 0 },
-  innerColor: '#02ad3b',
-  outerColor: '#0529f7',
+  innerColor: '#f4b63f',
+  midColor: '#ff8c42',
+  outerColor: '#e84040',
 }
 
 export interface GalaxyBand {
@@ -92,15 +95,8 @@ export function buildGalaxyBands(
   } = params
 
   const innerColor = new THREE.Color(params.innerColor)
-  console.log(
-    '\x1B[35m[Dev log]\x1B[0m -> buildGalaxyBands -> params.innerColor:',
-    params.innerColor,
-  )
+  const midColor = new THREE.Color(params.midColor)
   const outerColor = new THREE.Color(params.outerColor)
-  console.log(
-    '\x1B[35m[Dev log]\x1B[0m -> buildGalaxyBands -> params.outerColor:',
-    params.outerColor,
-  )
 
   const radii = new Float32Array(count)
   const positions = new Float32Array(count * 3)
@@ -135,11 +131,22 @@ export function buildGalaxyBands(
     positions[i * 3 + 2] =
       particleRadius * Math.cos(branchAngle + radiusLagAngle) + randomZ
 
-    const vertexColor = innerColor.clone()
-    vertexColor.lerp(outerColor, (particleRadius * 0.3) / radius)
-    colors[i * 3] = vertexColor.r
-    colors[i * 3 + 1] = vertexColor.g
-    colors[i * 3 + 2] = vertexColor.b
+    const t = particleRadius / radius
+    let r: number, g: number, b: number
+    if (t < 0.5) {
+      const localT = t * 2
+      r = THREE.MathUtils.lerp(innerColor.r, midColor.r, localT)
+      g = THREE.MathUtils.lerp(innerColor.g, midColor.g, localT)
+      b = THREE.MathUtils.lerp(innerColor.b, midColor.b, localT)
+    } else {
+      const localT = (t - 0.5) * 2
+      r = THREE.MathUtils.lerp(midColor.r, outerColor.r, localT)
+      g = THREE.MathUtils.lerp(midColor.g, outerColor.g, localT)
+      b = THREE.MathUtils.lerp(midColor.b, outerColor.b, localT)
+    }
+    colors[i * 3] = r
+    colors[i * 3 + 1] = g
+    colors[i * 3 + 2] = b
   }
 
   const bandCounts = [0, 0, 0]

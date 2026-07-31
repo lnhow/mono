@@ -6,6 +6,7 @@ const TEST_PARAMS: typeof GALAXY_PARAMS = {
   ...GALAXY_PARAMS,
   count: 3000,
   innerColor: '#ff0000',
+  midColor: '#00ff00',
   outerColor: '#0000ff',
 }
 
@@ -55,22 +56,19 @@ describe('buildGalaxyBands', () => {
     }
   })
 
-  it('encodes radius as an inner-to-outer color lerp within each band range', () => {
-    const ranges: ReadonlyArray<readonly [number, number]> = [
-      [0, 0.7 / 3],
-      [0.7 / 3, 1.4 / 3],
-      [1.4 / 3, 0.7 + 1e-6],
-    ]
+  it('encodes radius as a two-stop inner→mid→outer color lerp', () => {
     bands.forEach((band, bandIndex) => {
-      const [min, max] = ranges[bandIndex]!
       for (let i = 0; i < band.colors.length; i += 3) {
         const r = band.colors[i]!
         const g = band.colors[i + 1]!
         const b = band.colors[i + 2]!
-        expect(Math.abs(r + b - 1)).toBeLessThan(1e-6)
-        expect(g).toBe(0)
-        expect(b).toBeGreaterThanOrEqual(min)
-        expect(b).toBeLessThan(max)
+        if (bandIndex === 0) {
+          expect(b).toBe(0)
+          expect(r + g).toBeGreaterThan(0.99)
+        } else if (bandIndex === 2) {
+          expect(r).toBe(0)
+          expect(g + b).toBeGreaterThan(0.99)
+        }
       }
     })
   })
