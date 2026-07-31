@@ -5,8 +5,8 @@ import { describe, expect, it, vi } from 'vitest'
 
 import HeroPrototypePage from './page'
 
-vi.mock('./futuristic-clock-loader', () => ({
-  FuturisticClockLoader: () => <div data-testid="clock-slot" />,
+vi.mock('@/components/hero/mecha-hero', () => ({
+  MechaHero: () => <div data-testid="clock-slot" />,
 }))
 
 vi.mock('@/components/hero/user-agent-display', () => ({

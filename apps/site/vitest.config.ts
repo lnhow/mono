@@ -7,7 +7,7 @@ export default defineConfig({
     jsx: 'automatic',
   },
   oxc: {
-    jsx: 'automatic',
+    jsx: { runtime: 'automatic' },
   },
   resolve: {
     alias: {

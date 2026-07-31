@@ -203,3 +203,47 @@ a {
     transition: none !important;
   }
 }
+
+.galaxy-prototype-page {
+  --hero-accent: #ff4c40;
+  --hero-line: color-mix(in oklab, var(--instrument-foreground) 28%, transparent);
+  position: relative;
+  min-height: 240vh;
+  overflow-x: clip;
+}
+
+.galaxy-prototype-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  min-height: 42rem;
+  overflow: clip;
+  background:
+    radial-gradient(
+      120% 90% at 68% 42%,
+      color-mix(in oklab, var(--instrument) 82%, var(--signal-blue)) 0%,
+      var(--instrument) 52%,
+      oklch(0.157 0.006 229.25) 100%
+    );
+}
+
+.galaxy-prototype-user-agent {
+  position: absolute;
+  z-index: 3;
+  top: 1.25rem;
+  left: 1.25rem;
+  width: min(68vw, 36rem);
+  opacity: 0.42;
+}
+
+@media (min-width: 48rem) {
+  .galaxy-prototype-user-agent {
+    width: min(42vw, 36rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .galaxy-prototype-page .chamfer-surface {
+    transition: none !important;
+  }
+}
