@@ -26,6 +26,8 @@ export interface GalaxyParams {
   readonly tiltDamping: number
   /** Resting tilt about x (30deg) so the disc slightly faces the screen. */
   readonly baseTilt: number
+  /** Resting tilt about z (80deg) so the galaxy leans left. */
+  readonly baseTiltZ: number
   /** Scene-space offset of the galaxy center. */
   readonly offset: { readonly x: number; readonly y: number; readonly z: number }
 }
@@ -39,13 +41,14 @@ export const GALAXY_PARAMS: GalaxyParams = {
   randomness: 0.45,
   randomnessPower: 2.6,
   yRadiusOffset: 0.45,
-  rotationSpeed: -0.5,
+  rotationSpeed: -0.2,
   bandBoundaries: [1 / 3, 2 / 3],
   tiltFactors: [1, 0.6, 0.3],
-  maxTilt: 0.08,
+  maxTilt: 0.18,
   tiltDamping: 3,
   baseTilt: Math.PI / 6,
-  offset: { x: 3, y: 0, z: 0 },
+  baseTiltZ: (80 * Math.PI) / 180,
+  offset: { x: -3, y: 0, z: 0 },
 }
 
 export interface GalaxyBand {

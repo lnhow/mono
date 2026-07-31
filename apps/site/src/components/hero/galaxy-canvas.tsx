@@ -86,7 +86,7 @@ export function GalaxyCanvas({ tiltTarget }: GalaxyCanvasProps) {
       const tiltGroup = new THREE.Group()
       tiltGroup.position.set(offsetX, offsetY, offsetZ)
       const baseTiltGroup = new THREE.Group()
-      baseTiltGroup.rotation.set(GALAXY_PARAMS.baseTilt, 0, 0)
+      baseTiltGroup.rotation.set(GALAXY_PARAMS.baseTilt, 0, GALAXY_PARAMS.baseTiltZ)
       const spinGroup = new THREE.Group()
       const points = new THREE.Points(geometry, material)
       spinGroup.add(points)
