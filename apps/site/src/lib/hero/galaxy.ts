@@ -41,8 +41,8 @@ export interface GalaxyParams {
 }
 
 export const GALAXY_PARAMS: GalaxyParams = {
-  count: 40_000,
-  radius: 10,
+  count: 25_000,
+  radius: 9,
   radiusLag: 1.4,
   size: 0.01,
   branches: 4,
@@ -57,9 +57,9 @@ export const GALAXY_PARAMS: GalaxyParams = {
   baseTilt: (0 * Math.PI) / 180,
   baseTiltZ: (-30 * Math.PI) / 180,
   offset: { x: -4.5, y: -1, z: 0 },
-  innerColor: '#f4b63f',
-  midColor: '#ff8c42',
-  outerColor: '#e84040',
+  innerColor: '#004069',
+  midColor: '#05dcac',
+  outerColor: '#19e0ff',
 }
 
 export interface GalaxyBand {
