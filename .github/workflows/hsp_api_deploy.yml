@@ -58,4 +58,4 @@ jobs:
             cp ${{ secrets.HSP_API_ENV_FILE }} ${{ secrets.HSP_API_REMOTE_TARGET }}/out/apps/hsp/api/.env
             cd ${{ secrets.HSP_API_REMOTE_TARGET }}
             ls -al
-            pm2 startOrReload ecosystem.config.js --only hsp-api
+            CI=true pm2 startOrReload ecosystem.config.js --only hsp-api
