@@ -1,8 +1,6 @@
 'use client'
 
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { useReducedMotion } from 'motion/react'
-import { useEffect, useMemo, useRef, type RefObject } from 'react'
+import { useEffect, useRef, type RefObject } from 'react'
 import * as THREE from 'three'
 
 import {
@@ -22,33 +20,48 @@ interface GalaxyCanvasProps {
 }
 
 export function GalaxyCanvas({ tiltTarget }: GalaxyCanvasProps) {
-  const reducedMotion = useReducedMotion()
+  const containerRef = useRef<HTMLDivElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
-  return (
-    <Canvas
-      aria-hidden
-      flat
-      dpr={[1, 2]}
-      frameloop={reducedMotion === true ? 'demand' : 'always'}
-      camera={{ position: [0, 8, 8], fov: 75, near: 0.1, far: 100 }}
-      fallback={<div className="absolute inset-0" aria-hidden />}
-      onCreated={(state) => state.camera.lookAt(0, 0, 0)}
-    >
-      <GalaxyPoints tiltTarget={tiltTarget} reducedMotion={reducedMotion === true} />
-    </Canvas>
-  )
-}
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
 
-interface GalaxyPointsProps {
-  tiltTarget: RefObject<GalaxyTiltTarget>
-  reducedMotion: boolean
-}
+    const parent = containerRef.current
+    if (!parent) return
 
-function GalaxyPoints({ tiltTarget, reducedMotion }: GalaxyPointsProps) {
-  const geometries = useMemo(() => {
-    const inner = resolveCssColor('--signal-amber', GALAXY_INNER_FALLBACK)
-    const outer = resolveCssColor('--signal-blue', GALAXY_OUTER_FALLBACK)
-    return buildGalaxyBands(inner, outer).map((band) => {
+    const aspect = window.innerWidth / window.innerHeight
+    const offsetScale = Math.min(1, aspect / 1.2)
+    const offsetX = GALAXY_PARAMS.offset.x * offsetScale
+    const offsetY = GALAXY_PARAMS.offset.y
+    const offsetZ = GALAXY_PARAMS.offset.z
+
+    const innerColor = resolveCssColor('--signal-amber', GALAXY_INNER_FALLBACK)
+    const outerColor = resolveCssColor('--signal-blue', GALAXY_OUTER_FALLBACK)
+
+    const scene = new THREE.Scene()
+
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      parent.clientWidth / Math.max(parent.clientHeight, 1),
+      0.1,
+      100,
+    )
+    camera.position.set(0, 8, 8)
+    camera.lookAt(0, 0, 0)
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      alpha: true,
+      antialias: true,
+    })
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.setSize(parent.clientWidth, parent.clientHeight)
+    renderer.setClearColor(0x000000, 0)
+    renderer.toneMapping = THREE.NoToneMapping
+
+    const bands = buildGalaxyBands(innerColor, outerColor)
+    const geometries = bands.map((band) => {
       const geometry = new THREE.BufferGeometry()
       geometry.setAttribute(
         'position',
@@ -57,88 +70,106 @@ function GalaxyPoints({ tiltTarget, reducedMotion }: GalaxyPointsProps) {
       geometry.setAttribute('color', new THREE.BufferAttribute(band.colors, 3))
       return geometry
     })
+
+    const material = new THREE.PointsMaterial({
+      size: GALAXY_PARAMS.size,
+      vertexColors: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    })
+
+    const tiltGroups: THREE.Group[] = []
+    const spinGroups: THREE.Group[] = []
+    const root = new THREE.Group()
+
+    for (const geometry of geometries) {
+      const tiltGroup = new THREE.Group()
+      tiltGroup.position.set(offsetX, offsetY, offsetZ)
+      const baseTiltGroup = new THREE.Group()
+      baseTiltGroup.rotation.set(GALAXY_PARAMS.baseTilt, 0, 0)
+      const spinGroup = new THREE.Group()
+      const points = new THREE.Points(geometry, material)
+      spinGroup.add(points)
+      baseTiltGroup.add(spinGroup)
+      tiltGroup.add(baseTiltGroup)
+      root.add(tiltGroup)
+      tiltGroups.push(tiltGroup)
+      spinGroups.push(spinGroup)
+    }
+
+    scene.add(root)
+
+    const tilt = { x: 0, y: 0 }
+    let animationFrameId = 0
+    const startTime = performance.now()
+
+    const preferredMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches
+
+    function animate() {
+      animationFrameId = requestAnimationFrame(animate)
+
+      if (preferredMotion) return
+
+      const elapsed = (performance.now() - startTime) / 1000
+      const spin = elapsed * GALAXY_PARAMS.rotationSpeed
+
+      tilt.x = THREE.MathUtils.damp(
+        tilt.x,
+        tiltTarget.current?.y ?? 0,
+        GALAXY_PARAMS.tiltDamping,
+        0.016,
+      )
+      tilt.y = THREE.MathUtils.damp(
+        tilt.y,
+        tiltTarget.current?.x ?? 0,
+        GALAXY_PARAMS.tiltDamping,
+        0.016,
+      )
+
+      for (const group of spinGroups) group.rotation.y = spin
+      tiltGroups.forEach((group, index) => {
+        const factor = GALAXY_PARAMS.tiltFactors[index] ?? 1
+        group.rotation.x = tilt.x * GALAXY_PARAMS.maxTilt * factor
+        group.rotation.z = -tilt.y * GALAXY_PARAMS.maxTilt * factor
+      })
+
+      renderer.render(scene, camera)
+    }
+
+    if (preferredMotion) {
+      renderer.render(scene, camera)
+    } else {
+      animate()
+    }
+
+    function onResize() {
+      if (!parent) return
+      const w = parent.clientWidth
+      const h = parent.clientHeight
+      camera.aspect = w / Math.max(h, 1)
+      camera.updateProjectionMatrix()
+      renderer.setSize(w, h)
+    }
+    window.addEventListener('resize', onResize)
+
+    return () => {
+      window.removeEventListener('resize', onResize)
+      cancelAnimationFrame(animationFrameId)
+      renderer.dispose()
+      material.dispose()
+      geometries.forEach((g) => g.dispose())
+    }
   }, [])
 
-  useEffect(
-    () => () => geometries.forEach((geometry) => geometry.dispose()),
-    [geometries],
-  )
-
-  const tiltRefs = useRef<(THREE.Group | null)[]>([])
-  const spinRefs = useRef<(THREE.Group | null)[]>([])
-  const tilt = useRef({ x: 0, y: 0 })
-
-  const size = useThree((state) => state.size)
-  const invalidate = useThree((state) => state.invalidate)
-
-  const aspect = size.width / size.height
-  const offsetScale = Math.min(1, aspect / 1.2)
-  const offset: [number, number, number] = [
-    GALAXY_PARAMS.offset.x * offsetScale,
-    GALAXY_PARAMS.offset.y,
-    GALAXY_PARAMS.offset.z,
-  ]
-
-  useEffect(() => {
-    if (reducedMotion) invalidate()
-  }, [reducedMotion, invalidate])
-
-  useFrame((state, delta) => {
-    if (reducedMotion) return
-
-    const spin = state.clock.elapsedTime * GALAXY_PARAMS.rotationSpeed
-    tilt.current.x = THREE.MathUtils.damp(
-      tilt.current.x,
-      tiltTarget.current?.y ?? 0,
-      GALAXY_PARAMS.tiltDamping,
-      delta,
-    )
-    tilt.current.y = THREE.MathUtils.damp(
-      tilt.current.y,
-      tiltTarget.current?.x ?? 0,
-      GALAXY_PARAMS.tiltDamping,
-      delta,
-    )
-
-    spinRefs.current.forEach((group) => {
-      if (group) group.rotation.y = spin
-    })
-    tiltRefs.current.forEach((group, index) => {
-      if (!group) return
-      const factor = GALAXY_PARAMS.tiltFactors[index] ?? 1
-      group.rotation.x = tilt.current.x * GALAXY_PARAMS.maxTilt * factor
-      group.rotation.z = -tilt.current.y * GALAXY_PARAMS.maxTilt * factor
-    })
-  })
-
   return (
-    <group>
-      {geometries.map((geometry, index) => (
-        <group
-          key={index}
-          ref={(group) => {
-            tiltRefs.current[index] = group
-          }}
-          position={offset}
-        >
-          <group rotation={[GALAXY_PARAMS.baseTilt, 0, 0]}>
-            <group
-              ref={(group) => {
-                spinRefs.current[index] = group
-              }}
-            >
-              <points geometry={geometry}>
-                <pointsMaterial
-                  size={GALAXY_PARAMS.size}
-                  vertexColors
-                  depthWrite={false}
-                  blending={THREE.AdditiveBlending}
-                />
-              </points>
-            </group>
-          </group>
-        </group>
-      ))}
-    </group>
+    <div ref={containerRef} className="absolute inset-0">
+      <canvas
+        ref={(el) => { canvasRef.current = el }}
+        aria-hidden="true"
+        className="absolute inset-0 block h-full w-full"
+      />
+    </div>
   )
 }
