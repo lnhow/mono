@@ -8,8 +8,6 @@ const TEST_PARAMS: typeof GALAXY_PARAMS = {
   innerColor: '#ff0000',
   midColor: '#00ff00',
   outerColor: '#0000ff',
-  innerSize: 0.05,
-  outerSize: 0.01,
 }
 
 /** Deterministic LCG so particle assertions are stable. */
@@ -37,21 +35,12 @@ describe('resolveBandIndex', () => {
 describe('buildGalaxyBands', () => {
   const bands = buildGalaxyBands(TEST_PARAMS, createSeededRandom(42))
 
-  it('creates three bands with matching position/color/size lengths', () => {
+  it('creates three bands with matching position/color lengths', () => {
     expect(bands).toHaveLength(3)
     for (const band of bands) {
-      const particleCount = band.positions.length / 3
-      expect(band.colors.length).toBe(particleCount * 3)
-      expect(band.sizes.length).toBe(particleCount)
+      expect(band.positions.length).toBe(band.colors.length)
+      expect(band.positions.length % 3).toBe(0)
     }
-  })
-
-  it('inner band particles are larger than outer band particles', () => {
-    const innerSizes = bands[0]!.sizes
-    const outerSizes = bands[2]!.sizes
-    const avgInner = innerSizes.reduce((a, s) => a + s, 0) / innerSizes.length
-    const avgOuter = outerSizes.reduce((a, s) => a + s, 0) / outerSizes.length
-    expect(avgInner).toBeGreaterThan(avgOuter)
   })
 
   it('preserves the total particle count across bands', () => {
