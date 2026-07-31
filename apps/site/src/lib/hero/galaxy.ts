@@ -1,10 +1,8 @@
 /**
  * Pure galaxy particle math, ported 1:1 from
  * apps/learn/threejs/basics/src/18-galaxy/script.ts.
- * Kept free of three.js so it stays unit-testable in plain node.
  */
-
-export type RgbColor = readonly [number, number, number]
+import * as THREE from 'three'
 
 export interface GalaxyParams {
   readonly count: number
@@ -29,7 +27,15 @@ export interface GalaxyParams {
   /** Resting tilt about z (80deg) so the galaxy leans left. */
   readonly baseTiltZ: number
   /** Scene-space offset of the galaxy center. */
-  readonly offset: { readonly x: number; readonly y: number; readonly z: number }
+  readonly offset: {
+    readonly x: number
+    readonly y: number
+    readonly z: number
+  }
+  /** Hex or CSS color for the innermost particles. */
+  readonly innerColor: string
+  /** Hex or CSS color for the outermost particles. */
+  readonly outerColor: string
 }
 
 export const GALAXY_PARAMS: GalaxyParams = {
@@ -46,9 +52,11 @@ export const GALAXY_PARAMS: GalaxyParams = {
   tiltFactors: [1, 0.6, 0.3],
   maxTilt: 0.18,
   tiltDamping: 3,
-  baseTilt: Math.PI / 6,
-  baseTiltZ: (80 * Math.PI) / 180,
-  offset: { x: -3, y: 0, z: 0 },
+  baseTilt: (0 * Math.PI) / 180,
+  baseTiltZ: (-30 * Math.PI) / 180,
+  offset: { x: -4.5, y: -1, z: 0 },
+  innerColor: '#f4b63f',
+  outerColor: '#e84040',
 }
 
 export interface GalaxyBand {
@@ -69,8 +77,6 @@ export function resolveBandIndex(
 }
 
 export function buildGalaxyBands(
-  innerColor: RgbColor,
-  outerColor: RgbColor,
   params: GalaxyParams = GALAXY_PARAMS,
   random: () => number = Math.random,
 ): GalaxyBand[] {
@@ -84,6 +90,9 @@ export function buildGalaxyBands(
     yRadiusOffset,
     bandBoundaries,
   } = params
+
+  const innerColor = new THREE.Color(params.innerColor)
+  const outerColor = new THREE.Color(params.outerColor)
 
   const radii = new Float32Array(count)
   const positions = new Float32Array(count * 3)
@@ -118,10 +127,11 @@ export function buildGalaxyBands(
     positions[i * 3 + 2] =
       particleRadius * Math.cos(branchAngle + radiusLagAngle) + randomZ
 
-    const t = (particleRadius * 0.7) / radius
-    colors[i * 3] = innerColor[0] + (outerColor[0] - innerColor[0]) * t
-    colors[i * 3 + 1] = innerColor[1] + (outerColor[1] - innerColor[1]) * t
-    colors[i * 3 + 2] = innerColor[2] + (outerColor[2] - innerColor[2]) * t
+    const vertexColor = innerColor.clone()
+    vertexColor.lerp(outerColor, (particleRadius * 0.7) / radius)
+    colors[i * 3] = vertexColor.r
+    colors[i * 3 + 1] = vertexColor.g
+    colors[i * 3 + 2] = vertexColor.b
   }
 
   const bandCounts = [0, 0, 0]

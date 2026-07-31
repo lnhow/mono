@@ -2,9 +2,12 @@ import { describe, expect, it } from 'vitest'
 
 import { buildGalaxyBands, GALAXY_PARAMS, resolveBandIndex } from './galaxy'
 
-const INNER = [1, 0, 0] as const
-const OUTER = [0, 0, 1] as const
-const TEST_PARAMS = { ...GALAXY_PARAMS, count: 3000 }
+const TEST_PARAMS: typeof GALAXY_PARAMS = {
+  ...GALAXY_PARAMS,
+  count: 3000,
+  innerColor: '#ff0000',
+  outerColor: '#0000ff',
+}
 
 /** Deterministic LCG so particle assertions are stable. */
 function createSeededRandom(seed: number) {
@@ -29,7 +32,7 @@ describe('resolveBandIndex', () => {
 })
 
 describe('buildGalaxyBands', () => {
-  const bands = buildGalaxyBands(INNER, OUTER, TEST_PARAMS, createSeededRandom(42))
+  const bands = buildGalaxyBands(TEST_PARAMS, createSeededRandom(42))
 
   it('creates three bands with matching position/color lengths', () => {
     expect(bands).toHaveLength(3)
@@ -53,8 +56,6 @@ describe('buildGalaxyBands', () => {
   })
 
   it('encodes radius as an inner-to-outer color lerp within each band range', () => {
-    // With INNER=[1,0,0] and OUTER=[0,0,1], lerp t = 0.7 * radiusFraction gives
-    // color = [1 - t, 0, t], so the blue channel must fall in each band's range.
     const ranges: ReadonlyArray<readonly [number, number]> = [
       [0, 0.7 / 3],
       [0.7 / 3, 1.4 / 3],

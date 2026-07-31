@@ -16,20 +16,14 @@ interface GalaxyCanvasProps {
 }
 
 function GalaxyPoints({ tiltTarget }: { tiltTarget: RefObject<GalaxyTiltTarget> }) {
-  const innerColor = useMemo(() => new THREE.Color('#f4b63f'), [])
-  const outerColor = useMemo(() => new THREE.Color('#e84040'), [])
-
   const geometries = useMemo(() => {
-    return buildGalaxyBands(
-      [innerColor.r, innerColor.g, innerColor.b],
-      [outerColor.r, outerColor.g, outerColor.b],
-    ).map((band) => {
+    return buildGalaxyBands().map((band) => {
       const geometry = new THREE.BufferGeometry()
       geometry.setAttribute('position', new THREE.BufferAttribute(band.positions, 3))
       geometry.setAttribute('color', new THREE.BufferAttribute(band.colors, 3))
       return geometry
     })
-  }, [innerColor, outerColor])
+  }, [])
 
   useEffect(() => () => geometries.forEach((g) => g.dispose()), [geometries])
 
@@ -45,7 +39,7 @@ function GalaxyPoints({ tiltTarget }: { tiltTarget: RefObject<GalaxyTiltTarget> 
     GALAXY_PARAMS.offset.z,
   ]
 
-  useFrame((_state, delta) => {
+  useFrame(() => {
     const elapsed = performance.now() / 1000
     const spin = elapsed * GALAXY_PARAMS.rotationSpeed
 
