@@ -1,13 +1,9 @@
 'use client'
 
-import { useEffect, useRef, type RefObject } from 'react'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { useEffect, useMemo, useRef, type RefObject } from 'react'
 import * as THREE from 'three'
 
-import {
-  GALAXY_INNER_FALLBACK,
-  GALAXY_RED_FALLBACK,
-  resolveCssColor,
-} from '@/lib/hero/css-color'
 import { buildGalaxyBands, GALAXY_PARAMS } from '@/lib/hero/galaxy'
 
 export interface GalaxyTiltTarget {
@@ -19,157 +15,97 @@ interface GalaxyCanvasProps {
   tiltTarget: RefObject<GalaxyTiltTarget>
 }
 
-export function GalaxyCanvas({ tiltTarget }: GalaxyCanvasProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+function GalaxyPoints({ tiltTarget }: { tiltTarget: RefObject<GalaxyTiltTarget> }) {
+  const innerColor = useMemo(() => new THREE.Color('#f4b63f'), [])
+  const outerColor = useMemo(() => new THREE.Color('#e84040'), [])
 
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const parent = containerRef.current
-    if (!parent) return
-
-    const aspect = window.innerWidth / window.innerHeight
-    const offsetScale = Math.min(1, aspect / 1.2)
-    const offsetX = GALAXY_PARAMS.offset.x * offsetScale
-    const offsetY = GALAXY_PARAMS.offset.y
-    const offsetZ = GALAXY_PARAMS.offset.z
-
-    const innerColor = resolveCssColor('--signal-amber', GALAXY_INNER_FALLBACK)
-    const outerColor = resolveCssColor('--signal-red', GALAXY_RED_FALLBACK)
-
-    const scene = new THREE.Scene()
-
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      parent.clientWidth / Math.max(parent.clientHeight, 1),
-      0.1,
-      100,
-    )
-    camera.position.set(0, 8, 8)
-    camera.lookAt(0, 0, 0)
-
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      alpha: true,
-      antialias: true,
-    })
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    renderer.setSize(parent.clientWidth, parent.clientHeight)
-    renderer.setClearColor(0x000000, 0)
-    renderer.toneMapping = THREE.NoToneMapping
-
-    const bands = buildGalaxyBands(innerColor, outerColor)
-    const geometries = bands.map((band) => {
+  const geometries = useMemo(() => {
+    return buildGalaxyBands(
+      [innerColor.r, innerColor.g, innerColor.b],
+      [outerColor.r, outerColor.g, outerColor.b],
+    ).map((band) => {
       const geometry = new THREE.BufferGeometry()
-      geometry.setAttribute(
-        'position',
-        new THREE.BufferAttribute(band.positions, 3),
-      )
+      geometry.setAttribute('position', new THREE.BufferAttribute(band.positions, 3))
       geometry.setAttribute('color', new THREE.BufferAttribute(band.colors, 3))
       return geometry
     })
+  }, [innerColor, outerColor])
 
-    const material = new THREE.PointsMaterial({
-      size: GALAXY_PARAMS.size,
-      vertexColors: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
+  useEffect(() => () => geometries.forEach((g) => g.dispose()), [geometries])
+
+  const tiltRefs = useRef<(THREE.Group | null)[]>([])
+  const spinRefs = useRef<(THREE.Group | null)[]>([])
+  const tilt = useRef({ x: 0, y: 0 })
+  const size = useThree((s) => s.size)
+  const aspect = size.height > 0 ? size.width / size.height : 16 / 9
+  const offsetScale = Math.min(1, aspect / 1.2)
+  const offset: [number, number, number] = [
+    GALAXY_PARAMS.offset.x * offsetScale,
+    GALAXY_PARAMS.offset.y,
+    GALAXY_PARAMS.offset.z,
+  ]
+
+  useFrame((_state, delta) => {
+    const elapsed = performance.now() / 1000
+    const spin = elapsed * GALAXY_PARAMS.rotationSpeed
+
+    tilt.current.x = THREE.MathUtils.damp(
+      tilt.current.x, tiltTarget.current?.y ?? 0, GALAXY_PARAMS.tiltDamping, 0.016,
+    )
+    tilt.current.y = THREE.MathUtils.damp(
+      tilt.current.y, tiltTarget.current?.x ?? 0, GALAXY_PARAMS.tiltDamping, 0.016,
+    )
+
+    for (const group of spinRefs.current) { if (group) group.rotation.y = spin }
+    tiltRefs.current.forEach((group, index) => {
+      if (!group) return
+      const factor = GALAXY_PARAMS.tiltFactors[index] ?? 1
+      group.rotation.x = tilt.current.x * GALAXY_PARAMS.maxTilt * factor
+      group.rotation.z = -tilt.current.y * GALAXY_PARAMS.maxTilt * factor
     })
-
-    const tiltGroups: THREE.Group[] = []
-    const spinGroups: THREE.Group[] = []
-    const root = new THREE.Group()
-
-    for (const geometry of geometries) {
-      const tiltGroup = new THREE.Group()
-      tiltGroup.position.set(offsetX, offsetY, offsetZ)
-      const baseTiltGroup = new THREE.Group()
-      baseTiltGroup.rotation.set(GALAXY_PARAMS.baseTilt, 0, GALAXY_PARAMS.baseTiltZ)
-      const spinGroup = new THREE.Group()
-      const points = new THREE.Points(geometry, material)
-      spinGroup.add(points)
-      baseTiltGroup.add(spinGroup)
-      tiltGroup.add(baseTiltGroup)
-      root.add(tiltGroup)
-      tiltGroups.push(tiltGroup)
-      spinGroups.push(spinGroup)
-    }
-
-    scene.add(root)
-
-    const tilt = { x: 0, y: 0 }
-    let animationFrameId = 0
-    const startTime = performance.now()
-
-    const preferredMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches
-
-    function animate() {
-      animationFrameId = requestAnimationFrame(animate)
-
-      if (preferredMotion) return
-
-      const elapsed = (performance.now() - startTime) / 1000
-      const spin = elapsed * GALAXY_PARAMS.rotationSpeed
-
-      tilt.x = THREE.MathUtils.damp(
-        tilt.x,
-        tiltTarget.current?.y ?? 0,
-        GALAXY_PARAMS.tiltDamping,
-        0.016,
-      )
-      tilt.y = THREE.MathUtils.damp(
-        tilt.y,
-        tiltTarget.current?.x ?? 0,
-        GALAXY_PARAMS.tiltDamping,
-        0.016,
-      )
-
-      for (const group of spinGroups) group.rotation.y = spin
-      tiltGroups.forEach((group, index) => {
-        const factor = GALAXY_PARAMS.tiltFactors[index] ?? 1
-        group.rotation.x = tilt.x * GALAXY_PARAMS.maxTilt * factor
-        group.rotation.z = -tilt.y * GALAXY_PARAMS.maxTilt * factor
-      })
-
-      renderer.render(scene, camera)
-    }
-
-    if (preferredMotion) {
-      renderer.render(scene, camera)
-    } else {
-      animate()
-    }
-
-    function onResize() {
-      if (!parent) return
-      const w = parent.clientWidth
-      const h = parent.clientHeight
-      camera.aspect = w / Math.max(h, 1)
-      camera.updateProjectionMatrix()
-      renderer.setSize(w, h)
-    }
-    window.addEventListener('resize', onResize)
-
-    return () => {
-      window.removeEventListener('resize', onResize)
-      cancelAnimationFrame(animationFrameId)
-      renderer.dispose()
-      material.dispose()
-      geometries.forEach((g) => g.dispose())
-    }
-  }, [])
+  })
 
   return (
-    <div ref={containerRef} className="absolute inset-0">
-      <canvas
-        ref={(el) => { canvasRef.current = el }}
-        aria-hidden="true"
-        className="absolute inset-0 block h-full w-full"
-      />
-    </div>
+    <group>
+      {geometries.map((geometry, index) => (
+        <group
+          key={index}
+          ref={(g) => { tiltRefs.current[index] = g }}
+          position={offset}
+        >
+          <group rotation={[GALAXY_PARAMS.baseTilt, 0, GALAXY_PARAMS.baseTiltZ]}>
+            <group ref={(g) => { spinRefs.current[index] = g }}>
+              <points geometry={geometry}>
+                <pointsMaterial
+                  size={GALAXY_PARAMS.size}
+                  vertexColors
+                  depthWrite={false}
+                  blending={THREE.AdditiveBlending}
+                />
+              </points>
+            </group>
+          </group>
+        </group>
+      ))}
+    </group>
+  )
+}
+
+export function GalaxyCanvas({ tiltTarget }: GalaxyCanvasProps) {
+  return (
+    <Canvas
+      gl={{ alpha: true, antialias: true }}
+      flat
+      dpr={[1, 2]}
+      camera={{ position: [0, 8, 8], fov: 75, near: 0.1, far: 100 }}
+      onCreated={(state) => {
+        state.gl.setClearColor(0x000000, 0)
+        state.camera.lookAt(0, 0, 0)
+      }}
+      style={{ position: 'absolute', inset: 0 }}
+      aria-hidden
+    >
+      <GalaxyPoints tiltTarget={tiltTarget} />
+    </Canvas>
   )
 }
