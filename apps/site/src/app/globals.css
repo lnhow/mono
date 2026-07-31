@@ -206,7 +206,7 @@ a {
 
 .galaxy-prototype-page {
   --hero-accent: #ff4c40;
-  --hero-line: color-mix(in oklab, var(--instrument-foreground) 28%, transparent);
+  --hero-line: color-mix(in oklab, var(--foreground) 12%, transparent);
   position: relative;
   min-height: 240vh;
   overflow-x: clip;
@@ -218,13 +218,7 @@ a {
   height: 100vh;
   min-height: 42rem;
   overflow: clip;
-  background:
-    radial-gradient(
-      120% 90% at 68% 42%,
-      color-mix(in oklab, var(--instrument) 82%, var(--signal-blue)) 0%,
-      var(--instrument) 52%,
-      oklch(0.157 0.006 229.25) 100%
-    );
+  background: #000000;
 }
 
 .galaxy-prototype-user-agent {
@@ -239,11 +233,5 @@ a {
 @media (min-width: 48rem) {
   .galaxy-prototype-user-agent {
     width: min(42vw, 36rem);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .galaxy-prototype-page .chamfer-surface {
-    transition: none !important;
   }
 }
