@@ -8,6 +8,7 @@ export type SrgbColor = readonly [number, number, number]
  */
 export const GALAXY_INNER_FALLBACK: SrgbColor = [0.957, 0.713, 0.248]
 export const GALAXY_OUTER_FALLBACK: SrgbColor = [0.258, 0.683, 0.91]
+export const GALAXY_RED_FALLBACK: SrgbColor = [1, 0.3, 0.24]
 
 const HEX_PATTERN = /^#([0-9a-f]{6})$/i
 const RGB_PATTERN = /^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i
