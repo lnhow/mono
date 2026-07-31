@@ -39,24 +39,24 @@ export interface GalaxyParams {
 }
 
 export const GALAXY_PARAMS: GalaxyParams = {
-  count: 100_000,
-  radius: 5,
-  radiusLag: 1,
+  count: 40_000,
+  radius: 10,
+  radiusLag: 1.4,
   size: 0.01,
-  branches: 5,
-  randomness: 0.45,
+  branches: 4,
+  randomness: 0.5,
   randomnessPower: 2.6,
-  yRadiusOffset: 0.45,
+  yRadiusOffset: 0.5,
   rotationSpeed: -0.2,
   bandBoundaries: [1 / 3, 2 / 3],
   tiltFactors: [1, 0.6, 0.3],
-  maxTilt: 0.18,
+  maxTilt: 0.25,
   tiltDamping: 3,
   baseTilt: (0 * Math.PI) / 180,
   baseTiltZ: (-30 * Math.PI) / 180,
   offset: { x: -4.5, y: -1, z: 0 },
-  innerColor: '#f4b63f',
-  outerColor: '#e84040',
+  innerColor: '#02ad3b',
+  outerColor: '#0529f7',
 }
 
 export interface GalaxyBand {
@@ -92,7 +92,15 @@ export function buildGalaxyBands(
   } = params
 
   const innerColor = new THREE.Color(params.innerColor)
+  console.log(
+    '\x1B[35m[Dev log]\x1B[0m -> buildGalaxyBands -> params.innerColor:',
+    params.innerColor,
+  )
   const outerColor = new THREE.Color(params.outerColor)
+  console.log(
+    '\x1B[35m[Dev log]\x1B[0m -> buildGalaxyBands -> params.outerColor:',
+    params.outerColor,
+  )
 
   const radii = new Float32Array(count)
   const positions = new Float32Array(count * 3)
@@ -128,7 +136,7 @@ export function buildGalaxyBands(
       particleRadius * Math.cos(branchAngle + radiusLagAngle) + randomZ
 
     const vertexColor = innerColor.clone()
-    vertexColor.lerp(outerColor, (particleRadius * 0.7) / radius)
+    vertexColor.lerp(outerColor, (particleRadius * 0.3) / radius)
     colors[i * 3] = vertexColor.r
     colors[i * 3 + 1] = vertexColor.g
     colors[i * 3 + 2] = vertexColor.b
