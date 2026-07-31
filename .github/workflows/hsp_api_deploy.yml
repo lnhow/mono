@@ -6,6 +6,7 @@ on:
     paths:
       - 'apps/hsp/api/**'
       - '.github/workflows/hsp_api_deploy.yml'
+  workflow_dispatch:
 jobs:
   build-and-deploy-hsp-api:
     runs-on: ubuntu-latest
