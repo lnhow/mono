@@ -38,6 +38,7 @@ const ringDefinitions = [
     ticks: 100,
     length: 10,
     width: 1.5,
+    showCircle: false,
     color: 'stroke-hud-line-faint',
   },
   {
@@ -46,6 +47,7 @@ const ringDefinitions = [
     ticks: 60,
     length: 16,
     width: 2,
+    showCircle: false,
     color: 'stroke-hud-line-soft',
   },
   {
@@ -57,7 +59,7 @@ const ringDefinitions = [
     showCircle: true,
     color: 'stroke-hud-line',
   },
-  { key: 'hours', radius: 190, ticks: 12, length: 34, width: 7 },
+  { key: 'hours', radius: 190, ticks: 12, length: 34, width: 7, showCircle: false, color: undefined },
 ] as const satisfies ReadonlyArray<{
   key: keyof ClockAngles
   radius: number
