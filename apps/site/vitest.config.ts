@@ -6,6 +6,9 @@ export default defineConfig({
   esbuild: {
     jsx: 'automatic',
   },
+  oxc: {
+    jsx: 'automatic',
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
