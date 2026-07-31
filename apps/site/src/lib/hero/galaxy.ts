@@ -8,7 +8,10 @@ export interface GalaxyParams {
   readonly count: number
   readonly radius: number
   readonly radiusLag: number
-  readonly size: number
+  /** Particle size at the center (inner edge). */
+  readonly innerSize: number
+  /** Particle size at the outer edge. */
+  readonly outerSize: number
   readonly branches: number
   readonly randomness: number
   readonly randomnessPower: number
@@ -41,14 +44,15 @@ export interface GalaxyParams {
 }
 
 export const GALAXY_PARAMS: GalaxyParams = {
-  count: 40_000,
-  radius: 10,
-  radiusLag: 1.4,
-  size: 0.01,
+  count: 25_000,
+  radius: 8,
+  radiusLag: 1.6,
+  innerSize: 0.05,
+  outerSize: 0.01,
   branches: 4,
   randomness: 0.5,
-  randomnessPower: 2.6,
-  yRadiusOffset: 0.5,
+  randomnessPower: 3.5,
+  yRadiusOffset: 1,
   rotationSpeed: -0.2,
   bandBoundaries: [1 / 3, 2 / 3],
   tiltFactors: [1, 0.6, 0.3],
@@ -56,15 +60,16 @@ export const GALAXY_PARAMS: GalaxyParams = {
   tiltDamping: 3,
   baseTilt: (0 * Math.PI) / 180,
   baseTiltZ: (-30 * Math.PI) / 180,
-  offset: { x: -4.5, y: -1, z: 0 },
-  innerColor: '#f4b63f',
-  midColor: '#ff8c42',
-  outerColor: '#e84040',
+  offset: { x: -6, y: -3, z: 0 },
+  innerColor: '#07aeea',
+  midColor: '#2af3dd',
+  outerColor: '#2bf598',
 }
 
 export interface GalaxyBand {
   positions: Float32Array
   colors: Float32Array
+  sizes: Float32Array
 }
 
 export function resolveBandIndex(
@@ -101,6 +106,7 @@ export function buildGalaxyBands(
   const radii = new Float32Array(count)
   const positions = new Float32Array(count * 3)
   const colors = new Float32Array(count * 3)
+  const sizes = new Float32Array(count)
 
   for (let i = 0; i < count; i++) {
     const particleRadius = random() * radius
@@ -147,6 +153,11 @@ export function buildGalaxyBands(
     colors[i * 3] = r
     colors[i * 3 + 1] = g
     colors[i * 3 + 2] = b
+    sizes[i] = THREE.MathUtils.lerp(
+      params.innerSize,
+      params.outerSize,
+      particleRadius / radius,
+    )
   }
 
   const bandCounts = [0, 0, 0]
@@ -157,19 +168,20 @@ export function buildGalaxyBands(
   const bands: GalaxyBand[] = bandCounts.map((bandCount) => ({
     positions: new Float32Array(bandCount * 3),
     colors: new Float32Array(bandCount * 3),
+    sizes: new Float32Array(bandCount),
   }))
   const cursors = [0, 0, 0]
 
   for (let i = 0; i < count; i++) {
     const bandIndex = resolveBandIndex(radii[i]!, radius, bandBoundaries)
-    const target = cursors[bandIndex]! * 3
-    const source = i * 3
-    bands[bandIndex]!.positions[target] = positions[source]!
-    bands[bandIndex]!.positions[target + 1] = positions[source + 1]!
-    bands[bandIndex]!.positions[target + 2] = positions[source + 2]!
-    bands[bandIndex]!.colors[target] = colors[source]!
-    bands[bandIndex]!.colors[target + 1] = colors[source + 1]!
-    bands[bandIndex]!.colors[target + 2] = colors[source + 2]!
+    const target = cursors[bandIndex]!
+    bands[bandIndex]!.positions[target * 3] = positions[i * 3]!
+    bands[bandIndex]!.positions[target * 3 + 1] = positions[i * 3 + 1]!
+    bands[bandIndex]!.positions[target * 3 + 2] = positions[i * 3 + 2]!
+    bands[bandIndex]!.colors[target * 3] = colors[i * 3]!
+    bands[bandIndex]!.colors[target * 3 + 1] = colors[i * 3 + 1]!
+    bands[bandIndex]!.colors[target * 3 + 2] = colors[i * 3 + 2]!
+    bands[bandIndex]!.sizes[target] = sizes[i]!
     cursors[bandIndex]! += 1
   }
 

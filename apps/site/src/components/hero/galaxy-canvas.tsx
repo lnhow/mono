@@ -21,6 +21,7 @@ function GalaxyPoints({ tiltTarget }: { tiltTarget: RefObject<GalaxyTiltTarget> 
       const geometry = new THREE.BufferGeometry()
       geometry.setAttribute('position', new THREE.BufferAttribute(band.positions, 3))
       geometry.setAttribute('color', new THREE.BufferAttribute(band.colors, 3))
+      geometry.setAttribute('size', new THREE.BufferAttribute(band.sizes, 1))
       return geometry
     })
   }, [])
@@ -71,7 +72,7 @@ function GalaxyPoints({ tiltTarget }: { tiltTarget: RefObject<GalaxyTiltTarget> 
             <group ref={(g) => { spinRefs.current[index] = g }}>
               <points geometry={geometry}>
                 <pointsMaterial
-                  size={GALAXY_PARAMS.size}
+                  sizeAttenuation
                   vertexColors
                   depthWrite={false}
                   blending={THREE.AdditiveBlending}
