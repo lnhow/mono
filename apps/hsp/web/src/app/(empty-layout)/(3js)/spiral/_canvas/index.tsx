@@ -95,7 +95,7 @@ function initScene(canvas: HTMLCanvasElement | null) {
     randomness: 0.45,
     randomnessPower: 2.6,
     yRadiusOffset: 0.45,
-    rotationSpped: -0.5,
+    rotationSpeed: -0.5,
     innerColor: '#762DE5',
     outerColor: '#2E48E6',
   }
@@ -136,9 +136,11 @@ function initScene(canvas: HTMLCanvasElement | null) {
         galaxyParams.randomness *
         radius
       const randomY =
-        Math.pow(Math.random(), galaxyParams.randomnessPower) *
+        (Math.pow(Math.random(), galaxyParams.randomnessPower) *
           (Math.random() < 0.5 ? -1 : 1) *
-          galaxyParams.randomness * Math.sqrt(radius) / 2 +
+          galaxyParams.randomness *
+          Math.sqrt(radius)) /
+          2 +
         radius * galaxyParams.yRadiusOffset
       const randomZ =
         Math.pow(Math.random(), galaxyParams.randomnessPower) *
@@ -230,7 +232,7 @@ function initScene(canvas: HTMLCanvasElement | null) {
     .step(0.5)
     .onFinishChange(createGalaxy)
   galaxyFolder
-    .add(galaxyParams, 'rotationSpped')
+    .add(galaxyParams, 'rotationSpeed')
     .name('Rotation speed')
     .min(-5)
     .max(5)
@@ -248,14 +250,15 @@ function initScene(canvas: HTMLCanvasElement | null) {
   /**
    * Animate
    */
-  const clock = new THREE.Clock()
+  const timer = new THREE.Timer()
+  timer.reset()
   let animationFrame: number = 0
 
   const tick = () => {
-    const elapsedTime = clock.getElapsedTime()
+    const elapsedTime = timer.getElapsed()
 
     if (galaxy) {
-      galaxy.rotation.y = elapsedTime * galaxyParams.rotationSpped
+      galaxy.rotation.y = elapsedTime * galaxyParams.rotationSpeed
     }
 
     // Update controls
