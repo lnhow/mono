@@ -41,15 +41,15 @@ export interface GalaxyParams {
 }
 
 export const GALAXY_PARAMS: GalaxyParams = {
-  count: 20_000,
-  radius: 4.5,
-  radiusLag: 1.2,
-  size: 0.02,
+  count: 10_000,
+  radius: 5,
+  radiusLag: 1.7,
+  size: 0.01,
   branches: 4,
-  randomness: 0.5,
-  randomnessPower: 2.6,
+  randomness: 0.75,
+  randomnessPower: 5,
   yRadiusOffset: 1,
-  rotationSpeed: -0.15,
+  rotationSpeed: -0.1,
   bandBoundaries: [1 / 3, 2 / 3],
   tiltFactors: [1, 0.6, 0.3],
   maxTilt: 0.25,
@@ -87,91 +87,62 @@ export function buildGalaxyBands(
 ): GalaxyBand[] {
   const {
     count,
+    branches,
     radius,
     radiusLag,
-    branches,
     randomness,
     randomnessPower,
     yRadiusOffset,
     bandBoundaries,
   } = params
 
-  const innerColor = new THREE.Color(params.innerColor)
-  const midColor = new THREE.Color(params.midColor)
-  const outerColor = new THREE.Color(params.outerColor)
+  const inner = new THREE.Color(params.innerColor)
+  const mid = new THREE.Color(params.midColor)
+  const outer = new THREE.Color(params.outerColor)
 
-  const radii = new Float32Array(count)
-  const positions = new Float32Array(count * 3)
-  const colors = new Float32Array(count * 3)
+  const positions: number[][] = [[], [], []]
+  const colors: number[][] = [[], [], []]
 
   for (let i = 0; i < count; i++) {
     const particleRadius = random() * radius
-    radii[i] = particleRadius
-    const radiusLagAngle = particleRadius * radiusLag
-    const branchAngle =
-      BRANCH_ANGLES[i % BRANCH_ANGLES.length] ??
-      ((i % branches) / branches) * Math.PI * 2
+    const bandIndex = resolveBandIndex(particleRadius, radius, bandBoundaries)
+    const branchAngle = ((i % branches) / branches) * Math.PI * 2
+    const angle = branchAngle + particleRadius * radiusLag
 
-    const randomPow = () => Math.pow(random(), randomnessPower)
-    const randomSignX = random() < 0.5 ? -1 : 1
-    const randomSignY = random() < 0.5 ? -1 : 1
-    const randomSignZ = random() < 0.5 ? -1 : 1
+    const randPow = () => Math.pow(random(), randomnessPower)
+    const signX = random() < 0.5 ? -1 : 1
+    const signY = random() < 0.5 ? -1 : 1
+    const signZ = random() < 0.5 ? -1 : 1
 
-    const randomX = randomPow() * randomSignX * randomness * particleRadius
-    const randomY =
-      randomPow() * randomSignY * randomness * particleRadius +
+    const x =
+      particleRadius * Math.sin(angle) +
+      randPow() * signX * randomness * particleRadius
+    const y =
+      randPow() * signY * randomness * particleRadius +
       particleRadius * yRadiusOffset
-    const randomZ = randomPow() * randomSignZ * randomness * particleRadius
+    const z =
+      particleRadius * Math.cos(angle) +
+      randPow() * signZ * randomness * particleRadius
 
-    const idx = i * 3
-    positions[idx] =
-      particleRadius * Math.sin(branchAngle + radiusLagAngle) + randomX
-    positions[idx + 1] = randomY
-    positions[idx + 2] =
-      particleRadius * Math.cos(branchAngle + radiusLagAngle) + randomZ
+    positions[bandIndex]!.push(x, y, z)
 
+    // Two-stop color gradient: inner -> mid -> outer
     const t = particleRadius / radius
-    let r: number, g: number, b: number
-    if (t < 0.5) {
-      const localT = t * 2
-      r = innerColor.r + (midColor.r - innerColor.r) * localT
-      g = innerColor.g + (midColor.g - innerColor.g) * localT
-      b = innerColor.b + (midColor.b - innerColor.b) * localT
-    } else {
-      const localT = (t - 0.5) * 2
-      r = midColor.r + (outerColor.r - midColor.r) * localT
-      g = midColor.g + (outerColor.g - midColor.g) * localT
-      b = midColor.b + (outerColor.b - midColor.b) * localT
-    }
+    const isInner = t < 0.5
+    const localT = isInner ? t * 2 : (t - 0.5) * 2
+    const from = isInner ? inner : mid
+    const to = isInner ? mid : outer
     const brightness = random() > 0.9 ? 1.8 : 0.8 + random() * 0.4
-    colors[idx] = r * brightness
-    colors[idx + 1] = g * brightness
-    colors[idx + 2] = b * brightness
+
+    colors[bandIndex]!.push(
+      (from.r + (to.r - from.r) * localT) * brightness,
+      (from.g + (to.g - from.g) * localT) * brightness,
+      (from.b + (to.b - from.b) * localT) * brightness,
+    )
   }
 
-  const bandCounts = [0, 0, 0]
-  for (let i = 0; i < count; i++) {
-    bandCounts[resolveBandIndex(radii[i]!, radius, bandBoundaries)]! += 1
-  }
-
-  const bands: GalaxyBand[] = bandCounts.map((bandCount) => ({
-    positions: new Float32Array(bandCount * 3),
-    colors: new Float32Array(bandCount * 3),
+  return positions.map((pos, i) => ({
+    positions: new Float32Array(pos),
+    colors: new Float32Array(colors[i]!),
   }))
-  const cursors = [0, 0, 0]
-
-  for (let i = 0; i < count; i++) {
-    const bandIndex = resolveBandIndex(radii[i]!, radius, bandBoundaries)
-    const target = cursors[bandIndex]! * 3
-    const source = i * 3
-    bands[bandIndex]!.positions[target] = positions[source]!
-    bands[bandIndex]!.positions[target + 1] = positions[source + 1]!
-    bands[bandIndex]!.positions[target + 2] = positions[source + 2]!
-    bands[bandIndex]!.colors[target] = colors[source]!
-    bands[bandIndex]!.colors[target + 1] = colors[source + 1]!
-    bands[bandIndex]!.colors[target + 2] = colors[source + 2]!
-    cursors[bandIndex]! += 1
-  }
-
-  return bands
 }

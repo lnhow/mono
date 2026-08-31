@@ -5,10 +5,13 @@ import { useEffect, useState } from 'react'
 
 function UserAgentSkeleton() {
   return (
-    <div aria-label="Loading browser user agent" className="w-full max-w-xl space-y-2">
-      <Skeleton className="h-4 w-full" />
-      <Skeleton className="h-4 w-[92%]" />
-      <Skeleton className="h-4 w-[68%]" />
+    <div
+      aria-label="Loading browser user agent"
+      className="w-full max-w-xl space-y-2"
+    >
+      <Skeleton className="h-4 w-full bg-neutral-900" />
+      <Skeleton className="h-4 w-[92%] bg-neutral-900" />
+      <Skeleton className="h-4 w-[68%] bg-neutral-900" />
     </div>
   )
 }
@@ -40,7 +43,7 @@ export function UserAgentDisplay() {
   return (
     <output
       aria-label="Browser user agent"
-      className="block max-w-xl font-mono text-sm leading-tight text-muted-foreground"
+      className="block max-w-xl font-mono text-[0.625rem] leading-tight text-neutral-900"
     >
       {userAgent}
     </output>

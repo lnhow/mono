@@ -18,7 +18,7 @@ interface GalaxyCanvasProps {
 const ENTRANCE_DELAY = 0.3 // s
 const ENTRANCE_DURATION = 5 // s
 const ENTRANCE_EDGE_SOFTNESS = 0.5
-const BAND_SPEEDS = [3, 2, 1.732] // Inner spins faster, outer drifts slower
+const BAND_SPEEDS = [1.5, 1.428, 1.357] // Inner spins faster, outer drifts slower
 
 function GalaxyPoints({
   tiltTarget,
@@ -40,20 +40,10 @@ function GalaxyPoints({
   const entranceProgress = useRef({ value: 0 })
 
   const material = useMemo(() => {
-    let maxDistance = 0
-    for (const geometry of geometries) {
-      const positions = geometry.getAttribute('position').array as Float32Array
-      for (let i = 0; i < positions.length; i += 3) {
-        const d = Math.hypot(
-          positions[i]!,
-          positions[i + 1]!,
-          positions[i + 2]!,
-        )
-        if (d > maxDistance) maxDistance = d
-      }
-    }
-
-    const reach = (maxDistance + ENTRANCE_EDGE_SOFTNESS).toFixed(4)
+    const reach = (
+      GALAXY_PARAMS.radius * (1 + GALAXY_PARAMS.randomness) +
+      ENTRANCE_EDGE_SOFTNESS
+    ).toFixed(4)
     const softness = ENTRANCE_EDGE_SOFTNESS.toFixed(4)
     const maxRadius = GALAXY_PARAMS.radius.toFixed(4)
 
@@ -63,6 +53,7 @@ function GalaxyPoints({
       depthWrite: false,
       blending: THREE.AdditiveBlending,
     })
+    mat.customProgramCacheKey = () => 'galaxy-points-material'
 
     mat.onBeforeCompile = (shader) => {
       shader.uniforms.uEntranceProgress = entranceProgress.current
@@ -79,9 +70,10 @@ varying float vDistanceFromCenter;`,
 vDistanceFromCenter = length(position);`,
         )
         .replace(
-          '#include <pointsize_vertex>',
-          `#include <pointsize_vertex>
-float sizeRatio = mix(2.0, 0.01, clamp(length(position) / ${maxRadius}, 0.0, 1.0));
+          'gl_PointSize = size;',
+          `gl_PointSize = size;
+float r = clamp(length(position.xz) / ${maxRadius}, 0.0, 1.0);
+float sizeRatio = mix(20.0, 1.0, pow(r, 0.25));
 gl_PointSize *= sizeRatio;`,
         )
 
@@ -97,18 +89,17 @@ varying float vDistanceFromCenter;`,
           `float threshold = uEntranceProgress * ${reach};
 float visibility = 1.0 - smoothstep(threshold - ${softness}, threshold, vDistanceFromCenter);
 
-// Circular point shape + natural luminous falloff
+// Circular point shape + luminous falloff
 float dist = length(gl_PointCoord - vec2(0.5));
 if (dist > 0.5) discard;
 
-// Smoothly drops from 1.0 at center to 0.0 at the circumference
 float strength = 1.0 - dist * 2.0;
 float glow = pow(strength, 3.0);
 outgoingLight = diffuseColor.rgb * glow * visibility * 3.5;`,
         )
     }
     return mat
-  }, [geometries])
+  }, [])
 
   useEffect(
     () => () => {
@@ -151,46 +142,40 @@ outgoingLight = diffuseColor.rgb * glow * visibility * 3.5;`,
       delta,
     )
 
-    for (let index = 0; index < spinRefs.current.length; index++) {
-      const group = spinRefs.current[index]
-      if (!group) {
-        continue
+    for (let i = 0; i < geometries.length; i++) {
+      const spinGroup = spinRefs.current[i]
+      if (spinGroup) {
+        const speed = BAND_SPEEDS[i % BAND_SPEEDS.length] ?? 1
+        spinGroup.rotation.y = elapsed * GALAXY_PARAMS.rotationSpeed * speed
       }
-      const speed = BAND_SPEEDS[index % BAND_SPEEDS.length] ?? 1
-      group.rotation.y = elapsed * GALAXY_PARAMS.rotationSpeed * speed
-    }
 
-    for (let index = 0; index < tiltRefs.current.length; index++) {
-      const group = tiltRefs.current[index]
-      if (!group) {
-        continue
+      const tiltGroup = tiltRefs.current[i]
+      if (tiltGroup) {
+        const factor = GALAXY_PARAMS.tiltFactors[i] ?? 1
+        tiltGroup.rotation.x = tilt.current.x * GALAXY_PARAMS.maxTilt * factor
+        tiltGroup.rotation.z = -tilt.current.y * GALAXY_PARAMS.maxTilt * factor
       }
-      const factor = GALAXY_PARAMS.tiltFactors[index] ?? 1
-      group.rotation.x = tilt.current.x * GALAXY_PARAMS.maxTilt * factor
-      group.rotation.z = -tilt.current.y * GALAXY_PARAMS.maxTilt * factor
     }
   })
 
   return (
-    <group>
+    <group
+      position={offset}
+      rotation={[GALAXY_PARAMS.baseTilt, 0, GALAXY_PARAMS.baseTiltZ]}
+    >
       {geometries.map((geometry, index) => (
         <group
           key={index}
           ref={(g) => {
             tiltRefs.current[index] = g
           }}
-          position={offset}
         >
           <group
-            rotation={[GALAXY_PARAMS.baseTilt, 0, GALAXY_PARAMS.baseTiltZ]}
+            ref={(g) => {
+              spinRefs.current[index] = g
+            }}
           >
-            <group
-              ref={(g) => {
-                spinRefs.current[index] = g
-              }}
-            >
-              <points geometry={geometry} material={material} />
-            </group>
+            <points geometry={geometry} material={material} />
           </group>
         </group>
       ))}

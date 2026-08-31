@@ -220,18 +220,3 @@ a {
   overflow: clip;
   background: #000000;
 }
-
-.galaxy-prototype-user-agent {
-  position: absolute;
-  z-index: 3;
-  top: 1.25rem;
-  left: 1.25rem;
-  width: min(68vw, 36rem);
-  opacity: 0.42;
-}
-
-@media (min-width: 48rem) {
-  .galaxy-prototype-user-agent {
-    width: min(42vw, 36rem);
-  }
-}

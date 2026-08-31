@@ -107,7 +107,7 @@
   --border: var(--muted);
   --input: var(--muted);
   --ring: oklch(0.635 0.0128 153.53);
-  --radius: 0;
+  --radius: 0.625rem;
   --chamfer-sm: 10px;
   --chamfer-md: 18px;
   --chamfer-lg: 34px;
