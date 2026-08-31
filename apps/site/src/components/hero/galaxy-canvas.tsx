@@ -18,6 +18,7 @@ interface GalaxyCanvasProps {
 const ENTRANCE_DELAY = 0.3 // s
 const ENTRANCE_DURATION = 5 // s
 const ENTRANCE_EDGE_SOFTNESS = 0.5
+const BAND_SPEEDS = [3, 2, 1.732] // Inner spins faster, outer drifts slower
 
 function GalaxyPoints({
   tiltTarget,
@@ -37,11 +38,6 @@ function GalaxyPoints({
   }, [])
 
   const entranceProgress = useRef({ value: 0 })
-  const timer = useMemo(() => {
-    const t = new THREE.Timer()
-    if (typeof document !== 'undefined') t.connect(document)
-    return t
-  }, [])
 
   const material = useMemo(() => {
     let maxDistance = 0
@@ -59,6 +55,7 @@ function GalaxyPoints({
 
     const reach = (maxDistance + ENTRANCE_EDGE_SOFTNESS).toFixed(4)
     const softness = ENTRANCE_EDGE_SOFTNESS.toFixed(4)
+    const maxRadius = GALAXY_PARAMS.radius.toFixed(4)
 
     const mat = new THREE.PointsMaterial({
       size: GALAXY_PARAMS.size,
@@ -81,6 +78,12 @@ varying float vDistanceFromCenter;`,
           `#include <begin_vertex>
 vDistanceFromCenter = length(position);`,
         )
+        .replace(
+          '#include <pointsize_vertex>',
+          `#include <pointsize_vertex>
+float sizeRatio = mix(2.0, 0.01, clamp(length(position) / ${maxRadius}, 0.0, 1.0));
+gl_PointSize *= sizeRatio;`,
+        )
 
       shader.fragmentShader = shader.fragmentShader
         .replace(
@@ -93,7 +96,15 @@ varying float vDistanceFromCenter;`,
           'outgoingLight = diffuseColor.rgb;',
           `float threshold = uEntranceProgress * ${reach};
 float visibility = 1.0 - smoothstep(threshold - ${softness}, threshold, vDistanceFromCenter);
-outgoingLight = diffuseColor.rgb * visibility;`,
+
+// Circular point shape + natural luminous falloff
+float dist = length(gl_PointCoord - vec2(0.5));
+if (dist > 0.5) discard;
+
+// Smoothly drops from 1.0 at center to 0.0 at the circumference
+float strength = 1.0 - dist * 2.0;
+float glow = pow(strength, 3.0);
+outgoingLight = diffuseColor.rgb * glow * visibility * 3.5;`,
         )
     }
     return mat
@@ -103,9 +114,8 @@ outgoingLight = diffuseColor.rgb * visibility;`,
     () => () => {
       geometries.forEach((g) => g.dispose())
       material.dispose()
-      timer.dispose()
     },
-    [geometries, material, timer],
+    [geometries, material],
   )
 
   const tiltRefs = useRef<(THREE.Group | null)[]>([])
@@ -120,39 +130,45 @@ outgoingLight = diffuseColor.rgb * visibility;`,
     GALAXY_PARAMS.offset.z,
   ]
 
-  useFrame(() => {
-    timer.update()
-    const elapsed = timer.getElapsed()
+  useFrame((state, delta) => {
+    const elapsed = state.clock.elapsedTime
     const t = Math.min(
       Math.max(elapsed - ENTRANCE_DELAY, 0) / ENTRANCE_DURATION,
       1,
     )
     entranceProgress.current.value = 1 - Math.pow(1 - t, 3)
 
-    const spin = elapsed * GALAXY_PARAMS.rotationSpeed
-
     tilt.current.x = THREE.MathUtils.damp(
       tilt.current.x,
       tiltTarget.current?.y ?? 0,
       GALAXY_PARAMS.tiltDamping,
-      0.016,
+      delta,
     )
     tilt.current.y = THREE.MathUtils.damp(
       tilt.current.y,
       tiltTarget.current?.x ?? 0,
       GALAXY_PARAMS.tiltDamping,
-      0.016,
+      delta,
     )
 
-    for (const group of spinRefs.current) {
-      if (group) group.rotation.y = spin
+    for (let index = 0; index < spinRefs.current.length; index++) {
+      const group = spinRefs.current[index]
+      if (!group) {
+        continue
+      }
+      const speed = BAND_SPEEDS[index % BAND_SPEEDS.length] ?? 1
+      group.rotation.y = elapsed * GALAXY_PARAMS.rotationSpeed * speed
     }
-    tiltRefs.current.forEach((group, index) => {
-      if (!group) return
+
+    for (let index = 0; index < tiltRefs.current.length; index++) {
+      const group = tiltRefs.current[index]
+      if (!group) {
+        continue
+      }
       const factor = GALAXY_PARAMS.tiltFactors[index] ?? 1
       group.rotation.x = tilt.current.x * GALAXY_PARAMS.maxTilt * factor
       group.rotation.z = -tilt.current.y * GALAXY_PARAMS.maxTilt * factor
-    })
+    }
   })
 
   return (

@@ -41,15 +41,15 @@ export interface GalaxyParams {
 }
 
 export const GALAXY_PARAMS: GalaxyParams = {
-  count: 15_000,
-  radius: 5,
-  radiusLag: 1.4,
-  size: 0.01,
+  count: 20_000,
+  radius: 4.5,
+  radiusLag: 1.2,
+  size: 0.02,
   branches: 4,
   randomness: 0.5,
   randomnessPower: 2.6,
   yRadiusOffset: 1,
-  rotationSpeed: -0.1,
+  rotationSpeed: -0.15,
   bandBoundaries: [1 / 3, 2 / 3],
   tiltFactors: [1, 0.6, 0.3],
   maxTilt: 0.25,
@@ -57,9 +57,9 @@ export const GALAXY_PARAMS: GalaxyParams = {
   baseTilt: (0 * Math.PI) / 180,
   baseTiltZ: (-30 * Math.PI) / 180,
   offset: { x: -3.4, y: 1, z: 4.3 },
-  innerColor: '#004069',
-  midColor: '#05dcac',
-  outerColor: '#19e0ff',
+  innerColor: '#ff6b00',
+  midColor: '#d946ef',
+  outerColor: '#00e5ff',
 }
 
 export interface GalaxyBand {
@@ -78,6 +78,8 @@ export function resolveBandIndex(
   if (particleRadius < second) return 1
   return 2
 }
+
+const BRANCH_ANGLES = [0, 1.43, 3.05, 4.78] // e.g. 4 arms at varying angular spacing: 0°, 82°, 175°, 274°
 
 export function buildGalaxyBands(
   params: GalaxyParams = GALAXY_PARAMS,
@@ -106,47 +108,45 @@ export function buildGalaxyBands(
     const particleRadius = random() * radius
     radii[i] = particleRadius
     const radiusLagAngle = particleRadius * radiusLag
-    const branchAngle = ((i % branches) / branches) * Math.PI * 2
+    const branchAngle =
+      BRANCH_ANGLES[i % BRANCH_ANGLES.length] ??
+      ((i % branches) / branches) * Math.PI * 2
 
-    const randomX =
-      Math.pow(random(), randomnessPower) *
-      (random() < 0.5 ? -1 : 1) *
-      randomness *
-      particleRadius
+    const randomPow = () => Math.pow(random(), randomnessPower)
+    const randomSignX = random() < 0.5 ? -1 : 1
+    const randomSignY = random() < 0.5 ? -1 : 1
+    const randomSignZ = random() < 0.5 ? -1 : 1
+
+    const randomX = randomPow() * randomSignX * randomness * particleRadius
     const randomY =
-      Math.pow(random(), randomnessPower) *
-        (random() < 0.5 ? -1 : 1) *
-        randomness *
-        particleRadius +
+      randomPow() * randomSignY * randomness * particleRadius +
       particleRadius * yRadiusOffset
-    const randomZ =
-      Math.pow(random(), randomnessPower) *
-      (random() < 0.5 ? -1 : 1) *
-      randomness *
-      particleRadius
+    const randomZ = randomPow() * randomSignZ * randomness * particleRadius
 
-    positions[i * 3] =
+    const idx = i * 3
+    positions[idx] =
       particleRadius * Math.sin(branchAngle + radiusLagAngle) + randomX
-    positions[i * 3 + 1] = randomY
-    positions[i * 3 + 2] =
+    positions[idx + 1] = randomY
+    positions[idx + 2] =
       particleRadius * Math.cos(branchAngle + radiusLagAngle) + randomZ
 
     const t = particleRadius / radius
     let r: number, g: number, b: number
     if (t < 0.5) {
       const localT = t * 2
-      r = THREE.MathUtils.lerp(innerColor.r, midColor.r, localT)
-      g = THREE.MathUtils.lerp(innerColor.g, midColor.g, localT)
-      b = THREE.MathUtils.lerp(innerColor.b, midColor.b, localT)
+      r = innerColor.r + (midColor.r - innerColor.r) * localT
+      g = innerColor.g + (midColor.g - innerColor.g) * localT
+      b = innerColor.b + (midColor.b - innerColor.b) * localT
     } else {
       const localT = (t - 0.5) * 2
-      r = THREE.MathUtils.lerp(midColor.r, outerColor.r, localT)
-      g = THREE.MathUtils.lerp(midColor.g, outerColor.g, localT)
-      b = THREE.MathUtils.lerp(midColor.b, outerColor.b, localT)
+      r = midColor.r + (outerColor.r - midColor.r) * localT
+      g = midColor.g + (outerColor.g - midColor.g) * localT
+      b = midColor.b + (outerColor.b - midColor.b) * localT
     }
-    colors[i * 3] = r
-    colors[i * 3 + 1] = g
-    colors[i * 3 + 2] = b
+    const brightness = random() > 0.9 ? 1.8 : 0.8 + random() * 0.4
+    colors[idx] = r * brightness
+    colors[idx + 1] = g * brightness
+    colors[idx + 2] = b * brightness
   }
 
   const bandCounts = [0, 0, 0]

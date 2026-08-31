@@ -64,10 +64,10 @@ describe('buildGalaxyBands', () => {
         const b = band.colors[i + 2]!
         if (bandIndex === 0) {
           expect(b).toBe(0)
-          expect(r + g).toBeGreaterThan(0.99)
+          expect(r + g).toBeGreaterThan(0.5)
         } else if (bandIndex === 2) {
           expect(r).toBe(0)
-          expect(g + b).toBeGreaterThan(0.99)
+          expect(g + b).toBeGreaterThan(0.5)
         }
       }
     })

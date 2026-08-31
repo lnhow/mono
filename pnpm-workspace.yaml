@@ -54,7 +54,7 @@ catalogs:
   three:
     '@react-three/cannon': '6.6.0'
     '@react-three/drei': '10.7.7'
-    '@react-three/fiber': '9.5.0'
+    '@react-three/fiber': '9.7.0'
     r3f-perf: 7.2.3 # TODO: Outdated, unused, but keeping for now to see if there are any alternatives
     'three': '^0.185.1'
     '@types/three': '^0.185.1'

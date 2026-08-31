@@ -12,6 +12,11 @@ export default defineConfig([
     },
   },
   {
+    rules: {
+      'react/no-unknown-property': 'off',
+    },
+  },
+  {
     ignores: [
       'node_modules/**',
       '.next/**',

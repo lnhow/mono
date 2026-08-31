@@ -80,17 +80,22 @@ export function GalaxyHero() {
 
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     if (gyroActiveRef.current) return
-    const bounds = event.currentTarget.getBoundingClientRect()
+    const { clientWidth, clientHeight } = event.currentTarget
     tiltTarget.current = {
-      x: ((event.clientX - bounds.left) / bounds.width) * 2 - 1,
-      y: ((event.clientY - bounds.top) / bounds.height) * 2 - 1,
+      x: (event.nativeEvent.offsetX / clientWidth) * 2 - 1,
+      y: (event.nativeEvent.offsetY / clientHeight) * 2 - 1,
     }
+  }
+
+  const handlePointerLeave = () => {
+    tiltTarget.current = { x: 0, y: 0 }
   }
 
   return (
     <div
       ref={containerRef}
       onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
       className="relative isolate flex h-full w-full items-center justify-center overflow-hidden"
     >
       <div className="absolute inset-0">
