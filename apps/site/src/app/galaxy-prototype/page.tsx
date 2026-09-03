@@ -19,19 +19,26 @@ export default function GalaxyPrototypePage() {
         <div className="h-full w-full">
           <GalaxyHero />
         </div>
-        <section className="max-w-3xl px-4 sm:px-2 w-full space-y-6 py-12 z-10 absolute top-0 right-0 h-full flex flex-col items-start justify-center">
-          <div className="bg-linear-to-r from-neutral-900/30 to-neutral-900/0 rounded-3xl p-6 transform-gpu backdrop-blur-xs overflow-hidden">
-            <h1 className="tracking-wide text-5xl text-neutral-50">
-              <span className="text-neutral-400 text-3xl font-bold">Hi,</span>
-              <br /> I&apos;m Hào
+        <section className="max-w-3xl px-6 sm:px-8 w-full space-y-6 py-12 z-10 absolute top-0 right-0 h-full flex flex-col items-start justify-center">
+          <div className="relative rounded-3xl p-8 md:p-10 transform-gpu space-y-4 max-w-xl">
+            <h1 className="tracking-wide text-4xl sm:text-5xl font-bold text-zinc-300 leading-tight">
+              <span className="text-zinc-400 text-xl sm:text-2xl font-normal">
+                Hi,
+              </span>
+              <br /> I&apos;m{' '}
+              <span className="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
+                Hào
+              </span>
             </h1>
-            <p className="text-sm text-neutral-600 sm:text-md">
+
+            <p className="text-sm sm:text-base text-zinc-400 font-light leading-relaxed">
               Web Developer. Photography and UX Enthusiast.
             </p>
-          </div>
-          <div className="flex gap-2 flex-wrap mt-2">
-            <PersonalGithub />
-            <PersonalLinkedinLink />
+
+            <div className="flex gap-4 flex-wrap pt-2">
+              <PersonalGithub />
+              <PersonalLinkedinLink />
+            </div>
           </div>
         </section>
       </div>
@@ -45,10 +52,12 @@ function PersonalGithub() {
     <ButtonLink
       href="https://github.com/lnhow"
       target="_blank"
+      size="lg"
       variant="outline"
-      className="dark text-neutral-100"
+      className="dark text-zinc-100 bg-zinc-900/60 shadow-sm"
     >
       <span>GitHub</span>
+      <span className="text-xs opacity-60 ml-1">↗</span>
     </ButtonLink>
   )
 }
@@ -58,10 +67,12 @@ function PersonalLinkedinLink() {
     <ButtonLink
       href="https://linkedin.com/in/nguyenhaole7f8/"
       target="_blank"
+      size="lg"
       variant="outline"
-      className="dark text-neutral-100"
+      className="dark text-zinc-100 bg-zinc-900/60 shadow-sm"
     >
       <span>LinkedIn</span>
+      <span className="text-xs opacity-60 ml-1">↗</span>
     </ButtonLink>
   )
 }
