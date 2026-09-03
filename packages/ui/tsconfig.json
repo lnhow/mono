@@ -1,5 +1,9 @@
 {
   "extends": "@repo/tsconfig/lib-react.json",
   "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "resolvePackageJsonImports": true
+  }
 }

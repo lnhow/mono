@@ -2,6 +2,8 @@
 
 import { startTransition, useEffect, useRef, useState } from 'react'
 
+import { Button } from '@folio/ui/components/button'
+
 import { GalaxyCanvas, type GalaxyTiltTarget } from './galaxy-canvas'
 
 const GYRO_GAMMA_RANGE = 45
@@ -23,6 +25,18 @@ export function GalaxyHero() {
 
   useEffect(() => {
     if (typeof window === 'undefined' || !window.DeviceOrientationEvent) return
+
+    // On desktop environments (including touchscreen Windows laptops with trackpads/mice),
+    // tilt is driven by mouse/pointer movement.
+    // 1. Chromium (Chrome 152+) exposes `navigator.userAgentData.mobile` to distinguish desktop from mobile.
+    // 2. CSS media queries check for primary fine pointer and hover capability.
+    const isDesktop =
+      (typeof navigator !== 'undefined' &&
+        'userAgentData' in navigator &&
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (navigator as any).userAgentData?.mobile === false) ||
+      window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    if (isDesktop) return
 
     const ctor = DeviceOrientationEvent as DeviceOrientationEventCtor
     if (typeof ctor.requestPermission === 'function') {
@@ -86,13 +100,14 @@ export function GalaxyHero() {
         <GalaxyCanvas tiltTarget={tiltTarget} />
       </div>
       {showPrompt && (
-        <button
+        <Button
           type="button"
           onClick={handleEnableMotion}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white backdrop-blur transition hover:bg-white/20"
+          variant="outline"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 rounded-full border-white/20 bg-white/10 px-4 text-white backdrop-blur transition hover:bg-white/20 hover:text-white"
         >
           Enable motion
-        </button>
+        </Button>
       )}
     </div>
   )
