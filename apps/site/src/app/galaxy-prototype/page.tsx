@@ -16,9 +16,6 @@ export const metadata: Metadata = {
   robots: { follow: false, index: false },
 }
 
-const STAGE_PANEL_CLASS =
-  'rounded-2xl border border-zinc-800 bg-zinc-900/70 backdrop-blur-md shadow-sm'
-
 export default function GalaxyPrototypePage() {
   return (
     <main className="galaxy-prototype-page">
@@ -98,8 +95,7 @@ function StageCardLink({
     <Link
       href={href}
       className={cn(
-        STAGE_PANEL_CLASS,
-        'group relative transition-all duration-200 hover:border-zinc-500 hover:bg-zinc-800/80',
+        'group relative transition-all duration-200 hover:border-zinc-500 hover:bg-zinc-800/80 rounded-2xl border border-zinc-800 bg-zinc-900/30 backdrop-blur-xs transform-gpu shadow-sm',
         className,
       )}
       {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
@@ -127,7 +123,7 @@ function BigStageCardLink({
     <StageCardLink
       href={href}
       className={cn(
-        'flex aspect-square flex-col justify-between p-3 sm:p-4 min-w-16',
+        'flex aspect-square flex-col justify-between p-3 sm:p-4 min-w-20',
         className,
       )}
     >
