@@ -41,7 +41,7 @@ export interface GalaxyParams {
 }
 
 export const GALAXY_PARAMS: GalaxyParams = {
-  count: 10_000,
+  count: 4_000,
   radius: 5,
   radiusLag: 1.7,
   size: 0.01,
@@ -78,8 +78,6 @@ export function resolveBandIndex(
   if (particleRadius < second) return 1
   return 2
 }
-
-const BRANCH_ANGLES = [0, 1.43, 3.05, 4.78] // e.g. 4 arms at varying angular spacing: 0°, 82°, 175°, 274°
 
 export function buildGalaxyBands(
   params: GalaxyParams = GALAXY_PARAMS,

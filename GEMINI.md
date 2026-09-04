@@ -8,6 +8,7 @@ This is a **pnpm/Turborepo monorepo** that houses several applications and share
 
 ### Key Applications:
 
+*   **`apps/site`**: The personal portfolio and blog site, built with **Next.js 16**, React 19, TailwindCSS, Content Collections, and Three.js / React Three Fiber (Galaxy Hero).
 *   **`apps/hsp/web`**: The main web application, built with **Next.js 16** and React 19. It includes:
     *   A personal blog.
     *   `guesart`: A draw-and-guess game using `socket.io-client` and `jotai`.
@@ -27,39 +28,40 @@ This is a **pnpm/Turborepo monorepo** that houses several applications and share
 
 The project uses `pnpm` as its package manager and `turborepo` to manage tasks.
 
+> **CRITICAL CLI / SHELL NOTE**: Always use `corepack pnpm` instead of bare `pnpm` when running commands in this environment (e.g., `corepack pnpm <command>`). The global `pnpm` binary on this system encounters version switching errors / missing CLI shims (`ENOENT`). Using `corepack pnpm` avoids any fishing or path diagnostics.
+
 ### Initial Setup
 
-1.  **Install pnpm**: If you don't have it, install it globally: `npm install -g pnpm`.
+1.  **Install Dependencies**:
+    ```bash
+    corepack pnpm install
+    ```
 2.  **Environment Variables**: Copy the example environment file for the API and fill it out.
     ```bash
     cp ./apps/hsp/api/.env.example ./apps/hsp/api/.env
     # Open the .env file and add your database connection string, etc.
-    ```
-3.  **Install Dependencies**:
-    ```bash
-    pnpm install
     ```
 
 ### Development
 
 *   **Run all applications in development mode**:
     ```bash
-    pnpm dev
+    corepack pnpm dev
     ```
 *   **Run only the main `hsp` web and api applications**:
     ```bash
-    pnpm dev:hsp
+    corepack pnpm dev:hsp
     ```
 *   **Run Storybook**:
     ```bash
-    pnpm storybook
+    corepack pnpm storybook
     ```
 
 ### Building for Production
 
 *   **Build all applications and packages**:
     ```bash
-    pnpm build
+    corepack pnpm build
     ```
     Turborepo will cache artifacts and only rebuild what has changed.
 
@@ -67,11 +69,11 @@ The project uses `pnpm` as its package manager and `turborepo` to manage tasks.
 
 *   **Run unit tests**:
     ```bash
-    pnpm test
+    corepack pnpm test
     ```
 *   **Run end-to-end tests**:
     ```bash
-    pnpm test:e2e
+    corepack pnpm test:e2e
     ```
 
 ## Development Conventions
@@ -80,7 +82,7 @@ The project uses `pnpm` as its package manager and `turborepo` to manage tasks.
 
 *   **ESLint**: The project uses ESLint v9 with shared configurations located in `packages/configs/eslint-config`. Run the linter with:
     ```bash
-    pnpm lint
+    corepack pnpm lint
     ```
 *   **Prettier**: Code formatting is enforced by Prettier. The configuration is in the root `.prettierrc` file.
 *   **Husky**: A `pre-commit` hook is set up with Husky to run checks (likely linting) before allowing a commit.

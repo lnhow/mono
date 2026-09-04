@@ -20,6 +20,7 @@
     "@folio/ui": "workspace:*",
     "@tailwindcss/postcss": "catalog:gui",
     "@tailwindcss/typography": "catalog:gui",
+    "lucide-react": "^0.562.0",
     "next": "catalog:gui",
     "motion": "catalog:gui",
     "react": "catalog:gui",

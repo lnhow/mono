@@ -863,6 +863,9 @@ importers:
       '@tailwindcss/typography':
         specifier: catalog:gui
         version: 0.5.20(tailwindcss@4.3.3)
+      lucide-react:
+        specifier: ^0.562.0
+        version: 0.562.0(react@19.2.8)
       motion:
         specifier: catalog:gui
         version: 12.42.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)

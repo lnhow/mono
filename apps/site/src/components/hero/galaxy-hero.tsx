@@ -35,7 +35,9 @@ export function GalaxyHero() {
         'userAgentData' in navigator &&
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (navigator as any).userAgentData?.mobile === false) ||
-      window.matchMedia('(hover: hover) and (pointer: fine)').matches
+      Boolean(
+        window.matchMedia?.('(hover: hover) and (pointer: fine)')?.matches,
+      )
     if (isDesktop) return
 
     const ctor = DeviceOrientationEvent as DeviceOrientationEventCtor
@@ -104,7 +106,7 @@ export function GalaxyHero() {
           type="button"
           onClick={handleEnableMotion}
           variant="outline"
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 rounded-full border-white/20 bg-white/10 px-4 text-white backdrop-blur transition hover:bg-white/20 hover:text-white"
+          className="dark absolute top-16 sm:top-20 left-1/2 -translate-x-1/2 z-40 rounded-full border border-white/20 bg-zinc-950/80 px-4 py-2 text-xs font-medium text-white shadow-lg backdrop-blur-md transition hover:bg-zinc-800 hover:border-white/40 active:scale-95"
         >
           Enable motion
         </Button>

@@ -115,11 +115,15 @@ outgoingLight = diffuseColor.rgb * glow * visibility * 3.5;`,
   const size = useThree((s) => s.size)
   const aspect = size.height > 0 ? size.width / size.height : 16 / 9
   const offsetScale = Math.min(1, aspect / 1.2)
+  const portraitFactor = Math.max(0, Math.min(1, (1 - aspect) / 0.5))
   const offset: [number, number, number] = [
-    GALAXY_PARAMS.offset.x * offsetScale,
-    GALAXY_PARAMS.offset.y,
-    GALAXY_PARAMS.offset.z,
+    GALAXY_PARAMS.offset.x * offsetScale * (1 - portraitFactor * 0.5),
+    GALAXY_PARAMS.offset.y + portraitFactor * 2.0,
+    GALAXY_PARAMS.offset.z - portraitFactor * 1.8,
   ]
+  const baseTiltX =
+    GALAXY_PARAMS.baseTilt + portraitFactor * ((10 * Math.PI) / 180)
+  const baseTiltZ = GALAXY_PARAMS.baseTiltZ * (1 - portraitFactor * 0.4)
 
   useFrame((state, delta) => {
     const elapsed = state.clock.elapsedTime
@@ -159,10 +163,7 @@ outgoingLight = diffuseColor.rgb * glow * visibility * 3.5;`,
   })
 
   return (
-    <group
-      position={offset}
-      rotation={[GALAXY_PARAMS.baseTilt, 0, GALAXY_PARAMS.baseTiltZ]}
-    >
+    <group position={offset} rotation={[baseTiltX, 0, baseTiltZ]}>
       {geometries.map((geometry, index) => (
         <group
           key={index}
