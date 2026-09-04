@@ -205,10 +205,7 @@ a {
 }
 
 .galaxy-prototype-page {
-  --hero-accent: #ff4c40;
-  --hero-line: color-mix(in oklab, var(--foreground) 12%, transparent);
   position: relative;
-  min-height: 240vh;
   overflow-x: clip;
 }
 
