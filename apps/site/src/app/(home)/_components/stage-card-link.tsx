@@ -1,10 +1,9 @@
 import { cn } from '@folio/ui/lib/utils'
 import type { LucideIcon } from 'lucide-react'
 import { LucideMoveUpRight } from 'lucide-react'
-import Link from 'next/link'
 import type React from 'react'
 
-export interface StageCardLinkProps extends React.ComponentProps<typeof Link> {
+export interface StageCardLinkProps extends React.ComponentPropsWithoutRef<'a'> {
   isExternal?: boolean
 }
 
@@ -13,13 +12,11 @@ export function StageCardLink({
   isExternal,
   children,
   href,
-  prefetch = false,
   ...props
 }: StageCardLinkProps) {
   return (
-    <Link
+    <a
       href={href}
-      prefetch={prefetch}
       className={cn(
         'group relative transition-all duration-200 hover:border-zinc-500 hover:bg-zinc-800/80 rounded-2xl border border-zinc-800 bg-zinc-900/30 backdrop-blur-xs transform-gpu shadow-sm',
         className,
@@ -28,7 +25,7 @@ export function StageCardLink({
       {...props}
     >
       {children}
-    </Link>
+    </a>
   )
 }
 
@@ -45,7 +42,7 @@ export function BigStageCardLink({
   href: string
   icon: LucideIcon
   iconClassName?: string
-} & React.ComponentProps<typeof Link>) {
+} & React.ComponentPropsWithoutRef<'a'>) {
   return (
     <StageCardLink
       href={href}
