@@ -21,7 +21,7 @@ export interface DemoItem {
 
 export function DemoCard({ demo }: { demo: DemoItem }) {
   const isExternal = Boolean(demo.external)
-  const isDirectNav = demo.forceReload || ['Three.js', 'R3F', 'Cannon.js'].includes(demo.tag)
+  const isDirectNav = Boolean(demo.forceReload)
 
   const linkProps = {
     href: demo.href,

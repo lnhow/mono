@@ -8,7 +8,7 @@ import {
 } from './_components/stage-card-link'
 
 export const metadata: Metadata = {
-  title: 'Hao Le',
+  title: 'Home',
   description: 'Web Developer. Photography and UX Enthusiast.',
 }
 
