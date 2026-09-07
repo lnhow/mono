@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { LucideArrowLeft } from 'lucide-react'
 import type React from 'react'
+import { BfcacheHandler } from './_components/bfcache-handler'
 
 export default function DemosLayout({
   children,
@@ -9,6 +10,7 @@ export default function DemosLayout({
 }) {
   return (
     <>
+      <BfcacheHandler />
       <div className="fixed top-4 left-4 z-50">
         {/* Native <a> forces full page reload to properly tear down & recreate WebGL/R3F contexts */}
         <a
