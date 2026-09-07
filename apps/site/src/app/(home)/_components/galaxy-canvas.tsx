@@ -125,32 +125,38 @@ outgoingLight = diffuseColor.rgb * glow * visibility * 3.5;`,
     GALAXY_PARAMS.baseTilt + portraitFactor * ((10 * Math.PI) / 180)
   const baseTiltZ = GALAXY_PARAMS.baseTiltZ * (1 - portraitFactor * 0.4)
 
+  const MAX_DELTA = 0.05 // Cap frame delta to 50ms to prevent jumps on main-thread stalls or GC pauses
+
   useFrame((state, delta) => {
     const elapsed = state.clock.elapsedTime
-    const t = Math.min(
-      Math.max(elapsed - ENTRANCE_DELAY, 0) / ENTRANCE_DURATION,
-      1,
-    )
-    entranceProgress.current.value = 1 - Math.pow(1 - t, 3)
+    const safeDelta = Math.min(delta, MAX_DELTA)
+
+    if (entranceProgress.current.value < 1) {
+      const t = Math.min(
+        Math.max(elapsed - ENTRANCE_DELAY, 0) / ENTRANCE_DURATION,
+        1,
+      )
+      entranceProgress.current.value = 1 - Math.pow(1 - t, 3)
+    }
 
     tilt.current.x = THREE.MathUtils.damp(
       tilt.current.x,
       tiltTarget.current?.y ?? 0,
       GALAXY_PARAMS.tiltDamping,
-      delta,
+      safeDelta,
     )
     tilt.current.y = THREE.MathUtils.damp(
       tilt.current.y,
       tiltTarget.current?.x ?? 0,
       GALAXY_PARAMS.tiltDamping,
-      delta,
+      safeDelta,
     )
 
     for (let i = 0; i < geometries.length; i++) {
       const spinGroup = spinRefs.current[i]
       if (spinGroup) {
         const speed = BAND_SPEEDS[i % BAND_SPEEDS.length] ?? 1
-        spinGroup.rotation.y = elapsed * GALAXY_PARAMS.rotationSpeed * speed
+        spinGroup.rotation.y += safeDelta * GALAXY_PARAMS.rotationSpeed * speed
       }
 
       const tiltGroup = tiltRefs.current[i]
