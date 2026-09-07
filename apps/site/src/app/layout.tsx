@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(notoSans.className, 'font-sans')}
+      className={cn(notoSans.className, 'font-sans dark')}
       data-scroll-behavior="smooth"
     >
       <body>{children}</body>

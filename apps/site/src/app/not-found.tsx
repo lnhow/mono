@@ -7,15 +7,10 @@ export default function NotFound() {
         404
       </p>
       <h1 className="text-4xl font-semibold tracking-tight">Page not found</h1>
-      <p className="text-muted-foreground">
-        The page may have moved or may not be part of the stable site.
-      </p>
+      <p className="text-muted-foreground">The page may have moved.</p>
       <div className="flex justify-center gap-5 text-sm font-medium">
         <Link className="underline" href="/">
           Go home
-        </Link>
-        <Link className="underline" href="/blog">
-          Read the blog
         </Link>
       </div>
     </section>
