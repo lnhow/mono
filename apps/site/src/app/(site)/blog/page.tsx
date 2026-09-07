@@ -1,7 +1,7 @@
 import { allPosts } from 'content-collections'
 import type { Metadata } from 'next'
 
-import { PostCard } from '@/components/post-card'
+import { PostCard } from './_components/post-card'
 import { getVisiblePosts } from '@/lib/posts'
 import { blogMetadata } from '@/lib/site-metadata'
 

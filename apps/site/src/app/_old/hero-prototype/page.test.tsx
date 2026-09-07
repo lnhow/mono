@@ -5,15 +5,15 @@ import { describe, expect, it, vi } from 'vitest'
 
 import HeroPrototypePage from './page'
 
-vi.mock('@/components/hero/mecha-hero', () => ({
+vi.mock('./_components/mecha-hero', () => ({
   MechaHero: () => <div data-testid="clock-slot" />,
 }))
 
-vi.mock('@/components/hero/user-agent-display', () => ({
+vi.mock('./_components/user-agent-display', () => ({
   UserAgentDisplay: () => <div data-testid="user-agent" />,
 }))
 
-vi.mock('@/components/hero/scroll-ruler', () => ({
+vi.mock('./_components/scroll-ruler', () => ({
   ScrollRuler: () => <div data-testid="scroll-ruler" />,
 }))
 

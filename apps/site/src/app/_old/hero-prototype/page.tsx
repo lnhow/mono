@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
-import { ScrollRuler } from '@/components/hero/scroll-ruler'
-import { UserAgentDisplay } from '@/components/hero/user-agent-display'
-import { MechaHero } from '@/components/hero/mecha-hero'
+import { ScrollRuler } from './_components/scroll-ruler'
+import { UserAgentDisplay } from './_components/user-agent-display'
+import { MechaHero } from './_components/mecha-hero'
 
 export const metadata: Metadata = {
   title: 'Futuristic Hero Prototype',
