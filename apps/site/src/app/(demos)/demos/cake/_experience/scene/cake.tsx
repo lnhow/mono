@@ -52,6 +52,7 @@ const ANIMATION: Record<
 export function Cake(props: ComponentPropsWithRef<'group'>) {
   const cakeScene = useAtomValue(cakeSceneAtom)
   const { scene } = useGLTF(SCENE_CONFIG[cakeScene].model.link)
+  const clonedScene = React.useMemo(() => scene.clone(true), [scene])
   const container = useRef<Group>(null)
 
   useGSAP(
@@ -83,7 +84,7 @@ export function Cake(props: ComponentPropsWithRef<'group'>) {
   return (
     <group ref={container} {...props}>
       <primitive
-        object={scene}
+        object={clonedScene}
         {...SCENE_CONFIG[cakeScene].model.attributes}
       />
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>

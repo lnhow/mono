@@ -6,7 +6,7 @@ import {
   useMatcapTexture,
 } from '@react-three/drei'
 import { font } from '../../_shared/const'
-import { useEffect, useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import {
   BoxGeometry,
   ConeGeometry,
@@ -19,12 +19,6 @@ import { useFrame } from '@react-three/fiber'
 
 const ITEMS = 100
 const EMPTY_ARRAY = [...Array(ITEMS)]
-const GEOMETRIES = [
-  new TorusGeometry(),
-  new BoxGeometry(),
-  new ConeGeometry(undefined, undefined, 3),
-]
-
 // TODO: Fix cannot call impure function Math.random()
 /* eslint-disable react-hooks/purity */
 export default function Experience() {
@@ -38,10 +32,23 @@ export default function Experience() {
       }
     },
   )
-  const material = useRef(new MeshMatcapMaterial())
-  useEffect(() => {
-    material.current.matcap = matcapTexture
-    material.current.needsUpdate = true
+
+  const geometries = useMemo(
+    () => [
+      new TorusGeometry(),
+      new BoxGeometry(),
+      new ConeGeometry(undefined, undefined, 3),
+    ],
+    [],
+  )
+
+  const material = useMemo(() => {
+    const mat = new MeshMatcapMaterial()
+    if (matcapTexture) {
+      mat.matcap = matcapTexture
+      mat.needsUpdate = true
+    }
+    return mat
   }, [matcapTexture])
 
   const donuts = useRef<Mesh[]>([])
@@ -61,7 +68,7 @@ export default function Experience() {
       <Center>
         <Text3D
           font={font}
-          material={material.current}
+          material={material}
           size={0.5}
           height={0.2}
           curveSegments={12}
@@ -88,8 +95,8 @@ export default function Experience() {
                 }
                 donuts.current[index] = el
               }}
-              geometry={GEOMETRIES[shape] || GEOMETRIES[0]}
-              material={material.current}
+              geometry={geometries[shape] || geometries[0]}
+              material={material}
               position={[
                 (Math.random() - 0.5) * 10,
                 (Math.random() - 0.5) * 10,

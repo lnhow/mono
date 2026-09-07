@@ -15,6 +15,7 @@ const DEMOS: readonly DemoItem[] = [
     description: 'Interactive spiral galaxy simulation with lil-gui parameter controls.',
     href: '/demos/spiral',
     tag: 'Three.js',
+    forceReload: true,
   },
   {
     id: 'cake',
@@ -22,6 +23,7 @@ const DEMOS: readonly DemoItem[] = [
     description: 'Customizable 3D birthday cake with interactive lighting and customizable text.',
     href: '/demos/cake?edit=true',
     tag: 'R3F',
+    forceReload: true,
   },
   {
     id: 'player',
@@ -43,6 +45,7 @@ const DEMOS: readonly DemoItem[] = [
     description: 'Floating 3D kinetic typography and geometry scattering with matcap textures.',
     href: '/demos/3dtext',
     tag: 'Three.js',
+    forceReload: true,
   },
   {
     id: 'physics',
@@ -50,6 +53,7 @@ const DEMOS: readonly DemoItem[] = [
     description: 'Rigid-body gravitational physics collision simulation powered by Cannon.js.',
     href: '/demos/physics',
     tag: 'Cannon.js',
+    forceReload: true,
   },
   {
     id: 'nextjs-perf',

@@ -12,7 +12,6 @@ import {
 } from '@react-three/cannon'
 import { OrbitControls, PerformanceMonitor } from '@react-three/drei'
 // import { Perf } from 'r3f-perf'
-import { BoxGeometry, MeshStandardMaterial, SphereGeometry } from 'three'
 import { ComponentType, useEffect, useState } from 'react'
 
 const randomBetween = (between = 1) => (Math.random() - 0.5) * between * 2
@@ -126,12 +125,6 @@ const onShapeCollide = (e: CollideEvent) => {
   }))
 }
 
-const sphereDefaultOpts = {
-  material: new MeshStandardMaterial({ color: 'orange' }),
-  geometry: new SphereGeometry(1, 32, 32),
-  castShadow: true,
-}
-
 const Sphere = ({ position, radius }: ShapeProps) => {
   const [ref] = useSphere(
     () => ({
@@ -155,19 +148,13 @@ const Sphere = ({ position, radius }: ShapeProps) => {
   })
 
   return (
-    <mesh
-      ref={ref}
-      {...sphereDefaultOpts}
-      scale={[radius, radius, radius]}
-    ></mesh>
+    <mesh ref={ref} castShadow scale={[radius, radius, radius]}>
+      <sphereGeometry args={[1, 32, 32]} />
+      <meshStandardMaterial color="orange" />
+    </mesh>
   )
 }
 
-const boxDefaultOpts = {
-  material: new MeshStandardMaterial({ color: 'orange' }),
-  geometry: new BoxGeometry(1, 1, 1),
-  castShadow: true,
-}
 const Box = ({ position, radius }: ShapeProps) => {
   const [ref] = useBox(
     () => ({
@@ -191,7 +178,10 @@ const Box = ({ position, radius }: ShapeProps) => {
   })
 
   return (
-    <mesh ref={ref} {...boxDefaultOpts} scale={[radius, radius, radius]}></mesh>
+    <mesh ref={ref} castShadow scale={[radius, radius, radius]}>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color="orange" />
+    </mesh>
   )
 }
 

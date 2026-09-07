@@ -16,10 +16,18 @@ export interface DemoItem {
   href: string
   tag: string
   external?: boolean
+  forceReload?: boolean
 }
 
 export function DemoCard({ demo }: { demo: DemoItem }) {
   const isExternal = Boolean(demo.external)
+  const isDirectNav = demo.forceReload || ['Three.js', 'R3F', 'Cannon.js'].includes(demo.tag)
+
+  const linkProps = {
+    href: demo.href,
+    className: 'before:absolute before:inset-0 focus:outline-hidden',
+    ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
+  }
 
   return (
     <Card className="group relative flex flex-col justify-between overflow-hidden border-border/60 bg-card/60 backdrop-blur-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-border hover:bg-card hover:shadow-lg">
@@ -34,13 +42,11 @@ export function DemoCard({ demo }: { demo: DemoItem }) {
         </div>
         <div className="space-y-1.5">
           <CardTitle className="text-lg font-semibold tracking-tight">
-            <Link
-              href={demo.href}
-              className="before:absolute before:inset-0 focus:outline-hidden"
-              {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-            >
-              {demo.title}
-            </Link>
+            {isDirectNav ? (
+              <a {...linkProps}>{demo.title}</a>
+            ) : (
+              <Link {...linkProps}>{demo.title}</Link>
+            )}
           </CardTitle>
           <CardDescription className="text-sm leading-relaxed text-muted-foreground">
             {demo.description}

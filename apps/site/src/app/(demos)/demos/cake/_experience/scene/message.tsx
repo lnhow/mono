@@ -36,6 +36,7 @@ export default function TextMessage() {
     })
 
     const mergedGeometry = mergeGeometries(geometries)
+    geometries.forEach((g) => g.dispose())
     mergedGeometry.center()
 
     refText.current.geometry = mergedGeometry
