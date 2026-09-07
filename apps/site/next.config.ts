@@ -24,6 +24,11 @@ const nextConfig: NextConfig = {
         destination: '/demos/nextjs-perf/:slug*',
         permanent: true,
       },
+      {
+        source: '/tools/contrast-checker/:path*',
+        destination: '/demos/contrast-checker/:path*',
+        permanent: true,
+      },
     ]
   },
 }

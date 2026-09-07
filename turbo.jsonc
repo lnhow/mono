@@ -41,6 +41,13 @@
       "persistent": true,
       "interruptible": true
     },
+    "@folio/site#dev": {
+      // API need to be running for demos (e.g. perf-test)
+      "with": [ "@hsp/app-api#dev" ],
+      "cache": false,
+      "persistent": true,
+      "interruptible": true
+    },
     "storybook": {
       "cache": false,
       "persistent": true
