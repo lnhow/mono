@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
         destination: '/blog/:slug*',
         permanent: true,
       },
+      {
+        source: '/nextjs-perf/:slug*',
+        destination: '/demos/nextjs-perf/:slug*',
+        permanent: true,
+      },
     ]
   },
 }

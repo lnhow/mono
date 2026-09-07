@@ -41,6 +41,7 @@
     "remark-gfm": "catalog:markdown",
     "shiki": "catalog:markdown",
     "tailwindcss": "catalog:gui",
+    "tailwindcss-safe-area": "catalog:gui",
     "three": "catalog:three",
     "web-vitals": "^5.3.0"
   },

@@ -1,6 +1,75 @@
 @import '@folio/ui/globals.css';
+@import 'tailwindcss-safe-area';
 @plugin "@tailwindcss/typography";
 @source "../../../../packages/ui/src";
+@source "../../../../packages/hsp/ui/src";
+
+@utility icon-md {
+  @apply w-6 h-6;
+}
+
+@utility all-unset {
+  all: unset;
+}
+
+@theme inline {
+  --color-primary-100: var(--hsp-primary-100, var(--color-emerald-50));
+  --color-primary-200: var(--hsp-primary-200, var(--color-emerald-200));
+  --color-primary-300: var(--hsp-primary-300, var(--color-emerald-400));
+  --color-primary-400: var(--hsp-primary-400, var(--color-emerald-600));
+  --color-primary-500: var(--hsp-primary-500, var(--color-emerald-800));
+
+  --color-secondary-100: var(--hsp-secondary-100, var(--color-indigo-50));
+  --color-secondary-200: var(--hsp-secondary-200, var(--color-indigo-200));
+  --color-secondary-300: var(--hsp-secondary-300, var(--color-indigo-400));
+  --color-secondary-400: var(--hsp-secondary-400, var(--color-indigo-600));
+  --color-secondary-500: var(--hsp-secondary-500, var(--color-indigo-800));
+
+  --color-accent-100: var(--hsp-accent-100, var(--color-cyan-50));
+  --color-accent-200: var(--hsp-accent-200, var(--color-cyan-200));
+  --color-accent-300: var(--hsp-accent-300, var(--color-cyan-400));
+  --color-accent-400: var(--hsp-accent-400, var(--color-cyan-600));
+  --color-accent-500: var(--hsp-accent-500, var(--color-cyan-800));
+
+  --color-fore-100: var(--hsp-fore-100, var(--color-zinc-400));
+  --color-fore-200: var(--hsp-fore-200, var(--color-zinc-300));
+  --color-fore-300: var(--hsp-fore-300, var(--color-zinc-200));
+  --color-fore-400: var(--hsp-fore-400, var(--color-zinc-100));
+  --color-fore-500: var(--hsp-fore-500, var(--color-zinc-50));
+
+  --color-base-100: var(--hsp-base-100, var(--color-neutral-900));
+  --color-base-200: var(--hsp-base-200, var(--color-neutral-800));
+  --color-base-300: var(--hsp-base-300, var(--color-neutral-700));
+  --color-base-400: var(--hsp-base-400, var(--color-zinc-900));
+  --color-base-500: var(--hsp-base-500, var(--color-zinc-800));
+}
+
+:root {
+  --layout-spacing: 1rem;
+  --layout-header-height: 3.25rem;
+  --layout-full-height: calc(100vh - var(--layout-header-height) - var(--layout-spacing));
+
+  --hsp-primary-100: var(--color-emerald-50);
+  --hsp-primary-200: var(--color-emerald-200);
+  --hsp-primary-300: var(--color-emerald-400);
+  --hsp-primary-400: var(--color-emerald-600);
+  --hsp-primary-500: var(--color-emerald-800);
+
+  --hsp-fore-100: var(--color-zinc-400);
+  --hsp-fore-200: var(--color-zinc-300);
+  --hsp-fore-300: var(--color-zinc-200);
+  --hsp-fore-400: var(--color-zinc-100);
+  --hsp-fore-500: var(--color-zinc-50);
+
+  --hsp-base-100: var(--color-neutral-900);
+  --hsp-base-200: var(--color-neutral-800);
+  --hsp-base-300: var(--color-neutral-700);
+  --hsp-base-400: var(--color-zinc-900);
+  --hsp-base-500: var(--color-zinc-800);
+
+  --animate-collapsible-side-in: collapsible-side-in 0.2s ease-out;
+  --animate-collapsible-side-out: collapsible-side-out 0.2s ease-out;
+}
 
 html {
   scroll-behavior: smooth;

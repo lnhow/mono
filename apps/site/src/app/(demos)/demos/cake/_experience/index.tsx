@@ -2,6 +2,7 @@
 import { Canvas } from '@react-three/fiber'
 import Experience from './experience'
 import { cakeAtom } from './_state'
+import { useSetAtom } from 'jotai'
 import { useSearchParams } from 'next/navigation'
 import { useHydrateAtoms } from 'jotai/utils'
 import { decodeCakeURL } from './_const'
@@ -16,6 +17,7 @@ import {
   startTransition,
   // Suspense,
   useEffect,
+  useMemo,
   useRef,
   useState,
   ViewTransition,
@@ -50,8 +52,16 @@ export default function Main() {
 
 export const Hydrate = memo(function Hydrate() {
   const searchParams = useSearchParams()
-  const defaultCakeVal = decodeCakeURL(searchParams.toString())
+  const setCake = useSetAtom(cakeAtom)
+  const defaultCakeVal = useMemo(
+    () => decodeCakeURL(searchParams.toString()),
+    [searchParams],
+  )
   useHydrateAtoms([[cakeAtom, defaultCakeVal]])
+
+  useEffect(() => {
+    setCake(defaultCakeVal)
+  }, [defaultCakeVal, setCake])
 
   return null
 })
@@ -83,7 +93,7 @@ const HtmlUI = memo(function HtmlUI() {
       {/* <Activity mode={loading ? 'hidden' : 'visible'}> */}
       {loading ? null : (
         <>
-          <Controls className="absolute bottom-safe left-safe right-0 z-20" />
+          <Controls className="absolute bottom-4 sm:bottom-6 left-0 right-0 z-20 px-2" />
           <Audio className="absolute bottom-safe right-safe z-20 p-1" />
           <Credit className="absolute bottom-safe left-safe z-10 p-1" />
           <Loader />

@@ -9,21 +9,23 @@ export const metadata: Metadata = {
 
 export default function PagePlayer() {
   return (
-    <div className="flex min-h-(--layout-full-height) flex-col items-center justify-center -mx-(--layout-spacing) md:mx-0">
-      <div className="p-2">
+    <div className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4 py-12">
+      <div className="p-2 mb-6">
         <ViewTransition name="player-title">
-          <h1 className="text-2xl font-medium text-center text-balance">
+          <h1 className="text-2xl sm:text-3xl font-medium text-center text-balance text-zinc-100">
             Custom HTML video player
           </h1>
         </ViewTransition>
         <ViewTransition name="player-description">
-          <p className="my-4 text-md text-fore-200 text-center text-balance">
+          <p className="my-3 text-sm sm:text-base text-zinc-400 text-center text-balance max-w-md mx-auto">
             With custom controls, styling, only native browser code.
           </p>
         </ViewTransition>
       </div>
       <ViewTransition name="player-card" update="none">
-        <DemoPlayer />
+        <div className="w-full max-w-3xl">
+          <DemoPlayer />
+        </div>
       </ViewTransition>
     </div>
   )

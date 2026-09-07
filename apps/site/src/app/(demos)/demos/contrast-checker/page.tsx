@@ -8,9 +8,9 @@ export const metadata: Metadata = {
 }
 export default async function PageContrastChecker() {
   return (
-    <div className="max-w-lg mx-auto">
+    <div className="max-w-lg mx-auto py-16 px-4">
       <ViewTransition name="contrast-checker-title">
-        <h1 className="text-2xl text-center font-medium mb-4">
+        <h1 className="text-2xl sm:text-3xl text-center font-medium mb-6 text-zinc-100">
           Contrast Checker
         </h1>
       </ViewTransition>

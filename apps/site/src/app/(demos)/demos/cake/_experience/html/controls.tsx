@@ -31,7 +31,7 @@ export default function Controls({ className }: { className?: string }) {
 
   return (
     <section className={cn('max-w-xl mx-auto', className)}>
-      <form className="bg-base-100/60 m-2 p-3 rounded-md">
+      <form className="bg-zinc-900/90 border border-zinc-800 shadow-2xl backdrop-blur-md m-2 p-4 rounded-xl">
         <div>
           <Label htmlFor="cake" className="block mb-2">
             Cake
@@ -77,7 +77,7 @@ function ShareButton({ className }: { className?: string }) {
     }
 
     const host = window.location.origin
-    return `${host}/cake?${encodeCakeURL(value.message, value.scene)}`
+    return `${host}/demos/cake?${encodeCakeURL(value.message, value.scene)}`
   }, [value])
 
   return (

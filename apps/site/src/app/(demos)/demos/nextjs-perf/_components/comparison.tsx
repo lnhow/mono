@@ -8,13 +8,13 @@ import { DELAY } from './const'
 const COMPARISONS = {
   current: {
     title: 'Current SSR (No Suspense)',
-    src: '/nextjs-perf/ssr',
+    src: '/demos/nextjs-perf/ssr',
     codeSrc:
       'https://github.com/lnhow/mono/blob/master/apps/hsp/web/src/app/(empty-layout)/nextjs-perf/ssr/page.tsx',
   },
   cached: {
     title: 'NextJS 16 Suspense + LCP Cache',
-    src: '/nextjs-perf/cached',
+    src: '/demos/nextjs-perf/cached',
     codeSrc:
       'https://github.com/lnhow/mono/blob/master/apps/hsp/web/src/app/(empty-layout)/nextjs-perf/cached/page.tsx',
   },

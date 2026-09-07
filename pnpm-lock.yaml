@@ -926,6 +926,9 @@ importers:
       tailwindcss:
         specifier: catalog:gui
         version: 4.3.3
+      tailwindcss-safe-area:
+        specifier: catalog:gui
+        version: 1.3.0(tailwindcss@4.3.3)
       three:
         specifier: catalog:three
         version: 0.185.1

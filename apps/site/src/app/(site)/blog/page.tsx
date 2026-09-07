@@ -58,20 +58,6 @@ const DEMOS: readonly DemoItem[] = [
     href: '/demos/nextjs-perf',
     tag: 'Next.js',
   },
-  {
-    id: 'balloon',
-    title: 'Floating Balloons Showcase',
-    description: 'Canvas 2D particle simulation demonstrating buoyant physical movement.',
-    href: '/demos/balloon',
-    tag: 'Canvas 2D',
-  },
-  {
-    id: 'palette',
-    title: 'Design System Palette',
-    description: 'Interactive color system token matrix and accessible contrast shades.',
-    href: '/demos/palette',
-    tag: 'Design System',
-  },
 ]
 
 export default function BlogPage() {
