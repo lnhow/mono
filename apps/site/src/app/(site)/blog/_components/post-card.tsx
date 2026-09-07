@@ -43,7 +43,7 @@ export function PostCard({ post }: PostCardProps) {
             </div>
           </ViewTransition>
           <CardTitle className="text-xl">
-            <Link className="hover:underline" href={`/posts/${post.slug}`}>
+            <Link className="hover:underline" href={`/blog/${post.slug}`}>
               <ViewTransition name={transitionNames.title}>
                 {post.title}
               </ViewTransition>

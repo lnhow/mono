@@ -13,7 +13,7 @@ export function createSitemap(
     { url: origin, changeFrequency: 'monthly', priority: 1 },
     { url: `${origin}/blog`, changeFrequency: 'weekly', priority: 0.8 },
     ...getVisiblePosts(posts).map((post) => ({
-      url: `${origin}${post.url ?? `/posts/${post.slug}`}`,
+      url: `${origin}${post.url ?? `/blog/${post.slug}`}`,
       lastModified: post.updatedAt ?? post.createdAt,
       changeFrequency: 'monthly' as const,
       priority: 0.7,

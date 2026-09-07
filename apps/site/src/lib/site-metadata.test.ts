@@ -59,7 +59,7 @@ describe('page metadata', () => {
   it('defines article metadata with canonical dates, tags, and thumbnail', () => {
     const metadata = createPostMetadata({
       slug: 'example',
-      url: '/posts/example',
+      url: '/blog/example',
       title: 'Example title',
       description: 'Example description',
       createdAt: new Date('2025-01-01T00:00:00.000Z'),
@@ -69,10 +69,10 @@ describe('page metadata', () => {
 
     expect(metadata).toMatchObject({
       title: 'Example title',
-      alternates: { canonical: '/posts/example' },
+      alternates: { canonical: '/blog/example' },
       openGraph: {
         type: 'article',
-        url: '/posts/example',
+        url: '/blog/example',
         publishedTime: '2025-01-01T00:00:00.000Z',
         modifiedTime: '2025-01-02T00:00:00.000Z',
         tags: ['testing'],

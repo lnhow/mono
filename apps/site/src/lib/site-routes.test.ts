@@ -6,7 +6,7 @@ import { createRobots, createSitemap } from './site-routes'
 const post = (overrides: Partial<PostRecord> = {}): PostRecord => ({
   slug: 'published',
   createdAt: new Date('2025-01-01T00:00:00.000Z'),
-  url: '/posts/published',
+  url: '/blog/published',
   ...overrides,
 })
 
@@ -15,8 +15,8 @@ describe('createSitemap', () => {
     const sitemap = createSitemap(
       [
         post(),
-        post({ slug: 'draft', url: '/posts/draft', draft: true }),
-        post({ slug: 'archived', url: '/posts/archived', archived: true }),
+        post({ slug: 'draft', url: '/blog/draft', draft: true }),
+        post({ slug: 'archived', url: '/blog/archived', archived: true }),
       ],
       'https://preview.example.com/path/',
     )
@@ -24,7 +24,7 @@ describe('createSitemap', () => {
     expect(sitemap.map(({ url }) => url)).toEqual([
       'https://preview.example.com',
       'https://preview.example.com/blog',
-      'https://preview.example.com/posts/published',
+      'https://preview.example.com/blog/published',
     ])
   })
 })

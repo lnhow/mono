@@ -38,7 +38,7 @@ const posts = defineCollection({
     return {
       ...document,
       slug,
-      url: `/posts/${slug}`,
+      url: `/blog/${slug}`,
       readingTime: readingTime(document.content).minutes,
       mdx: await compileMDX(context, document, {
         remarkPlugins: [remarkGfm],
