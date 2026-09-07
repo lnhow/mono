@@ -71,8 +71,8 @@ async function TopBanner() {
 
   return (
     <BannerAndVideoSection
-      banners={data.banner.main}
-      subBanner={data.subBanner}
+      banners={data?.banner?.main ?? []}
+      subBanner={data?.subBanner}
     />
   )
 }
@@ -88,7 +88,12 @@ async function TimelinesAndNews() {
       .get(`/api/perf-test/newNavis?delay=${DELAY}`)
       .then((res: any) => res.data),
   ])
-  return <TimelineAndNewsSection timeline={timeLines} news={newNavis} />
+  return (
+    <TimelineAndNewsSection
+      timeline={Array.isArray(timeLines) ? timeLines : []}
+      news={Array.isArray(newNavis) ? newNavis : []}
+    />
+  )
 }
 
 async function Recommends() {

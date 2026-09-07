@@ -3,6 +3,14 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  cacheComponents: true,
+  cacheLife: {
+    threeMinutes: {
+      stale: 60 * 3,
+      revalidate: 60 * 3,
+      expire: 60 * 6,
+    },
+  },
   transpilePackages: ['@folio/ui', '@hsp/ui'],
   async redirects() {
     return [

@@ -7,7 +7,7 @@ export default function SiteLayout({ children }: Readonly<React.PropsWithChildre
       <main className="mx-auto w-full max-w-5xl px-5 py-12">{children}</main>
       <footer className="border-t">
         <div className="mx-auto max-w-5xl px-5 py-8 text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Hao Le
+          © 2026 Hao Le
         </div>
       </footer>
     </>
