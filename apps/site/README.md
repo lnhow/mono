@@ -3,6 +3,10 @@
 The stable production site for Hao Le. It is a Next.js App Router application
 that consumes the shared `@folio/ui` package and publishes the migrated blog.
 
+## Architecture & Conventions
+
+- **Component Colocation**: Components used by a single page are colocated in `_components/` beside the page (e.g. `src/app/(home)/_components/` next to `src/app/(home)/page.tsx`). Global components shared across multiple layouts are kept in `src/components/`.
+
 ## Environment
 
 Copy `.env.example` to `.env.local` for local overrides:
