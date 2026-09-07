@@ -5,6 +5,7 @@
     "ignoreDeprecations": "6.0",
     "paths": {
       "@/*": ["./src/*"],
+      "@hsp/ui/*": ["../../packages/hsp/ui/src/*"],
       "content-collections": ["./.content-collections/generated"]
     }
   },

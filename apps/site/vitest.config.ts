@@ -12,6 +12,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@hsp/ui': fileURLToPath(new URL('../../packages/hsp/ui/src', import.meta.url)),
     },
   },
   test: {

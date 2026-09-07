@@ -3,7 +3,7 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['@folio/ui'],
+  transpilePackages: ['@folio/ui', '@hsp/ui'],
   async redirects() {
     return [
       {
