@@ -648,6 +648,9 @@ importers:
       lil-gui:
         specifier: catalog:three
         version: 0.21.0
+      lucide-react:
+        specifier: ^0.562.0
+        version: 0.562.0(react@19.2.8)
       next:
         specifier: catalog:gui
         version: 16.3.4(@babel/core@7.29.0(supports-color@8.1.1))(@types/node@24.12.4)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)

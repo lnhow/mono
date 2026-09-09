@@ -1,2 +1,21 @@
 @import '@hsp/ui/src/styles/globals.css';
 @source '../../../../../packages/hsp/ui/';
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+}
+
+.galaxy-prototype-page {
+  position: relative;
+  overflow-x: clip;
+}
+
+.galaxy-prototype-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  min-height: 42rem;
+  overflow: clip;
+  background: #000000;
+}

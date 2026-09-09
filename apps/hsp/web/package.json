@@ -36,6 +36,7 @@
     "jotai-optics": "^0.4.0",
     "leva": "0.10.1",
     "lil-gui": "catalog:three",
+    "lucide-react": "^0.562.0",
     "next": "catalog:gui",
     "next-themes": "catalog:gui",
     "optics-ts": "^2.4.1",
