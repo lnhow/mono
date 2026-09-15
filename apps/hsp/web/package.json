@@ -91,6 +91,7 @@
     "remark": "catalog:markdown",
     "storybook": "catalog:dev",
     "typescript": "catalog:dev",
+    "vite": "catalog:dev",
     "vite-tsconfig-paths": "catalog:dev",
     "vitest": "catalog:dev",
     "zod": "^4.1.11"
