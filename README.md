@@ -42,11 +42,6 @@ My personal website + playground monorepo for all things Javacript+related
 
 - Frontend web
   - Techs: React 19.2, Next.js 16, Shadcn (Radix UI + TailwindCSS)
-  - Modules:
-    - [guesart](https://web.haoln7f8.com): Draw and Guess game
-      - Techs: socket.io-client, jotai state management
-    - [Custom HTML player](https://web.haoln7f8.com/player)
-      - Techs: `Picture-in-picture API`, `Fullscreen API`, `useSyncExternalStore`, Pure React & TailwindCSS
 - Backend
   - Techs: Nest.js, Socket.io, Prisma, MongoDB
 - Config: PNPM, Turborepo - Monorepo management, Prettier, Eslint v9
@@ -57,5 +52,4 @@ My personal website + playground monorepo for all things Javacript+related
       - The reason is to learn more about GCP and keep it running 24/7 while keeping the costs low
     - Nginx
     - PM2
-    - SSL: Let's Encrypt
   - MongoDB: MongoDB Atlas
