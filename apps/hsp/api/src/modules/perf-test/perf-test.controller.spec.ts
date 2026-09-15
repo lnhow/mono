@@ -59,10 +59,9 @@ describe('PerfTestController', () => {
           .spyOn(service, 'findOne')
           .mockImplementation(async () => Promise.resolve(result as any))
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const controllerMethod =
-          (controller as any)[
-            `find${section.charAt(0).toUpperCase() + section.slice(1)}`
-          ]
+        const controllerMethod = (controller as any)[
+          `find${section.charAt(0).toUpperCase() + section.slice(1)}`
+        ]
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
         expect(await controllerMethod.call(controller, '0')).toBe(result)
         // eslint-disable-next-line @typescript-eslint/unbound-method

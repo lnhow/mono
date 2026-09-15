@@ -19,15 +19,19 @@ const ButtonGenLinkContrast = memo(function ButtonGenLinkContrast() {
       // bt: getValues('bigText').slice(0, ValidationRules.bigText.max),
       // st: getValues('smallText').slice(0, ValidationRules.bigText.max),
     }
-    navigator.clipboard.writeText(
-      window.location.host +
-        '/tools/contrast-checker?' +
-        Object.keys(values)
-          .map((key) => {
-            return key + '=' + encodeURIComponent(values[key as 'fg' | 'bg'].toString('hex'))
-          })
-          .join('&'),
-    )
+    const origin = typeof window !== 'undefined' ? window.location.origin : ''
+    const pathname = typeof window !== 'undefined' ? window.location.pathname : '/demos/contrast-checker'
+    const query = Object.keys(values)
+      .map((key) => {
+        return (
+          key +
+          '=' +
+          encodeURIComponent(values[key as 'fg' | 'bg'].toString('hex'))
+        )
+      })
+      .join('&')
+
+    navigator.clipboard.writeText(`${origin}${pathname}?${query}`)
     setIsCopied(true)
   }
 

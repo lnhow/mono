@@ -37,10 +37,11 @@ catalogs:
     'eslint-plugin-react-hooks': 7.1.1
     '@types/react': 19.2.14
     '@types/react-dom': 19.2.3
-    next: 16.2.12
+    next: 16.3.4
     '@next/eslint-plugin-next': 16.2.6
     'sharp': '^0.35.3'
     next-themes: 0.4.6
+    motion: 12.42.2
     radix-ui: 1.6.7
     # TailwindCSS
     tailwindcss: 4.3.3
@@ -53,7 +54,7 @@ catalogs:
   three:
     '@react-three/cannon': '6.6.0'
     '@react-three/drei': '10.7.7'
-    '@react-three/fiber': '9.5.0'
+    '@react-three/fiber': '9.7.0'
     r3f-perf: 7.2.3 # TODO: Outdated, unused, but keeping for now to see if there are any alternatives
     'three': '^0.185.1'
     '@types/three': '^0.185.1'
@@ -90,6 +91,7 @@ catalogs:
     '@testing-library/dom': '10.4.1'
     '@testing-library/jest-dom': '7.0.0'
     'vite-tsconfig-paths': '6.1.1'
+    'vite': '8.1.5'
     'typescript': '6.0.3'
     'typescript-eslint': '8.65.0'
     '@chromatic-com/storybook': '^5.0.1'
