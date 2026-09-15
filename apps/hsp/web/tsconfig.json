@@ -21,11 +21,7 @@
       }
     ]
   },
-  "references": [
-    {
-      "path": "../../../packages/hsp/ui",
-    }
-  ],
+
   "include": [
     ".",
     "next-env.d.ts",
