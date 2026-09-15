@@ -4,6 +4,7 @@ build/**
 dist/**
 .next/**
 node_modules
+.pnpm-store
 
 .env
 .envrc
@@ -12,5 +13,7 @@ node_modules
 
 # Build
 out/
+.superpowers/brainstorm/
+.worktrees/
 # TypeScript cache
 *.tsbuildinfo

@@ -1,0 +1,117 @@
+// import { Perf } from 'r3f-perf'
+import {
+  Center,
+  OrbitControls,
+  Text3D,
+  useMatcapTexture,
+} from '@react-three/drei'
+import { font } from '../../_shared/const'
+import { useMemo, useRef } from 'react'
+import {
+  BoxGeometry,
+  ConeGeometry,
+  Mesh,
+  MeshMatcapMaterial,
+  SRGBColorSpace,
+  TorusGeometry,
+} from 'three'
+import { useFrame } from '@react-three/fiber'
+
+const ITEMS = 100
+const EMPTY_ARRAY = [...Array(ITEMS)]
+// TODO: Fix cannot call impure function Math.random()
+/* eslint-disable react-hooks/purity */
+export default function Experience() {
+  const [matcapTexture] = useMatcapTexture(
+    '7B5254_E9DCC7_B19986_C8AC91',
+    256,
+    (texture) => {
+      const textures = Array.isArray(texture) ? texture : [texture]
+      for (const item of textures) {
+        item.colorSpace = SRGBColorSpace
+      }
+    },
+  )
+
+  const geometries = useMemo(
+    () => [
+      new TorusGeometry(),
+      new BoxGeometry(),
+      new ConeGeometry(undefined, undefined, 3),
+    ],
+    [],
+  )
+
+  const material = useMemo(() => {
+    const mat = new MeshMatcapMaterial()
+    if (matcapTexture) {
+      mat.matcap = matcapTexture
+      mat.needsUpdate = true
+    }
+    return mat
+  }, [matcapTexture])
+
+  const donuts = useRef<Mesh[]>([])
+  useFrame((_, delta) => {
+    const _donuts = donuts.current
+    if (!_donuts) {
+      return
+    }
+    for (const child of _donuts) {
+      child.rotation.y += delta * 0.3
+    }
+  })
+
+  return (
+    <>
+      <OrbitControls makeDefault />
+      <Center>
+        <Text3D
+          font={font}
+          material={material}
+          size={0.5}
+          height={0.2}
+          curveSegments={12}
+          bevelEnabled={true}
+          bevelThickness={0.03}
+          bevelSize={0.02}
+          bevelOffset={0}
+          bevelSegments={5}
+        >
+          Welcome
+        </Text3D>
+      </Center>
+      <group>
+        {EMPTY_ARRAY.map((_, index) => {
+          const objScale = Math.random() * 0.2 + 0.1
+          const shape = Math.floor(Math.random() * 3)
+
+          return (
+            <mesh
+              key={index}
+              ref={(el) => {
+                if (!el) {
+                  return
+                }
+                donuts.current[index] = el
+              }}
+              geometry={geometries[shape] || geometries[0]}
+              material={material}
+              position={[
+                (Math.random() - 0.5) * 10,
+                (Math.random() - 0.5) * 10,
+                (Math.random() - 0.5) * 10,
+              ]}
+              rotation={[
+                Math.random() * Math.PI,
+                Math.random() * Math.PI,
+                Math.random() * Math.PI,
+              ]}
+              scale={objScale}
+            ></mesh>
+          )
+        })}
+      </group>
+    </>
+  )
+}

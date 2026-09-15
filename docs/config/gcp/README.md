@@ -139,7 +139,7 @@ Test locally if the Github Action run correctly
 # sudo nano <server_name>.config
 
 server {
-  server_name api.hspln.com;
+  server_name api.haoln7f8.com;
 
   # HTTP configuration
   listen 80;
@@ -153,8 +153,8 @@ server {
   # HTTPS configuration
   listen [::]:443 ssl ipv6only=on; # managed by Certbot
   listen 443 ssl; # managed by Certbot
-  ssl_certificate /etc/letsencrypt/live/api.hspln.com/fullchain.pem; # managed by Certbot
-  ssl_certificate_key /etc/letsencrypt/live/api.hspln.com/privkey.pem; # managed by Certbot
+  ssl_certificate /etc/letsencrypt/live/api.haoln7f8.com/fullchain.pem; # managed by Certbot
+  ssl_certificate_key /etc/letsencrypt/live/api.haoln7f8.com/privkey.pem; # managed by Certbot
   include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
